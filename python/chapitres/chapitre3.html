@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — Boucles | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-redo"></i> Chapitre 3</div>
+    <h1>🐍 Les <span class="highlight">Boucles</span></h1>
+    <p>Répéter automatiquement des actions : for, while, range et compréhensions de listes.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : for et range -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sync-alt"></i> La boucle for — parcourir</h2>
+    <div class="concept-card">
+        <h4>🎠 Analogie du manège</h4>
+        <p>La boucle <code>for</code> est comme un <strong>manège</strong> : on sait à l'avance combien de tours on va faire. Chaque tour, on prend l'élément suivant.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>for … in — la star de Python</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Parcourir une séquence
+for fruit in ["pomme", "banane", "orange"]:
+    print(fruit)
+
+# Parcourir une chaîne
+for lettre in "Python":
+    print(lettre, end=" ")  # P y t h o n
+
+# for en Python ≠ for en C
+# Python : for élément in collection
+# C      : for (i=0; i&lt;n; i++)  → plus complexe !</code></pre></div>
+
+    <div class="code-block"><div class="code-header"><span>range() — générer des nombres</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># range(stop) → 0, 1, 2, ..., stop-1
+for i in range(5):
+    print(i)              # 0 1 2 3 4 (PAS 5 !)
+
+# range(start, stop)
+for i in range(1, 6):
+    print(i)              # 1 2 3 4 5
+
+# range(start, stop, step)
+for i in range(0, 10, 2):
+    print(i)              # 0 2 4 6 8
+
+# Compte à rebours
+for i in range(5, 0, -1):
+    print(i)              # 5 4 3 2 1</code></pre></div>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique R.D.F. — range(Début, Fin, Pas)</h4>
+        <p><strong>R</strong>ange prend jusqu'à 3 arguments : <strong>D</strong>ébut (inclus, défaut 0), <strong>F</strong>in (exclu !), <strong>P</strong>as (défaut 1). Retenir : la <strong>Fin est toujours exclue</strong>, comme une porte fermée 🚪.</p>
+    </div>
+</section>
+
+<!-- Section 2 : while -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-hourglass-half"></i> La boucle while — tant que</h2>
+    <div class="concept-card">
+        <h4>⏳ Analogie du réveil</h4>
+        <p><code>while</code> c'est comme un <strong>réveil qui sonne tant qu'on ne l'a pas éteint</strong>. On ne sait pas combien de fois il va sonner — ça dépend de quand on appuie sur le bouton.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>while — quand on ne sait pas combien de tours</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Demander jusqu'à obtenir la bonne réponse
+reponse = ""
+while reponse != "Python":
+    reponse = input("Quel langage ? ")
+print("Bravo ! 🎉")
+
+# Attention à la boucle infinie !
+# while True:
+#     print("Je ne m'arrête jamais !")  # ❌ Ctrl+C !</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Utiliser</th><th>Quand</th><th>Exemple</th></tr></thead>
+        <tbody>
+            <tr><td><code>for</code></td><td>On connaît le nombre de tours</td><td>Parcourir une liste, range(n)</td></tr>
+            <tr><td><code>while</code></td><td>On ne sait pas quand arrêter</td><td>Attendre une saisie correcte</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 3 : break et continue -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-hand-paper"></i> break & continue</h2>
+    <div class="code-block"><div class="code-header"><span>Contrôler la boucle</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># break = SORTIR immédiatement
+for n in range(1, 100):
+    if n == 5:
+        break           # Sort de la boucle
+    print(n)            # Affiche 1 2 3 4
+
+# continue = PASSER au tour suivant
+for n in range(1, 6):
+    if n == 3:
+        continue        # Saute le 3
+    print(n)            # Affiche 1 2 4 5
+
+# 🎯 Résumé :
+# break    = "J'en ai assez, je sors !"
+# continue = "Je saute celui-ci, au suivant !"</code></pre></div>
+</section>
+
+<!-- Section 4 : enumerate et zip -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-stream"></i> enumerate() et zip()</h2>
+    <div class="code-block"><div class="code-header"><span>Outils pro pour les boucles</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># enumerate : indice + valeur (au lieu de range(len(..)))
+fruits = ["pomme", "banane", "orange"]
+for i, fruit in enumerate(fruits):
+    print(f"{i}: {fruit}")
+# 0: pomme   1: banane   2: orange
+
+# zip : parcourir 2 listes en parallèle
+noms = ["Alice", "Bob", "Clara"]
+notes = [15, 17, 12]
+for nom, note in zip(noms, notes):
+    print(f"{nom} : {note}/20")</code></pre></div>
+
+    <div class="tip-box"><strong>💡 Règle d'or :</strong> Si vous écrivez <code>for i in range(len(liste))</code> puis <code>liste[i]</code>, utilisez plutôt <code>enumerate()</code>. C'est plus Pythonic !</div>
+</section>
+
+<!-- Section 5 : Compréhensions de listes -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-magic"></i> Compréhensions de listes</h2>
+    <div class="concept-card">
+        <h4>⚡ Le super-pouvoir de Python</h4>
+        <p>Les compréhensions de listes sont un <strong>raccourci magique</strong> pour créer des listes en une seule ligne. C'est comme une recette de cuisine compressée !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>List comprehension</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Méthode classique (3 lignes)
+carres = []
+for x in range(1, 6):
+    carres.append(x ** 2)
+
+# Compréhension de liste (1 ligne !)
+carres = [x ** 2 for x in range(1, 6)]
+# [1, 4, 9, 16, 25]
+
+# Avec condition (filtre)
+pairs = [x for x in range(10) if x % 2 == 0]
+# [0, 2, 4, 6, 8]
+
+# 📝 Formule : [expression for var in iterable if condition]</code></pre></div>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Lire une compréhension</h4>
+        <p>Lisez-la comme une phrase : <code>[x**2 for x in range(5) if x > 0]</code> → « Prends x², <strong>pour chaque</strong> x de 0 à 4, <strong>si</strong> x > 0 ».</p>
+    </div>
+</section>
+
+<!-- Section 6 : Boucles imbriquées -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Boucles imbriquées</h2>
+    <div class="code-block"><div class="code-header"><span>Boucle dans une boucle</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Table de multiplication
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f"{i} × {j} = {i*j}", end="\t")
+    print()  # Saut de ligne
+
+# 1 × 1 = 1   1 × 2 = 2   1 × 3 = 3
+# 2 × 1 = 2   2 × 2 = 4   2 × 3 = 6
+# 3 × 1 = 3   3 × 2 = 6   3 × 3 = 9
+
+# Analogie : l'aiguille des minutes fait 60 tours
+# pour CHAQUE tour de l'aiguille des heures</code></pre></div>
+</section>
+
+<!-- Section 7 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 3</h4>
+        <ul>
+            <li><code>for x in collection</code> — parcourir des éléments</li>
+            <li><code>range(D, F, P)</code> — Début, Fin (exclue !), Pas</li>
+            <li><code>while condition</code> — quand on ne sait pas combien de tours</li>
+            <li><code>break</code> = sortir, <code>continue</code> = passer au suivant</li>
+            <li><code>enumerate()</code> = indice + valeur, <code>zip()</code> = listes en parallèle</li>
+            <li>Compréhension : <code>[expr for x in iter if cond]</code></li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre2.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Conditions</a>
+    <a href="chapitre4.html" class="next-chapter">Fonctions <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Affichez les nombres de 1 à 10 avec une boucle for.",hints:["range(1, 11)","La fin est exclue"],answer:"for i in range(1, 11):\n    print(i)"},
+        {q:"Calculez la somme des nombres de 1 à 100 avec une boucle.",hints:["Variable somme = 0","Accumulez avec +="],answer:"somme = 0\nfor i in range(1, 101):\n    somme += i\nprint(somme)  # 5050"},
+        {q:"Demandez un mot de passe en boucle jusqu'à ce que ce soit \"secret\".",hints:["while avec !=","input() dans la boucle"],answer:'mdp = ""\nwhile mdp != "secret":\n    mdp = input("Mot de passe : ")\nprint("Accès autorisé !")'},
+        {q:"Créez la liste des carrés de 1 à 10 avec une compréhension.",hints:["[x**2 for x in range(...)]"],answer:"carres = [x**2 for x in range(1, 11)]\nprint(carres)"},
+        {q:"Utilisez enumerate pour afficher chaque fruit avec son numéro.",hints:["for i, f in enumerate(fruits)","f-string pour formater"],answer:'fruits = ["pomme", "banane", "orange"]\nfor i, f in enumerate(fruits):\n    print(f"{i}: {f}")'}
+    ],
+    quiz: [
+        {type:"mcq",q:"Que produit range(5) ?",options:["1,2,3,4,5","0,1,2,3,4","0,1,2,3,4,5","5,4,3,2,1"],correct:1},
+        {type:"mcq",q:"Que produit range(2, 6) ?",options:["2,3,4,5","2,3,4,5,6","1,2,3,4,5,6","2,6"],correct:0},
+        {type:"mcq",q:"Quelle boucle utiliser quand on ne sait pas combien de tours ?",options:["for","while","range","les deux"],correct:1},
+        {type:"mcq",q:"Que fait break ?",options:["Passe au tour suivant","Sort de la boucle","Termine le programme","Redémarre la boucle"],correct:1},
+        {type:"mcq",q:"Que fait continue ?",options:["Sort de la boucle","Passe au tour suivant","Termine le programme","Recommence à 0"],correct:1},
+        {type:"mcq",q:"Que retourne [x*2 for x in range(4)] ?",options:["[2,4,6,8]","[0,2,4,6]","[0,1,2,3]","[1,2,3,4]"],correct:1},
+        {type:"mcq",q:"enumerate(['a','b','c']) donne :",options:["(0,'a'),(1,'b'),(2,'c')","('a',0),('b',1),('c',2)","[0,1,2]","['a','b','c']"],correct:0},
+        {type:"mcq",q:"range(10, 0, -2) produit :",options:["10,8,6,4,2","10,8,6,4,2,0","0,2,4,6,8,10","Erreur"],correct:0},
+        {type:"qa",q:"Comment lire : [x for x in range(10) if x%2==0] ?",answer:"La liste des x de 0 à 9 tels que x est pair → [0,2,4,6,8]"},
+        {type:"qa",q:"Comment parcourir deux listes en parallèle ?",answer:"Avec zip() : for a, b in zip(liste1, liste2)"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque outil à son usage :",pairs:[["for","Nombre de tours connu"],["while","Nombre de tours inconnu"],["break","Sortir de la boucle"],["continue","Passer au tour suivant"]]},
+        {instruction:"Associez chaque range à sa production :",pairs:[["range(3)","0, 1, 2"],["range(1,4)","1, 2, 3"],["range(0,6,2)","0, 2, 4"],["range(3,0,-1)","3, 2, 1"]]},
+        {instruction:"Associez chaque fonction utile à son rôle :",pairs:[["enumerate()","Indice + valeur"],["zip()","Listes en parallèle"],["range()","Séquence de nombres"],["len()","Longueur"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

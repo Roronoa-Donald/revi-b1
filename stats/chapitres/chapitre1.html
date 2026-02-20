@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 — Séries statistiques | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html" class="active"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-list-ol"></i> Chapitre 1</div>
+    <h1>📊 Séries <span class="highlight">statistiques</span></h1>
+    <p>Population, échantillon, variables et vocabulaire fondamental.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-question-circle"></i> C'est quoi les statistiques ?</h2>
+    <div class="concept-card">
+        <h4>🏫 Analogie du sondage de classe</h4>
+        <p>Imaginez un sondage dans votre classe : « Combien d'heures dormez-vous ? ». Vous récoltez les réponses de 30 élèves, vous les rangez, vous calculez la moyenne… <strong>C'est de la statistique !</strong></p>
+        <p>Les statistiques = l'art de <strong>collecter</strong>, <strong>organiser</strong>, <strong>résumer</strong> et <strong>interpréter</strong> des données.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-users"></i> Population vs Échantillon</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique P.E.I. — Population, Échantillon, Individu</h4>
+        <p><strong>P</strong>opulation = l'ensemble <strong>complet</strong> qu'on étudie (tous les étudiants de l'université)<br>
+        <strong>É</strong>chantillon = un <strong>sous-groupe</strong> de la population (30 étudiants tirés au sort)<br>
+        <strong>I</strong>ndividu = un <strong>élément</strong> de la population (un étudiant)</p>
+    </div>
+    <div class="tip-box"><strong>💡 Analogie :</strong> Population = toute la soupe 🍲. Échantillon = la cuillère pour goûter. Individu = un ingrédient.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tags"></i> Types de variables</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique Q.Q. — Qualitatif vs Quantitatif</h4>
+        <p><strong>Qualitatif</strong> = catégories, pas de calcul (couleur des yeux, filière)<br>
+        <strong>Quantitatif</strong> = nombres, on peut calculer (âge, taille, notes)</p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type</th><th>Sous-type</th><th>Exemple</th><th>Calcul possible ?</th></tr></thead>
+        <tbody>
+            <tr><td rowspan="2"><strong>Qualitatif</strong></td><td>Nominale</td><td>Couleur préférée, ville</td><td>Non (juste compter)</td></tr>
+            <tr><td>Ordinale</td><td>Niveau (Bien, Moyen, Faible)</td><td>Ordre oui, calculs non</td></tr>
+            <tr><td rowspan="2"><strong>Quantitatif</strong></td><td>Discrète</td><td>Nombre d'enfants (0, 1, 2…)</td><td>Oui (valeurs isolées)</td></tr>
+            <tr><td>Continue</td><td>Taille (1.72 m), poids</td><td>Oui (toute valeur dans un intervalle)</td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>ℹ️ Astuce rapide :</strong> Si on peut mettre des virgules (1.72, 65.3…) → continue. Si c'est des nombres entiers isolés → discrète. Si c'est des mots → qualitatif.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-clipboard-list"></i> Vocabulaire essentiel</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Terme</th><th>Définition</th><th>Exemple</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Caractère</strong></td><td>La propriété qu'on étudie</td><td>« Note à l'examen »</td></tr>
+            <tr><td><strong>Modalité</strong></td><td>Les valeurs possibles du caractère</td><td>0, 1, 2, …, 20</td></tr>
+            <tr><td><strong>Effectif (nᵢ)</strong></td><td>Nombre d'individus ayant une modalité</td><td>5 élèves ont eu 12</td></tr>
+            <tr><td><strong>Effectif total (N)</strong></td><td>Nombre total d'individus</td><td>30 élèves</td></tr>
+            <tr><td><strong>Fréquence (fᵢ)</strong></td><td>nᵢ / N (proportion)</td><td>5/30 = 0.167</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 1</h4>
+        <ul>
+            <li>Statistique = collecter, organiser, résumer, interpréter</li>
+            <li><strong>P.E.I.</strong> : Population (tout), Échantillon (sous-groupe), Individu (un élément)</li>
+            <li><strong>Q.Q.</strong> : Qualitatif (mots) vs Quantitatif (nombres)</li>
+            <li>Quantitatif discret (entiers) vs continu (virgules possibles)</li>
+            <li>Effectif (nᵢ) = combien, Fréquence (fᵢ) = proportion</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="../index.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Accueil</a>
+    <a href="chapitre2.html" class="next-chapter">Fréquences <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Différence entre population et échantillon ?",hints:["L'un est l'ensemble complet","L'autre est un sous-groupe"],answer:"Population = ensemble complet qu'on étudie. Échantillon = sous-groupe représentatif tiré de la population."},
+        {q:"Classifiez : nombre d'enfants, couleur des yeux, taille, filière universitaire, température.",hints:["Nombres vs catégories","Entiers vs décimaux"],answer:"Nombre d'enfants → quantitatif discret. Couleur des yeux → qualitatif nominal. Taille → quantitatif continu. Filière → qualitatif nominal. Température → quantitatif continu."},
+        {q:"Qu'est-ce que l'effectif et la fréquence ?",hints:["L'un est un nombre","L'autre est une proportion"],answer:"Effectif (nᵢ) = nombre d'individus ayant une certaine valeur. Fréquence (fᵢ) = nᵢ/N (proportion par rapport au total). Exemple: 5/30 = 0.167."},
+        {q:"Variable ordinale vs nominale ?",hints:["Ordre possible ?"],answer:"Nominale = catégories sans ordre (couleur, ville). Ordinale = catégories avec un ordre naturel (Faible < Moyen < Bien)."},
+        {q:"Donnez 2 exemples de variables quantitatives discrètes et 2 continues.",hints:["Entiers isolés","Valeurs décimales possibles"],answer:"Discrètes: nombre de frères/sœurs, nombre de voitures. Continues: poids (72.3 kg), durée d'un trajet (23.5 min)."}
+    ],
+    quiz:[
+        {type:"mcq",q:"La population est :",options:["Un sous-groupe","L'ensemble complet étudié","Un individu","Un échantillon"],correct:1},
+        {type:"mcq",q:"La couleur des yeux est une variable :",options:["Quantitative discrète","Quantitative continue","Qualitative nominale","Qualitative ordinale"],correct:2},
+        {type:"mcq",q:"Le nombre d'enfants (0, 1, 2…) est :",options:["Qualitatif","Quantitatif continu","Quantitatif discret","Ordonné"],correct:2},
+        {type:"mcq",q:"La fréquence fᵢ se calcule par :",options:["nᵢ × N","nᵢ + N","nᵢ / N","N / nᵢ"],correct:2},
+        {type:"mcq",q:"Un échantillon est :",options:["L'ensemble complet","Un sous-groupe de la population","Un individu","Une variable"],correct:1},
+        {type:"mcq",q:"La taille en cm est une variable :",options:["Qualitative","Quantitative discrète","Quantitative continue","Ordinale"],correct:2},
+        {type:"mcq",q:"'Bon / Moyen / Faible' est une variable :",options:["Quantitative","Qualitative nominale","Qualitative ordinale","Continue"],correct:2},
+        {type:"qa",q:"Quelle est la somme de toutes les fréquences ?",answer:"La somme de toutes les fréquences est toujours égale à 1 (ou 100%)."},
+        {type:"qa",q:"Différence entre variable discrète et continue ?",answer:"Discrète = valeurs isolées/entières (nb d'enfants). Continue = toute valeur dans un intervalle, y compris décimales (taille, poids)."},
+        {type:"qa",q:"Qu'est-ce qu'une modalité ?",answer:"Une modalité est une valeur possible du caractère étudié. Ex: pour le caractère 'note', les modalités sont 0, 1, 2, ..., 20."}
+    ],
+    dragdrop:[
+        {instruction:"Classez chaque variable : Qualitatif ou Quantitatif",pairs:[["Couleur préférée","Qualitatif"],["Nombre de cours","Quantitatif"],["Filière","Qualitatif"],["Température","Quantitatif"]]},
+        {instruction:"Discret ou Continu ?",pairs:[["Nombre de frères","Discret"],["Poids en kg","Continu"],["Nombre de SMS","Discret"],["Taille en cm","Continu"]]},
+        {instruction:"Associez les termes :",pairs:[["Population","Ensemble complet"],["Échantillon","Sous-groupe"],["Effectif","Nombre d'individus"],["Fréquence","Proportion"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

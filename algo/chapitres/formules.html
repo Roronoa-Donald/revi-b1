@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules & Cheat Sheet | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links"><li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li><li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li></ul>
+    <div class="nav-actions"><button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button><button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button></div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a><a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a><a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Cheat Sheet</div>
+    <h1>Formules & <span class="highlight">Aide-Mémoire</span></h1>
+    <p>Toutes les syntaxes, structures et mnémoniques d'Algorithmique en un seul endroit.</p>
+</section>
+<main class="content-wrapper">
+
+    <!-- Variables & Types -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-box"></i> Variables & Types</h2>
+        <table class="styled-table"><thead><tr><th>Type</th><th>Pseudocode</th><th>Pascal</th><th>Exemple</th></tr></thead>
+        <tbody>
+            <tr><td>Entier</td><td>Entier</td><td>integer</td><td>42, -7</td></tr>
+            <tr><td>Réel</td><td>Réel</td><td>real</td><td>3.14</td></tr>
+            <tr><td>Caractère</td><td>Caractère</td><td>char</td><td>'A'</td></tr>
+            <tr><td>Booléen</td><td>Booléen</td><td>boolean</td><td>VRAI/FAUX</td></tr>
+            <tr><td>Chaîne</td><td>Chaîne</td><td>string</td><td>"Bonjour"</td></tr>
+        </tbody></table>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>ERCBC :</strong> <strong>E</strong>ntier, <strong>R</strong>éel, <strong>C</strong>aractère, <strong>B</strong>ooléen, <strong>C</strong>haîne — « Elle Rit Car Bob Chante »</div></div>
+    </section>
+
+    <!-- Structures de contrôle -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-code-branch"></i> Structures de contrôle</h2>
+        <div class="algo-block">
+<span class="comment">// Condition</span>
+<span class="keyword">Si</span> condition <span class="keyword">Alors</span>
+    instructions
+<span class="keyword">SinonSi</span> autre_condition <span class="keyword">Alors</span>
+    instructions
+<span class="keyword">Sinon</span>
+    instructions
+<span class="keyword">FinSi</span>
+
+<span class="comment">// Selon</span>
+<span class="keyword">Selon</span> variable <span class="keyword">Faire</span>
+    valeur1 : instructions
+    valeur2 : instructions
+    <span class="keyword">Sinon</span> : instructions
+<span class="keyword">FinSelon</span>
+        </div>
+    </section>
+
+    <!-- Boucles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-sync-alt"></i> Boucles</h2>
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> début <span class="keyword">à</span> fin <span class="keyword">Faire</span>
+    instructions
+<span class="keyword">FinPour</span>
+
+<span class="keyword">TantQue</span> condition <span class="keyword">Faire</span>
+    instructions
+<span class="keyword">FinTantQue</span>
+
+<span class="keyword">Répéter</span>
+    instructions
+<span class="keyword">Jusqu'à</span> condition
+        </div>
+        <table class="styled-table"><thead><tr><th>Boucle</th><th>Nb connu ?</th><th>Test</th><th>Min exec</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Pour</strong></td><td>OUI</td><td>—</td><td>0</td></tr>
+            <tr><td><strong>Tant Que</strong></td><td>NON</td><td>Avant</td><td>0</td></tr>
+            <tr><td><strong>Répéter</strong></td><td>NON</td><td>Après</td><td>1</td></tr>
+        </tbody></table>
+    </section>
+
+    <!-- Tableaux -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-th-list"></i> Tableaux</h2>
+        <div class="algo-block">
+<span class="keyword">Variable</span> T : <span class="type">Tableau</span>[<span class="number">1</span>..N] <span class="keyword">de</span> <span class="type">Entier</span>
+<span class="comment">// Parcours</span>
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N : T[i]
+<span class="comment">// Somme</span>
+somme ← <span class="number">0</span>; Pour i : somme ← somme + T[i]
+<span class="comment">// Max</span>
+max ← T[<span class="number">1</span>]; Pour i de <span class="number">2</span> : Si T[i] > max → max ← T[i]
+        </div>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>T.I.P. :</strong> <strong>T</strong>ype identique, <strong>I</strong>ndice, <strong>P</strong>lusieurs valeurs</div></div>
+    </section>
+
+    <!-- Fonctions -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-puzzle-piece"></i> Fonctions & Procédures</h2>
+        <div class="algo-block">
+<span class="keyword">Procédure</span> NomProc(params)
+    <span class="comment">// Pas de retour</span>
+<span class="keyword">Fin</span>
+
+<span class="keyword">Fonction</span> NomFunc(params) : TypeRetour
+    <span class="keyword">Retourner</span> valeur
+<span class="keyword">Fin</span>
+        </div>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>F = Fournit</strong> (retourne une valeur), <strong>P = Pas de résultat</strong><br>Par valeur = copie, Par référence (E/S ou var) = original modifié</div></div>
+    </section>
+
+    <!-- Tri -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-sort-amount-down"></i> Tris — S.B.I.</h2>
+        <table class="styled-table"><thead><tr><th>Tri</th><th>Principe</th><th>Meilleur</th><th>Pire</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Sélection</strong></td><td>Cherche min → échange</td><td>O(n²)</td><td>O(n²)</td></tr>
+            <tr><td><strong>Bulles</strong></td><td>échange voisins</td><td>O(n)</td><td>O(n²)</td></tr>
+            <tr><td><strong>Insertion</strong></td><td>Insère à la bonne place</td><td>O(n)</td><td>O(n²)</td></tr>
+        </tbody></table>
+    </section>
+
+    <!-- Recherche -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-search"></i> Recherche</h2>
+        <table class="styled-table"><thead><tr><th>Type</th><th>Complexité</th><th>Trié requis ?</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Séquentielle</strong></td><td>O(n)</td><td>Non</td></tr>
+            <tr><td><strong>Dichotomique</strong></td><td>O(log n)</td><td>Oui</td></tr>
+        </tbody></table>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>G.M.D.</strong> = Gauche, Milieu, Droite (dichotomie)<br><code>milieu ← (gauche + droite) DIV 2</code></div></div>
+    </section>
+
+    <!-- Récursivité -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-infinity"></i> Récursivité</h2>
+        <div class="algo-block">
+<span class="comment">// Factorielle</span>
+fact(<span class="number">0</span>) = <span class="number">1</span>              <span class="comment">// Cas de base</span>
+fact(n) = n × fact(n-<span class="number">1</span>)    <span class="comment">// Appel récursif</span>
+
+<span class="comment">// Fibonacci</span>
+fibo(<span class="number">0</span>) = <span class="number">0</span>, fibo(<span class="number">1</span>) = <span class="number">1</span>
+fibo(n) = fibo(n-<span class="number">1</span>) + fibo(n-<span class="number">2</span>)
+        </div>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>2 règles d'or :</strong> Base + Progression. Pile d'appels = LIFO (crêpes 🥞)</div></div>
+    </section>
+
+    <!-- Structures de données -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-cubes"></i> Structures de données</h2>
+        <table class="styled-table"><thead><tr><th>Structure</th><th>Principe</th><th>Opérations</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Pile</strong> (LIFO)</td><td>Dernier entré = premier sorti</td><td>Empiler/Dépiler</td></tr>
+            <tr><td><strong>File</strong> (FIFO)</td><td>Premier entré = premier sorti</td><td>Enfiler/Défiler</td></tr>
+            <tr><td><strong>Liste chaînée</strong></td><td>Nœuds liés par pointeurs</td><td>Insertion O(1), accès O(n)</td></tr>
+            <tr><td><strong>Enregistrement</strong></td><td>Types différents</td><td>Accès par champ .nom</td></tr>
+        </tbody></table>
+    </section>
+
+    <!-- Complexité -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-tachometer-alt"></i> Complexité — Grand O</h2>
+        <table class="styled-table"><thead><tr><th>O(…)</th><th>Nom</th><th>n=1000</th></tr></thead>
+        <tbody>
+            <tr><td>O(1)</td><td>Constant</td><td>1</td></tr>
+            <tr><td>O(log n)</td><td>Logarithmique</td><td>~10</td></tr>
+            <tr><td>O(n)</td><td>Linéaire</td><td>1 000</td></tr>
+            <tr><td>O(n log n)</td><td>Quasi-linéaire</td><td>~10 000</td></tr>
+            <tr><td>O(n²)</td><td>Quadratique</td><td>1 000 000</td></tr>
+            <tr><td>O(2ⁿ)</td><td>Exponentiel</td><td>🔥</td></tr>
+        </tbody></table>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>CLLQQE :</strong> O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ)<br>« Courir Lentement, Les Quasi Quadratiques Explosent »</div></div>
+    </section>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

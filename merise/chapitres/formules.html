@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheatSheet MERISE | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html" class="active">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html" class="active"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-scroll"></i> Référence rapide</div>
+            <h1>CheatSheet <span class="highlight">MERISE</span></h1>
+            <p>Tout ce qu'il faut retenir en un coup d'œil — parfait pour les révisions de dernière minute.</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- SI & MERISE -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-building"></i> 1. SI & MERISE</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>SI</strong></td><td>Ensemble organisé de ressources pour collecter, stocker, traiter et distribuer l'information</td></tr>
+                        <tr><td><strong>MERISE</strong></td><td>Méthode d'analyse et conception de SI (France, 1978)</td></tr>
+                        <tr><td><strong>3 principes</strong></td><td>① Séparation Données / Traitements ② Démarche par niveaux ③ Démarche par étapes</td></tr>
+                        <tr><td><strong>3 niveaux</strong></td><td><strong>Conceptuel</strong> (QUOI) → <strong>Logique/Org.</strong> (QUI/OÙ) → <strong>Physique</strong> (COMMENT)</td></tr>
+                        <tr><td><strong>Modèles</strong></td><td>Données : MCD → MLD → MPD | Traitements : MCT → MOT → MPT</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- MCD -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-diagram-project"></i> 2. MCD — Modèle Conceptuel de Données</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>Propriété</strong></td><td>Donnée élémentaire atomique (plus petite unité)</td></tr>
+                        <tr><td><strong>Entité</strong></td><td>Objet du SI ayant une existence propre (rectangle)</td></tr>
+                        <tr><td><strong>Identifiant</strong></td><td>Propriété unique distinguant chaque occurrence (souligné)</td></tr>
+                        <tr><td><strong>Association</strong></td><td>Lien entre entités, peut porter des propriétés (ovale)</td></tr>
+                        <tr><td><strong>Cardinalités</strong></td><td>(min,max) — nombre de participations d'une occurrence à une association</td></tr>
+                    </tbody>
+                </table>
+                <h3>Cardinalités</h3>
+                <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin:.5rem 0">
+                    <span class="card-badge">0,1</span> Optionnel, unique
+                    <span class="card-badge">1,1</span> Obligatoire, unique
+                    <span class="card-badge">0,n</span> Optionnel, multiple
+                    <span class="card-badge">1,n</span> Obligatoire, multiple
+                </div>
+            </section>
+
+            <!-- MLD -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-table"></i> 3. MLD — Passage MCD → MLD</h2>
+                <table class="merise-table">
+                    <thead><tr><th>Règle</th><th>Condition</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>R1</strong></td><td>Cardinalité max <strong>1 — n</strong></td><td>FK (PK du côté n) → table côté 1</td></tr>
+                        <tr><td><strong>R2</strong></td><td>Cardinalité max <strong>n — n</strong></td><td>Nouvelle table d'association (PK = FK1 + FK2)</td></tr>
+                        <tr><td><strong>R3</strong></td><td>Cardinalité <strong>1,1 — 1,1</strong></td><td>Fusion ou FK dans la table dépendante</td></tr>
+                    </tbody>
+                </table>
+<pre class="schema-block" style="margin:.8rem 0">
+Notation : TABLE (<u>PK</u>, Attribut, <strong>#FK</strong>)
+PK = souligné | FK = précédé de #
+</pre>
+            </section>
+
+            <!-- Extensions -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions du MCD</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>Id. relative</strong></td><td>Entité faible (rectangle double) dont la PK inclut celle du parent</td></tr>
+                        <tr><td><strong>Réflexive [n,n]</strong></td><td>Table d'association avec 2 FK vers la même table</td></tr>
+                        <tr><td><strong>Réflexive [1,n]</strong></td><td>FK auto-référentielle dans la même table</td></tr>
+                        <tr><td><strong>Pseudo-entité</strong></td><td>Encapsulation d'une association pour la lier à une autre entité</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Normalisation -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-shield-halved"></i> 5. Normalisation</h2>
+                <table class="merise-table">
+                    <thead><tr><th>Forme</th><th>Règle</th><th>Élimine</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>1FN</strong></td><td>Attributs atomiques + PK</td><td>Groupes répétitifs</td></tr>
+                        <tr><td><strong>2FN</strong></td><td>1FN + pas de dépendance partielle</td><td>Dépendance d'une partie de PK</td></tr>
+                        <tr><td><strong>3FN</strong></td><td>2FN + pas de dépendance transitive</td><td>Dépendance entre non-clés</td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box" style="margin-top:.5rem">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Moyen mnémo :</strong> 1FN = atomique | 2FN = dépend de TOUTE la clé | 3FN = dépend SEULEMENT de la clé</div>
+                </div>
+            </section>
+
+            <!-- Flux -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-arrows-spin"></i> 6. Modélisation des Flux</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>Acteur interne</strong></td><td>Dans l'organisation (service, département)</td></tr>
+                        <tr><td><strong>Acteur externe</strong></td><td>Hors organisation (client, fournisseur)</td></tr>
+                        <tr><td><strong>Flux</strong></td><td>Information échangée (flèche numérotée émetteur → récepteur)</td></tr>
+                        <tr><td><strong>Domaine</strong></td><td>Sous-ensemble logique d'activités</td></tr>
+                        <tr><td><strong>Processus</strong></td><td>Ensemble de traitements déclenchés par événement(s)</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- MCT -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-gears"></i> 7. MCT — Modèle Conceptuel des Traitements</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>Événement</strong></td><td>Fait déclencheur (ovale) — externe, interne ou temporel</td></tr>
+                        <tr><td><strong>Opération</strong></td><td>Traitement ininterruptible (rectangle 3 zones)</td></tr>
+                        <tr><td><strong>Synchronisation</strong></td><td>Condition logique ET/OU entre événements</td></tr>
+                        <tr><td><strong>Résultat</strong></td><td>Événement produit par l'opération</td></tr>
+                        <tr><td><strong>Règle d'émission</strong></td><td>Condition de sortie : toujours, si OK, si refus…</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Glossaire -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-book"></i> 8. Glossaire Rapide</h2>
+                <table class="merise-table">
+                    <tbody>
+                        <tr><td><strong>DF</strong></td><td>Dépendance Fonctionnelle : A → B ssi chaque valeur de A donne exactement 1 valeur de B</td></tr>
+                        <tr><td><strong>PK</strong></td><td>Primary Key — Clé primaire (identifie de manière unique)</td></tr>
+                        <tr><td><strong>FK</strong></td><td>Foreign Key — Clé étrangère (référence vers PK d'une autre table)</td></tr>
+                        <tr><td><strong>MCD</strong></td><td>Modèle Conceptuel de Données</td></tr>
+                        <tr><td><strong>MLD</strong></td><td>Modèle Logique de Données</td></tr>
+                        <tr><td><strong>MCT</strong></td><td>Modèle Conceptuel des Traitements</td></tr>
+                        <tr><td><strong>MOT</strong></td><td>Modèle Organisationnel des Traitements</td></tr>
+                        <tr><td><strong>MPD</strong></td><td>Modèle Physique de Données</td></tr>
+                        <tr><td><strong>SI</strong></td><td>Système d'Information</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+</body>
+</html>

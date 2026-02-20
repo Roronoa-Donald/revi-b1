@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 2 — Algèbre relationnelle | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html" class="active"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-filter"></i> Chapitre 2</div>
+    <h1>σ Algèbre <span class="highlight">relationnelle</span></h1>
+    <p>Sélection, projection, jointure, union… — les opérations théoriques avant le SQL.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── 1. Introduction ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-info-circle"></i> Pourquoi l'algèbre relationnelle ?</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie AutoBot :</strong> L'algèbre relationnelle, c'est la <strong>recette de cuisine</strong> que suit le SGBD. Le SQL est la commande au restaurant, l'algèbre est ce que le chef fait en cuisine pour préparer le plat.
+        </div>
+
+        <p>L'algèbre relationnelle est le <strong>langage théorique</strong> qui décrit les opérations sur les tables. Le SQL est sa traduction pratique. Comprendre l'algèbre aide à prédire le résultat d'une requête SQL complexe.</p>
+    </section>
+
+    <!-- ─── 2. Opérations unaires ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-filter"></i> Opérations unaires (1 table)</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique S.P.R.</div>
+            <p><strong>S</strong>élection (σ) — <strong>P</strong>rojection (π) — <strong>R</strong>enommage (ρ)</p>
+            <p>Les 3 opérations qui s'appliquent à UNE seule table.</p>
+        </div>
+
+        <h3>σ — Sélection (sigma)</h3>
+        <p>Filtre les <strong>lignes</strong> selon une condition. Garde les tuples qui satisfont le critère.</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>Sélection</span></div>
+            <pre>σ_age>20 (ETUDIANTS)
+→ Garde uniquement les étudiants de plus de 20 ans
+
+En SQL : SELECT * FROM ETUDIANTS WHERE age > 20;</pre>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Moyen mnémotechnique :</strong> σ = <strong>S</strong>igma = <strong>S</strong>élection = on <strong>S</strong>épare les lignes qui passent le filtre.
+        </div>
+
+        <h3>π — Projection (pi)</h3>
+        <p>Sélectionne des <strong>colonnes</strong>. Ne garde que les attributs demandés.</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>Projection</span></div>
+            <pre>π_nom,prenom (ETUDIANTS)
+→ Garde uniquement les colonnes nom et prenom
+
+En SQL : SELECT nom, prenom FROM ETUDIANTS;</pre>
+        </div>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> σ = filtre <strong>horizontal</strong> (lignes). π = filtre <strong>vertical</strong> (colonnes). Ensemble, ils découpent la table comme un cutter dans les deux directions.
+        </div>
+
+        <h3>ρ — Renommage (rho)</h3>
+        <p>Change le nom d'une relation ou d'un attribut.</p>
+        <div class="code-block">
+            <div class="code-header"><span>Renommage</span></div>
+            <pre>ρ_E (ETUDIANTS)      → la table s'appelle maintenant E
+ρ_surname/nom (E)    → l'attribut nom s'appelle surname
+
+En SQL : SELECT nom AS surname FROM ETUDIANTS E;</pre>
+        </div>
+    </section>
+
+    <!-- ─── 3. Opérations binaires ensemblistes ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-object-group"></i> Opérations ensemblistes (2 tables)</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique U.I.D.P.</div>
+            <p><strong>U</strong>nion (∪) — <strong>I</strong>ntersection (∩) — <strong>D</strong>ifférence (−) — <strong>P</strong>roduit cartésien (×)</p>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Condition de compatibilité :</strong> Pour Union, Intersection et Différence, les deux tables doivent avoir le <strong>même schéma</strong> (mêmes attributs, mêmes types).
+        </div>
+
+        <div class="concept-card">
+            <h3>Les 4 opérations</h3>
+            <table class="styled-table">
+                <thead><tr><th>Opération</th><th>Symbole</th><th>Résultat</th><th>SQL</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Union</strong></td><td>∪</td><td>Toutes les lignes de R1 + R2 (sans doublons)</td><td>UNION</td></tr>
+                    <tr><td><strong>Intersection</strong></td><td>∩</td><td>Lignes communes à R1 et R2</td><td>INTERSECT</td></tr>
+                    <tr><td><strong>Différence</strong></td><td>−</td><td>Lignes de R1 absentes de R2</td><td>EXCEPT</td></tr>
+                    <tr><td><strong>Produit cartésien</strong></td><td>×</td><td>Toutes les combinaisons (R1 × R2)</td><td>CROSS JOIN</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemples</span></div>
+            <pre>ETUDIANTS_PARIS ∪ ETUDIANTS_LYON    → tous les étudiants
+ETUDIANTS_PARIS ∩ ETUDIANTS_LYON    → étudiants inscrits aux deux
+ETUDIANTS_PARIS − ETUDIANTS_LYON    → étudiants SEULEMENT à Paris
+
+Si R1 a 3 lignes et R2 a 4 lignes :
+R1 × R2 → 3 × 4 = 12 lignes (toutes les combinaisons)</pre>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Attention :</strong> Le produit cartésien seul est rarement utile — il « explose » le nombre de lignes. On l'utilise TOUJOURS avec une sélection (→ jointure).
+        </div>
+    </section>
+
+    <!-- ─── 4. Jointures ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-link"></i> Les jointures</h2>
+
+        <p>La jointure combine deux tables en utilisant une <strong>condition de liaison</strong> (généralement PK = FK).</p>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> Imagine deux listes Excel — ETUDIANTS et NOTES. Tu veux voir les notes avec le nom de l'étudiant. La jointure « colle » les deux listes en faisant correspondre l'id_etudiant.
+        </div>
+
+        <div class="concept-card">
+            <h3>Types de jointures</h3>
+            <table class="styled-table">
+                <thead><tr><th>Type</th><th>Symbole</th><th>Description</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Theta-jointure</strong></td><td>⋈_θ</td><td>Produit cartésien + sélection sur condition θ</td></tr>
+                    <tr><td><strong>Equi-jointure</strong></td><td>⋈<sub>=</sub></td><td>Theta-jointure où θ est une égalité (=)</td></tr>
+                    <tr><td><strong>Jointure naturelle</strong></td><td>⋈</td><td>Equi-jointure sur TOUS les attributs communs (même nom)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Jointure — Algèbre vs SQL</span></div>
+            <pre>Algèbre :  ETUDIANTS ⋈ (id_etu = id_etudiant) NOTES
+SQL     :  SELECT * FROM ETUDIANTS
+            JOIN NOTES ON ETUDIANTS.id_etu = NOTES.id_etudiant;
+
+Jointure naturelle :
+Algèbre :  ETUDIANTS ⋈ NOTES  (si même nom d'attribut)
+SQL     :  SELECT * FROM ETUDIANTS NATURAL JOIN NOTES;</pre>
+        </div>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Formule de la jointure</div>
+            <p><strong>R1 ⋈_θ R2 = σ_θ (R1 × R2)</strong></p>
+            <p>Jointure = Produit cartésien + Sélection. C'est du « filtrage après combinaison » !</p>
+        </div>
+    </section>
+
+    <!-- ─── 5. Division ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-divide"></i> La division (÷)</h2>
+
+        <p>Opération la plus complexe : <strong>R1 ÷ R2</strong> retourne les tuples de R1 associés à <em>TOUS</em> les tuples de R2.</p>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> « Quels étudiants sont inscrits à TOUS les cours ? » — La division répond à cette question du « pour tout ».
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemple</span></div>
+            <pre>INSCRIPTIONS(id_etu, id_cours)    ÷    COURS(id_cours)
+= Les étudiants inscrits à TOUS les cours
+
+SQL (pas de mot-clé direct, on passe par NOT EXISTS) :
+SELECT id_etu FROM INSCRIPTIONS I
+WHERE NOT EXISTS (
+    SELECT id_cours FROM COURS C
+    WHERE NOT EXISTS (
+        SELECT 1 FROM INSCRIPTIONS I2
+        WHERE I2.id_etu = I.id_etu AND I2.id_cours = C.id_cours
+    )
+);</pre>
+        </div>
+    </section>
+
+    <!-- ─── 6. Arbre algébrique ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-sitemap"></i> Arbre algébrique</h2>
+
+        <p>On représente une requête complexe sous forme d'<strong>arbre</strong> :</p>
+        <ul>
+            <li><strong>Feuilles</strong> = relations (tables sources)</li>
+            <li><strong>Nœuds internes</strong> = opérations (σ, π, ⋈, ∪…)</li>
+            <li><strong>Racine</strong> = résultat final</li>
+        </ul>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemple : π_nom (σ_note>15 (ETUDIANTS ⋈ NOTES))</span></div>
+            <pre>        π_nom
+          │
+      σ_note>15
+          │
+          ⋈
+         / \
+   ETUDIANTS  NOTES
+
+Lecture bottom-up :
+1. Tables sources → ETUDIANTS et NOTES
+2. Jointure → combine les deux
+3. Sélection → filtre note > 15
+4. Projection → ne garde que le nom</pre>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Optimisation :</strong> Descendre les σ (sélections) le plus bas possible dans l'arbre réduit le volume de données traitées → requête plus rapide !
+        </div>
+    </section>
+
+    <!-- ─── 7. Résumé ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+        <div class="concept-card">
+            <h3>🧠 Les 8 opérations de l'algèbre relationnelle</h3>
+            <table class="styled-table">
+                <thead><tr><th>Op.</th><th>Symbole</th><th>Unaire/Binaire</th><th>SQL équivalent</th></tr></thead>
+                <tbody>
+                    <tr><td>Sélection</td><td>σ</td><td>Unaire</td><td>WHERE</td></tr>
+                    <tr><td>Projection</td><td>π</td><td>Unaire</td><td>SELECT cols</td></tr>
+                    <tr><td>Renommage</td><td>ρ</td><td>Unaire</td><td>AS</td></tr>
+                    <tr><td>Union</td><td>∪</td><td>Binaire</td><td>UNION</td></tr>
+                    <tr><td>Intersection</td><td>∩</td><td>Binaire</td><td>INTERSECT</td></tr>
+                    <tr><td>Différence</td><td>−</td><td>Binaire</td><td>EXCEPT</td></tr>
+                    <tr><td>Produit cart.</td><td>×</td><td>Binaire</td><td>CROSS JOIN</td></tr>
+                    <tr><td>Jointure</td><td>⋈</td><td>Binaire</td><td>JOIN … ON</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Exercices ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-dumbbell"></i> Exercices du chapitre</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre1.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Chapitre 1</a>
+        <a href="chapitre3.html" class="btn-nav">Chapitre 3 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar" id="xp-bar"></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["σ = lignes | π = colonnes","Jointure = Produit cartésien + Sélection"]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Écrivez en algèbre : 'les noms des étudiants âgés de plus de 22 ans'.",hints:["D'abord filtre (σ) puis colonnes (π)","σ puis π"],answer:"π_nom (σ_age>22 (ETUDIANTS))"},
+        {q:"ETUDIANTS a 5 lignes, COURS a 3 lignes. Combien de lignes donne ETUDIANTS × COURS ?",hints:["Produit cartésien = toutes les combinaisons"],answer:"5 × 3 = 15 lignes."},
+        {q:"Quelle est la différence entre σ (sélection) et π (projection) ?",hints:["σ filtre des…","π filtre des…"],answer:"σ filtre des LIGNES (horizontal). π filtre des COLONNES (vertical)."},
+        {q:"Écrivez la jointure en algèbre : 'les noms et notes des étudiants'.",hints:["Joindre ETUDIANTS et NOTES sur id","Puis projeter nom et note"],answer:"π_nom,note (ETUDIANTS ⋈ (id=id_etu) NOTES)"},
+        {q:"ETUDIANTS_PARIS ∪ ETUDIANTS_LYON contient-il des doublons ?",hints:["L'union en algèbre élimine…"],answer:"Non, l'union (∪) élimine automatiquement les doublons (comme UNION en SQL, pas UNION ALL)."}
+    ],
+    quiz:[
+        {type:"mcq",q:"σ en algèbre relationnelle correspond à :",options:["SELECT colonnes","WHERE condition","JOIN","GROUP BY"],correct:1},
+        {type:"mcq",q:"π en algèbre relationnelle correspond à :",options:["WHERE","SELECT colonnes","ORDER BY","HAVING"],correct:1},
+        {type:"mcq",q:"R1 ⋈ R2 est équivalent à :",options:["π(R1 ∪ R2)","σ(R1 × R2)","R1 − R2","ρ(R1)"],correct:1},
+        {type:"mcq",q:"Pour faire une union, les tables doivent :",options:["Avoir le même nombre de lignes","Avoir le même schéma","Avoir une FK commune","Être triées"],correct:1},
+        {type:"mcq",q:"La division R1 ÷ R2 répond à :",options:["'Il existe au moins un'","'Pour tout'","'Aucun'","'La somme de'"],correct:1},
+        {type:"mcq",q:"Le produit cartésien de 10 et 8 lignes donne :",options:["18 lignes","80 lignes","10 lignes","2 lignes"],correct:1},
+        {type:"mcq",q:"Dans un arbre algébrique, les feuilles sont :",options:["Les opérations","Les résultats","Les tables sources","Les conditions"],correct:2},
+        {type:"qa",q:"Citez les 3 opérations unaires (S.P.R.).",answer:"Sélection (σ), Projection (π), Renommage (ρ)."},
+        {type:"qa",q:"Citez les 4 opérations ensemblistes (U.I.D.P.).",answer:"Union (∪), Intersection (∩), Différence (−), Produit cartésien (×)."},
+        {type:"qa",q:"Comment optimise-t-on un arbre algébrique ?",answer:"On descend les sélections (σ) le plus bas possible pour réduire le volume de données dès le départ."}
+    ],
+    dragdrop:[
+        {instruction:"Associez le symbole à l'opération :",pairs:[["σ","Sélection"],["π","Projection"],["ρ","Renommage"],["⋈","Jointure"],["∪","Union"],["∩","Intersection"]]},
+        {instruction:"Associez l'opération à son équivalent SQL :",pairs:[["σ","WHERE"],["π","SELECT colonnes"],["∪","UNION"],["−","EXCEPT"],["×","CROSS JOIN"],["⋈","JOIN ON"]]},
+        {instruction:"Classez : Unaire ou Binaire ?",pairs:[["Sélection","Unaire"],["Union","Binaire"],["Projection","Unaire"],["Jointure","Binaire"],["Renommage","Unaire"],["Différence","Binaire"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

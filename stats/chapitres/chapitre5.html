@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 5 — Représentations graphiques | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html" class="active"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-chart-pie"></i> Chapitre 5</div>
+    <h1>📊 Représentations <span class="highlight">graphiques</span></h1>
+    <p>Barres, circulaire, histogramme, polygone — choisir le bon graphique.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-chart-bar"></i> Quel graphique pour quelles données ?</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique B.C.H.P. — les 4 types de graphiques</h4>
+        <p><strong>B</strong>arres = données discrètes ou qualitatives (barres séparées)<br>
+        <strong>C</strong>irculaire (camembert) = proportions d'un tout (fréquences en %)<br>
+        <strong>H</strong>istogramme = données continues en classes (barres collées)<br>
+        <strong>P</strong>olygone des fréquences = relier les centres de classes (courbe)</p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type de données</th><th>Graphique adapté</th><th>Particularité</th></tr></thead>
+        <tbody>
+            <tr><td>Qualitatif nominale</td><td>Barres / Circulaire</td><td>Barres séparées, pas d'ordre</td></tr>
+            <tr><td>Qualitatif ordinale</td><td>Barres (ordonnées)</td><td>Barres séparées, avec ordre</td></tr>
+            <tr><td>Quantitatif discret</td><td>Diagramme en bâtons</td><td>Barres fines, sur chaque valeur</td></tr>
+            <tr><td>Quantitatif continu</td><td>Histogramme</td><td>Barres collées (pas d'espace)</td></tr>
+            <tr><td>Évolution temporelle</td><td>Courbe / Polygone</td><td>Points reliés par des lignes</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-chart-bar"></i> Diagramme en barres</h2>
+    <div class="concept-card">
+        <h4>📊 Quand l'utiliser ?</h4>
+        <p>Pour comparer des <strong>catégories</strong> ou des <strong>valeurs discrètes</strong>. Les barres sont <strong>séparées</strong> (espace entre elles = les valeurs ne sont pas continues).</p>
+        <p>Hauteur de chaque barre = effectif ou fréquence de la catégorie.</p>
+    </div>
+    <div class="tip-box"><strong>💡 Vertical ou Horizontal ?</strong> Vertical = standard. Horizontal = utile quand les labels sont longs (noms de pays, filières…).</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-chart-pie"></i> Diagramme circulaire (camembert)</h2>
+    <div class="concept-card">
+        <h4>🥧 Analogie de la pizza</h4>
+        <p>Chaque part de la pizza représente la <strong>proportion</strong> d'une catégorie par rapport au total. Un cercle complet = 360° = 100%.</p>
+    </div>
+    <div class="code-block"><pre><code>Angle de chaque secteur :
+angle = fréquence × 360°
+
+Exemple : fréquence = 0.25
+→ angle = 0.25 × 360° = 90°</code></pre></div>
+    <div class="warning-box"><strong>⚠️ À éviter quand :</strong> Trop de catégories (&gt;6), proportions proches (difficile à comparer), ou données évolutives. Dans ces cas, préférez un diagramme en barres.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-signal"></i> Histogramme</h2>
+    <div class="concept-card">
+        <h4>🧱 Barres collées = données continues</h4>
+        <p>L'histogramme est pour les données <strong>continues groupées en classes</strong>. Les barres sont <strong>collées</strong> car les classes sont adjacentes (pas de vide entre elles).</p>
+        <p><strong>Important :</strong> La surface de chaque barre est proportionnelle à l'effectif (ou la fréquence), pas seulement la hauteur.</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ Classes d'amplitudes inégales :</strong> Si les classes n'ont pas la même largeur, on utilise la <strong>densité de fréquence</strong> = fréquence / amplitude de la classe. C'est la hauteur de la barre.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-chart-line"></i> Polygone des fréquences et courbe cumulative</h2>
+    <p><strong>Polygone des fréquences :</strong> Reliez les centres de chaque classe par des segments de droite. Donne la « forme » de la distribution.</p>
+    <p><strong>Courbe cumulative (ogive) :</strong> Tracez les fréquences cumulées en fonction des bornes supérieures des classes. Permet de lire la médiane graphiquement (intersection avec F=0.5).</p>
+    <div class="tip-box"><strong>💡 Lire la médiane sur l'ogive :</strong> Tracez une droite horizontale à F = 0.5. Là où elle coupe la courbe, descendez verticalement pour lire la médiane sur l'axe des x.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 5</h4>
+        <ul>
+            <li><strong>B.C.H.P.</strong> : Barres (discret/quali), Circulaire (proportions), Histogramme (continu), Polygone (courbe)</li>
+            <li>Barres séparées = discret, barres collées = continu</li>
+            <li>Angle camembert = fréquence × 360°</li>
+            <li>Histogramme : surface ∝ effectif, pas seulement hauteur</li>
+            <li>Ogive → lecture graphique de la médiane à F = 0.5</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre4.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Dispersion</a>
+    <a href="chapitre6.html" class="next-chapter">Corrélation <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Quel graphique pour les couleurs préférées de 50 élèves ?",hints:["Données qualitatives nominales","Comparaison de catégories"],answer:"Diagramme en barres (séparées) ou diagramme circulaire (si peu de catégories). Les données sont qualitatives nominales."},
+        {q:"Calculez l'angle pour une catégorie de fréquence 0.35 dans un camembert.",hints:["angle = f × 360°"],answer:"angle = 0.35 × 360° = 126°."},
+        {q:"Pourquoi les barres d'un histogramme sont-elles collées ?",hints:["Type de données","Continuité"],answer:"Parce que les données sont continues et les classes sont adjacentes (pas de vide entre les intervalles). L'absence d'espace reflète la continuité des données."},
+        {q:"Quelle est la différence entre un diagramme en bâtons et un histogramme ?",hints:["Discret vs continu","Séparé vs collé"],answer:"Bâtons: données discrètes, barres fines et séparées sur chaque valeur. Histogramme: données continues en classes, barres larges et collées."},
+        {q:"Comment lire la médiane sur une courbe cumulative ?",hints:["Tracer F = 0.5","Intersection"],answer:"Tracer une horizontale à F = 0.5. L'abscisse du point d'intersection avec la courbe cumulative donne la médiane."}
+    ],
+    quiz:[
+        {type:"mcq",q:"Pour des données qualitatives, on utilise :",options:["Histogramme","Diagramme en barres","Polygone","Boîte à moustaches"],correct:1},
+        {type:"mcq",q:"L'histogramme est pour des données :",options:["Qualitatives","Discrètes","Continues (en classes)","Ordinales"],correct:2},
+        {type:"mcq",q:"Angle d'un secteur = fréquence × :",options:["100","180°","360°","N"],correct:2},
+        {type:"mcq",q:"Dans un histogramme, les barres sont :",options:["Séparées","Collées","Superposées","En 3D"],correct:1},
+        {type:"mcq",q:"La courbe cumulative permet de lire :",options:["Le mode","La moyenne","La médiane","La variance"],correct:2},
+        {type:"mcq",q:"Un camembert est à éviter quand il y a :",options:["2 catégories","3 catégories","Plus de 6 catégories","Des proportions très différentes"],correct:2},
+        {type:"mcq",q:"Le polygone des fréquences relie :",options:["Les bornes des classes","Les centres des classes","Les effectifs cumulés","Les modes"],correct:1},
+        {type:"qa",q:"Pourquoi la surface (et non la hauteur seule) compte dans un histogramme ?",answer:"Quand les classes ont des amplitudes inégales, c'est la surface de chaque barre qui est proportionnelle à l'effectif. On utilise alors la densité = fréquence / amplitude comme hauteur."},
+        {type:"qa",q:"Quand utiliser un graphique en courbe plutôt qu'en barres ?",answer:"Quand on veut montrer une évolution dans le temps (séries chronologiques) ou la forme continue d'une distribution (polygone des fréquences)."},
+        {type:"qa",q:"Qu'est-ce qu'une ogive ?",answer:"C'est la courbe des fréquences cumulées. On porte les fréquences cumulées en ordonnée et les bornes supérieures des classes en abscisse. Elle permet de lire la médiane et les quartiles."}
+    ],
+    dragdrop:[
+        {instruction:"Associez données → graphique :",pairs:[["Couleurs préférées","Barres / Circulaire"],["Tailles en classes","Histogramme"],["Nombre de voitures (0,1,2…)","Bâtons"],["Évolution du CA mensuel","Courbe"]]},
+        {instruction:"Vrai ou Faux :",pairs:[["Histogramme = barres collées","Vrai"],["Camembert bon pour 15 catégories","Faux"],["angle = fréquence × 360°","Vrai"],["Barres séparées = données continues","Faux"]]},
+        {instruction:"Associez :",pairs:[["Ogive","Fréquences cumulées"],["Polygone","Centres de classes reliés"],["Camembert","Proportions en parts"],["Histogramme","Classes continues"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

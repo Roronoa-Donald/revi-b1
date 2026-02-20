@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — Boucles | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html" class="active">Ch.3</a></li><li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="chapitre5.html">Ch.5</a></li><li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a><a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a><a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a><a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-sync-alt"></i> Chapitre 3</div>
+    <h1>Les <span class="highlight">Boucles</span></h1>
+    <p>Répéter des instructions : Pour, Tant que, Répéter…Jusqu'à. Compteurs, accumulateurs et boucles imbriquées.</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- 3.1 Boucle POUR -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-redo"></i> 3.1 — La boucle Pour (For)</h2>
+        <div class="concept-card">
+            <h4>🔢 Définition</h4>
+            <p>La boucle <strong>Pour</strong> répète un bloc d'instructions un <strong>nombre connu de fois</strong>. On utilise un <strong>compteur</strong> qui va d'une valeur de début à une valeur de fin.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🏃</span><div><strong>Analogie — Les tours de piste :</strong> « Fais 10 tours de piste. » Tu sais combien de tours avant de commencer. Le compteur = le numéro du tour actuel.</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> <span class="number">10</span> <span class="keyword">Faire</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Tour numéro "</span>, i)
+<span class="keyword">FinPour</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">for</span> i := <span class="number">1</span> <span class="keyword">to</span> <span class="number">10</span> <span class="keyword">do</span>
+    <span class="keyword">writeln</span>(<span class="string">'Tour numéro '</span>, i);
+        </div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo :</strong> <strong>Pour</strong> = « je sais combien de fois » → Pense au <strong>P</strong>révisible. Comme un compte à rebours : tu connais la fin avant de commencer.</div></div>
+
+        <h3>L'accumulateur</h3>
+        <p>Un <strong>accumulateur</strong> est une variable qui accumule des valeurs au fil des itérations :</p>
+        <div class="algo-block">
+<span class="comment">// Somme des nombres de 1 à N</span>
+somme ← <span class="number">0</span>
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    somme ← somme + i
+<span class="keyword">FinPour</span>
+<span class="keyword">Écrire</span>(<span class="string">"Somme = "</span>, somme)
+        </div>
+
+        <div class="tip-box"><span>💡</span><div><strong>Initialisaton :</strong> L'accumulateur doit toujours être initialisé <strong>avant</strong> la boucle ! <code>somme ← 0</code> pour une somme, <code>produit ← 1</code> pour un produit.</div></div>
+    </section>
+
+    <!-- 3.2 Boucle TANT QUE -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-sync"></i> 3.2 — La boucle Tant Que (While)</h2>
+        <div class="concept-card">
+            <h4>❓ Définition</h4>
+            <p>La boucle <strong>Tant Que</strong> répète un bloc <strong>tant qu'une condition est vraie</strong>. On ne sait pas forcément combien de fois elle s'exécutera. La condition est testée <strong>avant</strong> chaque itération.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🎮</span><div><strong>Analogie — Le jeu vidéo :</strong> « Tant que tu as des vies, tu continues à jouer. » Tu ne sais pas combien de parties tu vas faire — ça dépend de tes performances !</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Écrire</span>(<span class="string">"Mot de passe ?"</span>)
+<span class="keyword">Lire</span>(mdp)
+<span class="keyword">TantQue</span> mdp ≠ <span class="string">"secret"</span> <span class="keyword">Faire</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Incorrect, réessayez :"</span>)
+    <span class="keyword">Lire</span>(mdp)
+<span class="keyword">FinTantQue</span>
+<span class="keyword">Écrire</span>(<span class="string">"Accès autorisé !"</span>)
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">readln</span>(mdp);
+<span class="keyword">while</span> mdp <> <span class="string">'secret'</span> <span class="keyword">do</span>
+<span class="keyword">begin</span>
+    <span class="keyword">writeln</span>(<span class="string">'Incorrect, reessayez :'</span>);
+    <span class="keyword">readln</span>(mdp);
+<span class="keyword">end</span>;
+        </div>
+
+        <div class="warning-box"><span>⚠️</span><div><strong>Boucle infinie :</strong> Si la condition ne devient jamais FAUX, la boucle tourne indéfiniment ! Vérifie toujours que quelque chose dans le bloc <strong>modifie la condition</strong>.</div></div>
+    </section>
+
+    <!-- 3.3 Répéter Jusqu'à -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-undo"></i> 3.3 — Répéter … Jusqu'à (Repeat…Until)</h2>
+        <div class="concept-card">
+            <h4>🔄 Définition</h4>
+            <p>La boucle <strong>Répéter…Jusqu'à</strong> exécute le bloc <strong>au moins une fois</strong>, puis vérifie la condition à la fin. Elle continue jusqu'à ce que la condition devienne <strong>VRAIE</strong>.</p>
+        </div>
+
+        <div class="algo-block">
+<span class="keyword">Répéter</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Entrez un nombre positif :"</span>)
+    <span class="keyword">Lire</span>(n)
+<span class="keyword">Jusqu'à</span> n > <span class="number">0</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">repeat</span>
+    <span class="keyword">writeln</span>(<span class="string">'Entrez un nombre positif :'</span>);
+    <span class="keyword">readln</span>(n);
+<span class="keyword">until</span> n > <span class="number">0</span>;
+        </div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — TQ vs R/J :</strong><br>
+        🔍 <strong>Tant Que</strong> = « vérifie AVANT d'entrer » (garde à l'entrée du club)<br>
+        🚪 <strong>Répéter/Jusqu'à</strong> = « entre d'abord, on vérifie APRÈS » (tu goûtes avant de juger)<br>
+        Résultat : Répéter s'exécute <strong>au moins 1 fois</strong>, Tant Que peut ne jamais s'exécuter.</div></div>
+    </section>
+
+    <!-- 3.4 Comparaison des 3 boucles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-balance-scale"></i> 3.4 — Comparaison des 3 boucles</h2>
+        <table class="styled-table">
+            <thead><tr><th>Boucle</th><th>Nb itérations connu ?</th><th>Test</th><th>Minimum exécutions</th><th>Pascal</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Pour</strong></td><td>OUI</td><td>—</td><td>0 (si début > fin)</td><td><code>for</code></td></tr>
+                <tr><td><strong>Tant Que</strong></td><td>NON</td><td>Avant</td><td>0</td><td><code>while</code></td></tr>
+                <tr><td><strong>Répéter</strong></td><td>NON</td><td>Après</td><td>1</td><td><code>repeat</code></td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 3.5 Boucles imbriquées -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-layer-group"></i> 3.5 — Boucles imbriquées</h2>
+        <p>On peut <strong>imbriquer</strong> une boucle dans une autre. La boucle interne s'exécute complètement à chaque itération de la boucle externe.</p>
+        <div class="algo-block">
+<span class="comment">// Table de multiplication</span>
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> <span class="number">5</span> <span class="keyword">Faire</span>
+    <span class="keyword">Pour</span> j <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> <span class="number">5</span> <span class="keyword">Faire</span>
+        <span class="keyword">Écrire</span>(i, <span class="string">" × "</span>, j, <span class="string">" = "</span>, i*j)
+    <span class="keyword">FinPour</span>
+<span class="keyword">FinPour</span>
+        </div>
+
+        <div class="analogy-box"><span class="icon">🗓️</span><div><strong>Analogie — Le calendrier :</strong> La boucle externe = les mois (12). La boucle interne = les jours (28-31). Pour chaque mois, on parcourt TOUS ses jours avant de passer au mois suivant.</div></div>
+
+        <div class="info-box"><span>ℹ️</span><div><strong>Nombre total d'itérations :</strong> boucle externe × boucle interne. Si la boucle externe fait 5 tours et l'interne 5 tours → 5 × 5 = <strong>25 itérations</strong> au total.</div></div>
+    </section>
+
+    <!-- Résumé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 3.6 — Résumé</h2>
+        <div class="concept-card"><h4>🎯 Ce qu'il faut retenir</h4>
+            <ul>
+                <li><strong>Pour</strong> : nombre d'itérations connu à l'avance</li>
+                <li><strong>Tant Que</strong> : test avant, peut ne jamais s'exécuter</li>
+                <li><strong>Répéter/Jusqu'à</strong> : test après, s'exécute au moins 1 fois</li>
+                <li><strong>Accumulateur</strong> : initialiser avant la boucle !</li>
+                <li><strong>Boucle infinie</strong> : toujours modifier la condition dans le corps</li>
+                <li><strong>Imbriquées</strong> : total = externe × interne</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Exercices -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre2.html"><i class="fas fa-arrow-left"></i> Ch.2 — Conditions</a>
+        <a href="chapitre4.html">Ch.4 — Tableaux <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_algo_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+    { id: 'explorer', name: 'Explorateur', icon: '🔍', desc: 'Termine 10 exercices', xp: 50 },
+    { id: 'ch3', name: 'Boucleur', icon: '🔄', desc: 'Termine les Boucles', xp: 20 },
+    { id: 'quiz_king', name: 'Roi du Quiz', icon: '👑', desc: '50 QCM corrects', xp: 60 },
+    { id: 'streak_3', name: 'Série de 3', icon: '🔥', desc: '3 jours consécutifs', xp: 25 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti Codeur' },
+    { min: 80, title: 'Algorithmicien Jr.' }, { min: 150, title: 'Développeur Logique' },
+    { min: 250, title: 'Maître des Boucles' }, { min: 400, title: 'Architecte Algo' }
+] });
+GameEngine.init();
+
+ChapterExercises.init({
+    guided: [
+        { q: "Quelle boucle utilise-t-on quand on connaît le nombre d'itérations ?", hints: ["3 lettres", "Commence par P", "Pour"], answer: "pour" },
+        { q: "Quelle boucle s'exécute au moins une fois ?", hints: ["Le test est à la fin", "Répéter…", "Répéter Jusqu'à"], answer: "répéter" },
+        { q: "Combien d'itérations : Pour i de 1 à 5 ?", hints: ["De 1 à 5 inclus", "Comptez…"], answer: "5" },
+        { q: "À quelle valeur initialise-t-on un accumulateur de somme ?", hints: ["Élément neutre de l'addition", "0"], answer: "0" },
+        { q: "Boucles imbriquées : 3 tours externes × 4 tours internes = combien au total ?", hints: ["Multiplication", "3 × 4"], answer: "12" }
+    ],
+    quiz: [
+        { type: "mcq", q: "TantQue teste la condition :", options: ["Avant chaque itération", "Après chaque itération", "Une seule fois au début", "À la fin seulement"], correct: 0 },
+        { type: "mcq", q: "Quel risque si on oublie de modifier la variable dans un TantQue ?", options: ["Le programme plante", "Boucle infinie", "Erreur de compilation", "Rien de spécial"], correct: 1 },
+        { type: "qa", q: "En Pascal, quel mot-clé traduit 'Tant Que' ?", answer: ["while"] },
+        { type: "mcq", q: "Répéter...Jusqu'à n>0 : si n=5 au départ, combien de fois le bloc s'exécute ?", options: ["0", "1", "5", "Infini"], correct: 1 },
+        { type: "qa", q: "Comment dit-on 'Pour' en Pascal ?", answer: ["for"] },
+        { type: "mcq", q: "Pour i de 1 à 0 Faire : combien d'exécutions ?", options: ["0", "1", "-1", "Erreur"], correct: 0 },
+        { type: "mcq", q: "Quel est l'accumulateur ici : produit ← produit * i ?", options: ["i", "produit", "*", "Aucun"], correct: 1 },
+        { type: "qa", q: "En Pascal, 'Répéter…Jusqu'à' se traduit par ?", answer: ["repeat...until", "repeat until", "repeat"] },
+        { type: "mcq", q: "Boucle Pour avec compteur décroissant en Pascal :", options: ["for i := 10 to 1", "for i := 10 downto 1", "for i := 1 downto 10", "while i >= 1"], correct: 1 },
+        { type: "qa", q: "À quelle valeur initialise-t-on un accumulateur de produit ?", answer: ["1"] }
+    ],
+    dragdrop: [
+        { instruction: "Associe chaque boucle à sa caractéristique :", pairs: [["Pour", "Nombre d'itérations connu"], ["Tant Que", "Test avant — peut ne jamais s'exécuter"], ["Répéter/Jusqu'à", "Test après — au moins 1 exécution"]] },
+        { instruction: "Associe chaque pseudocode à sa traduction Pascal :", pairs: [["Pour i de 1 à N Faire", "for i := 1 to N do"], ["TantQue condition Faire", "while condition do"], ["Répéter … Jusqu'à cond", "repeat … until cond"]] },
+        { instruction: "Associe chaque situation à la boucle adaptée :", pairs: [["Afficher les nombres de 1 à 100", "Pour"], ["Demander un mot de passe jusqu'au bon", "Répéter/Jusqu'à"], ["Lire des données tant que l'utilisateur continue", "Tant Que"]] }
+    ]
+});
+</script>
+</body>
+</html>

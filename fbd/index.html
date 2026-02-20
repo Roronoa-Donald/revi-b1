@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBD — Fonctionnement des Bases de Données | B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li><li><a href="chapitres/formules.html">Formules</a></li>
+        <li><a href="chapitres/cartes.html">Cartes</a></li><li><a href="chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 Modèle relationnel</a>
+    <a href="chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 Algèbre relationnelle</a>
+    <a href="chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 SQL — Fondamentaux</a>
+    <a href="chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 SQL — Avancé</a>
+    <a href="chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 Normalisation</a>
+    <a href="chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 Conception & contraintes</a>
+    <a href="chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-database"></i> Bachelor 1 — Bases de Données</div>
+    <h1>🔧 AutoBot <span class="highlight">FBD</span></h1>
+    <p>Fonctionnement des Bases de Données — Du modèle relationnel au SQL, tout pour maîtriser les données !</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- ─── Modules ─── -->
+    <section class="chapter-section">
+        <h2 class="section-title"><i class="fas fa-compass"></i> Modules du cours</h2>
+        <div class="modules-grid">
+            <a href="chapitres/chapitre1.html" class="module-card"><div class="module-icon"><i class="fas fa-table"></i></div><h3>1. Modèle relationnel</h3><p>Relations, attributs, tuples, clés primaires et étrangères.</p></a>
+            <a href="chapitres/chapitre2.html" class="module-card"><div class="module-icon"><i class="fas fa-filter"></i></div><h3>2. Algèbre relationnelle</h3><p>Sélection, projection, jointure, union, intersection, différence.</p></a>
+            <a href="chapitres/chapitre3.html" class="module-card"><div class="module-icon"><i class="fas fa-code"></i></div><h3>3. SQL — Fondamentaux</h3><p>SELECT, INSERT, UPDATE, DELETE, WHERE, ORDER BY.</p></a>
+            <a href="chapitres/chapitre4.html" class="module-card"><div class="module-icon"><i class="fas fa-layer-group"></i></div><h3>4. SQL — Avancé</h3><p>Jointures, GROUP BY, HAVING, sous-requêtes, fonctions.</p></a>
+            <a href="chapitres/chapitre5.html" class="module-card"><div class="module-icon"><i class="fas fa-broom"></i></div><h3>5. Normalisation</h3><p>1NF, 2NF, 3NF, BCNF — éliminer la redondance.</p></a>
+            <a href="chapitres/chapitre6.html" class="module-card"><div class="module-icon"><i class="fas fa-drafting-compass"></i></div><h3>6. Conception & contraintes</h3><p>Schéma E-R, contraintes d'intégrité, MLD, passage E-R → relationnel.</p></a>
+        </div>
+    </section>
+
+    <!-- ─── Outils ─── -->
+    <section class="chapter-section">
+        <h2 class="section-title"><i class="fas fa-toolbox"></i> Outils de révision</h2>
+        <div class="modules-grid">
+            <a href="chapitres/formules.html" class="module-card"><div class="module-icon"><i class="fas fa-scroll"></i></div><h3>Formules & mnémoniques</h3><p>Toutes les formules clés et astuces de mémorisation.</p></a>
+            <a href="chapitres/cartes.html" class="module-card"><div class="module-icon"><i class="fas fa-layer-group"></i></div><h3>Cartes mémoire</h3><p>30 flash cards interactives pour réviser.</p></a>
+            <a href="chapitres/simulateur-examen.html" class="module-card"><div class="module-icon"><i class="fas fa-graduation-cap"></i></div><h3>Simulateur d'examen</h3><p>35 QCM chronométrées avec corrections.</p></a>
+            <a href="exercices/exercices.html" class="module-card"><div class="module-icon"><i class="fas fa-dumbbell"></i></div><h3>Exercices</h3><p>24 exercices classés par chapitre et difficulté.</p></a>
+        </div>
+    </section>
+
+    <!-- ─── Features ─── -->
+    <section class="chapter-section">
+        <h2 class="section-title"><i class="fas fa-star"></i> Fonctionnalités</h2>
+        <div class="features-grid">
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-brain"></i></div><h3>Mnémoniques</h3><p>Des astuces uniques pour chaque chapitre.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-code"></i></div><h3>SQL en pratique</h3><p>Exemples concrets avec résultats attendus.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-trophy"></i></div><h3>Gamification</h3><p>Badges, niveaux et XP pour te motiver.</p></div>
+            <div class="feature-card"><div class="feature-icon"><i class="fas fa-moon"></i></div><h3>Mode sombre</h3><p>Interface adaptée jour/nuit.</p></div>
+        </div>
+    </section>
+</main>
+
+<footer style="text-align:center;padding:2rem;opacity:.5;font-size:.85rem">
+    🔧 AutoBot FBD — B1 © 2025
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_fbd_progress',
+    badges:[
+        {id:'first_table',name:'Première Table',icon:'🗃️',desc:'Découvrir le modèle relationnel'},
+        {id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:'Maîtriser les opérations relationnelles'},
+        {id:'sql_starter',name:'SQL Starter',icon:'💻',desc:'Écrire les premières requêtes SQL'},
+        {id:'join_master',name:'JOIN Master',icon:'🔗',desc:'Réussir les jointures avancées'},
+        {id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:'Normaliser en 3NF'},
+        {id:'architect',name:'Architecte BD',icon:'🏗️',desc:'Concevoir un schéma complet'},
+        {id:'half_way',name:'Mi-parcours',icon:'🏁',desc:'3 chapitres terminés'},
+        {id:'db_legend',name:'Légende BD',icon:'🏆',desc:'Tous les chapitres terminés'}
+    ],
+    levels:[
+        {name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},
+        {name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}
+    ],
+    tips:[
+        "Une clé primaire identifie UNIQUEMENT chaque ligne !",
+        "SELECT * est pratique, mais précise tes colonnes en production.",
+        "WHERE filtre avant GROUP BY, HAVING filtre après.",
+        "1NF = valeurs atomiques. Si tu as des listes dans une cellule, c'est NON !",
+        "JOIN = coller deux tables via une clé commune.",
+        "NULL ≠ 0 ≠ '' — NULL signifie 'inconnu'.",
+        "BCNF ⊂ 3NF ⊂ 2NF ⊂ 1NF — chaque forme inclut la précédente.",
+        "Toujours tester tes requêtes avec LIMIT avant de lancer sur toute la table.",
+        "Un bon schéma réduit 90% des bugs de données.",
+        "La normalisation élimine la redondance, pas les données !"
+    ]
+});
+GameEngine.init();
+</script>
+</body>
+</html>

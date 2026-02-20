@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — Tableaux & Chaînes | C/C++ B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre1.html">Ch.1</a></li><li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li><li><a href="chapitre4.html" class="active">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li><li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-th-list"></i> Chapitre 4</div>
+    <h1>⚡ Tableaux & <span class="highlight">Chaînes</span></h1>
+    <p>Stocker des collections de données : tableaux 1D, 2D, chaînes de caractères et les fonctions de string.h.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ 4.1 Tableaux 1D ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="tableaux-1d">
+    <h2><i class="fas fa-th-list"></i> 4.1 — Tableaux à une dimension</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le casier à courrier</div>
+        <p>Un tableau est comme un <strong>casier à courrier</strong> dans un immeuble. Chaque case est numérotée (0, 1, 2…) et contient une valeur. Toutes les cases stockent le même <strong>type</strong> de données.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Déclaration et utilisation</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Déclaration : type nom[taille];
+int notes[5];                    // 5 cases non initialisées
+
+// Déclaration + initialisation
+int notes[5] = {12, 15, 8, 17, 14};
+
+// Initialisation automatique de la taille
+int ages[] = {20, 22, 19, 21};   // Taille = 4 (automatique)
+
+// Accès : indice commence à 0 !
+printf("Première note : %d\n", notes[0]);  // 12
+printf("Dernière note : %d\n", notes[4]);  // 14
+
+// Modification
+notes[2] = 10;  // Remplace 8 par 10</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Piège n°1 : L'indice commence à 0 !</strong><br>
+        Un tableau de taille 5 a les indices 0, 1, 2, 3, 4 — <strong>pas 5 !</strong> Accéder à <code>notes[5]</code> est un <strong>débordement</strong> (buffer overflow) qui peut planter le programme ou créer des bugs invisibles.
+    </div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — « Zéro d'abord »</div>
+        <p>En C, tout commence à <strong>0</strong>. Le premier élément est <code>tab[0]</code>, le dernier est <code>tab[taille-1]</code>. Pensez « <strong>Z</strong>éro = <strong>Z</strong>one de départ ».</p>
+    </div>
+
+    <h3>Parcourir un tableau avec une boucle</h3>
+    <div class="code-block"><div class="code-header"><span>Parcours, somme, min, max</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#define N 5
+int notes[N] = {12, 15, 8, 17, 14};
+
+// Afficher tout
+for (int i = 0; i < N; i++) {
+    printf("notes[%d] = %d\n", i, notes[i]);
+}
+
+// Calculer la somme et la moyenne
+int somme = 0;
+for (int i = 0; i < N; i++) somme += notes[i];
+float moy = (float)somme / N;
+printf("Moyenne = %.2f\n", moy);  // 13.20
+
+// Trouver le maximum
+int max = notes[0];
+for (int i = 1; i < N; i++) {
+    if (notes[i] > max) max = notes[i];
+}
+printf("Max = %d\n", max);  // 17</code></pre></div>
+</section>
+
+<!-- ═══════════════ 4.2 Tableaux 2D ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="tableaux-2d">
+    <h2><i class="fas fa-table"></i> 4.2 — Tableaux à deux dimensions (matrices)</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le tableur Excel</div>
+        <p>Un tableau 2D est comme une <strong>feuille Excel</strong> : des lignes et des colonnes. <code>tab[ligne][colonne]</code> = la cellule à la croisée.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Matrice 3×4</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// 3 lignes, 4 colonnes
+int mat[3][4] = {
+    {1, 2, 3, 4},     // Ligne 0
+    {5, 6, 7, 8},     // Ligne 1
+    {9, 10, 11, 12}   // Ligne 2
+};
+
+// Accès
+printf("%d\n", mat[1][2]);  // 7 (ligne 1, colonne 2)
+
+// Parcours complet
+for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 4; j++) {
+        printf("%3d ", mat[i][j]);
+    }
+    printf("\n");
+}
+//   1   2   3   4
+//   5   6   7   8
+//   9  10  11  12</code></pre></div>
+</section>
+
+<!-- ═══════════════ 4.3 Chaînes de caractères ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="chaines">
+    <h2><i class="fas fa-font"></i> 4.3 — Chaînes de caractères</h2>
+
+    <div class="concept-card">
+        <h4>📝 Qu'est-ce qu'une chaîne en C ?</h4>
+        <p>En C, il n'y a <strong>pas de type string</strong> ! Une chaîne est simplement un <strong>tableau de char</strong> terminé par le caractère spécial <code>'\0'</code> (null terminator).</p>
+    </div>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le train avec un wagon-stop</div>
+        <p>Une chaîne est comme un train où chaque wagon porte une lettre. Le dernier wagon est le <strong>wagon STOP</strong> (<code>'\0'</code>) qui dit au programme « c'est fini, arrête de lire ! ».</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Chaînes en C</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Déclaration avec guillemets doubles
+char nom[20] = "Alice";
+// En mémoire : ['A','l','i','c','e','\0', ?, ?, ...]
+
+// Caractère par caractère (rare)
+char msg[] = {'H','e','l','l','o','\0'};
+
+// TAILLE = nb caractères + 1 (pour '\0')
+// "Alice" a 5 lettres → besoin de 6 cases minimum
+
+// Afficher
+printf("Nom : %s\n", nom);
+
+// Lire au clavier (ATTENTION aux espaces !)
+char ville[50];
+printf("Ville : ");
+scanf("%s", ville);          // Lit UN mot (pas d'espace !)
+// OU pour une ligne entière :
+fgets(ville, 50, stdin);     // Lit toute la ligne</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ scanf("%s") ne lit pas les espaces !</strong> Il s'arrête au premier espace. Pour lire "New York", utilisez <code>fgets()</code>. Et <strong>pas de &amp;</strong> devant un tableau dans scanf : <code>scanf("%s", ville)</code> sans &amp;.
+    </div>
+</section>
+
+<!-- ═══════════════ 4.4 string.h ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="string-h">
+    <h2><i class="fas fa-tools"></i> 4.4 — Fonctions de string.h</h2>
+
+    <div class="info-box">
+        <strong>Inclure :</strong> <code>#include &lt;string.h&gt;</code> pour accéder aux fonctions de manipulation de chaînes.
+    </div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Fonction</th><th>Action</th><th>Exemple</th></tr></thead>
+            <tbody>
+                <tr><td><code>strlen(s)</code></td><td>Longueur (sans '\0')</td><td><code>strlen("Hello")</code> → 5</td></tr>
+                <tr><td><code>strcpy(dest, src)</code></td><td>Copier src dans dest</td><td><code>strcpy(nom, "Bob");</code></td></tr>
+                <tr><td><code>strcat(dest, src)</code></td><td>Concaténer (ajouter à la fin)</td><td><code>strcat(msg, " World");</code></td></tr>
+                <tr><td><code>strcmp(s1, s2)</code></td><td>Comparer (0 si égaux)</td><td><code>strcmp("a","b")</code> → &lt; 0</td></tr>
+                <tr><td><code>strchr(s, c)</code></td><td>Chercher un caractère</td><td><code>strchr("Hello",'l')</code></td></tr>
+                <tr><td><code>strstr(s, sub)</code></td><td>Chercher une sous-chaîne</td><td><code>strstr("Hello","ell")</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>L.C.C.C.</strong> (Les 4 fonctions essentielles)</div>
+        <ul>
+            <li>str<strong>L</strong>en — <strong>L</strong>ongueur</li>
+            <li>str<strong>C</strong>py — <strong>C</strong>opier</li>
+            <li>str<strong>C</strong>at — <strong>C</strong>oncaténer</li>
+            <li>str<strong>C</strong>mp — <strong>C</strong>omparer</li>
+        </ul>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Exemples string.h</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#include &lt;string.h&gt;
+
+char prenom[20] = "Alice";
+char nom[20];
+
+// Copier
+strcpy(nom, "Dupont");
+
+// Longueur
+printf("Longueur prénom : %lu\n", strlen(prenom));  // 5
+
+// Concaténer
+char complet[50] = "";
+strcpy(complet, prenom);
+strcat(complet, " ");
+strcat(complet, nom);
+printf("%s\n", complet);  // Alice Dupont
+
+// Comparer
+if (strcmp(prenom, "Alice") == 0) {
+    printf("C'est bien Alice !\n");
+}
+// strcmp retourne 0 si égaux (PIÈGE : 0 = vrai en logique !)</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ JAMAIS de = pour copier une chaîne !</strong> <code>nom = "Bob";</code> ne fonctionne PAS en C. Utilisez toujours <code>strcpy(nom, "Bob");</code>. De même, <code>==</code> ne compare pas des chaînes : utilisez <code>strcmp()</code>.
+    </div>
+</section>
+
+<!-- ═══════════════ 4.5 Tableau comme paramètre ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="tableau-param">
+    <h2><i class="fas fa-share"></i> 4.5 — Passer un tableau à une fonction</h2>
+
+    <div class="concept-card">
+        <h4>⚡ Règle clé</h4>
+        <p>En C, un tableau est <strong>toujours passé par adresse</strong> (pas par copie !). La fonction peut donc modifier l'original. Il faut aussi passer la <strong>taille</strong> car le tableau ne connaît pas sa propre taille.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Tableau en paramètre</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Toujours passer la taille en paramètre !
+void afficher(int tab[], int n) {
+    for (int i = 0; i < n; i++)
+        printf("%d ", tab[i]);
+    printf("\n");
+}
+
+float moyenne(int tab[], int n) {
+    int s = 0;
+    for (int i = 0; i < n; i++) s += tab[i];
+    return (float)s / n;
+}
+
+int main() {
+    int notes[] = {12, 15, 8, 17, 14};
+    int n = 5;
+    
+    afficher(notes, n);
+    printf("Moyenne : %.2f\n", moyenne(notes, n));
+    return 0;
+}</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — « Tableau = Toujours avec sa Taille »</div>
+        <p>A chaque fois que vous passez un tableau à une fonction, passez aussi sa taille : <code>f(tab, n)</code>. Les deux vont toujours ensemble, comme un couple !</p>
+    </div>
+</section>
+
+<!-- ═══════════════ 4.6 Récap ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="recap">
+    <h2><i class="fas fa-clipboard-check"></i> 4.6 — Récapitulatif</h2>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Concept</th><th>Syntaxe</th><th>Piège</th></tr></thead>
+            <tbody>
+                <tr><td>Tableau 1D</td><td><code>int t[5] = {1,2,3,4,5};</code></td><td>Indice commence à 0</td></tr>
+                <tr><td>Tableau 2D</td><td><code>int m[3][4];</code></td><td>m[ligne][colonne]</td></tr>
+                <tr><td>Chaîne</td><td><code>char s[20] = "Hi";</code></td><td>+1 pour '\0'</td></tr>
+                <tr><td>strlen</td><td><code>strlen("abc")</code> → 3</td><td>Ne compte pas '\0'</td></tr>
+                <tr><td>strcpy</td><td><code>strcpy(d, s);</code></td><td>Pas de = pour copier !</td></tr>
+                <tr><td>strcmp</td><td><code>strcmp(a,b)==0</code></td><td>0 = égaux (pas ==)</td></tr>
+                <tr><td>Tab en param</td><td><code>f(tab, n)</code></td><td>Toujours passer la taille</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ EXERCICES ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exercices">
+    <h2><i class="fas fa-dumbbell"></i> Exercices du Chapitre 4</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre3.html" class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i> Chapitre 3</a>
+    <a href="chapitre5.html" class="nav-btn next-btn">Chapitre 5 <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_c_cpp_progress',badges:[{id:'first_step',name:'Premier Pas',icon:'🏁',desc:'Premier exercice',xp:10}],levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti C'},{min:80,title:'Développeur Jr.'},{min:150,title:'Codeur Confirmé'},{min:250,title:'Maître du C'},{min:400,title:'Guru C/C++'}]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        { q: "Déclarez un tableau de 5 entiers, remplissez-le avec scanf et affichez-le.", hints: ["for + scanf(\"%d\", &tab[i])","Deuxième boucle pour afficher"], answer: 'int tab[5];\nfor(int i=0;i<5;i++) scanf("%d",&tab[i]);\nfor(int i=0;i<5;i++) printf("%d ",tab[i]);' },
+        { q: "Écrivez une fonction qui calcule la moyenne d'un tableau d'entiers.", hints: ["float moyenne(int t[], int n)","Accumulez la somme"], answer: 'float moyenne(int t[], int n){\n    int s=0;\n    for(int i=0;i<n;i++) s+=t[i];\n    return (float)s/n;\n}' },
+        { q: "Inversez un tableau sur place (le premier échange avec le dernier, etc.).", hints: ["Deux indices : i et n-1-i","Boucle jusqu'à n/2","Variable temp"], answer: 'void inverser(int t[], int n){\n    for(int i=0;i<n/2;i++){\n        int tmp=t[i]; t[i]=t[n-1-i]; t[n-1-i]=tmp;\n    }\n}' },
+        { q: "Lisez une chaîne au clavier et comptez le nombre de voyelles.", hints: ["Parcourez chaque caractère","Testez a,e,i,o,u"], answer: 'char s[100]; int v=0;\nfgets(s,100,stdin);\nfor(int i=0;s[i]!=\'\\0\';i++)\n    if(s[i]==\'a\'||s[i]==\'e\'||s[i]==\'i\'||s[i]==\'o\'||s[i]==\'u\') v++;\nprintf("Voyelles: %d\\n",v);' },
+        { q: "Comparez deux chaînes saisies et dites si elles sont identiques.", hints: ["strcmp retourne 0 si égaux","#include <string.h>"], answer: 'char a[50],b[50];\nscanf("%s",a); scanf("%s",b);\nif(strcmp(a,b)==0) printf("Identiques\\n");\nelse printf("Différentes\\n");' }
+    ],
+    quiz: [
+        { type:'mcq', q:"Quel est l'indice du premier élément d'un tableau en C ?", options:["1","0","-1","N"], correct:1 },
+        { type:'mcq', q:"Que contient la fin d'une chaîne C ?", options:["\\n","\\0","0","EOF"], correct:1 },
+        { type:'mcq', q:"Pour copier une chaîne, on utilise :", options:["=","strcpy","strcat","memcpy"], correct:1 },
+        { type:'mcq', q:"strcmp retourne 0 quand :", options:["S1 > S2","S1 < S2","S1 == S2","Erreur"], correct:2 },
+        { type:'qa', q:"Pourquoi faut-il passer la taille du tableau en paramètre ?", answer:"Car un tableau en C ne connaît pas sa propre taille" },
+        { type:'mcq', q:"Pour un tableau de 10 éléments, le dernier indice valide est :", options:["10","9","11","8"], correct:1 },
+        { type:'qa', q:"Quelle est la différence entre scanf(\"%s\") et fgets() ?", answer:"scanf s'arrête au premier espace, fgets lit toute la ligne" },
+        { type:'mcq', q:"Quelle taille minimum pour stocker \"Hello\" ?", options:["5","6","7","4"], correct:1 },
+        { type:'mcq', q:"Un tableau passé à une fonction est :", options:["Copié (par valeur)","Par adresse (modifiable)","Constant","Doublé"], correct:1 },
+        { type:'mcq', q:"strlen(\"ABC\") retourne :", options:["4","3","2","6"], correct:1 }
+    ],
+    dragdrop: [
+        { instruction:"Associez la fonction string.h à son rôle :", pairs:[
+            ["strlen","Longueur"],["strcpy","Copier"],["strcat","Concaténer"],["strcmp","Comparer"]
+        ]},
+        { instruction:"Associez le piège à sa description :", pairs:[
+            ["tab[5] sur int t[5]","Débordement (buffer overflow)"],["nom = \"Bob\"","Interdit (utiliser strcpy)"],["scanf(\"%s\")","Ne lit pas les espaces"],["strcmp(a,b)","0 = égaux, pas !="]
+        ]},
+        { instruction:"Associez le concept au code :", pairs:[
+            ["Tableau 1D","int t[5];"],["Tableau 2D","int m[3][4];"],["Chaîne","char s[20];"],["Parcours","for(i=0;i<n;i++)"]
+        ]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

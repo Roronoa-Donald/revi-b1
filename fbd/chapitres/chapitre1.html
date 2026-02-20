@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 — Modèle relationnel | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html" class="active"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-table"></i> Chapitre 1</div>
+    <h1>🗃️ Le modèle <span class="highlight">relationnel</span></h1>
+    <p>Relations, attributs, tuples, clés primaires et étrangères — les fondations des bases de données.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── 1. Pourquoi les bases de données ? ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-question-circle"></i> Pourquoi les bases de données ?</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie AutoBot :</strong> Imagine un bibliothécaire qui gère des milliers de livres. Sans système, retrouver un livre prendrait des heures. Une base de données, c'est le <strong>catalogue organisé</strong> qui permet de retrouver n'importe quel livre en secondes !
+        </div>
+
+        <p>Avant les bases de données, on stockait les informations dans des fichiers plats (texte, CSV…). Problèmes :</p>
+        <ul>
+            <li><strong>Redondance :</strong> mêmes données copiées partout</li>
+            <li><strong>Incohérence :</strong> une modification oubliée dans un fichier</li>
+            <li><strong>Pas de sécurité :</strong> tout le monde accède à tout</li>
+            <li><strong>Difficile à interroger :</strong> pas de langage standard</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>💡 Solution :</strong> Le Système de Gestion de Base de Données (<strong>SGBD</strong>) — un logiciel spécialisé qui organise, stocke, interroge et protège les données. Exemples : MySQL, PostgreSQL, Oracle, SQL Server, SQLite.
+        </div>
+    </section>
+
+    <!-- ─── 2. Le modèle relationnel ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-table"></i> Le modèle relationnel</h2>
+
+        <p>Inventé par <strong>Edgar F. Codd</strong> en 1970, le modèle relationnel organise les données sous forme de <strong>tables</strong> (appelées <em>relations</em>).</p>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique R.A.T.D.</div>
+            <p><strong>R</strong>elation — <strong>A</strong>ttribut — <strong>T</strong>uple — <strong>D</strong>omaine</p>
+            <p>Les 4 concepts fondamentaux du modèle relationnel.</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>📋 Vocabulaire clé</h3>
+            <table class="styled-table">
+                <thead><tr><th>Terme technique</th><th>Équivalent courant</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Relation</strong></td><td>Table</td><td>ETUDIANTS</td></tr>
+                    <tr><td><strong>Attribut</strong></td><td>Colonne</td><td>nom, prenom, age</td></tr>
+                    <tr><td><strong>Tuple</strong></td><td>Ligne / Enregistrement</td><td>(1, "Ali", "Ben", 20)</td></tr>
+                    <tr><td><strong>Domaine</strong></td><td>Type de valeurs</td><td>INTEGER, VARCHAR, DATE</td></tr>
+                    <tr><td><strong>Schéma</strong></td><td>Structure de la table</td><td>ETUDIANTS(id, nom, prenom, age)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> Une relation = un <strong>classeur Excel</strong>. Les colonnes = les en-têtes (attributs). Chaque ligne = un enregistrement (tuple). Le type de données attendu dans chaque colonne = le domaine.
+        </div>
+    </section>
+
+    <!-- ─── 3. Notation d'un schéma ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pen"></i> Notation d'un schéma</h2>
+
+        <p>On note un schéma relationnel ainsi :</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>Schéma relationnel</span></div>
+            <pre>ETUDIANTS(<u>id</u>, nom, prenom, date_naissance, email)
+COURS(<u>code_cours</u>, intitule, credits)
+INSCRIPTIONS(<u>#id_etudiant, #code_cours</u>, note)</pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>🔑 Conventions</h3>
+            <ul>
+                <li><strong><u>Souligné</u></strong> = clé primaire</li>
+                <li><strong>#</strong> = clé étrangère (référence vers une autre table)</li>
+                <li>NOM EN MAJUSCULES = nom de la relation</li>
+                <li>Attributs entre parenthèses, séparés par des virgules</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ─── 4. Clé primaire ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-key"></i> La clé primaire (PK)</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique U.N.I.</div>
+            <p><strong>U</strong>nique — <strong>N</strong>on-null — <strong>I</strong>mmuable</p>
+            <p>Les 3 propriétés d'une clé primaire.</p>
+        </div>
+
+        <p>La clé primaire est l'<strong>attribut (ou combinaison d'attributs)</strong> qui identifie de manière unique chaque tuple.</p>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> La clé primaire, c'est comme ton <strong>numéro de sécurité sociale</strong> — chaque personne en a un et un seul, et deux personnes ne partagent jamais le même.
+        </div>
+
+        <div class="concept-card">
+            <h3>Propriétés de la clé primaire</h3>
+            <table class="styled-table">
+                <thead><tr><th>Propriété</th><th>Signification</th><th>Exemple violation</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Unique</strong></td><td>Pas de doublon dans la colonne</td><td>Deux étudiants avec id=1 → ❌</td></tr>
+                    <tr><td><strong>Non-null</strong></td><td>Jamais vide</td><td>Un étudiant sans id → ❌</td></tr>
+                    <tr><td><strong>Immuable</strong></td><td>Ne change pas après création</td><td>Modifier l'id d'un étudiant → ❌</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Clé candidate vs clé primaire :</strong> Plusieurs colonnes <em>pourraient</em> servir de clé (email, numéro étudiant) — ce sont les <strong>clés candidates</strong>. On en choisit UNE comme clé primaire.
+        </div>
+
+        <h3>Types de clés primaires</h3>
+        <ul>
+            <li><strong>Simple :</strong> un seul attribut → <code>ETUDIANTS(<u>id</u>, nom, …)</code></li>
+            <li><strong>Composée :</strong> plusieurs attributs → <code>INSCRIPTIONS(<u>id_etudiant, code_cours</u>, note)</code></li>
+            <li><strong>Artificielle :</strong> auto-générée (ex: <code>SERIAL</code>, <code>AUTO_INCREMENT</code>) quand aucun attribut naturel ne convient</li>
+        </ul>
+    </section>
+
+    <!-- ─── 5. Clé étrangère ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-link"></i> La clé étrangère (FK)</h2>
+
+        <p>La clé étrangère crée un <strong>lien entre deux tables</strong>. Elle référence la clé primaire d'une autre table.</p>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> Imagine un <strong>ticket de cinéma</strong>. Le numéro de salle sur ton ticket (clé étrangère) pointe vers une salle précise dans le cinéma (clé primaire de la table SALLES). Le ticket n'invente pas de salle — il <em>référence</em> une salle existante.
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemple FK</span></div>
+            <pre>ETUDIANTS(<u>id</u>, nom, prenom)
+NOTES(<u>id_note</u>, #id_etudiant, matiere, valeur)
+       │                │
+       │                └── clé étrangère → ETUDIANTS.id
+       └── clé primaire</pre>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Intégrité référentielle :</strong> On ne peut PAS insérer un <code>id_etudiant</code> dans NOTES qui n'existe pas dans ETUDIANTS. Le SGBD bloque l'opération.
+        </div>
+
+        <div class="concept-card">
+            <h3>Règles de suppression (ON DELETE)</h3>
+            <table class="styled-table">
+                <thead><tr><th>Action</th><th>Comportement</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>RESTRICT</strong></td><td>Interdit de supprimer si des FK pointent</td></tr>
+                    <tr><td><strong>CASCADE</strong></td><td>Supprime aussi les lignes filles</td></tr>
+                    <tr><td><strong>SET NULL</strong></td><td>Met NULL dans les FK concernées</td></tr>
+                    <tr><td><strong>SET DEFAULT</strong></td><td>Remet la valeur par défaut</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── 6. Cardinalités et relations ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-project-diagram"></i> Types de relations</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique 1:1 / 1:N / M:N</div>
+            <p><strong>1:1</strong> = Personne ↔ Passeport | <strong>1:N</strong> = Professeur → Cours | <strong>M:N</strong> = Étudiants ↔ Cours</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Les 3 types de relations</h3>
+            <table class="styled-table">
+                <thead><tr><th>Type</th><th>Signification</th><th>Implémentation</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>1:1</strong></td><td>Un enregistrement lié à un seul</td><td>FK UNIQUE dans l'une des deux tables</td></tr>
+                    <tr><td><strong>1:N</strong></td><td>Un enregistrement lié à plusieurs</td><td>FK dans la table côté N</td></tr>
+                    <tr><td><strong>M:N</strong></td><td>Plusieurs liés à plusieurs</td><td>Table de jonction (table pivot)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Relation M:N avec table de jonction</span></div>
+            <pre>ETUDIANTS(<u>id_etu</u>, nom, prenom)
+COURS(<u>id_cours</u>, intitule, credits)
+INSCRIPTIONS(<u>#id_etu, #id_cours</u>, date_inscription, note)
+              └───────────────── table de jonction</pre>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Astuce :</strong> Une relation M:N se décompose TOUJOURS en deux relations 1:N via une table de jonction. C'est la raison d'être d'INSCRIPTIONS !
+        </div>
+    </section>
+
+    <!-- ─── 7. Domaines et types ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-shapes"></i> Domaines et types de données</h2>
+
+        <p>Chaque attribut a un <strong>domaine</strong> = l'ensemble des valeurs autorisées.</p>
+
+        <div class="concept-card">
+            <h3>Types SQL courants</h3>
+            <table class="styled-table">
+                <thead><tr><th>Type</th><th>Description</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><code>INTEGER</code></td><td>Nombre entier</td><td>42, -5, 0</td></tr>
+                    <tr><td><code>FLOAT / REAL</code></td><td>Nombre décimal</td><td>3.14, -0.5</td></tr>
+                    <tr><td><code>VARCHAR(n)</code></td><td>Texte variable (max n car.)</td><td>'Ali', 'SQL'</td></tr>
+                    <tr><td><code>CHAR(n)</code></td><td>Texte fixe (n car.)</td><td>'FR', 'US'</td></tr>
+                    <tr><td><code>DATE</code></td><td>Date (AAAA-MM-JJ)</td><td>'2025-01-15'</td></tr>
+                    <tr><td><code>BOOLEAN</code></td><td>Vrai/Faux</td><td>TRUE, FALSE</td></tr>
+                    <tr><td><code>SERIAL</code></td><td>Entier auto-incrémenté</td><td>1, 2, 3…</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ NULL :</strong> NULL ≠ 0 ≠ '' ≠ 'NULL'. NULL signifie <strong>« valeur inconnue ou absente »</strong>. Toute opération avec NULL donne NULL (sauf IS NULL).
+        </div>
+    </section>
+
+    <!-- ─── 8. Résumé ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+
+        <div class="concept-card">
+            <h3>🧠 Ce qu'il faut retenir</h3>
+            <table class="styled-table">
+                <thead><tr><th>Concept</th><th>En un mot</th></tr></thead>
+                <tbody>
+                    <tr><td>Relation</td><td>= Table</td></tr>
+                    <tr><td>Attribut</td><td>= Colonne</td></tr>
+                    <tr><td>Tuple</td><td>= Ligne</td></tr>
+                    <tr><td>Domaine</td><td>= Type de données</td></tr>
+                    <tr><td>Clé primaire</td><td>= Identifiant unique (U.N.I.)</td></tr>
+                    <tr><td>Clé étrangère</td><td>= Lien → autre table</td></tr>
+                    <tr><td>1:1, 1:N, M:N</td><td>= Types de cardinalité</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Exercices ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-dumbbell"></i> Exercices du chapitre</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <!-- ─── Navigation ─── -->
+    <div class="chapter-nav">
+        <a href="../index.html" class="btn-nav"><i class="fas fa-home"></i> Accueil</a>
+        <a href="chapitre2.html" class="btn-nav">Chapitre 2 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar" id="xp-bar"></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_fbd_progress',
+    badges:[
+        {id:'first_table',name:'Première Table',icon:'🗃️',desc:'Découvrir le modèle relationnel'},
+        {id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:'Maîtriser les opérations relationnelles'},
+        {id:'sql_starter',name:'SQL Starter',icon:'💻',desc:'Écrire les premières requêtes SQL'},
+        {id:'join_master',name:'JOIN Master',icon:'🔗',desc:'Réussir les jointures avancées'},
+        {id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:'Normaliser en 3NF'},
+        {id:'architect',name:'Architecte BD',icon:'🏗️',desc:'Concevoir un schéma complet'},
+        {id:'half_way',name:'Mi-parcours',icon:'🏁',desc:'3 chapitres terminés'},
+        {id:'db_legend',name:'Légende BD',icon:'🏆',desc:'Tous les chapitres terminés'}
+    ],
+    levels:[
+        {name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},
+        {name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}
+    ],
+    tips:["Une clé primaire identifie UNIQUEMENT chaque ligne !","NULL ≠ 0 ≠ '' — NULL signifie 'inconnu'."]
+});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Donnez le schéma relationnel d'une table PRODUITS avec id, nom, prix, stock.",hints:["Quelle colonne est unique ? → id","Quel type pour le prix ? → FLOAT ou DECIMAL"],answer:"PRODUITS(id, nom, prix, stock) avec id comme clé primaire : PRODUITS(<u>id</u>, nom, prix, stock)"},
+        {q:"Une table COMMANDES doit référencer PRODUITS et CLIENTS. Quelles clés étrangères faut-il ?",hints:["Chaque commande concerne UN produit","Chaque commande est passée par UN client"],answer:"COMMANDES(<u>id_cmd</u>, #id_client, #id_produit, date, quantite) — deux FK vers CLIENTS.id et PRODUITS.id"},
+        {q:"Quelle est la différence entre clé candidate et clé primaire ?",hints:["Combien de clés candidates peut-on avoir ?","Combien de clés primaires ?"],answer:"Clé candidate = toute combinaison d'attributs pouvant identifier un tuple (il peut y en avoir plusieurs). Clé primaire = la clé candidate CHOISIE (une seule par table)."},
+        {q:"Comment transforme-t-on une relation M:N entre AUTEURS et LIVRES ?",hints:["On crée une table intermédiaire","Elle contient les PK des deux tables"],answer:"On crée une table de jonction : ECRIRE(<u>#id_auteur, #id_livre</u>) qui référence AUTEURS(id_auteur) et LIVRES(id_livre)."},
+        {q:"Qu'est-ce qu'une clé primaire composée ? Donnez un exemple.",hints:["Plus d'un attribut forme la clé","Aucun attribut seul ne suffit à identifier"],answer:"Clé composée = plusieurs attributs forment ensemble la PK. Ex: INSCRIPTIONS(<u>id_etu, id_cours</u>, note) — ni id_etu ni id_cours seul ne suffit."}
+    ],
+    quiz:[
+        {type:"mcq",q:"R.A.T.D. signifie :",options:["Relation, Attribut, Tuple, Domaine","Requête, Algorithme, Table, Donnée","Résultat, Agrégation, Tri, Division","Relation, Alias, Tri, Déclaration"],correct:0},
+        {type:"mcq",q:"La clé primaire est toujours :",options:["NULL autorisé","Unique et non-null","Modifiable à volonté","En dernière position"],correct:1},
+        {type:"mcq",q:"Une clé étrangère référence :",options:["Un attribut quelconque","La clé primaire d'une autre table","Un type de données","Le nom de la table"],correct:1},
+        {type:"mcq",q:"Une relation M:N nécessite :",options:["Deux clés primaires dans une table","Une table de jonction","Un INDEX spécial","Un TRIGGER"],correct:1},
+        {type:"mcq",q:"NULL en SQL signifie :",options:["Zéro","Chaîne vide","Valeur inconnue ou absente","FALSE"],correct:2},
+        {type:"mcq",q:"VARCHAR(50) signifie :",options:["Texte fixe de 50 car.","Texte variable max 50 car.","50 lignes de texte","Entier de 50 chiffres"],correct:1},
+        {type:"mcq",q:"ON DELETE CASCADE signifie :",options:["Erreur si FK pointe","Supprimer aussi les lignes filles","Mettre NULL dans la FK","Ne rien faire"],correct:1},
+        {type:"qa",q:"Citez les 3 propriétés U.N.I. d'une clé primaire.",answer:"Unique, Non-null, Immuable."},
+        {type:"qa",q:"Quelle est la différence entre CHAR(5) et VARCHAR(5) ?",answer:"CHAR(5) stocke toujours 5 caractères (complète avec des espaces). VARCHAR(5) stocke jusqu'à 5 caractères (taille variable)."},
+        {type:"qa",q:"Dans ETUDIANTS(id, nom, email) : quelles sont les clés candidates possibles ?",answer:"id et email (les deux sont uniques par étudiant). On choisit généralement id comme PK."}
+    ],
+    dragdrop:[
+        {instruction:"Associez le terme à sa définition :",pairs:[["Relation","Table"],["Attribut","Colonne"],["Tuple","Ligne"],["Domaine","Type de données"],["PK","Identifiant unique"],["FK","Référence vers autre table"]]},
+        {instruction:"Associez le type de relation à son implémentation :",pairs:[["1:1","FK UNIQUE dans une table"],["1:N","FK côté N"],["M:N","Table de jonction"]]},
+        {instruction:"Associez le type SQL à un exemple :",pairs:[["INTEGER","42"],["VARCHAR","'Ali'"],["DATE","'2025-01-15'"],["BOOLEAN","TRUE"],["SERIAL","auto 1,2,3…"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

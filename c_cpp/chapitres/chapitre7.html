@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 7 — Fichiers | C/C++ B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre5.html">Ch.5</a></li><li><a href="chapitre6.html">Ch.6</a></li>
+        <li><a href="chapitre7.html" class="active">Ch.7</a></li><li><a href="chapitre8.html">Ch.8</a></li>
+        <li><a href="formules.html">Formules</a></li><li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitre7.html" class="active"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-file-alt"></i> Chapitre 7</div>
+    <h1>⚡ Gestion des <span class="highlight">Fichiers</span></h1>
+    <p>Lire et écrire des fichiers texte et binaire : fopen, fclose, fprintf, fscanf, fgets — la persistance des données en C.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ 7.1 Pourquoi les fichiers ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="pourquoi">
+    <h2><i class="fas fa-save"></i> 7.1 — Pourquoi les fichiers ?</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le cahier de notes</div>
+        <p>Les variables sont comme un <strong>tableau blanc</strong> : dès qu'on éteint (ferme le programme), tout s'efface. Un fichier est comme un <strong>cahier</strong> : ce que vous écrivez reste même après avoir fermé le cahier. C'est la <strong>persistance</strong>.</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>📁 Types de fichiers en C</h4>
+        <ul>
+            <li><strong>Fichier texte</strong> — lisible par un humain (.txt, .csv). Contient des caractères ASCII.</li>
+            <li><strong>Fichier binaire</strong> — lisible par la machine. Plus compact, plus rapide, mais illisible.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════ 7.2 Ouvrir / Fermer ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="ouvrir-fermer">
+    <h2><i class="fas fa-door-open"></i> 7.2 — Ouvrir et fermer un fichier</h2>
+
+    <div class="code-block"><div class="code-header"><span>fopen et fclose</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>FILE *f;  // Pointeur vers le fichier
+
+// Ouvrir un fichier
+f = fopen("donnees.txt", "r");  // "r" = lecture
+
+// TOUJOURS vérifier si l'ouverture a réussi !
+if (f == NULL) {
+    printf("Erreur : fichier introuvable !\n");
+    return 1;
+}
+
+// ... utiliser le fichier ...
+
+// Fermer le fichier (OBLIGATOIRE)
+fclose(f);</code></pre></div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Mode</th><th>Signification</th><th>Si fichier n'existe pas</th></tr></thead>
+            <tbody>
+                <tr><td><code>"r"</code></td><td><strong>R</strong>ead — lecture seule</td><td>Erreur (NULL)</td></tr>
+                <tr><td><code>"w"</code></td><td><strong>W</strong>rite — écriture (écrase !)</td><td>Crée le fichier</td></tr>
+                <tr><td><code>"a"</code></td><td><strong>A</strong>ppend — ajout à la fin</td><td>Crée le fichier</td></tr>
+                <tr><td><code>"r+"</code></td><td>Lecture + écriture</td><td>Erreur (NULL)</td></tr>
+                <tr><td><code>"w+"</code></td><td>Écriture + lecture (écrase !)</td><td>Crée le fichier</td></tr>
+                <tr><td><code>"rb"/"wb"</code></td><td>Binaire (lecture/écriture)</td><td>—</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>R.W.A.</strong> (Read, Write, Append)</div>
+        <ul>
+            <li><strong>r</strong> = <strong>R</strong>ead (lire)</li>
+            <li><strong>w</strong> = <strong>W</strong>rite (écrire — ⚠️ EFFACE le contenu existant !)</li>
+            <li><strong>a</strong> = <strong>A</strong>ppend (ajouter à la fin — contenu préservé)</li>
+        </ul>
+    </div>
+
+    <div class="warning-box">
+        <strong>⚠️ Le piège de "w" :</strong> Ouvrir un fichier en mode <code>"w"</code> <strong>efface immédiatement</strong> tout son contenu ! Si vous voulez ajouter sans effacer, utilisez <code>"a"</code>.
+    </div>
+</section>
+
+<!-- ═══════════════ 7.3 Écrire dans un fichier ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="ecrire">
+    <h2><i class="fas fa-pen"></i> 7.3 — Écrire dans un fichier</h2>
+
+    <div class="code-block"><div class="code-header"><span>fprintf, fputs, fputc</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>FILE *f = fopen("resultat.txt", "w");
+if (f == NULL) return 1;
+
+// fprintf : comme printf mais dans un fichier
+fprintf(f, "Nom : %s\n", "Alice");
+fprintf(f, "Note : %.2f\n", 15.5);
+fprintf(f, "Date : %02d/%02d/%d\n", 15, 3, 2024);
+
+// fputs : écrire une chaîne (sans formatage)
+fputs("Fin du rapport\n", f);
+
+// fputc : écrire un seul caractère
+fputc('X', f);
+
+fclose(f);
+printf("Fichier écrit avec succès !\n");</code></pre></div>
+
+    <div class="tip-box">
+        <strong>Astuce :</strong> <code>fprintf(f, ...)</code> a exactement la même syntaxe que <code>printf(...)</code>, sauf qu'on ajoute <code>f</code> en premier paramètre. Tout ce que vous savez faire avec printf, vous pouvez le faire avec fprintf !
+    </div>
+</section>
+
+<!-- ═══════════════ 7.4 Lire un fichier ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="lire">
+    <h2><i class="fas fa-book-open"></i> 7.4 — Lire un fichier</h2>
+
+    <div class="code-block"><div class="code-header"><span>fscanf, fgets, fgetc</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>FILE *f = fopen("donnees.txt", "r");
+if (f == NULL) return 1;
+
+// Méthode 1 : fgets — lire ligne par ligne (RECOMMANDÉ)
+char ligne[256];
+while (fgets(ligne, 256, f) != NULL) {
+    printf("%s", ligne);  // Affiche chaque ligne
+}
+
+// Rembobiner pour relire
+rewind(f);
+
+// Méthode 2 : fscanf — lire des données formatées
+char nom[50];
+int age;
+while (fscanf(f, "%s %d", nom, &amp;age) == 2) {
+    printf("%s a %d ans\n", nom, age);
+}
+
+// Méthode 3 : fgetc — lire caractère par caractère
+rewind(f);
+int c;
+while ((c = fgetc(f)) != EOF) {
+    putchar(c);  // Affiche chaque caractère
+}
+
+fclose(f);</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — Quand utiliser quoi ?</div>
+        <ul>
+            <li><code>fgets</code> → Lire <strong>ligne par ligne</strong> (le plus sûr et courant)</li>
+            <li><code>fscanf</code> → Lire des <strong>données structurées</strong> (nom age note…)</li>
+            <li><code>fgetc</code> → Lire <strong>caractère par caractère</strong> (rare)</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <strong>EOF = End Of File :</strong> La constante <code>EOF</code> (définie dans stdio.h) signale qu'on a atteint la fin du fichier. C'est le signal d'arrêt de lecture.
+    </div>
+</section>
+
+<!-- ═══════════════ 7.5 Exemple complet CSV ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exemple-csv">
+    <h2><i class="fas fa-table"></i> 7.5 — Exemple complet : fichier CSV</h2>
+
+    <div class="code-block"><div class="code-header"><span>Écrire et lire un fichier CSV</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>typedef struct {
+    char nom[30];
+    float note;
+} Etudiant;
+
+// ÉCRITURE
+void sauvegarder(Etudiant promo[], int n) {
+    FILE *f = fopen("notes.csv", "w");
+    if (!f) return;
+    fprintf(f, "Nom,Note\n");  // En-tête CSV
+    for (int i = 0; i < n; i++)
+        fprintf(f, "%s,%.2f\n", promo[i].nom, promo[i].note);
+    fclose(f);
+}
+
+// LECTURE
+int charger(Etudiant promo[], int maxN) {
+    FILE *f = fopen("notes.csv", "r");
+    if (!f) return 0;
+    char ligne[100];
+    fgets(ligne, 100, f);  // Sauter l'en-tête
+    int n = 0;
+    while (n < maxN &amp;&amp; fscanf(f, "%[^,],%f\n", 
+            promo[n].nom, &amp;promo[n].note) == 2) {
+        n++;
+    }
+    fclose(f);
+    return n;
+}
+
+int main() {
+    Etudiant p[] = {{"Alice",16},{"Bob",12},{"Eve",15}};
+    sauvegarder(p, 3);
+    
+    Etudiant loaded[10];
+    int n = charger(loaded, 10);
+    for (int i = 0; i < n; i++)
+        printf("%s : %.2f\n", loaded[i].nom, loaded[i].note);
+    return 0;
+}</code></pre></div>
+</section>
+
+<!-- ═══════════════ 7.6 Fichiers binaires ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="binaire">
+    <h2><i class="fas fa-microchip"></i> 7.6 — Fichiers binaires (aperçu)</h2>
+
+    <div class="code-block"><div class="code-header"><span>fwrite et fread</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>Etudiant promo[3] = {{"Alice",16},{"Bob",12},{"Eve",15}};
+
+// Écriture binaire
+FILE *f = fopen("promo.dat", "wb");
+fwrite(promo, sizeof(Etudiant), 3, f);
+fclose(f);
+
+// Lecture binaire
+Etudiant loaded[3];
+f = fopen("promo.dat", "rb");
+fread(loaded, sizeof(Etudiant), 3, f);
+fclose(f);
+
+// Avantage : un seul appel pour tout écrire/lire
+// Inconvénient : fichier non lisible par un humain</code></pre></div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th></th><th>Fichier texte</th><th>Fichier binaire</th></tr></thead>
+            <tbody>
+                <tr><td>Lisibilité</td><td>Oui (éditeur texte)</td><td>Non</td></tr>
+                <tr><td>Taille</td><td>Plus grand</td><td>Plus compact</td></tr>
+                <tr><td>Vitesse</td><td>Plus lent</td><td>Plus rapide</td></tr>
+                <tr><td>Portabilité</td><td>Oui</td><td>Attention (endianness)</td></tr>
+                <tr><td>Fonctions</td><td>fprintf, fscanf, fgets</td><td>fwrite, fread</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ 7.7 Récap ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="recap">
+    <h2><i class="fas fa-clipboard-check"></i> 7.7 — Récapitulatif</h2>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Action</th><th>Fonction</th><th>Mode</th></tr></thead>
+            <tbody>
+                <tr><td>Ouvrir</td><td><code>fopen("f.txt","mode")</code></td><td>r, w, a, rb, wb</td></tr>
+                <tr><td>Fermer</td><td><code>fclose(f);</code></td><td>OBLIGATOIRE</td></tr>
+                <tr><td>Écrire formaté</td><td><code>fprintf(f, "%d", x);</code></td><td>w ou a</td></tr>
+                <tr><td>Lire ligne</td><td><code>fgets(buf, n, f);</code></td><td>r</td></tr>
+                <tr><td>Lire formaté</td><td><code>fscanf(f, "%d", &amp;x);</code></td><td>r</td></tr>
+                <tr><td>Fin de fichier</td><td><code>EOF</code></td><td>Condition d'arrêt</td></tr>
+                <tr><td>Binaire écrire</td><td><code>fwrite(…)</code></td><td>wb</td></tr>
+                <tr><td>Binaire lire</td><td><code>fread(…)</code></td><td>rb</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ EXERCICES ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exercices">
+    <h2><i class="fas fa-dumbbell"></i> Exercices du Chapitre 7</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre6.html" class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i> Chapitre 6</a>
+    <a href="chapitre8.html" class="nav-btn next-btn">Chapitre 8 <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_c_cpp_progress',badges:[{id:'first_step',name:'Premier Pas',icon:'🏁',desc:'Premier exercice',xp:10}],levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti C'},{min:80,title:'Développeur Jr.'},{min:150,title:'Codeur Confirmé'},{min:250,title:'Maître du C'},{min:400,title:'Guru C/C++'}]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        { q: "Écrivez un programme qui crée un fichier et y écrit 5 lignes \"Ligne i\".", hints: ["fopen en mode \"w\"","Boucle avec fprintf","fclose à la fin"], answer: 'FILE *f = fopen("test.txt","w");\nfor(int i=1;i<=5;i++)\n    fprintf(f,"Ligne %d\\n",i);\nfclose(f);' },
+        { q: "Lisez un fichier texte ligne par ligne et affichez chaque ligne numérotée.", hints: ["fgets dans une boucle while","Compteur de lignes"], answer: 'FILE *f=fopen("test.txt","r");\nchar buf[256]; int n=1;\nwhile(fgets(buf,256,f)) printf("%d: %s",n++,buf);\nfclose(f);' },
+        { q: "Écrivez un programme qui compte le nombre de lignes dans un fichier.", hints: ["fgets retourne NULL à la fin","Incrémentez un compteur"], answer: 'FILE *f=fopen("test.txt","r");\nchar buf[256]; int n=0;\nwhile(fgets(buf,256,f)) n++;\nfclose(f);\nprintf("%d lignes\\n",n);' },
+        { q: "Créez un programme qui ajoute du texte à la fin d'un fichier existant (mode append).", hints: ["Mode \"a\"","fprintf pour écrire"], answer: 'FILE *f=fopen("log.txt","a");\nfprintf(f,"[%s] Événement\\n","12:30");\nfclose(f);' },
+        { q: "Sauvegardez un tableau de 3 structures Etudiant dans un fichier CSV.", hints: ["En-tête: Nom,Note","Boucle avec fprintf"], answer: 'typedef struct{char nom[30];float note;}Etu;\nEtu p[]={{"Alice",16},{"Bob",12},{"Eve",15}};\nFILE *f=fopen("notes.csv","w");\nfprintf(f,"Nom,Note\\n");\nfor(int i=0;i<3;i++) fprintf(f,"%s,%.2f\\n",p[i].nom,p[i].note);\nfclose(f);' }
+    ],
+    quiz: [
+        { type:'mcq', q:"Quel mode efface le contenu existant ?", options:["\"r\"","\"w\"","\"a\"","\"r+\""], correct:1 },
+        { type:'mcq', q:"fopen retourne NULL quand :", options:["Le fichier existe","Le fichier est vide","Le fichier n'est pas trouvé","Toujours"], correct:2 },
+        { type:'mcq', q:"Pour ajouter à la fin d'un fichier :", options:["\"r\"","\"w\"","\"a\"","\"w+\""], correct:2 },
+        { type:'qa', q:"Que signifie EOF ?", answer:"End Of File — fin du fichier" },
+        { type:'mcq', q:"Quelle fonction lit une ligne entière ?", options:["fscanf","fgetc","fgets","fread"], correct:2 },
+        { type:'mcq', q:"fprintf est identique à printf sauf :", options:["Il est plus lent","Il écrit dans un fichier","Il ne gère pas %f","Rien"], correct:1 },
+        { type:'qa', q:"Pourquoi toujours vérifier si fopen retourne NULL ?", answer:"Le fichier peut ne pas exister ou être inaccessible (permissions, mauvais chemin)" },
+        { type:'mcq', q:"Quel mode pour un fichier binaire en écriture ?", options:["\"b\"","\"wb\"","\"bw\"","\"w\""], correct:1 },
+        { type:'mcq', q:"fclose sert à :", options:["Supprimer le fichier","Libérer les ressources et sauver","Vider le buffer","Renommer"], correct:1 },
+        { type:'mcq', q:"fread/fwrite sont utilisés pour :", options:["Fichiers texte","Fichiers binaires","Les deux","Aucun"], correct:1 }
+    ],
+    dragdrop: [
+        { instruction:"Associez le mode à son effet :", pairs:[
+            ["\"r\"","Lecture seule"],["\"w\"","Écriture (écrase)"],["\"a\"","Ajout à la fin"],["\"rb\"","Lecture binaire"]
+        ]},
+        { instruction:"Associez la fonction à son rôle :", pairs:[
+            ["fopen","Ouvrir un fichier"],["fclose","Fermer un fichier"],["fprintf","Écrire formaté"],["fgets","Lire une ligne"]
+        ]},
+        { instruction:"Texte vs Binaire :", pairs:[
+            ["fprintf","Fichier texte"],["fwrite","Fichier binaire"],["fgets","Fichier texte"],["fread","Fichier binaire"]
+        ]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

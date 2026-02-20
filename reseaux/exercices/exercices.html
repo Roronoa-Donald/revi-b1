@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}
+.ex-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.ex-toolbar button{padding:.45rem 1rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;transition:.2s;font-size:.85rem}.ex-toolbar button.active,.ex-toolbar button:hover{background:var(--accent);color:#fff}
+.ex-search{display:flex;gap:.8rem;margin:1rem auto;max-width:600px}.ex-search input{flex:1;padding:.6rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.95rem}.ex-search select{padding:.6rem;border-radius:12px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.95rem}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin:2rem 0}.ex-card{background:var(--card-bg);border-radius:18px;padding:1.5rem;border-left:4px solid var(--accent);box-shadow:0 2px 12px rgba(0,0,0,.08);transition:transform .2s}.ex-card:hover{transform:translateY(-3px)}.ex-card h3{margin:0 0 .5rem;font-size:1rem}.ex-card .ex-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0}.ex-tag{font-size:.7rem;padding:.15rem .5rem;border-radius:99px;background:var(--accent-glow);color:var(--accent);font-weight:600}.ex-diff{font-size:.7rem;padding:.15rem .5rem;border-radius:99px;font-weight:700}.ex-easy{background:rgba(34,197,94,.15);color:#22c55e}.ex-medium{background:rgba(234,179,8,.15);color:#ca8a04}.ex-hard{background:rgba(239,68,68,.15);color:#ef4444}
+.ex-solution{margin-top:.8rem;padding:1rem;border-radius:12px;background:var(--bg);border:1px solid var(--border);display:none;font-size:.9rem;line-height:1.6}.ex-solution.show{display:block}.ex-toggle{margin-top:.6rem;padding:.4rem .8rem;border:2px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;font-weight:600;cursor:pointer;font-size:.85rem;transition:.2s}.ex-toggle:hover{background:var(--accent);color:#fff}
+.ex-counter{text-align:center;font-size:.9rem;opacity:.7;margin:1rem 0}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="../chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="../chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="../chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="../chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>🌐 Banque d'<span class="highlight">exercices</span></h1>
+    <p>24 exercices classés par chapitre et difficulté — filtrez et cherchez.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="ex-search"><input type="text" id="search" placeholder="🔍 Rechercher un exercice…"><select id="diff-filter"><option value="">Toute difficulté</option><option value="easy">⭐ Facile</option><option value="medium">⭐⭐ Moyen</option><option value="hard">⭐⭐⭐ Difficile</option></select></div>
+    <div class="ex-toolbar" id="cat-toolbar"></div>
+    <div class="ex-counter" id="counter"></div>
+    <div class="ex-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EX=[
+// Ch.1 — OSI
+{title:"Nommer les 7 couches OSI",cat:"OSI",diff:"easy",text:"Listez les 7 couches du modèle OSI dans l'ordre (de la couche 1 à 7).",sol:"1. Physique, 2. Liaison de données, 3. Réseau, 4. Transport, 5. Session, 6. Présentation, 7. Application. Mnémonique : PLRTSPA."},
+{title:"Rôle de chaque couche OSI",cat:"OSI",diff:"medium",text:"Pour chaque couche OSI, décrivez en une phrase son rôle principal.",sol:"1. Physique: transmission de bits (câbles, signaux). 2. Liaison: trames, adresses MAC. 3. Réseau: routage, adresses IP. 4. Transport: fiabilité, ports (TCP/UDP). 5. Session: ouverture/fermeture de sessions. 6. Présentation: format, compression, chiffrement. 7. Application: interface utilisateur (HTTP, DNS, FTP)."},
+{title:"Encapsulation étape par étape",cat:"OSI",diff:"hard",text:"Décrivez le processus d'encapsulation quand un navigateur envoie une requête HTTP. Nommez chaque unité de données à chaque couche.",sol:"Application → données HTTP. Transport → segment TCP (+ port). Réseau → paquet IP (+ adresses IP). Liaison → trame (+ adresses MAC). Physique → bits sur le câble. Chaque couche ajoute son en-tête, comme des poupées russes."},
+// Ch.2 — TCP/IP
+{title:"TCP vs UDP en 3 points",cat:"TCP/IP",diff:"easy",text:"Donnez 3 différences entre TCP et UDP.",sol:"1. TCP est fiable (accusé de réception), UDP non. 2. TCP utilise un 3-way handshake, UDP envoie directement. 3. TCP est plus lent, UDP est plus rapide (streaming, jeux)."},
+{title:"3-way handshake",cat:"TCP/IP",diff:"medium",text:"Décrivez les 3 étapes du TCP handshake avec un schéma (texte).",sol:"Client → SYN → Serveur (demande de connexion). Serveur → SYN-ACK → Client (accepte). Client → ACK → Serveur (confirmé). La connexion est établie."},
+{title:"Associer ports et services",cat:"TCP/IP",diff:"easy",text:"Associez chaque port à son service : 22, 53, 80, 443, 25, 21.",sol:"22=SSH, 53=DNS, 80=HTTP, 443=HTTPS, 25=SMTP (email), 21=FTP."},
+// Ch.3 — IPv4
+{title:"Identifier la classe d'adresse",cat:"IPv4",diff:"easy",text:"Déterminez la classe (A, B ou C) : 10.0.0.1, 172.16.5.3, 192.168.1.1, 150.24.0.1, 8.8.8.8.",sol:"10.0.0.1 → Classe A. 172.16.5.3 → Classe B. 192.168.1.1 → Classe C. 150.24.0.1 → Classe B. 8.8.8.8 → Classe A."},
+{title:"IP publique ou privée ?",cat:"IPv4",diff:"easy",text:"Classifiez : 192.168.0.50, 8.8.4.4, 10.10.10.10, 172.20.1.1, 200.100.50.1.",sol:"192.168.0.50 → Privée. 8.8.4.4 → Publique. 10.10.10.10 → Privée. 172.20.1.1 → Privée (172.16-31). 200.100.50.1 → Publique."},
+{title:"Calculer le nombre d'hôtes",cat:"IPv4",diff:"medium",text:"Combien d'hôtes utilisables pour les masques /24, /25, /26, /27, /28 ?",sol:"/24: 2^8-2=254. /25: 2^7-2=126. /26: 2^6-2=62. /27: 2^5-2=30. /28: 2^4-2=14."},
+// Ch.4 — Subnetting
+{title:"Subnetting de base /26",cat:"Subnetting",diff:"medium",text:"Réseau 192.168.10.0/26. Donnez : masque, nombre d'hôtes, adresse réseau, broadcast, plage utilisable.",sol:"Masque: 255.255.255.192. Hôtes: 62. Réseau: 192.168.10.0. Broadcast: 192.168.10.63. Plage: 192.168.10.1 à .62."},
+{title:"Découper en 4 sous-réseaux",cat:"Subnetting",diff:"hard",text:"Découpez 192.168.1.0/24 en 4 sous-réseaux égaux. Donnez réseau, broadcast et plage de chacun.",sol:"Besoin de 2 bits (2²=4) → /26 (64 adresses). SR1: .0-.63 (plage .1-.62). SR2: .64-.127 (plage .65-.126). SR3: .128-.191 (plage .129-.190). SR4: .192-.255 (plage .193-.254)."},
+{title:"Trouver le sous-réseau d'une IP",cat:"Subnetting",diff:"hard",text:"L'hôte 192.168.5.200/27 appartient à quel sous-réseau ? Quel est son broadcast ?",sol:"Bloc = 32 (2^5). 200 / 32 = 6.25, donc 6×32 = 192. Réseau: 192.168.5.192. Broadcast: 192.168.5.223. Plage: .193 à .222."},
+// Ch.5 — Protocoles
+{title:"Processus DHCP (DORA)",cat:"Protocoles",diff:"easy",text:"Décrivez les 4 étapes du processus DHCP.",sol:"1. Discover: le client broadcast pour trouver un serveur. 2. Offer: le serveur propose une IP. 3. Request: le client accepte l'offre. 4. Acknowledge: le serveur confirme le bail."},
+{title:"Résolution DNS pas à pas",cat:"Protocoles",diff:"medium",text:"Décrivez comment google.com est résolu en adresse IP.",sol:"1. Cache local vérifié. 2. Si absent, requête au résolveur DNS. 3. Le résolveur interroge le serveur racine (.root). 4. Puis le serveur .com. 5. Puis le serveur autoritaire de google.com. 6. L'IP est retournée et mise en cache."},
+{title:"Codes HTTP courants",cat:"Protocoles",diff:"easy",text:"Donnez la signification des codes : 200, 301, 403, 404, 500.",sol:"200=OK (succès). 301=Redirection permanente. 403=Interdit (pas d'accès). 404=Non trouvé. 500=Erreur interne du serveur."},
+// Ch.6 — Équipements
+{title:"Hub vs Switch vs Routeur",cat:"Équipements",diff:"easy",text:"Comparez hub, switch et routeur (couche OSI, méthode, intelligence).",sol:"Hub: couche 1, broadcast tout, pas intelligent. Switch: couche 2, table MAC, envoie au bon port. Routeur: couche 3, table de routage, achemine entre réseaux via IP."},
+{title:"Concevoir un réseau simple",cat:"Équipements",diff:"medium",text:"Vous devez connecter 3 services (RH, IT, Direction) isolés mais avec accès Internet. Quels équipements ?",sol:"Switch avec VLAN (1 VLAN par service) pour isoler le trafic. Routeur pour interconnecter les VLAN et fournir l'accès Internet. Pare-feu pour filtrer le trafic."},
+{title:"Table MAC d'un switch",cat:"Équipements",diff:"hard",text:"Un switch a 4 ports. MAC-A sur port 1 envoie à MAC-C. MAC-C est inconnu. Que fait le switch ?",sol:"Le switch enregistre MAC-A → port 1. Comme MAC-C est inconnu, il flood (broadcast) sur tous les ports sauf le port source (2, 3, 4). Quand MAC-C répond, le switch apprend son port."},
+// Ch.7 — Sécurité
+{title:"Symétrique vs Asymétrique",cat:"Sécurité",diff:"easy",text:"Comparez les deux types de chiffrement en 3 critères.",sol:"Symétrique: 1 clé, rapide, problème de distribution (AES). Asymétrique: 2 clés (pub/priv), lent, sûr pour l'échange (RSA). HTTPS combine les deux."},
+{title:"Identifier les attaques",cat:"Sécurité",diff:"medium",text:"Identifiez l'attaque : 1) Faux email de votre banque. 2) Serveur submergé. 3) Quelqu'un lit vos messages WiFi. 4) Essai de 100 000 mots de passe.",sol:"1) Phishing. 2) DDoS. 3) Man-in-the-Middle. 4) Brute Force."},
+{title:"Plan de sécurité réseau",cat:"Sécurité",diff:"hard",text:"Proposez 5 mesures de sécurité pour un réseau d'entreprise.",sol:"1. Pare-feu avec règles strictes. 2. VPN pour les télé-travailleurs. 3. Segmentation VLAN. 4. WPA3 pour le Wi-Fi. 5. 2FA pour l'authentification. 6. Mises à jour régulières. 7. Politique de mots de passe forts."},
+// Ch.8 — Wi-Fi & Outils
+{title:"Diagnostic bottom-up",cat:"Wi-Fi/Outils",diff:"medium",text:"Internet ne marche pas. Détaillez les étapes de diagnostic avec les commandes.",sol:"1. Câble/Wi-Fi branché ? 2. ipconfig → IP valide ? 3. ping 127.0.0.1 → carte OK ? 4. ping passerelle → réseau local OK ? 5. ping 8.8.8.8 → Internet OK ? 6. ping google.com → DNS OK ? Si 5 OK mais 6 échoue → ipconfig /flushdns."},
+{title:"Normes Wi-Fi",cat:"Wi-Fi/Outils",diff:"easy",text:"Associez : Wi-Fi 4, Wi-Fi 5, Wi-Fi 6 avec leurs normes IEEE.",sol:"Wi-Fi 4 = 802.11n. Wi-Fi 5 = 802.11ac. Wi-Fi 6 = 802.11ax."},
+{title:"Sécurité Wi-Fi : choisir le bon protocole",cat:"Wi-Fi/Outils",diff:"medium",text:"Classez WEP, WPA, WPA2, WPA3 du moins sûr au plus sûr et justifiez.",sol:"WEP (RC4, cassé en minutes) < WPA (TKIP, amélioré mais vulnérable) < WPA2 (AES-CCMP, standard actuel) < WPA3 (AES-GCMP, le plus sûr). Toujours utiliser WPA2 minimum."}
+];
+const CATS=["Tous",...[...new Set(EX.map(e=>e.cat))]];
+let activeCat="Tous",activeDiff="",searchStr="";
+const toolbar=document.getElementById('cat-toolbar'),grid=document.getElementById('grid'),counter=document.getElementById('counter');
+function render(){
+    let f=EX;
+    if(activeCat!=="Tous")f=f.filter(e=>e.cat===activeCat);
+    if(activeDiff)f=f.filter(e=>e.diff===activeDiff);
+    if(searchStr)f=f.filter(e=>(e.title+e.text).toLowerCase().includes(searchStr));
+    counter.textContent=f.length+' exercice'+(f.length>1?'s':'')+' trouvé'+(f.length>1?'s':'');
+    grid.innerHTML=f.map((e,i)=>{
+        const diffLabel=e.diff==='easy'?'⭐ Facile':e.diff==='medium'?'⭐⭐ Moyen':'⭐⭐⭐ Difficile';
+        return`<div class="ex-card"><h3>${e.title}</h3><div class="ex-tags"><span class="ex-tag">${e.cat}</span><span class="ex-diff ex-${e.diff}">${diffLabel}</span></div><p style="font-size:.92rem;margin:.5rem 0;line-height:1.5">${e.text}</p><button class="ex-toggle" onclick="this.nextElementSibling.classList.toggle('show');this.textContent=this.nextElementSibling.classList.contains('show')?'Masquer ▲':'Solution ▼'">Solution ▼</button><div class="ex-solution">${e.sol}</div></div>`;
+    }).join('');
+}
+function buildToolbar(){
+    toolbar.innerHTML=CATS.map(c=>`<button class="${c===activeCat?'active':''}" onclick="activeCat='${c}';buildToolbar();render();">${c}</button>`).join('');
+}
+document.getElementById('search').addEventListener('input',e=>{searchStr=e.target.value.toLowerCase();render();});
+document.getElementById('diff-filter').addEventListener('change',e=>{activeDiff=e.target.value;render();});
+buildToolbar();render();
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aide-mémoire Python | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.4rem;margin:1.5rem 0}.formula-card{background:var(--card-bg);border-radius:14px;padding:1.5rem;border-left:4px solid var(--accent);box-shadow:var(--shadow)}.formula-card h4{margin:0 0 .7rem;color:var(--accent)}.formula-card code{font-size:.92rem}.formula-card .mnemonic{background:var(--accent-glow);border-radius:8px;padding:.5rem .8rem;margin-top:.7rem;font-weight:600;font-size:.9rem}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Aide-mémoire</div>
+    <h1>🐍 Toutes les <span class="highlight">Formules</span> Python</h1>
+    <p>Tous les mnémoniques et syntaxes essentielles en un seul endroit.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Ch.1 : Variables & Types -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-box"></i> Ch.1 — Variables & Types</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Types fondamentaux</h4>
+            <code>int</code> (entier) · <code>float</code> (décimal) · <code>str</code> (texte) · <code>bool</code> (True/False)
+            <div class="mnemonic">🧠 I.F.S.B. — Int, Float, Str, Bool</div>
+        </div>
+        <div class="formula-card">
+            <h4>Variables</h4>
+            <code>nom = "Alice"</code> — pas de type à déclarer<br>
+            <code>type(x)</code> → connaître le type<br>
+            <code>f"Bonjour {nom}"</code> → f-strings
+        </div>
+        <div class="formula-card">
+            <h4>Opérateurs spéciaux</h4>
+            <code>//</code> division entière · <code>**</code> puissance · <code>%</code> modulo<br>
+            <code>int("42")</code>, <code>str(42)</code>, <code>float("3.14")</code> → casting
+        </div>
+    </div>
+</section>
+
+<!-- Ch.2 : Conditions -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-code-branch"></i> Ch.2 — Conditions</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Structure if / elif / else</h4>
+            <code>if condition:</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;bloc</code><br>
+            <code>elif autre:</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;bloc</code><br>
+            <code>else:</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;bloc</code>
+        </div>
+        <div class="formula-card">
+            <h4>Opérateurs logiques</h4>
+            <code>and</code>, <code>or</code>, <code>not</code> — en mots, pas en symboles !<br>
+            <code>==</code> comparaison ≠ <code>=</code> affectation<br>
+            <code>in</code> → appartenance (<code>"a" in "abc"</code>)
+        </div>
+        <div class="formula-card">
+            <h4>Ternaire & match</h4>
+            <code>r = "pair" if n%2==0 else "impair"</code><br>
+            <code>match variable: case valeur: ...</code> (3.10+)
+        </div>
+    </div>
+</section>
+
+<!-- Ch.3 : Boucles -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sync-alt"></i> Ch.3 — Boucles</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>for et range()</h4>
+            <code>for i in range(n):</code> → 0 à n-1<br>
+            <code>range(D, F, P)</code>
+            <div class="mnemonic">🧠 R.D.F. — Range(Début, Fin exclue, Pas)</div>
+        </div>
+        <div class="formula-card">
+            <h4>while</h4>
+            <code>while condition:</code><br>
+            <code>break</code> → sortir · <code>continue</code> → itération suivante
+        </div>
+        <div class="formula-card">
+            <h4>Outils puissants</h4>
+            <code>enumerate(liste)</code> → index + valeur<br>
+            <code>zip(a, b)</code> → parcours parallèle<br>
+            <code>[x**2 for x in range(10)]</code> → compréhension
+        </div>
+    </div>
+</section>
+
+<!-- Ch.4 : Fonctions -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cogs"></i> Ch.4 — Fonctions</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Déclaration</h4>
+            <code>def nom(params):</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;return resultat</code>
+            <div class="mnemonic">🧠 R.L.T. — Réutiliser, Lire, Tester</div>
+        </div>
+        <div class="formula-card">
+            <h4>Paramètres avancés</h4>
+            <code>def f(a, b=10):</code> → défaut<br>
+            <code>f(b=5, a=1)</code> → nommés<br>
+            <code>*args</code> → tuple d'arguments<br>
+            <code>**kwargs</code> → dict d'arguments
+        </div>
+        <div class="formula-card">
+            <h4>Lambda & Scope</h4>
+            <code>carre = lambda x: x**2</code><br>
+            Variables locales ≠ globales<br>
+            <code>return</code> ≠ <code>print</code> (piège classique !)
+        </div>
+    </div>
+</section>
+
+<!-- Ch.5 : Listes & Tuples -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-list"></i> Ch.5 — Listes & Tuples</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Méthodes de liste</h4>
+            <code>.append(x)</code> · <code>.insert(i, x)</code> · <code>.remove(x)</code> · <code>.pop(i)</code> · <code>.sort()</code>
+            <div class="mnemonic">🧠 A.I.R.P.S. — Append, Insert, Remove, Pop, Sort</div>
+        </div>
+        <div class="formula-card">
+            <h4>Slicing</h4>
+            <code>liste[début:fin:pas]</code><br>
+            <code>liste[-1]</code> → dernier élément<br>
+            <code>liste[::-1]</code> → inversée
+        </div>
+        <div class="formula-card">
+            <h4>Tuples</h4>
+            <code>t = (1, 2, 3)</code> — immuable<br>
+            <code>a, b, c = t</code> → unpacking<br>
+            <code>len(), sum(), min(), max(), sorted()</code>
+        </div>
+    </div>
+</section>
+
+<!-- Ch.6 : Dictionnaires & Sets -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-book"></i> Ch.6 — Dictionnaires & Sets</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Dictionnaires</h4>
+            <code>d = {"clé": valeur}</code><br>
+            <code>d.get("clé", défaut)</code> → accès sûr
+            <div class="mnemonic">🧠 K.V.I. — Keys, Values, Items (les 3 vues)</div>
+        </div>
+        <div class="formula-card">
+            <h4>Sets (ensembles)</h4>
+            <code>s = {1, 2, 3}</code> — pas de doublons<br>
+            <code>|</code> union · <code>&amp;</code> intersection · <code>-</code> différence<br>
+            <code>set()</code> pour vide (pas <code>{}</code> = dict !)
+        </div>
+    </div>
+</section>
+
+<!-- Ch.7 : Fichiers & Exceptions -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-file-alt"></i> Ch.7 — Fichiers & Exceptions</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Fichiers</h4>
+            <code>with open("f", "r") as f:</code><br>
+            <code>f.read()</code> · <code>for ligne in f</code> · <code>f.write()</code>
+            <div class="mnemonic">🧠 R.W.A. — Read, Write (écrase !), Append</div>
+        </div>
+        <div class="formula-card">
+            <h4>JSON</h4>
+            <code>json.dump(data, f)</code> → sauvegarder<br>
+            <code>json.load(f)</code> → charger
+        </div>
+        <div class="formula-card">
+            <h4>Exceptions</h4>
+            <code>try: ... except TypeError: ... finally: ...</code><br>
+            <code>raise ValueError("msg")</code><br>
+            Exceptions courantes : ValueError, TypeError, KeyError, IndexError, FileNotFoundError
+        </div>
+    </div>
+</section>
+
+<!-- Ch.8 : Modules & POO -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cubes"></i> Ch.8 — Modules & POO</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h4>Import</h4>
+            <code>import math</code> · <code>from math import sqrt</code> · <code>import random as rd</code>
+            <div class="mnemonic">🧠 I.F.A. — Import complet, From sélectif, Alias</div>
+        </div>
+        <div class="formula-card">
+            <h4>Classes</h4>
+            <code>class Nom:</code><br>
+            <code>&nbsp;&nbsp;def __init__(self, ...):</code><br>
+            <code>&nbsp;&nbsp;&nbsp;&nbsp;self.attr = val</code><br>
+            <code>&nbsp;&nbsp;def methode(self):</code>
+            <div class="mnemonic">🧠 C.I.A.M. — Classe, Init, Attributs, Méthodes</div>
+        </div>
+        <div class="formula-card">
+            <h4>Héritage</h4>
+            <code>class Enfant(Parent):</code><br>
+            <code>super().__init__(...)</code><br>
+            Override = redéfinir une méthode parent
+        </div>
+    </div>
+</section>
+
+<!-- Récap mnémoniques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-brain"></i> Tous les mnémoniques</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Mnémo</th><th>Signification</th><th>Chapitre</th></tr></thead>
+        <tbody>
+            <tr><td><strong>I.F.S.B.</strong></td><td>Int, Float, Str, Bool — les 4 types</td><td>Ch.1</td></tr>
+            <tr><td><strong>R.D.F.</strong></td><td>Range(Début, Fin exclue, Pas) — fin = porte fermée</td><td>Ch.3</td></tr>
+            <tr><td><strong>R.L.T.</strong></td><td>Réutiliser, Lire, Tester — pourquoi des fonctions</td><td>Ch.4</td></tr>
+            <tr><td><strong>A.I.R.P.S.</strong></td><td>Append, Insert, Remove, Pop, Sort — méthodes list</td><td>Ch.5</td></tr>
+            <tr><td><strong>K.V.I.</strong></td><td>Keys, Values, Items — les 3 vues d'un dict</td><td>Ch.6</td></tr>
+            <tr><td><strong>R.W.A.</strong></td><td>Read, Write, Append — modes d'ouverture fichiers</td><td>Ch.7</td></tr>
+            <tr><td><strong>I.F.A.</strong></td><td>Import, From, Alias — 3 façons d'importer</td><td>Ch.8</td></tr>
+            <tr><td><strong>C.I.A.M.</strong></td><td>Classe, Init, Attributs, Méthodes — POO</td><td>Ch.8</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

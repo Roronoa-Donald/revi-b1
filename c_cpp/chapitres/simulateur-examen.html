@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'Examen C/C++ | B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}
+
+.exam-setup{max-width:600px;margin:0 auto 2rem;padding:2rem;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;backdrop-filter:blur(20px)}
+.exam-setup label{display:block;margin-bottom:.5rem;font-weight:600;color:var(--text-primary)}
+.exam-setup select,.exam-setup input{width:100%;padding:.6rem 1rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--card-bg);color:var(--text-primary);font-size:1rem;margin-bottom:1rem}
+.exam-setup .btn-start{width:100%;padding:.8rem;border:none;border-radius:12px;background:var(--accent);color:#000;font-weight:700;font-size:1.05rem;cursor:pointer;transition:.2s}
+.exam-setup .btn-start:hover{opacity:.85}
+
+.exam-area{display:none}
+.exam-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;padding:1rem 1.5rem;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px}
+.exam-timer{font-size:1.3rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--accent)}
+.exam-timer.danger{color:#ef4444;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.exam-score{font-weight:600;color:var(--text-secondary)}
+
+.q-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;margin-bottom:1.2rem;backdrop-filter:blur(20px)}
+.q-card .q-number{font-size:.8rem;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:.5rem}
+.q-card .q-text{font-size:1.05rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem;line-height:1.5}
+.q-card pre{background:var(--card-bg);padding:1rem;border-radius:10px;overflow-x:auto;margin-bottom:1rem;font-family:'JetBrains Mono',monospace;font-size:.9rem;border:1px solid var(--glass-border)}
+.q-options{display:flex;flex-direction:column;gap:.5rem}
+.q-opt{padding:.7rem 1rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--card-bg);color:var(--text-primary);cursor:pointer;transition:.2s;font-size:.95rem}
+.q-opt:hover{border-color:var(--accent);background:var(--accent-glow)}
+.q-opt.selected{border-color:var(--accent);background:var(--accent-glow);font-weight:600}
+.q-opt.correct{border-color:#22c55e;background:rgba(34,197,94,.15);color:#22c55e}
+.q-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.15);color:#ef4444}
+.q-explanation{display:none;margin-top:.8rem;padding:.8rem 1rem;border-radius:10px;background:rgba(34,197,94,.1);border-left:4px solid #22c55e;font-size:.9rem;color:var(--text-secondary);line-height:1.5}
+
+.exam-actions{display:flex;justify-content:center;gap:1rem;margin:2rem 0}
+.exam-actions button{padding:.7rem 2rem;border-radius:12px;border:1px solid var(--glass-border);background:var(--glass-bg);color:var(--text-primary);font-weight:600;cursor:pointer;transition:.2s;font-size:1rem}
+.exam-actions button.primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.exam-actions button:hover{opacity:.85}
+
+.results-panel{display:none;text-align:center;padding:2.5rem;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;margin:2rem auto;max-width:500px}
+.results-panel .score-big{font-size:3.5rem;font-weight:900;color:var(--accent)}
+.results-panel .score-label{font-size:1.1rem;color:var(--text-secondary);margin:.5rem 0 1.5rem}
+.results-panel .bar{height:10px;border-radius:5px;background:var(--glass-border);overflow:hidden;margin-bottom:1.5rem}
+.results-panel .bar-fill{height:100%;border-radius:5px;transition:width 1s ease}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html" class="active">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Examen blanc</div>
+    <h1>⚡ Simulateur <span class="highlight">C/C++</span></h1>
+    <p>Testez vos connaissances dans les conditions d'un vrai examen. Chrono, correction détaillée, score final.</p>
+</section>
+
+<main class="content-wrapper">
+
+<div class="exam-setup" id="exam-setup">
+    <label for="q-count"><i class="fas fa-list-ol"></i> Nombre de questions</label>
+    <select id="q-count"><option value="10">10 questions</option><option value="15" selected>15 questions</option><option value="20">20 questions</option><option value="35">Toutes (35)</option></select>
+    <label for="q-time"><i class="fas fa-clock"></i> Durée (minutes)</label>
+    <select id="q-time"><option value="10">10 min</option><option value="15" selected>15 min</option><option value="20">20 min</option><option value="30">30 min</option><option value="0">Illimité</option></select>
+    <label for="q-chapter"><i class="fas fa-filter"></i> Chapitres</label>
+    <select id="q-chapter"><option value="all" selected>Tous les chapitres</option>
+        <option value="1">Ch.1 — Bases</option><option value="2">Ch.2 — Flux</option><option value="3">Ch.3 — Fonctions</option>
+        <option value="4">Ch.4 — Tableaux</option><option value="5">Ch.5 — Pointeurs</option><option value="6">Ch.6 — Structures</option>
+        <option value="7">Ch.7 — Fichiers</option><option value="8">Ch.8 — C++</option>
+    </select>
+    <button class="btn-start" onclick="startExam()"><i class="fas fa-play"></i> Lancer l'examen</button>
+</div>
+
+<div class="exam-area" id="exam-area">
+    <div class="exam-header">
+        <span class="exam-score" id="exam-progress">Question 1/15</span>
+        <span class="exam-timer" id="exam-timer">15:00</span>
+    </div>
+    <div id="questions-container"></div>
+    <div class="exam-actions">
+        <button class="primary" onclick="submitExam()"><i class="fas fa-check-circle"></i> Terminer l'examen</button>
+    </div>
+</div>
+
+<div class="results-panel" id="results-panel">
+    <div class="score-big" id="score-big">0%</div>
+    <div class="score-label" id="score-label">0 / 0 bonnes réponses</div>
+    <div class="bar"><div class="bar-fill" id="bar-fill" style="width:0;background:var(--accent)"></div></div>
+    <div class="exam-actions">
+        <button onclick="reviewAnswers()"><i class="fas fa-eye"></i> Voir correction</button>
+        <button class="primary" onclick="resetExam()"><i class="fas fa-redo"></i> Recommencer</button>
+    </div>
+</div>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const BANK = [
+// Ch.1 — Bases
+{ch:1,q:"Quel est le mnémonique pour la structure d'un programme C ?",opts:["I.M.P.R.","S.T.D.O.","C.O.M.P.","M.A.I.N."],ans:0,exp:"I.M.P.R. = Include, Main, Printf, Return — les 4 éléments fondamentaux."},
+{ch:1,q:"Quelle est la taille d'un <code>int</code> en C (architecture 32/64 bits) ?",opts:["1 octet","2 octets","4 octets","8 octets"],ans:2,exp:"Un int occupe 4 octets soit 32 bits sur les architectures modernes."},
+{ch:1,q:"Quel format printf pour afficher un <code>float</code> ?",opts:["%d","%f","%c","%s"],ans:1,exp:"%D.F.C.S. — %d=Decimal, %f=Float, %c=Char, %s=String."},
+{ch:1,q:"Que fait <code>scanf(\"%d\", n);</code> (sans &amp;) ?",opts:["Lit n normalement","Erreur de compilation","Comportement indéfini (crash probable)","Affiche n"],ans:2,exp:"Sans & devant n, scanf reçoit la valeur de n au lieu de son adresse → comportement indéfini."},
+{ch:1,q:"Quelle instruction termine un programme C avec succès ?",opts:["exit(1);","return -1;","return 0;","stop();"],ans:2,exp:"return 0 dans main() indique une terminaison normale (sans erreur)."},
+// Ch.2 — Flux
+{ch:2,q:"Que retourne l'expression <code>(5 > 3) ? 10 : 20</code> ?",opts:["5","3","10","20"],ans:2,exp:"5 > 3 est vrai, donc la valeur après ? est retournée : 10."},
+{ch:2,q:"Quel mnémonique pour un switch bien structuré ?",opts:["C.C.B.D.","S.W.I.T.","C.A.S.E.","B.R.K.D."],ans:0,exp:"C.C.B.D. = Case, Code, Break, Default."},
+{ch:2,q:"Combien de fois s'exécute <code>for(int i=0; i&lt;5; i++)</code> ?",opts:["4 fois","5 fois","6 fois","Infini"],ans:1,exp:"i prend les valeurs 0,1,2,3,4 → 5 itérations (I.C.I. : Init=0, Condition=<5, Incrément)."},
+{ch:2,q:"Quelle boucle garantit au moins une exécution ?",opts:["for","while","do-while","Les trois"],ans:2,exp:"do-while exécute le corps UNE fois avant de tester la condition."},
+{ch:2,q:"Que fait <code>continue;</code> dans une boucle ?",opts:["Sort de la boucle","Passe au tour suivant","Termine le programme","Redémarre la boucle depuis i=0"],ans:1,exp:"continue saute le reste du corps et passe à l'itération suivante. break sort de la boucle."},
+// Ch.3 — Fonctions
+{ch:3,q:"Les 5 éléments d'une fonction (mnémonique) ?",opts:["T.N.P.C.R.","R.L.M.A.B.","I.F.D.C.E.","F.U.N.C.S."],ans:0,exp:"T.N.P.C.R. = Type retour, Nom, Paramètres, Corps, Return."},
+{ch:3,q:"Que se passe-t-il en passage par valeur ?",opts:["L'original est modifié","Une copie est créée","Le programme plante","La variable est supprimée"],ans:1,exp:"Par valeur = photocopie : la fonction travaille sur une copie, l'original ne change pas."},
+{ch:3,q:'Que fait <code>void f(int *p) { (*p)++; }</code> appelé avec <code>f(&amp;x);</code> ?',opts:["Rien","Incrémente une copie de x","Incrémente x directement","Erreur de compilation"],ans:2,exp:"Passage par adresse : &x donne l'adresse de x, *p accède à x et l'incrémente."},
+{ch:3,q:"Que signifie <code>void</code> comme type de retour ?",opts:["La fonction retourne 0","La fonction ne retourne rien","La fonction retourne NULL","Erreur"],ans:1,exp:"void = pas de retour. La fonction exécute une action sans renvoyer de valeur."},
+// Ch.4 — Tableaux & Chaînes
+{ch:4,q:"Quel est le premier indice d'un tableau en C ?",opts:["1","0","-1","Dépend de la taille"],ans:1,exp:"En C, les indices commencent TOUJOURS à 0. Un tableau de taille n a des indices de 0 à n-1."},
+{ch:4,q:"Que contient <code>\"Hi\"</code> en mémoire ?",opts:["H, i","H, i, \\0","H, i, \\n","H, i, 0"],ans:1,exp:"Chaque chaîne se termine par '\\0' (null terminator). \"Hi\" = {'H','i','\\0'} → 3 octets."},
+{ch:4,q:"Comment comparer deux chaînes en C ?",opts:["a == b","strcmp(a, b) == 0","a.equals(b)","strcompare(a, b)"],ans:1,exp:"En C, == compare les adresses, pas le contenu ! strcmp retourne 0 si les chaînes sont identiques (L.C.C.C.)."},
+{ch:4,q:"Quel est le risque de <code>strcpy(dst, src)</code> si dst est trop petit ?",opts:["Troncature automatique","Erreur de compilation","Débordement de buffer (buffer overflow)","La copie ne se fait pas"],ans:2,exp:"strcpy ne vérifie pas la taille ! Si dst est trop petit → débordement mémoire (faille de sécurité classique)."},
+// Ch.5 — Pointeurs
+{ch:5,q:"Que fait l'opérateur <code>&amp;</code> ?",opts:["Multiplie","Retourne l'adresse","Compare deux valeurs","Accède à la valeur pointée"],ans:1,exp:"& = Adresse (retourne l'adresse mémoire d'une variable). * = Accéder à la valeur."},
+{ch:5,q:"Quel mnémonique pour l'allocation dynamique ?",opts:["A.L.L.O.","M.C.R.F.","N.E.W.D.","H.E.A.P."],ans:1,exp:"M.C.R.F. = Malloc, Calloc, Realloc, Free."},
+{ch:5,q:"Quel est l'avantage de <code>calloc</code> sur <code>malloc</code> ?",opts:["Plus rapide","Initialise la mémoire à 0","Pas besoin de free","Alloue sur la pile"],ans:1,exp:"calloc(n, sizeof) alloue ET initialise à 0. malloc alloue sans initialiser (contenu imprévisible)."},
+{ch:5,q:"Que faire immédiatement après <code>free(p)</code> ?",opts:["Rien","Appeler malloc à nouveau","Mettre p = NULL","Afficher p"],ans:2,exp:"free(p); p = NULL; — évite les dangling pointers (pointeurs vers mémoire libérée)."},
+{ch:5,q:"<code>tab[3]</code> est équivalent à quoi avec l'arithmétique de pointeurs ?",opts:["*tab + 3","*(tab + 3)","&tab + 3","tab * 3"],ans:1,exp:"tab[i] ≡ *(tab + i). Le compilateur transforme l'une en l'autre."},
+// Ch.6 — Structures
+{ch:6,q:"Comment accéder au champ 'nom' via un pointeur sur structure ?",opts:["p.nom","p->nom","*p.nom","&p.nom"],ans:1,exp:"Via pointeur : p->nom (flèche) = (*p).nom. Accès direct (sans pointeur) : e.nom (point)."},
+{ch:6,q:"À quoi sert <code>typedef</code> avec une structure ?",opts:["Rendre la struct plus rapide","Créer un alias pour éviter d'écrire 'struct'","Allouer automatiquement la mémoire","Initialiser les champs à 0"],ans:1,exp:"typedef struct {...} Nom; permet d'écrire Nom au lieu de struct Nom partout."},
+{ch:6,q:"Quel est le premier élément d'un <code>enum { A, B, C }</code> ?",opts:["1","0","-1","Non défini"],ans:1,exp:"Par défaut, le premier élément d'un enum vaut 0, le suivant 1, etc."},
+// Ch.7 — Fichiers
+{ch:7,q:"Quel mode <code>fopen</code> écrase le fichier existant ?",opts:["\"r\"","\"w\"","\"a\"","\"r+\""],ans:1,exp:"R.W.A. : \"w\" (Write) crée le fichier ou ÉCRASE le contenu existant. \"a\" (Append) ajoute à la fin."},
+{ch:7,q:"Que retourne <code>fopen</code> si le fichier n'existe pas (mode \"r\") ?",opts:["Un fichier vide","Une erreur de compilation","NULL","EOF"],ans:2,exp:"Si le fichier n'existe pas en lecture, fopen retourne NULL. Toujours vérifier !"},
+{ch:7,q:"Quelle fonction lit une ligne complète depuis un fichier ?",opts:["fscanf","fgets","fgetc","fread"],ans:1,exp:"fgets(buf, taille, f) lit une ligne complète (jusqu'à \\n ou fin de buffer). fscanf s'arrête aux espaces."},
+{ch:7,q:"Que fait <code>fprintf(f, \"%d;%s\\n\", 42, \"test\")</code> ?",opts:["Affiche à l'écran","Écrit '42;test' suivi d'un saut de ligne dans le fichier f","Lit depuis le fichier","Erreur"],ans:1,exp:"fprintf fonctionne comme printf mais écrit dans un fichier au lieu de l'écran."},
+// Ch.8 — C++
+{ch:8,q:"Quel est le remplaçant C++ de <code>printf</code> ?",opts:["cout","cin","printf reste utilisé","print"],ans:0,exp:"cout << \"texte\" << endl; remplace printf en C++. Les flèches << poussent vers la sortie."},
+{ch:8,q:"Combien de symboles faut-il pour utiliser une référence vs un pointeur ?",opts:["Référence: 3, Pointeur: 1","Référence: 1, Pointeur: 3","Les deux: 2","Les deux: 1"],ans:1,exp:"Référence : 1 symbole (&). Pointeur : 3 symboles (*, &, ->). Les références sont plus simples !"},
+{ch:8,q:"Quel mnémonique pour les éléments d'une classe C++ ?",opts:["P.A.M.C.","C.L.A.S.","O.O.P.S.","E.H.P.C."],ans:0,exp:"P.A.M.C. = Private (encapsulation), Attributs, Méthodes, Constructeur."},
+{ch:8,q:"Quelle est la syntaxe d'héritage en C++ ?",opts:["class Fille extends Mere","class Fille : public Mere","class Fille inherits Mere","Fille -> Mere"],ans:1,exp:"En C++ : class Fille : public Mere { }; (pas extends comme Java/PHP)."}
+];
+
+let selected = [], timer = null, timeLeft = 0, answers = {};
+const $ = id => document.getElementById(id);
+
+function startExam() {
+    const count = parseInt($('q-count').value) || BANK.length;
+    const mins = parseInt($('q-time').value);
+    const ch = $('q-chapter').value;
+    let pool = ch === 'all' ? [...BANK] : BANK.filter(q => q.ch === parseInt(ch));
+    pool.sort(() => Math.random() - .5);
+    selected = pool.slice(0, Math.min(count, pool.length));
+    answers = {}; timeLeft = mins * 60;
+    $('exam-setup').style.display = 'none';
+    $('results-panel').style.display = 'none';
+    $('exam-area').style.display = 'block';
+    renderQuestions();
+    if (mins > 0) startTimer();
+}
+
+function renderQuestions() {
+    const ct = $('questions-container');
+    ct.innerHTML = selected.map((q, i) => `
+        <div class="q-card" id="qc-${i}">
+            <div class="q-number">Question ${i+1}/${selected.length} — Ch.${q.ch}</div>
+            <div class="q-text">${q.q}</div>
+            <div class="q-options">${q.opts.map((o, j) => `<div class="q-opt" data-q="${i}" data-o="${j}" onclick="pickAnswer(${i},${j})">${o}</div>`).join('')}</div>
+            <div class="q-explanation" id="exp-${i}">${q.exp}</div>
+        </div>`).join('');
+    $('exam-progress').textContent = `0 / ${selected.length} répondues`;
+}
+
+function pickAnswer(qi, oi) {
+    answers[qi] = oi;
+    document.querySelectorAll(`.q-opt[data-q="${qi}"]`).forEach(el => el.classList.toggle('selected', parseInt(el.dataset.o) === oi));
+    $('exam-progress').textContent = `${Object.keys(answers).length} / ${selected.length} répondues`;
+}
+
+function startTimer() {
+    const el = $('exam-timer');
+    const tick = () => {
+        if (timeLeft <= 0) { clearInterval(timer); submitExam(); return; }
+        const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+        el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        el.classList.toggle('danger', timeLeft <= 60);
+        timeLeft--;
+    };
+    tick();
+    timer = setInterval(tick, 1000);
+}
+
+function submitExam() {
+    clearInterval(timer);
+    let score = 0;
+    selected.forEach((q, i) => { if (answers[i] === q.ans) score++; });
+    const pct = Math.round(score / selected.length * 100);
+    $('exam-area').style.display = 'none';
+    $('results-panel').style.display = 'block';
+    $('score-big').textContent = pct + '%';
+    $('score-label').textContent = `${score} / ${selected.length} bonnes réponses`;
+    const fill = $('bar-fill');
+    fill.style.background = pct >= 70 ? '#22c55e' : pct >= 50 ? '#f59e0b' : '#ef4444';
+    setTimeout(() => fill.style.width = pct + '%', 100);
+}
+
+function reviewAnswers() {
+    $('results-panel').style.display = 'none';
+    $('exam-area').style.display = 'block';
+    selected.forEach((q, i) => {
+        const opts = document.querySelectorAll(`.q-opt[data-q="${i}"]`);
+        opts.forEach(o => {
+            o.style.pointerEvents = 'none';
+            const idx = parseInt(o.dataset.o);
+            if (idx === q.ans) o.classList.add('correct');
+            else if (idx === answers[i]) o.classList.add('wrong');
+        });
+        $(`exp-${i}`).style.display = 'block';
+    });
+    document.querySelector('.exam-actions').innerHTML = '<button class="primary" onclick="resetExam()"><i class="fas fa-redo"></i> Recommencer</button>';
+}
+
+function resetExam() {
+    clearInterval(timer);
+    $('exam-area').style.display = 'none';
+    $('results-panel').style.display = 'none';
+    $('exam-setup').style.display = 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 — Modèle OSI & Introduction | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html" class="active"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Chapitre 1</div>
+    <h1>🌐 Modèle OSI & <span class="highlight">Introduction</span></h1>
+    <p>Comprendre les 7 couches du modèle OSI — la base de tout réseau.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Qu'est-ce qu'un réseau -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-globe"></i> Qu'est-ce qu'un réseau ?</h2>
+    <div class="concept-card">
+        <h4>🏘️ Analogie du quartier</h4>
+        <p>Un <strong>réseau informatique</strong> c'est comme un <strong>quartier de maisons</strong> reliées par des routes. Chaque maison (ordinateur) a une adresse. Les routes (câbles/Wi-Fi) permettent d'envoyer des colis (données). La poste (protocoles) s'assure que le bon colis arrive à la bonne maison.</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ Types de réseaux :</strong>
+        <ul>
+            <li><strong>LAN</strong> (Local Area Network) — réseau local (école, bureau)</li>
+            <li><strong>WAN</strong> (Wide Area Network) — réseau étendu (Internet)</li>
+            <li><strong>MAN</strong> (Metropolitan Area Network) — échelle ville</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Le modèle OSI -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Le modèle OSI — 7 couches</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique « Pour Le Réseau, Tout Se Passe Automatiquement »</h4>
+        <p>De la couche 7 (haut) à la couche 1 (bas) :<br>
+        <strong>P</strong>hysique · <strong>L</strong>iaison · <strong>R</strong>éseau · <strong>T</strong>ransport · <strong>S</strong>ession · <strong>P</strong>résentation · <strong>A</strong>pplication<br>
+        (ou de bas en haut : <strong>P-L-R-T-S-P-A</strong>)</p>
+    </div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>#</th><th>Couche</th><th>Rôle</th><th>Exemple</th><th>Unité</th></tr></thead>
+        <tbody>
+            <tr><td>7</td><td><strong>Application</strong></td><td>Interface utilisateur</td><td>HTTP, FTP, SMTP</td><td>Données</td></tr>
+            <tr><td>6</td><td><strong>Présentation</strong></td><td>Format, chiffrement</td><td>SSL/TLS, JPEG, ASCII</td><td>Données</td></tr>
+            <tr><td>5</td><td><strong>Session</strong></td><td>Ouverture/fermeture de session</td><td>NetBIOS, RPC</td><td>Données</td></tr>
+            <tr><td>4</td><td><strong>Transport</strong></td><td>Fiabilité, ports</td><td>TCP, UDP</td><td>Segments</td></tr>
+            <tr><td>3</td><td><strong>Réseau</strong></td><td>Routage, adresses IP</td><td>IP, ICMP, ARP</td><td>Paquets</td></tr>
+            <tr><td>2</td><td><strong>Liaison</strong></td><td>Adresses MAC, trames</td><td>Ethernet, Wi-Fi</td><td>Trames</td></tr>
+            <tr><td>1</td><td><strong>Physique</strong></td><td>Câbles, signaux</td><td>RJ45, fibre optique</td><td>Bits</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Encapsulation -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-box-open"></i> Encapsulation</h2>
+    <div class="concept-card">
+        <h4>📦 Analogie des poupées russes</h4>
+        <p>Quand un ordinateur envoie des données, chaque couche <strong>emballe</strong> les données dans une enveloppe (en-tête). C'est comme des <strong>poupées russes</strong> : les données sont au centre, et chaque couche ajoute sa propre enveloppe autour.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Le processus d'encapsulation</span></div><pre><code>Application     → Données
+Transport       → [En-tête TCP] + Données = Segment
+Réseau          → [En-tête IP] + Segment = Paquet
+Liaison         → [En-tête MAC] + Paquet + [FCS] = Trame
+Physique        → Bits sur le câble (010110...)</code></pre></div>
+    <div class="tip-box"><strong>💡 Astuce :</strong> À la réception, c'est l'inverse = <strong>désencapsulation</strong>. Chaque couche enlève son en-tête et passe au-dessus.</div>
+</section>
+
+<!-- Couches détaillées -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-search"></i> Zoom sur les couches essentielles</h2>
+
+    <div class="concept-card">
+        <h4>Couche 1 — Physique 🔌</h4>
+        <p>Les « routes » du réseau : câbles RJ45 (cuivre), fibre optique (lumière), ondes Wi-Fi. Elle transforme les bits en signaux électriques/lumineux.</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>Couche 2 — Liaison 🔗</h4>
+        <p>Utilise les <strong>adresses MAC</strong> (uniques pour chaque carte réseau). Le <strong>switch</strong> travaille à cette couche. Format MAC : <code>AA:BB:CC:DD:EE:FF</code> (6 octets en hexadécimal).</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>Couche 3 — Réseau 🗺️</h4>
+        <p>Utilise les <strong>adresses IP</strong> pour le routage. Le <strong>routeur</strong> travaille à cette couche. Il choisit le meilleur chemin pour les paquets.</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>Couche 4 — Transport 🚛</h4>
+        <p><strong>TCP</strong> (fiable, lent) vs <strong>UDP</strong> (rapide, non fiable). Utilise les <strong>numéros de port</strong> (ex: HTTP = 80, HTTPS = 443).</p>
+    </div>
+</section>
+
+<!-- Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 1</h4>
+        <ul>
+            <li>Un réseau = machines connectées qui communiquent</li>
+            <li>LAN (local), WAN (étendu), MAN (métropolitain)</li>
+            <li>OSI = 7 couches : <strong>P-L-R-T-S-P-A</strong></li>
+            <li>Encapsulation = chaque couche ajoute un en-tête</li>
+            <li>Couche 2 = MAC + switch · Couche 3 = IP + routeur</li>
+            <li>Couche 4 = TCP (fiable) / UDP (rapide)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="../index.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Accueil</a>
+    <a href="chapitre2.html" class="next-chapter">TCP/IP <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Technicien',minXP:300},{name:'Admin',minXP:550},{name:'Architecte',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Citez les 7 couches OSI de bas en haut.",hints:["P-L-R-T-S-P-A","Commencez par Physique"],answer:"1.Physique 2.Liaison 3.Réseau 4.Transport 5.Session 6.Présentation 7.Application"},
+        {q:"Quel équipement travaille en couche 2 ? En couche 3 ?",hints:["Couche 2 = adresses MAC","Couche 3 = adresses IP"],answer:"Couche 2 : Switch (adresses MAC)\nCouche 3 : Routeur (adresses IP)"},
+        {q:"Expliquez l'encapsulation avec un exemple.",hints:["Chaque couche ajoute un en-tête","Poupées russes"],answer:"Les données de l'application sont encapsulées dans un segment (TCP), puis un paquet (IP), puis une trame (MAC), puis des bits physiques. Chaque couche ajoute son en-tête."},
+        {q:"Donnez un exemple de protocole pour chaque couche 4, 3 et 7.",hints:["Couche 4 = transport","Couche 7 = applications web"],answer:"Couche 7: HTTP, FTP\nCouche 4: TCP, UDP\nCouche 3: IP, ICMP"},
+        {q:"Quelle est la différence entre LAN et WAN ?",hints:["L = Local","W = Wide"],answer:"LAN = réseau local (même bâtiment/campus)\nWAN = réseau étendu (entre villes, pays) — Internet est le plus grand WAN."}
+    ],
+    quiz:[
+        {type:"mcq",q:"Combien de couches a le modèle OSI ?",options:["4","5","7","8"],correct:2},
+        {type:"mcq",q:"Quelle couche utilise les adresses MAC ?",options:["Physique","Liaison","Réseau","Transport"],correct:1},
+        {type:"mcq",q:"Quel est le nom de l'unité de données en couche 3 ?",options:["Segment","Trame","Paquet","Bit"],correct:2},
+        {type:"mcq",q:"Quel protocole est en couche 4 ?",options:["HTTP","IP","TCP","Ethernet"],correct:2},
+        {type:"mcq",q:"Le routeur travaille à quelle couche ?",options:["1","2","3","4"],correct:2},
+        {type:"mcq",q:"LAN signifie :",options:["Large Area Network","Local Area Network","Long Area Network","Light Area Network"],correct:1},
+        {type:"mcq",q:"L'encapsulation ajoute quoi à chaque couche ?",options:["Des données","Un en-tête","Un fichier","Un port"],correct:1},
+        {type:"mcq",q:"Quelle couche gère le chiffrement (SSL/TLS) ?",options:["Application","Présentation","Session","Transport"],correct:1},
+        {type:"qa",q:"Quel est le mnémonique pour les 7 couches OSI ?",answer:"P-L-R-T-S-P-A : Physique, Liaison, Réseau, Transport, Session, Présentation, Application"},
+        {type:"qa",q:"Quelle est la différence principale entre TCP et UDP ?",answer:"TCP est fiable (accusé de réception, retransmission), UDP est rapide mais non fiable (pas de vérification)."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque couche OSI à son rôle :",pairs:[["Physique","Câbles et signaux"],["Liaison","Adresses MAC"],["Réseau","Routage (IP)"],["Transport","Fiabilité et ports"]]},
+        {instruction:"Associez chaque unité à sa couche :",pairs:[["Bits","Couche 1 Physique"],["Trames","Couche 2 Liaison"],["Paquets","Couche 3 Réseau"],["Segments","Couche 4 Transport"]]},
+        {instruction:"Associez chaque type de réseau à sa portée :",pairs:[["LAN","Local (bâtiment)"],["MAN","Métropolitain (ville)"],["WAN","Étendu (monde)"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

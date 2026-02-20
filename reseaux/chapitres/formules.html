@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules & Mnémoniques | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin:2rem 0}.formula-card{background:var(--card-bg);border-radius:18px;padding:1.5rem;border-left:4px solid var(--accent);box-shadow:0 2px 12px rgba(0,0,0,.08);transition:transform .2s}.formula-card:hover{transform:translateY(-3px)}.formula-card h3{margin:0 0 .5rem;font-size:1.05rem;color:var(--accent)}.formula-card .mnemonic{font-size:1.3rem;font-weight:800;letter-spacing:1px;color:var(--accent);margin:.5rem 0}.formula-card p{margin:.4rem 0;font-size:.95rem;line-height:1.5}.formula-card ul{margin:.5rem 0;padding-left:1.2rem}.formula-card li{font-size:.92rem;margin:.2rem 0}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Cheat Sheet</div>
+    <h1>🌐 Formules & <span class="highlight">Mnémoniques</span></h1>
+    <p>Toutes les formules et astuces de mémorisation du cours Réseaux — à imprimer et garder sous la main.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══ Table des mnémoniques ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-brain"></i> Toutes les mnémoniques</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Chapitre</th><th>Mnémonique</th><th>Signification</th></tr></thead>
+        <tbody>
+            <tr><td>Ch.1 — Modèle OSI</td><td><strong>PLRTSPA</strong></td><td>Physique, Liaison, Réseau, Transport, Session, Présentation, Application</td></tr>
+            <tr><td>Ch.2 — TCP/IP</td><td><strong>ATIA</strong></td><td>Application, Transport, Internet, Accès réseau</td></tr>
+            <tr><td>Ch.5 — DHCP</td><td><strong>DORA</strong></td><td>Discover, Offer, Request, Acknowledge</td></tr>
+            <tr><td>Ch.6 — Équipements</td><td><strong>HSR = 1-2-3</strong></td><td>Hub = couche 1, Switch = couche 2, Routeur = couche 3</td></tr>
+            <tr><td>Ch.7 — Sécurité</td><td><strong>C.I.D.</strong></td><td>Confidentialité, Intégrité, Disponibilité</td></tr>
+            <tr><td>Ch.8 — Commandes</td><td><strong>PINTA</strong></td><td>Ping, Ipconfig, Nslookup, Tracert, Arp</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- ═══ Formulas Grid ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-th-large"></i> Fiches de révision par chapitre</h2>
+
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h3><i class="fas fa-layer-group"></i> Ch.1 — Modèle OSI</h3>
+            <div class="mnemonic">PLRTSPA</div>
+            <ul>
+                <li><strong>7</strong> couches : Physique → Liaison → Réseau → Transport → Session → Présentation → Application</li>
+                <li>Données encapsulées couche par couche (poupées russes)</li>
+                <li>LAN = local, WAN = étendu, MAN = métropolitain</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-globe"></i> Ch.2 — TCP/IP</h3>
+            <div class="mnemonic">ATIA</div>
+            <ul>
+                <li><strong>4</strong> couches : Application, Transport, Internet, Accès réseau</li>
+                <li>TCP = fiable, connexion (3-way handshake : SYN → SYN-ACK → ACK)</li>
+                <li>UDP = rapide, sans connexion (streaming, jeux)</li>
+                <li>Ports clés : 80 (HTTP), 443 (HTTPS), 22 (SSH), 53 (DNS), 25 (SMTP)</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-map-marker-alt"></i> Ch.3 — Adressage IPv4</h3>
+            <div class="mnemonic">4 octets · 32 bits</div>
+            <ul>
+                <li>Classe A : 1.0.0.0 → 126.x.x.x (masque /8)</li>
+                <li>Classe B : 128.0.0.0 → 191.x.x.x (masque /16)</li>
+                <li>Classe C : 192.0.0.0 → 223.x.x.x (masque /24)</li>
+                <li>Privé : 10.x.x.x, 172.16-31.x.x, 192.168.x.x</li>
+                <li>Formule hôtes : 2<sup>n</sup> − 2 (n = bits hôtes)</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-cut"></i> Ch.4 — Subnetting</h3>
+            <div class="mnemonic">2ⁿ − 2 hôtes</div>
+            <ul>
+                <li>CIDR : /24 = 255.255.255.0 = 254 hôtes</li>
+                <li>/25 = 128 − 2 = 126 hôtes</li>
+                <li>/26 = 64 − 2 = 62 hôtes</li>
+                <li>/27 = 32 − 2 = 30 hôtes</li>
+                <li>/28 = 16 − 2 = 14 hôtes</li>
+                <li>/30 = 4 − 2 = 2 hôtes (lien point-à-point)</li>
+                <li>Étapes : bits empruntés → taille bloc → @réseau → @broadcast → plage</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-exchange-alt"></i> Ch.5 — Protocoles</h3>
+            <div class="mnemonic">DORA</div>
+            <ul>
+                <li>HTTP : requête/réponse, codes 200/301/404/500</li>
+                <li>DNS : nom → IP (records A, AAAA, CNAME, MX, NS)</li>
+                <li>DHCP : attribution auto d'IP (Discover → Offer → Request → Ack)</li>
+                <li>ARP : IP → MAC (broadcast « Qui a cette IP ? »)</li>
+                <li>ICMP : ping, traceroute (diagnostic)</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-server"></i> Ch.6 — Équipements</h3>
+            <div class="mnemonic">HSR = 1-2-3</div>
+            <ul>
+                <li>Hub = couche 1 (broadcast tout, mégaphone)</li>
+                <li>Switch = couche 2 (table MAC, facteur intelligent)</li>
+                <li>Routeur = couche 3 (table de routage, GPS)</li>
+                <li>Pare-feu = filtrage (videur)</li>
+                <li>Point d'accès Wi-Fi, Modem (signal numérique ↔ analogique)</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-shield-alt"></i> Ch.7 — Sécurité</h3>
+            <div class="mnemonic">C.I.D.</div>
+            <ul>
+                <li>Symétrique (AES, 1 clé, rapide) vs Asymétrique (RSA, 2 clés)</li>
+                <li>HTTPS = asymétrique + symétrique (hybride)</li>
+                <li>VPN = tunnel chiffré (IPSec, OpenVPN, WireGuard)</li>
+                <li>Attaques : Phishing, DDoS, MitM, ARP Spoofing, Brute Force</li>
+                <li>Protection : HTTPS, 2FA, mots de passe forts, VLAN</li>
+            </ul>
+        </div>
+
+        <div class="formula-card">
+            <h3><i class="fas fa-wifi"></i> Ch.8 — Wi-Fi & Outils</h3>
+            <div class="mnemonic">PINTA</div>
+            <ul>
+                <li>Normes : b(11Mb) → g(54Mb) → n/Wi-Fi4 → ac/Wi-Fi5 → ax/Wi-Fi6</li>
+                <li>2.4 GHz (portée) vs 5 GHz (débit)</li>
+                <li>Sécurité : WEP ⛔ → WPA ⚠️ → WPA2 ✅ → WPA3 ✅✅</li>
+                <li>Commandes : ping, ipconfig, nslookup, tracert, arp, netstat</li>
+                <li>Diagnostic bottom-up : câble → IP → passerelle → 8.8.8.8 → DNS</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre8.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Ch.8</a>
+    <a href="cartes.html" class="next-chapter">Cartes <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

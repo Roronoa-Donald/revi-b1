@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes Flash C/C++ | B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}
+
+.flash-deck{display:flex;flex-direction:column;align-items:center;gap:2rem;padding:2rem 0}
+.flash-counter{font-size:.95rem;color:var(--text-secondary);margin-bottom:.5rem}
+.flash-card{width:100%;max-width:520px;min-height:260px;perspective:1000px;cursor:pointer}
+.flash-card-inner{position:relative;width:100%;min-height:260px;transition:transform .5s;transform-style:preserve-3d}
+.flash-card.flipped .flash-card-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;border:1px solid var(--glass-border)}
+.flash-front{background:var(--glass-bg);backdrop-filter:blur(20px)}
+.flash-front .flash-label{font-size:.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:1rem}
+.flash-front h3{font-size:1.4rem;color:var(--text-primary);line-height:1.4}
+.flash-back{background:linear-gradient(135deg,var(--accent),var(--accent-dark));transform:rotateY(180deg);color:#fff}
+.flash-back p{font-size:1.1rem;line-height:1.6}
+.flash-back code{background:rgba(255,255,255,.2);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.95rem}
+.flash-nav{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center}
+.flash-nav button{padding:.7rem 1.4rem;border-radius:12px;border:1px solid var(--glass-border);background:var(--glass-bg);color:var(--text-primary);cursor:pointer;font-weight:600;transition:.2s}
+.flash-nav button:hover{border-color:var(--accent);color:var(--accent)}
+.flash-nav button.primary{background:var(--accent);color:#000;border-color:var(--accent)}
+.flash-progress{width:100%;max-width:520px;height:6px;border-radius:3px;background:var(--glass-border);overflow:hidden}
+.flash-progress-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.flash-tags{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
+.flash-tags button{padding:.3rem .8rem;border-radius:8px;font-size:.8rem;border:1px solid var(--glass-border);background:var(--glass-bg);color:var(--text-secondary);cursor:pointer;transition:.2s}
+.flash-tags button.active,.flash-tags button:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+.keyboard-hint{font-size:.8rem;color:var(--text-secondary);margin-top:.5rem}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html" class="active">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html" class="active"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Cartes Flash</div>
+    <h1>⚡ Cartes Flash <span class="highlight">C/C++</span></h1>
+    <p>30 cartes pour réviser l'essentiel. Cliquez pour retourner, utilisez les flèches ← → ou Espace.</p>
+</section>
+
+<main class="content-wrapper">
+<div class="flash-deck" id="flash-deck">
+    <div class="flash-tags" id="flash-tags"></div>
+    <div class="flash-counter" id="flash-counter"></div>
+    <div class="flash-progress"><div class="flash-progress-fill" id="flash-progress"></div></div>
+    <div class="flash-card" id="flash-card">
+        <div class="flash-card-inner" id="flash-card-inner">
+            <div class="flash-front"><div class="flash-label" id="flash-label"></div><h3 id="flash-question"></h3></div>
+            <div class="flash-back"><p id="flash-answer"></p></div>
+        </div>
+    </div>
+    <div class="flash-nav">
+        <button onclick="prevCard()"><i class="fas fa-arrow-left"></i> Préc.</button>
+        <button class="primary" onclick="flipCard()"><i class="fas fa-sync-alt"></i> Retourner</button>
+        <button onclick="nextCard()">Suiv. <i class="fas fa-arrow-right"></i></button>
+        <button onclick="shuffleDeck()"><i class="fas fa-random"></i> Mélanger</button>
+    </div>
+    <p class="keyboard-hint">⌨️ Espace = retourner &nbsp;|&nbsp; ← → = naviguer &nbsp;|&nbsp; R = mélanger</p>
+</div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const ALL_CARDS = [
+    // Ch.1 — Bases
+    {tag:"Bases",q:"Quel mnémonique retenir pour la structure d'un programme C ?",a:"<strong>I.M.P.R.</strong> — Include, Main, Printf, Return"},
+    {tag:"Bases",q:"Quels sont les 4 types fondamentaux en C ? (mnémonique)",a:"<strong>I.F.D.C.</strong> — <code>int</code>, <code>float</code>, <code>double</code>, <code>char</code>"},
+    {tag:"Bases",q:"Quels spécificateurs printf pour int, float, char, string ?",a:"<strong>%D.F.C.S.</strong> — <code>%d</code>, <code>%f</code>, <code>%c</code>, <code>%s</code>"},
+    {tag:"Bases",q:"Quelle erreur fréquente avec scanf() et un int ?",a:"Oublier le <code>&amp;</code> devant la variable ! <code>scanf(\"%d\", &amp;n);</code>"},
+    // Ch.2 — Contrôle de flux
+    {tag:"Flux",q:"Qu'est-ce que l'opérateur ternaire ?",a:"<code>condition ? valeur_vrai : valeur_faux</code><br>Version courte du if/else pour une affectation."},
+    {tag:"Flux",q:"Mnémonique pour un « switch » bien écrit ?",a:"<strong>C.C.B.D.</strong> — Case, Code, Break, Default"},
+    {tag:"Flux",q:"Quelles sont les 3 parties d'une boucle for ?",a:"<strong>I.C.I.</strong> — Init (i=0), Condition (i&lt;n), Incrément (i++)"},
+    {tag:"Flux",q:"Différence entre while et do-while ?",a:"<code>while</code> : 0+ tours (vérifie avant)<br><code>do-while</code> : 1+ tour (exécute puis vérifie)"},
+    // Ch.3 — Fonctions
+    {tag:"Fonctions",q:"Les 5 éléments d'une fonction ?",a:"<strong>T.N.P.C.R.</strong> — Type retour, Nom, Paramètres, Corps, Return"},
+    {tag:"Fonctions",q:"3 raisons d'utiliser des fonctions ?",a:"<strong>R.L.M.</strong> — Réutiliser, Lire (lisibilité), Maintenir"},
+    {tag:"Fonctions",q:"Différence passage par valeur vs par adresse ?",a:"<strong>Valeur</strong> : copie, l'original ne change pas.<br><strong>Adresse</strong> : on passe <code>&amp;x</code>, la fonction modifie l'original via <code>*p</code>."},
+    {tag:"Fonctions",q:"À quoi sert le mot-clé static dans une fonction ?",a:"La variable <code>static</code> garde sa valeur entre les appels de la fonction (persiste en mémoire)."},
+    // Ch.4 — Tableaux & Chaînes
+    {tag:"Tableaux",q:"Comment déclarer un tableau de 5 int initialisé ?",a:"<code>int t[5] = {10, 20, 30, 40, 50};</code><br>Indices de 0 à 4 !"},
+    {tag:"Tableaux",q:"Qu'est-ce que le caractère '\\0' ?",a:"Le <strong>null terminator</strong> : marqueur de fin de chaîne. <code>\"Hi\"</code> = {'H','i','\\0'}. Sans lui, strlen/printf débordent."},
+    {tag:"Tableaux",q:"Les 4 fonctions string.h ? (mnémonique)",a:"<strong>L.C.C.C.</strong> — str<strong>L</strong>en, str<strong>C</strong>py, str<strong>C</strong>at, str<strong>C</strong>mp"},
+    {tag:"Tableaux",q:"Pourquoi passer la taille avec un tableau ?",a:"En C, un tableau perd sa taille quand il est passé en paramètre. Règle : <strong>Tableau = Toujours avec sa Taille !</strong>"},
+    // Ch.5 — Pointeurs
+    {tag:"Pointeurs",q:"Que font & et * avec les pointeurs ?",a:"<code>&amp;</code> = <strong>Adresse</strong> de la variable<br><code>*</code> = <strong>Accéder</strong> à la valeur pointée"},
+    {tag:"Pointeurs",q:"Les 4 fonctions d'allocation dynamique ?",a:"<strong>M.C.R.F.</strong> — <code>malloc</code> (non initialisé), <code>calloc</code> (initialisé à 0), <code>realloc</code> (redim), <code>free</code> (libérer)"},
+    {tag:"Pointeurs",q:"Qu'est-ce qu'un dangling pointer ?",a:"Un pointeur qui pointe vers une zone déjà libérée. Solution : <code>free(p); p = NULL;</code>"},
+    {tag:"Pointeurs",q:"Relation tableau / pointeur ?",a:"<code>tab</code> ≡ <code>&amp;tab[0]</code> (adresse du 1er élément)<br><code>tab[i]</code> ≡ <code>*(tab + i)</code>"},
+    // Ch.6 — Structures
+    {tag:"Structures",q:"Comment accéder à un champ d'une structure ?",a:"Accès direct : <code>e.nom</code> (point)<br>Via pointeur : <code>p-&gt;nom</code> (flèche) = <code>(*p).nom</code>"},
+    {tag:"Structures",q:"À quoi sert typedef avec struct ?",a:"<code>typedef struct { ... } Etudiant;</code><br>Crée un alias pour ne plus écrire <code>struct</code> à chaque utilisation."},
+    {tag:"Structures",q:"Qu'est-ce qu'un enum en C ?",a:"Un type avec des constantes nommées : <code>enum Jour {LUN, MAR, MER};</code><br>LUN=0, MAR=1, MER=2 automatiquement."},
+    // Ch.7 — Fichiers
+    {tag:"Fichiers",q:"Les 3 modes d'ouverture de fichier ?",a:"<strong>R.W.A.</strong> — <code>\"r\"</code> = Read (lire), <code>\"w\"</code> = Write (écrire, écrase !), <code>\"a\"</code> = Append (ajouter)"},
+    {tag:"Fichiers",q:"Que faut-il TOUJOURS vérifier après fopen ?",a:"<code>if (f == NULL) { perror(\"Erreur\"); return 1; }</code><br>Ne jamais utiliser un FILE* NULL !"},
+    {tag:"Fichiers",q:"Comment lire un fichier ligne par ligne ?",a:"<code>while (fgets(buf, sizeof(buf), f) != NULL) { ... }</code><br><code>fgets</code> lit jusqu'à \\n ou fin de buffer."},
+    // Ch.8 — C++
+    {tag:"C++",q:"Quels sont les remplaçants C++ de printf/scanf ?",a:"<code>cout &lt;&lt; \"Hello\" &lt;&lt; endl;</code><br><code>cin &gt;&gt; x;</code><br>Les flèches indiquent le sens du flux."},
+    {tag:"C++",q:"Différence entre pointeur et référence en C++ ?",a:"Pointeur : <code>int *p = &amp;x;</code> (3 symboles *, &amp;, ->)<br>Référence : <code>int &amp;r = x;</code> (1 symbole, plus simple, ne peut pas être NULL)"},
+    {tag:"C++",q:"Les 4 éléments d'une classe ? (mnémonique)",a:"<strong>P.A.M.C.</strong> — Private (encapsulation), Attributs (données), Méthodes (comportement), Constructeur (init)"},
+    {tag:"C++",q:"Comment faire de l'héritage en C++ ?",a:"<code>class Fille : public Mere { ... };</code><br>La classe fille hérite de tous les membres publics et protégés de la classe mère."}
+];
+
+let cards = [...ALL_CARDS], index = 0, tags = new Set(ALL_CARDS.map(c => c.tag));
+const $ = id => document.getElementById(id);
+
+function renderTags() {
+    const ct = $('flash-tags');
+    ct.innerHTML = '<button class="active" onclick="filterTag(null)">Toutes</button>';
+    tags.forEach(t => { ct.innerHTML += `<button onclick="filterTag('${t}')">${t}</button>`; });
+}
+function filterTag(tag) {
+    cards = tag ? ALL_CARDS.filter(c => c.tag === tag) : [...ALL_CARDS];
+    index = 0; render();
+    $('flash-tags').querySelectorAll('button').forEach(b => b.classList.toggle('active', b.textContent === (tag || 'Toutes')));
+}
+function render() {
+    if (!cards.length) return;
+    const c = cards[index];
+    $('flash-label').textContent = c.tag;
+    $('flash-question').textContent = c.q;
+    $('flash-answer').innerHTML = c.a;
+    $('flash-counter').textContent = `${index + 1} / ${cards.length}`;
+    $('flash-progress').style.width = ((index + 1) / cards.length * 100) + '%';
+    $('flash-card').classList.remove('flipped');
+}
+function flipCard() { $('flash-card').classList.toggle('flipped'); }
+function nextCard() { index = (index + 1) % cards.length; render(); }
+function prevCard() { index = (index - 1 + cards.length) % cards.length; render(); }
+function shuffleDeck() { for (let i = cards.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [cards[i], cards[j]] = [cards[j], cards[i]]; } index = 0; render(); }
+
+document.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
+    if (e.key === 'ArrowRight') nextCard();
+    if (e.key === 'ArrowLeft') prevCard();
+    if (e.key.toLowerCase() === 'r') shuffleDeck();
+});
+renderTags(); render();
+</script>
+</body>
+</html>

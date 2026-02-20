@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://cours-b1.vercel.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://cours-b1.vercel.app/algo/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/c_cpp/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/python/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/reseaux/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/stats/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/fbd/</loc><priority>0.9</priority></url>
+  <url><loc>https://cours-b1.vercel.app/merise/</loc><priority>0.9</priority></url>
+</urlset>

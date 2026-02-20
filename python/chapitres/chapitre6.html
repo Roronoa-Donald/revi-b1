@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Dictionnaires & Sets | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a>
+    <a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-book"></i> Chapitre 6</div>
+    <h1>🐍 Dictionnaires & <span class="highlight">Sets</span></h1>
+    <p>Stocker des données en paires clé:valeur et manipuler des ensembles uniques.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Dictionnaires -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-book-open"></i> Dictionnaire — clé : valeur</h2>
+    <div class="concept-card">
+        <h4>📖 Analogie du vrai dictionnaire</h4>
+        <p>Un dictionnaire Python fonctionne comme un <strong>vrai dictionnaire</strong> : vous cherchez un <strong>mot</strong> (la clé) pour trouver sa <strong>définition</strong> (la valeur). Pas besoin de feuilleter page par page — accès instantané !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Créer et accéder</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Créer un dictionnaire
+etudiant = {
+    "nom": "Alice",
+    "age": 20,
+    "notes": [15, 17, 12]
+}
+
+# Accéder par la clé (PAS par indice !)
+print(etudiant["nom"])      # "Alice"
+print(etudiant["age"])      # 20
+
+# ⚠️ Clé inexistante → KeyError !
+# print(etudiant["ville"])  # ❌ KeyError
+
+# Solution sûre : .get()
+print(etudiant.get("ville", "Inconnue"))  # "Inconnue" (défaut)
+
+# Modifier / Ajouter
+etudiant["age"] = 21            # Modifier
+etudiant["ville"] = "Paris"     # Ajouter (si clé n'existe pas)
+
+# Supprimer
+del etudiant["ville"]           # Supprime la clé
+note = etudiant.pop("age")      # Supprime et retourne la valeur</code></pre></div>
+</section>
+
+<!-- Section 2 : Méthodes -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cogs"></i> Méthodes du dictionnaire — K.V.I.</h2>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique K.V.I.</h4>
+        <p><strong>K</strong>eys · <strong>V</strong>alues · <strong>I</strong>tems — les 3 vues essentielles d'un dictionnaire.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Les 3 vues</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>d = {"nom": "Alice", "age": 20, "note": 15}
+
+d.keys()       # dict_keys(["nom", "age", "note"])
+d.values()     # dict_values(["Alice", 20, 15])
+d.items()      # dict_items([("nom","Alice"), ("age",20), ("note",15)])
+
+# Parcourir un dictionnaire
+for cle in d:               # Parcourt les CLÉS par défaut
+    print(cle)
+
+for cle, val in d.items():  # Clé ET valeur
+    print(f"{cle} : {val}")
+
+# Vérifier qu'une clé existe
+if "nom" in d:
+    print("La clé 'nom' existe !")
+
+# Nombre de paires
+len(d)  # 3</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Méthode</th><th>Retourne</th></tr></thead>
+        <tbody>
+            <tr><td><code>.keys()</code></td><td>Toutes les clés</td></tr>
+            <tr><td><code>.values()</code></td><td>Toutes les valeurs</td></tr>
+            <tr><td><code>.items()</code></td><td>Paires (clé, valeur)</td></tr>
+            <tr><td><code>.get(clé, défaut)</code></td><td>Valeur ou défaut si absente</td></tr>
+            <tr><td><code>.update(autre_dict)</code></td><td>Fusionne deux dicts</td></tr>
+            <tr><td><code>.pop(clé)</code></td><td>Supprime et retourne</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 3 : Dict comprehension -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-magic"></i> Dict comprehension</h2>
+    <div class="code-block"><div class="code-header"><span>Créer un dict en une ligne</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Classique
+carres = {}
+for x in range(1, 6):
+    carres[x] = x ** 2
+
+# Compréhension de dictionnaire (1 ligne !)
+carres = {x: x**2 for x in range(1, 6)}
+# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+# Avec condition
+pairs = {x: x**2 for x in range(10) if x % 2 == 0}
+# {0: 0, 2: 4, 4: 16, 6: 36, 8: 64}</code></pre></div>
+</section>
+
+<!-- Section 4 : Sets -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-circle-notch"></i> Les sets — ensembles uniques</h2>
+    <div class="concept-card">
+        <h4>🎨 Analogie du sac de billes</h4>
+        <p>Un set est un <strong>sac de billes sans doublons</strong> : chaque élément est unique. Si vous essayez de mettre deux billes rouges, il n'en gardera qu'une. Et l'ordre n'est pas garanti !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Sets</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Créer un set
+fruits = {"pomme", "banane", "orange", "pomme"}
+print(fruits)  # {"pomme", "banane", "orange"} — pas de doublon !
+
+# Set vide (⚠️ pas {}, c'est un dict vide !)
+vide = set()
+
+# Ajouter / Supprimer
+fruits.add("kiwi")
+fruits.discard("banane")  # Pas d'erreur si absent
+
+# Supprimer les doublons d'une liste !
+nombres = [1, 2, 2, 3, 3, 3]
+uniques = list(set(nombres))  # [1, 2, 3]</code></pre></div>
+
+    <div class="code-block"><div class="code-header"><span>Opérations ensemblistes</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+a | b    # Union : {1,2,3,4,5,6}
+a & b    # Intersection : {3,4}
+a - b    # Différence : {1,2}
+a ^ b    # Symétrique : {1,2,5,6}
+
+# Sous-ensemble
+{1, 2} &lt;= {1, 2, 3}  # True (sous-ensemble)</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Opération</th><th>Symbole</th><th>Méthode</th></tr></thead>
+        <tbody>
+            <tr><td>Union</td><td><code>a | b</code></td><td><code>a.union(b)</code></td></tr>
+            <tr><td>Intersection</td><td><code>a & b</code></td><td><code>a.intersection(b)</code></td></tr>
+            <tr><td>Différence</td><td><code>a - b</code></td><td><code>a.difference(b)</code></td></tr>
+            <tr><td>Symétrique</td><td><code>a ^ b</code></td><td><code>a.symmetric_difference(b)</code></td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 5 : Comparaison -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-balance-scale"></i> Liste vs Dict vs Tuple vs Set</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type</th><th>Syntaxe</th><th>Ordonné</th><th>Modifiable</th><th>Doublons</th></tr></thead>
+        <tbody>
+            <tr><td>Liste</td><td><code>[...]</code></td><td>✅</td><td>✅</td><td>✅</td></tr>
+            <tr><td>Tuple</td><td><code>(...)</code></td><td>✅</td><td>❌</td><td>✅</td></tr>
+            <tr><td>Dict</td><td><code>{k:v}</code></td><td>✅ (3.7+)</td><td>✅</td><td>Clés uniques</td></tr>
+            <tr><td>Set</td><td><code>{...}</code></td><td>❌</td><td>✅</td><td>❌</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 6 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 6</h4>
+        <ul>
+            <li>Dict <code>{"clé": valeur}</code> — accès par clé, pas par indice</li>
+            <li><code>.get(clé, défaut)</code> évite les KeyError</li>
+            <li><strong>K.V.I.</strong> : <code>.keys()</code>, <code>.values()</code>, <code>.items()</code></li>
+            <li>Parcours : <code>for k, v in d.items()</code></li>
+            <li>Set <code>{}</code> : pas de doublons, pas d'ordre</li>
+            <li>Opérations : <code>|</code> union, <code>&</code> intersection, <code>-</code> différence</li>
+            <li>Supprimer les doublons : <code>list(set(liste))</code></li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre5.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Listes & Tuples</a>
+    <a href="chapitre7.html" class="next-chapter">Fichiers & Exceptions <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Créez un dictionnaire avec nom, âge et ville. Affichez le nom.",hints:['{"nom":"Alice", ...}','d["nom"]'],answer:'d = {"nom": "Alice", "age": 20, "ville": "Paris"}\nprint(d["nom"])'},
+        {q:"Ajoutez la clé 'note' = 15 et supprimez 'ville'.",hints:["d[\"note\"] = 15","del d[\"ville\"]"],answer:'d["note"] = 15\ndel d["ville"]\nprint(d)'},
+        {q:"Parcourez le dictionnaire et affichez clé : valeur.",hints:["for k, v in d.items()"],answer:'for k, v in d.items():\n    print(f"{k} : {v}")'},
+        {q:"Créez un set à partir de [1,2,2,3,3,3] et affichez-le.",hints:["set(liste)"],answer:"lst = [1,2,2,3,3,3]\ns = set(lst)\nprint(s)  # {1, 2, 3}"},
+        {q:"Trouvez l'intersection de {1,2,3,4} et {3,4,5,6}.",hints:["& ou .intersection()"],answer:"a = {1,2,3,4}\nb = {3,4,5,6}\nprint(a & b)  # {3, 4}"}
+    ],
+    quiz: [
+        {type:"mcq",q:"Comment accéder à la valeur d'un dictionnaire ?",options:["d[0]","d.valeur","d[\"clé\"]","d(clé)"],correct:2},
+        {type:"mcq",q:"Que fait .get(\"x\", 0) si \"x\" n'existe pas ?",options:["KeyError","None","0","False"],correct:2},
+        {type:"mcq",q:"Quel mnémonique pour les 3 vues d'un dict ?",options:["K.V.I.","D.I.C.","C.V.K.","M.A.P."],correct:0},
+        {type:"mcq",q:"Un set peut contenir des doublons ?",options:["Oui","Non","Seulement des int","Seulement des str"],correct:1},
+        {type:"mcq",q:"Que fait {1,2,3} | {3,4,5} ?",options:["{3}","{1,2,3,4,5}","{1,2,4,5}","Erreur"],correct:1},
+        {type:"mcq",q:"Comment créer un set vide ?",options:["{}","set()","()","[]"],correct:1},
+        {type:"mcq",q:"for k in d: parcourt quoi par défaut ?",options:["Les valeurs","Les clés","Les paires","Les indices"],correct:1},
+        {type:"mcq",q:"Comment supprimer les doublons d'une liste ?",options:["list.unique()","set(list)","list.distinct()","unique(list)"],correct:1},
+        {type:"qa",q:"Quelle différence entre del d[\"x\"] et d.pop(\"x\") ?",answer:"del supprime sans retourner. pop supprime ET retourne la valeur."},
+        {type:"qa",q:"Quels types de collections Python sont ordonnés ?",answer:"Liste et tuple (et dict depuis Python 3.7+). Les sets ne sont PAS ordonnés."}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque méthode à son retour :",pairs:[[".keys()","Les clés"],[".values()","Les valeurs"],[".items()","Paires (clé, valeur)"],[".get(k, d)","Valeur ou défaut"]]},
+        {instruction:"Associez chaque opération set à son symbole :",pairs:[["Union","|"],["Intersection","&"],["Différence","-"],["Symétrique","^"]]},
+        {instruction:"Associez chaque collection à sa syntaxe :",pairs:[["Liste","[1, 2, 3]"],["Tuple","(1, 2, 3)"],["Dict",'{"a": 1}'],["Set","{1, 2, 3}"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

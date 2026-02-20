@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Algorithmes de Tri | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="chapitre5.html">Ch.5</a></li>
+        <li><a href="chapitre6.html" class="active">Ch.6</a></li><li><a href="chapitre7.html">Ch.7</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a>
+    <a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a><a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-sort-amount-down"></i> Chapitre 6</div>
+    <h1>Algorithmes de <span class="highlight">Tri</span></h1>
+    <p>Ordonner des données : tri par sélection, tri à bulles, tri par insertion. Comparaison et complexité.</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- 6.1 Introduction -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-sort"></i> 6.1 — Pourquoi trier ?</h2>
+        <div class="analogy-box"><span class="icon">📚</span><div><strong>Analogie — La bibliothèque :</strong> Imagine une bibliothèque où les livres sont rangés au hasard. Trouver un livre prendrait des heures ! Si tout est trié par ordre alphabétique, c'est instantané. Trier = faciliter la recherche.</div></div>
+        <div class="info-box"><span>ℹ️</span><div>Un tableau est <strong>trié en ordre croissant</strong> si pour tout i : <code>T[i] ≤ T[i+1]</code>. En ordre décroissant : <code>T[i] ≥ T[i+1]</code>.</div></div>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — S.B.I.</strong> : Les 3 tris de B1 = <strong>S</strong>élection, <strong>B</strong>ulles, <strong>I</strong>nsertion. Comme un bus SBI !</div></div>
+    </section>
+
+    <!-- 6.2 Tri par sélection -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-hand-pointer"></i> 6.2 — Tri par sélection</h2>
+        <div class="concept-card"><h4>🎯 Principe</h4>
+            <p>À chaque étape, on <strong>sélectionne le plus petit</strong> élément restant et on le place à sa position définitive.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🃏</span><div><strong>Analogie — Les cartes :</strong> Tu as un tas de cartes en désordre. Tu cherches la plus petite, tu la mets en 1ère position. Puis la plus petite parmi les restantes → 2ème position. Etc.</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N-<span class="number">1</span> <span class="keyword">Faire</span>
+    posMin ← i
+    <span class="keyword">Pour</span> j <span class="keyword">de</span> i+<span class="number">1</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+        <span class="keyword">Si</span> T[j] < T[posMin] <span class="keyword">Alors</span>
+            posMin ← j
+        <span class="keyword">FinSi</span>
+    <span class="keyword">FinPour</span>
+    <span class="comment">// Échange T[i] et T[posMin]</span>
+    temp ← T[i]
+    T[i] ← T[posMin]
+    T[posMin] ← temp
+<span class="keyword">FinPour</span>
+        </div>
+
+        <div class="tip-box"><span>💡</span><div><strong>Échange :</strong> Toujours utiliser une variable <code>temp</code> ! Rappel du chapitre 1 : l'échange des 3 verres.</div></div>
+        <div class="complexity-badge">Complexité : O(n²) comparaisons dans tous les cas</div>
+    </section>
+
+    <!-- 6.3 Tri à bulles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-circle"></i> 6.3 — Tri à bulles</h2>
+        <div class="concept-card"><h4>🫧 Principe</h4>
+            <p>On compare chaque paire d'éléments voisins et on les <strong>échange s'ils sont dans le mauvais ordre</strong>. On répète jusqu'à ce qu'aucun échange ne soit nécessaire.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🫧</span><div><strong>Analogie — Les bulles :</strong> Comme des bulles de savon : les éléments les plus légers (petits) remontent petit à petit vers le haut (début), les plus lourds descendent vers le fond (fin).</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Répéter</span>
+    échange ← FAUX
+    <span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N-<span class="number">1</span> <span class="keyword">Faire</span>
+        <span class="keyword">Si</span> T[i] > T[i+<span class="number">1</span>] <span class="keyword">Alors</span>
+            <span class="comment">// Échange</span>
+            temp ← T[i]
+            T[i] ← T[i+<span class="number">1</span>]
+            T[i+<span class="number">1</span>] ← temp
+            échange ← VRAI
+        <span class="keyword">FinSi</span>
+    <span class="keyword">FinPour</span>
+<span class="keyword">Jusqu'à</span> échange = FAUX
+        </div>
+
+        <div class="info-box"><span>ℹ️</span><div><strong>Avantage :</strong> Si le tableau est déjà trié, une seule passe suffit (aucun échange) → s'arrête plus vite que la sélection.</div></div>
+        <div class="complexity-badge">Complexité : O(n²) pire cas, O(n) meilleur cas (déjà trié)</div>
+    </section>
+
+    <!-- 6.4 Tri par insertion -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-arrow-right"></i> 6.4 — Tri par insertion</h2>
+        <div class="concept-card"><h4>📥 Principe</h4>
+            <p>On prend les éléments un par un et on les <strong>insère à la bonne position</strong> dans la partie déjà triée.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🃏</span><div><strong>Analogie — Le jeu de cartes :</strong> Quand tu reçois tes cartes une par une, tu insères chacune à sa place dans ta main déjà triée. C'est exactement le tri par insertion !</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">2</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    clé ← T[i]
+    j ← i - <span class="number">1</span>
+    <span class="keyword">TantQue</span> (j ≥ <span class="number">1</span>) <span class="keyword">ET</span> (T[j] > clé) <span class="keyword">Faire</span>
+        T[j+<span class="number">1</span>] ← T[j]   <span class="comment">// Décaler vers la droite</span>
+        j ← j - <span class="number">1</span>
+    <span class="keyword">FinTantQue</span>
+    T[j+<span class="number">1</span>] ← clé     <span class="comment">// Insérer</span>
+<span class="keyword">FinPour</span>
+        </div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — Qui décale quoi ?</strong><br>
+        🔍 <strong>Sélection</strong> = cherche le min, échange → « le chasseur »<br>
+        🫧 <strong>Bulles</strong> = voisins qui s'échangent → « les secousses »<br>
+        📥 <strong>Insertion</strong> = prend et insère → « le joueur de cartes »</div></div>
+        <div class="complexity-badge">Complexité : O(n²) pire cas, O(n) meilleur cas (déjà trié)</div>
+    </section>
+
+    <!-- 6.5 Comparaison -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-balance-scale"></i> 6.5 — Comparaison des 3 tris</h2>
+        <table class="styled-table">
+            <thead><tr><th>Tri</th><th>Meilleur cas</th><th>Pire cas</th><th>Stable ?</th><th>Avantage</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Sélection</strong></td><td>O(n²)</td><td>O(n²)</td><td>Non</td><td>Simple, peu d'échanges</td></tr>
+                <tr><td><strong>Bulles</strong></td><td>O(n)</td><td>O(n²)</td><td>Oui</td><td>Détecte si déjà trié</td></tr>
+                <tr><td><strong>Insertion</strong></td><td>O(n)</td><td>O(n²)</td><td>Oui</td><td>Efficace sur petits tableaux</td></tr>
+            </tbody>
+        </table>
+        <div class="info-box"><span>ℹ️</span><div><strong>Tri stable :</strong> Un tri est stable s'il conserve l'ordre relatif des éléments égaux. Bulles et Insertion sont stables, Sélection ne l'est pas.</div></div>
+    </section>
+
+    <!-- Résumé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 6.6 — Résumé</h2>
+        <div class="concept-card"><h4>🎯 Aide-mémoire</h4>
+            <ul>
+                <li><strong>S.B.I.</strong> = Sélection, Bulles, Insertion</li>
+                <li><strong>Sélection</strong> : cherche le min → échange → O(n²) toujours</li>
+                <li><strong>Bulles</strong> : échange voisins → O(n) si déjà trié</li>
+                <li><strong>Insertion</strong> : insère à la bonne place → O(n) si déjà trié</li>
+                <li>Tous en O(n²) dans le pire cas</li>
+                <li>Échange = toujours avec variable temp</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Exercices -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre5.html"><i class="fas fa-arrow-left"></i> Ch.5 — Fonctions</a>
+        <a href="chapitre7.html">Ch.7 — Recherche <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_algo_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+    { id: 'ch6', name: 'Trieur Expert', icon: '📊', desc: 'Termine les Algorithmes de Tri', xp: 20 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti Codeur' },
+    { min: 80, title: 'Algorithmicien Jr.' }, { min: 150, title: 'Développeur Logique' },
+    { min: 250, title: 'Maître du Tri' }, { min: 400, title: 'Architecte Algo' }
+] });
+GameEngine.init();
+
+ChapterExercises.init({
+    guided: [
+        { q: "Quel tri cherche le minimum et l'échange ? (S/B/I)", hints: ["Le chasseur", "Sélection"], answer: "sélection" },
+        { q: "Quel tri compare les voisins et les échange ?", hints: ["Comme des secousses", "Bulles"], answer: "bulles" },
+        { q: "Quel tri insère chaque élément à sa bonne place ?", hints: ["Le joueur de cartes", "Insertion"], answer: "insertion" },
+        { q: "Complexité pire cas des 3 tris élémentaires ?", hints: ["n au carré", "O(n²)"], answer: "o(n²)" },
+        { q: "Quel mnémonique retenir pour les 3 tris ?", hints: ["S, B, I", "Comme un bus"], answer: "sbi" }
+    ],
+    quiz: [
+        { type: "mcq", q: "Le tri par sélection en meilleur cas est :", options: ["O(n)", "O(n²)", "O(n log n)", "O(1)"], correct: 1 },
+        { type: "mcq", q: "Quel tri peut détecter un tableau déjà trié ?", options: ["Sélection", "Bulles", "Aucun", "Tous"], correct: 1 },
+        { type: "qa", q: "Un tri qui conserve l'ordre des éléments égaux est dit ___", answer: ["stable"] },
+        { type: "mcq", q: "Dans le tri par insertion, on commence la boucle à :", options: ["i = 0", "i = 1", "i = 2", "i = N"], correct: 2 },
+        { type: "mcq", q: "T = [5, 3, 1]. Après 1 passe du tri à bulles :", options: ["[1, 3, 5]", "[3, 1, 5]", "[3, 5, 1]", "[5, 1, 3]"], correct: 1 },
+        { type: "qa", q: "Variable temporaire pour échanger a et b ? (3 étapes)", answer: ["temp"] },
+        { type: "mcq", q: "Combien de comparaisons pour trier 5 éléments par sélection ?", options: ["5", "10", "20", "25"], correct: 1 },
+        { type: "mcq", q: "Quel tri est le plus naturel (comme on trie des cartes) ?", options: ["Sélection", "Bulles", "Insertion", "Rapide"], correct: 2 },
+        { type: "qa", q: "Meilleur cas du tri à bulles = O(___)", answer: ["n"] },
+        { type: "mcq", q: "Le tri par sélection est-il stable ?", options: ["Oui", "Non", "Parfois", "Ça dépend"], correct: 1 }
+    ],
+    dragdrop: [
+        { instruction: "Associe chaque tri à son analogie :", pairs: [["Sélection", "Le chasseur qui cherche le minimum"], ["Bulles", "Des secousses entre voisins"], ["Insertion", "Le joueur de cartes qui insère"]] },
+        { instruction: "Associe complexité et cas :", pairs: [["Sélection meilleur cas", "O(n²)"], ["Bulles meilleur cas", "O(n)"], ["Insertion pire cas", "O(n²)"], ["Bulles pire cas", "O(n²)"]] },
+        { instruction: "Les 3 étapes de l'échange de T[i] et T[j] :", pairs: [["Étape 1", "temp ← T[i]"], ["Étape 2", "T[i] ← T[j]"], ["Étape 3", "T[j] ← temp"]] }
+    ]
+});
+</script>
+</body>
+</html>

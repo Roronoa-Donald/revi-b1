@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes Flash | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}
+    .flash-toolbar{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.5rem 0}
+    .flash-toolbar button{padding:.45rem 1rem;border-radius:20px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer;font-weight:600;font-size:.85rem;transition:.2s}
+    .flash-toolbar button:hover,.flash-toolbar button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .flash-counter{text-align:center;margin:.7rem 0;font-weight:600;color:var(--text-muted)}
+    .flash-scene{perspective:800px;max-width:520px;margin:0 auto;min-height:290px}
+    .flash-card-inner{position:relative;width:100%;min-height:270px;transition:transform .5s;transform-style:preserve-3d;cursor:pointer}
+    .flash-card-inner.flipped{transform:rotateY(180deg)}
+    .flash-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center}
+    .flash-front{background:var(--card-bg);border:2px solid var(--accent);box-shadow:var(--shadow)}
+    .flash-front h3{font-size:1.15rem;line-height:1.6;color:var(--text)}
+    .flash-back{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;transform:rotateY(180deg)}
+    .flash-back p{font-size:1.05rem;line-height:1.6}
+    .flash-back code{background:rgba(255,255,255,.2);padding:.15rem .4rem;border-radius:4px;font-size:.95rem}
+    .flash-nav{display:flex;gap:1rem;justify-content:center;margin:1.2rem 0}
+    .flash-nav button{width:48px;height:48px;border-radius:50%;border:2px solid var(--accent);background:var(--card-bg);color:var(--accent);font-size:1.2rem;cursor:pointer;transition:.2s}
+    .flash-nav button:hover{background:var(--accent);color:#fff}
+    .flash-tag{display:inline-block;font-size:.7rem;padding:.2rem .5rem;border-radius:10px;background:var(--accent-glow);color:var(--accent);font-weight:700;margin-bottom:.8rem}
+    .keyboard-hint{text-align:center;font-size:.8rem;color:var(--text-muted);margin-top:.7rem}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html" class="active">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html" class="active"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Cartes Flash</div>
+    <h1>🐍 Révise avec les <span class="highlight">Cartes</span></h1>
+    <p>30 cartes interactives — clique ou appuie sur Espace pour retourner.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="flash-toolbar" id="flash-toolbar"></div>
+    <div class="flash-counter" id="flash-counter"></div>
+    <div class="flash-scene" id="flash-scene">
+        <div class="flash-card-inner" id="flash-card">
+            <div class="flash-face flash-front"><span class="flash-tag" id="card-tag"></span><h3 id="card-question"></h3></div>
+            <div class="flash-face flash-back"><p id="card-answer"></p></div>
+        </div>
+    </div>
+    <div class="flash-nav">
+        <button id="btn-prev" title="Précédent"><i class="fas fa-arrow-left"></i></button>
+        <button id="btn-shuffle" title="Mélanger"><i class="fas fa-shuffle"></i></button>
+        <button id="btn-next" title="Suivant"><i class="fas fa-arrow-right"></i></button>
+    </div>
+    <p class="keyboard-hint">⌨️ ← Précédent · Espace Retourner · → Suivant</p>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const CARDS=[
+// Variables & Types
+{tag:"Variables",q:"Quels sont les 4 types fondamentaux en Python ?",a:"int (entier), float (décimal), str (texte), bool (True/False) — <code>I.F.S.B.</code>"},
+{tag:"Variables",q:"Comment connaître le type d'une variable ?",a:"<code>type(x)</code> — renvoie le type de l'objet"},
+{tag:"Variables",q:"Qu'est-ce qu'une f-string ?",a:"<code>f\"Bonjour {nom}\"</code> — texte à trous qui insère des variables"},
+{tag:"Variables",q:"Que fait // en Python ?",a:"Division entière : <code>7 // 2</code> → <code>3</code> (pas de virgule)"},
+// Conditions
+{tag:"Conditions",q:"Quels sont les opérateurs logiques Python ?",a:"<code>and</code>, <code>or</code>, <code>not</code> — en mots, pas en symboles !"},
+{tag:"Conditions",q:"Quelle est la syntaxe du ternaire Python ?",a:"<code>r = \"pair\" if n%2==0 else \"impair\"</code>"},
+{tag:"Conditions",q:"Différence entre = et == ?",a:"<code>=</code> affectation (donne une valeur) · <code>==</code> comparaison (teste l'égalité)"},
+{tag:"Conditions",q:"Comment tester l'appartenance ?",a:"<code>in</code> : <code>\"a\" in \"abc\"</code> → True · <code>3 in [1,2,3]</code> → True"},
+// Boucles
+{tag:"Boucles",q:"Que fait range(2, 10, 3) ?",a:"Génère 2, 5, 8 — <code>R.D.F.</code> Range(Début, Fin exclue, Pas)"},
+{tag:"Boucles",q:"Quelle est la meilleure boucle pour parcourir une liste ?",a:"<code>for elem in liste:</code> — simple et « pythonique »"},
+{tag:"Boucles",q:"Comment obtenir l'index ET la valeur ?",a:"<code>for i, val in enumerate(liste):</code>"},
+{tag:"Boucles",q:"Qu'est-ce qu'une compréhension de liste ?",a:"<code>[x**2 for x in range(10) if x%2==0]</code> — boucle en une ligne"},
+// Fonctions
+{tag:"Fonctions",q:"Différence entre print() et return ?",a:"<code>print()</code> affiche à l'écran · <code>return</code> renvoie une valeur au code appelant"},
+{tag:"Fonctions",q:"Que sont *args et **kwargs ?",a:"<code>*args</code> = tuple d'arguments positionnels · <code>**kwargs</code> = dict d'arguments nommés"},
+{tag:"Fonctions",q:"Qu'est-ce qu'une lambda ?",a:"<code>lambda x: x**2</code> — fonction anonyme en une ligne"},
+{tag:"Fonctions",q:"Pourquoi créer des fonctions ?",a:"<code>R.L.T.</code> : Réutiliser le code, Lire facilement, Tester séparément"},
+// Listes & Tuples
+{tag:"Listes",q:"5 méthodes essentielles des listes ?",a:"<code>A.I.R.P.S.</code> : Append, Insert, Remove, Pop, Sort"},
+{tag:"Listes",q:"Que fait liste[::-1] ?",a:"Renvoie la liste inversée (slicing avec pas négatif)"},
+{tag:"Listes",q:"Différence entre .sort() et sorted() ?",a:"<code>.sort()</code> modifie en place (retourne None) · <code>sorted()</code> retourne une nouvelle liste"},
+{tag:"Listes",q:"Comment accéder au dernier élément ?",a:"<code>liste[-1]</code> — index négatif = partir de la fin"},
+// Dicts & Sets
+{tag:"Dicts",q:"3 vues d'un dictionnaire ?",a:"<code>K.V.I.</code> : <code>.keys()</code>, <code>.values()</code>, <code>.items()</code>"},
+{tag:"Dicts",q:"Différence entre d[\"clé\"] et d.get(\"clé\") ?",a:"<code>d[\"clé\"]</code> → KeyError si absent · <code>d.get(\"clé\", défaut)</code> → valeur par défaut"},
+{tag:"Dicts",q:"Comment créer un set vide ?",a:"<code>set()</code> — attention <code>{}</code> crée un dict vide, pas un set !"},
+{tag:"Dicts",q:"Opérations sur les sets ?",a:"<code>|</code> union · <code>&</code> intersection · <code>-</code> différence · <code>^</code> symétrique"},
+// Fichiers & Exceptions
+{tag:"Fichiers",q:"Quelle syntaxe ouvre et ferme auto un fichier ?",a:"<code>with open(\"f.txt\", \"r\") as f:</code> — fermeture automatique"},
+{tag:"Fichiers",q:"Différence entre mode w et a ?",a:"<code>w</code> écrase le contenu · <code>a</code> ajoute à la fin — <code>R.W.A.</code>"},
+{tag:"Fichiers",q:"Comment gérer une erreur sans crash ?",a:"<code>try: ... except ValueError: ...</code> — le filet de sécurité"},
+// Modules & POO
+{tag:"POO",q:"3 façons d'importer un module ?",a:"<code>I.F.A.</code> : <code>import math</code> · <code>from math import sqrt</code> · <code>import math as m</code>"},
+{tag:"POO",q:"Que représente self dans une classe ?",a:"<code>self</code> = « moi-même » — référence à l'instance courante de l'objet"},
+{tag:"POO",q:"Structure d'une classe Python ?",a:"<code>C.I.A.M.</code> : Classe → Init → Attributs → Méthodes"}
+];
+const tags=[...new Set(CARDS.map(c=>c.tag))];let filtered=[...CARDS],idx=0;
+function render(){const c=filtered[idx];document.getElementById('card-tag').textContent=c.tag;document.getElementById('card-question').textContent=c.q;document.getElementById('card-answer').innerHTML=c.a;document.getElementById('flash-card').classList.remove('flipped');document.getElementById('flash-counter').textContent=`${idx+1} / ${filtered.length}`}
+function buildToolbar(){const tb=document.getElementById('flash-toolbar');tb.innerHTML='';const all=document.createElement('button');all.textContent='Toutes';all.className='active';all.onclick=()=>{filtered=[...CARDS];idx=0;render();tb.querySelectorAll('button').forEach(b=>b.classList.remove('active'));all.classList.add('active')};tb.appendChild(all);tags.forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{filtered=CARDS.filter(c=>c.tag===t);idx=0;render();tb.querySelectorAll('button').forEach(b=>b.classList.remove('active'));b.classList.add('active')};tb.appendChild(b)})}
+document.getElementById('flash-card').addEventListener('click',()=>document.getElementById('flash-card').classList.toggle('flipped'));
+document.getElementById('btn-prev').addEventListener('click',()=>{idx=(idx-1+filtered.length)%filtered.length;render()});
+document.getElementById('btn-next').addEventListener('click',()=>{idx=(idx+1)%filtered.length;render()});
+document.getElementById('btn-shuffle').addEventListener('click',()=>{for(let i=filtered.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[filtered[i],filtered[j]]=[filtered[j],filtered[i]]}idx=0;render()});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){idx=(idx-1+filtered.length)%filtered.length;render()}else if(e.key==='ArrowRight'){idx=(idx+1)%filtered.length;render()}else if(e.key===' '){e.preventDefault();document.getElementById('flash-card').classList.toggle('flipped')}});
+buildToolbar();render();
+</script>
+</body>
+</html>

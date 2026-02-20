@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 9 — Structures de Données | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="chapitre8.html">Ch.8</a></li>
+        <li><a href="chapitre9.html" class="active">Ch.9</a></li><li><a href="chapitre10.html">Ch.10</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="chapitre9.html" class="active"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-cubes"></i> Chapitre 9</div>
+    <h1>Structures de <span class="highlight">Données</span></h1>
+    <p>Piles, files, listes chaînées et enregistrements : organiser les données au-delà des tableaux.</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- 9.1 Enregistrements -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-id-card"></i> 9.1 — Les enregistrements (records)</h2>
+        <div class="concept-card"><h4>📋 Définition</h4>
+            <p>Un <strong>enregistrement</strong> regroupe plusieurs données de <strong>types différents</strong> sous un même nom. Chaque donnée est un <strong>champ</strong>.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🪪</span><div><strong>Analogie — La carte d'identité :</strong> Une seule carte, mais plusieurs informations : nom (chaîne), prénom (chaîne), âge (entier), taille (réel). C'est un enregistrement !</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Type</span> Etudiant = <span class="keyword">Enregistrement</span>
+    nom : <span class="type">Chaîne</span>
+    prenom : <span class="type">Chaîne</span>
+    age : <span class="type">Entier</span>
+    moyenne : <span class="type">Réel</span>
+<span class="keyword">FinEnregistrement</span>
+
+<span class="keyword">Variable</span> e1 : Etudiant
+e1.nom ← <span class="string">"Dupont"</span>
+e1.age ← <span class="number">20</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">type</span>
+    Etudiant = <span class="keyword">record</span>
+        nom: <span class="type">string</span>;
+        prenom: <span class="type">string</span>;
+        age: <span class="type">integer</span>;
+        moyenne: <span class="type">real</span>;
+    <span class="keyword">end</span>;
+<span class="keyword">var</span> e1: Etudiant;
+        </div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — Tableau vs Enregistrement :</strong><br>
+        📦 <strong>Tableau</strong> = plusieurs valeurs du <strong>même type</strong> (boîte d'œufs)<br>
+        🪪 <strong>Enregistrement</strong> = plusieurs valeurs de <strong>types différents</strong> (carte d'identité)</div></div>
+    </section>
+
+    <!-- 9.2 Piles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-layer-group"></i> 9.2 — Les piles (stacks)</h2>
+        <div class="concept-card"><h4>📚 Principe LIFO</h4>
+            <p>Une <strong>pile</strong> = Last In, First Out. Le dernier élément ajouté est le premier retiré. Deux opérations de base : <strong>Empiler</strong> (push) et <strong>Dépiler</strong> (pop).</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🥞</span><div><strong>Analogie — La pile d'assiettes :</strong> Tu empiles les assiettes les unes sur les autres. Pour en prendre une, tu prends celle du dessus (la dernière posée). Tu ne peux pas prendre celle du milieu !</div></div>
+
+        <table class="styled-table">
+            <thead><tr><th>Opération</th><th>Description</th><th>Complexité</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Empiler(x)</strong></td><td>Ajoute x au sommet</td><td>O(1)</td></tr>
+                <tr><td><strong>Dépiler()</strong></td><td>Retire et retourne le sommet</td><td>O(1)</td></tr>
+                <tr><td><strong>Sommet()</strong></td><td>Consulte le sommet sans retirer</td><td>O(1)</td></tr>
+                <tr><td><strong>EstVide()</strong></td><td>Vérifie si la pile est vide</td><td>O(1)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="example-box"><span>📝</span><div><strong>Cas d'utilisation :</strong> Pile d'appels (récursivité !), bouton « Annuler » (Ctrl+Z), historique de navigation (bouton Retour).</div></div>
+    </section>
+
+    <!-- 9.3 Files -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-people-carry"></i> 9.3 — Les files (queues)</h2>
+        <div class="concept-card"><h4>🚶 Principe FIFO</h4>
+            <p>Une <strong>file</strong> = First In, First Out. Le premier élément ajouté est le premier retiré. Deux opérations : <strong>Enfiler</strong> (enqueue) et <strong>Défiler</strong> (dequeue).</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🎫</span><div><strong>Analogie — La file d'attente :</strong> Au cinéma, le premier arrivé est le premier servi. Pas de doublage ! Les nouveaux arrivent à la fin, les premiers partent de devant.</div></div>
+
+        <table class="styled-table">
+            <thead><tr><th>Opération</th><th>Description</th><th>Complexité</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Enfiler(x)</strong></td><td>Ajoute x à la fin</td><td>O(1)</td></tr>
+                <tr><td><strong>Défiler()</strong></td><td>Retire et retourne le premier</td><td>O(1)</td></tr>
+                <tr><td><strong>Premier()</strong></td><td>Consulte le premier sans retirer</td><td>O(1)</td></tr>
+                <tr><td><strong>EstVide()</strong></td><td>Vérifie si la file est vide</td><td>O(1)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — LIFO vs FIFO :</strong><br>
+        🥞 Pi<strong>L</strong>e = <strong>L</strong>IFO = <strong>L</strong>ast In First Out (assiettes, Ctrl+Z)<br>
+        🎫 Fi<strong>F</strong>e = <strong>F</strong>IFO = <strong>F</strong>irst In First Out (file d'attente, imprimante)</div></div>
+    </section>
+
+    <!-- 9.4 Listes chaînées -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-link"></i> 9.4 — Les listes chaînées</h2>
+        <div class="concept-card"><h4>🔗 Principe</h4>
+            <p>Chaque élément (nœud) contient une <strong>valeur</strong> et un <strong>pointeur</strong> vers l'élément suivant. Le dernier pointe vers NIL (rien).</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🚂</span><div><strong>Analogie — Le train :</strong> Chaque wagon = un nœud. Il transporte des passagers (valeur) et est accroché au wagon suivant (pointeur). Le dernier wagon n'est accroché à rien (NIL).</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Type</span> Noeud = <span class="keyword">Enregistrement</span>
+    valeur : <span class="type">Entier</span>
+    suivant : <span class="type">↑Noeud</span>    <span class="comment">// Pointeur vers le noeud suivant</span>
+<span class="keyword">FinEnregistrement</span>
+        </div>
+
+        <table class="styled-table">
+            <thead><tr><th>Avantage</th><th>Inconvénient</th></tr></thead>
+            <tbody>
+                <tr><td>Insertion/suppression rapide (O(1))</td><td>Accès par indice lent (O(n))</td></tr>
+                <tr><td>Taille dynamique</td><td>Plus de mémoire (pointeurs)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 9.5 Comparaison -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-balance-scale"></i> 9.5 — Tableau récapitulatif</h2>
+        <table class="styled-table">
+            <thead><tr><th>Structure</th><th>Principe</th><th>Accès</th><th>Analogie</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Tableau</strong></td><td>Cases indexées</td><td>O(1) par indice</td><td>Hôtel (n° chambre)</td></tr>
+                <tr><td><strong>Enregistrement</strong></td><td>Champs nommés</td><td>O(1) par nom</td><td>Carte d'identité</td></tr>
+                <tr><td><strong>Pile</strong></td><td>LIFO</td><td>Sommet seul</td><td>Assiettes</td></tr>
+                <tr><td><strong>File</strong></td><td>FIFO</td><td>Début seul</td><td>File d'attente</td></tr>
+                <tr><td><strong>Liste chaînée</strong></td><td>Nœuds liés</td><td>Parcours O(n)</td><td>Train</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Résumé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 9.6 — Résumé</h2>
+        <div class="concept-card"><h4>🎯 Aide-mémoire</h4>
+            <ul>
+                <li><strong>Enregistrement</strong> : types différents sous un nom (carte d'identité)</li>
+                <li><strong>Pile LIFO</strong> : Empiler/Dépiler, dernier entré = premier sorti</li>
+                <li><strong>File FIFO</strong> : Enfiler/Défiler, premier entré = premier sorti</li>
+                <li><strong>Liste chaînée</strong> : nœuds liés par pointeurs (train)</li>
+                <li>Pile → Ctrl+Z, récursion | File → imprimante, messages</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Exercices -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre8.html"><i class="fas fa-arrow-left"></i> Ch.8 — Récursivité</a>
+        <a href="chapitre10.html">Ch.10 — Complexité <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_algo_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+    { id: 'ch9', name: 'Structureur', icon: '🏗️', desc: 'Termine Structures de Données', xp: 20 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti Codeur' },
+    { min: 80, title: 'Algorithmicien Jr.' }, { min: 150, title: 'Développeur Logique' },
+    { min: 250, title: 'Architecte de Données' }, { min: 400, title: 'Architecte Algo' }
+] });
+GameEngine.init();
+
+ChapterExercises.init({
+    guided: [
+        { q: "LIFO signifie ?", hints: ["Last In...", "Last In First Out"], answer: "last in first out" },
+        { q: "FIFO signifie ?", hints: ["First In...", "First In First Out"], answer: "first in first out" },
+        { q: "Opération d'ajout dans une pile ?", hints: ["Push en anglais", "Empiler"], answer: "empiler" },
+        { q: "Opération de retrait dans une file ?", hints: ["Dequeue en anglais", "Défiler"], answer: "défiler" },
+        { q: "Le dernier noeud d'une liste chaînée pointe vers ?", hints: ["Rien", "NIL"], answer: "nil" }
+    ],
+    quiz: [
+        { type: "mcq", q: "La pile suit le principe :", options: ["FIFO", "LIFO", "Random", "FILO"], correct: 1 },
+        { type: "mcq", q: "La file suit le principe :", options: ["LIFO", "FIFO", "LIMU", "LILO"], correct: 1 },
+        { type: "qa", q: "Analogie de la pile : les a_____", answer: ["assiettes", "crêpes"] },
+        { type: "mcq", q: "Un enregistrement peut contenir :", options: ["Un seul type", "Plusieurs types différents", "Que des entiers", "Que des chaînes"], correct: 1 },
+        { type: "mcq", q: "Ctrl+Z utilise quelle structure ?", options: ["File", "Pile", "Tableau", "Liste"], correct: 1 },
+        { type: "qa", q: "Chaque noeud d'une liste chaînée contient : valeur + ___", answer: ["pointeur", "suivant"] },
+        { type: "mcq", q: "Accès par indice dans un tableau :", options: ["O(1)", "O(n)", "O(log n)", "O(n²)"], correct: 0 },
+        { type: "mcq", q: "Accès par indice dans une liste chaînée :", options: ["O(1)", "O(n)", "O(log n)", "O(n²)"], correct: 1 },
+        { type: "mcq", q: "File d'attente au cinéma = :", options: ["Pile", "File", "Tableau", "Enregistrement"], correct: 1 },
+        { type: "qa", q: "Tableau = même type, Enregistrement = types d___", answer: ["différents"] }
+    ],
+    dragdrop: [
+        { instruction: "Associe structure et principe :", pairs: [["Pile", "LIFO — dernier entré, premier sorti"], ["File", "FIFO — premier entré, premier sorti"], ["Tableau", "Accès par indice O(1)"], ["Liste chaînée", "Nœuds liés par pointeurs"]] },
+        { instruction: "Associe opération et structure :", pairs: [["Empiler/Dépiler", "Pile"], ["Enfiler/Défiler", "File"], ["T[i]", "Tableau"], ["noeud.suivant", "Liste chaînée"]] },
+        { instruction: "Associe analogie et structure :", pairs: [["Assiettes empilées", "Pile"], ["File d'attente cinéma", "File"], ["Wagons de train", "Liste chaînée"], ["Carte d'identité", "Enregistrement"]] }
+    ]
+});
+</script>
+</body>
+</html>

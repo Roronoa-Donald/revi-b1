@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'Examen MERISE | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .sim-config{max-width:500px;margin:0 auto 2rem;padding:1.5rem;border-radius:1rem;background:var(--card-bg);border:1px solid var(--glass-border)}
+        .sim-config label{display:block;margin-bottom:.3rem;font-weight:600;font-size:.85rem}
+        .sim-config select,.sim-config input{width:100%;padding:.5rem;border-radius:.5rem;border:1px solid var(--glass-border);background:var(--bg-primary);color:var(--text-primary);margin-bottom:1rem;font-size:.9rem}
+        .sim-start{width:100%;padding:.7rem;border:0;border-radius:.5rem;background:var(--accent);color:#fff;font-weight:700;font-size:1rem;cursor:pointer}
+        .sim-start:hover{opacity:.85}
+        .timer-bar{height:6px;border-radius:3px;background:var(--glass-border);margin-bottom:1rem;overflow:hidden}
+        .timer-bar-fill{height:100%;background:var(--accent);transition:width 1s linear}
+        .timer-text{text-align:right;font-size:.8rem;color:var(--text-muted);margin-bottom:.5rem}
+        .q-card{padding:1.5rem;border-radius:1rem;background:var(--card-bg);border:1px solid var(--glass-border);margin-bottom:1.5rem}
+        .q-card .q-num{font-size:.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+        .q-card h3{font-size:1rem;line-height:1.5;margin-bottom:1rem}
+        .q-options{display:flex;flex-direction:column;gap:.5rem}
+        .q-opt{padding:.7rem 1rem;border:2px solid var(--glass-border);border-radius:.5rem;cursor:pointer;transition:.2s;font-size:.9rem;background:var(--bg-primary)}
+        .q-opt:hover{border-color:var(--accent);background:var(--accent-glow)}
+        .q-opt.selected{border-color:var(--accent);background:var(--accent-glow);font-weight:600}
+        .q-opt.correct{border-color:#22c55e;background:rgba(34,197,94,.12)}
+        .q-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.12)}
+        .q-opt.missed{border-color:#22c55e;background:rgba(34,197,94,.06);outline:2px dashed #22c55e}
+        .q-nav{display:flex;gap:1rem;justify-content:center;margin:1.5rem 0}
+        .q-nav button{padding:.5rem 1.5rem;border:2px solid var(--accent);border-radius:.5rem;background:var(--card-bg);color:var(--accent);font-weight:600;cursor:pointer;font-size:.9rem}
+        .q-nav button.primary{background:var(--accent);color:#fff}
+        .q-nav button:hover{opacity:.85}
+        .result-card{text-align:center;padding:2rem;border-radius:1rem;background:var(--card-bg);border:1px solid var(--glass-border)}
+        .result-score{font-size:3rem;font-weight:900;color:var(--accent)}
+        .result-details{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin:1.5rem 0}
+        .result-stat{padding:1rem;border-radius:.5rem;background:var(--bg-primary)}
+        .result-stat .val{font-size:1.5rem;font-weight:800}
+        .result-stat .lbl{font-size:.75rem;color:var(--text-muted)}
+        .q-dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:1rem 0}
+        .q-dot{width:28px;height:28px;border-radius:.3rem;font-size:.7rem;display:flex;align-items:center;justify-content:center;border:1px solid var(--glass-border);cursor:pointer;background:var(--bg-primary);color:var(--text-muted);font-weight:600}
+        .q-dot.current{border-color:var(--accent);color:var(--accent);font-weight:800}
+        .q-dot.answered{background:var(--accent-glow);color:var(--accent)}
+        #exam-area{display:none}#config-area{display:block}#result-area{display:none}
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html" class="active"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-award"></i> Mode examen</div>
+            <h1>Simulateur <span class="highlight">d'Examen</span></h1>
+            <p>QCM chronométré pour tester tes connaissances en conditions réelles.</p>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- CONFIG -->
+            <div id="config-area">
+                <div class="sim-config">
+                    <label for="cfg-cat"><i class="fa-solid fa-filter"></i> Module</label>
+                    <select id="cfg-cat">
+                        <option value="all">Tous les modules (60 questions)</option>
+                        <option value="si">1. SI & MERISE</option>
+                        <option value="mcd">2. MCD</option>
+                        <option value="mld">3. MLD</option>
+                        <option value="ext">4. Extensions & Normalisation</option>
+                        <option value="flux">5. Flux</option>
+                        <option value="mct">6. MCT</option>
+                    </select>
+                    <label for="cfg-count"><i class="fa-solid fa-hashtag"></i> Nombre de questions</label>
+                    <select id="cfg-count">
+                        <option value="10">10 questions (~10 min)</option>
+                        <option value="20" selected>20 questions (~20 min)</option>
+                        <option value="30">30 questions (~30 min)</option>
+                        <option value="0">Toutes les questions</option>
+                    </select>
+                    <label for="cfg-timer"><i class="fa-solid fa-clock"></i> Chronomètre</label>
+                    <select id="cfg-timer">
+                        <option value="60">1 min / question</option>
+                        <option value="45" selected>45 sec / question</option>
+                        <option value="30">30 sec / question</option>
+                        <option value="0">Pas de chrono</option>
+                    </select>
+                    <button class="sim-start" id="start-btn"><i class="fa-solid fa-play"></i> Lancer l'examen</button>
+                </div>
+            </div>
+
+            <!-- EXAM -->
+            <div id="exam-area">
+                <div class="timer-text" id="timer-text">--:--</div>
+                <div class="timer-bar"><div class="timer-bar-fill" id="timer-fill" style="width:100%"></div></div>
+                <div class="q-dots" id="q-dots"></div>
+                <div class="q-card" id="q-card">
+                    <div class="q-num" id="q-num"></div>
+                    <h3 id="q-text"></h3>
+                    <div class="q-options" id="q-options"></div>
+                </div>
+                <div class="q-nav">
+                    <button id="q-prev"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
+                    <button id="q-next" class="primary">Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                    <button id="q-finish" class="primary" style="display:none"><i class="fa-solid fa-flag-checkered"></i> Terminer</button>
+                </div>
+            </div>
+
+            <!-- RESULT -->
+            <div id="result-area">
+                <div class="result-card">
+                    <p style="font-size:1.2rem;margin-bottom:.3rem"><i class="fa-solid fa-flag-checkered"></i> Examen terminé !</p>
+                    <div class="result-score" id="res-score">0%</div>
+                    <div class="result-details">
+                        <div class="result-stat"><div class="val" id="res-correct" style="color:#22c55e">0</div><div class="lbl">Correctes</div></div>
+                        <div class="result-stat"><div class="val" id="res-wrong" style="color:#ef4444">0</div><div class="lbl">Incorrectes</div></div>
+                        <div class="result-stat"><div class="val" id="res-skip" style="color:var(--text-muted)">0</div><div class="lbl">Passées</div></div>
+                        <div class="result-stat"><div class="val" id="res-time">0s</div><div class="lbl">Temps</div></div>
+                    </div>
+                    <button class="sim-start" id="review-btn" style="margin-top:1rem"><i class="fa-solid fa-magnifying-glass"></i> Voir les corrections</button>
+                    <button class="sim-start" id="retry-btn" style="margin-top:.5rem;background:var(--card-bg);color:var(--accent);border:2px solid var(--accent)"><i class="fa-solid fa-rotate"></i> Recommencer</button>
+                </div>
+                <div id="review-area" style="margin-top:2rem"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+    <script>
+    (function(){
+        const BANK=[
+            // SI & MERISE
+            {cat:'si',q:"Qu'est-ce qu'un Système d'Information ?",o:["Un logiciel de comptabilité","Un ensemble organisé de ressources pour collecter, stocker, traiter et distribuer l'information","Un réseau informatique","Un ordinateur"],a:1},
+            {cat:'si',q:"MERISE est une méthode d'origine :",o:["Américaine","Britannique","Française","Allemande"],a:2},
+            {cat:'si',q:"Quel principe MERISE N'est PAS correct ?",o:["Séparation données / traitements","Démarche par niveaux","Démarche par étapes","Séparation client / serveur"],a:3},
+            {cat:'si',q:"Le niveau conceptuel répond à la question :",o:["COMMENT ?","QUI ?","QUOI ?","OÙ ?"],a:2},
+            {cat:'si',q:"Quel modèle est au niveau conceptuel côté données ?",o:["MLD","MPD","MCT","MCD"],a:3},
+            {cat:'si',q:"Le système de pilotage correspond à :",o:["La production","La décision","Le stockage","La communication"],a:1},
+            {cat:'si',q:"Combien de niveaux comporte MERISE ?",o:["2","3","4","5"],a:1},
+            {cat:'si',q:"Le SI se situe entre :",o:["Le système opérant et le système de pilotage","Le MCD et le MLD","L'entité et l'association","Le client et le serveur"],a:0},
+            {cat:'si',q:"La première étape d'un projet MERISE est :",o:["L'étude détaillée","La réalisation","Le schéma directeur","La mise en œuvre"],a:2},
+            {cat:'si',q:"Quelle est la différence entre donnée et information ?",o:["Il n'y en a pas","La donnée est un fait brut, l'information est interprétée","L'information est brute, la donnée est interprétée","La donnée est numérique, l'information est textuelle"],a:1},
+            // MCD
+            {cat:'mcd',q:"Une propriété doit être :",o:["Complexe","Atomique (élémentaire)","Toujours numérique","Facultative"],a:1},
+            {cat:'mcd',q:"Comment représente-t-on une entité dans le MCD ?",o:["Un ovale","Un losange","Un rectangle","Un cercle"],a:2},
+            {cat:'mcd',q:"L'identifiant d'une entité est :",o:["Facultatif","Souligné dans le MCD","Toujours numérique","Écrit en italique"],a:1},
+            {cat:'mcd',q:"Une association est représentée par :",o:["Un rectangle","Un ovale ou losange","Un triangle","Une flèche"],a:1},
+            {cat:'mcd',q:"La cardinalité (1,n) signifie :",o:["Optionnel et unique","Obligatoire et unique","Optionnel et multiple","Obligatoire et multiple"],a:3},
+            {cat:'mcd',q:"La cardinalité (0,1) signifie :",o:["Obligatoire et unique","Optionnel et unique","Optionnel et multiple","Obligatoire et multiple"],a:1},
+            {cat:'mcd',q:"Une association ternaire lie :",o:["1 entité","2 entités","3 entités","4 entités"],a:2},
+            {cat:'mcd',q:"Qu'est-ce qu'une occurrence ?",o:["Un type de propriété","Une instance concrète d'une entité","Un type d'association","Une contrainte"],a:1},
+            {cat:'mcd',q:"Les cardinalités se lisent du point de vue de :",o:["L'association","L'entité","La propriété","L'identifiant"],a:1},
+            {cat:'mcd',q:"Le dictionnaire des données recense :",o:["Les entités uniquement","Toutes les propriétés avec leur type et taille","Les associations uniquement","Les règles de gestion"],a:1},
+            {cat:'mcd',q:"A → B signifie :",o:["B détermine A","A et B sont identiques","Pour chaque valeur de A, exactement une valeur de B","A et B sont indépendants"],a:2},
+            {cat:'mcd',q:"Comment appelle-t-on les contraintes métier en langage naturel ?",o:["Les cardinalités","Les dépendances fonctionnelles","Les règles de gestion","Les identifiants"],a:2},
+            {cat:'mcd',q:"Quelle propriété N'est PAS atomique ?",o:["Nom","Code_postal","Adresse complète","Prix_unitaire"],a:2},
+            {cat:'mcd',q:"(Matricule, Code_mat) → Note est une DF :",o:["Simple","Partielle","Composée","Transitive"],a:2},
+            {cat:'mcd',q:"Combien de propriétés minimum une entité doit-elle avoir ?",o:["0","1 (au moins l'identifiant)","2","3"],a:1},
+            // MLD
+            {cat:'mld',q:"Dans le MLD, une entité devient :",o:["Un attribut","Une clé","Une table","Un index"],a:2},
+            {cat:'mld',q:"La clé étrangère est notée avec :",o:["Un astérisque *","Un dièse #","Un souligné","Un point d'exclamation !"],a:1},
+            {cat:'mld',q:"Pour une association (1,n)–(1,1), on applique :",o:["Règle 1 : FK côté 1","Règle 2 : table d'association","Règle 3 : fusion","Aucune règle"],a:0},
+            {cat:'mld',q:"Pour une association (n,n), on crée :",o:["Une FK","Une table d'association","Un index","Une vue"],a:1},
+            {cat:'mld',q:"La PK d'une table d'association (R2) est :",o:["Un nouvel identifiant","La FK la plus grande","La concaténation des FK des deux entités","La FK de l'entité principale"],a:2},
+            {cat:'mld',q:"L'intégrité référentielle garantit que :",o:["Les noms sont corrects","Toute valeur de FK existe dans la table référencée","Les tables ont des tailles égales","Les types sont cohérents"],a:1},
+            {cat:'mld',q:"Si une association porte la propriété Quantité et a (n,n) :",o:["Quantité va dans l'une des entités","Quantité disparaît","Quantité devient attribut de la table d'association","Quantité devient une FK"],a:2},
+            {cat:'mld',q:"Une association (1,1)–(1,1) se traduit souvent par :",o:["2 tables + table d'association","Fusion des tables","3 tables distinctes","Rien"],a:1},
+            {cat:'mld',q:"Où va la FK dans la règle 1 ?",o:["Table côté n","Table côté 1","Les deux","Ni l'une ni l'autre"],a:1},
+            {cat:'mld',q:"Une clé primaire composée est formée de :",o:["1 seul attribut","2 attributs ou plus","Obligatoirement 3 attributs","Aucun attribut"],a:1},
+            // Extensions & Normalisation
+            {cat:'ext',q:"L'identification relative concerne :",o:["Une entité forte","Une entité dont l'identifiant inclut celui du parent","Toutes les entités","Les associations seulement"],a:1},
+            {cat:'ext',q:"Une association réflexive lie :",o:["Deux entités différentes","Une entité à elle-même","Trois entités","Une entité et une association"],a:1},
+            {cat:'ext',q:"EMPLOYÉ (Matricule, Nom, #Matricule_manager) est un cas de :",o:["Réflexive (1,n)","Réflexive (n,n)","Identification relative","Pseudo-entité"],a:0},
+            {cat:'ext',q:"La 1FN exige :",o:["Pas de dépendance transitive","Des attributs atomiques + PK","Pas de dépendance partielle","Des FK dans chaque table"],a:1},
+            {cat:'ext',q:"La 2FN concerne les tables avec :",o:["Clé simple","Clé composée","Aucune clé","Toutes les tables"],a:1},
+            {cat:'ext',q:"Matricule → Num_service → Nom_service viole :",o:["La 1FN","La 2FN","La 3FN","Aucune FN"],a:2},
+            {cat:'ext',q:"Si la PK est simple, la table est :",o:["En 1FN seulement","Automatiquement en 2FN","Automatiquement en 3FN","En BCNF"],a:1},
+            {cat:'ext',q:"La normalisation sert à :",o:["Accélérer les requêtes","Éliminer redondances et anomalies","Ajouter des FK","Créer des index"],a:1},
+            {cat:'ext',q:"Une pseudo-entité (agrégation) est utilisée quand :",o:["Une entité est faible","Une association doit participer à une autre association","On a trop d'entités","Les cardinalités sont (1,1)"],a:1},
+            {cat:'ext',q:"Un MCD bien conçu produit un MLD généralement en :",o:["1FN","2FN","3FN","Aucune FN"],a:2},
+            // Flux
+            {cat:'flux',q:"Le schéma de flux représente :",o:["Les entités et associations","Les échanges d'informations entre acteurs","Les traitements internes","Les clés primaires"],a:1},
+            {cat:'flux',q:"Un acteur externe est :",o:["Un service de l'organisation","Hors du périmètre de l'organisation","Toujours un individu","Le système informatique"],a:1},
+            {cat:'flux',q:"Un flux d'information est représenté par :",o:["Un rectangle","Un ovale","Une flèche numérotée","Un losange"],a:2},
+            {cat:'flux',q:"Un domaine d'activité est :",o:["Un logiciel","Un sous-ensemble cohérent de l'organisation","Un type de données","Un niveau MERISE"],a:1},
+            {cat:'flux',q:"Un processus est :",o:["Un type de données","Un ensemble de traitements déclenchés par événement(s)","Un acteur externe","Une propriété du SI"],a:1},
+            {cat:'flux',q:"L'étape 1 de construction du schéma de flux est :",o:["Dessiner le diagramme","Numéroter les flux","Identifier les acteurs","Identifier les processus"],a:2},
+            {cat:'flux',q:"Les flux identifiés deviennent dans le MCT :",o:["Des entités","Des événements","Des propriétés","Des tables"],a:1},
+            // MCT
+            {cat:'mct',q:"Le MCT décrit :",o:["Les données du SI","Ce que fait le SI indépendamment de QUI et COMMENT","L'organisation physique","Les tables de la base"],a:1},
+            {cat:'mct',q:"Un événement dans le MCT est :",o:["Un attribut","Un fait instantané déclencheur ou résultat","Une table","Un identifiant"],a:1},
+            {cat:'mct',q:"Une opération MCT est :",o:["Toujours interruptible","Non interruptible (atomique)","Optionnelle","Un type de données"],a:1},
+            {cat:'mct',q:"La synchronisation ET signifie :",o:["Au moins un événement suffit","Tous les événements doivent être présents","Aucun événement nécessaire","Exactement un seul événement"],a:1},
+            {cat:'mct',q:"Une règle d'émission peut être :",o:["Toujours, si OK, si refus","Un identifiant","Un type de données","Une clé étrangère"],a:0},
+            {cat:'mct',q:"Un cycle dans le MCT est :",o:["Un bug","Une boucle où un résultat redéclenche une opération antérieure","Interdit","Un événement externe"],a:1},
+            {cat:'mct',q:"Le MCT se transforme ensuite en :",o:["MLD","MCD","MOT","MPD"],a:2},
+            {cat:'mct',q:"MCD et MCT sont tous deux au niveau :",o:["Physique","Logique","Conceptuel","Organisationnel"],a:2},
+            {cat:'mct',q:"Un événement temporel est déclenché par :",o:["Un acteur externe","Une date ou heure","Une opération","Un flux"],a:1},
+            {cat:'mct',q:"L'opération MCT comporte combien de zones ?",o:["1","2","3 (nom, actions, conditions d'émission)","4"],a:2}
+        ];
+
+        let questions=[],answers=[],currentQ=0,timerSec=0,timerTotal=0,timerInt=null,startTime=0;
+        const $=id=>document.getElementById(id);
+
+        function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+        $('start-btn').addEventListener('click',()=>{
+            const cat=$('cfg-cat').value;
+            let pool=cat==='all'?[...BANK]:BANK.filter(q=>q.cat===cat);
+            pool=shuffle(pool);
+            let count=parseInt($('cfg-count').value)||pool.length;
+            if(count>pool.length||count===0)count=pool.length;
+            questions=pool.slice(0,count);
+            answers=new Array(count).fill(-1);
+            currentQ=0;
+            const perQ=parseInt($('cfg-timer').value);
+            timerTotal=perQ*count;timerSec=timerTotal;
+            startTime=Date.now();
+            $('config-area').style.display='none';
+            $('exam-area').style.display='block';
+            $('result-area').style.display='none';
+            renderQ();buildDots();
+            if(timerTotal>0){timerInt=setInterval(tick,1000);updateTimer()}
+            else{$('timer-text').textContent='Pas de chrono';$('timer-fill').style.width='100%'}
+        });
+
+        function tick(){timerSec--;updateTimer();if(timerSec<=0)finish()}
+        function updateTimer(){const m=Math.floor(timerSec/60),s=timerSec%60;$('timer-text').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;$('timer-fill').style.width=`${(timerSec/timerTotal)*100}%`}
+
+        function renderQ(){
+            const q=questions[currentQ];
+            $('q-num').textContent=`Question ${currentQ+1} / ${questions.length} — ${({si:'SI & MERISE',mcd:'MCD',mld:'MLD',ext:'Extensions & Norm.',flux:'Flux',mct:'MCT'})[q.cat]}`;
+            $('q-text').textContent=q.q;
+            const opts=$('q-options');opts.innerHTML='';
+            q.o.forEach((o,i)=>{
+                const d=document.createElement('div');d.className='q-opt';d.textContent=o;
+                if(answers[currentQ]===i)d.classList.add('selected');
+                d.addEventListener('click',()=>{answers[currentQ]=i;renderQ();buildDots()});
+                opts.appendChild(d);
+            });
+            $('q-prev').style.display=currentQ===0?'none':'';
+            $('q-next').style.display=currentQ===questions.length-1?'none':'';
+            $('q-finish').style.display=currentQ===questions.length-1?'':'none';
+            buildDots();
+        }
+
+        function buildDots(){
+            const c=$('q-dots');c.innerHTML='';
+            questions.forEach((_,i)=>{
+                const d=document.createElement('span');d.className='q-dot';d.textContent=i+1;
+                if(i===currentQ)d.classList.add('current');
+                if(answers[i]!==-1)d.classList.add('answered');
+                d.addEventListener('click',()=>{currentQ=i;renderQ()});
+                c.appendChild(d);
+            });
+        }
+
+        $('q-prev').addEventListener('click',()=>{if(currentQ>0){currentQ--;renderQ()}});
+        $('q-next').addEventListener('click',()=>{if(currentQ<questions.length-1){currentQ++;renderQ()}});
+        $('q-finish').addEventListener('click',finish);
+
+        function finish(){
+            if(timerInt)clearInterval(timerInt);
+            const elapsed=Math.round((Date.now()-startTime)/1000);
+            let correct=0,wrong=0,skip=0;
+            questions.forEach((q,i)=>{if(answers[i]===-1)skip++;else if(answers[i]===q.a)correct++;else wrong++});
+            const pct=questions.length?Math.round(correct/questions.length*100):0;
+            $('exam-area').style.display='none';
+            $('result-area').style.display='block';
+            $('res-score').textContent=pct+'%';
+            $('res-correct').textContent=correct;
+            $('res-wrong').textContent=wrong;
+            $('res-skip').textContent=skip;
+            const m=Math.floor(elapsed/60),s=elapsed%60;
+            $('res-time').textContent=m>0?`${m}m${s}s`:`${s}s`;
+            if(typeof window.RD_Gamification!=='undefined'){window.RD_Gamification.addXP(correct*15);if(pct===100)window.RD_Gamification.unlock('perfectionist')}
+        }
+
+        $('review-btn').addEventListener('click',()=>{
+            const area=$('review-area');area.innerHTML='';
+            questions.forEach((q,i)=>{
+                const div=document.createElement('div');div.className='q-card';
+                div.innerHTML=`<div class="q-num">Question ${i+1} — ${({si:'SI & MERISE',mcd:'MCD',mld:'MLD',ext:'Extensions & Norm.',flux:'Flux',mct:'MCT'})[q.cat]}</div><h3>${q.q}</h3><div class="q-options">${q.o.map((o,j)=>{
+                    let cls='q-opt';
+                    if(j===q.a)cls+=' correct';
+                    if(answers[i]===j&&j!==q.a)cls+=' wrong';
+                    if(answers[i]===-1&&j===q.a)cls+=' missed';
+                    return `<div class="${cls}">${o}</div>`;
+                }).join('')}</div>`;
+                area.appendChild(div);
+            });
+            $('review-btn').style.display='none';
+        });
+
+        $('retry-btn').addEventListener('click',()=>{
+            $('result-area').style.display='none';
+            $('config-area').style.display='block';
+            $('review-btn').style.display='';
+            $('review-area').innerHTML='';
+        });
+    })();
+    </script>
+</body>
+</html>

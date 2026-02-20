@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 — Systèmes d'Information & MERISE | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html" class="active">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html" class="active"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions & Normalisation</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-building"></i> Module 1</div>
+            <h1>Systèmes d'Information & <span class="highlight">MERISE</span></h1>
+            <p>Comprendre ce qu'est un SI, pourquoi on le modélise, et comment la méthode MERISE structure l'analyse et la conception.</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 1 : L'information -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-lightbulb"></i> I. L'Information</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Le terme « informer » vient du latin <em>informare</em> = « donner une forme ». <strong>L'information</strong> est un renseignement ou une réalité apportant une connaissance sur un objet ou un événement. Elle est composée de <strong>données</strong> manipulées par les technologies de l'information, auxquelles les individus attribuent un <strong>sens</strong>.</p>
+                </div>
+
+                <h3>Donnée → Information → Connaissance</h3>
+                <p>Il y a une chaîne progressive :</p>
+                <div class="schema-block">
+  DONNÉE           →        INFORMATION          →       CONNAISSANCE
+  (fait brut)            (donnée + contexte)          (information + expérience)
+
+  Ex: "37.5"         "La température du          "Le patient a de la
+                      patient est 37.5°C"         fièvre, il faut agir"
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div><strong>Retiens</strong> : La <em>donnée</em> est brute (un chiffre, un mot). L'<em>information</em> c'est la donnée mise en contexte. La <em>connaissance</em> c'est l'utilisation « intelligente » de l'information.</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 2 : L'entreprise système -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-building"></i> II. L'Entreprise Système</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>D'après Joël de Rosnay, un <strong>système</strong> est un « ensemble d'éléments en interaction dynamique, organisés en fonction d'un but ».</p>
+                </div>
+
+                <p>L'entreprise est un système qui est :</p>
+                <ul style="margin-left:1.5rem;margin-bottom:1rem;">
+                    <li><strong>Organisé</strong> — une structure permet de coordonner les éléments</li>
+                    <li><strong>Finalisé</strong> — elle poursuit des buts (profit, croissance…)</li>
+                    <li><strong>Ouvert</strong> — en relation avec son environnement (économique, juridique, technique…)</li>
+                    <li><strong>Dynamique</strong> — en constante évolution</li>
+                    <li><strong>Régulé</strong> — les décisions sont prises pour atteindre les objectifs fixés</li>
+                </ul>
+
+                <h3>Les 3 sous-systèmes de l'entreprise</h3>
+                <div class="schema-block">
+┌──────────────────────────────────┐
+│    SYSTÈME DE PILOTAGE           │  ← Décide, fixe les objectifs
+│    (Direction, Management)       │
+├──────────────────────────────────┤
+│    SYSTÈME D'INFORMATION         │  ← Collecte, traite, stocke,
+│    (SI)                          │     diffuse l'information
+├──────────────────────────────────┤
+│    SYSTÈME OPÉRANT               │  ← Exécute les opérations
+│    (Production, Ventes, etc.)    │     quotidiennes
+└──────────────────────────────────┘
+                </div>
+
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Astuce examen</strong> : Le SI est au <em>centre</em> entre le système de pilotage (qui décide) et le système opérant (qui exécute). Il fait le <strong>lien</strong> entre les deux.</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 3 : Système d'information -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-server"></i> III. Le Système d'Information (SI)</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition officielle (R. Reix, 1998)</h4>
+                    <p>« Un <strong>système d'information</strong> est un ensemble organisé de ressources : matériel, logiciel, personnel, données, procédures permettant d'<strong>acquérir</strong>, de <strong>traiter</strong>, de <strong>stocker</strong>, de <strong>communiquer</strong> des informations (sous forme de données, textes, images, sons, etc.) dans des organisations. »</p>
+                </div>
+
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Attention</strong> : <strong>Système d'Information ≠ Système Informatique</strong>. Le système informatique est la partie <em>automatisée</em> du SI (matériels, logiciels, réseaux). Le SI existait bien avant l'informatique (ex: système comptable des marchands phéniciens).</div>
+                </div>
+
+                <h3>Rôles du SI dans l'organisation</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Rôle</th><th>Description</th><th>Exemple</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Acquérir</strong></td><td>Collecter les données</td><td>Scanner un code-barres en caisse</td></tr>
+                        <tr><td><strong>Traiter</strong></td><td>Transformer les données</td><td>Calculer le total TTC d'une facture</td></tr>
+                        <tr><td><strong>Stocker</strong></td><td>Mémoriser les informations</td><td>Enregistrer une commande en base</td></tr>
+                        <tr><td><strong>Communiquer</strong></td><td>Diffuser l'information</td><td>Envoyer un email de confirmation</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div><strong>Exemple concret</strong> : Une société qui vend des PC. Un client passe commande (acquérir) → le SI vérifie le stock et calcule le prix (traiter) → enregistre la commande dans la base de données (stocker) → envoie une confirmation et alerte le magasinier (communiquer).</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 4 : Démarche générale -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-route"></i> IV. Démarche de Mise en Place d'un SI</h2>
+
+                <h3>A. Le Schéma Directeur</h3>
+                <p>C'est une étape de <strong>réflexion globale</strong> et de <strong>planification</strong> du développement du SI. L'objectif est de faire le pont entre la stratégie de l'entreprise et les projets informatiques à mener.</p>
+                <p>L'entreprise est décomposée en <strong>domaines de gestion</strong> (ex : gestion des ventes, gestion du personnel, comptabilité…).</p>
+
+                <h3>B. Les étapes d'un projet informatique</h3>
+                <div class="norm-step">
+                    <span class="step-num">1</span>
+                    <strong>Schéma directeur</strong> — Vision globale, planification, découpage en domaines
+                </div>
+                <div class="norm-step">
+                    <span class="step-num">2</span>
+                    <strong>Étude préalable</strong> — Analyse de l'existant, identification des problèmes, propositions de solutions (maquette ou prototype)
+                </div>
+                <div class="norm-step">
+                    <span class="step-num">3</span>
+                    <strong>Étude détaillée</strong> — Détail de la solution choisie, rédaction du cahier des charges
+                </div>
+                <div class="norm-step">
+                    <span class="step-num">4</span>
+                    <strong>Réalisation</strong> — Programmation, tests unitaires, tests d'intégration
+                </div>
+                <div class="norm-step">
+                    <span class="step-num">5</span>
+                    <strong>Mise en œuvre</strong> — Installation, formation, lancement en parallèle avec l'ancien système
+                </div>
+                <div class="norm-step">
+                    <span class="step-num">6</span>
+                    <strong>Maintenance & évolution</strong> — Corrections, améliorations, nouvelles fonctionnalités
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div><strong>Maquette vs Prototype</strong> : La <em>maquette</em> simule les écrans et enchaînements pour valider l'ergonomie (pas de vraies données). Le <em>prototype</em> intègre des fonctionnalités réelles avec un sous-ensemble de données réelles.</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 5 : L'analyse informatique -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-magnifying-glass-chart"></i> V. L'Analyse Informatique</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Qu'est-ce que l'analyse informatique ?</h4>
+                    <p>L'analyse consiste à : <strong>comprendre et modéliser</strong> la gestion du domaine d'activité dans une organisation, puis <strong>concevoir la solution informatique</strong> adéquate.</p>
+                </div>
+
+                <h3>Pourquoi une méthode d'analyse ?</h3>
+                <p>La réalisation d'applications informatiques implique <strong>de nombreuses personnes</strong> (direction, service informatique, utilisateurs…) qui doivent coopérer. Il faut un <strong>langage commun</strong> pour se comprendre.</p>
+
+                <p>Une méthode d'analyse doit permettre de :</p>
+                <ul style="margin-left:1.5rem;margin-bottom:1rem;">
+                    <li>Faciliter la <strong>communication</strong> entre les acteurs du projet</li>
+                    <li>Faire une <strong>analyse critique de l'existant</strong></li>
+                    <li>Recenser les <strong>nouveaux besoins</strong></li>
+                    <li>Proposer une ou plusieurs <strong>solutions</strong></li>
+                    <li>Définir en détail le <strong>fonctionnement du futur système</strong></li>
+                    <li>Suivre la <strong>mise en œuvre</strong></li>
+                </ul>
+
+                <h3>Les modèles</h3>
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-cube"></i> Qu'est-ce qu'un modèle ?</h4>
+                    <p>Un SI réel est souvent très complexe. Pour mieux le comprendre, on le représente sous forme de <strong>modèle</strong> (= représentation simplifiée de la réalité). On parle de <strong>modélisation</strong> d'un système d'information.</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 6 : La méthode MERISE -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-star"></i> VI. La Méthode MERISE</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Présentation</h4>
+                    <p><strong>MERISE</strong> est une méthode française d'analyse apparue en <strong>1979</strong>, conçue conjointement par des industriels et des universitaires. Elle a été adoptée par les administrations et entreprises françaises comme méthodologie rigoureuse de conception des systèmes d'information.</p>
+                </div>
+
+                <h3>Les 3 principes fondamentaux de MERISE</h3>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-1"></i> Séparation des données et des traitements</h4>
+                    <p>MERISE étudie les <strong>données</strong> (ce qu'on stocke) et les <strong>traitements</strong> (ce qu'on fait) de manière <strong>indépendante</strong> dans un premier temps, puis les rapproche pour validation.</p>
+                    <div class="tip-box" style="margin-top:.8rem">
+                        <i class="fa-solid fa-brain"></i>
+                        <div><strong>Pourquoi ?</strong> Parce que si le taux de TVA est stocké dans le programme (traitement) et pas dans les données, quand il change il faut modifier le programme ! En séparant, on modifie juste la donnée.</div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-2"></i> La démarche par niveaux</h4>
+                    <p>MERISE découpe l'analyse en <strong>3 niveaux d'abstraction</strong> :</p>
+                    <table class="merise-table" style="margin-top:.8rem">
+                        <thead><tr><th>Niveau</th><th>Données</th><th>Traitements</th><th>Question</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Conceptuel</strong></td>
+                                <td><code>MCD</code> (Modèle Conceptuel des Données)</td>
+                                <td><code>MCT</code> (Modèle Conceptuel des Traitements)</td>
+                                <td><em>QUOI ?</em> — Que fait le système ?</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Logique / Organisationnel</strong></td>
+                                <td><code>MLD</code> (Modèle Logique des Données)</td>
+                                <td><code>MOT</code> (Modèle Organisationnel des Traitements)</td>
+                                <td><em>QUI fait QUOI ? OÙ ? QUAND ?</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Physique</strong></td>
+                                <td><code>MPD</code> (Modèle Physique des Données)</td>
+                                <td><code>MPT</code> (Modèle Physique des Traitements)</td>
+                                <td><em>COMMENT ?</em> — Quels outils ?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-3"></i> La démarche par étapes</h4>
+                    <p>Les étapes sont hiérarchisées : schéma directeur → étude préalable → étude détaillée → réalisation → mise en œuvre → maintenance.</p>
+                </div>
+
+                <h3>Schéma récapitulatif de MERISE</h3>
+                <div class="schema-block">
+                    MERISE
+    ┌───────────────────┬────────────────────┐
+    │     DONNÉES       │    TRAITEMENTS     │
+    ├───────────────────┼────────────────────┤
+    │  MCD (Conceptuel) │  MCT (Conceptuel)  │   ← QUOI ?
+    │  MLD (Logique)    │  MOT (Organisat.)  │   ← QUI ? OÙ ? QUAND ?
+    │  MPD (Physique)   │  MPT (Physique)    │   ← COMMENT ?
+    └───────────────────┴────────────────────┘
+                </div>
+
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Point clé examen</strong> : Le niveau <strong>conceptuel</strong> répond à « QUOI ? » (indépendant de la technologie). Le niveau <strong>logique</strong> répond à « QUI, OÙ, QUAND ? ». Le niveau <strong>physique</strong> répond à « COMMENT ? » (choix de SGBD, langages, etc.).</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 7 : Le suivi d'un projet MERISE -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-list-check"></i> VII. Le Suivi d'un Projet MERISE</h2>
+
+                <p>Dans MERISE, un <strong>projet</strong> désigne l'analyse d'un système d'information particulier. Voici les étapes :</p>
+
+                <table class="merise-table">
+                    <thead><tr><th>Étape</th><th>Objectif</th><th>Livrables</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Schéma directeur</strong></td>
+                            <td>Réflexion globale et planification</td>
+                            <td>Document de vision, découpage en domaines</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Étude préalable</strong></td>
+                            <td>Analyse de l'existant, solutions possibles</td>
+                            <td>Rapport d'étude, maquette/prototype</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Étude détaillée</strong></td>
+                            <td>Détailler la solution choisie</td>
+                            <td>Cahier des charges fonctionnel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Réalisation</strong></td>
+                            <td>Développer l'application</td>
+                            <td>Code, tests, doc technique</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mise en œuvre</strong></td>
+                            <td>Installer et déployer</td>
+                            <td>Formation, migration, recette</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance</strong></td>
+                            <td>Corriger et faire évoluer</td>
+                            <td>Patches, nouvelles versions</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Le cahier des charges</strong> doit commencer par une présentation de l'entreprise, indiquer les objectifs (réduction des délais, absorption de la croissance…), les contraintes (compatibilité matériel existant, qualification du personnel…), puis les spécifications techniques.</div>
+                </div>
+
+                <div class="tip-box" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));border-left:4px solid var(--success);">
+                    <i class="fa-solid fa-brain" style="color:var(--success);"></i>
+                    <div>
+                        <strong>🧠 Mnémotechnique — Les 3 niveaux MERISE</strong><br>
+                        <strong>« C.L.P — Conceptuel, Logique, Physique »</strong>
+                        <ul style="margin:0.5rem 0 0 1rem;">
+                            <li><strong>C</strong>onceptuel → QUOI ? (le métier, indépendant de la technique)</li>
+                            <li><strong>L</strong>ogique → COMMENT ? (les tables, les clés étrangères)</li>
+                            <li><strong>P</strong>hysique → OÙ ? (le SGBD, les index, le SQL concret)</li>
+                        </ul>
+                        <p style="font-size:0.88rem;opacity:0.8;margin-top:0.5rem;">« On pense d'abord au <strong>métier</strong>, puis à la <strong>structure</strong>, puis à la <strong>machine</strong>. »</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONE EXERCICES -->
+            <article class="glass-card" id="interactive-exercise">
+                <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
+                <p style="color:var(--text-muted);">Chargement des exercices...</p>
+            </article>
+
+            <!-- Nav -->
+            <div class="chapter-nav">
+                <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+                <a href="chapitre2.html">Module 2 — MCD <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/chapter-exercises.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+</body>
+</html>

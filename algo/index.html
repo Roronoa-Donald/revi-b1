@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithmique — B1 Cours Interactifs</title>
+    <meta name="description" content="Cours complet d'algorithmique B1 : variables, conditions, boucles, tableaux, fonctions, tri, récursivité, structures de données et complexité.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        :root { --accent: #10b981; --accent-light: #34d399; --accent-dark: #059669; --accent-glow: rgba(16,185,129,0.25); }
+        .dark { --accent: #34d399; --accent-light: #6ee7b7; --accent-dark: #10b981; --accent-glow: rgba(52,211,153,0.25); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="glass-nav">
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="chapitres/chapitre1.html">Cours</a></li>
+            <li><a href="chapitres/formules.html">Formules</a></li>
+            <li><a href="exercices/exercices.html">Exercices</a></li>
+            <li><a href="chapitres/cartes.html">Cartes</a></li>
+            <li><a href="chapitres/simulateur-examen.html">Simulateur</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header">
+        <span>🤖 AlgoBot</span>
+        <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    </div>
+    <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
+    <a href="chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
+    <a href="chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
+    <a href="chapitres/chapitre9.html"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
+    <a href="chapitres/chapitre10.html"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="chapitres/formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+    <a href="chapitres/cartes.html"><i class="fas fa-clone"></i> Flashcards</a>
+    <a href="chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-microchip"></i> Bachelor 1 — Algorithmique</div>
+    <h1>🤖 Maîtrisez l'<span class="highlight">Algorithmique</span></h1>
+    <p>10 chapitres pour apprendre à penser comme un développeur : des variables à la complexité algorithmique, avec des exercices interactifs et des sections Pascal.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- Modules Grid -->
+    <div class="modules-grid">
+        <a href="chapitres/chapitre1.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-box"></i></div>
+            <h3>1. Variables & Types</h3>
+            <p>Déclaration, types de données, affectation, entrées/sorties. Premiers pas en pseudocode et Pascal.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~45 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre2.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>2. Structures Conditionnelles</h3>
+            <p>Si/Sinon, Selon/Cas, conditions imbriquées, opérateurs logiques ET/OU/NON.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre3.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-sync-alt"></i></div>
+            <h3>3. Boucles</h3>
+            <p>Pour, Tant que, Répéter…Jusqu'à. Compteurs, accumulateurs, boucles imbriquées.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~55 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre4.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-th-list"></i></div>
+            <h3>4. Tableaux</h3>
+            <p>Tableaux à 1D et 2D, parcours, recherche séquentielle, algorithmes de base sur tableaux.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre5.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <h3>5. Fonctions & Procédures</h3>
+            <p>Découpage en sous-programmes, paramètres, valeur de retour, portée des variables.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre6.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-sort-amount-down"></i></div>
+            <h3>6. Algorithmes de Tri</h3>
+            <p>Tri par sélection, tri à bulles, tri par insertion. Comprendre et comparer les algorithmes.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~55 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre7.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-search"></i></div>
+            <h3>7. Algorithmes de Recherche</h3>
+            <p>Recherche séquentielle, recherche dichotomique, analyse de performance.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~40 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre8.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-infinity"></i></div>
+            <h3>8. Récursivité</h3>
+            <p>Principe de récursion, cas de base, pile d'appels, exemples classiques (factorielle, Fibonacci).</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~55 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre9.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>9. Structures de Données</h3>
+            <p>Piles, files, listes chaînées. Comprendre les structures fondamentales.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre10.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-chart-line"></i></div>
+            <h3>10. Complexité Algorithmique</h3>
+            <p>Notation O(), analyse du temps et de l'espace, comparer les algorithmes.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 18 exercices</span></div>
+        </a>
+    </div>
+
+    <!-- Features -->
+    <div class="features-grid reveal-on-scroll">
+        <div class="feature-item">
+            <i class="fas fa-gamepad"></i>
+            <h4>Gamifié</h4>
+            <p>XP, badges et niveaux pour rester motivé</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-brain"></i>
+            <h4>Mnémotechniques</h4>
+            <p>Astuces pour retenir les concepts clés</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-dumbbell"></i>
+            <h4>180 Exercices</h4>
+            <p>Guidés, QCM et glisser-déposer</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-terminal"></i>
+            <h4>Pseudocode + Pascal</h4>
+            <p>Algorithmes en pseudocode avec traduction Pascal</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-graduation-cap"></i>
+            <h4>Simulateur d'Examen</h4>
+            <p>Mode examen chronométré avec correction</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-download"></i>
+            <h4>Téléchargeable</h4>
+            <p>Export PDF, Markdown et texte brut</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- XP Bar -->
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gamification.js"></script>
+<script>
+    GameEngine.configure({
+        storageKey: 'b1_algo_progress',
+        badges: [
+            { id: 'first_step',    name: 'Premier Pas',       icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+            { id: 'explorer',      name: 'Explorateur',       icon: '🔍', desc: 'Termine 10 exercices', xp: 50 },
+            { id: 'ch1',           name: 'Variables OK',      icon: '📦', desc: 'Termine Variables & Types', xp: 20 },
+            { id: 'ch2',           name: 'Conditionnel',      icon: '🔀', desc: 'Termine les Conditions', xp: 20 },
+            { id: 'ch3',           name: 'Boucleur',          icon: '🔄', desc: 'Termine les Boucles', xp: 20 },
+            { id: 'ch4',           name: 'Tabuliste',         icon: '📊', desc: 'Termine les Tableaux', xp: 20 },
+            { id: 'ch5',           name: 'Modulaire',         icon: '🧩', desc: 'Termine Fonctions', xp: 25 },
+            { id: 'ch6',           name: 'Trieur',            icon: '📶', desc: 'Termine les Tris', xp: 25 },
+            { id: 'ch7',           name: 'Chercheur',         icon: '🔎', desc: 'Termine Recherche', xp: 25 },
+            { id: 'ch8',           name: 'Récursif',          icon: '♾️', desc: 'Termine Récursivité', xp: 30 },
+            { id: 'ch9',           name: 'Architecte',        icon: '🏗️', desc: 'Termine Structures', xp: 30 },
+            { id: 'ch10',          name: 'Analyste',          icon: '📈', desc: 'Termine Complexité', xp: 30 },
+            { id: 'quiz_king',     name: 'Roi du Quiz',       icon: '👑', desc: '50 QCM corrects', xp: 60 },
+            { id: 'streak_3',      name: 'Série de 3',        icon: '🔥', desc: '3 jours consécutifs', xp: 25 },
+            { id: 'streak_7',      name: 'Semaine Active',    icon: '⭐', desc: '7 jours consécutifs', xp: 50 },
+            { id: 'perfectionist', name: 'Perfectionniste',   icon: '💎', desc: '10 exercices parfaits', xp: 40 },
+            { id: 'half_way',      name: 'Mi-Parcours',       icon: '🎯', desc: '50% du cours terminé', xp: 35 },
+            { id: 'legend',        name: 'Légende Algo',      icon: '🏆', desc: '100% du cours terminé', xp: 100 }
+        ],
+        levels: [
+            { min: 0,   title: 'Débutant' },
+            { min: 30,  title: 'Apprenti Codeur' },
+            { min: 80,  title: 'Algorithmicien Jr.' },
+            { min: 150, title: 'Développeur Logique' },
+            { min: 250, title: 'Maître des Boucles' },
+            { min: 400, title: 'Architecte Algo' },
+            { min: 600, title: 'Légende Algorithmique' }
+        ],
+        tips: [
+            "Un algorithme = entrées → traitement → sorties. Pense toujours à ces 3 parties ! 📋",
+            "Variable = boîte avec étiquette. Le type dit ce qu'on peut mettre dedans. 📦",
+            "SI (condition) ALORS action — c'est comme un feu rouge : rouge → stop, vert → passe ! 🚦",
+            "Boucle POUR = tu sais combien de fois. TANT QUE = tu ne sais pas. 🔄",
+            "Tableau = casier numéroté. L'indice commence à 0 (ou 1 en Pascal) ! 🗄️",
+            "Fonction = machine : tu mets des ingrédients, elle donne un résultat. 🎰",
+            "Tri à bulles : les plus gros remontent comme des bulles dans l'eau. 🫧",
+            "Recherche dichotomique : comme chercher un mot dans le dictionnaire — tu ouvres au milieu ! 📖",
+            "Récursivité : la fonction s'appelle elle-même. Toujours un cas de base sinon boucle infinie ! ♾️",
+            "O(1) < O(log n) < O(n) < O(n log n) < O(n²) — du plus rapide au plus lent. ⚡"
+        ]
+    });
+    GameEngine.init();
+</script>
+</body>
+</html>

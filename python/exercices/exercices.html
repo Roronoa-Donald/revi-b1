@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}
+    .ex-toolbar{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:1.2rem 0}
+    .ex-toolbar button{padding:.4rem .9rem;border-radius:20px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer;font-weight:600;font-size:.82rem;transition:.2s}
+    .ex-toolbar button:hover,.ex-toolbar button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .ex-search{max-width:500px;margin:1rem auto;position:relative}
+    .ex-search input{width:100%;padding:.7rem 1rem .7rem 2.5rem;border-radius:10px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:1rem}
+    .ex-search i{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+    .ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem;margin:1.5rem 0}
+    .ex-card{background:var(--card-bg);border-radius:14px;padding:1.5rem;border-left:4px solid var(--accent);box-shadow:var(--shadow);transition:.2s}
+    .ex-card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.15)}
+    .ex-card h4{margin:0 0 .4rem;font-size:1rem;color:var(--accent)}.ex-card p{margin:.3rem 0 .8rem;font-size:.94rem;line-height:1.5;color:var(--text)}
+    .ex-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.7rem}
+    .ex-tag{font-size:.7rem;padding:.2rem .5rem;border-radius:10px;font-weight:700}
+    .ex-tag.cat{background:var(--accent-glow);color:var(--accent)}.ex-tag.lvl-1{background:rgba(16,185,129,.15);color:#10b981}.ex-tag.lvl-2{background:rgba(245,158,11,.15);color:#f59e0b}.ex-tag.lvl-3{background:rgba(239,68,68,.15);color:#ef4444}
+    .ex-solution{display:none;margin-top:.8rem;background:var(--bg);border-radius:8px;padding:1rem;font-family:'JetBrains Mono',monospace;font-size:.88rem;white-space:pre-wrap;line-height:1.6;border:1px solid var(--border)}
+    .ex-toggle{padding:.4rem .8rem;border-radius:8px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-size:.8rem;font-weight:600;transition:.2s}
+    .ex-toggle:hover{background:var(--accent);color:#fff}
+    .ex-count{text-align:center;color:var(--text-muted);font-weight:600;margin:.5rem 0}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="../chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="../chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="../chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="../chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>🐍 Banque <span class="highlight">d'Exercices</span></h1>
+    <p>24 exercices classés par chapitre et difficulté avec solutions détaillées.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="ex-search"><i class="fas fa-search"></i><input type="text" id="ex-search" placeholder="Rechercher un exercice…"></div>
+    <div class="ex-toolbar" id="cat-bar"></div>
+    <div class="ex-toolbar" id="lvl-bar"></div>
+    <div class="ex-count" id="ex-count"></div>
+    <div class="ex-grid" id="ex-grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXERCISES=[
+// Ch.1 Variables & Types
+{cat:"Variables",lvl:1,title:"Affichage formaté",desc:"Demandez prénom et âge, affichez une phrase avec f-string.",sol:'prenom = input("Prénom : ")\nage = input("Âge : ")\nprint(f"Bonjour {prenom}, tu as {age} ans !")'},
+{cat:"Variables",lvl:1,title:"Calculs de base",desc:"Calculez le périmètre et l\'aire d\'un rectangle (longueur et largeur saisies).",sol:'l = float(input("Longueur : "))\nw = float(input("Largeur : "))\nprint(f"Périmètre : {2*(l+w)}")\nprint(f"Aire : {l*w}")'},
+{cat:"Variables",lvl:2,title:"Convertisseur température",desc:"Convertissez des Celsius en Fahrenheit et inversement.",sol:'c = float(input("Celsius : "))\nf = c * 9/5 + 32\nprint(f"{c}°C = {f}°F")'},
+// Ch.2 Conditions
+{cat:"Conditions",lvl:1,title:"Pair ou impair",desc:"Dites si un nombre saisi est pair ou impair.",sol:'n = int(input("Nombre : "))\nif n % 2 == 0:\n    print("Pair")\nelse:\n    print("Impair")'},
+{cat:"Conditions",lvl:2,title:"Calculatrice simple",desc:"Demandez 2 nombres et un opérateur (+,-,*,/), affichez le résultat.",sol:'a = float(input("a : "))\nb = float(input("b : "))\nop = input("Opérateur (+,-,*,/) : ")\nif op == "+": print(a+b)\nelif op == "-": print(a-b)\nelif op == "*": print(a*b)\nelif op == "/": print(a/b if b!=0 else "Division par 0")\nelse: print("Opérateur inconnu")'},
+{cat:"Conditions",lvl:3,title:"Validateur de mot de passe",desc:"Vérifiez qu\'un mot de passe a ≥8 chars, une majuscule, un chiffre.",sol:'mdp = input("Mot de passe : ")\nok_len = len(mdp) >= 8\nok_up = any(c.isupper() for c in mdp)\nok_dig = any(c.isdigit() for c in mdp)\nif ok_len and ok_up and ok_dig:\n    print("Mot de passe valide !")\nelse:\n    print("Trop faible !")'},
+// Ch.3 Boucles
+{cat:"Boucles",lvl:1,title:"Table de multiplication",desc:"Affichez la table de multiplication d\'un nombre donné (1 à 10).",sol:'n = int(input("Nombre : "))\nfor i in range(1, 11):\n    print(f"{n} x {i} = {n*i}")'},
+{cat:"Boucles",lvl:2,title:"Deviner un nombre",desc:"Le programme choisit un nombre entre 1 et 100, l\'utilisateur devine.",sol:'import random\nsecret = random.randint(1, 100)\nwhile True:\n    essai = int(input("Devinez : "))\n    if essai < secret: print("Plus grand !")\n    elif essai > secret: print("Plus petit !")\n    else:\n        print("Bravo !"); break'},
+{cat:"Boucles",lvl:3,title:"Triangle de Pascal",desc:"Affichez les n premières lignes du triangle de Pascal.",sol:'n = int(input("Lignes : "))\ntri = [[1]]\nfor i in range(1, n):\n    row = [1]\n    for j in range(1, i):\n        row.append(tri[i-1][j-1]+tri[i-1][j])\n    row.append(1)\n    tri.append(row)\nfor r in tri:\n    print(r)'},
+// Ch.4 Fonctions
+{cat:"Fonctions",lvl:1,title:"Fonction saluer",desc:"Créez une fonction saluer(nom) qui retourne 'Bonjour, nom !'.",sol:'def saluer(nom):\n    return f"Bonjour, {nom} !"\n\nprint(saluer("Alice"))'},
+{cat:"Fonctions",lvl:2,title:"Fibonacci",desc:"Écrivez une fonction fibonacci(n) qui retourne la liste des n premiers termes.",sol:'def fibonacci(n):\n    fib = [0, 1]\n    for i in range(2, n):\n        fib.append(fib[-1] + fib[-2])\n    return fib[:n]\n\nprint(fibonacci(10))'},
+{cat:"Fonctions",lvl:3,title:"Décorateur chrono",desc:"Créez un décorateur qui mesure le temps d\'exécution d\'une fonction.",sol:'import time\ndef chrono(func):\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        print(f"Temps : {time.time()-start:.4f}s")\n        return result\n    return wrapper\n\n@chrono\ndef test():\n    sum(range(1000000))\n\ntest()'},
+// Ch.5 Listes & Tuples
+{cat:"Listes",lvl:1,title:"Moyenne de notes",desc:"Demandez des notes, stockez en liste, calculez la moyenne.",sol:'notes = []\nwhile True:\n    n = input("Note (ou q) : ")\n    if n == "q": break\n    notes.append(float(n))\nprint(f"Moyenne : {sum(notes)/len(notes):.2f}")'},
+{cat:"Listes",lvl:2,title:"Tri par sélection",desc:"Implémentez le tri par sélection sur une liste.",sol:'def tri_selection(lst):\n    for i in range(len(lst)):\n        mini = i\n        for j in range(i+1, len(lst)):\n            if lst[j] < lst[mini]: mini = j\n        lst[i], lst[mini] = lst[mini], lst[i]\n    return lst\n\nprint(tri_selection([64,25,12,22,11]))'},
+{cat:"Listes",lvl:3,title:"Matrice transposée",desc:"Transposez une matrice (liste de listes) avec une compréhension.",sol:'mat = [[1,2,3],[4,5,6],[7,8,9]]\ntrans = [[row[i] for row in mat] for i in range(len(mat[0]))]\nfor r in trans: print(r)'},
+// Ch.6 Dicts & Sets
+{cat:"Dicts",lvl:1,title:"Annuaire simple",desc:"Créez un annuaire (dict) avec ajout, recherche, affichage.",sol:'annuaire = {}\nwhile True:\n    choix = input("(a)jouter (r)echercher (q)uitter : ")\n    if choix == "a":\n        nom = input("Nom : ")\n        tel = input("Tél : ")\n        annuaire[nom] = tel\n    elif choix == "r":\n        nom = input("Nom : ")\n        print(annuaire.get(nom, "Introuvable"))\n    elif choix == "q": break'},
+{cat:"Dicts",lvl:2,title:"Compteur de mots",desc:"Comptez les occurrences de chaque mot dans un texte.",sol:'texte = input("Texte : ")\nmots = texte.lower().split()\ncompteur = {}\nfor m in mots:\n    compteur[m] = compteur.get(m, 0) + 1\nfor m, c in sorted(compteur.items(), key=lambda x: -x[1]):\n    print(f"{m}: {c}")'},
+{cat:"Dicts",lvl:3,title:"Opérations ensemblistes",desc:"Trouvez les étudiants communs à 2 cours avec des sets.",sol:'maths = {"Alice","Bob","Clara","David"}\ninfo = {"Bob","Clara","Eve","Frank"}\nprint("Communs :", maths & info)\nprint("Tous :", maths | info)\nprint("Maths seul :", maths - info)'},
+// Ch.7 Fichiers
+{cat:"Fichiers",lvl:1,title:"Écrire et relire",desc:"Écrivez 5 noms dans un fichier, puis relisez-les.",sol:'noms = ["Alice","Bob","Clara","David","Eve"]\nwith open("noms.txt","w") as f:\n    for n in noms: f.write(n+"\\n")\nwith open("noms.txt") as f:\n    for ligne in f: print(ligne.strip())'},
+{cat:"Fichiers",lvl:2,title:"Carnet de notes CSV",desc:"Sauvegardez et chargez des notes depuis un fichier CSV.",sol:'import csv\nwith open("notes.csv","w",newline="") as f:\n    w = csv.writer(f)\n    w.writerow(["Nom","Note"])\n    w.writerow(["Alice",15])\nwith open("notes.csv") as f:\n    for row in csv.reader(f): print(row)'},
+{cat:"Fichiers",lvl:3,title:"Gestionnaire JSON",desc:"Créez un mini-gestionnaire de tâches sauvegardé en JSON.",sol:'import json, os\nFILE = "tasks.json"\ndef load():\n    if os.path.exists(FILE):\n        with open(FILE) as f: return json.load(f)\n    return []\ndef save(t):\n    with open(FILE,"w") as f: json.dump(t,f,indent=2)\ntasks = load()\ntasks.append({"nom":"Étudier","fait":False})\nsave(tasks)\nprint(tasks)'},
+// Ch.8 Modules & POO
+{cat:"POO",lvl:1,title:"Classe Rectangle",desc:"Créez une classe Rectangle avec aire() et perimetre().",sol:'class Rectangle:\n    def __init__(self, l, w):\n        self.l = l\n        self.w = w\n    def aire(self): return self.l * self.w\n    def perimetre(self): return 2*(self.l+self.w)\n\nr = Rectangle(5, 3)\nprint(f"Aire : {r.aire()}, Périmètre : {r.perimetre()}")'},
+{cat:"POO",lvl:2,title:"Héritage véhicules",desc:"Créez Vehicule (parent) → Voiture et Moto (enfants).",sol:'class Vehicule:\n    def __init__(self, marque, vitesse):\n        self.marque = marque\n        self.vitesse = vitesse\n    def info(self):\n        return f"{self.marque} ({self.vitesse} km/h)"\n\nclass Voiture(Vehicule):\n    def __init__(self, marque, vitesse, portes):\n        super().__init__(marque, vitesse)\n        self.portes = portes\n\nclass Moto(Vehicule):\n    def __init__(self, marque, vitesse, type_):\n        super().__init__(marque, vitesse)\n        self.type = type_\n\nv = Voiture("Peugeot",180,5)\nm = Moto("Yamaha",200,"Sport")\nprint(v.info(), m.info())'},
+{cat:"POO",lvl:3,title:"Système bancaire",desc:"Créez CompteBancaire avec dépôt, retrait, historique.",sol:'class CompteBancaire:\n    def __init__(self, titulaire, solde=0):\n        self.titulaire = titulaire\n        self.solde = solde\n        self.historique = []\n    def deposer(self, m):\n        self.solde += m\n        self.historique.append(f"+{m}€")\n    def retirer(self, m):\n        if m > self.solde: raise ValueError("Solde insuffisant")\n        self.solde -= m\n        self.historique.append(f"-{m}€")\n    def releve(self):\n        print(f"Compte de {self.titulaire}: {self.solde}€")\n        for h in self.historique: print(f"  {h}")\n\nc = CompteBancaire("Alice",100)\nc.deposer(50)\nc.retirer(30)\nc.releve()'}
+];
+
+const CATS=[...new Set(EXERCISES.map(e=>e.cat))];let activeCat='all',activeLvl='all',searchTerm='';
+
+function render(){
+    let filtered=EXERCISES.filter(e=>{
+        if(activeCat!=='all'&&e.cat!==activeCat)return false;
+        if(activeLvl!=='all'&&e.lvl!==parseInt(activeLvl))return false;
+        if(searchTerm&&!e.title.toLowerCase().includes(searchTerm)&&!e.desc.toLowerCase().includes(searchTerm))return false;
+        return true;
+    });
+    document.getElementById('ex-count').textContent=`${filtered.length} exercice${filtered.length>1?'s':''}`;
+    const grid=document.getElementById('ex-grid');
+    grid.innerHTML=filtered.map((e,i)=>`<div class="ex-card"><div class="ex-meta"><span class="ex-tag cat">${e.cat}</span><span class="ex-tag lvl-${e.lvl}">${['','⭐ Facile','⭐⭐ Moyen','⭐⭐⭐ Difficile'][e.lvl]}</span></div><h4>${e.title}</h4><p>${e.desc}</p><button class="ex-toggle" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';this.textContent=this.nextElementSibling.style.display==='block'?'Masquer':'Solution'">Solution</button><div class="ex-solution">${e.sol}</div></div>`).join('');
+}
+
+function buildBars(){
+    const cb=document.getElementById('cat-bar');
+    cb.innerHTML='<button class="active" onclick="setCat(\'all\',this)">Tous</button>'+CATS.map(c=>`<button onclick="setCat('${c}',this)">${c}</button>`).join('');
+    const lb=document.getElementById('lvl-bar');
+    lb.innerHTML='<button class="active" onclick="setLvl(\'all\',this)">Tous niveaux</button><button onclick="setLvl(1,this)">⭐ Facile</button><button onclick="setLvl(2,this)">⭐⭐ Moyen</button><button onclick="setLvl(3,this)">⭐⭐⭐ Difficile</button>';
+}
+
+function setCat(c,btn){activeCat=c;document.querySelectorAll('#cat-bar button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+function setLvl(l,btn){activeLvl=l;document.querySelectorAll('#lvl-bar button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+document.getElementById('ex-search').addEventListener('input',e=>{searchTerm=e.target.value.toLowerCase();render()});
+buildBars();render();
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes mémoire | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}.cards-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.cards-toolbar button{padding:.45rem 1rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;transition:.2s}.cards-toolbar button.active,.cards-toolbar button:hover{background:var(--accent);color:#fff}.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin:2rem 0}.flashcard{perspective:900px;height:220px;cursor:pointer}.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.1)}.flashcard-front{background:var(--card-bg);border:2px solid var(--accent)}.flashcard-back{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;transform:rotateY(180deg)}.flashcard-front h3{font-size:1rem;margin:0;line-height:1.5}.flashcard-back p{font-size:.93rem;margin:0;line-height:1.5}.flashcard-tag{position:absolute;top:.7rem;right:.7rem;font-size:.7rem;padding:.2rem .6rem;border-radius:99px;background:var(--accent-glow);color:var(--accent);font-weight:700}.cards-counter{text-align:center;margin:1rem 0;font-size:.95rem;opacity:.7}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html" class="active">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html" class="active"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Flash Cards</div>
+    <h1>🔧 Cartes <span class="highlight">mémoire</span></h1>
+    <p>30 cartes interactives — cliquez pour retourner.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="cards-toolbar" id="toolbar"></div>
+    <div class="cards-counter" id="counter"></div>
+    <div class="flashcard-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const CARDS=[
+// ─── Modèle relationnel ───
+{q:"Qu'est-ce qu'une relation en BD ?",a:"Une table. Colonnes = attributs, lignes = tuples, types = domaines.",tag:"Modèle"},
+{q:"R.A.T.D. signifie ?",a:"Relation, Attribut, Tuple, Domaine — les 4 fondamentaux du modèle relationnel.",tag:"Modèle"},
+{q:"Clé primaire : 3 propriétés U.N.I. ?",a:"Unique (pas de doublon), Non-null (jamais vide), Immuable (ne change pas).",tag:"Modèle"},
+{q:"Clé étrangère (FK) ?",a:"Attribut qui référence la PK d'une autre table, créant un lien entre les deux.",tag:"Modèle"},
+{q:"Relation M:N → implémentation ?",a:"Table de jonction dont la PK composée = les PK des deux entités liées.",tag:"Modèle"},
+// ─── Algèbre relationnelle ───
+{q:"σ (sigma) = ?",a:"Sélection : filtre les LIGNES selon une condition. SQL → WHERE.",tag:"Algèbre"},
+{q:"π (pi) = ?",a:"Projection : sélectionne des COLONNES. SQL → SELECT col1, col2.",tag:"Algèbre"},
+{q:"Jointure = ?",a:"R1 ⋈_θ R2 = σ_θ(R1 × R2). Produit cartésien + sélection sur condition.",tag:"Algèbre"},
+{q:"U.I.D.P. = ?",a:"Union (∪), Intersection (∩), Différence (−), Produit cartésien (×).",tag:"Algèbre"},
+{q:"Division R1 ÷ R2 = ?",a:"Tuples de R1 associés à TOUS les tuples de R2. Répond à « pour tout ».",tag:"Algèbre"},
+// ─── SQL base ───
+{q:"D.M.C. = ?",a:"DDL (Create/Alter/Drop), DML (Select/Insert/Update/Delete), DCL (Grant/Revoke).",tag:"SQL Base"},
+{q:"C.R.U.D. = ?",a:"Create → INSERT, Read → SELECT, Update → UPDATE, Delete → DELETE.",tag:"SQL Base"},
+{q:"WHERE email = NULL correct ?",a:"NON ! Il faut IS NULL. Rien n'est = à NULL, même pas NULL.",tag:"SQL Base"},
+{q:"DELETE vs TRUNCATE vs DROP ?",a:"DELETE = supprime lignes (WHERE possible). TRUNCATE = vide table. DROP = supprime table entière.",tag:"SQL Base"},
+{q:"LIKE 'D%' ?",a:"Sélectionne ce qui commence par D. % = 0+ caractères. _ = 1 caractère exactement.",tag:"SQL Base"},
+// ─── SQL avancé ───
+{q:"INNER JOIN vs LEFT JOIN ?",a:"INNER = correspondances seulement. LEFT = tout à gauche + correspondances (NULL sinon).",tag:"SQL Avancé"},
+{q:"C.S.A.M.M. = ?",a:"COUNT, SUM, AVG, MAX, MIN — les 5 fonctions d'agrégation.",tag:"SQL Avancé"},
+{q:"WHERE vs HAVING ?",a:"WHERE filtre lignes AVANT GROUP BY. HAVING filtre groupes APRÈS GROUP BY.",tag:"SQL Avancé"},
+{q:"Ordre d'exécution SQL ?",a:"FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.",tag:"SQL Avancé"},
+{q:"COALESCE(NULL, NULL, 'X') ?",a:"Retourne 'X' — premier argument non-NULL de la liste.",tag:"SQL Avancé"},
+// ─── Normalisation ───
+{q:"Pourquoi normaliser ?",a:"Éliminer les anomalies I.M.S. : Insertion, Mise à jour, Suppression.",tag:"Normalisation"},
+{q:"1NF ?",a:"Valeurs atomiques (pas de listes dans une cellule) + PK définie.",tag:"Normalisation"},
+{q:"2NF ?",a:"1NF + pas de dépendance partielle (tous les attributs non-clé dépendent de TOUTE la clé).",tag:"Normalisation"},
+{q:"3NF = « la clé, toute la clé… » ?",a:"…rien que la clé ! Pas de DF transitive (non-clé → non-clé est interdit).",tag:"Normalisation"},
+{q:"BCNF ?",a:"Tout déterminant (côté gauche d'une DF) doit être une clé candidate. Plus strict que 3NF.",tag:"Normalisation"},
+// ─── Conception ───
+{q:"E.A.R. = ?",a:"Entité, Attribut, Relation — les 3 composants du schéma E-R.",tag:"Conception"},
+{q:"Comment convertir 1:N en relationnel ?",a:"FK dans la table côté N (le 'plusieurs').",tag:"Conception"},
+{q:"E.R.D.U. = ?",a:"Entité, Référentielle, Domaine, Utilisateur — les 4 types de contraintes d'intégrité.",tag:"Conception"},
+{q:"A.C.L.P.N. = ?",a:"Analyse → Conceptuel (MCD) → Logique (MLD) → Physique (MPD) → Normaliser.",tag:"Conception"},
+{q:"MCD vs MLD ?",a:"MCD = schéma E-R (entités, relations, cardinalités). MLD = tables, colonnes, PK, FK.",tag:"Conception"}
+];
+const TAGS=["Tous",...[...new Set(CARDS.map(c=>c.tag))]];
+let activeTag="Tous";
+const toolbar=document.getElementById('toolbar'),grid=document.getElementById('grid'),counter=document.getElementById('counter');
+function render(){
+    const f=activeTag==="Tous"?CARDS:CARDS.filter(c=>c.tag===activeTag);
+    counter.textContent=f.length+' carte'+(f.length>1?'s':'');
+    grid.innerHTML=f.map(c=>`<div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-tag">${c.tag}</span><h3>${c.q}</h3></div><div class="flashcard-back"><p>${c.a}</p></div></div></div>`).join('');
+}
+toolbar.innerHTML=TAGS.map(t=>`<button class="${t===activeTag?'active':''}" onclick="activeTag='${t}';document.querySelectorAll('.cards-toolbar button').forEach(b=>b.classList.remove('active'));this.classList.add('active');render();">${t}</button>`).join('');
+render();
+</script>
+</body>
+</html>

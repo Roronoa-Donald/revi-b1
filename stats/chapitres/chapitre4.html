@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — Dispersion | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-arrows-alt-h"></i> Chapitre 4</div>
+    <h1>📊 Mesures de <span class="highlight">dispersion</span></h1>
+    <p>Étendue, variance, écart-type, quartiles et boîte à moustaches.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-question-circle"></i> Pourquoi la dispersion ?</h2>
+    <div class="concept-card">
+        <h4>🎯 Analogie du tir à l'arc</h4>
+        <p>Deux archers ont la même moyenne (centre de la cible). Mais l'un groupe ses flèches (faible dispersion), l'autre les éparpille (forte dispersion). <strong>La moyenne seule ne suffit pas !</strong> Il faut mesurer l'étalement des données.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-ruler-horizontal"></i> L'étendue</h2>
+    <div class="code-block"><pre><code>Étendue = max − min
+
+Exemple : 3, 5, 7, 9, 15
+Étendue = 15 − 3 = 12</code></pre></div>
+    <div class="warning-box"><strong>⚠️ Limitation :</strong> L'étendue n'utilise que 2 valeurs (min et max). Un seul outlier la déforme complètement.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-calculator"></i> Variance et Écart-type</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique V.É.R. — Variance, Écart-type, Racine</h4>
+        <p><strong>V</strong>ariance (σ²) = moyenne des carrés des écarts à la moyenne<br>
+        <strong>É</strong>cart-type (σ) = racine carrée de la variance<br>
+        <strong>R</strong>elation : σ = √V (l'écart-type a la même unité que les données !)</p>
+    </div>
+    <div class="code-block"><pre><code>Variance (population) :
+σ² = Σ(xᵢ − x̄)² / N = [Σxᵢ² / N] − x̄²
+
+Écart-type :
+σ = √σ²
+
+Formule de König (plus rapide) :
+σ² = (Σxᵢ²/N) − x̄²  ← "Moyenne des carrés − carré de la moyenne"</code></pre></div>
+
+    <h3>Exemple pas à pas</h3>
+    <p>Données : 4, 8, 6, 10, 2 → x̄ = 30/5 = <strong>6</strong></p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>xᵢ</th><th>xᵢ − x̄</th><th>(xᵢ − x̄)²</th></tr></thead>
+        <tbody>
+            <tr><td>4</td><td>−2</td><td>4</td></tr>
+            <tr><td>8</td><td>+2</td><td>4</td></tr>
+            <tr><td>6</td><td>0</td><td>0</td></tr>
+            <tr><td>10</td><td>+4</td><td>16</td></tr>
+            <tr><td>2</td><td>−4</td><td>16</td></tr>
+            <tr><td colspan="2"><strong>Total</strong></td><td><strong>40</strong></td></tr>
+        </tbody>
+    </table></div>
+    <p>σ² = 40/5 = <strong>8</strong> → σ = √8 ≈ <strong>2.83</strong></p>
+    <div class="tip-box"><strong>💡 Formule de König :</strong> Σxᵢ² = 16+64+36+100+4 = 220. σ² = 220/5 − 6² = 44 − 36 = <strong>8</strong> ✓ Plus rapide sans calculer les écarts !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-percentage"></i> Quartiles et IQR</h2>
+    <div class="concept-card">
+        <h4>🍰 Analogie du gâteau en 4 parts</h4>
+        <p>Les quartiles découpent les données rangées en <strong>4 parts égales</strong> :<br>
+        <strong>Q1</strong> = 25% (un quart) | <strong>Q2</strong> = 50% (= médiane) | <strong>Q3</strong> = 75% (trois quarts)</p>
+    </div>
+    <div class="code-block"><pre><code>IQR (Interquartile Range) = Q3 − Q1
+
+L'IQR mesure l'étalement des 50% centraux des données.
+Il est résistant aux valeurs extrêmes (outliers).
+
+Détection d'outliers :
+Valeur < Q1 − 1.5×IQR  → outlier bas
+Valeur > Q3 + 1.5×IQR  → outlier haut</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-box"></i> Boîte à moustaches (Box Plot)</h2>
+    <div class="concept-card">
+        <h4>📦 Les 5 valeurs clés</h4>
+        <p>Une boîte à moustaches affiche 5 valeurs : <strong>min — Q1 — Q2(Me) — Q3 — max</strong></p>
+        <div class="code-block"><pre><code>min ──────┤    Q1 ╔══════╤══════╗ Q3    ├────── max
+                 ║      │ Me  ║
+                 ╚══════╧══════╝
+          moustache   la boîte    moustache</code></pre></div>
+        <p>La <strong>boîte</strong> contient 50% des données (de Q1 à Q3). La <strong>médiane</strong> est le trait à l'intérieur. Les <strong>moustaches</strong> s'étendent jusqu'aux min/max (ou 1.5×IQR).</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 4</h4>
+        <ul>
+            <li>Étendue = max − min (simple mais fragile)</li>
+            <li><strong>V.É.R.</strong> : Variance (σ² = Σ(xᵢ−x̄)²/N), Écart-type (σ = √σ²), Relation σ=√V</li>
+            <li>König : σ² = (Σxᵢ²/N) − x̄²</li>
+            <li>Q1 (25%), Q2 = médiane (50%), Q3 (75%)</li>
+            <li>IQR = Q3 − Q1 (résistant aux outliers)</li>
+            <li>Boîte à moustaches : min — Q1 — Me — Q3 — max</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre3.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Tendance centrale</a>
+    <a href="chapitre5.html" class="next-chapter">Graphiques <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Calculez la variance et l'écart-type de : 2, 4, 6, 8, 10.",hints:["x̄ = 30/5 = 6","Σ(xᵢ−x̄)² = ?"],answer:"x̄=6. Écarts²: 16+4+0+4+16=40. σ²=40/5=8. σ=√8≈2.83."},
+        {q:"Utilisez la formule de König pour le même jeu de données.",hints:["Σxᵢ² = 4+16+36+64+100","(Σxᵢ²/N) − x̄²"],answer:"Σxᵢ²=220. σ²=220/5−6²=44−36=8. σ=√8≈2.83. ✓"},
+        {q:"Trouvez Q1, Q2, Q3 de : 1, 2, 3, 4, 5, 6, 7, 8.",hints:["Rangez (déjà fait)","Q2 = médiane"],answer:"Q2=(4+5)/2=4.5. Q1=médiane de {1,2,3,4}=(2+3)/2=2.5. Q3=médiane de {5,6,7,8}=(6+7)/2=6.5. IQR=6.5−2.5=4."},
+        {q:"Quelle est l'étendue de : 15, 22, 8, 35, 12 ?",hints:["max − min"],answer:"max=35, min=8. Étendue=35−8=27."},
+        {q:"Série A: 5,5,5,5,5. Série B: 1,3,5,7,9. Même moyenne ? Même dispersion ?",hints:["Calculez x̄ et σ pour chaque"],answer:"Même moyenne (5). Série A: σ²=0 (aucune dispersion). Série B: σ²=8, σ≈2.83. Les moyennes sont identiques mais la dispersion est très différente."}
+    ],
+    quiz:[
+        {type:"mcq",q:"La variance se calcule par :",options:["Σ(xᵢ−x̄)/N","Σ(xᵢ−x̄)²/N","max−min","Q3−Q1"],correct:1},
+        {type:"mcq",q:"L'écart-type est :",options:["Le carré de la variance","La racine de la variance","La moyenne des écarts","L'étendue / 2"],correct:1},
+        {type:"mcq",q:"La formule de König est :",options:["σ²=(Σxᵢ²/N)−x̄²","σ²=Σxᵢ/N","σ²=max−min","σ²=Q3−Q1"],correct:0},
+        {type:"mcq",q:"IQR signifie :",options:["Q1×Q3","Q3−Q1","Q3+Q1","Q3/Q1"],correct:1},
+        {type:"mcq",q:"La boîte à moustaches montre :",options:["4 valeurs","5 valeurs","3 valeurs","7 valeurs"],correct:1},
+        {type:"mcq",q:"L'étendue de 2, 5, 8, 12, 20 est :",options:["10","18","8","22"],correct:1},
+        {type:"mcq",q:"Un outlier (par la règle IQR) est une valeur :",options:["Inférieure à la médiane","Supérieure à la moyenne","En dehors de [Q1−1.5×IQR ; Q3+1.5×IQR]","Égale au mode"],correct:2},
+        {type:"qa",q:"Pourquoi élève-t-on au carré les écarts dans la variance ?",answer:"Pour éliminer les signes négatifs (les écarts positifs et négatifs s'annuleraient sinon). Le carré donne plus de poids aux grands écarts."},
+        {type:"qa",q:"Pourquoi l'écart-type est-il plus pratique que la variance ?",answer:"L'écart-type a la même unité que les données (ex: cm), tandis que la variance est en unités² (cm²)."},
+        {type:"qa",q:"Quand la variance vaut 0, que signifie-t-il ?",answer:"Toutes les valeurs sont identiques (aucune dispersion). Toutes les données = la moyenne."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque mesure à sa propriété :",pairs:[["Étendue","max − min"],["Variance","Moyenne des écarts²"],["Écart-type","√Variance"],["IQR","Q3 − Q1"]]},
+        {instruction:"Boîte à moustaches — 5 valeurs :",pairs:[["1re valeur","min"],["2e valeur","Q1"],["3e valeur","Médiane"],["4e valeur","Q3"],["5e valeur","max"]]},
+        {instruction:"Résistant ou Sensible aux outliers ?",pairs:[["Étendue","Sensible"],["Moyenne","Sensible"],["Médiane","Résistant"],["IQR","Résistant"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

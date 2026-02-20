@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Structures | C/C++ B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre4.html">Ch.4</a></li><li><a href="chapitre5.html">Ch.5</a></li>
+        <li><a href="chapitre6.html" class="active">Ch.6</a></li><li><a href="chapitre7.html">Ch.7</a></li>
+        <li><a href="formules.html">Formules</a></li><li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-cubes"></i> Chapitre 6</div>
+    <h1>⚡ Les <span class="highlight">Structures</span></h1>
+    <p>Regrouper des données de types différents dans un seul « paquet » : struct, typedef, tableaux de structures.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ 6.1 Qu'est-ce qu'une structure ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="definition">
+    <h2><i class="fas fa-cubes"></i> 6.1 — Qu'est-ce qu'une structure ?</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — La carte d'identité</div>
+        <p>Une carte d'identité regroupe des informations de <strong>types différents</strong> : nom (texte), date de naissance (date), numéro (entier), photo (image). Un <code>struct</code> fait la même chose en C : il regroupe plusieurs variables de types différents sous un seul nom.</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>📦 Définition</h4>
+        <p>Une <strong>structure</strong> (<code>struct</code>) est un type de donnée personnalisé qui regroupe plusieurs variables (appelées <strong>champs</strong> ou <strong>membres</strong>) de types éventuellement différents.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Déclaration d'une structure</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Définition du modèle (type)
+struct Etudiant {
+    char nom[50];
+    int age;
+    float moyenne;
+};
+
+// Déclaration d'une variable de type struct Etudiant
+struct Etudiant e1;
+
+// Initialisation directe
+struct Etudiant e2 = {"Alice", 20, 15.5};
+
+// Accès aux champs avec le point .
+strcpy(e1.nom, "Bob");
+e1.age = 19;
+e1.moyenne = 12.75;
+
+printf("%s a %d ans (moy: %.2f)\n", e1.nom, e1.age, e1.moyenne);
+// Bob a 19 ans (moy: 12.75)</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — « Le point ouvre le champ »</div>
+        <p>Pour accéder à un champ : <code>variable<strong>.</strong>champ</code>. Le point (<code>.</code>) est comme une clé qui ouvre le bon tiroir de la boîte.</p>
+    </div>
+</section>
+
+<!-- ═══════════════ 6.2 typedef ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="typedef">
+    <h2><i class="fas fa-tag"></i> 6.2 — typedef : simplifier les noms</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le surnom</div>
+        <p><code>typedef</code> donne un <strong>surnom</strong> à un type. Au lieu d'écrire « Monsieur Jean-Pierre Dupont-Martin » à chaque fois, on dit juste « Jean ». Pareil : au lieu de <code>struct Etudiant</code>, on peut écrire juste <code>Etudiant</code>.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>typedef struct</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Sans typedef : répéter "struct" partout
+struct Etudiant e1;  // struct obligatoire
+
+// Avec typedef : le surnom suffit
+typedef struct {
+    char nom[50];
+    int age;
+    float moyenne;
+} Etudiant;  // ← Le surnom !
+
+Etudiant e1 = {"Alice", 20, 15.5};  // Plus besoin de "struct" !
+Etudiant e2;  // Beaucoup plus propre</code></pre></div>
+
+    <div class="tip-box">
+        <strong>Convention :</strong> En C, on nomme les types créés avec typedef en <strong>PascalCase</strong> (première lettre majuscule) : <code>Etudiant</code>, <code>Point</code>, <code>Voiture</code>.
+    </div>
+</section>
+
+<!-- ═══════════════ 6.3 Tableaux de structures ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="tableau-struct">
+    <h2><i class="fas fa-th-large"></i> 6.3 — Tableaux de structures</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le registre scolaire</div>
+        <p>Un tableau de structures est comme un <strong>registre scolaire</strong> : chaque ligne est un élève (une structure) avec son nom, son âge, ses notes. Le registre = le tableau, chaque fiche = une structure.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Tableau de structures</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>typedef struct {
+    char nom[30];
+    float note;
+} Etudiant;
+
+#define N 3
+Etudiant promo[N] = {
+    {"Alice", 16.5},
+    {"Bob", 12.0},
+    {"Charlie", 14.75}
+};
+
+// Afficher toute la promo
+for (int i = 0; i < N; i++) {
+    printf("%s : %.2f\n", promo[i].nom, promo[i].note);
+}
+
+// Trouver le meilleur élève
+int best = 0;
+for (int i = 1; i < N; i++) {
+    if (promo[i].note > promo[best].note)
+        best = i;
+}
+printf("Meilleur : %s (%.2f)\n", promo[best].nom, promo[best].note);</code></pre></div>
+</section>
+
+<!-- ═══════════════ 6.4 Structures et fonctions ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="struct-fonctions">
+    <h2><i class="fas fa-exchange-alt"></i> 6.4 — Passer une structure à une fonction</h2>
+
+    <div class="code-block"><div class="code-header"><span>Par valeur vs par pointeur</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>typedef struct {
+    char nom[50];
+    int age;
+} Personne;
+
+// Par VALEUR : copie la structure (ne modifie pas l'original)
+void afficher(Personne p) {
+    printf("%s (%d ans)\n", p.nom, p.age);
+}
+
+// Par POINTEUR : modifie l'original (plus efficace)
+void vieillir(Personne *p) {
+    p->age++;  // ← Notation FLÈCHE pour pointeur de structure !
+}
+
+int main() {
+    Personne alice = {"Alice", 20};
+    afficher(alice);        // Alice (20 ans)
+    vieillir(&amp;alice);
+    afficher(alice);        // Alice (21 ans) ← Modifié !
+    return 0;
+}</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — Point vs Flèche</div>
+        <ul>
+            <li><code>objet<strong>.</strong>champ</code> → variable directe (le <strong>point</strong> est simple comme l'accès direct)</li>
+            <li><code>pointeur<strong>-></strong>champ</code> → via pointeur (la <strong>flèche</strong> suit le chemin vers l'adresse)</li>
+        </ul>
+        <p>En fait, <code>p->age</code> est un raccourci pour <code>(*p).age</code>.</p>
+    </div>
+</section>
+
+<!-- ═══════════════ 6.5 Structures imbriquées ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="imbriquees">
+    <h2><i class="fas fa-layer-group"></i> 6.5 — Structures imbriquées</h2>
+
+    <div class="code-block"><div class="code-header"><span>Structure dans une structure</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>typedef struct {
+    int jour, mois, annee;
+} Date;
+
+typedef struct {
+    char nom[50];
+    Date naissance;   // Structure imbriquée !
+    float moyenne;
+} Etudiant;
+
+Etudiant e = {"Alice", {15, 3, 2004}, 15.5};
+
+printf("%s, née le %02d/%02d/%d\n", 
+       e.nom, 
+       e.naissance.jour,    // Deux points successifs
+       e.naissance.mois, 
+       e.naissance.annee);
+// Alice, née le 15/03/2004</code></pre></div>
+
+    <div class="tip-box">
+        <strong>Conseil :</strong> Utilisez les structures imbriquées pour modéliser des données complexes. C'est un premier pas vers la <strong>programmation orientée objet</strong> que vous verrez en C++ (chapitre 8).
+    </div>
+</section>
+
+<!-- ═══════════════ 6.6 Énumérations ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="enum">
+    <h2><i class="fas fa-list-ol"></i> 6.6 — Complément : Énumérations (enum)</h2>
+
+    <div class="code-block"><div class="code-header"><span>enum — des constantes nommées</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Définir des valeurs symboliques
+typedef enum {
+    LUNDI, MARDI, MERCREDI, JEUDI,   // 0, 1, 2, 3
+    VENDREDI, SAMEDI, DIMANCHE        // 4, 5, 6
+} Jour;
+
+typedef enum {
+    ROUGE = 1,    // Valeur personnalisée
+    VERT = 2,
+    BLEU = 4
+} Couleur;
+
+Jour today = MERCREDI;
+if (today == SAMEDI || today == DIMANCHE)
+    printf("Week-end !\n");
+else
+    printf("Jour de cours !\n");  // ← Exécuté</code></pre></div>
+
+    <div class="info-box">
+        <strong>Utilité de enum :</strong> Au lieu d'écrire <code>if (jour == 3)</code> (que veut dire 3 ?), on écrit <code>if (jour == MERCREDI)</code> — beaucoup plus lisible !
+    </div>
+</section>
+
+<!-- ═══════════════ 6.7 Récap ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="recap">
+    <h2><i class="fas fa-clipboard-check"></i> 6.7 — Récapitulatif</h2>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Concept</th><th>Syntaxe</th><th>À retenir</th></tr></thead>
+            <tbody>
+                <tr><td>Définition</td><td><code>struct { … };</code></td><td>Regroupe des types différents</td></tr>
+                <tr><td>typedef</td><td><code>typedef struct{…} Nom;</code></td><td>Surnom (plus de « struct »)</td></tr>
+                <tr><td>Accès champ</td><td><code>e.nom</code></td><td>Le point ouvre le tiroir</td></tr>
+                <tr><td>Pointeur → champ</td><td><code>p->nom</code></td><td>Flèche = via pointeur</td></tr>
+                <tr><td>Tableau de struct</td><td><code>Etu promo[30];</code></td><td>Registre d'éléments</td></tr>
+                <tr><td>Imbrication</td><td><code>e.date.jour</code></td><td>Points successifs</td></tr>
+                <tr><td>enum</td><td><code>typedef enum{…} Nom;</code></td><td>Constantes nommées</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ EXERCICES ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exercices">
+    <h2><i class="fas fa-dumbbell"></i> Exercices du Chapitre 6</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre5.html" class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i> Chapitre 5</a>
+    <a href="chapitre7.html" class="nav-btn next-btn">Chapitre 7 <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_c_cpp_progress',badges:[{id:'first_step',name:'Premier Pas',icon:'🏁',desc:'Premier exercice',xp:10}],levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti C'},{min:80,title:'Développeur Jr.'},{min:150,title:'Codeur Confirmé'},{min:250,title:'Maître du C'},{min:400,title:'Guru C/C++'}]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        { q: "Définissez une structure Point (x, y) avec typedef et créez un point à (3, 7).", hints: ["typedef struct { float x,y; } Point;","Point p = {3, 7};"], answer: 'typedef struct { float x, y; } Point;\nPoint p = {3.0, 7.0};\nprintf("(%g, %g)\\n", p.x, p.y);' },
+        { q: "Créez un tableau de 3 étudiants (nom, note) et trouvez celui qui a la meilleure note.", hints: ["Boucle comparant promo[i].note","Gardez l'indice du meilleur"], answer: 'typedef struct{char nom[30];float note;}Etu;\nEtu p[3]={{"Alice",16},{"Bob",12},{"Eve",14}};\nint best=0;\nfor(int i=1;i<3;i++) if(p[i].note>p[best].note) best=i;\nprintf("Meilleur: %s\\n",p[best].nom);' },
+        { q: "Écrivez une fonction `afficherPersonne` qui reçoit un pointeur et utilise ->.", hints: ["void afficherPersonne(Personne *p)","p->nom, p->age"], answer: 'void afficherPersonne(Personne *p){\n    printf("%s (%d ans)\\n", p->nom, p->age);\n}' },
+        { q: "Créez une structure Date (j,m,a) et une structure Etudiant qui contient une Date.", hints: ["Imbrication : Date dans Etudiant","Accès : e.naissance.jour"], answer: 'typedef struct{int j,m,a;}Date;\ntypedef struct{char nom[30];Date naiss;}Etu;\nEtu e={"Bob",{5,12,2003}};\nprintf("%d/%d/%d\\n",e.naiss.j,e.naiss.m,e.naiss.a);' },
+        { q: "Créez un enum Couleur (ROUGE, VERT, BLEU) et affichez le nom selon la valeur.", hints: ["switch sur la couleur","case ROUGE: printf(...)"], answer: 'typedef enum{ROUGE,VERT,BLEU}Couleur;\nCouleur c=VERT;\nswitch(c){\n    case ROUGE:printf("Rouge");break;\n    case VERT:printf("Vert");break;\n    case BLEU:printf("Bleu");break;\n}' }
+    ],
+    quiz: [
+        { type:'mcq', q:"Le mot-clé pour regrouper des types différents :", options:["array","class","struct","union"], correct:2 },
+        { type:'mcq', q:"Pour accéder à un champ via un pointeur, on utilise :", options:[". (point)","-> (flèche)",":: (scope)","# (dièse)"], correct:1 },
+        { type:'mcq', q:"typedef sert à :", options:["Définir un type","Créer un alias de type","Déclarer une variable","Importer un fichier"], correct:1 },
+        { type:'qa', q:"p->age est un raccourci pour quel code ?", answer:"(*p).age" },
+        { type:'mcq', q:"enum LUNDI=0 par défaut. Que vaut MERCREDI ?", options:["1","2","3","Indéfini"], correct:1 },
+        { type:'mcq', q:"Un tableau de structures se déclare :", options:["struct Etu[10];","Etu promo[10];","Etu[10] promo;","array<Etu> promo;"], correct:1 },
+        { type:'qa', q:"Quelle est la différence entre struct et enum ?", answer:"struct regroupe des variables de types différents, enum définit des constantes entières nommées" },
+        { type:'mcq', q:"Pour passer une structure efficacement à une fonction :", options:["Par valeur (copie)","Par pointeur (&)","Par référence","Par tableau"], correct:1 },
+        { type:'mcq', q:"e.naissance.jour accède à :", options:["Un tableau 2D","Une structure imbriquée","Un pointeur de pointeur","Un enum"], correct:1 },
+        { type:'mcq', q:"Quelle convention de nommage pour les types typedef ?", options:["camelCase","snake_case","PascalCase","MAJUSCULES"], correct:2 }
+    ],
+    dragdrop: [
+        { instruction:"Associez la syntaxe à sa signification :", pairs:[
+            ["e.nom","Accès direct au champ"],["p->nom","Accès via pointeur"],["(*p).nom","Équivalent de p->nom"],["promo[i].note","Champ d'un élément du tableau"]
+        ]},
+        { instruction:"Associez le concept à son analogie :", pairs:[
+            ["struct","Carte d'identité"],["typedef","Surnom"],["enum","Liste de constantes"],["imbrication","Structure dans une structure"]
+        ]},
+        { instruction:"Associez le mot-clé au bon usage :", pairs:[
+            ["struct","Regrouper des données"],["typedef","Simplifier le nom"],["enum","Jours, couleurs, états"],["->","Pointeur vers champ"]
+        ]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

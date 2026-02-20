@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'examen | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}
+    .sim-setup{max-width:500px;margin:2rem auto;text-align:center}
+    .sim-setup select,.sim-setup button{padding:.7rem 1.5rem;border-radius:.5rem;border:1px solid var(--border);font-size:1rem;margin:.5rem}
+    .sim-setup button{background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:600}
+    .sim-timer{text-align:center;font-size:1.4rem;font-weight:700;color:var(--accent);margin:1rem 0}
+    .sim-question{background:var(--card-bg);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin:1.5rem auto;max-width:700px}
+    .sim-question h3{color:var(--accent);margin-bottom:1rem}
+    .sim-options{display:flex;flex-direction:column;gap:.5rem}
+    .sim-opt{padding:.8rem 1rem;border:2px solid var(--border);border-radius:.5rem;cursor:pointer;transition:.2s;background:var(--card-bg)}
+    .sim-opt:hover{border-color:var(--accent)}
+    .sim-opt.selected{border-color:var(--accent);background:var(--accent-glow)}
+    .sim-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15)}
+    .sim-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.15)}
+    .sim-nav{display:flex;justify-content:center;gap:1rem;margin:1.5rem 0;flex-wrap:wrap}
+    .sim-nav button{padding:.6rem 1.2rem;border-radius:.5rem;border:1px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer}
+    .sim-nav button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .sim-result{text-align:center;padding:2rem;max-width:600px;margin:2rem auto}
+    .sim-result h2{font-size:2rem;color:var(--accent)}
+    .sim-score{font-size:3rem;font-weight:900;color:var(--accent);margin:1rem 0}
+    .sim-review{margin-top:2rem;text-align:left}
+    .hidden{display:none}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links"><li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li><li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html" class="active">Simulateur</a></li></ul>
+    <div class="nav-actions"><button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button><button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button></div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a><a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+</div>
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Entraînement</div>
+    <h1>Simulateur <span class="highlight">d'Examen</span></h1>
+    <p>Teste tes connaissances en conditions réelles : chronomètre, score et correction détaillée.</p>
+</section>
+<main class="content-wrapper">
+    <!-- Setup -->
+    <div class="sim-setup" id="sim-setup">
+        <h2>Paramètres</h2>
+        <p>Nombre de questions :</p>
+        <select id="sim-count"><option value="10">10 questions</option><option value="20" selected>20 questions</option><option value="30">30 questions</option></select>
+        <p>Durée :</p>
+        <select id="sim-time"><option value="10">10 minutes</option><option value="20" selected>20 minutes</option><option value="30">30 minutes</option><option value="0">Illimité</option></select>
+        <br><button onclick="startExam()"><i class="fas fa-play"></i> Commencer l'examen</button>
+    </div>
+    <!-- Exam -->
+    <div class="hidden" id="sim-exam">
+        <div class="sim-timer" id="sim-timer">20:00</div>
+        <div id="sim-qcontainer"></div>
+        <div class="sim-nav">
+            <button onclick="simPrev()"><i class="fas fa-arrow-left"></i> Précédente</button>
+            <span id="sim-qnum" style="line-height:2.5;color:var(--text-muted)">1/20</span>
+            <button onclick="simNext()">Suivante <i class="fas fa-arrow-right"></i></button>
+            <button class="primary" onclick="finishExam()"><i class="fas fa-flag-checkered"></i> Terminer</button>
+        </div>
+    </div>
+    <!-- Result -->
+    <div class="hidden" id="sim-result">
+        <div class="sim-result">
+            <h2>Résultat</h2>
+            <div class="sim-score" id="sim-score">0/20</div>
+            <p id="sim-msg"></p>
+            <button class="sim-nav primary" onclick="location.reload()" style="display:inline-block;padding:.7rem 1.5rem;border-radius:.5rem;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1rem"><i class="fas fa-redo"></i> Recommencer</button>
+            <div class="sim-review" id="sim-review"></div>
+        </div>
+    </div>
+</main>
+<script src="../../assets/js/main.js"></script>
+<script>
+const bank=[
+{q:"Que signifie ETS en algorithmique ?",opts:["Entrée-Traitement-Sortie","Écrire-Tester-Stocker","Exécuter-Transformer-Sauver","Évaluer-Tracer-Simplifier"],c:0,ch:1},
+{q:"Quel mnémonique pour les 5 types de données ?",opts:["ERCBC","ABCDE","VITRE","ETRCB"],c:0,ch:1},
+{q:"L'opérateur ← signifie :",opts:["Affectation","Comparaison","Soustraction","Pointeur"],c:0,ch:1},
+{q:"17 MOD 5 = ?",opts:["2","3","5","1"],c:0,ch:1},
+{q:"En Pascal, pas de ; avant :",opts:["else","then","begin","end"],c:0,ch:2},
+{q:"ET logique : VRAI ET FAUX = ?",opts:["FAUX","VRAI","Erreur","Indéfini"],c:0,ch:2},
+{q:"OU logique : FAUX OU VRAI = ?",opts:["VRAI","FAUX","Erreur","0"],c:0,ch:2},
+{q:"Selon/Cas est préférable quand :",opts:["Plusieurs valeurs exactes à tester","Une seule condition","Des intervalles","Des booléens"],c:0,ch:2},
+{q:"Quelle boucle connaît le nombre d'itérations ?",opts:["Pour","Tant Que","Répéter","Aucune"],c:0,ch:3},
+{q:"Répéter…Jusqu'à s'exécute au minimum :",opts:["1 fois","0 fois","2 fois","N fois"],c:0,ch:3},
+{q:"Boucle infinie = ?",opts:["Condition jamais fausse","Trop de variables","Pas de boucle","Erreur de syntaxe"],c:0,ch:3},
+{q:"Accumulateur de produit initialisé à :",opts:["1","0","-1","N"],c:0,ch:3},
+{q:"T.I.P. signifie :",opts:["Type Identique, Indice, Plusieurs","Tableau Itératif Paramétré","Tri Insertion Pile","Test Interne Programme"],c:0,ch:4},
+{q:"Pour trouver le max, on initialise avec :",opts:["T[1]","0","-1","N"],c:0,ch:4},
+{q:"Tableau 3×4 = combien de cases ?",opts:["12","7","34","1"],c:0,ch:4},
+{q:"Fonction vs Procédure ?",opts:["Fonction retourne une valeur","Procédure retourne une valeur","Aucune différence","Fonction n'a pas de paramètres"],c:0,ch:5},
+{q:"Passage par référence en Pascal :",opts:["var","ref","ptr","&"],c:0,ch:5},
+{q:"LRMT signifie :",opts:["Lisibilité Réutilisation Maintenabilité Travail","Lecture Recherche Mémoire Temps","Local Récursif Modulaire Tableau","Lire Remplir Modifier Trier"],c:0,ch:5},
+{q:"Tri par sélection en meilleur cas :",opts:["O(n²)","O(n)","O(log n)","O(1)"],c:0,ch:6},
+{q:"Quel tri détecte un tableau déjà trié ?",opts:["Bulles","Sélection","Insertion","Aucun"],c:0,ch:6},
+{q:"Analogie du tri par insertion ?",opts:["Joueur de cartes","Joueur de dés","Cuisinier","Coureur"],c:0,ch:6},
+{q:"Recherche dichotomique nécessite :",opts:["Tableau trié","Tableau non trié","Tableau 2D","Pile"],c:0,ch:7},
+{q:"O(log n) pour n=1024 = max comparaisons ?",opts:["10","1024","512","100"],c:0,ch:7},
+{q:"Formule du milieu en dichotomie :",opts:["(gauche+droite) DIV 2","gauche+droite","(gauche-droite)/2","gauche*droite"],c:0,ch:7},
+{q:"2 règles de la récursivité :",opts:["Base + Progression","Entrée + Sortie","Tri + Recherche","Pile + File"],c:0,ch:8},
+{q:"Factorielle(5) = ?",opts:["120","60","24","720"],c:0,ch:8},
+{q:"Pile d'appels suit :",opts:["LIFO","FIFO","Random","LILO"],c:0,ch:8},
+{q:"Pile : opérations de base ?",opts:["Empiler/Dépiler","Enfiler/Défiler","Insérer/Supprimer","Lire/Écrire"],c:0,ch:9},
+{q:"File = ?",opts:["FIFO","LIFO","LILO","FILO"],c:0,ch:9},
+{q:"Liste chaînée : accès par indice ?",opts:["O(n)","O(1)","O(log n)","O(n²)"],c:0,ch:9},
+{q:"O(n²) pour n=100 ?",opts:["10 000","100","200","1 000"],c:0,ch:10},
+{q:"Terme dominant de 3n²+5n+10 ?",opts:["n²","5n","10","3"],c:0,ch:10},
+{q:"1 boucle = O(n), 2 boucles imbriquées = ?",opts:["O(n²)","O(2n)","O(n+n)","O(n)"],c:0,ch:10},
+{q:"Fibonacci récursif naïf = ?",opts:["O(2ⁿ)","O(n)","O(n²)","O(log n)"],c:0,ch:10},
+{q:"Algorithme en place = ?",opts:["O(1) en espace","O(1) en temps","Sans boucle","Sans variable"],c:0,ch:10}
+];
+let questions=[],ci=0,answers=[],timer=null,timeLeft=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){const count=+document.getElementById('sim-count').value;const mins=+document.getElementById('sim-time').value;
+questions=shuffle([...bank]).slice(0,count);answers=new Array(count).fill(-1);ci=0;
+document.getElementById('sim-setup').classList.add('hidden');document.getElementById('sim-exam').classList.remove('hidden');
+if(mins>0){timeLeft=mins*60;timer=setInterval(tick,1000);tick()}else{document.getElementById('sim-timer').textContent='Illimité'}
+renderQ()}
+function tick(){if(timeLeft<=0){clearInterval(timer);finishExam();return}const m=Math.floor(timeLeft/60);const s=timeLeft%60;document.getElementById('sim-timer').textContent=`${m}:${s.toString().padStart(2,'0')}`;timeLeft--}
+function renderQ(){const q=questions[ci];const h=`<div class="sim-question"><h3>Q${ci+1}. ${q.q}</h3><div class="sim-options">${q.opts.map((o,i)=>`<div class="sim-opt${answers[ci]===i?' selected':''}" onclick="selectOpt(${i})">${o}</div>`).join('')}</div></div>`;
+document.getElementById('sim-qcontainer').innerHTML=h;document.getElementById('sim-qnum').textContent=`${ci+1}/${questions.length}`}
+function selectOpt(i){answers[ci]=i;renderQ()}
+function simPrev(){if(ci>0){ci--;renderQ()}}
+function simNext(){if(ci<questions.length-1){ci++;renderQ()}}
+function finishExam(){if(timer)clearInterval(timer);let score=0;let review='<h3>Correction détaillée</h3>';
+questions.forEach((q,i)=>{const ok=answers[i]===q.c;if(ok)score++;
+review+=`<div class="sim-question" style="border-left:4px solid ${ok?'#10b981':'#ef4444'}"><h3 style="color:${ok?'#10b981':'#ef4444'}">Q${i+1}. ${q.q}</h3><p><strong>Ta réponse :</strong> ${answers[i]>=0?q.opts[answers[i]]:'<em>Pas de réponse</em>'} ${ok?'✅':'❌'}</p>${!ok?`<p><strong>Bonne réponse :</strong> ${q.opts[q.c]}</p>`:''}</div>`});
+document.getElementById('sim-exam').classList.add('hidden');document.getElementById('sim-result').classList.remove('hidden');
+document.getElementById('sim-score').textContent=`${score}/${questions.length}`;
+const pct=Math.round(score/questions.length*100);
+document.getElementById('sim-msg').textContent=pct>=80?'🏆 Excellent !':pct>=60?'👍 Bien, continue !':pct>=40?'📚 Révise encore un peu.':'💪 Courage, reprends les chapitres !';
+document.getElementById('sim-review').innerHTML=review}
+</script>
+</body>
+</html>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord B1 - Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <style>
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-surface: rgba(15, 23, 42, 0.65);
+      --bg-surface-2: rgba(30, 41, 59, 0.5);
+      --bg-input: rgba(15, 23, 42, 0.6);
+      --border: rgba(99, 102, 241, 0.1);
+      --border-active: rgba(99, 102, 241, 0.3);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent: #6366f1;
+      --accent-light: #818cf8;
+      --accent-glow: rgba(99, 102, 241, 0.3);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 15px; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* BG */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 600px 400px at 15% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 85% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+    }
+
+    /* Header */
+    .d-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .d-header h1 {
+      font-size: 1.05rem; font-weight: 700;
+      background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .d-header-actions { display: flex; gap: 10px; }
+
+    /* Buttons */
+    .btn {
+      padding: 8px 16px; font-size: 0.8rem; font-weight: 600; font-family: var(--font-sans);
+      border: none; border-radius: var(--radius-sm); cursor: pointer;
+      transition: all var(--transition); display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-accent { background: var(--accent); color: white; }
+    .btn-accent:hover { background: #5558e6; box-shadow: 0 4px 15px var(--accent-glow); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #0d9669; }
+    .btn-danger { background: var(--error); color: white; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-warning { background: var(--warning); color: white; }
+    .btn-warning:hover { background: #d97706; }
+    .btn-ghost {
+      background: transparent; color: var(--text-muted); border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text-primary); border-color: var(--border-active); background: rgba(99,102,241,0.05); }
+    .btn-sm { padding: 5px 10px; font-size: 0.75rem; }
+
+    /* Main */
+    .d-main { max-width: 1200px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    .stat-card {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px;
+      backdrop-filter: blur(12px);
+    }
+    .stat-card .label { color: var(--text-muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    .stat-card .value { font-size: 2rem; font-weight: 800; margin-top: 4px; font-family: var(--font-mono); }
+    .stat-card .value.v-accent { color: var(--accent-light); }
+    .stat-card .value.v-success { color: var(--success); }
+    .stat-card .value.v-warning { color: var(--warning); }
+    .stat-card .value.v-error { color: var(--error); }
+
+    /* Card */
+    .card {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 24px; overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .card-header {
+      padding: 16px 22px; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .card-header h2 {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-primary);
+    }
+    .card-body { padding: 20px 22px; }
+
+    /* Form */
+    .create-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 14px; font-size: 0.88rem; font-family: var(--font-sans);
+      background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary); outline: none;
+      transition: all var(--transition);
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+    .form-group select option { background: #1e293b; color: #f1f5f9; }
+
+    /* Course checkboxes */
+    .course-checkboxes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .course-checkboxes label {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.82rem; color: var(--text-secondary); cursor: pointer;
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px;
+      transition: all var(--transition); text-transform: none; font-weight: 500; letter-spacing: 0;
+    }
+    .course-checkboxes label:has(input:checked) {
+      background: rgba(99,102,241,0.12); border-color: var(--accent); color: var(--accent-light);
+    }
+    .course-checkboxes input { accent-color: var(--accent); }
+
+    /* Generated keys */
+    .generated-keys {
+      background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: var(--radius-sm); padding: 16px; margin-top: 16px; display: none;
+    }
+    .generated-keys.visible { display: block; }
+    .generated-keys h4 { color: var(--success); margin-bottom: 10px; font-size: 0.85rem; }
+    .key-tag {
+      display: inline-block; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 6px; padding: 6px 14px; font-family: var(--font-mono);
+      font-weight: 700; font-size: 0.95rem; margin: 4px; cursor: pointer;
+      color: #6ee7b7; transition: all var(--transition);
+    }
+    .key-tag:hover { background: rgba(16, 185, 129, 0.15); }
+    .key-tag.copied { background: rgba(16, 185, 129, 0.25); }
+
+    /* Table */
+    .table-wrapper { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th {
+      background: rgba(15, 23, 42, 0.5); padding: 11px 14px;
+      text-align: left; font-weight: 700; color: var(--text-muted);
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    td { padding: 11px 14px; border-bottom: 1px solid rgba(99,102,241,0.05); vertical-align: middle; }
+    tr:hover td { background: rgba(99, 102, 241, 0.03); }
+
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.3px;
+    }
+    .badge-success { background: rgba(16, 185, 129, 0.12); color: #6ee7b7; }
+    .badge-warning { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
+    .badge-danger { background: rgba(239, 68, 68, 0.12); color: #fca5a5; }
+    .badge-info { background: rgba(99, 102, 241, 0.12); color: #a5b4fc; }
+
+    .key-code { font-family: var(--font-mono); font-weight: 700; font-size: 0.88rem; color: #c7d2fe; }
+    .actions-cell { white-space: nowrap; }
+
+    /* Filter */
+    .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-bar .btn { font-size: 0.73rem; padding: 5px 12px; }
+    .filter-bar .btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    /* Search */
+    .search-bar {
+      display: flex; gap: 10px; margin-bottom: 12px; align-items: center;
+    }
+    .search-bar input {
+      flex: 1; padding: 8px 14px; font-size: 0.85rem; font-family: var(--font-sans);
+      background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); color: var(--text-primary); outline: none;
+      transition: all var(--transition);
+    }
+    .search-bar input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1); }
+    .search-bar input::placeholder { color: var(--text-muted); }
+
+    /* Tabs */
+    .tab-bar { display: flex; gap: 2px; margin-bottom: 20px; background: var(--bg-surface); border-radius: var(--radius-sm); padding: 3px; border: 1px solid var(--border); }
+    .tab-bar .tab {
+      padding: 8px 18px; font-size: 0.8rem; font-weight: 600; font-family: var(--font-sans);
+      border: none; border-radius: 6px; cursor: pointer;
+      background: transparent; color: var(--text-muted); transition: all var(--transition);
+    }
+    .tab-bar .tab.active { background: var(--accent); color: white; }
+    .tab-bar .tab:hover:not(.active) { color: var(--text-primary); background: rgba(99,102,241,0.08); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Course stats */
+    .course-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .course-stat-card {
+      background: var(--bg-surface-2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 16px; position: relative; overflow: hidden;
+    }
+    .course-stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .course-stat-card .cs-name { font-weight: 700; font-size: 0.88rem; margin-bottom: 10px; }
+    .course-stat-card .cs-row { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-secondary); padding: 2px 0; }
+    .course-stat-card .cs-value { font-weight: 700; font-family: var(--font-mono); }
+
+    /* Logs */
+    .log-entry {
+      display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(99,102,241,0.05);
+      font-size: 0.82rem; align-items: flex-start;
+    }
+    .log-entry:last-child { border-bottom: none; }
+    .log-icon {
+      width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; flex-shrink: 0;
+    }
+    .log-icon.activation { background: rgba(16, 185, 129, 0.12); }
+    .log-icon.revoke { background: rgba(239, 68, 68, 0.12); }
+    .log-icon.admin { background: rgba(99, 102, 241, 0.12); }
+    .log-icon.session { background: rgba(245, 158, 11, 0.12); }
+    .log-icon.key { background: rgba(59, 130, 246, 0.12); }
+    .log-body { flex: 1; }
+    .log-body .log-title { font-weight: 600; color: var(--text-primary); }
+    .log-body .log-detail { color: var(--text-muted); font-size: 0.76rem; margin-top: 2px; }
+    .log-time { color: var(--text-muted); font-size: 0.72rem; white-space: nowrap; font-family: var(--font-mono); }
+    .log-pagination { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .log-filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .log-filter-bar .btn { font-size: 0.72rem; padding: 4px 10px; }
+
+    /* Empty */
+    .empty-state { text-align: center; padding: 36px; color: var(--text-muted); }
+    .empty-state .icon { font-size: 2.2rem; margin-bottom: 8px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 20px; right: 20px;
+      padding: 12px 20px; border-radius: var(--radius-sm);
+      color: white; font-size: 0.85rem; font-weight: 600;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transform: translateY(80px); opacity: 0;
+      transition: all 0.3s; z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+    .toast.visible { transform: translateY(0); opacity: 1; }
+    .toast.success { background: rgba(16, 185, 129, 0.9); }
+    .toast.error { background: rgba(239, 68, 68, 0.9); }
+    .toast.info { background: rgba(99, 102, 241, 0.9); }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center; z-index: 200;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal {
+      background: rgba(30, 41, 59, 0.95); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 30px; max-width: 440px; width: 90%;
+      text-align: center; backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .modal h3 { margin-bottom: 12px; color: var(--text-primary); font-size: 1.05rem; }
+    .modal p { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.88rem; line-height: 1.5; }
+    .modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+    @media (max-width: 768px) {
+      .d-main { padding: 14px; }
+      .create-form { grid-template-columns: 1fr; }
+      .d-header { padding: 12px 14px; }
+      .d-header h1 { font-size: 0.9rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="d-header">
+    <h1>⚙️ Tableau de bord B1 — Bachelor 1</h1>
+    <div class="d-header-actions">
+      <a href="/" class="btn btn-ghost">📚 Site</a>
+      <button class="btn btn-ghost" onclick="logout()">🚪 Déconnexion</button>
+    </div>
+  </div>
+
+  <div class="d-main">
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="label">Total clés</div><div class="value v-accent" id="statTotal">-</div></div>
+      <div class="stat-card"><div class="label">Clés utilisées</div><div class="value v-success" id="statUsed">-</div></div>
+      <div class="stat-card"><div class="label">Disponibles</div><div class="value v-warning" id="statAvailable">-</div></div>
+      <div class="stat-card"><div class="label">Sessions actives</div><div class="value v-accent" id="statSessions">-</div></div>
+      <div class="stat-card"><div class="label">Révoquées</div><div class="value v-error" id="statRevoked">-</div></div>
+      <div class="stat-card"><div class="label">Expirées</div><div class="value v-error" id="statExpired">-</div></div>
+    </div>
+
+    <!-- Navigation par onglets -->
+    <div class="tab-bar">
+      <button class="tab active" onclick="switchTab('keys')">🔑 Clés</button>
+      <button class="tab" onclick="switchTab('sessions')">🖥️ Sessions</button>
+      <button class="tab" onclick="switchTab('courses')">📊 Stats par cours</button>
+      <button class="tab" onclick="switchTab('logs')">📜 Journal d'activité</button>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><h2>🔑 Créer des clés d'activation</h2></div>
+      <div class="card-body">
+        <form id="createForm" class="create-form">
+          <div class="form-group">
+            <label>Portée d'accès</label>
+            <select id="scopeType" onchange="toggleCourseCheckboxes()">
+              <option value="all">Tous les cours</option>
+              <option value="specific">Cours spécifiques</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Nombre de clés</label>
+            <input type="number" id="keyCount" min="1" max="50" value="1">
+          </div>
+          <div class="form-group full" id="coursesGroup" style="display:none;">
+            <label>Sélectionner les cours</label>
+            <div class="course-checkboxes" id="courseCheckboxes"></div>
+          </div>
+          <div class="form-group">
+            <label>Expiration</label>
+            <select id="expiresIn">
+              <option value="never">Sans expiration</option>
+              <option value="7d">7 jours</option>
+              <option value="30d">30 jours</option>
+              <option value="90d">3 mois</option>
+              <option value="180d">6 mois</option>
+              <option value="365d">1 an</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>📝 Description (optionnel)</label>
+            <input type="text" id="keyNote" placeholder="Ex: Pour Ahmed - formation Linux, Licence pro 2026, Client entreprise X..." maxlength="255">
+          </div>
+          <div class="form-group full">
+            <button type="submit" class="btn btn-success" id="btnCreate" style="width:100%;padding:12px;">✨ Générer les clés</button>
+          </div>
+        </form>
+        <div id="generatedKeys" class="generated-keys">
+          <h4>✅ Clés générées (cliquez pour copier) :</h4>
+          <div id="generatedKeysList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>📋 Liste des clés</h2>
+        <div class="filter-bar">
+          <button class="btn btn-ghost btn-sm active" onclick="filterKeys('')" data-filter="">Toutes</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterKeys('active')" data-filter="active">Disponibles</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterKeys('used')" data-filter="used">Utilisées</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterKeys('revoked')" data-filter="revoked">Révoquées</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterKeys('expired')" data-filter="expired">Expirées</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="search-bar">
+          <input type="text" id="keySearch" placeholder="🔍 Rechercher par clé, description ou portée..." oninput="debounceSearch()">
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>ID</th><th>Clé</th><th>Portée</th><th>État</th><th>Expiration</th><th>Description</th><th>Créée le</th><th>Actions</th></tr></thead>
+            <tbody id="keysTableBody">
+              <tr><td colspan="8"><div class="empty-state"><div class="icon">⏳</div>Chargement...</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="tabSessions" style="display:none;">
+      <div class="card-header"><h2>🖥️ Sessions actives</h2></div>
+      <div class="card-body">
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>ID</th><th>Clé</th><th>Portée</th><th>État</th><th>Créée le</th><th>Dernière vérif.</th><th>Actions</th></tr></thead>
+            <tbody id="sessionsTableBody">
+              <tr><td colspan="7"><div class="empty-state"><div class="icon">⏳</div>Chargement...</div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Stats par cours -->
+    <div class="card" id="tabCourses" style="display:none;">
+      <div class="card-header"><h2>📊 Statistiques par cours</h2></div>
+      <div class="card-body">
+        <div class="course-stats-grid" id="courseStatsGrid">
+          <div class="empty-state"><div class="icon">⏳</div>Chargement...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Journal d'activité -->
+    <div class="card" id="tabLogs" style="display:none;">
+      <div class="card-header"><h2>📜 Journal d'activité</h2></div>
+      <div class="card-body">
+        <div class="log-filter-bar">
+          <button class="btn btn-ghost btn-sm active" onclick="filterLogs(null)" data-logfilter="">Tout</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('activation')" data-logfilter="activation">Activations</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('admin_login')" data-logfilter="admin_login">Connexions admin</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('admin_login_failed')" data-logfilter="admin_login_failed">Échecs login</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('key_created')" data-logfilter="key_created">Créations clés</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('key_revoked')" data-logfilter="key_revoked">Révocations</button>
+          <button class="btn btn-ghost btn-sm" onclick="filterLogs('session_created')" data-logfilter="session_created">Sessions</button>
+        </div>
+        <div id="logsContainer">
+          <div class="empty-state"><div class="icon">⏳</div>Chargement...</div>
+        </div>
+        <div class="log-pagination" id="logsPagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal">
+      <h3 id="modalTitle">Confirmation</h3>
+      <p id="modalMessage">Êtes-vous sûr ?</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+        <button class="btn btn-danger" id="modalConfirm">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let courses = {}, currentFilter = '', pendingAction = null, currentLogFilter = null, logOffset = 0;
+    const LOG_LIMIT = 50;
+    let searchTimeout = null;
+
+    async function init() {
+      await loadCourses();
+      await Promise.all([loadStats(), loadKeys(), loadSessions()]);
+    }
+
+    async function api(url, options = {}) {
+      const headers = options.body ? { 'Content-Type': 'application/json' } : {};
+      const res = await fetch(url, { credentials: 'include', headers, ...options });
+      if (res.status === 401) { window.location.href = '/_auth/admin/login.html'; return null; }
+      return res.json();
+    }
+
+    // ==================
+    // Tabs
+    // ==================
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-bar .tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      // Show/hide card sections
+      document.getElementById('tabSessions').style.display = (tab === 'sessions') ? 'block' : 'none';
+      document.getElementById('tabCourses').style.display = (tab === 'courses') ? 'block' : 'none';
+      document.getElementById('tabLogs').style.display = (tab === 'logs') ? 'block' : 'none';
+      // Keys section: the creation card + list card are always before sessions
+      const keysCards = document.querySelectorAll('.d-main > .card:not([id])');
+      keysCards.forEach(c => c.style.display = (tab === 'keys') ? 'block' : 'none');
+      // Load tab-specific data on demand
+      if (tab === 'courses') loadCourseStats();
+      if (tab === 'logs') { logOffset = 0; loadLogs(); }
+    }
+
+    async function loadCourses() {
+      courses = await api('/api/admin/courses') || {};
+      const c = document.getElementById('courseCheckboxes');
+      c.innerHTML = '';
+      for (const [key, name] of Object.entries(courses)) {
+        c.innerHTML += '<label><input type="checkbox" name="course" value="' + key + '"> ' + name + '</label>';
+      }
+    }
+
+    function toggleCourseCheckboxes() {
+      document.getElementById('coursesGroup').style.display = document.getElementById('scopeType').value === 'specific' ? 'flex' : 'none';
+    }
+
+    async function loadStats() {
+      const s = await api('/api/admin/stats'); if (!s) return;
+      document.getElementById('statTotal').textContent = s.total_keys || 0;
+      document.getElementById('statUsed').textContent = s.used_keys || 0;
+      document.getElementById('statAvailable').textContent = s.available_keys || 0;
+      document.getElementById('statSessions').textContent = s.active_sessions || 0;
+      document.getElementById('statRevoked').textContent = s.revoked_keys || 0;
+      document.getElementById('statExpired').textContent = s.expired_keys || 0;
+    }
+
+    // ==================
+    // Search
+    // ==================
+    function debounceSearch() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => loadKeys(currentFilter), 300);
+    }
+
+    // ==================
+    // Create keys
+    // ==================
+    document.getElementById('createForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const scopeType = document.getElementById('scopeType').value;
+      const count = parseInt(document.getElementById('keyCount').value) || 1;
+      const note = document.getElementById('keyNote').value.trim();
+      const expiresIn = document.getElementById('expiresIn').value;
+      let scope = 'all';
+      if (scopeType === 'specific') {
+        const checked = [...document.querySelectorAll('#courseCheckboxes input:checked')].map(c => c.value);
+        if (checked.length === 0) { showToast('Sélectionnez au moins un cours', 'error'); return; }
+        scope = checked.join(',');
+      }
+      const btn = document.getElementById('btnCreate');
+      btn.disabled = true; btn.textContent = 'Génération...';
+      const data = await api('/api/admin/keys', { method: 'POST', body: JSON.stringify({ scope, count, note, expiresIn }) });
+      btn.disabled = false; btn.textContent = '✨ Générer les clés';
+      if (data && data.success) {
+        showToast(data.keys.length + ' clé(s) créée(s)', 'success');
+        const c = document.getElementById('generatedKeysList');
+        c.innerHTML = data.keys.map(k => '<span class="key-tag" onclick="copyKey(this,\'' + k.key_code + '\')">' + k.key_code + '</span>').join('');
+        document.getElementById('generatedKeys').classList.add('visible');
+        loadStats(); loadKeys(); document.getElementById('keyNote').value = '';
+      } else { showToast(data?.message || 'Erreur', 'error'); }
+    });
+
+    function copyKey(el, key) {
+      navigator.clipboard.writeText(key).then(() => {
+        el.classList.add('copied'); showToast('Clé copiée : ' + key, 'info');
+        setTimeout(() => el.classList.remove('copied'), 1500);
+      });
+    }
+
+    // ==================
+    // Keys list
+    // ==================
+    async function loadKeys(filter = '') {
+      currentFilter = filter;
+      const search = (document.getElementById('keySearch') || {}).value || '';
+      let url = '/api/admin/keys?filter=' + encodeURIComponent(filter);
+      if (search.trim()) url += '&search=' + encodeURIComponent(search.trim());
+      const keys = await api(url); if (!keys) return;
+      const tbody = document.getElementById('keysTableBody');
+      if (keys.length === 0) { tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="icon">📭</div>Aucune clé</div></td></tr>'; return; }
+      tbody.innerHTML = keys.map(k => {
+        let st;
+        const isExpired = k.expires_at && new Date(k.expires_at) < new Date();
+        if (!k.is_active) st = '<span class="badge badge-danger">Révoquée</span>';
+        else if (isExpired) st = '<span class="badge badge-danger">Expirée</span>';
+        else if (k.is_used) st = '<span class="badge badge-success">Utilisée</span>';
+        else st = '<span class="badge badge-warning">Disponible</span>';
+        let sc; if (k.scope === 'all') sc = '<span class="badge badge-info">Tous</span>'; else sc = k.scope.split(',').map(s => '<span class="badge badge-info">' + (courses[s]||s) + '</span>').join(' ');
+        const exp = k.expires_at ? new Date(k.expires_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'}) : '∞';
+        const dt = new Date(k.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+        let acts = '';
+        if (k.is_active) { if (k.is_used) acts += '<button class="btn btn-warning btn-sm" onclick="confirmAction(\'reset\',' + k.id + ',\'' + k.key_code + '\')">🔄</button> '; acts += '<button class="btn btn-danger btn-sm" onclick="confirmAction(\'revoke\',' + k.id + ',\'' + k.key_code + '\')">⛔</button> '; }
+        else acts += '<button class="btn btn-success btn-sm" onclick="confirmAction(\'reactivate\',' + k.id + ',\'' + k.key_code + '\')">✅</button> ';
+        acts += '<button class="btn btn-ghost btn-sm" onclick="confirmAction(\'delete\',' + k.id + ',\'' + k.key_code + '\')" style="color:var(--error)">🗑️</button>';
+        return '<tr><td>'+k.id+'</td><td><span class="key-code">'+k.key_code+'</span></td><td>'+sc+'</td><td>'+st+'</td><td>'+exp+'</td><td class="desc-cell">'+(k.note||'<span style="color:var(--text-muted)">—</span>')+'</td><td>'+dt+'</td><td class="actions-cell">'+acts+'</td></tr>';
+      }).join('');
+    }
+
+    function filterKeys(f) {
+      document.querySelectorAll('.filter-bar .btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+      loadKeys(f);
+    }
+
+    // ==================
+    // Sessions
+    // ==================
+    async function loadSessions() {
+      const sessions = await api('/api/admin/sessions'); if (!sessions) return;
+      const tbody = document.getElementById('sessionsTableBody');
+      if (sessions.length === 0) { tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><div class="icon">🔌</div>Aucune session</div></td></tr>'; return; }
+      tbody.innerHTML = sessions.map(s => {
+        const st = s.is_valid ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Révoquée</span>';
+        const sc = s.scope==='all' ? '<span class="badge badge-info">Tous</span>' : s.scope.split(',').map(x => '<span class="badge badge-info">'+(courses[x]||x)+'</span>').join(' ');
+        const d1 = new Date(s.created_at).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+        const d2 = s.last_verified ? new Date(s.last_verified).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '-';
+        const act = s.is_valid ? '<button class="btn btn-danger btn-sm" onclick="confirmAction(\'revokeSession\','+s.id+',\''+s.key_code+'\')">⛔ Révoquer</button>' : '<span style="color:var(--text-muted);font-size:0.75rem">-</span>';
+        return '<tr><td>'+s.id+'</td><td><span class="key-code">'+s.key_code+'</span></td><td>'+sc+'</td><td>'+st+'</td><td>'+d1+'</td><td>'+d2+'</td><td class="actions-cell">'+act+'</td></tr>';
+      }).join('');
+    }
+
+    // ==================
+    // Course Stats
+    // ==================
+    const courseColors = {
+      'algo':'#10b981','c_cpp':'#f59e0b','python':'#06b6d4',
+      'reseaux':'#0ea5e9','stats':'#8b5cf6','fbd':'#ea580c',
+      'merise':'#14b8a6'
+    };
+
+    async function loadCourseStats() {
+      const data = await api('/api/admin/stats/courses'); if (!data) return;
+      const grid = document.getElementById('courseStatsGrid');
+      let html = '';
+      // Card for "all" scope
+      if (data.allScope) {
+        const a = data.allScope;
+        html += '<div class="course-stat-card" style="border-top:3px solid var(--accent);">'
+          + '<div class="cs-name">🌐 Toutes matières (scope: all)</div>'
+          + '<div class="cs-row"><span>Total</span><span class="cs-value">' + (a.total_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Utilisées</span><span class="cs-value" style="color:var(--success)">' + (a.used_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Disponibles</span><span class="cs-value" style="color:var(--warning)">' + (a.available_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Révoquées</span><span class="cs-value" style="color:var(--error)">' + (a.revoked_keys||0) + '</span></div>'
+          + '</div>';
+      }
+      // Per-course cards
+      for (const c of data.byCourse) {
+        const color = courseColors[c.course] || 'var(--accent)';
+        const name = courses[c.course] || c.course;
+        html += '<div class="course-stat-card" style="border-top:3px solid ' + color + ';">'
+          + '<div class="cs-name">' + name + '</div>'
+          + '<div class="cs-row"><span>Total</span><span class="cs-value">' + (c.total_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Utilisées</span><span class="cs-value" style="color:var(--success)">' + (c.used_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Disponibles</span><span class="cs-value" style="color:var(--warning)">' + (c.available_keys||0) + '</span></div>'
+          + '<div class="cs-row"><span>Révoquées</span><span class="cs-value" style="color:var(--error)">' + (c.revoked_keys||0) + '</span></div>'
+          + '</div>';
+      }
+      if (!html) html = '<div class="empty-state"><div class="icon">📭</div>Aucune donnée par cours</div>';
+      grid.innerHTML = html;
+    }
+
+    // ==================
+    // Activity Logs
+    // ==================
+    const logIcons = {
+      'activation': { icon: '🔓', css: 'activation', label: 'Activation' },
+      'key_activated': { icon: '🔓', css: 'activation', label: 'Clé activée' },
+      'key_created': { icon: '🔑', css: 'key', label: 'Clé créée' },
+      'key_revoked': { icon: '⛔', css: 'revoke', label: 'Clé révoquée' },
+      'key_reactivated': { icon: '✅', css: 'activation', label: 'Clé réactivée' },
+      'key_reset': { icon: '🔄', css: 'session', label: 'Clé réinitialisée' },
+      'key_deleted': { icon: '🗑️', css: 'revoke', label: 'Clé supprimée' },
+      'admin_login': { icon: '👤', css: 'admin', label: 'Connexion admin' },
+      'admin_login_failed': { icon: '🚫', css: 'revoke', label: 'Échec connexion' },
+      'session_created': { icon: '🖥️', css: 'session', label: 'Session créée' },
+      'session_revoked': { icon: '⛔', css: 'revoke', label: 'Session révoquée' }
+    };
+
+    async function loadLogs() {
+      const url = '/api/admin/logs?limit=' + LOG_LIMIT + '&offset=' + logOffset + (currentLogFilter ? '&type=' + currentLogFilter : '');
+      const data = await api(url); if (!data) return;
+      const container = document.getElementById('logsContainer');
+      if (data.logs.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="icon">📭</div>Aucun événement</div>';
+        document.getElementById('logsPagination').innerHTML = '';
+        return;
+      }
+      container.innerHTML = data.logs.map(log => {
+        const info = logIcons[log.event_type] || { icon: '📋', css: 'key', label: log.event_type };
+        const t = new Date(log.created_at);
+        const timeStr = t.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' + t.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+        let detail = '';
+        if (log.key_code) detail += '<strong>' + log.key_code + '</strong> ';
+        if (log.details) detail += log.details + ' ';
+        if (log.ip_address) detail += '(IP: ' + log.ip_address + ')';
+        if (log.scope) detail += ' [' + log.scope + ']';
+        return '<div class="log-entry">'
+          + '<div class="log-icon ' + info.css + '">' + info.icon + '</div>'
+          + '<div class="log-body"><div class="log-title">' + info.label + '</div><div class="log-detail">' + (detail || '-') + '</div></div>'
+          + '<div class="log-time">' + timeStr + '</div>'
+          + '</div>';
+      }).join('');
+      // Pagination
+      const totalPages = Math.ceil(data.total / LOG_LIMIT);
+      const currentPage = Math.floor(logOffset / LOG_LIMIT) + 1;
+      let pag = '';
+      if (totalPages > 1) {
+        if (currentPage > 1) pag += '<button class="btn btn-ghost btn-sm" onclick="goLogPage(' + (currentPage-2) + ')">← Préc</button>';
+        pag += '<span style="color:var(--text-muted);font-size:0.78rem;padding:5px 10px;">Page ' + currentPage + ' / ' + totalPages + ' (' + data.total + ' événements)</span>';
+        if (currentPage < totalPages) pag += '<button class="btn btn-ghost btn-sm" onclick="goLogPage(' + currentPage + ')">Suiv →</button>';
+      } else {
+        pag = '<span style="color:var(--text-muted);font-size:0.78rem;">' + data.total + ' événement(s)</span>';
+      }
+      document.getElementById('logsPagination').innerHTML = pag;
+    }
+
+    function goLogPage(page) { logOffset = page * LOG_LIMIT; loadLogs(); }
+
+    function filterLogs(type) {
+      currentLogFilter = type;
+      logOffset = 0;
+      document.querySelectorAll('.log-filter-bar .btn').forEach(b => b.classList.toggle('active', (b.dataset.logfilter||'') === (type||'')));
+      loadLogs();
+    }
+
+    // ==================
+    // Actions & Modals
+    // ==================
+    function confirmAction(action, id, keyCode) {
+      const m = {
+        reset: { t:'Réinitialiser la clé ?', m:'La clé <strong>'+keyCode+'</strong> sera déliée de la machine. La session existante sera invalidée.' },
+        revoke: { t:'Révoquer la clé ?', m:'La clé <strong>'+keyCode+'</strong> sera désactivée. L\'utilisateur perd l\'accès immédiatement.' },
+        reactivate: { t:'Réactiver la clé ?', m:'La clé <strong>'+keyCode+'</strong> sera réactivée.' },
+        delete: { t:'Supprimer définitivement ?', m:'La clé <strong>'+keyCode+'</strong> et ses sessions seront supprimées. Irréversible.' },
+        revokeSession: { t:'Révoquer la session ?', m:'La session liée à <strong>'+keyCode+'</strong> sera invalidée.' }
+      };
+      const cfg = m[action];
+      document.getElementById('modalTitle').textContent = cfg.t;
+      document.getElementById('modalMessage').innerHTML = cfg.m;
+      document.getElementById('confirmModal').classList.add('visible');
+      const cb = document.getElementById('modalConfirm');
+      cb.className = action === 'reactivate' ? 'btn btn-success' : 'btn btn-danger';
+      pendingAction = { action, id };
+    }
+
+    document.getElementById('modalConfirm').addEventListener('click', async () => {
+      if (!pendingAction) return;
+      const { action, id } = pendingAction; closeModal();
+      const ep = {
+        reset: { url:'/api/admin/keys/'+id+'/reset', method:'POST' },
+        revoke: { url:'/api/admin/keys/'+id+'/revoke', method:'POST' },
+        reactivate: { url:'/api/admin/keys/'+id+'/reactivate', method:'POST' },
+        delete: { url:'/api/admin/keys/'+id, method:'DELETE' },
+        revokeSession: { url:'/api/admin/sessions/'+id+'/revoke', method:'POST' }
+      }[action];
+      const data = await api(ep.url, { method: ep.method });
+      if (data && data.success) { showToast(data.message, 'success'); loadStats(); loadKeys(currentFilter); loadSessions(); }
+      else showToast(data?.message || 'Erreur', 'error');
+      pendingAction = null;
+    });
+
+    function closeModal() { document.getElementById('confirmModal').classList.remove('visible'); }
+    document.getElementById('confirmModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+
+    function showToast(msg, type='info') {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.className = 'toast ' + type + ' visible';
+      setTimeout(() => t.classList.remove('visible'), 3500);
+    }
+
+    async function logout() {
+      await api('/api/admin/logout', { method: 'POST' });
+      window.location.href = '/_auth/admin/login.html';
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 2 — Conditions | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a>
+    <a href="chapitre2.html" class="active"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-code-branch"></i> Chapitre 2</div>
+    <h1>🐍 Les <span class="highlight">Conditions</span></h1>
+    <p>Apprendre à votre programme à prendre des décisions : if, elif, else et opérateurs logiques.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Introduction -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-traffic-light"></i> Prendre des décisions</h2>
+    <div class="concept-card">
+        <h4>🚦 Analogie du feu tricolore</h4>
+        <p>Un programme sans conditions est une route en ligne droite. Les conditions sont les <strong>feux tricolores</strong> : selon la situation, on va à gauche, à droite ou tout droit.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>if / else — la base</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>age = int(input("Votre âge : "))
+
+if age >= 18:
+    print("Vous êtes majeur ✅")
+else:
+    print("Vous êtes mineur ❌")
+
+# ⚠️ INDENTATION OBLIGATOIRE !
+# Python utilise l'indentation (4 espaces) au lieu des { }</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Règle d'or Python :</strong> L'indentation remplace les accolades <code>{ }</code>. Si le code n'est pas correctement indenté → <code>IndentationError</code>. Utilisez <strong>4 espaces</strong> (ou Tab configuré à 4).
+    </div>
+</section>
+
+<!-- Section 2 : Opérateurs de comparaison -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-balance-scale"></i> Opérateurs de comparaison</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Opérateur</th><th>Signification</th><th>Exemple</th><th>Résultat</th></tr></thead>
+        <tbody>
+            <tr><td><code>==</code></td><td>Égal à</td><td><code>5 == 5</code></td><td><code>True</code></td></tr>
+            <tr><td><code>!=</code></td><td>Différent de</td><td><code>5 != 3</code></td><td><code>True</code></td></tr>
+            <tr><td><code>&lt;</code> / <code>&gt;</code></td><td>Inférieur / Supérieur</td><td><code>3 &lt; 5</code></td><td><code>True</code></td></tr>
+            <tr><td><code>&lt;=</code> / <code>&gt;=</code></td><td>Inférieur ou égal / Supérieur ou égal</td><td><code>5 &gt;= 5</code></td><td><code>True</code></td></tr>
+        </tbody>
+    </table></div>
+    <div class="warning-box"><strong>⚠️ Piège classique :</strong> <code>=</code> c'est l'affectation. <code>==</code> c'est la comparaison. Ne les confondez pas !</div>
+</section>
+
+<!-- Section 3 : elif -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-list-ol"></i> elif — plusieurs chemins</h2>
+    <div class="concept-card">
+        <h4>🔀 Analogie du menu</h4>
+        <p>Imaginez un <strong>menu de restaurant</strong> : si plat 1 disponible → le prendre, sinon si plat 2 → sinon si plat 3 → sinon "rien ne convient". C'est exactement <code>if / elif / else</code>.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>if / elif / else</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>note = float(input("Note /20 : "))
+
+if note >= 16:
+    mention = "Très Bien"
+elif note >= 14:
+    mention = "Bien"
+elif note >= 12:
+    mention = "Assez Bien"
+elif note >= 10:
+    mention = "Passable"
+else:
+    mention = "Recalé(e)"
+
+print(f"Mention : {mention}")
+
+# ⚠️ L'ordre compte ! Testez du plus grand au plus petit
+# car Python s'arrête au PREMIER elif vrai</code></pre></div>
+
+    <div class="tip-box">
+        <strong>💡 Astuce :</strong> <code>elif</code> = "else if" en abrégé. Vous pouvez en mettre autant que nécessaire. Le <code>else</code> final est optionnel mais recommandé.
+    </div>
+</section>
+
+<!-- Section 4 : Opérateurs logiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-link"></i> Opérateurs logiques — and, or, not</h2>
+
+    <div class="code-block"><div class="code-header"><span>Combiner des conditions</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>age = 20
+permis = True
+
+# and : les DEUX doivent être vraies
+if age >= 18 and permis:
+    print("Vous pouvez conduire")
+
+# or : au moins UNE doit être vraie
+if age < 12 or age > 65:
+    print("Tarif réduit")
+
+# not : inverse la condition
+if not permis:
+    print("Pas de permis !")
+
+# 🐍 Python vs C :
+# Python : and, or, not (mots anglais !)
+# C      : &&, ||, !    (symboles)</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Python</th><th>C/C++</th><th>Signification</th></tr></thead>
+        <tbody>
+            <tr><td><code>and</code></td><td><code>&&</code></td><td>ET logique</td></tr>
+            <tr><td><code>or</code></td><td><code>||</code></td><td>OU logique</td></tr>
+            <tr><td><code>not</code></td><td><code>!</code></td><td>NON logique</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 5 : Opérateur ternaire -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-compress-arrows-alt"></i> Expression conditionnelle (ternaire)</h2>
+    <div class="code-block"><div class="code-header"><span>Ternaire Python vs C</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Python : valeur_si_vrai if condition else valeur_si_faux
+statut = "majeur" if age >= 18 else "mineur"
+
+# C : condition ? vrai : faux
+# Python inverse l'ordre : valeur PUIS condition !</code></pre></div>
+    <div class="info-box"><strong>Mnémonique :</strong> En Python, on écrit comme on parle : « majeur <em>si</em> age >= 18, <em>sinon</em> mineur ».</div>
+</section>
+
+<!-- Section 6 : in et chaînes de comparaison -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-search"></i> Astuces Python uniques</h2>
+    <div class="code-block"><div class="code-header"><span>in et chaînes de comparaison</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># 'in' : tester l'appartenance (super utile !)
+fruit = "pomme"
+if fruit in ["pomme", "banane", "orange"]:
+    print("C'est un fruit connu !")
+
+# Chaîne de comparaison (exclusif à Python !)
+note = 15
+if 10 <= note <= 20:
+    print("Note valide")
+# En C il faudrait : if (note >= 10 && note &lt;= 20)</code></pre></div>
+    <div class="tip-box"><strong>💡 Super-pouvoir Python :</strong> L'opérateur <code>in</code> cherche un élément dans une liste, un tuple ou une chaîne. <code>"a" in "chat"</code> → <code>True</code></div>
+</section>
+
+<!-- Section 7 : match-case (Python 3.10+) -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-th-list"></i> match-case (Python 3.10+)</h2>
+    <div class="code-block"><div class="code-header"><span>Le switch de Python</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>commande = input("Commande : ")
+
+match commande:
+    case "aide":
+        print("Liste des commandes...")
+    case "quitter":
+        print("Au revoir !")
+    case "version":
+        print("v1.0")
+    case _:
+        print("Commande inconnue")
+        # _ = default (comme en C avec switch/default)</code></pre></div>
+    <div class="info-box"><strong>Note :</strong> <code>match-case</code> existe depuis Python 3.10. Avant, on utilisait des chaînes de if/elif. Pas de <code>break</code> nécessaire contrairement au switch C !</div>
+</section>
+
+<!-- Section 8 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 2</h4>
+        <ul>
+            <li><code>if / elif / else</code> — structure de décision (indentation !)</li>
+            <li>Comparaison : <code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code></li>
+            <li>Logique : <code>and</code> (ET), <code>or</code> (OU), <code>not</code> (NON) — mots, pas symboles</li>
+            <li>Ternaire : <code>valeur if condition else autre</code></li>
+            <li><code>in</code> : vérifier l'appartenance</li>
+            <li>Python permet <code>10 &lt;= x &lt;= 20</code> directement</li>
+            <li><code>match-case</code> : switch Python (3.10+), pas de break</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre1.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Variables & Types</a>
+    <a href="chapitre3.html" class="next-chapter">Boucles <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Demandez l'âge de l'utilisateur et dites s'il est majeur ou mineur.",hints:["input() + int()","if age >= 18"],answer:'age = int(input("Âge : "))\nif age >= 18:\n    print("Majeur")\nelse:\n    print("Mineur")'},
+        {q:"Demandez une note /20 et affichez la mention (TB ≥ 16, B ≥ 14, AB ≥ 12, P ≥ 10, sinon Recalé).",hints:["Utilisez elif","Testez du plus grand au plus petit"],answer:'n = float(input("Note : "))\nif n >= 16: print("Très Bien")\nelif n >= 14: print("Bien")\nelif n >= 12: print("Assez Bien")\nelif n >= 10: print("Passable")\nelse: print("Recalé")'},
+        {q:"Vérifiez si un nombre est à la fois positif ET pair.",hints:["and pour combiner","% 2 == 0 pour pair"],answer:'n = int(input("Nombre : "))\nif n > 0 and n % 2 == 0:\n    print("Positif et pair")\nelse:\n    print("Non")'},
+        {q:"Utilisez l'opérateur ternaire pour affecter \"pair\" ou \"impair\" à une variable.",hints:["valeur if condition else autre"],answer:'n = int(input("n : "))\nresultat = "pair" if n % 2 == 0 else "impair"\nprint(resultat)'},
+        {q:"Vérifiez si un fruit saisi est dans la liste [\"pomme\", \"banane\", \"orange\"].",hints:["Utilisez in"],answer:'fruit = input("Fruit : ")\nif fruit in ["pomme", "banane", "orange"]:\n    print("Fruit connu !")\nelse:\n    print("Fruit inconnu")'}
+    ],
+    quiz: [
+        {type:"mcq",q:"Quelle est l'erreur dans : if age >= 18 print('Majeur') ?",options:["Manque les :","Manque les ()","Manque le ;","Pas d'erreur"],correct:0},
+        {type:"mcq",q:"Que signifie elif ?",options:["else if (sinon si)","else finally","end if","elif est une erreur"],correct:0},
+        {type:"mcq",q:"Comment Python remplace-t-il les { } du C ?",options:["Par des ()","Par l'indentation","Par des []","Par des crochets"],correct:1},
+        {type:"mcq",q:"Quel opérateur logique en Python équivaut à && en C ?",options:["&&","AND","and","et"],correct:2},
+        {type:"mcq",q:"Que vaut : \"pair\" if 5 % 2 == 0 else \"impair\" ?",options:["pair","impair","True","Erreur"],correct:1},
+        {type:"mcq",q:"Que fait 'x in [1, 2, 3]' quand x=2 ?",options:["True","False","2","Erreur"],correct:0},
+        {type:"mcq",q:"Le match-case nécessite-t-il un break ?",options:["Oui, comme en C","Non, jamais","Seulement avec default","Ça dépend"],correct:1},
+        {type:"mcq",q:"Que vaut : not True ?",options:["True","False","None","Erreur"],correct:1},
+        {type:"qa",q:"Comment écrire 10 <= x <= 20 en Python ?",answer:"Exactement comme ça : 10 <= x <= 20 (chaîne de comparaison)"},
+        {type:"qa",q:"Quelle est la différence entre = et == ?",answer:"= est l'affectation (donner une valeur), == est la comparaison (tester l'égalité)"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque opérateur logique Python ↔ C :",pairs:[["and","&&"],["or","||"],["not","!"],["in","(pas d'équivalent simple)"]]},
+        {instruction:"Ordonnez les mentions (de la meilleure à la moins bonne) :",pairs:[["≥ 16","Très Bien"],["≥ 14","Bien"],["≥ 12","Assez Bien"],["≥ 10","Passable"]]},
+        {instruction:"Associez chaque concept à sa syntaxe :",pairs:[["Condition simple","if ... :"],["Alternative","else:"],["Sinon si","elif ... :"],["Ternaire","val if cond else autre"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

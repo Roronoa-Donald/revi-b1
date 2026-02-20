@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links"><li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li><li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li></ul>
+    <div class="nav-actions"><button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button><button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button></div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a><a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a><a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+</div>
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Entraînement</div>
+    <h1>Banque d'<span class="highlight">Exercices</span></h1>
+    <p>Exercices classés par chapitre et difficulté. Clique pour révéler la solution.</p>
+</section>
+<main class="content-wrapper">
+    <div class="exercise-filters" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;justify-content:center">
+        <button class="filter-btn active" onclick="filterCat('all',this)">Tous</button>
+        <button class="filter-btn" onclick="filterCat('variables',this)">Variables</button>
+        <button class="filter-btn" onclick="filterCat('conditions',this)">Conditions</button>
+        <button class="filter-btn" onclick="filterCat('boucles',this)">Boucles</button>
+        <button class="filter-btn" onclick="filterCat('tableaux',this)">Tableaux</button>
+        <button class="filter-btn" onclick="filterCat('fonctions',this)">Fonctions</button>
+        <button class="filter-btn" onclick="filterCat('tri',this)">Tri</button>
+        <button class="filter-btn" onclick="filterCat('recherche',this)">Recherche</button>
+        <button class="filter-btn" onclick="filterCat('recursivite',this)">Récursivité</button>
+        <button class="filter-btn" onclick="filterCat('structures',this)">Structures</button>
+        <button class="filter-btn" onclick="filterCat('complexite',this)">Complexité</button>
+    </div>
+    <div id="exercises-list"></div>
+</main>
+<script src="../../assets/js/main.js"></script>
+<script>
+const exercises=[
+{cat:'variables',level:'⭐',q:"Écrire un algorithme qui lit deux nombres et affiche leur somme.",a:"Lire(a)\nLire(b)\nÉcrire(a + b)"},
+{cat:'variables',level:'⭐',q:"Écrire un algorithme qui échange les valeurs de deux variables a et b.",a:"temp ← a\na ← b\nb ← temp"},
+{cat:'variables',level:'⭐⭐',q:"Écrire un algorithme qui calcule l'aire d'un cercle (rayon lu au clavier).",a:"Lire(r)\naire ← 3.14159 * r * r\nÉcrire(aire)"},
+{cat:'conditions',level:'⭐',q:"Écrire un algorithme qui lit un nombre et affiche s'il est positif, négatif ou nul.",a:"Lire(n)\nSi n > 0 Alors Écrire('Positif')\nSinonSi n < 0 Alors Écrire('Négatif')\nSinon Écrire('Nul')"},
+{cat:'conditions',level:'⭐⭐',q:"Écrire un algorithme qui lit 3 nombres et affiche le plus grand.",a:"Lire(a,b,c)\nmax ← a\nSi b > max Alors max ← b\nSi c > max Alors max ← c\nÉcrire(max)"},
+{cat:'conditions',level:'⭐⭐',q:"Lire une note et afficher la mention : <10 → Insuffisant, 10-12 → Passable, 12-14 → AB, 14-16 → Bien, ≥16 → TB.",a:"Lire(note)\nSi note < 10 Alors Écrire('Insuffisant')\nSinonSi note < 12 Alors Écrire('Passable')\nSinonSi note < 14 Alors Écrire('AB')\nSinonSi note < 16 Alors Écrire('Bien')\nSinon Écrire('TB')"},
+{cat:'boucles',level:'⭐',q:"Afficher les nombres de 1 à 10 avec une boucle Pour.",a:"Pour i de 1 à 10 Faire\n    Écrire(i)\nFinPour"},
+{cat:'boucles',level:'⭐⭐',q:"Calculer la somme des nombres de 1 à N (lu au clavier) avec une boucle.",a:"Lire(N)\nsomme ← 0\nPour i de 1 à N Faire\n    somme ← somme + i\nFinPour\nÉcrire(somme)"},
+{cat:'boucles',level:'⭐⭐',q:"Demander un mot de passe tant que l'utilisateur ne saisit pas 'ABC'.",a:"Répéter\n    Écrire('Mot de passe ?')\n    Lire(mdp)\nJusqu'à mdp = 'ABC'\nÉcrire('Accès autorisé')"},
+{cat:'boucles',level:'⭐⭐⭐',q:"Afficher la table de multiplication de 1 à 10 (multiplication complète).",a:"Pour i de 1 à 10 Faire\n    Pour j de 1 à 10 Faire\n        Écrire(i, ' × ', j, ' = ', i*j)\n    FinPour\nFinPour"},
+{cat:'tableaux',level:'⭐',q:"Lire 5 notes, les stocker dans un tableau, puis les afficher.",a:"Pour i de 1 à 5 Faire\n    Lire(T[i])\nFinPour\nPour i de 1 à 5 Faire\n    Écrire(T[i])\nFinPour"},
+{cat:'tableaux',level:'⭐⭐',q:"Calculer la moyenne d'un tableau de N notes.",a:"somme ← 0\nPour i de 1 à N Faire\n    somme ← somme + T[i]\nFinPour\nmoyenne ← somme / N"},
+{cat:'tableaux',level:'⭐⭐⭐',q:"Trouver le maximum et sa position dans un tableau.",a:"max ← T[1], pos ← 1\nPour i de 2 à N Faire\n    Si T[i] > max Alors\n        max ← T[i]\n        pos ← i\n    FinSi\nFinPour"},
+{cat:'fonctions',level:'⭐',q:"Écrire une fonction Max2(a,b) qui retourne le plus grand des deux.",a:"Fonction Max2(a,b : Entier) : Entier\nDébut\n    Si a > b Alors\n        Retourner a\n    Sinon\n        Retourner b\n    FinSi\nFin"},
+{cat:'fonctions',level:'⭐⭐',q:"Écrire une fonction EstPair(n) qui retourne VRAI si n est pair.",a:"Fonction EstPair(n : Entier) : Booléen\nDébut\n    Retourner (n MOD 2 = 0)\nFin"},
+{cat:'fonctions',level:'⭐⭐',q:"Écrire une procédure AfficherTab(T, N) qui affiche un tableau.",a:"Procédure AfficherTab(T : Tableau, N : Entier)\nDébut\n    Pour i de 1 à N Faire\n        Écrire(T[i], ' ')\n    FinPour\nFin"},
+{cat:'tri',level:'⭐⭐',q:"Appliquer le tri par sélection sur T=[5, 2, 8, 1, 9]. Donner l'état après chaque passe.",a:"Passe 1: min=1 pos=4 → [1, 2, 8, 5, 9]\nPasse 2: min=2 pos=2 → [1, 2, 8, 5, 9]\nPasse 3: min=5 pos=4 → [1, 2, 5, 8, 9]\nPasse 4: min=8 pos=4 → [1, 2, 5, 8, 9]"},
+{cat:'tri',level:'⭐⭐',q:"Appliquer le tri à bulles sur T=[4, 3, 1, 2]. Combien de passes ?",a:"Passe 1: [3,1,2,4]\nPasse 2: [1,2,3,4]\nPasse 3: aucun échange → FIN\n3 passes au total."},
+{cat:'recherche',level:'⭐⭐',q:"Tracer la recherche dichotomique de 7 dans T=[1,3,5,7,9,11,13].",a:"g=1 d=7 m=4 T[4]=7 → TROUVÉ en 1 étape !"},
+{cat:'recherche',level:'⭐⭐⭐',q:"Tracer la recherche dichotomique de 6 dans T=[1,3,5,7,9,11,13].",a:"g=1 d=7 m=4 T[4]=7 > 6 → d=3\ng=1 d=3 m=2 T[2]=3 < 6 → g=3\ng=3 d=3 m=3 T[3]=5 < 6 → g=4\ng=4 d=3 → g>d → NON TROUVÉ"},
+{cat:'recursivite',level:'⭐⭐',q:"Écrire la fonction récursive de Factorielle.",a:"Fonction Fact(n : Entier) : Entier\nDébut\n    Si n = 0 Alors\n        Retourner 1\n    Sinon\n        Retourner n * Fact(n-1)\n    FinSi\nFin"},
+{cat:'recursivite',level:'⭐⭐⭐',q:"Tracer les appels de Fibo(5).",a:"Fibo(5) = Fibo(4) + Fibo(3)\nFibo(4) = Fibo(3) + Fibo(2)\nFibo(3) = Fibo(2) + Fibo(1)\nFibo(2) = Fibo(1) + Fibo(0) = 1+0 = 1\nFibo(3) = 1+1 = 2\nFibo(4) = 2+1 = 3\nFibo(5) = 3+2 = 5"},
+{cat:'structures',level:'⭐⭐',q:"Simuler : Empiler(3), Empiler(7), Empiler(1), Dépiler(), Dépiler(). Reste quoi ?",a:"Pile: [3] → [3,7] → [3,7,1] → Dépiler 1 → [3,7] → Dépiler 7 → [3]\nReste : 3"},
+{cat:'structures',level:'⭐⭐',q:"Simuler : Enfiler(A), Enfiler(B), Défiler(), Enfiler(C), Défiler(). État ?",a:"File: [A] → [A,B] → Défiler A → [B] → [B,C] → Défiler B → [C]\nReste : C"},
+{cat:'complexite',level:'⭐',q:"Donner la complexité : somme ← 0; Pour i de 1 à n : somme ← somme + i",a:"1 instruction + n itérations × 1 instruction = O(n)"},
+{cat:'complexite',level:'⭐⭐',q:"Donner la complexité : Pour i de 1 à n, Pour j de 1 à n : T[i][j] ← 0",a:"n × n = O(n²) — deux boucles imbriquées."},
+{cat:'complexite',level:'⭐⭐⭐',q:"Simplifier : 5n³ + 3n² + 100n + 42",a:"Terme dominant = n³ → O(n³)"}
+];
+function renderExercises(cat='all'){
+    const filtered=cat==='all'?exercises:exercises.filter(e=>e.cat===cat);
+    const html=filtered.map((e,i)=>`<div class="ex-card" data-cat="${e.cat}">
+        <div class="ex-header"><span class="ex-level">${e.level}</span><span class="ex-cat">${e.cat}</span></div>
+        <p class="ex-question">${e.q}</p>
+        <button class="ex-toggle" onclick="this.nextElementSibling.classList.toggle('hidden');this.textContent=this.textContent==='Voir la solution'?'Masquer':'Voir la solution'">Voir la solution</button>
+        <pre class="ex-answer hidden" style="background:var(--card-bg);padding:1rem;border-radius:.5rem;border:1px solid var(--border);overflow-x:auto;margin-top:.5rem;white-space:pre-wrap">${e.a}</pre>
+    </div>`).join('');
+    document.getElementById('exercises-list').innerHTML=html||'<p style="text-align:center;color:var(--text-muted)">Aucun exercice dans cette catégorie.</p>';
+}
+function filterCat(cat,btn){
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderExercises(cat);
+}
+renderExercises();
+</script>
+<style>
+.filter-btn{padding:.5rem 1rem;border-radius:2rem;border:1px solid var(--border);background:var(--card-bg);color:var(--text);cursor:pointer;font-size:.85rem;transition:.2s}
+.filter-btn:hover,.filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ex-card{background:var(--card-bg);border:1px solid var(--border);border-radius:1rem;padding:1.2rem;margin-bottom:1rem}
+.ex-header{display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.85rem}
+.ex-level{color:var(--accent)}
+.ex-cat{background:var(--accent-glow);color:var(--accent);padding:.15rem .5rem;border-radius:1rem;font-size:.8rem}
+.ex-question{font-weight:500;margin-bottom:.8rem}
+.ex-toggle{padding:.4rem .8rem;border-radius:.5rem;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-size:.85rem}
+.ex-toggle:hover{background:var(--accent);color:#fff}
+</style>
+</body>
+</html>

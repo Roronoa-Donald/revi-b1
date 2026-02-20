@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /_auth/
+Disallow: /api/
+Disallow: /server/
+Disallow: /scripts/
+
+Sitemap: https://cours-b1.vercel.app/sitemap.xml

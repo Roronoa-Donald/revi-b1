@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — Fonctions | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a>
+    <a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-puzzle-piece"></i> Chapitre 4</div>
+    <h1>🐍 Les <span class="highlight">Fonctions</span></h1>
+    <p>Découper votre code en blocs réutilisables : def, return, paramètres, lambda.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Pourquoi -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-question-circle"></i> Pourquoi des fonctions ?</h2>
+    <div class="concept-card">
+        <h4>🧩 Analogie des recettes de cuisine</h4>
+        <p>Imaginez que vous faites souvent des crêpes. Plutôt que de réécrire la recette à chaque fois, vous la notez UNE FOIS et vous dites simplement « faire des crêpes ». Une fonction, c'est exactement ça : une <strong>recette nommée</strong> que vous pouvez appeler quand vous voulez.</p>
+    </div>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique R.L.T. — 3 raisons</h4>
+        <p><strong>R</strong>éutiliser (écrire une seule fois, appeler plusieurs fois) · <strong>L</strong>ire (code plus clair et organisé) · <strong>T</strong>ester (chaque fonction se teste séparément)</p>
+    </div>
+</section>
+
+<!-- Section 2 : def et return -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-code"></i> Créer une fonction — def</h2>
+
+    <div class="code-block"><div class="code-header"><span>Syntaxe de base</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Définir une fonction
+def dire_bonjour():
+    print("Bonjour ! 👋")
+
+# Appeler la fonction
+dire_bonjour()      # Affiche "Bonjour ! 👋"
+dire_bonjour()      # On peut l'appeler autant de fois qu'on veut
+
+# Avec paramètre
+def dire_bonjour(nom):
+    print(f"Bonjour {nom} !")
+
+dire_bonjour("Alice")   # Bonjour Alice !
+dire_bonjour("Bob")     # Bonjour Bob !</code></pre></div>
+
+    <div class="code-block"><div class="code-header"><span>return — renvoyer un résultat</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Sans return → la fonction FAIT quelque chose (affiche, etc.)
+def afficher_carre(n):
+    print(n ** 2)
+
+# Avec return → la fonction CALCULE et RENVOIE un résultat
+def carre(n):
+    return n ** 2
+
+resultat = carre(5)     # resultat = 25
+print(carre(3) + carre(4))  # 9 + 16 = 25
+
+# ⚠️ Différence fondamentale :
+# print() → affiche à l'écran (pas réutilisable)
+# return  → renvoie une valeur (réutilisable dans des calculs)</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Piège n°1 :</strong> <code>print()</code> ≠ <code>return</code>. Si vous faites <code>print()</code> au lieu de <code>return</code>, la fonction ne renvoie rien (<code>None</code>) et vous ne pourrez pas réutiliser le résultat dans un calcul.
+    </div>
+</section>
+
+<!-- Section 3 : Paramètres avancés -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sliders-h"></i> Paramètres avancés</h2>
+
+    <div class="code-block"><div class="code-header"><span>Valeurs par défaut et nommés</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Paramètre avec valeur par défaut
+def saluer(nom, lang="fr"):
+    if lang == "fr":
+        print(f"Bonjour {nom} !")
+    else:
+        print(f"Hello {nom}!")
+
+saluer("Alice")          # Bonjour Alice ! (fr par défaut)
+saluer("Bob", "en")      # Hello Bob!
+
+# Arguments nommés (keyword arguments)
+saluer(lang="en", nom="Clara")  # Ordre libre !
+
+# Retour multiple (tuple)
+def min_max(liste):
+    return min(liste), max(liste)
+
+petit, grand = min_max([3, 1, 7, 2])
+print(petit, grand)  # 1 7</code></pre></div>
+
+    <div class="info-box"><strong>🐍 Super-pouvoir Python :</strong> Une fonction peut retourner <strong>plusieurs valeurs</strong> grâce au tuple. <code>return a, b</code> et on récupère avec <code>x, y = f()</code>.</div>
+</section>
+
+<!-- Section 4 : *args et **kwargs -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-asterisk"></i> *args et **kwargs</h2>
+    <div class="code-block"><div class="code-header"><span>Nombre variable d'arguments</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># *args : nombre variable d'arguments positionnels
+def somme(*args):
+    total = 0
+    for n in args:
+        total += n
+    return total
+
+print(somme(1, 2))         # 3
+print(somme(1, 2, 3, 4))   # 10
+
+# **kwargs : arguments nommés variables
+def fiche(**kwargs):
+    for cle, valeur in kwargs.items():
+        print(f"{cle} : {valeur}")
+
+fiche(nom="Alice", age=20, ville="Paris")
+# nom : Alice
+# age : 20
+# ville : Paris</code></pre></div>
+
+    <div class="concept-card">
+        <h4>📦 Analogie de la valise</h4>
+        <p><code>*args</code> = une <strong>valise ouverte</strong> : on peut y mettre autant d'objets qu'on veut, sans les nommer.<br>
+        <code>**kwargs</code> = une <strong>valise avec des étiquettes</strong> : chaque objet a un nom.</p>
+    </div>
+</section>
+
+<!-- Section 5 : Portée des variables -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-door-open"></i> Portée des variables</h2>
+    <div class="code-block"><div class="code-header"><span>Local vs Global</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>x = 10  # Variable GLOBALE
+
+def f():
+    x = 5    # Variable LOCALE (différente !)
+    print(x) # 5
+
+f()
+print(x)     # 10 (le global n'a pas changé)
+
+# Pour modifier le global depuis une fonction :
+def g():
+    global x
+    x = 99
+
+g()
+print(x)     # 99
+
+# ⚠️ Évitez global autant que possible !
+# Préférez passer en paramètre et return</code></pre></div>
+
+    <div class="concept-card">
+        <h4>🏠 Analogie des pièces</h4>
+        <p>Variable <strong>locale</strong> = un objet dans une pièce (visible uniquement dans cette pièce).<br>Variable <strong>globale</strong> = un objet dans le couloir (visible partout, mais on préfère ne pas y toucher).</p>
+    </div>
+</section>
+
+<!-- Section 6 : Lambda -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bolt"></i> Fonctions lambda (anonymes)</h2>
+    <div class="code-block"><div class="code-header"><span>Mini-fonctions en une ligne</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Fonction classique
+def double(x):
+    return x * 2
+
+# Même chose en lambda
+double = lambda x: x * 2
+print(double(5))  # 10
+
+# Utile pour sort, map, filter
+noms = ["Clara", "alice", "Bob"]
+noms.sort(key=lambda s: s.lower())
+print(noms)  # ['alice', 'Bob', 'Clara']
+
+# Formule : lambda paramètres: expression
+carre = lambda x: x ** 2
+somme = lambda a, b: a + b</code></pre></div>
+
+    <div class="info-box"><strong>Quand utiliser lambda :</strong> Pour des fonctions simples d'une seule expression, souvent passées en argument (sort, map, filter). Pour le reste, utilisez <code>def</code> classique.</div>
+</section>
+
+<!-- Section 7 : Docstrings -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-file-alt"></i> Documenter — docstrings</h2>
+    <div class="code-block"><div class="code-header"><span>Bonne pratique</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>def moyenne(notes):
+    """
+    Calcule la moyenne d'une liste de notes.
+    
+    Args:
+        notes (list): Liste de nombres
+    
+    Returns:
+        float: La moyenne des notes
+    """
+    return sum(notes) / len(notes)
+
+# Accéder à la doc
+help(moyenne)
+print(moyenne.__doc__)</code></pre></div>
+    <div class="tip-box"><strong>💡 Règle pro :</strong> Documentez vos fonctions avec des <strong>docstrings</strong> (triple guillemets). Ça aide les autres (et vous dans 6 mois !).</div>
+</section>
+
+<!-- Section 8 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 4</h4>
+        <ul>
+            <li><code>def nom(params):</code> — définir une fonction</li>
+            <li><code>return</code> renvoie une valeur (≠ print qui affiche)</li>
+            <li>Valeurs par défaut : <code>def f(x, y=10)</code></li>
+            <li>Retour multiple : <code>return a, b</code></li>
+            <li><code>*args</code> = arguments illimités, <code>**kwargs</code> = nommés</li>
+            <li>Local vs Global — évitez <code>global</code></li>
+            <li><code>lambda x: expr</code> — fonction anonyme en une ligne</li>
+            <li>Docstrings pour documenter vos fonctions</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre3.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Boucles</a>
+    <a href="chapitre5.html" class="next-chapter">Listes & Tuples <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Écrivez une fonction carre(n) qui retourne n².",hints:["def carre(n):","return n ** 2"],answer:"def carre(n):\n    return n ** 2\n\nprint(carre(5))  # 25"},
+        {q:"Écrivez une fonction est_pair(n) qui retourne True si n est pair.",hints:["n % 2 == 0","return True ou False"],answer:"def est_pair(n):\n    return n % 2 == 0\n\nprint(est_pair(4))  # True"},
+        {q:"Écrivez une fonction saluer(nom, fois=1) qui dit bonjour 'fois' fois.",hints:["Paramètre par défaut","Boucle for"],answer:'def saluer(nom, fois=1):\n    for _ in range(fois):\n        print(f"Bonjour {nom} !")\n\nsaluer("Alice", 3)'},
+        {q:"Écrivez une fonction qui retourne le min ET le max d'une liste.",hints:["return min, max","Retour multiple"],answer:"def min_max(lst):\n    return min(lst), max(lst)\n\np, g = min_max([3,1,7,2])\nprint(p, g)  # 1 7"},
+        {q:"Créez un lambda qui triple un nombre et testez-le.",hints:["lambda x: x * 3"],answer:"triple = lambda x: x * 3\nprint(triple(7))  # 21"}
+    ],
+    quiz: [
+        {type:"mcq",q:"Que retourne une fonction sans return ?",options:["0","False","None","Erreur"],correct:2},
+        {type:"mcq",q:"Quelle est la différence principale entre print() et return ?",options:["Aucune","print affiche, return renvoie une valeur","print est plus rapide","return affiche"],correct:1},
+        {type:"mcq",q:"def f(a, b=5) : f(3) donne b = ?",options:["3","5","0","Erreur"],correct:1},
+        {type:"mcq",q:"Comment récupérer 2 valeurs d'un return a, b ?",options:["x = f()","x, y = f()","[x,y] = f()","Les 3 marchent"],correct:1},
+        {type:"mcq",q:"Que fait *args dans une fonction ?",options:["Un pointeur","Collecte les arguments en tuple","Multiplie les arguments","Erreur"],correct:1},
+        {type:"mcq",q:"lambda x: x+1 est équivalent à :",options:["def f(x): print(x+1)","def f(x): return x+1","def f(): return x+1","x + 1"],correct:1},
+        {type:"mcq",q:"Une variable locale est visible :",options:["Partout","Uniquement dans sa fonction","Uniquement dans le fichier","Nulle part"],correct:1},
+        {type:"mcq",q:"Comment documenter une fonction en Python ?",options:["// commentaire","/* */","Docstring (triple guillemets)","@doc"],correct:2},
+        {type:"qa",q:"Que signifie R.L.T. (raisons des fonctions) ?",answer:"Réutiliser, Lire (lisibilité), Tester"},
+        {type:"qa",q:"Comment passer un nombre variable d'arguments nommés ?",answer:"Avec **kwargs (double étoile)"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque concept à son usage :",pairs:[["def","Définir une fonction"],["return","Renvoyer un résultat"],["lambda","Fonction anonyme"],["*args","Arguments multiples"]]},
+        {instruction:"Associez chaque type de variable à sa portée :",pairs:[["Locale","Visible dans la fonction"],["Globale","Visible partout"],["Paramètre","Copie locale à la fonction"],["global x","Accès/modif du global"]]},
+        {instruction:"Associez chaque syntaxe à son résultat :",pairs:[["f(3,5)","Arguments positionnels"],["f(b=5,a=3)","Arguments nommés"],["f(3)  (def f(a,b=0))","b vaut 0 par défaut"],["f(*[1,2,3])","Dépaquetage de liste"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

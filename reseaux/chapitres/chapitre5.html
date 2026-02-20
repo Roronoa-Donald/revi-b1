@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 5 — Protocoles courants | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html" class="active"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-cogs"></i> Chapitre 5</div>
+    <h1>🌐 Protocoles <span class="highlight">courants</span></h1>
+    <p>HTTP, DNS, DHCP, ARP, ICMP — les protocoles qui font tourner Internet.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-globe"></i> HTTP / HTTPS — Le Web</h2>
+    <div class="concept-card">
+        <h4>🌐 Analogie du serveur au restaurant</h4>
+        <p>Vous (le client/navigateur) passez une <strong>commande</strong> (requête HTTP) au serveur. Il prépare le plat (la page web) et vous le sert (réponse HTTP). HTTPS = le même restaurant mais avec un <strong>rideau</strong> (chiffrement TLS) pour que personne n'espionne votre commande.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Requête / Réponse HTTP</span></div><pre><code>Client → Serveur :  GET /index.html HTTP/1.1
+                    Host: www.example.com
+
+Serveur → Client :  HTTP/1.1 200 OK
+                    Content-Type: text/html
+                    &lt;html&gt;...&lt;/html&gt;
+
+Codes de statut :
+  200 = OK          301 = Redirection
+  404 = Not Found   500 = Erreur serveur</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-address-book"></i> DNS — Le GPS d'Internet</h2>
+    <div class="concept-card">
+        <h4>📱 Analogie du répertoire téléphonique</h4>
+        <p>Vous ne retenez pas les numéros de téléphone, vous cherchez « Alice » dans vos contacts. Le <strong>DNS</strong> fait pareil : il traduit les noms (google.com) en adresses IP (142.250.75.14). Sans DNS, il faudrait taper des IP partout !</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Résolution DNS</span></div><pre><code>1. Vous tapez "www.google.com" dans le navigateur
+2. Le PC demande au serveur DNS : "Quelle IP pour google.com ?"
+3. Le DNS répond : "142.250.75.14"
+4. Le navigateur contacte 142.250.75.14
+
+Types d'enregistrements DNS :
+  A     → nom → IPv4
+  AAAA  → nom → IPv6
+  CNAME → alias vers un autre nom
+  MX    → serveur mail du domaine
+  NS    → serveur DNS du domaine</code></pre></div>
+    <div class="tip-box"><strong>💡 Port :</strong> DNS utilise le port <strong>53</strong> (UDP pour les requêtes courantes, TCP pour les transferts de zone).</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-magic"></i> DHCP — IP automatique</h2>
+    <div class="concept-card">
+        <h4>🏨 Analogie de l'hôtel</h4>
+        <p>Quand vous arrivez à l'hôtel, la réception vous attribue un <strong>numéro de chambre</strong>. Le <strong>DHCP</strong> fait pareil : il attribue automatiquement une adresse IP à chaque appareil qui se connecte au réseau.</p>
+    </div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique D.O.R.A. (processus DHCP)</h4>
+        <p><strong>D</strong>iscover → <strong>O</strong>ffer → <strong>R</strong>equest → <strong>A</strong>ck<br>
+        Le client cherche, le serveur propose, le client demande, le serveur confirme.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-search-location"></i> ARP — Trouver l'adresse MAC</h2>
+    <div class="concept-card">
+        <h4>📢 Analogie du « Qui habite ici ? »</h4>
+        <p>Vous connaissez l'adresse (IP) mais pas le nom du résident (MAC). ARP <strong>crie dans le réseau</strong> : « Qui a l'IP 192.168.1.5 ? ». L'appareil concerné répond : « C'est moi ! Mon MAC est AA:BB:CC:DD:EE:FF ».</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ ARP</strong> travaille entre couche 2 et 3. Il traduit une <strong>adresse IP → adresse MAC</strong>. Les résultats sont stockés dans la <strong>table ARP</strong> (cache) pour ne pas redemander à chaque fois.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-heartbeat"></i> ICMP — Diagnostic réseau</h2>
+    <div class="code-block"><div class="code-header"><span>ICMP en pratique</span></div><pre><code># ping — tester la connectivité
+ping 8.8.8.8          # Teste si Google DNS est joignable
+ping www.google.com   # Teste DNS + connectivité
+
+# traceroute — voir le chemin
+tracert www.google.com   # (Windows)
+traceroute www.google.com # (Linux/Mac)
+→ Affiche chaque routeur traversé</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table"></i> Tableau récapitulatif</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Protocole</th><th>Port</th><th>Couche</th><th>Rôle</th></tr></thead>
+        <tbody>
+            <tr><td><strong>HTTP</strong></td><td>80</td><td>7 Application</td><td>Web non sécurisé</td></tr>
+            <tr><td><strong>HTTPS</strong></td><td>443</td><td>7 Application</td><td>Web sécurisé (TLS)</td></tr>
+            <tr><td><strong>DNS</strong></td><td>53</td><td>7 Application</td><td>Nom → IP</td></tr>
+            <tr><td><strong>DHCP</strong></td><td>67/68</td><td>7 Application</td><td>Attribution IP auto</td></tr>
+            <tr><td><strong>FTP</strong></td><td>21</td><td>7 Application</td><td>Transfert fichiers</td></tr>
+            <tr><td><strong>SSH</strong></td><td>22</td><td>7 Application</td><td>Shell distant sécurisé</td></tr>
+            <tr><td><strong>ARP</strong></td><td>—</td><td>2-3</td><td>IP → MAC</td></tr>
+            <tr><td><strong>ICMP</strong></td><td>—</td><td>3 Réseau</td><td>Diagnostic (ping)</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 5</h4>
+        <ul>
+            <li>HTTP/HTTPS : web (80/443) · DNS : nom→IP (53)</li>
+            <li>DHCP : <strong>D.O.R.A.</strong> (Discover, Offer, Request, Ack)</li>
+            <li>ARP : IP → MAC (« Qui a cette IP ? »)</li>
+            <li>ICMP : ping + traceroute (diagnostic)</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre4.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Sous-réseaux</a>
+    <a href="chapitre6.html" class="next-chapter">Équipements <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Technicien',minXP:300},{name:'Admin',minXP:550},{name:'Architecte',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Décrivez les 4 étapes du processus DHCP.",hints:["D.O.R.A.","Discover, Offer, Request, Ack"],answer:"1.Discover: le client broadcast 'Y a-t-il un serveur DHCP?'\n2.Offer: le serveur propose une IP\n3.Request: le client accepte l'offre\n4.Ack: le serveur confirme l'attribution"},
+        {q:"Que fait la commande 'nslookup google.com' ?",hints:["nslookup = DNS lookup","Traduit nom en IP"],answer:"Elle interroge le serveur DNS pour obtenir l'adresse IP de google.com."},
+        {q:"Quel protocole permet de traduire IP → MAC ?",hints:["Broadcast sur le réseau local","Commence par A"],answer:"ARP (Address Resolution Protocol). Il broadcast 'Qui a l'adresse IP X?' et l'appareil concerné répond avec son adresse MAC."},
+        {q:"Quelle différence entre HTTP et HTTPS ?",hints:["Le S = Secure","Chiffrement TLS"],answer:"HTTPS ajoute une couche de chiffrement TLS/SSL. Les données sont chiffrées entre le client et le serveur. HTTP transmet en clair."},
+        {q:"Que signifie le code HTTP 404 ?",hints:["Erreur côté client","La ressource n'existe pas"],answer:"404 = Not Found. La page demandée n'existe pas sur le serveur."}
+    ],
+    quiz:[
+        {type:"mcq",q:"DNS traduit :",options:["MAC → IP","IP → MAC","Nom → IP","IP → Nom de port"],correct:2},
+        {type:"mcq",q:"DHCP utilise le processus :",options:["SYN-ACK","DORA","ICMP","ARP"],correct:1},
+        {type:"mcq",q:"Quel protocole est utilisé par la commande ping ?",options:["TCP","UDP","ICMP","ARP"],correct:2},
+        {type:"mcq",q:"Le port 443 est utilisé par :",options:["HTTP","FTP","SSH","HTTPS"],correct:3},
+        {type:"mcq",q:"ARP traduit :",options:["Nom → IP","IP → MAC","MAC → IP","Port → Service"],correct:1},
+        {type:"mcq",q:"FTP utilise le port :",options:["21","22","25","80"],correct:0},
+        {type:"mcq",q:"Code HTTP 200 signifie :",options:["Erreur serveur","Page non trouvée","OK (succès)","Redirection"],correct:2},
+        {type:"mcq",q:"Le type d'enregistrement DNS 'A' associe :",options:["Nom → IPv6","Nom → IPv4","Nom → Alias","Nom → Serveur mail"],correct:1},
+        {type:"qa",q:"Que signifie DHCP ?",answer:"Dynamic Host Configuration Protocol — attribution automatique d'adresses IP."},
+        {type:"qa",q:"Quel protocole utiliser pour se connecter à distance de façon sécurisée ?",answer:"SSH (Secure Shell), port 22. Remplace Telnet (non sécurisé)."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque protocole à son rôle :",pairs:[["DNS","Nom → IP"],["DHCP","Attribution IP auto"],["ARP","IP → MAC"],["ICMP","Diagnostic (ping)"]]},
+        {instruction:"Associez chaque code HTTP à sa signification :",pairs:[["200","OK"],["301","Redirection"],["404","Non trouvé"],["500","Erreur serveur"]]},
+        {instruction:"Associez les étapes DHCP dans l'ordre :",pairs:[["Étape 1","Discover"],["Étape 2","Offer"],["Étape 3","Request"],["Étape 4","Acknowledge"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

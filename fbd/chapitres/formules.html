@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules & Mnémoniques | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin:2rem 0}.formula-card{background:var(--card-bg);border-radius:18px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.06);border-left:4px solid var(--accent);transition:.2s}.formula-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}.formula-card h3{margin:0 0 .75rem;font-size:1.05rem;color:var(--accent)}.formula-card p,.formula-card code{font-size:.93rem;line-height:1.5}.formula-card .formula{font-family:'JetBrains Mono',monospace;background:var(--accent-glow);padding:.5rem .8rem;border-radius:8px;display:inline-block;margin:.5rem 0;font-size:.88rem}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Formules & Mnémoniques</div>
+    <h1>🔧 Fiche <span class="highlight">de révision</span></h1>
+    <p>Tous les mnémoniques et formules clés du cours FBD en un seul endroit.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── Tableau récap mnémoniques ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-brain"></i> Tous les mnémoniques</h2>
+        <div class="concept-card">
+            <table class="styled-table">
+                <thead><tr><th>Ch.</th><th>Mnémonique</th><th>Signification</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><strong>R.A.T.D.</strong></td><td>Relation, Attribut, Tuple, Domaine</td></tr>
+                    <tr><td>1</td><td><strong>U.N.I.</strong></td><td>Unique, Non-null, Immuable (clé primaire)</td></tr>
+                    <tr><td>2</td><td><strong>S.P.R.</strong></td><td>Sélection (σ), Projection (π), Renommage (ρ)</td></tr>
+                    <tr><td>2</td><td><strong>U.I.D.P.</strong></td><td>Union (∪), Intersection (∩), Différence (−), Produit (×)</td></tr>
+                    <tr><td>3</td><td><strong>D.M.C.</strong></td><td>DDL (Create/Alter/Drop), DML (Select/Insert/Update/Delete), DCL (Grant/Revoke)</td></tr>
+                    <tr><td>3</td><td><strong>S.F.W.O.L.</strong></td><td>SELECT — FROM — WHERE — ORDER BY — LIMIT</td></tr>
+                    <tr><td>3</td><td><strong>C.R.U.D.</strong></td><td>Create → INSERT | Read → SELECT | Update → UPDATE | Delete → DELETE</td></tr>
+                    <tr><td>4</td><td><strong>I.L.R.F.C.</strong></td><td>INNER, LEFT, RIGHT, FULL, CROSS JOIN</td></tr>
+                    <tr><td>4</td><td><strong>C.S.A.M.M.</strong></td><td>COUNT, SUM, AVG, MAX, MIN</td></tr>
+                    <tr><td>5</td><td><strong>I.M.S.</strong></td><td>Anomalies : Insertion, Mise à jour, Suppression</td></tr>
+                    <tr><td>5</td><td><strong>A.U.P.</strong></td><td>1NF : Atomique, Unique, PK définie</td></tr>
+                    <tr><td>6</td><td><strong>E.A.R.</strong></td><td>Entité, Attribut, Relation (modèle E-R)</td></tr>
+                    <tr><td>6</td><td><strong>E.R.D.U.</strong></td><td>Entité, Référentielle, Domaine, Utilisateur (contraintes)</td></tr>
+                    <tr><td>6</td><td><strong>A.C.L.P.N.</strong></td><td>Analyse, Conceptuel, Logique, Physique, Normaliser</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Formules ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-square-root-alt"></i> Formules & Règles essentielles</h2>
+        <div class="formula-grid">
+
+            <div class="formula-card">
+                <h3>🗃️ Ch.1 — Modèle relationnel</h3>
+                <p><strong>Schéma :</strong></p>
+                <div class="formula">TABLE(<u>PK</u>, attribut1, #FK, …)</div>
+                <p><u>souligné</u> = PK | # = FK</p>
+                <p><strong>Relations :</strong> 1:1 → FK UNIQUE | 1:N → FK côté N | M:N → table de jonction</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>σ Ch.2 — Algèbre relationnelle</h3>
+                <p><strong>Unaires :</strong></p>
+                <div class="formula">σ_condition (R) → filtre lignes</div>
+                <div class="formula">π_colonnes (R) → filtre colonnes</div>
+                <p><strong>Jointure :</strong></p>
+                <div class="formula">R1 ⋈_θ R2 = σ_θ (R1 × R2)</div>
+            </div>
+
+            <div class="formula-card">
+                <h3>💻 Ch.3 — SQL Fondamentaux</h3>
+                <div class="formula">SELECT cols FROM table WHERE cond ORDER BY col LIMIT n;</div>
+                <div class="formula">INSERT INTO t (cols) VALUES (vals);</div>
+                <div class="formula">UPDATE t SET col=val WHERE cond;</div>
+                <div class="formula">DELETE FROM t WHERE cond;</div>
+            </div>
+
+            <div class="formula-card">
+                <h3>🔗 Ch.4 — SQL Avancé</h3>
+                <p><strong>Ordre exécution :</strong></p>
+                <div class="formula">FROM→WHERE→GROUP BY→HAVING→SELECT→ORDER BY→LIMIT</div>
+                <p><strong>WHERE</strong> = avant groupement | <strong>HAVING</strong> = après groupement</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>🧹 Ch.5 — Normalisation</h3>
+                <p><strong>La clé, toute la clé, rien que la clé :</strong></p>
+                <div class="formula">1NF = atomique | 2NF = pas partiel | 3NF = pas transitif</div>
+                <p><strong>DF transitive :</strong> A → B → C → séparer</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>🏗️ Ch.6 — Conception</h3>
+                <p><strong>Processus :</strong></p>
+                <div class="formula">Analyse → MCD → MLD → MPD → Normaliser</div>
+                <p><strong>Contraintes :</strong> Entité (PK) + Référentielle (FK) + Domaine (CHECK) + Utilisateur (TRIGGER)</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ─── Aide-mémoire SQL ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-terminal"></i> Aide-mémoire SQL rapide</h2>
+        <div class="concept-card">
+            <table class="styled-table">
+                <thead><tr><th>Action</th><th>SQL</th></tr></thead>
+                <tbody>
+                    <tr><td>Créer table</td><td><code>CREATE TABLE t (col TYPE CONTRAINTES, …);</code></td></tr>
+                    <tr><td>Ajouter colonne</td><td><code>ALTER TABLE t ADD COLUMN col TYPE;</code></td></tr>
+                    <tr><td>Supprimer table</td><td><code>DROP TABLE IF EXISTS t;</code></td></tr>
+                    <tr><td>Insérer</td><td><code>INSERT INTO t (cols) VALUES (vals);</code></td></tr>
+                    <tr><td>Lire</td><td><code>SELECT cols FROM t WHERE cond;</code></td></tr>
+                    <tr><td>Modifier</td><td><code>UPDATE t SET col=val WHERE cond;</code></td></tr>
+                    <tr><td>Supprimer lignes</td><td><code>DELETE FROM t WHERE cond;</code></td></tr>
+                    <tr><td>Jointure</td><td><code>SELECT … FROM t1 JOIN t2 ON t1.pk=t2.fk;</code></td></tr>
+                    <tr><td>Grouper</td><td><code>SELECT col, COUNT(*) FROM t GROUP BY col;</code></td></tr>
+                    <tr><td>Filtrer groupes</td><td><code>… GROUP BY col HAVING COUNT(*)>3;</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

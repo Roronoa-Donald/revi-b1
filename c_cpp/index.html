@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C/C++ — Cours Interactif B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="chapitres/chapitre1.html">Ch.1</a></li><li><a href="chapitres/chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitres/chapitre3.html">Ch.3</a></li><li><a href="chapitres/chapitre4.html">Ch.4</a></li>
+        <li><a href="chapitres/formules.html">Formules</a></li><li><a href="exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-bolt"></i> Cours Interactif</div>
+    <h1>⚡ Maîtrisez le <span class="highlight">C/C++</span></h1>
+    <p>Des fondamentaux du langage C à l'introduction au C++. 8 chapitres progressifs avec exercices pratiques, mnémoniques et code compilable.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="modules-grid">
+        <a href="chapitres/chapitre1.html" class="module-card"><div class="module-icon"><i class="fas fa-terminal"></i></div><h3>Ch.1 — Bases du C</h3><p>Premier programme, variables, types, printf/scanf, opérateurs.</p><span class="module-meta">⏱ 45 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre2.html" class="module-card"><div class="module-icon"><i class="fas fa-code-branch"></i></div><h3>Ch.2 — Contrôle de flux</h3><p>if/else, switch, boucles for, while, do-while, break/continue.</p><span class="module-meta">⏱ 40 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre3.html" class="module-card"><div class="module-icon"><i class="fas fa-puzzle-piece"></i></div><h3>Ch.3 — Fonctions</h3><p>Déclaration, prototypes, paramètres, passage par valeur/adresse.</p><span class="module-meta">⏱ 40 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre4.html" class="module-card"><div class="module-icon"><i class="fas fa-th-list"></i></div><h3>Ch.4 — Tableaux & Chaînes</h3><p>Tableaux 1D/2D, chaînes de caractères, fonctions string.h.</p><span class="module-meta">⏱ 45 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre5.html" class="module-card"><div class="module-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Ch.5 — Pointeurs</h3><p>Adresses, déréférencement, pointeurs et tableaux, allocation dynamique.</p><span class="module-meta">⏱ 50 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre6.html" class="module-card"><div class="module-icon"><i class="fas fa-cubes"></i></div><h3>Ch.6 — Structures</h3><p>struct, typedef, tableaux de structures, passage aux fonctions.</p><span class="module-meta">⏱ 35 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre7.html" class="module-card"><div class="module-icon"><i class="fas fa-file-alt"></i></div><h3>Ch.7 — Fichiers</h3><p>fopen, fclose, fprintf, fscanf, fgets, fichiers texte et binaire.</p><span class="module-meta">⏱ 35 min · 18 exercices</span></a>
+        <a href="chapitres/chapitre8.html" class="module-card"><div class="module-icon"><i class="fas fa-rocket"></i></div><h3>Ch.8 — Introduction au C++</h3><p>cout/cin, classes, constructeurs, encapsulation, héritage simple.</p><span class="module-meta">⏱ 45 min · 18 exercices</span></a>
+    </div>
+
+    <div class="features-grid" style="margin-top:3rem">
+        <div class="feature-card"><i class="fas fa-gamepad"></i><h4>Gamifié</h4><p>XP, badges et niveaux</p></div>
+        <div class="feature-card"><i class="fas fa-brain"></i><h4>Mnémoniques</h4><p>Astuces mémorisation</p></div>
+        <div class="feature-card"><i class="fas fa-code"></i><h4>Code compilable</h4><p>Exemples C & C++ réels</p></div>
+        <div class="feature-card"><i class="fas fa-graduation-cap"></i><h4>Simulateur</h4><p>Examen chronométré</p></div>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_c_cpp_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Premier exercice', xp: 10 },
+    { id: 'hello_world', name: 'Hello World!', icon: '👋', desc: 'Termine le chapitre 1', xp: 15 },
+    { id: 'pointer_master', name: 'Maître Pointeur', icon: '🎯', desc: 'Termine les pointeurs', xp: 25 },
+    { id: 'cpp_intro', name: 'C++ Initié', icon: '🚀', desc: 'Termine l\'intro C++', xp: 25 },
+    { id: 'quiz_king', name: 'Roi du Quiz', icon: '👑', desc: '50 QCM corrects', xp: 60 },
+    { id: 'streak_3', name: 'Série de 3', icon: '🔥', desc: '3 jours consécutifs', xp: 25 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende C', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti C' },
+    { min: 80, title: 'Développeur Jr.' }, { min: 150, title: 'Codeur Confirmé' },
+    { min: 250, title: 'Maître du C' }, { min: 400, title: 'Guru C/C++' }
+] });
+GameEngine.init();
+</script>
+</body>
+</html>

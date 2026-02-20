@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — Tendance centrale | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-bullseye"></i> Chapitre 3</div>
+    <h1>📊 Tendance <span class="highlight">centrale</span></h1>
+    <p>Moyenne, médiane, mode — les 3 mesures qui résument vos données.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Les 3 M : Moyenne, Médiane, Mode</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique M.M.M. — Les 3 mesures de tendance centrale</h4>
+        <p><strong>M</strong>oyenne = somme / effectif total (le « centre de gravité »)<br>
+        <strong>M</strong>édiane = valeur qui coupe les données en 2 moitiés égales (50e centile)<br>
+        <strong>M</strong>ode = valeur la plus fréquente (la « star » des données)</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-calculator"></i> La Moyenne (x̄)</h2>
+    <div class="concept-card">
+        <h4>⚖️ Analogie de la balance</h4>
+        <p>La moyenne est le <strong>point d'équilibre</strong>. Si vous posez toutes vos valeurs sur une règle, la moyenne est le point où elle est en équilibre parfait.</p>
+    </div>
+    <div class="code-block"><pre><code>Formule (données brutes) :
+x̄ = (x₁ + x₂ + … + xₙ) / N = Σxᵢ / N
+
+Formule (tableau de fréquences) :
+x̄ = Σ(xᵢ × nᵢ) / N = Σ(xᵢ × fᵢ)
+
+Moyenne pondérée :
+x̄ = Σ(xᵢ × pᵢ) / Σpᵢ  (pᵢ = poids/coefficient)</code></pre></div>
+    <p><strong>Exemple :</strong> Notes : 8, 12, 14, 10, 16 → x̄ = (8+12+14+10+16) / 5 = 60/5 = <strong>12</strong></p>
+    <div class="warning-box"><strong>⚠️ Piège !</strong> La moyenne est sensible aux <strong>valeurs extrêmes</strong>. Ajoutez un 0 → x̄ = 60/6 = 10 (la moyenne chute). Un milliardaire dans un village fait exploser la moyenne des revenus !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-arrows-alt-v"></i> La Médiane (Me)</h2>
+    <div class="concept-card">
+        <h4>🚶 Analogie de la file d'attente</h4>
+        <p>Rangez 9 personnes par taille croissante. La <strong>médiane</strong> est la taille de la personne au <strong>milieu</strong> (la 5e). 50% sont plus petits, 50% sont plus grands.</p>
+    </div>
+    <div class="code-block"><pre><code>Méthode :
+1. Ranger les données par ordre croissant
+2. Si N est impair : Me = valeur au rang (N+1)/2
+3. Si N est pair : Me = moyenne des 2 valeurs centrales
+
+Exemple (N=5, impair) :
+8, 10, 12, 14, 16 → rang = (5+1)/2 = 3e → Me = 12
+
+Exemple (N=6, pair) :
+8, 10, 12, 14, 16, 18 → Me = (12 + 14) / 2 = 13</code></pre></div>
+    <div class="tip-box"><strong>💡 Avantage de la médiane :</strong> Elle <strong>résiste</strong> aux valeurs extrêmes ! Si la série devient 0, 10, 12, 14, 16 → la médiane reste 12, mais la moyenne chute à 10.4.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-star"></i> Le Mode (Mo)</h2>
+    <div class="concept-card">
+        <h4>🏆 Analogie du vote</h4>
+        <p>Le <strong>mode</strong> = la valeur la plus « populaire » (la plus fréquente). C'est comme le résultat d'un vote : la valeur qui a le plus de « voix » (le plus grand effectif).</p>
+    </div>
+    <p><strong>Exemple :</strong> 3, 5, 5, 5, 7, 8, 9 → <strong>Mo = 5</strong> (apparaît 3 fois)</p>
+    <div class="info-box"><strong>ℹ️ Cas particuliers :</strong> Il peut y avoir <strong>plusieurs modes</strong> (bimodal, multimodal) si plusieurs valeurs ont le même effectif maximal. Une distribution « plate » n'a pas de mode.</div>
+
+    <h3>Comparaison des 3 M</h3>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Mesure</th><th>Formule</th><th>Avantage</th><th>Inconvénient</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Moyenne</strong></td><td>Σxᵢ / N</td><td>Utilise toutes les valeurs</td><td>Sensible aux extrêmes</td></tr>
+            <tr><td><strong>Médiane</strong></td><td>Valeur centrale</td><td>Résiste aux extrêmes</td><td>Ignore les valeurs</td></tr>
+            <tr><td><strong>Mode</strong></td><td>Valeur la + fréquente</td><td>Fonctionne pour le qualitatif</td><td>Peut ne pas exister</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 3</h4>
+        <ul>
+            <li><strong>M.M.M.</strong> : Moyenne (somme/N), Médiane (milieu), Mode (+ fréquent)</li>
+            <li>Moyenne pondérée : Σ(xᵢ × pᵢ) / Σpᵢ</li>
+            <li>Médiane : ranger → position (N+1)/2 (impair) ou moyenne des 2 centraux (pair)</li>
+            <li>Moyenne sensible aux extrêmes, médiane résistante</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre2.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Fréquences</a>
+    <a href="chapitre4.html" class="next-chapter">Dispersion <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Calculez la moyenne de : 4, 7, 9, 12, 18.",hints:["Somme = ?","Divisez par N=5"],answer:"Somme = 4+7+9+12+18 = 50. Moyenne = 50/5 = 10."},
+        {q:"Trouvez la médiane de : 3, 7, 1, 9, 5.",hints:["Rangez d'abord","Position (N+1)/2"],answer:"Rangée: 1, 3, 5, 7, 9. N=5 (impair). Position = (5+1)/2 = 3e. Médiane = 5."},
+        {q:"Trouvez le mode de : 2, 3, 3, 4, 5, 5, 5, 6, 7.",hints:["Quelle valeur apparaît le plus ?"],answer:"5 apparaît 3 fois (plus que toute autre). Mode = 5."},
+        {q:"Moyenne pondérée : Maths (coef 3, note 14), Français (coef 2, note 11), Anglais (coef 1, note 16).",hints:["Σ(note × coef)","Divisez par Σcoef"],answer:"(14×3 + 11×2 + 16×1) / (3+2+1) = (42+22+16)/6 = 80/6 ≈ 13.33."},
+        {q:"Médiane pour N=6 : 2, 5, 8, 12, 15, 20.",hints:["N pair → moyenne des 2 centraux"],answer:"N=6 (pair). Positions 3 et 4 : 8 et 12. Médiane = (8+12)/2 = 10."}
+    ],
+    quiz:[
+        {type:"mcq",q:"La moyenne de 10, 20, 30 est :",options:["10","20","30","60"],correct:1},
+        {type:"mcq",q:"La médiane est sensible aux valeurs extrêmes :",options:["Vrai","Faux"],correct:1},
+        {type:"mcq",q:"Le mode est :",options:["La somme / N","La valeur centrale","La valeur la plus fréquente","L'écart-type"],correct:2},
+        {type:"mcq",q:"Pour N=7, la médiane est au rang :",options:["3","3.5","4","7"],correct:2},
+        {type:"mcq",q:"Quelle mesure fonctionne avec des données qualitatives ?",options:["Moyenne","Médiane","Mode","Variance"],correct:2},
+        {type:"mcq",q:"Moyenne pondérée de 10 (coef 2) et 20 (coef 1) :",options:["15","13.33","16.67","12"],correct:1},
+        {type:"mcq",q:"Série : 1, 1, 2, 2, 2, 3, 3. Le mode est :",options:["1","2","3","1 et 3"],correct:1},
+        {type:"qa",q:"Quand préfère-t-on la médiane à la moyenne ?",answer:"Quand les données contiennent des valeurs extrêmes (outliers). Ex: revenus avec quelques très riches → la médiane donne une image plus fidèle du revenu 'typique'."},
+        {type:"qa",q:"Peut-il y avoir plusieurs modes ?",answer:"Oui, une distribution bimodale a 2 modes. Multimodale = plus de 2 modes. Si toutes les valeurs ont le même effectif, il n'y a pas de mode."},
+        {type:"qa",q:"Formule de la moyenne avec un tableau de fréquences ?",answer:"x̄ = Σ(xᵢ × nᵢ) / N ou de manière équivalente x̄ = Σ(xᵢ × fᵢ)."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque mesure à sa définition :",pairs:[["Moyenne","Somme des valeurs / N"],["Médiane","Valeur qui coupe en 2 moitiés"],["Mode","Valeur la plus fréquente"]]},
+        {instruction:"Avantage ou Inconvénient de la moyenne ?",pairs:[["Utilise toutes les valeurs","Avantage"],["Sensible aux extrêmes","Inconvénient"],["Simple à calculer","Avantage"],["Un seul outlier la fausse","Inconvénient"]]},
+        {instruction:"Ranger et trouver la médiane : 5, 2, 8, 1, 4",pairs:[["Série rangée","1, 2, 4, 5, 8"],["Position","(5+1)/2 = 3e"],["Médiane","4"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

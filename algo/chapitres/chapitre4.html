@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — Tableaux | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="chapitre4.html" class="active">Ch.4</a></li><li><a href="chapitre5.html">Ch.5</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a>
+    <a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a><a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-th-list"></i> Chapitre 4</div>
+    <h1>Les <span class="highlight">Tableaux</span></h1>
+    <p>Stocker et manipuler des collections de données : tableaux 1D, 2D, parcours et recherche séquentielle.</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- 4.1 Tableau 1D -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-list-ol"></i> 4.1 — Tableaux à une dimension</h2>
+        <div class="concept-card"><h4>📦 Définition</h4>
+            <p>Un <strong>tableau</strong> est une structure qui permet de stocker plusieurs valeurs <strong>du même type</strong> sous un même nom. Chaque valeur est identifiée par un <strong>indice</strong> (numéro de position).</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🏨</span><div><strong>Analogie — L'hôtel :</strong> Un tableau = un étage d'hôtel. Chaque chambre a un numéro (indice). Toutes les chambres sont identiques (même type). Pour trouver un client, on dit « chambre 3 » → <code>T[3]</code>.</div></div>
+
+        <h3>Déclaration</h3>
+        <div class="algo-block">
+<span class="comment">// Pseudocode</span>
+<span class="keyword">Variable</span> notes : <span class="type">Tableau</span>[<span class="number">1</span>..<span class="number">10</span>] <span class="keyword">de</span> <span class="type">Réel</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">var</span>
+    notes : <span class="keyword">array</span>[<span class="number">1</span>..<span class="number">10</span>] <span class="keyword">of</span> <span class="type">real</span>;
+        </div>
+
+        <h3>Accès et affectation</h3>
+        <div class="algo-block">
+notes[<span class="number">1</span>] ← <span class="number">15.5</span>    <span class="comment">// Affecter la valeur 15.5 à la case 1</span>
+notes[<span class="number">3</span>] ← notes[<span class="number">1</span>] + <span class="number">2</span>  <span class="comment">// Case 3 = 17.5</span>
+        </div>
+
+        <div class="warning-box"><span>⚠️</span><div><strong>Indices :</strong> En pseudocode on commence souvent à l'indice <strong>1</strong>. En Pascal aussi. Mais en C/Java/Python, on commence à <strong>0</strong> ! Attention quand tu traduis.</div></div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — T.I.P. :</strong> Un tableau c'est <strong>T</strong>ype identique, <strong>I</strong>ndice pour accéder, <strong>P</strong>lusieurs valeurs.</div></div>
+    </section>
+
+    <!-- 4.2 Parcours -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-walking"></i> 4.2 — Parcourir un tableau</h2>
+        <p>Pour traiter toutes les cases d'un tableau, on utilise une boucle <strong>Pour</strong> :</p>
+
+        <h3>Remplissage par l'utilisateur</h3>
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Entrez la note n°"</span>, i, <span class="string">" : "</span>)
+    <span class="keyword">Lire</span>(notes[i])
+<span class="keyword">FinPour</span>
+        </div>
+
+        <h3>Affichage</h3>
+        <div class="algo-block">
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Note "</span>, i, <span class="string">" = "</span>, notes[i])
+<span class="keyword">FinPour</span>
+        </div>
+
+        <h3>Calcul de la somme et de la moyenne</h3>
+        <div class="algo-block">
+somme ← <span class="number">0</span>
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    somme ← somme + notes[i]
+<span class="keyword">FinPour</span>
+moyenne ← somme / N
+        </div>
+
+        <h3>Recherche du maximum</h3>
+        <div class="algo-block">
+max ← notes[<span class="number">1</span>]
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">2</span> <span class="keyword">à</span> N <span class="keyword">Faire</span>
+    <span class="keyword">Si</span> notes[i] > max <span class="keyword">Alors</span>
+        max ← notes[i]
+    <span class="keyword">FinSi</span>
+<span class="keyword">FinPour</span>
+        </div>
+        <div class="tip-box"><span>💡</span><div><strong>Initialisation du max :</strong> On initialise avec le <strong>premier élément</strong> du tableau (pas 0 !). Puis on compare à partir du 2ème.</div></div>
+    </section>
+
+    <!-- 4.3 Tableau 2D -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-table"></i> 4.3 — Tableaux à deux dimensions (matrices)</h2>
+        <div class="concept-card"><h4>📊 Définition</h4>
+            <p>Un tableau 2D = un tableau de tableaux. On accède à un élément par <strong>deux indices</strong> : la <strong>ligne</strong> et la <strong>colonne</strong>.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🎬</span><div><strong>Analogie — Le cinéma :</strong> La rangée = 1er indice (ligne). Le siège dans la rangée = 2ème indice (colonne). <code>cinema[3][5]</code> = rangée 3, siège 5.</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Variable</span> grille : <span class="type">Tableau</span>[<span class="number">1</span>..<span class="number">3</span>][<span class="number">1</span>..<span class="number">4</span>] <span class="keyword">de</span> <span class="type">Entier</span>
+
+<span class="comment">// Parcours complet avec 2 boucles imbriquées</span>
+<span class="keyword">Pour</span> i <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> <span class="number">3</span> <span class="keyword">Faire</span>
+    <span class="keyword">Pour</span> j <span class="keyword">de</span> <span class="number">1</span> <span class="keyword">à</span> <span class="number">4</span> <span class="keyword">Faire</span>
+        <span class="keyword">Écrire</span>(grille[i][j], <span class="string">" "</span>)
+    <span class="keyword">FinPour</span>
+    <span class="keyword">Écrire</span>()  <span class="comment">// Retour à la ligne</span>
+<span class="keyword">FinPour</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">var</span>
+    grille : <span class="keyword">array</span>[<span class="number">1</span>..<span class="number">3</span>, <span class="number">1</span>..<span class="number">4</span>] <span class="keyword">of</span> <span class="type">integer</span>;
+        </div>
+    </section>
+
+    <!-- 4.4 Recherche séquentielle -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-search"></i> 4.4 — Recherche séquentielle</h2>
+        <p>On parcourt le tableau case par case pour trouver une valeur :</p>
+        <div class="algo-block">
+trouvé ← FAUX
+i ← <span class="number">1</span>
+<span class="keyword">TantQue</span> (i ≤ N) <span class="keyword">ET</span> (trouvé = FAUX) <span class="keyword">Faire</span>
+    <span class="keyword">Si</span> T[i] = valeurCherchée <span class="keyword">Alors</span>
+        trouvé ← VRAI
+        position ← i
+    <span class="keyword">Sinon</span>
+        i ← i + <span class="number">1</span>
+    <span class="keyword">FinSi</span>
+<span class="keyword">FinTantQue</span>
+        </div>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — FLAG :</strong> On utilise un <strong>drapeau</strong> (booléen <code>trouvé</code>) pour savoir si on a trouvé et on <strong>s'arrête dès</strong> que c'est trouvé — on ne continue pas inutilement.</div></div>
+    </section>
+
+    <!-- Résumé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 4.5 — Résumé</h2>
+        <div class="concept-card"><h4>🎯 Aide-mémoire</h4>
+            <ul>
+                <li><strong>Tableau 1D</strong> : une seule ligne de cases, accès par <code>T[i]</code></li>
+                <li><strong>Tableau 2D</strong> : lignes × colonnes, accès par <code>T[i][j]</code></li>
+                <li><strong>Parcours</strong> : toujours avec boucle Pour</li>
+                <li><strong>Somme</strong> : accumulateur initialisé à 0</li>
+                <li><strong>Max</strong> : initialisé au 1er élément, boucle à partir du 2ème</li>
+                <li><strong>Recherche</strong> : drapeau trouvé + arrêt dès trouvé</li>
+                <li><strong>T.I.P.</strong> : Type identique, Indice, Plusieurs valeurs</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Exercices -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre3.html"><i class="fas fa-arrow-left"></i> Ch.3 — Boucles</a>
+        <a href="chapitre5.html">Ch.5 — Fonctions <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_algo_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+    { id: 'ch4', name: 'Maître des Tableaux', icon: '📦', desc: 'Termine les Tableaux', xp: 20 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti Codeur' },
+    { min: 80, title: 'Algorithmicien Jr.' }, { min: 150, title: 'Développeur Logique' },
+    { min: 250, title: 'Maître des Tableaux' }, { min: 400, title: 'Architecte Algo' }
+] });
+GameEngine.init();
+
+ChapterExercises.init({
+    guided: [
+        { q: "Comment accéder à la 5ème case d'un tableau T ?", hints: ["Avec un indice entre crochets", "T[5]"], answer: "t[5]" },
+        { q: "Quelle boucle utilise-t-on pour parcourir un tableau de N éléments ?", hints: ["On connaît N", "Pour…de 1 à N"], answer: "pour" },
+        { q: "Comment initialiser l'accumulateur pour chercher le maximum ?", hints: ["Pas 0 !", "Le premier élément"], answer: "t[1]" },
+        { q: "Combien de boucles pour parcourir un tableau 2D ?", hints: ["Une pour les lignes, une pour…", "2 boucles"], answer: "2" },
+        { q: "Quel type de variable sert de 'drapeau' dans une recherche ?", hints: ["VRAI ou FAUX", "booléen"], answer: "booléen" }
+    ],
+    quiz: [
+        { type: "mcq", q: "T est un tableau[1..10] d'entiers. Que vaut T[0] ?", options: ["0", "Erreur / indéfini", "T[1]", "10"], correct: 1 },
+        { type: "mcq", q: "Pour calculer la moyenne de N notes :", options: ["somme / N", "somme * N", "N / somme", "somme + N"], correct: 0 },
+        { type: "qa", q: "En Pascal, comment déclare-t-on un tableau de 5 entiers (indice 1..5) ?", answer: ["array[1..5] of integer"] },
+        { type: "mcq", q: "Tableau 2D : grille[2][3] représente :", options: ["Ligne 2, colonne 3", "Colonne 2, ligne 3", "Case n°23", "Total de 6 cases"], correct: 0 },
+        { type: "qa", q: "Que signifie T.I.P. pour les tableaux ?", answer: ["type identique indice plusieurs"] },
+        { type: "mcq", q: "Recherche séquentielle : on s'arrête quand ?", options: ["Toujours à la fin", "Dès qu'on trouve", "Au milieu", "Après N/2 cases"], correct: 1 },
+        { type: "mcq", q: "Tableau 3 lignes × 4 colonnes = combien de cases ?", options: ["7", "12", "34", "3"], correct: 1 },
+        { type: "qa", q: "On initialise une somme à ___ avant la boucle.", answer: ["0"] },
+        { type: "mcq", q: "Pour trouver le min, on compare avec :", options: ["<", ">", "=", "≠"], correct: 0 },
+        { type: "qa", q: "Combien de cases dans T[1..20] ?", answer: ["20"] }
+    ],
+    dragdrop: [
+        { instruction: "Associe chaque opération à sa bonne initialisation :", pairs: [["Somme", "accumulateur ← 0"], ["Produit", "accumulateur ← 1"], ["Maximum", "max ← T[1]"], ["Recherche", "trouvé ← FAUX"]] },
+        { instruction: "Associe chaque concept à sa définition :", pairs: [["Indice", "Numéro de position dans le tableau"], ["Tableau 2D", "Tableau de tableaux (lignes × colonnes)"], ["Parcours", "Visite de toutes les cases avec une boucle"]] },
+        { instruction: "Ordonne les étapes de la recherche séquentielle :", pairs: [["Étape 1", "Initialiser trouvé ← FAUX, i ← 1"], ["Étape 2", "TantQue (i ≤ N) ET NON trouvé"], ["Étape 3", "Si T[i] = valeur → trouvé ← VRAI"], ["Étape 4", "Sinon i ← i + 1"]] }
+    ]
+});
+</script>
+</body>
+</html>

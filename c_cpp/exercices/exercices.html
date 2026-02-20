@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices C/C++ | B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}
+
+.filters-bar{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.filters-bar select,.filters-bar input{padding:.6rem 1rem;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass-bg);color:var(--text-primary);font-size:.9rem;backdrop-filter:blur(10px)}
+.exo-count{text-align:center;font-size:.9rem;color:var(--text-secondary);margin-bottom:1.5rem}
+.exo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.2rem}
+.exo-card{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem;backdrop-filter:blur(20px);transition:.3s}
+.exo-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.exo-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+.exo-cat{font-size:.75rem;padding:.25rem .7rem;border-radius:8px;background:var(--accent-glow);color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.exo-diff{font-size:.75rem;font-weight:600}
+.exo-diff.easy{color:#22c55e}.exo-diff.medium{color:#f59e0b}.exo-diff.hard{color:#ef4444}
+.exo-title{font-size:1.05rem;font-weight:700;color:var(--text-primary);margin-bottom:.5rem}
+.exo-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.5;margin-bottom:.8rem}
+.exo-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.exo-tags span{font-size:.72rem;padding:.2rem .5rem;border-radius:6px;background:var(--card-bg);color:var(--text-secondary);border:1px solid var(--glass-border)}
+.exo-toggle{margin-top:.8rem;font-size:.85rem;color:var(--accent);cursor:pointer;font-weight:600;border:none;background:none;padding:0;transition:.2s}
+.exo-toggle:hover{text-decoration:underline}
+.exo-solution{display:none;margin-top:.8rem;padding:1rem;background:var(--card-bg);border-radius:10px;border:1px solid var(--glass-border)}
+.exo-solution pre{margin:0;font-family:'JetBrains Mono',monospace;font-size:.85rem;white-space:pre-wrap;color:var(--text-primary)}
+.exo-solution .exo-hint{font-size:.85rem;color:var(--text-secondary);margin-bottom:.5rem;font-style:italic}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="../chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="../chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="../chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="../chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Pratique</div>
+    <h1>⚡ Exercices <span class="highlight">C/C++</span></h1>
+    <p>24 exercices de programmation classés par chapitre et difficulté. Essayez avant de voir la solution !</p>
+</section>
+
+<main class="content-wrapper">
+<div class="filters-bar">
+    <select id="filter-cat" onchange="applyFilters()">
+        <option value="all">Tous les chapitres</option>
+        <option value="Bases">Ch.1 — Bases</option><option value="Flux">Ch.2 — Contrôle de flux</option>
+        <option value="Fonctions">Ch.3 — Fonctions</option><option value="Tableaux">Ch.4 — Tableaux & Chaînes</option>
+        <option value="Pointeurs">Ch.5 — Pointeurs</option><option value="Structures">Ch.6 — Structures</option>
+        <option value="Fichiers">Ch.7 — Fichiers</option><option value="C++">Ch.8 — C++</option>
+    </select>
+    <select id="filter-diff" onchange="applyFilters()">
+        <option value="all">Toutes difficultés</option>
+        <option value="easy">⭐ Facile</option><option value="medium">⭐⭐ Moyen</option><option value="hard">⭐⭐⭐ Difficile</option>
+    </select>
+    <input type="search" id="filter-search" placeholder="🔍 Rechercher..." oninput="applyFilters()">
+</div>
+<div class="exo-count" id="exo-count"></div>
+<div class="exo-grid" id="exo-grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXOS = [
+// Ch.1 — Bases
+{cat:"Bases",diff:"easy",title:"Hello World personnalisé",desc:"Demandez le prénom de l'utilisateur avec scanf et affichez « Bonjour, [prénom] ! ».",tags:["printf","scanf"],hint:"Utilisez %s pour lire et afficher une chaîne.",code:'#include <stdio.h>\nint main() {\n    char prenom[50];\n    printf("Votre prénom : ");\n    scanf("%s", prenom);  // pas de & pour un tableau\n    printf("Bonjour, %s !\\n", prenom);\n    return 0;\n}'},
+{cat:"Bases",diff:"easy",title:"Conversion Celsius → Fahrenheit",desc:"Lisez une température en Celsius et affichez l'équivalent en Fahrenheit (F = C × 9/5 + 32).",tags:["float","printf"],hint:"Attention : 9/5 en int donne 1. Utilisez 9.0/5.",code:'#include <stdio.h>\nint main() {\n    float c;\n    printf("Celsius : "); scanf("%f", &c);\n    printf("%.1f°C = %.1f°F\\n", c, c * 9.0/5 + 32);\n    return 0;\n}'},
+{cat:"Bases",diff:"medium",title:"Swap de deux variables",desc:"Échangez les valeurs de deux variables entières a et b sans utiliser de troisième variable.",tags:["opérateurs","xor"],hint:"Utilisez XOR : a^=b; b^=a; a^=b; ou addition/soustraction.",code:'#include <stdio.h>\nint main() {\n    int a = 5, b = 10;\n    // Méthode XOR\n    a ^= b; b ^= a; a ^= b;\n    printf("a=%d, b=%d\\n", a, b); // a=10, b=5\n    return 0;\n}'},
+// Ch.2 — Flux
+{cat:"Flux",diff:"easy",title:"Pair ou impair",desc:"Demandez un nombre et dites s'il est pair ou impair.",tags:["if","modulo"],hint:"Un nombre est pair si n % 2 == 0.",code:'#include <stdio.h>\nint main() {\n    int n;\n    printf("Nombre : "); scanf("%d", &n);\n    if (n % 2 == 0) printf("%d est pair\\n", n);\n    else printf("%d est impair\\n", n);\n    return 0;\n}'},
+{cat:"Flux",diff:"medium",title:"Table de multiplication",desc:"Affichez la table de multiplication d'un nombre n (de 1 à 10) avec une boucle for.",tags:["for","printf"],hint:"for(int i=1; i<=10; i++) printf(\"%d x %d = %d\\n\", n, i, n*i);",code:'#include <stdio.h>\nint main() {\n    int n;\n    printf("Table de : "); scanf("%d", &n);\n    for (int i = 1; i <= 10; i++)\n        printf("%d x %d = %d\\n", n, i, n * i);\n    return 0;\n}'},
+{cat:"Flux",diff:"medium",title:"Calculatrice switch",desc:"Lisez deux nombres et un opérateur (+,-,*,/) puis affichez le résultat avec un switch.",tags:["switch","char"],hint:"scanf(\" %c\", &op) — l'espace avant %c ignore les espaces blancs.",code:'#include <stdio.h>\nint main() {\n    float a, b; char op;\n    printf("a op b : "); scanf("%f %c %f", &a, &op, &b);\n    switch(op) {\n        case \'+\': printf("= %.2f\\n", a+b); break;\n        case \'-\': printf("= %.2f\\n", a-b); break;\n        case \'*\': printf("= %.2f\\n", a*b); break;\n        case \'/\':\n            if (b != 0) printf("= %.2f\\n", a/b);\n            else printf("Division par 0 !\\n");\n            break;\n        default: printf("Opérateur inconnu\\n");\n    }\n    return 0;\n}'},
+// Ch.3 — Fonctions
+{cat:"Fonctions",diff:"easy",title:"Fonction maximum",desc:"Écrivez une fonction max(a, b) qui retourne le plus grand de deux entiers.",tags:["fonction","return"],hint:"Utilisez l'opérateur ternaire : return (a > b) ? a : b;",code:'#include <stdio.h>\nint max(int a, int b) {\n    return (a > b) ? a : b;\n}\nint main() {\n    printf("Max(3,7) = %d\\n", max(3, 7)); // 7\n    return 0;\n}'},
+{cat:"Fonctions",diff:"medium",title:"Factorielle récursive",desc:"Écrivez une fonction récursive qui calcule n! (factorielle de n).",tags:["récursivité","return"],hint:"Cas de base : 0! = 1. Sinon n! = n × (n-1)!",code:'#include <stdio.h>\nlong fact(int n) {\n    if (n <= 1) return 1;      // Cas de base\n    return n * fact(n - 1);     // Appel récursif\n}\nint main() {\n    printf("5! = %ld\\n", fact(5)); // 120\n    return 0;\n}'},
+{cat:"Fonctions",diff:"medium",title:"Échange par adresse",desc:"Écrivez une fonction swap(int *a, int *b) qui échange les valeurs pointées.",tags:["pointeur","adresse"],hint:"int tmp = *a; *a = *b; *b = tmp;",code:'#include <stdio.h>\nvoid swap(int *a, int *b) {\n    int tmp = *a;\n    *a = *b;\n    *b = tmp;\n}\nint main() {\n    int x = 5, y = 10;\n    swap(&x, &y);\n    printf("x=%d, y=%d\\n", x, y); // x=10, y=5\n    return 0;\n}'},
+// Ch.4 — Tableaux & Chaînes
+{cat:"Tableaux",diff:"easy",title:"Somme d'un tableau",desc:"Calculez et affichez la somme de tous les éléments d'un tableau d'entiers.",tags:["boucle","tableau"],hint:"Accumulez dans une variable somme initialisée à 0.",code:'#include <stdio.h>\nint main() {\n    int t[] = {3, 7, 1, 9, 4};\n    int n = 5, somme = 0;\n    for (int i = 0; i < n; i++) somme += t[i];\n    printf("Somme = %d\\n", somme); // 24\n    return 0;\n}'},
+{cat:"Tableaux",diff:"medium",title:"Inverser une chaîne",desc:"Écrivez un programme qui inverse une chaîne de caractères (\"hello\" → \"olleh\").",tags:["string","boucle"],hint:"Échangez les caractères du début et de la fin en avançant vers le centre.",code:'#include <stdio.h>\n#include <string.h>\nint main() {\n    char s[] = "hello";\n    int len = strlen(s);\n    for (int i = 0; i < len / 2; i++) {\n        char tmp = s[i];\n        s[i] = s[len - 1 - i];\n        s[len - 1 - i] = tmp;\n    }\n    printf("%s\\n", s); // olleh\n    return 0;\n}'},
+{cat:"Tableaux",diff:"hard",title:"Tri à bulles",desc:"Implémentez le tri à bulles pour trier un tableau d'entiers en ordre croissant.",tags:["tri","boucle imbriquée"],hint:"Deux boucles : la externe pour les passes, l'interne pour comparer les voisins.",code:'#include <stdio.h>\nvoid tri_bulle(int t[], int n) {\n    for (int i = 0; i < n - 1; i++)\n        for (int j = 0; j < n - 1 - i; j++)\n            if (t[j] > t[j+1]) {\n                int tmp = t[j];\n                t[j] = t[j+1];\n                t[j+1] = tmp;\n            }\n}\nint main() {\n    int t[] = {5, 2, 8, 1, 9};\n    tri_bulle(t, 5);\n    for (int i = 0; i < 5; i++) printf("%d ", t[i]);\n    // 1 2 5 8 9\n    return 0;\n}'},
+// Ch.5 — Pointeurs
+{cat:"Pointeurs",diff:"easy",title:"Premier pointeur",desc:"Déclarez un int x=42, un pointeur vers x, puis affichez l'adresse et la valeur via le pointeur.",tags:["pointeur","&","*"],hint:"int *p = &x; printf(\"%p → %d\\n\", (void*)p, *p);",code:'#include <stdio.h>\nint main() {\n    int x = 42;\n    int *p = &x;\n    printf("Adresse : %p\\n", (void*)p);\n    printf("Valeur  : %d\\n", *p); // 42\n    *p = 99;\n    printf("x = %d\\n", x);       // 99\n    return 0;\n}'},
+{cat:"Pointeurs",diff:"medium",title:"Tableau dynamique",desc:"Allouez dynamiquement un tableau de n entiers, remplissez-le, calculez la somme, puis libérez.",tags:["malloc","free"],hint:"int *t = (int*)malloc(n * sizeof(int)); ... free(t);",code:'#include <stdio.h>\n#include <stdlib.h>\nint main() {\n    int n;\n    printf("Taille : "); scanf("%d", &n);\n    int *t = (int*)malloc(n * sizeof(int));\n    if (!t) { printf("Erreur allocation\\n"); return 1; }\n    for (int i = 0; i < n; i++) t[i] = i + 1;\n    int somme = 0;\n    for (int i = 0; i < n; i++) somme += t[i];\n    printf("Somme = %d\\n", somme);\n    free(t); t = NULL;\n    return 0;\n}'},
+{cat:"Pointeurs",diff:"hard",title:"Tableau redimensionnable",desc:"Créez un tableau dynamique qui double de taille quand il est plein (simule un ArrayList).",tags:["realloc","malloc"],hint:"Quand count == capacity : capacity *= 2; t = realloc(t, capacity * sizeof(int));",code:'#include <stdio.h>\n#include <stdlib.h>\nint main() {\n    int capacity = 2, count = 0;\n    int *t = (int*)malloc(capacity * sizeof(int));\n    for (int val = 10; val <= 100; val += 10) {\n        if (count == capacity) {\n            capacity *= 2;\n            t = (int*)realloc(t, capacity * sizeof(int));\n        }\n        t[count++] = val;\n    }\n    for (int i = 0; i < count; i++) printf("%d ", t[i]);\n    printf("\\n(cap=%d, count=%d)\\n", capacity, count);\n    free(t); t = NULL;\n    return 0;\n}'},
+// Ch.6 — Structures
+{cat:"Structures",diff:"easy",title:"Structure Étudiant",desc:"Créez une structure Etudiant (nom, age, note), initialisez-la et affichez ses champs.",tags:["struct","typedef"],hint:"typedef struct { char nom[30]; int age; float note; } Etudiant;",code:'#include <stdio.h>\ntypedef struct {\n    char nom[30]; int age; float note;\n} Etudiant;\nint main() {\n    Etudiant e = {"Alice", 20, 15.5};\n    printf("%s, %d ans, note=%.1f\\n", e.nom, e.age, e.note);\n    return 0;\n}'},
+{cat:"Structures",diff:"medium",title:"Tableau de structures",desc:"Gérez un registre de 3 étudiants et affichez celui qui a la meilleure note.",tags:["struct","tableau","boucle"],hint:"Parcourez le tableau et gardez l'indice du max de note.",code:'#include <stdio.h>\ntypedef struct { char nom[30]; float note; } Etudiant;\nint main() {\n    Etudiant tab[] = {{"Alice",15.5},{"Bob",17.0},{"Clara",14.0}};\n    int best = 0;\n    for (int i = 1; i < 3; i++)\n        if (tab[i].note > tab[best].note) best = i;\n    printf("Meilleur : %s (%.1f)\\n", tab[best].nom, tab[best].note);\n    return 0;\n}'},
+{cat:"Structures",diff:"hard",title:"Structure avec pointeur",desc:"Écrivez une fonction qui modifie un Etudiant via un pointeur (notation -> pour les champs).",tags:["struct","pointeur","->"],hint:"void modifier(Etudiant *p) { p->note = 18.0; }",code:'#include <stdio.h>\ntypedef struct { char nom[30]; float note; } Etudiant;\nvoid augmenter(Etudiant *p, float bonus) {\n    p->note += bonus;  // flèche car pointeur\n    if (p->note > 20) p->note = 20;\n}\nint main() {\n    Etudiant e = {"Alice", 15.5};\n    augmenter(&e, 3.0);\n    printf("%s : %.1f\\n", e.nom, e.note); // 18.5\n    return 0;\n}'},
+// Ch.7 — Fichiers
+{cat:"Fichiers",diff:"easy",title:"Écrire dans un fichier",desc:"Créez un fichier 'notes.txt' et écrivez-y 3 lignes avec fprintf.",tags:["fopen","fprintf","fclose"],hint:"FILE *f = fopen(\"notes.txt\", \"w\");",code:'#include <stdio.h>\nint main() {\n    FILE *f = fopen("notes.txt", "w");\n    if (!f) { perror("Erreur"); return 1; }\n    fprintf(f, "Alice;15.5\\n");\n    fprintf(f, "Bob;17.0\\n");\n    fprintf(f, "Clara;14.0\\n");\n    fclose(f);\n    printf("Fichier créé !\\n");\n    return 0;\n}'},
+{cat:"Fichiers",diff:"medium",title:"Lire un fichier ligne par ligne",desc:"Lisez et affichez chaque ligne de 'notes.txt' avec fgets.",tags:["fopen","fgets","fclose"],hint:"while(fgets(buf, sizeof(buf), f)) printf(\"%s\", buf);",code:'#include <stdio.h>\nint main() {\n    FILE *f = fopen("notes.txt", "r");\n    if (!f) { perror("Erreur"); return 1; }\n    char buf[256];\n    while (fgets(buf, sizeof(buf), f))\n        printf("%s", buf);\n    fclose(f);\n    return 0;\n}'},
+{cat:"Fichiers",diff:"hard",title:"CSV → moyenne",desc:"Lisez un fichier CSV (nom;note) et calculez la moyenne des notes.",tags:["fscanf","fichier","calcul"],hint:"fscanf(f, \"%[^;];%f\\n\", nom, &note) lit un format nom;note.",code:'#include <stdio.h>\nint main() {\n    FILE *f = fopen("notes.txt", "r");\n    if (!f) { perror("Erreur"); return 1; }\n    char nom[50]; float note, somme = 0; int count = 0;\n    while (fscanf(f, "%[^;];%f\\n", nom, &note) == 2) {\n        printf("%s : %.1f\\n", nom, note);\n        somme += note; count++;\n    }\n    fclose(f);\n    if (count > 0)\n        printf("Moyenne : %.2f\\n", somme / count);\n    return 0;\n}'},
+// Ch.8 — C++
+{cat:"C++",diff:"easy",title:"Hello C++",desc:"Écrivez un programme C++ qui demande un prénom et dit bonjour avec cout/cin.",tags:["cout","cin","string"],hint:'string prenom; cin >> prenom; cout << "Bonjour " << prenom << endl;',code:'#include <iostream>\n#include <string>\nusing namespace std;\nint main() {\n    string prenom;\n    cout << "Prénom : ";\n    cin >> prenom;\n    cout << "Bonjour " << prenom << " !" << endl;\n    return 0;\n}'},
+{cat:"C++",diff:"medium",title:"Classe Rectangle",desc:"Créez une classe Rectangle avec largeur, hauteur, aire() et perimetre().",tags:["class","méthode","constructeur"],hint:"class Rectangle { private: double l, h; public: Rectangle(double, double); double aire(); };",code:'#include <iostream>\nusing namespace std;\nclass Rectangle {\nprivate:\n    double largeur, hauteur;   // P.A.M.C.\npublic:\n    Rectangle(double l, double h) : largeur(l), hauteur(h) {}\n    double aire() { return largeur * hauteur; }\n    double perimetre() { return 2 * (largeur + hauteur); }\n};\nint main() {\n    Rectangle r(5, 3);\n    cout << "Aire = " << r.aire() << endl;       // 15\n    cout << "Périm = " << r.perimetre() << endl; // 16\n    return 0;\n}'},
+{cat:"C++",diff:"hard",title:"Héritage Forme → Cercle",desc:"Créez une hiérarchie Forme (abstraite) → Cercle avec méthode aire() virtuelle.",tags:["héritage","virtual","override"],hint:"class Forme { public: virtual double aire() = 0; };",code:'#include <iostream>\n#include <cmath>\nusing namespace std;\nclass Forme {\npublic:\n    virtual double aire() = 0;  // Méthode abstraite\n    virtual ~Forme() {}         // Destructeur virtuel\n};\nclass Cercle : public Forme {\n    double rayon;\npublic:\n    Cercle(double r) : rayon(r) {}\n    double aire() override { return M_PI * rayon * rayon; }\n};\nint main() {\n    Forme *f = new Cercle(5);\n    cout << "Aire = " << f->aire() << endl; // ~78.54\n    delete f;\n    return 0;\n}'}
+];
+
+const $ = id => document.getElementById(id);
+
+function applyFilters() {
+    const cat = $('filter-cat').value;
+    const diff = $('filter-diff').value;
+    const search = $('filter-search').value.toLowerCase();
+    const filtered = EXOS.filter(e =>
+        (cat === 'all' || e.cat === cat) &&
+        (diff === 'all' || e.diff === diff) &&
+        (search === '' || e.title.toLowerCase().includes(search) || e.desc.toLowerCase().includes(search) || e.tags.some(t => t.toLowerCase().includes(search)))
+    );
+    $('exo-count').textContent = `${filtered.length} exercice${filtered.length > 1 ? 's' : ''} trouvé${filtered.length > 1 ? 's' : ''}`;
+    $('exo-grid').innerHTML = filtered.map((e, i) => `
+        <div class="exo-card">
+            <div class="exo-header">
+                <span class="exo-cat">${e.cat}</span>
+                <span class="exo-diff ${e.diff}">${e.diff === 'easy' ? '⭐ Facile' : e.diff === 'medium' ? '⭐⭐ Moyen' : '⭐⭐⭐ Difficile'}</span>
+            </div>
+            <div class="exo-title">${e.title}</div>
+            <div class="exo-desc">${e.desc}</div>
+            <div class="exo-tags">${e.tags.map(t => '<span>' + t + '</span>').join('')}</div>
+            <button class="exo-toggle" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> Voir la solution</button>
+            <div class="exo-solution">
+                <div class="exo-hint">💡 Indice : ${e.hint}</div>
+                <pre><code>${escHtml(e.code)}</code></pre>
+            </div>
+        </div>`).join('');
+}
+
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function toggleSolution(btn) {
+    const sol = btn.nextElementSibling;
+    const visible = sol.style.display === 'block';
+    sol.style.display = visible ? 'none' : 'block';
+    btn.innerHTML = visible ? '<i class="fas fa-eye"></i> Voir la solution' : '<i class="fas fa-eye-slash"></i> Masquer la solution';
+}
+
+applyFilters();
+</script>
+</body>
+</html>

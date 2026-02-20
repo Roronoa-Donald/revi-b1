@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}.exo-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.exo-toolbar button{padding:.45rem 1rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;transition:.2s;font-size:.85rem}.exo-toolbar button.active,.exo-toolbar button:hover{background:var(--accent);color:#fff}.exo-search{max-width:400px;margin:1rem auto;display:flex}.exo-search input{flex:1;padding:.55rem 1rem;border:2px solid var(--border);border-radius:12px 0 0 12px;background:var(--card-bg);color:var(--text);font-size:.95rem}.exo-search button{padding:.55rem 1rem;border:none;background:var(--accent);color:#fff;border-radius:0 12px 12px 0;cursor:pointer;font-size:.95rem}.diff-toolbar{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.5rem}.diff-toolbar button{padding:.35rem .8rem;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer;font-size:.82rem;transition:.2s}.diff-toolbar button.active{border-color:var(--accent);color:var(--accent);font-weight:700}.exo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem;margin-top:1rem}.exo-card{background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:0 4px 16px rgba(0,0,0,.06);transition:.25s;border-left:4px solid var(--accent)}.exo-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}.exo-card h3{margin:0 0 .5rem;font-size:1rem}.exo-card p{margin:0 0 .75rem;font-size:.88rem;opacity:.8;line-height:1.4}.exo-meta{display:flex;gap:.5rem;flex-wrap:wrap}.exo-tag{font-size:.72rem;padding:.2rem .55rem;border-radius:99px;font-weight:600}.exo-tag.cat{background:var(--accent-glow);color:var(--accent)}.exo-tag.easy{background:rgba(16,185,129,.15);color:#10b981}.exo-tag.medium{background:rgba(245,158,11,.15);color:#f59e0b}.exo-tag.hard{background:rgba(239,68,68,.15);color:#ef4444}.exo-count{text-align:center;margin:1rem 0;font-size:.9rem;opacity:.6}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="../chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="../chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>📊 Banque <span class="highlight">d'exercices</span></h1>
+    <p>24 exercices classés par chapitre et difficulté.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="exo-search"><input type="text" id="search" placeholder="Rechercher un exercice…"><button onclick="renderExos()"><i class="fas fa-search"></i></button></div>
+    <div class="exo-toolbar" id="cat-toolbar"></div>
+    <div class="diff-toolbar" id="diff-toolbar"></div>
+    <div class="exo-count" id="exo-count"></div>
+    <div class="exo-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXOS=[
+// ─── Ch.1 Séries statistiques ───
+{title:"Identifier les variables",desc:"On observe la couleur des yeux, l'âge, la taille, le code postal. Classez chaque variable (qualitative/quantitative, discrète/continue, nominale/ordinale).",cat:"Séries",diff:"easy",ch:1},
+{title:"Population vs Échantillon",desc:"Un hôpital compte 2 000 patients. On interroge 150 d'entre eux. Identifiez la population, l'échantillon, un individu, le caractère étudié.",cat:"Séries",diff:"easy",ch:1},
+{title:"Construire un tableau brut",desc:"Notes de 20 étudiants : 12, 14, 8, 12, 16, 10, 14, 12, 18, 10, 14, 12, 8, 16, 14, 10, 12, 14, 16, 12. Construisez le tableau des effectifs.",cat:"Séries",diff:"medium",ch:1},
+{title:"Série avec modalités qualitatives",desc:"Transport utilisé par 30 étudiants : Bus(12), Vélo(5), Voiture(8), Métro(5). Donnez la variable, son type, effectifs et fréquences.",cat:"Séries",diff:"medium",ch:1},
+// ─── Ch.2 Tableaux de fréquences ───
+{title:"Calculer les fréquences",desc:"Pour nᵢ = 3, 7, 5, 10, 5 (N=30), calculez chaque fᵢ et vérifiez que Σfᵢ = 1.",cat:"Fréquences",diff:"easy",ch:2},
+{title:"Fréquences cumulées",desc:"À partir du tableau (effectifs : 4, 6, 10, 8, 2), calculez les fréquences puis les fréquences cumulées croissantes. La dernière vaut-elle 1 ?",cat:"Fréquences",diff:"medium",ch:2},
+{title:"Données en classes",desc:"Tailles (cm) : [150;160[(3), [160;170[(8), [170;180[(12), [180;190[(5), [190;200[(2). Calculez centres de classe, fréquences, fréquences cumulées.",cat:"Fréquences",diff:"medium",ch:2},
+{title:"Retrouver N depuis les fréquences",desc:"On sait que f₁=0.15, f₂=0.35, f₃=0.25, f₄=0.25 et n₁=6. Retrouvez N et tous les nᵢ.",cat:"Fréquences",diff:"hard",ch:2},
+// ─── Ch.3 Tendance centrale ───
+{title:"Calculer la moyenne simple",desc:"Série : 5, 8, 12, 7, 10, 14, 6, 9. Calculez la moyenne arithmétique.",cat:"Tendance centrale",diff:"easy",ch:3},
+{title:"Moyenne pondérée",desc:"Notes et effectifs : 8(×3), 10(×5), 12(×7), 14(×4), 16(×1). Calculez la moyenne pondérée.",cat:"Tendance centrale",diff:"medium",ch:3},
+{title:"Trouver la médiane",desc:"Série triée : 3, 5, 5, 7, 8, 10, 12, 14, 15. (a) Trouvez la médiane pour N=9. (b) Si on ajoute 20, recalculez pour N=10.",cat:"Tendance centrale",diff:"medium",ch:3},
+{title:"Impact d'un outlier",desc:"Salaires (k€) : 25, 28, 30, 32, 35, 120. Calculez moyenne et médiane. Lequel est plus représentatif ? Pourquoi ?",cat:"Tendance centrale",diff:"hard",ch:3},
+// ─── Ch.4 Dispersion ───
+{title:"Étendue et variance",desc:"Série : 4, 6, 8, 10, 12. Calculez l'étendue, la variance (2 méthodes : définition et König) et l'écart-type.",cat:"Dispersion",diff:"easy",ch:4},
+{title:"Quartiles et IQR",desc:"Série triée : 2, 4, 5, 7, 8, 9, 11, 13, 15, 18, 20, 22. Trouvez Q1, Q2, Q3, IQR. Y a-t-il des outliers ?",cat:"Dispersion",diff:"medium",ch:4},
+{title:"Dessiner une boîte à moustaches",desc:"Données : min=3, Q1=8, Me=12, Q3=17, max=25. Dessinez la boîte à moustaches et identifiez les 50% centraux.",cat:"Dispersion",diff:"medium",ch:4},
+{title:"Comparer deux séries",desc:"Classe A : x̄=12, σ=2. Classe B : x̄=11, σ=4. Quelle classe est la plus homogène ? Justifiez avec le coefficient de variation.",cat:"Dispersion",diff:"hard",ch:4},
+// ─── Ch.5 Graphiques ───
+{title:"Choisir le bon graphique",desc:"Pour chaque situation, indiquez le graphique adapté : (a) répartition garçons/filles, (b) évolution des ventes, (c) répartition par tranche d'âge, (d) fréquences cumulées.",cat:"Graphiques",diff:"easy",ch:5},
+{title:"Construire un camembert",desc:"Budget mensuel : Loyer 40%, Nourriture 25%, Transport 15%, Loisirs 10%, Épargne 10%. Calculez les angles et dessinez le camembert.",cat:"Graphiques",diff:"medium",ch:5},
+{title:"Histogramme à classes inégales",desc:"Classes : [0;10[(4), [10;20[(8), [20;50[(15), [50;100[(10). Construisez l'histogramme en utilisant la densité (effectif/amplitude) pour les hauteurs.",cat:"Graphiques",diff:"hard",ch:5},
+{title:"Lire la médiane sur l'ogive",desc:"Tracez la courbe des fréquences cumulées pour : [0;5[(0.10), [5;10[(0.25), [10;15[(0.35), [15;20[(0.20), [20;25[(0.10). Lisez graphiquement la médiane.",cat:"Graphiques",diff:"hard",ch:5},
+// ─── Ch.6 Corrélation & régression ───
+{title:"Nuage de points",desc:"X={1,2,3,4,5}, Y={2,4,5,8,10}. Placez les points dans un repère. Observez-vous une tendance ?",cat:"Corrélation",diff:"easy",ch:6},
+{title:"Calculer r",desc:"X={2,4,6,8,10}, Y={3,5,8,10,14}. Calculez x̄, ȳ, Cov(X,Y), σₓ, σᵧ, puis r. Interprétez.",cat:"Corrélation",diff:"medium",ch:6},
+{title:"Droite de régression",desc:"Avec les données ci-dessus, trouvez a=Cov/Var(X) et b=ȳ−ax̄. Écrivez Y=aX+b. Prédisez Y pour X=12.",cat:"Corrélation",diff:"medium",ch:6},
+{title:"Corrélation ≠ Causalité",desc:"On observe que les ventes de glaces et les noyades augmentent en été (r=0.92). Cela signifie-t-il que manger des glaces cause des noyades ? Expliquez le biais.",cat:"Corrélation",diff:"hard",ch:6}
+];
+const CATS=["Tous",...[...new Set(EXOS.map(e=>e.cat))]];
+const DIFFS=[{k:"all",l:"Tous"},{k:"easy",l:"⭐ Facile"},{k:"medium",l:"⭐⭐ Moyen"},{k:"hard",l:"⭐⭐⭐ Difficile"}];
+let activeCat="Tous",activeDiff="all";
+const grid=document.getElementById('grid'),catTb=document.getElementById('cat-toolbar'),diffTb=document.getElementById('diff-toolbar'),countEl=document.getElementById('exo-count'),searchEl=document.getElementById('search');
+searchEl.addEventListener('input',renderExos);
+function renderExos(){
+    const q=searchEl.value.toLowerCase();
+    let f=EXOS.filter(e=>{
+        if(activeCat!=="Tous"&&e.cat!==activeCat)return false;
+        if(activeDiff!=="all"&&e.diff!==activeDiff)return false;
+        if(q&&!e.title.toLowerCase().includes(q)&&!e.desc.toLowerCase().includes(q))return false;
+        return true;
+    });
+    countEl.textContent=f.length+' exercice'+(f.length>1?'s':'');
+    grid.innerHTML=f.map(e=>`<div class="exo-card"><h3>${e.title}</h3><p>${e.desc}</p><div class="exo-meta"><span class="exo-tag cat">${e.cat}</span><span class="exo-tag ${e.diff}">${e.diff==='easy'?'⭐ Facile':e.diff==='medium'?'⭐⭐ Moyen':'⭐⭐⭐ Difficile'}</span><span class="exo-tag cat">Ch.${e.ch}</span></div></div>`).join('');
+}
+function buildToolbars(){
+    catTb.innerHTML=CATS.map(c=>`<button class="${c===activeCat?'active':''}" onclick="activeCat='${c}';buildToolbars();renderExos()">${c}</button>`).join('');
+    diffTb.innerHTML=DIFFS.map(d=>`<button class="${d.k===activeDiff?'active':''}" onclick="activeDiff='${d.k}';buildToolbars();renderExos()">${d.l}</button>`).join('');
+}
+buildToolbars();renderExos();
+</script>
+</body>
+</html>

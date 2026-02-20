@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 5 — Listes & Tuples | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html" class="active"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-list-ol"></i> Chapitre 5</div>
+    <h1>🐍 Listes & <span class="highlight">Tuples</span></h1>
+    <p>Stocker et manipuler des collections de données : listes modifiables, tuples immuables, slicing.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Listes -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-list"></i> Les listes — collections modifiables</h2>
+    <div class="concept-card">
+        <h4>🧳 Analogie de la valise</h4>
+        <p>Une liste est comme une <strong>valise ouverte</strong> : vous pouvez y mettre des objets, en retirer, en réorganiser, la vider. Elle peut contenir n'importe quoi, même des objets de types différents !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Créer et accéder</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Créer une liste
+fruits = ["pomme", "banane", "orange"]
+notes = [15, 17, 12, 18, 14]
+mixte = ["Alice", 20, True, 3.14]  # Types mélangés OK !
+vide = []
+
+# Accéder (indice à partir de 0 !)
+print(fruits[0])     # "pomme" (premier)
+print(fruits[-1])    # "orange" (dernier !)
+print(fruits[-2])    # "banane" (avant-dernier)
+
+# Modifier
+fruits[1] = "kiwi"   # ["pomme", "kiwi", "orange"]
+
+# Longueur
+print(len(fruits))    # 3</code></pre></div>
+
+    <div class="tip-box"><strong>💡 Super-pouvoir Python :</strong> Les indices négatifs comptent depuis la fin ! <code>-1</code> = dernier, <code>-2</code> = avant-dernier. Plus besoin de <code>list[len(list)-1]</code>.</div>
+</section>
+
+<!-- Section 2 : Méthodes -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tools"></i> Méthodes de listes — A.I.R.P.S.</h2>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique A.I.R.P.S.</h4>
+        <p><strong>A</strong>ppend · <strong>I</strong>nsert · <strong>R</strong>emove · <strong>P</strong>op · <strong>S</strong>ort — les 5 méthodes les plus utilisées sur les listes.</p>
+    </div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Méthode</th><th>Action</th><th>Exemple</th></tr></thead>
+        <tbody>
+            <tr><td><code>.append(x)</code></td><td>Ajouter à la fin</td><td><code>l.append(42)</code></td></tr>
+            <tr><td><code>.insert(i, x)</code></td><td>Insérer à la position i</td><td><code>l.insert(0, "début")</code></td></tr>
+            <tr><td><code>.remove(x)</code></td><td>Supprimer la 1ère occurrence</td><td><code>l.remove("banane")</code></td></tr>
+            <tr><td><code>.pop(i)</code></td><td>Supprimer et retourner l'élément i</td><td><code>dernier = l.pop()</code></td></tr>
+            <tr><td><code>.sort()</code></td><td>Trier sur place</td><td><code>l.sort()</code></td></tr>
+            <tr><td><code>.reverse()</code></td><td>Inverser la liste</td><td><code>l.reverse()</code></td></tr>
+            <tr><td><code>.index(x)</code></td><td>Trouver l'indice de x</td><td><code>l.index("pomme")</code></td></tr>
+            <tr><td><code>.count(x)</code></td><td>Compter les occurrences de x</td><td><code>l.count(5)</code></td></tr>
+        </tbody>
+    </table></div>
+
+    <div class="warning-box"><strong>⚠️ Piège :</strong> <code>.sort()</code> modifie la liste (retourne <code>None</code>). <code>sorted(liste)</code> crée une NOUVELLE liste triée. Ne faites pas <code>l = l.sort()</code> (ça met <code>None</code> dans l) !</div>
+</section>
+
+<!-- Section 3 : Slicing -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cut"></i> Slicing — découper</h2>
+
+    <div class="code-block"><div class="code-header"><span>liste[debut:fin:pas]</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>l = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+l[2:5]     # [2, 3, 4]      (indices 2 à 4, fin exclue !)
+l[:3]      # [0, 1, 2]      (du début à 2)
+l[7:]      # [7, 8, 9]      (de 7 à la fin)
+l[::2]     # [0, 2, 4, 6, 8]  (un sur deux)
+l[::-1]    # [9, 8, 7, ..., 0]  (inversé !)
+
+# Copier une liste
+copie = l[:]  # Copie complète (pas un alias !)
+# ou copie = l.copy() ou copie = list(l)</code></pre></div>
+
+    <div class="concept-card">
+        <h4>🍕 Analogie de la pizza</h4>
+        <p>Le slicing, c'est comme couper une pizza : <code>[debut:fin]</code> = de quelle part à quelle part. La <strong>fin est toujours exclue</strong> (même principe que <code>range()</code>).</p>
+    </div>
+</section>
+
+<!-- Section 4 : Fonctions utiles -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-wrench"></i> Fonctions utiles sur les listes</h2>
+    <div class="code-block"><div class="code-header"><span>Fonctions intégrées</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>notes = [15, 17, 12, 18, 14]
+
+len(notes)       # 5 (longueur)
+sum(notes)       # 76 (somme)
+min(notes)       # 12 (minimum)
+max(notes)       # 18 (maximum)
+sorted(notes)    # [12,14,15,17,18] (nouvelle liste triée)
+
+# Moyenne
+moyenne = sum(notes) / len(notes)  # 15.2
+
+# Vérifier l'appartenance
+17 in notes      # True
+20 in notes      # False</code></pre></div>
+</section>
+
+<!-- Section 5 : Tuples -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-lock"></i> Les tuples — collections immuables</h2>
+    <div class="concept-card">
+        <h4>🔒 Analogie du coffre-fort</h4>
+        <p>Un tuple est comme un <strong>coffre-fort verrouillé</strong> : une fois fermé, on ne peut plus ni ajouter, ni retirer, ni modifier son contenu. C'est une liste « gelée ».</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Tuples</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Créer un tuple (parenthèses ou sans)
+coord = (48.8, 2.3)
+couleur = 255, 128, 0     # Parenthèses optionnelles
+singleton = (42,)          # ⚠️ Virgule nécessaire pour 1 élément !
+
+# Accéder (comme les listes)
+print(coord[0])   # 48.8
+print(coord[-1])  # 2.3
+
+# IMPOSSIBLE de modifier !
+coord[0] = 0      # ❌ TypeError !
+coord.append(5)   # ❌ Pas de méthode append !
+
+# Unpacking (déballage)
+x, y = coord      # x=48.8, y=2.3
+nom, age, note = ("Alice", 20, 15.5)  # Pratique !</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Liste <code>[]</code></th><th>Tuple <code>()</code></th></tr></thead>
+        <tbody>
+            <tr><td>Modifiable (mutable)</td><td>Non modifiable (immuable)</td></tr>
+            <tr><td>append, remove, sort…</td><td>Aucune modification possible</td></tr>
+            <tr><td>Plus lente</td><td>Plus rapide</td></tr>
+            <tr><td>Panier de courses</td><td>Coordonnées GPS</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 6 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 5</h4>
+        <ul>
+            <li>Liste <code>[]</code> : collection modifiable, indices à partir de 0</li>
+            <li>Indices négatifs : <code>[-1]</code> = dernier</li>
+            <li>Méthodes <strong>A.I.R.P.S.</strong> : Append, Insert, Remove, Pop, Sort</li>
+            <li>Slicing : <code>[debut:fin:pas]</code> — fin toujours exclue</li>
+            <li><code>len()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code>, <code>sorted()</code></li>
+            <li>Tuple <code>()</code> : comme une liste mais immuable</li>
+            <li>Unpacking : <code>x, y = (a, b)</code></li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre4.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Fonctions</a>
+    <a href="chapitre6.html" class="next-chapter">Dictionnaires <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Créez une liste de 5 prénoms et affichez le premier et le dernier.",hints:["Indices 0 et -1"],answer:'noms = ["Alice","Bob","Clara","David","Eve"]\nprint(noms[0], noms[-1])'},
+        {q:"Ajoutez \"Frank\" à la fin et supprimez \"Bob\".",hints:[".append() et .remove()"],answer:'noms.append("Frank")\nnoms.remove("Bob")\nprint(noms)'},
+        {q:"Triez une liste de notes et affichez les 3 meilleures.",hints:[".sort() puis slicing [-3:]"],answer:"notes = [12,18,15,9,17]\nnotes.sort()\nprint(notes[-3:])  # [15, 17, 18]"},
+        {q:"Inversez une liste sans sort, juste avec le slicing.",hints:["[::-1]"],answer:'l = [1,2,3,4,5]\nprint(l[::-1])  # [5,4,3,2,1]'},
+        {q:"Créez un tuple de coordonnées (x, y) et déballez-le.",hints:["Unpacking : x, y = tuple"],answer:"coord = (48.8, 2.3)\nx, y = coord\nprint(f\"Lat: {x}, Lon: {y}\")"}
+    ],
+    quiz: [
+        {type:"mcq",q:"Que fait fruits[-1] ?",options:["Erreur","Supprime le dernier","Retourne le dernier","Retourne le premier"],correct:2},
+        {type:"mcq",q:"Que retourne l.sort() ?",options:["La liste triée","None","True","Une copie triée"],correct:1},
+        {type:"mcq",q:"Que fait l[1:4] sur [0,1,2,3,4,5] ?",options:["[1,2,3]","[1,2,3,4]","[0,1,2,3]","[2,3,4]"],correct:1},
+        {type:"mcq",q:"Comment inverser une liste avec le slicing ?",options:["l[-1:0]","l[::-1]","l[0:-1]","reverse(l)"],correct:1},
+        {type:"mcq",q:"Quelle différence entre liste et tuple ?",options:["Aucune","Le tuple est modifiable","La liste est modifiable, pas le tuple","Le tuple est plus lent"],correct:2},
+        {type:"mcq",q:"Comment créer un tuple d'un seul élément ?",options:["(42)","(42,)","[42]","tuple(42)"],correct:1},
+        {type:"mcq",q:"Que fait l.pop() ?",options:["Supprime le premier","Supprime et retourne le dernier","Vide la liste","Trie la liste"],correct:1},
+        {type:"mcq",q:"Quel mnémonique pour les 5 méthodes de liste ?",options:["A.I.R.P.S.","L.I.S.T.E.","A.P.P.E.D.","S.O.R.T.S."],correct:0},
+        {type:"qa",q:"Comment copier une liste sans créer un alias ?",answer:"copie = l[:] ou copie = l.copy() ou copie = list(l)"},
+        {type:"qa",q:"Comment calculer la moyenne d'une liste de notes ?",answer:"sum(notes) / len(notes)"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque méthode à son action :",pairs:[[".append(x)","Ajouter à la fin"],[".pop()","Supprimer le dernier"],[".remove(x)","Supprimer par valeur"],[".sort()","Trier sur place"]]},
+        {instruction:"Associez chaque type à sa caractéristique :",pairs:[["Liste []","Modifiable (mutable)"],["Tuple ()","Immuable"],["sorted()","Nouvelle liste triée"],[".sort()","Modifie sur place"]]},
+        {instruction:"Associez chaque slicing à son résultat (l=[0,1,2,3,4]) :",pairs:[["l[:3]","[0, 1, 2]"],["l[2:]","[2, 3, 4]"],["l[::2]","[0, 2, 4]"],["l[::-1]","[4, 3, 2, 1, 0]"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

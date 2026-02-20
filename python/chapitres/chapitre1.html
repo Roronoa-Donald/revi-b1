@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 — Variables & Types | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html" class="active"><i class="fas fa-book-open"></i> Ch.1 Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 Fonctions</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 Listes</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 Dicts</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 Fichiers</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 POO</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-inbox"></i> Chapitre 1</div>
+    <h1>🐍 Variables & <span class="highlight">Types</span></h1>
+    <p>Les bases absolues de Python : afficher, stocker des données, comprendre les types.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Pourquoi Python -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-question-circle"></i> Pourquoi Python ?</h2>
+    <div class="concept-card">
+        <h4>🐍 Le langage couteau-suisse</h4>
+        <p>Python est comme un <strong>couteau suisse</strong> : simple à utiliser mais incroyablement puissant. Il est utilisé partout : web, IA, data science, automatisation, cybersécurité…</p>
+        <p>Contrairement au C, Python n'a pas besoin de compilateur. Vous écrivez, vous exécutez. C'est un langage <strong>interprété</strong>.</p>
+    </div>
+
+    <div class="info-box"><strong>Analogie :</strong> Si le C est une voiture manuelle (précise mais complexe), Python est une voiture automatique : facile au départ, très efficace au quotidien.</div>
+
+    <div class="code-block"><div class="code-header"><span>Mon premier programme</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>print("Hello, World!")   # C'est tout ! Pas de main(), pas de ;
+# En C il fallait : #include, int main(), printf, return 0...</code></pre></div>
+</section>
+
+<!-- Section 2 : Variables -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-box"></i> Variables — des boîtes étiquetées</h2>
+
+    <div class="concept-card">
+        <h4>📦 Analogie de la boîte</h4>
+        <p>Une variable est une <strong>boîte avec une étiquette</strong>. L'étiquette est le nom, le contenu est la valeur. En Python, pas besoin de dire quel type sera dans la boîte — Python le devine tout seul !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Déclaration de variables</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>nom = "Alice"        # str (texte)
+age = 20             # int (entier)
+taille = 1.75        # float (décimal)
+etudiant = True      # bool (vrai/faux)
+
+# Pas de int, float, char... Python devine !
+# C'est le TYPAGE DYNAMIQUE</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Règles de nommage :</strong>
+        <ul>
+            <li>Commence par une lettre ou _ (pas un chiffre !)</li>
+            <li>Pas d'espaces ni caractères spéciaux</li>
+            <li>Convention : <code>snake_case</code> (mon_age, pas monAge)</li>
+            <li>Python est <strong>sensible à la casse</strong> : <code>age ≠ Age ≠ AGE</code></li>
+        </ul>
+    </div>
+</section>
+
+<!-- Section 3 : Types -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tags"></i> Les 4 types de base — I.F.S.B.</h2>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique I.F.S.B.</h4>
+        <p><strong>I</strong>nt · <strong>F</strong>loat · <strong>S</strong>tr · <strong>B</strong>ool — les 4 types fondamentaux de Python, comme les 4 éléments de la programmation !</p>
+    </div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type</th><th>Description</th><th>Exemple</th><th>Vérifier</th></tr></thead>
+        <tbody>
+            <tr><td><code>int</code></td><td>Entier</td><td><code>42</code>, <code>-7</code></td><td><code>type(42)</code> → &lt;class 'int'&gt;</td></tr>
+            <tr><td><code>float</code></td><td>Décimal</td><td><code>3.14</code>, <code>-0.5</code></td><td><code>type(3.14)</code> → &lt;class 'float'&gt;</td></tr>
+            <tr><td><code>str</code></td><td>Texte (chaîne)</td><td><code>"Hello"</code>, <code>'Oui'</code></td><td><code>type("Hi")</code> → &lt;class 'str'&gt;</td></tr>
+            <tr><td><code>bool</code></td><td>Booléen</td><td><code>True</code>, <code>False</code></td><td><code>type(True)</code> → &lt;class 'bool'&gt;</td></tr>
+        </tbody>
+    </table></div>
+
+    <div class="tip-box">
+        <strong>💡 Astuce :</strong> La fonction <code>type(x)</code> vous dit TOUJOURS le type d'une variable. Utilisez-la quand vous avez un doute !
+    </div>
+</section>
+
+<!-- Section 4 : print et input -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-terminal"></i> Afficher et Lire — print() & input()</h2>
+
+    <div class="code-block"><div class="code-header"><span>print() — afficher</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Basique
+print("Bonjour !")
+
+# Plusieurs valeurs
+nom = "Alice"
+age = 20
+print("Je suis", nom, "j'ai", age, "ans")
+
+# f-string (⭐ LA méthode moderne)
+print(f"Je suis {nom}, j'ai {age} ans")
+# Accolades = trou à remplir automatiquement</code></pre></div>
+
+    <div class="concept-card">
+        <h4>🎯 f-strings — la méthode moderne</h4>
+        <p>Pensez aux f-strings comme un <strong>texte à trous</strong> : vous mettez un <code>f</code> devant les guillemets, puis chaque <code>{variable}</code> est automatiquement remplacée par sa valeur. C'est comme Mad Libs en programmation !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>input() — lire une saisie</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># input() retourne TOUJOURS un str !
+nom = input("Votre nom : ")      # "Alice" → str
+age = input("Votre âge : ")      # "20" → str (pas int !)
+
+# ⚠️ PIÈGE CLASSIQUE :
+# age + 1 → ERREUR ! "20" + 1 = impossible
+
+# Solution : convertir !
+age = int(input("Votre âge : "))   # "20" → 20 (int)
+taille = float(input("Taille : ")) # "1.75" → 1.75 (float)</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Piège n°1 du débutant :</strong> <code>input()</code> retourne TOUJOURS un <code>str</code> ! Pour calculer, convertissez avec <code>int()</code> ou <code>float()</code>.
+    </div>
+</section>
+
+<!-- Section 5 : Opérateurs -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-calculator"></i> Opérateurs</h2>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Opérateur</th><th>Description</th><th>Exemple</th><th>Résultat</th></tr></thead>
+        <tbody>
+            <tr><td><code>+</code> <code>-</code> <code>*</code></td><td>Addition, soustraction, multiplication</td><td><code>7 + 3</code></td><td><code>10</code></td></tr>
+            <tr><td><code>/</code></td><td>Division (toujours float !)</td><td><code>7 / 2</code></td><td><code>3.5</code></td></tr>
+            <tr><td><code>//</code></td><td>Division entière</td><td><code>7 // 2</code></td><td><code>3</code></td></tr>
+            <tr><td><code>%</code></td><td>Modulo (reste)</td><td><code>7 % 2</code></td><td><code>1</code></td></tr>
+            <tr><td><code>**</code></td><td>Puissance</td><td><code>2 ** 3</code></td><td><code>8</code></td></tr>
+        </tbody>
+    </table></div>
+
+    <div class="info-box">
+        <strong>🐍 vs C :</strong> En Python, <code>7 / 2 = 3.5</code> (division réelle). En C, <code>7 / 2 = 3</code> (division entière). Python a <code>//</code> pour la division entière et <code>**</code> pour la puissance (pas besoin de <code>pow()</code>).
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Opérateurs sur les strings</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Concaténation
+prenom = "Alice"
+message = "Bonjour " + prenom    # "Bonjour Alice"
+
+# Répétition
+ligne = "-" * 30                  # "------------------------------"
+
+# ⚠️ Interdit : "Age: " + 20     → TypeError !
+# Solution : "Age: " + str(20)   ou f"Age: {20}"</code></pre></div>
+</section>
+
+<!-- Section 6 : Conversions -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exchange-alt"></i> Conversions de types</h2>
+
+    <div class="code-block"><div class="code-header"><span>Casting en Python</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># str → int
+age = int("20")          # 20
+
+# str → float
+prix = float("19.99")    # 19.99
+
+# int/float → str
+texte = str(42)           # "42"
+
+# Vérification
+type(age)                 # &lt;class 'int'&gt;
+isinstance(age, int)      # True</code></pre></div>
+
+    <div class="concept-card">
+        <h4>🔄 Règle simple</h4>
+        <p>Le nom du type sert de <strong>fonction de conversion</strong> : <code>int()</code>, <code>float()</code>, <code>str()</code>, <code>bool()</code>. C'est plus intuitif qu'en C !</p>
+    </div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Conversion</th><th>Résultat</th><th>Piège ?</th></tr></thead>
+        <tbody>
+            <tr><td><code>int("42")</code></td><td>42</td><td>✅ OK</td></tr>
+            <tr><td><code>int("3.14")</code></td><td>❌ ValueError</td><td>Passer par float d'abord !</td></tr>
+            <tr><td><code>int(3.9)</code></td><td>3</td><td>Tronque (ne pas arrondir) !</td></tr>
+            <tr><td><code>bool(0)</code></td><td>False</td><td>0, "", [], None → False</td></tr>
+            <tr><td><code>bool(42)</code></td><td>True</td><td>Tout le reste → True</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 7 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 1</h4>
+        <ul>
+            <li><code>print()</code> affiche, <code>input()</code> lit (retourne toujours str !)</li>
+            <li>4 types : <strong>I.F.S.B.</strong> — int, float, str, bool</li>
+            <li><code>type(x)</code> pour vérifier le type</li>
+            <li>f-strings : <code>f"Texte {variable}"</code></li>
+            <li><code>int()</code>, <code>float()</code>, <code>str()</code> pour convertir</li>
+            <li>Python : typage dynamique, pas de déclaration de type</li>
+            <li><code>/</code> = division réelle, <code>//</code> = entière, <code>**</code> = puissance</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="../index.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Accueil</a>
+    <a href="chapitre2.html" class="next-chapter">Conditions <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_python_progress',badges:[{id:'first_step',icon:'🐍',label:'Premier pas',desc:'Premier chapitre terminé'},{id:'print_master',icon:'🖨️',label:'Print master',desc:'Ch.1 maîtrisé'},{id:'quiz_king',icon:'👑',label:'Quiz King',desc:'10 quiz réussis'},{id:'half_way',icon:'🏔️',label:'Mi-parcours',desc:'4 chapitres terminés'},{id:'legend',icon:'🏆',label:'Légende',desc:'Tous les chapitres terminés'}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru 🐍',minXP:1200}]});GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Créez une variable `nom` contenant \"Alice\" et affichez-la avec print().",hints:["Guillemets autour du texte","print(nom)"],answer:'nom = "Alice"\nprint(nom)'},
+        {q:"Demandez l'âge de l'utilisateur et affichez-le augmenté de 10.",hints:["input() retourne un str","Convertissez avec int()"],answer:'age = int(input("Votre âge : "))\nprint(f"Dans 10 ans : {age + 10}")'},
+        {q:"Calculez 2 puissance 10 en Python.",hints:["Opérateur **"],answer:"print(2 ** 10)  # 1024"},
+        {q:"Affichez le type de la valeur 3.14 avec type().",hints:["type() entre parenthèses"],answer:"print(type(3.14))  # <class 'float'>"},
+        {q:"Convertissez la chaîne \"42\" en entier et ajoutez 8.",hints:["int() pour convertir"],answer:'n = int("42")\nprint(n + 8)  # 50'}
+    ],
+    quiz: [
+        {type:"mcq",q:"Que retourne type(42) ?",options:["int","float","str","number"],correct:0},
+        {type:"mcq",q:"Que retourne input() ?",options:["int","float","Toujours str","Dépend de la saisie"],correct:2},
+        {type:"mcq",q:"Que vaut 7 / 2 en Python ?",options:["3","3.5","3.0","Erreur"],correct:1},
+        {type:"mcq",q:"Que vaut 7 // 2 en Python ?",options:["3","3.5","4","3.0"],correct:0},
+        {type:"mcq",q:"Que vaut 2 ** 4 ?",options:["8","16","6","24"],correct:1},
+        {type:"mcq",q:"Comment afficher 'Bonjour Alice' avec une f-string ?",options:['f"Bonjour {nom}"','f"Bonjour nom"','print(Bonjour, nom)','format("Bonjour", nom)'],correct:0},
+        {type:"mcq",q:"Que fait bool(0) ?",options:["True","False","0","Erreur"],correct:1},
+        {type:"mcq",q:"Quel est le mnémonique des 4 types de base ?",options:["I.F.D.C.","I.F.S.B.","S.T.R.B.","T.Y.P.E."],correct:1},
+        {type:"qa",q:"Quelle convention de nommage utilise Python ?",answer:"snake_case (mots séparés par des underscores)"},
+        {type:"qa",q:"Comment convertir la chaîne \"3.14\" en nombre décimal ?",answer:"float(\"3.14\")"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque valeur à son type :",pairs:[["42","int"],["3.14","float"],['"Hello"',"str"],["True","bool"]]},
+        {instruction:"Associez chaque opérateur à son rôle :",pairs:[["//","Division entière"],["%","Modulo (reste)"],["**","Puissance"],["==","Comparaison"]]},
+        {instruction:"Associez chaque fonction à son usage :",pairs:[["print()","Afficher"],["input()","Lire saisie"],["type()","Vérifier le type"],["int()","Convertir en entier"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 8 — Wi-Fi & Outils pratiques | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html" class="active"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-wifi"></i> Chapitre 8</div>
+    <h1>🌐 Wi-Fi & Outils <span class="highlight">pratiques</span></h1>
+    <p>Normes sans fil, sécurité Wi-Fi, commandes réseau et diagnostic.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ SECTION 1 : Wi-Fi ═══════════════ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-wifi"></i> Le Wi-Fi — Réseau sans fil</h2>
+    <div class="concept-card">
+        <h4>📡 Analogie de la radio</h4>
+        <p>Le Wi-Fi fonctionne comme une <strong>radio</strong> : le routeur est l'émetteur et vos appareils sont les récepteurs. Les données voyagent par <strong>ondes radio</strong> au lieu de câbles.</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ IEEE 802.11</strong> est le standard qui définit le Wi-Fi. Chaque lettre (a, b, g, n, ac, ax) est une version avec des améliorations.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-history"></i> Normes Wi-Fi</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Norme</th><th>Nom marketing</th><th>Année</th><th>Fréquence</th><th>Débit max</th></tr></thead>
+        <tbody>
+            <tr><td>802.11b</td><td>—</td><td>1999</td><td>2.4 GHz</td><td>11 Mbit/s</td></tr>
+            <tr><td>802.11a</td><td>—</td><td>1999</td><td>5 GHz</td><td>54 Mbit/s</td></tr>
+            <tr><td>802.11g</td><td>—</td><td>2003</td><td>2.4 GHz</td><td>54 Mbit/s</td></tr>
+            <tr><td>802.11n</td><td>Wi-Fi 4</td><td>2009</td><td>2.4 + 5 GHz</td><td>600 Mbit/s</td></tr>
+            <tr><td>802.11ac</td><td>Wi-Fi 5</td><td>2013</td><td>5 GHz</td><td>6.9 Gbit/s</td></tr>
+            <tr><td>802.11ax</td><td>Wi-Fi 6</td><td>2019</td><td>2.4 + 5 + 6 GHz</td><td>9.6 Gbit/s</td></tr>
+        </tbody>
+    </table></div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📻 2.4 GHz vs 5 GHz</h4>
+        <p><strong>2.4 GHz</strong> = longue portée mais plus lent et encombré (micro-ondes, Bluetooth…)<br>
+        <strong>5 GHz</strong> = courte portée mais plus rapide et moins d'interférences<br>
+        <em>Analogie :</em> 2.4 GHz = autoroute large mais embouteillée, 5 GHz = voie rapide moins encombrée.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-lock"></i> Sécurité Wi-Fi</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique — Évolution sécurité Wi-Fi</h4>
+        <p>WEP → WPA → WPA2 → WPA3 = <strong>« Wifi Est Pourri → Wifi Protège Assez → Wifi Protège Assez² → Wifi Protège Au max³ »</strong></p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Protocole</th><th>Année</th><th>Chiffrement</th><th>Sécurité</th></tr></thead>
+        <tbody>
+            <tr><td><strong>WEP</strong></td><td>1997</td><td>RC4</td><td>⛔ Cassé en minutes</td></tr>
+            <tr><td><strong>WPA</strong></td><td>2003</td><td>TKIP</td><td>⚠️ Vulnérable</td></tr>
+            <tr><td><strong>WPA2</strong></td><td>2004</td><td>AES-CCMP</td><td>✅ Standard actuel</td></tr>
+            <tr><td><strong>WPA3</strong></td><td>2018</td><td>AES-GCMP</td><td>✅✅ Le plus sûr</td></tr>
+        </tbody>
+    </table></div>
+    <div class="warning-box"><strong>⚠️ Jamais de WEP !</strong> Il peut être cassé en quelques minutes. Toujours utiliser WPA2 minimum (WPA3 idéalement).</div>
+</section>
+
+<!-- ═══════════════ SECTION 2 : Commandes Réseau ═══════════════ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-terminal"></i> Commandes réseau essentielles</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique PINTA — Les 5 commandes à retenir</h4>
+        <p><strong>P</strong>ing — <strong>I</strong>pconfig — <strong>N</strong>slookup — <strong>T</strong>racert — <strong>A</strong>rp</p>
+    </div>
+
+    <h3>1. ipconfig / ifconfig</h3>
+    <div class="code-block"><pre><code># Windows
+ipconfig
+ipconfig /all         # détails complets
+ipconfig /release     # libérer l'IP DHCP
+ipconfig /renew       # renouveler l'IP DHCP
+ipconfig /flushdns    # vider le cache DNS
+
+# Linux/Mac
+ifconfig
+ip addr show          # version moderne</code></pre></div>
+
+    <h3>2. ping</h3>
+    <div class="code-block"><pre><code># Tester la connectivité (envoi de paquets ICMP)
+ping google.com
+ping 192.168.1.1      # tester la passerelle
+ping 127.0.0.1        # tester la carte réseau locale (loopback)</code></pre></div>
+    <div class="tip-box"><strong>💡 Diagnostic rapide :</strong> ping 127.0.0.1 OK → carte réseau OK. ping passerelle OK → réseau local OK. ping google.com OK → Internet OK.</div>
+
+    <h3>3. tracert / traceroute</h3>
+    <div class="code-block"><pre><code># Voir tous les routeurs traversés pour atteindre une destination
+tracert google.com       # Windows
+traceroute google.com    # Linux/Mac</code></pre></div>
+
+    <h3>4. nslookup / dig</h3>
+    <div class="code-block"><pre><code># Résoudre un nom de domaine en IP (interrogation DNS)
+nslookup google.com
+nslookup -type=MX google.com    # serveurs mail
+
+# Linux alternative
+dig google.com</code></pre></div>
+
+    <h3>5. netstat / ss</h3>
+    <div class="code-block"><pre><code># Voir les connexions réseau actives et les ports ouverts
+netstat -an              # Windows
+netstat -tulpn           # Linux (TCP/UDP, ports, processus)
+ss -tulpn                # Linux moderne</code></pre></div>
+
+    <h3>6. arp</h3>
+    <div class="code-block"><pre><code># Afficher la table ARP (correspondance IP ↔ MAC)
+arp -a</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-stethoscope"></i> Diagnostic réseau — méthode pas à pas</h2>
+    <div class="concept-card">
+        <h4>🔍 La méthode « de bas en haut » (bottom-up)</h4>
+        <p>Quand Internet ne marche pas, on teste couche par couche :</p>
+        <ol>
+            <li><strong>Couche 1 (Physique)</strong> — Le câble est branché ? Le Wi-Fi est activé ?</li>
+            <li><strong>Couche 2 (Liaison)</strong> — <code>ipconfig</code> montre-t-il une adresse IP ?</li>
+            <li><strong>Couche 3 (Réseau)</strong> — <code>ping 127.0.0.1</code> puis <code>ping passerelle</code></li>
+            <li><strong>Couche 4+ (Transport)</strong> — <code>ping 8.8.8.8</code> puis <code>ping google.com</code></li>
+        </ol>
+        <p>Si ping 8.8.8.8 OK mais ping google.com échoue → problème DNS !</p>
+    </div>
+    <div class="tip-box"><strong>💡 Le réflexe universel :</strong> Quand rien ne marche, testez <code>ping 8.8.8.8</code> — c'est le serveur DNS de Google, toujours accessible. S'il répond, Internet fonctionne mais c'est peut-être un problème DNS.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 8</h4>
+        <ul>
+            <li>Wi-Fi = ondes radio, standard IEEE 802.11 (b→g→n→ac→ax)</li>
+            <li>2.4 GHz (portée, lent) vs 5 GHz (rapide, courte portée)</li>
+            <li>Sécurité Wi-Fi : WEP ⛔ → WPA ⚠️ → WPA2 ✅ → WPA3 ✅✅</li>
+            <li>PINTA : Ping, Ipconfig, Nslookup, Tracert, Arp</li>
+            <li>Diagnostic bottom-up : physique → IP → passerelle → Internet → DNS</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre7.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Sécurité</a>
+    <a href="formules.html" class="next-chapter">Formules <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Technicien',minXP:300},{name:'Admin',minXP:550},{name:'Architecte',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Quelle est la différence entre 2.4 GHz et 5 GHz ?",hints:["Portée vs débit","Interférences"],answer:"2.4 GHz: longue portée mais plus lent et encombré. 5 GHz: courte portée mais plus rapide avec moins d'interférences."},
+        {q:"Pourquoi ne faut-il jamais utiliser WEP ?",hints:["Cassé en minutes","Chiffrement faible RC4"],answer:"WEP utilise RC4 qui est cassé. Un attaquant peut le craquer en quelques minutes avec des outils gratuits. Toujours WPA2 minimum."},
+        {q:"Décrivez la méthode de diagnostic bottom-up.",hints:["Couche par couche","De la couche 1 vers le haut"],answer:"1) Vérifier câble/Wi-Fi (physique) 2) ipconfig pour l'IP 3) ping 127.0.0.1 (loopback) 4) ping passerelle 5) ping 8.8.8.8 6) ping google.com. Si 5 OK mais 6 échoue → problème DNS."},
+        {q:"À quoi sert la commande tracert ?",hints:["Chemin des paquets","Liste les routeurs"],answer:"tracert (Windows) / traceroute (Linux) affiche tous les routeurs intermédiaires traversés pour atteindre une destination, avec le temps de réponse de chacun."},
+        {q:"Que signifient les commandes ipconfig /release et /renew ?",hints:["DHCP","Adresse IP"],answer:"/release libère l'adresse IP attribuée par DHCP. /renew demande une nouvelle adresse au serveur DHCP. Utile pour résoudre des problèmes d'adressage."}
+    ],
+    quiz:[
+        {type:"mcq",q:"Wi-Fi 6 correspond à la norme :",options:["802.11n","802.11ac","802.11ax","802.11g"],correct:2},
+        {type:"mcq",q:"La fréquence 5 GHz offre :",options:["Plus de portée","Plus de débit","Plus d'interférences","Tout en même temps"],correct:1},
+        {type:"mcq",q:"Quel protocole Wi-Fi est cassé ?",options:["WPA2","WPA3","WEP","WPA2-Enterprise"],correct:2},
+        {type:"mcq",q:"ping 127.0.0.1 teste :",options:["La connexion Internet","Le serveur DNS","La carte réseau locale","Le routeur"],correct:2},
+        {type:"mcq",q:"Pour voir les connexions actives on utilise :",options:["ping","nslookup","netstat","tracert"],correct:2},
+        {type:"mcq",q:"Si ping 8.8.8.8 marche mais pas ping google.com, c'est un problème de :",options:["Câble","IP","DNS","Pare-feu"],correct:2},
+        {type:"mcq",q:"WPA2 utilise quel chiffrement ?",options:["RC4","TKIP","AES-CCMP","DES"],correct:2},
+        {type:"mcq",q:"La commande arp -a affiche :",options:["Les routes réseau","Les correspondances IP ↔ MAC","Les ports ouverts","Les DNS"],correct:1},
+        {type:"qa",q:"Que fait ipconfig /flushdns ?",answer:"Elle vide le cache DNS local, ce qui force Windows à refaire les requêtes DNS. Utile quand un site ne se résout pas correctement."},
+        {type:"qa",q:"Qu'est-ce que le SSID d'un réseau Wi-Fi ?",answer:"Le SSID est le nom du réseau Wi-Fi (Service Set Identifier). C'est ce qui apparaît dans la liste des réseaux disponibles."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque commande à sa fonction :",pairs:[["ping","Tester la connectivité"],["ipconfig","Voir la configuration IP"],["tracert","Voir le chemin des paquets"],["nslookup","Résoudre un nom DNS"]]},
+        {instruction:"Associez chaque norme Wi-Fi à son nom marketing :",pairs:[["802.11n","Wi-Fi 4"],["802.11ac","Wi-Fi 5"],["802.11ax","Wi-Fi 6"]]},
+        {instruction:"Associez chaque protocole de sécurité à son niveau :",pairs:[["WEP","⛔ Cassé"],["WPA","⚠️ Vulnérable"],["WPA2","✅ Standard"],["WPA3","✅✅ Le plus sûr"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

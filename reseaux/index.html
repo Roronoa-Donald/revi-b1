@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réseaux Informatiques — B1 Bachelor 1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Portail</a></li><li><a href="chapitres/formules.html">Formules</a></li>
+        <li><a href="chapitres/cartes.html">Cartes</a></li><li><a href="chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Portail B1</a>
+    <a href="chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 Modèle OSI</a>
+    <a href="chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 TCP/IP</a>
+    <a href="chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 Adressage IPv4</a>
+    <a href="chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 Sous-réseaux</a>
+    <a href="chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 Protocoles</a>
+    <a href="chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 Équipements</a>
+    <a href="chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 Sécurité</a>
+    <a href="chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 Wi-Fi & Pratique</a>
+    <a href="chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-network-wired"></i> Réseaux B1</div>
+    <h1>🌐 Réseaux <span class="highlight">Informatiques</span></h1>
+    <p>Comprendre les réseaux de A à Z : du câble Ethernet au cloud, en passant par IPv4, les protocoles et la sécurité.</p>
+</section>
+
+<main class="content-wrapper">
+    <section class="features-grid">
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-layer-group"></i></div><h3>8 chapitres</h3><p>Du modèle OSI au Wi-Fi, chaque notion est expliquée simplement.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-brain"></i></div><h3>Mnémoniques</h3><p>Des astuces pour retenir les 7 couches OSI, les classes IP, et plus.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-dumbbell"></i></div><h3>Pratique</h3><p>Exercices de subnetting, QCM, simulateur d'examen.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-trophy"></i></div><h3>Gamification</h3><p>Gagne de l'XP, débloque des badges, monte en niveau !</p></div>
+    </section>
+
+    <section class="modules-section">
+        <h2 class="section-title"><i class="fas fa-book-open"></i> Chapitres</h2>
+        <div class="modules-grid">
+            <a href="chapitres/chapitre1.html" class="module-card"><div class="module-number">01</div><h3>Modèle OSI & Introduction</h3><p>Les 7 couches, rôle de chaque couche, encapsulation.</p></a>
+            <a href="chapitres/chapitre2.html" class="module-card"><div class="module-number">02</div><h3>TCP/IP & Modèle Internet</h3><p>Comparaison OSI vs TCP/IP, TCP vs UDP, ports.</p></a>
+            <a href="chapitres/chapitre3.html" class="module-card"><div class="module-number">03</div><h3>Adressage IPv4</h3><p>Adresses IP, classes, masques, adresses privées/publiques.</p></a>
+            <a href="chapitres/chapitre4.html" class="module-card"><div class="module-number">04</div><h3>Sous-réseaux (Subnetting)</h3><p>CIDR, calcul de sous-réseaux, VLSM.</p></a>
+            <a href="chapitres/chapitre5.html" class="module-card"><div class="module-number">05</div><h3>Protocoles courants</h3><p>HTTP, DNS, DHCP, ARP, ICMP, FTP, SSH.</p></a>
+            <a href="chapitres/chapitre6.html" class="module-card"><div class="module-number">06</div><h3>Équipements réseau</h3><p>Hub, switch, routeur, pare-feu, AP, VLAN.</p></a>
+            <a href="chapitres/chapitre7.html" class="module-card"><div class="module-number">07</div><h3>Sécurité réseau</h3><p>Firewall, VPN, chiffrement, attaques courantes.</p></a>
+            <a href="chapitres/chapitre8.html" class="module-card"><div class="module-number">08</div><h3>Wi-Fi & Outils pratiques</h3><p>Normes Wi-Fi, commandes réseau, diagnostic.</p></a>
+        </div>
+    </section>
+
+    <section class="modules-section">
+        <h2 class="section-title"><i class="fas fa-tools"></i> Outils</h2>
+        <div class="modules-grid">
+            <a href="chapitres/formules.html" class="module-card"><div class="module-number"><i class="fas fa-scroll"></i></div><h3>Aide-mémoire</h3><p>Toutes les formules et mnémoniques clés.</p></a>
+            <a href="chapitres/cartes.html" class="module-card"><div class="module-number"><i class="fas fa-layer-group"></i></div><h3>Cartes Flash</h3><p>30 cartes pour réviser rapidement.</p></a>
+            <a href="chapitres/simulateur-examen.html" class="module-card"><div class="module-number"><i class="fas fa-graduation-cap"></i></div><h3>Simulateur d'examen</h3><p>35 QCM en conditions réelles.</p></a>
+            <a href="exercices/exercices.html" class="module-card"><div class="module-number"><i class="fas fa-dumbbell"></i></div><h3>Exercices</h3><p>24 exercices pratiques avec solutions.</p></a>
+        </div>
+    </section>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_reseaux_progress',
+    badges:[
+        {id:'first_packet',name:'Premier Paquet',icon:'📡',condition:g=>g.xp>=10},
+        {id:'osi_master',name:'Maître OSI',icon:'🏗️',condition:g=>g.xp>=80},
+        {id:'ip_guru',name:'Guru IPv4',icon:'🔢',condition:g=>g.xp>=200},
+        {id:'subnet_ninja',name:'Ninja Subnet',icon:'🥷',condition:g=>g.xp>=350},
+        {id:'proto_expert',name:'Expert Protocoles',icon:'📋',condition:g=>g.xp>=500},
+        {id:'security_shield',name:'Bouclier Sécurité',icon:'🛡️',condition:g=>g.xp>=700},
+        {id:'half_way',name:'Mi-parcours',icon:'🏅',condition:g=>g.xp>=450},
+        {id:'network_legend',name:'Légende Réseau',icon:'🌐',condition:g=>g.xp>=1000}
+    ],
+    levels:[
+        {name:'Débutant',minXP:0},{name:'Apprenti Réseau',minXP:100},{name:'Technicien Jr.',minXP:300},
+        {name:'Admin Confirmé',minXP:550},{name:'Architecte',minXP:850},{name:'Guru Réseau',minXP:1200}
+    ],
+    tips:['Retiens les 7 couches OSI avec « Pour Le Réseau, Tout Se Passe Automatiquement »','TCP = fiable (accusé de réception), UDP = rapide (pas de vérification)','Les adresses privées : 10.x.x.x, 172.16-31.x.x, 192.168.x.x','Pour le subnetting, pense en puissances de 2','Un switch travaille en couche 2 (MAC), un routeur en couche 3 (IP)','DHCP donne des IP automatiquement, DNS traduit les noms en IP','Le masque /24 = 255.255.255.0 = 256 adresses (254 utilisables)','ARP = « Qui a cette IP ? » → découverte d\'adresse MAC','ping utilise ICMP pour tester la connectivité','VPN = tunnel chiffré pour sécuriser les communications']
+});
+GameEngine.init();
+</script>
+</body>
+</html>

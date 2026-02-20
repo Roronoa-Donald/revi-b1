@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'examen | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}
+    .sim-config{background:var(--card-bg);border-radius:16px;padding:2rem;max-width:600px;margin:0 auto 2rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1rem}
+    .sim-config label{font-weight:600;color:var(--text)}.sim-config select,.sim-config input{padding:.6rem;border-radius:8px;border:2px solid var(--border);background:var(--bg);color:var(--text);font-size:1rem}
+    .sim-config button{padding:.8rem;border-radius:10px;background:var(--accent);color:#fff;border:none;font-weight:700;font-size:1.05rem;cursor:pointer;transition:.2s}.sim-config button:hover{opacity:.85}
+    .sim-question-card{background:var(--card-bg);border-radius:14px;padding:1.8rem;margin-bottom:1.2rem;border-left:4px solid var(--accent);box-shadow:var(--shadow)}
+    .sim-question-card h3{margin:0 0 .5rem;font-size:1rem;color:var(--accent)}.sim-question-card p{margin:.5rem 0 1rem;font-size:1.05rem;line-height:1.6}
+    .sim-options{display:flex;flex-direction:column;gap:.5rem}.sim-option{padding:.7rem 1rem;border-radius:10px;border:2px solid var(--border);background:var(--bg);cursor:pointer;transition:.2s;font-size:.97rem}
+    .sim-option:hover{border-color:var(--accent)}.sim-option.selected{background:var(--accent-glow);border-color:var(--accent);font-weight:600}
+    .sim-option.correct{background:rgba(16,185,129,.15);border-color:#10b981}.sim-option.wrong{background:rgba(239,68,68,.15);border-color:#ef4444}
+    .sim-timer{text-align:center;font-size:1.4rem;font-weight:800;margin:1rem 0;color:var(--accent)}.sim-timer.warning{color:#ef4444}
+    .sim-actions{display:flex;gap:1rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap}
+    .sim-actions button{padding:.7rem 1.5rem;border-radius:10px;border:2px solid var(--accent);background:var(--card-bg);color:var(--accent);font-weight:700;cursor:pointer;transition:.2s}
+    .sim-actions button:hover{background:var(--accent);color:#fff}
+    .sim-result{background:var(--card-bg);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--shadow)}.sim-result h2{font-size:2rem;color:var(--accent)}
+    .sim-result .score{font-size:3rem;font-weight:900;margin:1rem 0}.score.good{color:#10b981}.score.avg{color:#f59e0b}.score.bad{color:#ef4444}
+    .sim-progress{width:100%;height:8px;background:var(--border);border-radius:4px;margin:1rem 0}.sim-progress-fill{height:100%;background:var(--accent);border-radius:4px;transition:width .3s}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html" class="active">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Simulateur</div>
+    <h1>🐍 Simulateur <span class="highlight">d'Examen</span></h1>
+    <p>35 questions pour tester tes connaissances dans les conditions de l'examen.</p>
+</section>
+
+<main class="content-wrapper">
+    <div id="sim-config" class="sim-config">
+        <label>Nombre de questions<select id="q-count"><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option><option value="35">35 (toutes)</option></select></label>
+        <label>Temps (minutes)<input type="number" id="q-time" value="20" min="5" max="90"></label>
+        <label>Chapitres<select id="q-chapter"><option value="all">Tous</option><option value="1">Ch.1 Variables</option><option value="2">Ch.2 Conditions</option><option value="3">Ch.3 Boucles</option><option value="4">Ch.4 Fonctions</option><option value="5">Ch.5 Listes</option><option value="6">Ch.6 Dicts & Sets</option><option value="7">Ch.7 Fichiers</option><option value="8">Ch.8 Modules & POO</option></select></label>
+        <button onclick="startExam()"><i class="fas fa-play"></i> Démarrer l'examen</button>
+    </div>
+    <div id="sim-area"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const BANK=[
+// Ch.1 Variables & Types
+{ch:"1",q:"Quel est le type de 3.14 en Python ?",o:["int","float","str","double"],c:1},
+{ch:"1",q:"Que retourne type(True) ?",o:["<class 'int'>","<class 'bool'>","<class 'str'>","<class 'bit'>"],c:1},
+{ch:"1",q:"Quelle est la bonne f-string ?",o:['f"Age : {age}"','f"Age : [age]"','"Age : {age}"','f("Age : {age}")'],c:0},
+{ch:"1",q:"Que vaut 7 // 2 ?",o:["3.5","3","4","3.0"],c:1},
+{ch:"1",q:"Comment convertir '42' en entier ?",o:["int('42')","str(42)","float('42')","number('42')"],c:0},
+// Ch.2 Conditions
+{ch:"2",q:"Quel opérateur logique remplace && en Python ?",o:["&&","AND","and","&"],c:2},
+{ch:"2",q:"Quelle est la syntaxe du ternaire ?",o:['if x: a else: b','a if condition else b','condition ? a : b','a when condition else b'],c:1},
+{ch:"2",q:"Que teste l'opérateur 'in' ?",o:["L'identité","L'appartenance","L'égalité","Le type"],c:1},
+{ch:"2",q:"match / case est disponible depuis Python :",o:["3.6","3.8","3.10","3.12"],c:2},
+// Ch.3 Boucles
+{ch:"3",q:"Que produit range(1, 8, 2) ?",o:["1,3,5,7","1,2,3,4,5,6,7","2,4,6,8","1,3,5,7,8"],c:0},
+{ch:"3",q:"Quel mot-clé saute à l'itération suivante ?",o:["break","pass","continue","next"],c:2},
+{ch:"3",q:"Que retourne enumerate(['a','b','c']) ?",o:["['a','b','c']","[(0,'a'),(1,'b'),(2,'c')]","{'a':0,'b':1}","[1,2,3]"],c:1},
+{ch:"3",q:"[x**2 for x in range(4)] donne :",o:["[1,4,9,16]","[0,1,4,9]","[0,2,4,6]","[1,2,3,4]"],c:1},
+{ch:"3",q:"Quel type de boucle vérifie la condition AVANT chaque itération ?",o:["for","do..while","while","repeat"],c:2},
+// Ch.4 Fonctions
+{ch:"4",q:"Que retourne une fonction sans return explicite ?",o:["0","''","None","False"],c:2},
+{ch:"4",q:"Que fait *args dans une fonction ?",o:["Crée une liste","Accepte des arguments positionnels comme tuple","Crée un dict","Rien de spécial"],c:1},
+{ch:"4",q:"lambda x, y: x + y est :",o:["Une classe","Une boucle","Une fonction anonyme","Un décorateur"],c:2},
+{ch:"4",q:"Quelle est la portée d'une variable dans une fonction ?",o:["Globale","Locale","Les deux","Aucune"],c:1},
+// Ch.5 Listes & Tuples
+{ch:"5",q:"Que fait liste.pop(0) ?",o:["Ajoute 0","Supprime et retourne le premier élément","Vide la liste","Insère 0 au début"],c:1},
+{ch:"5",q:"Comment inverser une liste en place ?",o:["liste.reverse()","reversed(liste)","liste[::-1]","liste.invert()"],c:0},
+{ch:"5",q:"Quelle est la différence entre un tuple et une liste ?",o:["Le tuple est mutable","La liste est immuable","Le tuple est immuable","Aucune"],c:2},
+{ch:"5",q:"Que fait sorted([3,1,2]) ?",o:["None (tri en place)","[1,2,3] (nouvelle liste)","[3,2,1]","Erreur"],c:1},
+// Ch.6 Dicts & Sets
+{ch:"6",q:"Comment accéder de façon sûre à une clé d'un dict ?",o:["d['clé']","d.get('clé','défaut')","d.safe('clé')","d.fetch('clé')"],c:1},
+{ch:"6",q:"Que crée {} en Python ?",o:["Un set vide","Un tuple vide","Un dict vide","Une erreur"],c:2},
+{ch:"6",q:"Quelle opération donne l'union de 2 sets ?",o:["&","-","|","^"],c:2},
+{ch:"6",q:"Que retourne d.items() ?",o:["Les clés","Les valeurs","Des paires (clé, valeur)","Le nombre d'éléments"],c:2},
+// Ch.7 Fichiers & Exceptions
+{ch:"7",q:"Quel mot-clé ferme automatiquement le fichier ?",o:["close","finally","with","auto"],c:2},
+{ch:"7",q:"Quel mode d'ouverture ÉCRASE le contenu ?",o:["r","w","a","r+"],c:1},
+{ch:"7",q:"Que fait json.load(f) ?",o:["Sauvegarde en JSON","Charge un fichier JSON en dict","Convertit une string","Supprime le fichier"],c:1},
+{ch:"7",q:"Quel bloc s'exécute TOUJOURS (erreur ou pas) ?",o:["try","except","else","finally"],c:3},
+{ch:"7",q:"int('abc') lève quelle exception ?",o:["TypeError","ValueError","SyntaxError","RuntimeError"],c:1},
+// Ch.8 Modules & POO
+{ch:"8",q:"Que fait 'from math import sqrt' ?",o:["Importe tout math","Importe seulement sqrt","Crée un alias","Installe math"],c:1},
+{ch:"8",q:"Quel est le rôle de __init__ ?",o:["Détruire","Initialiser (constructeur)","Importer","Hériter"],c:1},
+{ch:"8",q:"Que représente self ?",o:["Le module","La classe parent","L'instance courante","Le fichier"],c:2},
+{ch:"8",q:"Comment hériter de Animal ?",o:["class Chien inherits Animal:","class Chien(Animal):","class Chien extends Animal:","class Chien : Animal"],c:1}
+];
+
+let questions=[],answers=[],current=0,timer=null,timeLeft=0;
+
+function startExam(){
+    const count=parseInt(document.getElementById('q-count').value);
+    const mins=parseInt(document.getElementById('q-time').value);
+    const ch=document.getElementById('q-chapter').value;
+    let pool=ch==='all'?[...BANK]:BANK.filter(q=>q.ch===ch);
+    for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+    questions=pool.slice(0,Math.min(count,pool.length));
+    answers=new Array(questions.length).fill(-1);current=0;timeLeft=mins*60;
+    document.getElementById('sim-config').style.display='none';
+    renderExam();startTimer();
+}
+
+function startTimer(){
+    clearInterval(timer);
+    timer=setInterval(()=>{
+        timeLeft--;if(timeLeft<=0){clearInterval(timer);submitExam()}
+        const m=Math.floor(timeLeft/60),s=timeLeft%60;
+        const el=document.getElementById('sim-timer');
+        if(el){el.textContent=`⏱ ${m}:${s.toString().padStart(2,'0')}`;if(timeLeft<60)el.classList.add('warning');else el.classList.remove('warning')}
+    },1000);
+}
+
+function renderExam(){
+    const area=document.getElementById('sim-area');
+    const m=Math.floor(timeLeft/60),s=timeLeft%60;
+    let html=`<div class="sim-timer" id="sim-timer">⏱ ${m}:${s.toString().padStart(2,'0')}</div>`;
+    html+=`<div class="sim-progress"><div class="sim-progress-fill" style="width:${(current+1)/questions.length*100}%"></div></div>`;
+    const q=questions[current];
+    html+=`<div class="sim-question-card"><h3>Question ${current+1}/${questions.length} <small>(Ch.${q.ch})</small></h3><p>${q.q}</p><div class="sim-options">`;
+    q.o.forEach((o,i)=>{html+=`<div class="sim-option${answers[current]===i?' selected':''}" onclick="selectAnswer(${i})">${o}</div>`});
+    html+=`</div></div>`;
+    html+=`<div class="sim-actions">`;
+    if(current>0)html+=`<button onclick="navQ(${current-1})"><i class="fas fa-arrow-left"></i> Précédente</button>`;
+    if(current<questions.length-1)html+=`<button onclick="navQ(${current+1})">Suivante <i class="fas fa-arrow-right"></i></button>`;
+    html+=`<button onclick="submitExam()" style="background:var(--accent);color:#fff;border-color:var(--accent)"><i class="fas fa-check"></i> Terminer</button>`;
+    html+=`</div>`;
+    area.innerHTML=html;
+}
+
+function selectAnswer(i){answers[current]=i;renderExam()}
+function navQ(i){current=i;renderExam()}
+
+function submitExam(){
+    clearInterval(timer);
+    let score=0;questions.forEach((q,i)=>{if(answers[i]===q.c)score++});
+    const pct=Math.round(score/questions.length*100);
+    const cls=pct>=70?'good':pct>=50?'avg':'bad';
+    let html=`<div class="sim-result"><h2>Résultat</h2><div class="score ${cls}">${pct}%</div><p>${score}/${questions.length} bonnes réponses</p></div>`;
+    html+=`<h3 style="margin:2rem 0 1rem;text-align:center">Correction détaillée</h3>`;
+    questions.forEach((q,i)=>{
+        const ok=answers[i]===q.c;
+        html+=`<div class="sim-question-card" style="border-left-color:${ok?'#10b981':'#ef4444'}"><h3>Q${i+1} (Ch.${q.ch}) ${ok?'✅':'❌'}</h3><p>${q.q}</p><div class="sim-options">`;
+        q.o.forEach((o,j)=>{
+            let cls='';if(j===q.c)cls='correct';else if(j===answers[i]&&!ok)cls='wrong';
+            html+=`<div class="sim-option ${cls}">${o}</div>`;
+        });
+        html+=`</div></div>`;
+    });
+    html+=`<div class="sim-actions"><button onclick="location.reload()"><i class="fas fa-redo"></i> Recommencer</button></div>`;
+    document.getElementById('sim-area').innerHTML=html;
+}
+</script>
+</body>
+</html>

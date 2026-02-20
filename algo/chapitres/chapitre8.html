@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 8 — Récursivité | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#10b981;--accent-light:#34d399;--accent-dark:#059669;--accent-glow:rgba(16,185,129,0.25)}.dark{--accent:#34d399;--accent-light:#6ee7b7;--accent-dark:#10b981;--accent-glow:rgba(52,211,153,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="chapitre7.html">Ch.7</a></li>
+        <li><a href="chapitre8.html" class="active">Ch.8</a></li><li><a href="chapitre9.html">Ch.9</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a>
+    <a href="chapitre8.html" class="active"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a><a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-infinity"></i> Chapitre 8</div>
+    <h1>La <span class="highlight">Récursivité</span></h1>
+    <p>Une fonction qui s'appelle elle-même : cas de base, pile d'appels, factorielle, Fibonacci et pièges classiques.</p>
+</section>
+
+<main class="content-wrapper">
+    <!-- 8.1 Principe -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-sync-alt"></i> 8.1 — Le principe de la récursivité</h2>
+        <div class="concept-card"><h4>🔄 Définition</h4>
+            <p>Une fonction est <strong>récursive</strong> si elle <strong>s'appelle elle-même</strong> dans sa définition. Chaque appel résout un sous-problème plus petit, jusqu'à atteindre un <strong>cas de base</strong> (arrêt).</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🪆</span><div><strong>Analogie — Les poupées russes :</strong> Tu ouvres une matriochka et tu trouves une plus petite dedans. Tu l'ouvres aussi, et encore une plus petite… jusqu'à la dernière (la plus petite = cas de base). Puis tu refermes tout dans l'ordre inverse.</div></div>
+
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — Les 2 règles d'or :</strong><br>
+        🛑 <strong>Règle 1 — CAS DE BASE :</strong> Il doit y avoir un point d'arrêt (sinon boucle infinie !)<br>
+        📉 <strong>Règle 2 — PROGRESSION :</strong> Chaque appel doit se rapprocher du cas de base<br>
+        Résumé : « <strong>B</strong>ase + <strong>P</strong>rogression = récursion saine »</div></div>
+    </section>
+
+    <!-- 8.2 Factorielle -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-exclamation"></i> 8.2 — Exemple : la factorielle</h2>
+        <p>n! = n × (n-1) × (n-2) × … × 1. Par définition : 0! = 1.</p>
+        <div class="info-box"><span>ℹ️</span><div><strong>Formule récursive :</strong> <code>fact(n) = n × fact(n-1)</code> avec <code>fact(0) = 1</code> (cas de base)</div></div>
+
+        <div class="algo-block">
+<span class="keyword">Fonction</span> Factorielle(n : <span class="type">Entier</span>) : <span class="type">Entier</span>
+<span class="keyword">Début</span>
+    <span class="keyword">Si</span> n = <span class="number">0</span> <span class="keyword">Alors</span>           <span class="comment">// Cas de base</span>
+        <span class="keyword">Retourner</span> <span class="number">1</span>
+    <span class="keyword">Sinon</span>
+        <span class="keyword">Retourner</span> n * Factorielle(n - <span class="number">1</span>)   <span class="comment">// Appel récursif</span>
+    <span class="keyword">FinSi</span>
+<span class="keyword">Fin</span>
+        </div>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">function</span> Factorielle(n: <span class="type">integer</span>): <span class="type">integer</span>;
+<span class="keyword">begin</span>
+    <span class="keyword">if</span> n = <span class="number">0</span> <span class="keyword">then</span>
+        Factorielle := <span class="number">1</span>
+    <span class="keyword">else</span>
+        Factorielle := n * Factorielle(n - <span class="number">1</span>);
+<span class="keyword">end</span>;
+        </div>
+
+        <h3>Trace de Factorielle(4)</h3>
+        <div class="algo-block">
+Factorielle(<span class="number">4</span>) = <span class="number">4</span> × Factorielle(<span class="number">3</span>)
+    Factorielle(<span class="number">3</span>) = <span class="number">3</span> × Factorielle(<span class="number">2</span>)
+        Factorielle(<span class="number">2</span>) = <span class="number">2</span> × Factorielle(<span class="number">1</span>)
+            Factorielle(<span class="number">1</span>) = <span class="number">1</span> × Factorielle(<span class="number">0</span>)
+                Factorielle(<span class="number">0</span>) = <span class="number">1</span>  ← cas de base
+            = <span class="number">1</span> × <span class="number">1</span> = <span class="number">1</span>
+        = <span class="number">2</span> × <span class="number">1</span> = <span class="number">2</span>
+    = <span class="number">3</span> × <span class="number">2</span> = <span class="number">6</span>
+= <span class="number">4</span> × <span class="number">6</span> = <span class="number">24</span>
+        </div>
+    </section>
+
+    <!-- 8.3 Pile d'appels -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-layer-group"></i> 8.3 — La pile d'appels</h2>
+        <div class="concept-card"><h4>📚 Définition</h4>
+            <p>Chaque appel récursif est empilé sur la <strong>pile d'appels</strong> (call stack). Quand le cas de base est atteint, les appels sont dépilés dans l'ordre inverse.</p>
+        </div>
+        <div class="analogy-box"><span class="icon">🥞</span><div><strong>Analogie — La pile de crêpes :</strong> Chaque appel récursif = une crêpe posée sur la pile. On ne peut manger (résoudre) que la crêpe du dessus. Le cas de base = la dernière crêpe posée (la première mangée). C'est le principe <strong>LIFO</strong> (Last In, First Out).</div></div>
+
+        <div class="warning-box"><span>⚠️</span><div><strong>Stack Overflow !</strong> Si la récursion est trop profonde (pas de cas de base ou progression insuffisante), la pile déborde → erreur <strong>Stack Overflow</strong>. C'est l'équivalent de la boucle infinie pour les boucles.</div></div>
+    </section>
+
+    <!-- 8.4 Fibonacci -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-seedling"></i> 8.4 — Fibonacci</h2>
+        <p>Suite : 0, 1, 1, 2, 3, 5, 8, 13, 21… Chaque terme = somme des 2 précédents.</p>
+        <div class="algo-block">
+<span class="keyword">Fonction</span> Fibo(n : <span class="type">Entier</span>) : <span class="type">Entier</span>
+<span class="keyword">Début</span>
+    <span class="keyword">Si</span> n = <span class="number">0</span> <span class="keyword">Alors</span> <span class="keyword">Retourner</span> <span class="number">0</span>     <span class="comment">// Cas de base 1</span>
+    <span class="keyword">SinonSi</span> n = <span class="number">1</span> <span class="keyword">Alors</span> <span class="keyword">Retourner</span> <span class="number">1</span>  <span class="comment">// Cas de base 2</span>
+    <span class="keyword">Sinon</span>
+        <span class="keyword">Retourner</span> Fibo(n-<span class="number">1</span>) + Fibo(n-<span class="number">2</span>)   <span class="comment">// Deux appels récursifs !</span>
+    <span class="keyword">FinSi</span>
+<span class="keyword">Fin</span>
+        </div>
+
+        <div class="warning-box"><span>⚠️</span><div><strong>Attention :</strong> La version récursive de Fibonacci est très <strong>lente</strong> car elle recalcule les mêmes valeurs des millions de fois ! Fibo(5) appelle Fibo(3) deux fois, Fibo(2) trois fois… Complexité exponentielle O(2ⁿ). En pratique, on préfère la version <strong>itérative</strong>.</div></div>
+    </section>
+
+    <!-- 8.5 Récursif vs Itératif -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-balance-scale"></i> 8.5 — Récursif vs Itératif</h2>
+        <table class="styled-table">
+            <thead><tr><th>Critère</th><th>Récursif</th><th>Itératif</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Lisibilité</strong></td><td>Souvent plus élégant</td><td>Plus explicite</td></tr>
+                <tr><td><strong>Mémoire</strong></td><td>Pile d'appels (coûteux)</td><td>Variables en boucle</td></tr>
+                <tr><td><strong>Performance</strong></td><td>Peut être lent (Fibonacci)</td><td>Généralement plus rapide</td></tr>
+                <tr><td><strong>Risque</strong></td><td>Stack Overflow</td><td>Boucle infinie</td></tr>
+            </tbody>
+        </table>
+        <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo :</strong> Tout algorithme récursif peut être réécrit en itératif (et vice-versa). La récursivité est un <strong>outil</strong>, pas une obligation. Utilise-la quand le problème est <strong>naturellement récursif</strong> (arbres, fractales, diviser pour régner).</div></div>
+    </section>
+
+    <!-- Résumé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 8.6 — Résumé</h2>
+        <div class="concept-card"><h4>🎯 Aide-mémoire</h4>
+            <ul>
+                <li><strong>Récursif</strong> = une fonction qui s'appelle elle-même</li>
+                <li><strong>2 règles d'or</strong> : Base + Progression</li>
+                <li><strong>Factorielle</strong> : fact(0)=1, fact(n)=n×fact(n-1)</li>
+                <li><strong>Fibonacci</strong> : fibo(0)=0, fibo(1)=1, fibo(n)=fibo(n-1)+fibo(n-2)</li>
+                <li><strong>Pile d'appels</strong> : LIFO (crêpes)</li>
+                <li><strong>Stack Overflow</strong> : quand il manque le cas de base</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Exercices -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre7.html"><i class="fas fa-arrow-left"></i> Ch.7 — Recherche</a>
+        <a href="chapitre9.html">Ch.9 — Structures de données <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({ storageKey: 'b1_algo_progress', badges: [
+    { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+    { id: 'ch8', name: 'Récurseur', icon: '🪆', desc: 'Termine la Récursivité', xp: 20 },
+    { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% terminé', xp: 35 },
+    { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% terminé', xp: 100 }
+], levels: [
+    { min: 0, title: 'Débutant' }, { min: 30, title: 'Apprenti Codeur' },
+    { min: 80, title: 'Algorithmicien Jr.' }, { min: 150, title: 'Développeur Logique' },
+    { min: 250, title: 'Maître Récursif' }, { min: 400, title: 'Architecte Algo' }
+] });
+GameEngine.init();
+
+ChapterExercises.init({
+    guided: [
+        { q: "Comment s'appelle le point d'arrêt d'une récursion ?", hints: ["Le cas de...", "Base"], answer: "cas de base" },
+        { q: "Que vaut Factorielle(0) ?", hints: ["C'est le cas de base", "1"], answer: "1" },
+        { q: "Que vaut Factorielle(5) ?", hints: ["5×4×3×2×1", "120"], answer: "120" },
+        { q: "Quelle erreur si pas de cas de base ?", hints: ["La pile déborde", "Stack Overflow"], answer: "stack overflow" },
+        { q: "Principe de la pile d'appels : L.I.F.O. = ?", hints: ["Last In, First Out", "Dernier entré, premier sorti"], answer: "last in first out" }
+    ],
+    quiz: [
+        { type: "mcq", q: "Une fonction récursive :", options: ["S'appelle elle-même", "Appelle une autre fonction", "N'a pas de paramètres", "Ne retourne rien"], correct: 0 },
+        { type: "mcq", q: "Les 2 règles d'or de la récursion sont :", options: ["Base + Progression", "Entrée + Sortie", "Locale + Globale", "Simple + Complexe"], correct: 0 },
+        { type: "qa", q: "Fibonacci : fibo(6) = ?", answer: ["8"] },
+        { type: "mcq", q: "Pourquoi Fibonacci récursif est-il lent ?", options: ["Trop de paramètres", "Recalcule les mêmes valeurs", "Pas de cas de base", "Utilise trop de mémoire"], correct: 1 },
+        { type: "mcq", q: "La pile d'appels suit le principe :", options: ["FIFO", "LIFO", "Random", "Round-robin"], correct: 1 },
+        { type: "qa", q: "Analogie de la pile d'appels : les p_____", answer: ["crêpes", "poupées russes"] },
+        { type: "mcq", q: "Peut-on toujours remplacer une récursion par une boucle ?", options: ["Oui", "Non", "Seulement pour Factorielle", "Seulement avec des tableaux"], correct: 0 },
+        { type: "mcq", q: "Factorielle(3) fait combien d'appels au total ?", options: ["2", "3", "4", "5"], correct: 2 },
+        { type: "qa", q: "Fibo(0) = ___, Fibo(1) = ___", answer: ["0 1", "0, 1"] },
+        { type: "mcq", q: "La complexité de Fibonacci récursif naïf est :", options: ["O(n)", "O(n²)", "O(2ⁿ)", "O(log n)"], correct: 2 }
+    ],
+    dragdrop: [
+        { instruction: "Associe chaque concept récursif :", pairs: [["Cas de base", "Condition d'arrêt"], ["Appel récursif", "La fonction s'appelle elle-même"], ["Pile d'appels", "LIFO — empile puis dépile"], ["Stack Overflow", "Pile pleine, pas de cas de base"]] },
+        { instruction: "Trace de Factorielle(3) — ordonne :", pairs: [["Appel 1", "Fact(3) = 3 × Fact(2)"], ["Appel 2", "Fact(2) = 2 × Fact(1)"], ["Appel 3", "Fact(1) = 1 × Fact(0)"], ["Base", "Fact(0) = 1"]] },
+        { instruction: "Récursif vs Itératif :", pairs: [["Élégant, risque Stack Overflow", "Récursif"], ["Plus de mémoire (pile)", "Récursif"], ["Variables en boucle, performant", "Itératif"], ["Risque boucle infinie", "Itératif"]] }
+    ]
+});
+</script>
+</body>
+</html>

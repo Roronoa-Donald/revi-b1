@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards MERISE | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .cards-controls{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem}
+        .cards-controls select,.cards-controls button{padding:.5rem 1rem;border-radius:.5rem;border:1px solid var(--glass-border);background:var(--card-bg);color:var(--text-primary);cursor:pointer;font-size:.85rem}
+        .cards-controls button{background:var(--accent);color:#fff;border:0;font-weight:600}
+        .cards-controls button:hover{opacity:.85}
+        .card-counter{margin-left:auto;font-size:.85rem;color:var(--text-muted)}
+        .flashcard-container{perspective:1200px;max-width:600px;margin:0 auto 2rem}
+        .flashcard{position:relative;width:100%;min-height:280px;cursor:pointer;transform-style:preserve-3d;transition:transform .5s}
+        .flashcard.flipped{transform:rotateY(180deg)}
+        .flashcard-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:1rem;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:2px solid var(--glass-border)}
+        .flashcard-front{background:var(--card-bg)}
+        .flashcard-front .card-label{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:.5rem}
+        .flashcard-front h3{font-size:1.15rem;line-height:1.5}
+        .flashcard-back{background:var(--accent-glow);transform:rotateY(180deg)}
+        .flashcard-back p{font-size:1rem;line-height:1.6}
+        .flashcard-nav{display:flex;gap:1rem;justify-content:center;align-items:center;margin-bottom:1rem}
+        .flashcard-nav button{width:48px;height:48px;border-radius:50%;border:2px solid var(--accent);background:var(--card-bg);color:var(--accent);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+        .flashcard-nav button:hover{background:var(--accent);color:#fff}
+        .flashcard-nav span{font-weight:600;min-width:80px;text-align:center}
+        .click-hint{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.3rem}
+        .progress-dots{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+        .progress-dots span{width:8px;height:8px;border-radius:50%;background:var(--glass-border);transition:.2s}
+        .progress-dots span.done{background:var(--accent)}
+        .progress-dots span.current{background:var(--accent);transform:scale(1.4)}
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html" class="active"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-clone"></i> Mémorisation active</div>
+            <h1>Flashcards <span class="highlight">MERISE</span></h1>
+            <p>60 cartes recto-verso pour tester tes connaissances. Clique pour retourner la carte.</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="cards-controls">
+                <select id="filter-cat">
+                    <option value="all">Tous les modules</option>
+                    <option value="si">1. SI & MERISE</option>
+                    <option value="mcd">2. MCD</option>
+                    <option value="mld">3. MLD</option>
+                    <option value="ext">4. Extensions & Normalisation</option>
+                    <option value="flux">5. Flux</option>
+                    <option value="mct">6. MCT</option>
+                </select>
+                <button id="shuffle-btn"><i class="fa-solid fa-shuffle"></i> Mélanger</button>
+                <span class="card-counter" id="card-counter"></span>
+            </div>
+
+            <div class="progress-dots" id="progress-dots"></div>
+
+            <div class="flashcard-container" id="flashcard-container">
+                <div class="flashcard" id="flashcard">
+                    <div class="flashcard-face flashcard-front">
+                        <span class="card-label" id="card-cat"></span>
+                        <h3 id="card-question"></h3>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <p id="card-answer"></p>
+                    </div>
+                </div>
+            </div>
+            <p class="click-hint"><i class="fa-solid fa-hand-pointer"></i> Clique sur la carte pour la retourner</p>
+
+            <div class="flashcard-nav">
+                <button id="prev-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                <span id="card-pos">1 / 60</span>
+                <button id="next-btn"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+    <script>
+    (function(){
+        const ALL_CARDS = [
+            // ───── SI & MERISE (10 cartes) ─────
+            {cat:'si',q:"Qu'est-ce qu'un Système d'Information (SI) ?",a:"Ensemble organisé de ressources (humaines, matérielles, logicielles) permettant de collecter, stocker, traiter et distribuer l'information dans une organisation."},
+            {cat:'si',q:"Quels sont les 3 sous-systèmes d'une entreprise ?",a:"① Système de pilotage (décision) ② Système d'information (mémorisation & communication) ③ Système opérant (production)"},
+            {cat:'si',q:"Qu'est-ce que MERISE ?",a:"Méthode française (1978) d'analyse et de conception des systèmes d'information, basée sur la séparation données/traitements et une démarche par niveaux."},
+            {cat:'si',q:"Quels sont les 3 principes de MERISE ?",a:"① Séparation données / traitements ② Démarche par niveaux (conceptuel, logique, physique) ③ Démarche par étapes"},
+            {cat:'si',q:"Quels sont les 3 niveaux de MERISE ?",a:"Conceptuel (QUOI) → Logique/Organisationnel (QUI/OÙ) → Physique (COMMENT)"},
+            {cat:'si',q:"Quels modèles côté DONNÉES à chaque niveau ?",a:"Conceptuel → MCD | Logique → MLD | Physique → MPD"},
+            {cat:'si',q:"Quels modèles côté TRAITEMENTS à chaque niveau ?",a:"Conceptuel → MCT | Organisationnel → MOT | Physique → MPT"},
+            {cat:'si',q:"Quelle différence entre donnée et information ?",a:"La donnée est un fait brut (ex: 36.5). L'information est une donnée interprétée dans un contexte (ex: température du patient = 36.5°C)."},
+            {cat:'si',q:"Quelles sont les 6 étapes d'un projet MERISE ?",a:"① Schéma directeur ② Étude préalable ③ Étude détaillée ④ Réalisation ⑤ Mise en œuvre ⑥ Maintenance"},
+            {cat:'si',q:"Qu'est-ce qu'un modèle en analyse informatique ?",a:"Une représentation abstraite et simplifiée de la réalité qui permet de comprendre et communiquer sur le système étudié."},
+            // ───── MCD (15 cartes) ─────
+            {cat:'mcd',q:"Qu'est-ce qu'une propriété dans le MCD ?",a:"La plus petite unité d'information ayant un sens. Elle est élémentaire (atomique), avec un nom et un type de domaine. Ex : Nom_client (Alphabétique)."},
+            {cat:'mcd',q:"Qu'est-ce qu'une entité ?",a:"Représentation d'un objet du SI (concret ou abstrait) ayant une existence propre, regroupant un ensemble de propriétés. Symbole : rectangle."},
+            {cat:'mcd',q:"Quels sont les 3 types d'entités ?",a:"① Entité individu (personne) ② Entité objet concret (objet physique) ③ Entité objet abstrait (concept : commande, facture)"},
+            {cat:'mcd',q:"Qu'est-ce qu'un identifiant ?",a:"Propriété (ou groupe) dont la valeur distingue de manière unique chaque occurrence d'une entité. Souligné dans le MCD. Ex : Matricule, Code_client."},
+            {cat:'mcd',q:"Qu'est-ce qu'une association ?",a:"Lien sémantique entre 2+ entités représentant un fait. Elle peut porter des propriétés propres. Symbole : ovale (ou losange)."},
+            {cat:'mcd',q:"Qu'est-ce qu'une occurrence ?",a:"Une instance (un exemplaire concret) d'une entité. Ex : « Dupont Jean » est une occurrence de l'entité CLIENT."},
+            {cat:'mcd',q:"Que signifie la cardinalité (0,1) ?",a:"Participation optionnelle et unique : une occurrence participe 0 ou 1 fois à l'association."},
+            {cat:'mcd',q:"Que signifie la cardinalité (1,1) ?",a:"Participation obligatoire et unique : une occurrence participe exactement 1 fois à l'association."},
+            {cat:'mcd',q:"Que signifie la cardinalité (0,n) ?",a:"Participation optionnelle et multiple : une occurrence participe 0, 1 ou plusieurs fois."},
+            {cat:'mcd',q:"Que signifie la cardinalité (1,n) ?",a:"Participation obligatoire et multiple : une occurrence participe au moins 1 fois, potentiellement plusieurs."},
+            {cat:'mcd',q:"Comment lit-on les cardinalités ?",a:"Du point de vue de l'entité : « Combien de fois au minimum et au maximum UNE occurrence de cette entité participe-t-elle à l'association ? »"},
+            {cat:'mcd',q:"Qu'est-ce qu'une règle de gestion ?",a:"Phrase en langage naturel décrivant une contrainte métier. Elle permet de déterminer entités, associations et cardinalités du MCD."},
+            {cat:'mcd',q:"Qu'est-ce que le dictionnaire des données ?",a:"Document qui recense toutes les propriétés du SI avec leur nom, type (A, N, AN, D, B), taille et entité d'appartenance."},
+            {cat:'mcd',q:"Qu'est-ce qu'une Dépendance Fonctionnelle ?",a:"A → B : pour chaque valeur de A, on connaît exactement UNE valeur de B. Ex : Matricule → Nom."},
+            {cat:'mcd',q:"Qu'est-ce qu'une association ternaire ?",a:"Association liant 3 entités simultanément. Ex : ÉTUDIANT — NOTER — MATIÈRE + SEMESTRE."},
+            // ───── MLD (10 cartes) ─────
+            {cat:'mld',q:"Que devient une entité dans le MLD ?",a:"Une TABLE (ou relation) avec des attributs (colonnes), une clé primaire et des enregistrements (lignes)."},
+            {cat:'mld',q:"Qu'est-ce qu'une clé primaire (PK) ?",a:"Attribut(s) identifiant de manière unique chaque ligne d'une table. Obligatoire, unique, non nulle. Notation : souligné."},
+            {cat:'mld',q:"Qu'est-ce qu'une clé étrangère (FK) ?",a:"Attribut d'une table référençant la PK d'une autre table. Garantit l'intégrité référentielle. Notation : précédée de #."},
+            {cat:'mld',q:"Règle 1 du passage MCD→MLD ?",a:"Association (x,1)–(x,n) : la PK du côté n migre comme FK dans la table côté 1. Pas de table d'association."},
+            {cat:'mld',q:"Règle 2 du passage MCD→MLD ?",a:"Association (x,n)–(x,n) : nouvelle table d'association. PK = concaténation des FK des deux entités. Les propriétés portées deviennent des attributs."},
+            {cat:'mld',q:"Règle 3 du passage MCD→MLD ?",a:"Association (1,1)–(1,1) : fusion des tables ou FK dans la table dépendante. Cas rare."},
+            {cat:'mld',q:"Comment noter le MLD textuel ?",a:"TABLE (PK souligné, attributs, #FK). Ex : COMMANDE (Num_cmd, Date, #Code_client)"},
+            {cat:'mld',q:"Qu'est-ce qu'une clé composée ?",a:"Clé primaire formée de 2+ attributs dont la combinaison est unique. Souvent dans les tables d'association (R2)."},
+            {cat:'mld',q:"Que devient la propriété d'une association (n,n) ?",a:"Un attribut normal de la table d'association créée par la règle 2."},
+            {cat:'mld',q:"Comment savoir où mettre la FK (R1) ?",a:"La FK va toujours dans la table côté cardinalité max 1. Mnémo : « le 1 reçoit la FK du n »."},
+            // ───── Extensions & Normalisation (10 cartes) ─────
+            {cat:'ext',q:"Qu'est-ce qu'une identification relative ?",a:"Entité faible dont l'identifiant inclut celui de l'entité parente. Sa PK est composée (FK parent + sa propre clé). Rectangle double."},
+            {cat:'ext',q:"Qu'est-ce qu'une association réflexive ?",a:"Association liant une entité à elle-même. On distingue les rôles de chaque patte. Ex : PERSONNE —ÊTRE_PARENT_DE— PERSONNE."},
+            {cat:'ext',q:"Comment traduire une réflexive (n,n) en MLD ?",a:"Table d'association avec 2 FK vers la même table (rôles différenciés). Ex : ÊTRE_AMI (#Id_pers1, #Id_pers2)."},
+            {cat:'ext',q:"Comment traduire une réflexive (1,n) en MLD ?",a:"FK auto-référentielle dans la même table. Ex : EMPLOYÉ (Matricule, Nom, #Matricule_manager)."},
+            {cat:'ext',q:"Qu'est-ce qu'une pseudo-entité (agrégation) ?",a:"Encapsulation d'une association + ses entités en un bloc pouvant participer à d'autres associations."},
+            {cat:'ext',q:"Qu'est-ce que la 1ère Forme Normale (1FN) ?",a:"Tous les attributs sont atomiques (1 seule valeur par cellule) + la table possède une clé primaire."},
+            {cat:'ext',q:"Qu'est-ce que la 2ème Forme Normale (2FN) ?",a:"1FN + aucun attribut non-clé ne dépend d'une PARTIE seulement de la clé (pas de dépendance partielle). Ne concerne que les clés composées."},
+            {cat:'ext',q:"Qu'est-ce que la 3ème Forme Normale (3FN) ?",a:"2FN + aucun attribut non-clé ne dépend d'un AUTRE attribut non-clé (pas de dépendance transitive)."},
+            {cat:'ext',q:"Si la PK est simple, est-on automatiquement en 2FN ?",a:"Oui ! La 2FN concerne les dépendances partielles, qui ne peuvent exister qu'avec une clé composée."},
+            {cat:'ext',q:"Pourquoi normaliser ?",a:"Pour éliminer les redondances, éviter les anomalies d'insertion/modification/suppression et garantir la cohérence des données."},
+            // ───── Flux (7 cartes) ─────
+            {cat:'flux',q:"Qu'est-ce qu'un flux d'information ?",a:"Échange d'information entre deux acteurs. Caractérisé par un émetteur, un récepteur et un contenu. Représenté par une flèche numérotée."},
+            {cat:'flux',q:"Différence acteur interne / externe ?",a:"Interne : fait partie de l'organisation (service, département). Externe : hors périmètre (client, fournisseur, banque)."},
+            {cat:'flux',q:"Qu'est-ce qu'un domaine d'activité ?",a:"Sous-ensemble cohérent de l'organisation regroupant des activités et données fortement liées."},
+            {cat:'flux',q:"Comment construire un schéma de flux ?",a:"① Identifier les acteurs ② Identifier les flux ③ Numéroter les flux ④ Dessiner le diagramme avec flèches"},
+            {cat:'flux',q:"Qu'est-ce qu'un processus dans les flux ?",a:"Ensemble de traitements déclenchés par un/plusieurs événements, aboutissant à un résultat. Rattaché à un domaine."},
+            {cat:'flux',q:"Comment représente-t-on un acteur externe ?",a:"Par un cercle ou une ellipse en pointillés, placé à l'extérieur du rectangle du domaine."},
+            {cat:'flux',q:"Quel est le lien entre flux et MCT ?",a:"Les flux identifiés deviennent les événements déclencheurs et résultats dans le Modèle Conceptuel des Traitements."},
+            // ───── MCT (8 cartes) ─────
+            {cat:'mct',q:"Qu'est-ce que le MCT ?",a:"Modèle Conceptuel des Traitements : décrit CE QUE fait le SI en réponse aux événements, indépendamment de QUI et COMMENT."},
+            {cat:'mct',q:"Qu'est-ce qu'un événement dans le MCT ?",a:"Fait instantané déclencheur ou résultat. Types : externe (environnement), interne (produit par le SI), temporel (date/heure). Symbole : ovale."},
+            {cat:'mct',q:"Qu'est-ce qu'une opération dans le MCT ?",a:"Traitement NON INTERRUPTIBLE déclenché par événement(s). 3 zones : nom, actions, conditions d'émission. Symbole : rectangle."},
+            {cat:'mct',q:"Qu'est-ce qu'une synchronisation ?",a:"Expression logique (ET/OU) exprimant la condition de déclenchement quand plusieurs événements sont nécessaires."},
+            {cat:'mct',q:"Que signifie « ET » en synchronisation ?",a:"TOUS les événements doivent être présents pour déclencher l'opération."},
+            {cat:'mct',q:"Que signifie « OU » en synchronisation ?",a:"Au moins UN des événements suffit pour déclencher l'opération."},
+            {cat:'mct',q:"Qu'est-ce qu'une règle d'émission ?",a:"Condition de sortie d'une opération déterminant quel résultat est produit. Ex : toujours, si OK, si refus."},
+            {cat:'mct',q:"Qu'est-ce qu'un cycle dans le MCT ?",a:"Boucle où le résultat d'une opération redéclenche une opération précédente. Fréquent dans les relances/itérations."}
+        ];
+
+        let cards=[...ALL_CARDS], idx=0;
+        const flashcard=document.getElementById('flashcard');
+        const qEl=document.getElementById('card-question');
+        const aEl=document.getElementById('card-answer');
+        const catEl=document.getElementById('card-cat');
+        const posEl=document.getElementById('card-pos');
+        const counterEl=document.getElementById('card-counter');
+        const dotsEl=document.getElementById('progress-dots');
+        const catLabels={si:'SI & MERISE',mcd:'MCD',mld:'MLD',ext:'Extensions & Norm.',flux:'Flux',mct:'MCT'};
+
+        function render(){
+            if(!cards.length){qEl.textContent='Aucune carte';aEl.textContent='';catEl.textContent='';posEl.textContent='0/0';return}
+            const c=cards[idx];
+            flashcard.classList.remove('flipped');
+            qEl.textContent=c.q;
+            aEl.textContent=c.a;
+            catEl.textContent=catLabels[c.cat]||c.cat;
+            posEl.textContent=`${idx+1} / ${cards.length}`;
+            counterEl.textContent=`${cards.length} cartes`;
+            buildDots();
+        }
+        function buildDots(){
+            dotsEl.innerHTML='';
+            cards.forEach((_,i)=>{const s=document.createElement('span');if(i===idx)s.classList.add('current');dotsEl.appendChild(s)});
+        }
+        flashcard.addEventListener('click',()=>flashcard.classList.toggle('flipped'));
+        document.getElementById('prev-btn').addEventListener('click',()=>{idx=(idx-1+cards.length)%cards.length;render()});
+        document.getElementById('next-btn').addEventListener('click',()=>{idx=(idx+1)%cards.length;render()});
+        document.getElementById('shuffle-btn').addEventListener('click',()=>{for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}idx=0;render()});
+        document.getElementById('filter-cat').addEventListener('change',function(){const v=this.value;cards=v==='all'?[...ALL_CARDS]:ALL_CARDS.filter(c=>c.cat===v);idx=0;render()});
+        document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){idx=(idx+1)%cards.length;render()}else if(e.key==='ArrowLeft'){idx=(idx-1+cards.length)%cards.length;render()}else if(e.key===' '){e.preventDefault();flashcard.classList.toggle('flipped')}});
+        render();
+    })();
+    </script>
+</body>
+</html>

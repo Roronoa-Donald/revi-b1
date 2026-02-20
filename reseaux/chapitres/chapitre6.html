@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Équipements réseau | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-server"></i> Chapitre 6</div>
+    <h1>🌐 Équipements <span class="highlight">réseau</span></h1>
+    <p>Hub, switch, routeur, pare-feu, point d'accès — qui fait quoi ?</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-broadcast-tower"></i> Hub — Le « crieur public »</h2>
+    <div class="concept-card">
+        <h4>📢 Analogie</h4>
+        <p>Le hub est comme un <strong>mégaphone</strong> : il reçoit un message et le <strong>répète à tout le monde</strong>. Pas intelligent, pas de filtrage. Couche 1 (Physique). <strong>Obsolète</strong> aujourd'hui, remplacé par le switch.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-random"></i> Switch — Le « facteur intelligent »</h2>
+    <div class="concept-card">
+        <h4>📬 Analogie du facteur</h4>
+        <p>Le switch est un <strong>facteur intelligent</strong> : il lit l'adresse MAC sur l'enveloppe et la livre <strong>uniquement au bon destinataire</strong>. Il mémorise quelle MAC est sur quel port via sa <strong>table MAC</strong>. Couche 2 (Liaison).</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ VLAN</strong> = Virtual LAN. Le switch peut créer des <strong>réseaux virtuels séparés</strong>. Ex: le département Compta et le département RH sur le même switch physique mais isolés logiquement.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-route"></i> Routeur — Le « GPS »</h2>
+    <div class="concept-card">
+        <h4>🗺️ Analogie du GPS</h4>
+        <p>Le routeur est comme un <strong>GPS</strong> : il connaît les routes (table de routage) et choisit le <strong>meilleur chemin</strong> pour envoyer les paquets vers leur destination. Il relie des réseaux différents. Couche 3 (Réseau).</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Table de routage</span></div><pre><code>Destination       Masque            Passerelle        Interface
+192.168.1.0       255.255.255.0     Directement       eth0
+10.0.0.0          255.0.0.0         192.168.1.1       eth0
+0.0.0.0           0.0.0.0           192.168.1.254     eth0
+                                    ↑ Route par défaut (Internet)</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-shield-alt"></i> Pare-feu (Firewall)</h2>
+    <div class="concept-card">
+        <h4>🚪 Analogie du videur de boîte de nuit</h4>
+        <p>Le pare-feu est le <strong>videur</strong> à l'entrée : il vérifie les règles (ACL) et décide qui <strong>entre</strong> (trafic autorisé) et qui est <strong>bloqué</strong>. Il filtre par IP, port, protocole.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-wifi"></i> Point d'accès (AP) & Modem</h2>
+    <div class="concept-card">
+        <h4>📡 Point d'accès Wi-Fi</h4>
+        <p>Le <strong>AP</strong> (Access Point) convertit le signal filaire en <strong>signal Wi-Fi</strong>. C'est un « pont » entre le réseau câblé et les appareils sans fil.</p>
+    </div>
+    <div class="concept-card">
+        <h4>📞 Modem</h4>
+        <p>Le <strong>modem</strong> (<strong>Mo</strong>dulateur/<strong>Dém</strong>odulateur) convertit les signaux entre votre réseau (numérique) et la ligne de l'opérateur (analogique/DSL/fibre).</p>
+    </div>
+    <div class="tip-box"><strong>💡 Votre « box »</strong> (Freebox, Livebox…) est un appareil <strong>tout-en-un</strong> : modem + routeur + switch + point d'accès Wi-Fi + pare-feu !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table"></i> Comparatif</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Équipement</th><th>Couche OSI</th><th>Adresse</th><th>Intelligence</th></tr></thead>
+        <tbody>
+            <tr><td>Hub</td><td>1 Physique</td><td>Aucune</td><td>Broadcast tout</td></tr>
+            <tr><td>Switch</td><td>2 Liaison</td><td>MAC</td><td>Table MAC, VLAN</td></tr>
+            <tr><td>Routeur</td><td>3 Réseau</td><td>IP</td><td>Table de routage</td></tr>
+            <tr><td>Pare-feu</td><td>3-7</td><td>IP/Port</td><td>Règles de filtrage</td></tr>
+            <tr><td>AP Wi-Fi</td><td>1-2</td><td>MAC</td><td>Pont filaire↔sans fil</td></tr>
+        </tbody>
+    </table></div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique « H.S.R. = 1.2.3 »</h4>
+        <p><strong>H</strong>ub = couche <strong>1</strong> · <strong>S</strong>witch = couche <strong>2</strong> · <strong>R</strong>outeur = couche <strong>3</strong></p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 6</h4>
+        <ul>
+            <li><strong>H.S.R. = 1.2.3</strong> : Hub(1), Switch(2), Routeur(3)</li>
+            <li>Switch = adresses MAC · Routeur = adresses IP</li>
+            <li>VLAN = réseau virtuel sur un switch</li>
+            <li>Pare-feu = filtre le trafic (videur)</li>
+            <li>Box = modem + routeur + switch + AP + firewall</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre5.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Protocoles</a>
+    <a href="chapitre7.html" class="next-chapter">Sécurité <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Technicien',minXP:300},{name:'Admin',minXP:550},{name:'Architecte',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Quelle est la différence entre un hub et un switch ?",hints:["Hub = broadcast","Switch = table MAC"],answer:"Le hub envoie tout à tout le monde (couche 1). Le switch envoie uniquement au destinataire grâce à sa table MAC (couche 2)."},
+        {q:"À quelle couche travaille un routeur et qu'utilise-t-il ?",hints:["Couche 3","Adresses IP"],answer:"Couche 3 (Réseau). Il utilise les adresses IP et sa table de routage pour choisir le meilleur chemin."},
+        {q:"Qu'est-ce qu'un VLAN et à quoi sert-il ?",hints:["Virtual LAN","Isolation logique"],answer:"Un VLAN est un réseau local virtuel créé sur un switch. Il sert à isoler logiquement des groupes d'appareils (sécurité, organisation) sans changer le câblage."},
+        {q:"Listez les fonctions de votre box Internet.",hints:["5 fonctions","Modem, routeur..."],answer:"1.Modem (conversion signal) 2.Routeur (routage IP) 3.Switch (plusieurs ports Ethernet) 4.Point d'accès Wi-Fi 5.Pare-feu"},
+        {q:"Comparez le pare-feu logiciel et matériel.",hints:["Logiciel = sur l'OS","Matériel = boîtier dédié"],answer:"Logiciel: installé sur l'OS (Windows Firewall), protège un seul appareil.\nMatériel: boîtier dédié, protège tout le réseau, plus performant."}
+    ],
+    quiz:[
+        {type:"mcq",q:"Le switch travaille en couche :",options:["1","2","3","4"],correct:1},
+        {type:"mcq",q:"Le hub envoie les trames :",options:["Au destinataire uniquement","À tous les ports","Au routeur","Au serveur DHCP"],correct:1},
+        {type:"mcq",q:"VLAN signifie :",options:["Virtual Local Access Network","Virtual LAN","Very Large Area Network","Variable Link Address Node"],correct:1},
+        {type:"mcq",q:"Qu'est-ce qui différencie un routeur d'un switch ?",options:["Le routeur utilise les MAC","Le routeur utilise les IP","Le routeur est en couche 2","Le routeur est plus lent"],correct:1},
+        {type:"mcq",q:"Le pare-feu filtre par :",options:["IP et port","Uniquement MAC","Uniquement DNS","Rien"],correct:0},
+        {type:"mcq",q:"Un point d'accès Wi-Fi relie :",options:["2 routeurs","Réseau filaire ↔ sans fil","Internet ↔ LAN","2 VLAN"],correct:1},
+        {type:"mcq",q:"H.S.R. = 1.2.3 signifie :",options:["HTTP/SSH/RDP = ports 1,2,3","Hub=1, Switch=2, Routeur=3","Hardware/Software/Router","Rien"],correct:1},
+        {type:"mcq",q:"Le modem convertit :",options:["IP en MAC","Signal numérique ↔ analogique","Nom en IP","TCP en UDP"],correct:1},
+        {type:"qa",q:"Pourquoi le hub est-il obsolète ?",answer:"Il envoie tout à tout le monde (broadcast), ce qui crée des collisions, gaspille la bande passante et pose des problèmes de sécurité."},
+        {type:"qa",q:"Qu'est-ce qu'une table MAC ?",answer:"C'est une table maintenue par le switch qui associe chaque adresse MAC à un port physique du switch, pour savoir où envoyer les trames."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque équipement à sa couche OSI :",pairs:[["Hub","Couche 1"],["Switch","Couche 2"],["Routeur","Couche 3"],["Pare-feu","Couches 3-7"]]},
+        {instruction:"Associez chaque équipement à son analogie :",pairs:[["Hub","Mégaphone (crie à tous)"],["Switch","Facteur (livre au bon port)"],["Routeur","GPS (meilleur chemin)"],["Pare-feu","Videur (filtre l'entrée)"]]},
+        {instruction:"Fonctions de la box Internet :",pairs:[["Modem","Conversion de signal"],["Routeur","Routage IP"],["Switch","Ports Ethernet"],["AP Wi-Fi","Sans fil"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

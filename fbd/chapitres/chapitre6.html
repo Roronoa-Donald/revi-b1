@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Conception & Contraintes | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-drafting-compass"></i> Chapitre 6</div>
+    <h1>🏗️ Conception <span class="highlight">& Contraintes</span></h1>
+    <p>Schéma Entité-Relation, passage E-R → relationnel, contraintes d'intégrité.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── 1. Le modèle E-R ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-project-diagram"></i> Le modèle Entité-Relation (E-R)</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie AutoBot :</strong> Le schéma E-R est le <strong>plan d'architecte</strong> avant de construire la maison (la base de données). On dessine les pièces (entités), les portes entre elles (relations) et les règles de la maison (contraintes).
+        </div>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique E.A.R.</div>
+            <p><strong>E</strong>ntité — <strong>A</strong>ttribut — <strong>R</strong>elation</p>
+            <p>Les 3 composants d'un schéma E-R.</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Composants du schéma E-R</h3>
+            <table class="styled-table">
+                <thead><tr><th>Composant</th><th>Représentation</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Entité</strong></td><td>Rectangle</td><td>ETUDIANT, COURS, PROFESSEUR</td></tr>
+                    <tr><td><strong>Attribut</strong></td><td>Ovale relié à l'entité</td><td>nom, prenom, age</td></tr>
+                    <tr><td><strong>Attribut clé</strong></td><td>Ovale souligné</td><td><u>id</u></td></tr>
+                    <tr><td><strong>Relation</strong></td><td>Losange</td><td>INSCRIT, ENSEIGNE</td></tr>
+                    <tr><td><strong>Cardinalité</strong></td><td>Nombres sur les liens</td><td>1..N, 0..*, 1..1</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemple schéma E-R (texte)</span></div>
+            <pre>┌──────────────┐         ┌──────────────┐
+│   ETUDIANT   │         │    COURS     │
+│──────────────│         │──────────────│
+│ <u>id_etu</u>       │   M:N   │ <u>id_cours</u>     │
+│ nom          │◄─INSCRIT─►│ intitule     │
+│ prenom       │         │ credits      │
+│ age          │         │              │
+└──────────────┘         └──────────────┘
+      La relation INSCRIT a un attribut : note</pre>
+        </div>
+    </section>
+
+    <!-- ─── 2. Cardinalités ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-hashtag"></i> Les cardinalités</h2>
+
+        <p>La cardinalité indique <strong>combien</strong> d'instances d'une entité participent à une relation.</p>
+
+        <div class="concept-card">
+            <h3>Notation des cardinalités</h3>
+            <table class="styled-table">
+                <thead><tr><th>Notation</th><th>Signification</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>1..1</strong></td><td>Exactement un</td><td>Un passeport → UN citoyen</td></tr>
+                    <tr><td><strong>0..1</strong></td><td>Zéro ou un</td><td>Un étudiant → 0 ou 1 stage</td></tr>
+                    <tr><td><strong>1..N</strong></td><td>Un à plusieurs</td><td>Un dept → 1 à N employés</td></tr>
+                    <tr><td><strong>0..N</strong> ou <strong>*</strong></td><td>Zéro à plusieurs</td><td>Un étudiant → 0 à N cours</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Comment lire :</strong> Lisez TOUJOURS la cardinalité dans le sens de chaque entité :<br>
+            « Un ETUDIANT peut être inscrit à <strong>0..N</strong> cours. Un COURS peut avoir <strong>0..N</strong> étudiants inscrits. » → c'est du M:N.
+        </div>
+    </section>
+
+    <!-- ─── 3. Passage E-R → Relationnel ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Passage E-R → Schéma relationnel</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Règles de conversion E-R → Relationnel</div>
+            <p><strong>Entité → Table</strong> | <strong>Attribut → Colonne</strong> | <strong>Clé E-R → PK</strong></p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Règles selon la cardinalité</h3>
+            <table class="styled-table">
+                <thead><tr><th>Cardinalité</th><th>Transformation</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>1:1</strong></td><td>FK dans l'une des deux tables (ou fusionner)</td></tr>
+                    <tr><td><strong>1:N</strong></td><td>FK dans la table côté N (le « plusieurs »)</td></tr>
+                    <tr><td><strong>M:N</strong></td><td>Créer une <strong>table de jonction</strong> avec les PK des deux entités</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Exemple complet</span></div>
+            <pre>E-R :
+  PROFESSEUR (1) ───ENSEIGNE──── (N) COURS
+  ETUDIANT   (M) ───INSCRIT───── (N) COURS  [attribut: note]
+
+Relationnel :
+  PROFESSEURS(<u>id_prof</u>, nom, prenom, specialite)
+  COURS(<u>id_cours</u>, intitule, credits, #id_prof)      ← FK côté N
+  ETUDIANTS(<u>id_etu</u>, nom, prenom, date_naissance)
+  INSCRIPTIONS(<u>#id_etu, #id_cours</u>, note)             ← table de jonction M:N</pre>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Astuce pour M:N :</strong> La table de jonction a une clé composée des PK des deux entités. Elle peut avoir des attributs propres (ici : note, date_inscription…).
+        </div>
+    </section>
+
+    <!-- ─── 4. Contraintes d'intégrité ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-shield-alt"></i> Contraintes d'intégrité</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique E.R.D.U.</div>
+            <p><strong>E</strong>ntité — <strong>R</strong>éférentielle — <strong>D</strong>omaine — <strong>U</strong>tilisateur</p>
+            <p>Les 4 types de contraintes d'intégrité.</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Les 4 contraintes</h3>
+            <table class="styled-table">
+                <thead><tr><th>Contrainte</th><th>Règle</th><th>SQL</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Entité</strong></td><td>Chaque table a une PK unique et non-null</td><td><code>PRIMARY KEY</code></td></tr>
+                    <tr><td><strong>Référentielle</strong></td><td>Toute FK pointe vers une PK existante</td><td><code>REFERENCES table(pk)</code></td></tr>
+                    <tr><td><strong>Domaine</strong></td><td>Les valeurs respectent le type et les contraintes</td><td><code>CHECK, NOT NULL, types</code></td></tr>
+                    <tr><td><strong>Utilisateur</strong></td><td>Règles métier spécifiques</td><td><code>CHECK, TRIGGER</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>SQL — Toutes les contraintes ensemble</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>CREATE TABLE inscriptions (
+    id_etu   INTEGER NOT NULL,
+    id_cours INTEGER NOT NULL,
+    note     DECIMAL(4,2) CHECK (note >= 0 AND note <= 20),
+    date_insc DATE DEFAULT CURRENT_DATE,
+    
+    PRIMARY KEY (id_etu, id_cours),                -- contrainte d'entité
+    FOREIGN KEY (id_etu) REFERENCES etudiants(id)  -- contrainte référentielle
+        ON DELETE CASCADE,
+    FOREIGN KEY (id_cours) REFERENCES cours(id)
+        ON DELETE RESTRICT
+);
+
+-- Contrainte utilisateur (métier)
+ALTER TABLE inscriptions 
+ADD CONSTRAINT chk_date 
+CHECK (date_insc >= '2020-01-01');</pre>
+        </div>
+    </section>
+
+    <!-- ─── 5. Processus de conception ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-road"></i> Processus de conception complet</h2>
+
+        <div class="concept-card">
+            <h3>🔧 Les 5 étapes</h3>
+            <table class="styled-table">
+                <thead><tr><th>Étape</th><th>Action</th><th>Résultat</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>1. Analyse</strong></td><td>Recueillir les besoins</td><td>Cahier des charges</td></tr>
+                    <tr><td><strong>2. MCD</strong></td><td>Modèle Conceptuel (E-R)</td><td>Schéma E-R</td></tr>
+                    <tr><td><strong>3. MLD</strong></td><td>Modèle Logique (relationnel)</td><td>Tables, PK, FK</td></tr>
+                    <tr><td><strong>4. MPD</strong></td><td>Modèle Physique (SQL)</td><td>CREATE TABLE, contraintes</td></tr>
+                    <tr><td><strong>5. Normaliser</strong></td><td>Vérifier 1NF → 3NF</td><td>Schéma optimisé</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique A.C.L.P.N.</div>
+            <p><strong>A</strong>nalyse → <strong>C</strong>onceptuel (MCD) → <strong>L</strong>ogique (MLD) → <strong>P</strong>hysique (MPD) → <strong>N</strong>ormaliser</p>
+        </div>
+    </section>
+
+    <!-- ─── 6. Bonnes pratiques ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-double"></i> Bonnes pratiques de conception</h2>
+
+        <div class="concept-card">
+            <h3>✅ Les Do & Don't</h3>
+            <table class="styled-table">
+                <thead><tr><th>✅ Faire</th><th>❌ Éviter</th></tr></thead>
+                <tbody>
+                    <tr><td>Utiliser des noms clairs et cohérents</td><td>Noms cryptiques (t1, col_a)</td></tr>
+                    <tr><td>Toujours définir une PK</td><td>Tables sans PK</td></tr>
+                    <tr><td>Utiliser des FK pour les liens</td><td>Liens implicites (sans FK)</td></tr>
+                    <tr><td>Normaliser en 3NF minimum</td><td>Stocker des données redondantes</td></tr>
+                    <tr><td>NOT NULL quand la donnée est obligatoire</td><td>Tout laisser nullable</td></tr>
+                    <tr><td>CHECK pour les règles métier</td><td>Se reposer uniquement sur l'application</td></tr>
+                    <tr><td>Utiliser SERIAL/UUID pour les PK artificielles</td><td>Utiliser des données « naturelles » volatiles comme PK</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── 7. Résumé global ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif du cours FBD</h2>
+
+        <div class="concept-card">
+            <h3>🧠 Tous les mnémoniques du cours</h3>
+            <table class="styled-table">
+                <thead><tr><th>Ch.</th><th>Mnémonique</th><th>Signification</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td><strong>R.A.T.D.</strong></td><td>Relation, Attribut, Tuple, Domaine</td></tr>
+                    <tr><td>1</td><td><strong>U.N.I.</strong></td><td>Unique, Non-null, Immuable (PK)</td></tr>
+                    <tr><td>2</td><td><strong>S.P.R.</strong></td><td>Sélection, Projection, Renommage</td></tr>
+                    <tr><td>2</td><td><strong>U.I.D.P.</strong></td><td>Union, Intersection, Différence, Produit</td></tr>
+                    <tr><td>3</td><td><strong>D.M.C.</strong></td><td>DDL, DML, DCL</td></tr>
+                    <tr><td>3</td><td><strong>S.F.W.O.L.</strong></td><td>SELECT FROM WHERE ORDER LIMIT</td></tr>
+                    <tr><td>3</td><td><strong>C.R.U.D.</strong></td><td>Create, Read, Update, Delete</td></tr>
+                    <tr><td>4</td><td><strong>I.L.R.F.C.</strong></td><td>Inner, Left, Right, Full, Cross JOIN</td></tr>
+                    <tr><td>4</td><td><strong>C.S.A.M.M.</strong></td><td>Count, Sum, Avg, Max, Min</td></tr>
+                    <tr><td>5</td><td><strong>I.M.S.</strong></td><td>Anomalies : Insertion, Mise à jour, Suppression</td></tr>
+                    <tr><td>6</td><td><strong>E.A.R.</strong></td><td>Entité, Attribut, Relation</td></tr>
+                    <tr><td>6</td><td><strong>E.R.D.U.</strong></td><td>Entité, Référentielle, Domaine, Utilisateur</td></tr>
+                    <tr><td>6</td><td><strong>A.C.L.P.N.</strong></td><td>Analyse, Conceptuel, Logique, Physique, Normaliser</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Exercices ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-dumbbell"></i> Exercices du chapitre</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre5.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Chapitre 5</a>
+        <a href="formules.html" class="btn-nav">Formules <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar" id="xp-bar"></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["E-R = plan d'architecte de la BD","Toujours convertir M:N en table de jonction"]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Dessinez le schéma E-R (en texte) pour : un MEDECIN consulte des PATIENTS. Un patient peut consulter plusieurs médecins.",hints:["C'est une relation M:N","La relation CONSULTER peut avoir un attribut date"],answer:"MEDECIN (1,N) ──CONSULTER── (1,N) PATIENT. Attributs de CONSULTER : date, motif. Table de jonction : CONSULTATIONS(#id_medecin, #id_patient, date, motif)."},
+        {q:"Convertissez en relationnel : AUTEUR (1,N) ──ECRIT── (0,N) LIVRE.",hints:["C'est du M:N → table de jonction"],answer:"AUTEURS(<u>id_auteur</u>, nom), LIVRES(<u>id_livre</u>, titre), ECRIRE(<u>#id_auteur, #id_livre</u>)"},
+        {q:"Convertissez en relationnel : DEPARTEMENT (1) ──EMPLOIE── (N) EMPLOYE.",hints:["1:N → FK côté N"],answer:"DEPARTEMENTS(<u>id_dept</u>, nom_dept), EMPLOYES(<u>id_emp</u>, nom, #id_dept)"},
+        {q:"Quelles contraintes SQL ajouteriez-vous pour : 'un employé ne peut pas avoir un salaire négatif, et le département est obligatoire' ?",hints:["CHECK pour le salaire","NOT NULL pour le département"],answer:"salaire DECIMAL(10,2) CHECK(salaire >= 0), id_dept INTEGER NOT NULL REFERENCES departements(id_dept)"},
+        {q:"Citez les 5 étapes de conception A.C.L.P.N. et leur livrable.",hints:["De l'analyse au physique"],answer:"1. Analyse → Cahier des charges. 2. Conceptuel (MCD) → Schéma E-R. 3. Logique (MLD) → Tables/PK/FK. 4. Physique (MPD) → SQL CREATE. 5. Normaliser → Schéma 3NF."}
+    ],
+    quiz:[
+        {type:"mcq",q:"E.A.R. signifie :",options:["Entité, Attribut, Relation","Erreur, Analyse, Résultat","Enregistrement, Alias, Référence","Effectif, Association, Règle"],correct:0},
+        {type:"mcq",q:"Pour une relation M:N, on crée :",options:["Une FK dans chaque table","Une table de jonction","Un attribut multi-valué","Rien de spécial"],correct:1},
+        {type:"mcq",q:"Pour une relation 1:N, la FK va :",options:["Côté 1","Côté N","Dans une table séparée","Nulle part"],correct:1},
+        {type:"mcq",q:"La contrainte d'intégrité référentielle assure que :",options:["Pas de NULL dans la PK","Toute FK pointe vers une PK existante","Les valeurs sont atomiques","Les types sont corrects"],correct:1},
+        {type:"mcq",q:"E.R.D.U. liste les contraintes :",options:["Entité, Référentielle, Domaine, Utilisateur","Erreur, Résultat, Donnée, Unique","Enregistrement, Relation, Domaine, Union","Effectif, Référence, Déterminant, Unicité"],correct:0},
+        {type:"mcq",q:"Le MCD correspond à :",options:["Le Modèle Conceptuel de Données (E-R)","Le Modèle Calculé des Données","Le Modèle Complet de la Database","Le Module Central de Données"],correct:0},
+        {type:"mcq",q:"A.C.L.P.N. = les étapes de conception :",options:["Analyse, Conceptuel, Logique, Physique, Normaliser","Attribut, Clé, Lien, Projection, Nom","Addition, Calcul, Lecture, Produit, Norme","Alias, Contrainte, Langage, Programme, Nom"],correct:0},
+        {type:"qa",q:"Quelle est la différence entre MCD et MLD ?",answer:"MCD = schéma E-R (entités, relations, cardinalités). MLD = schéma relationnel (tables, colonnes, PK, FK). Le MLD est la traduction du MCD en tables."},
+        {type:"qa",q:"Citez les 4 types de contraintes d'intégrité (E.R.D.U.).",answer:"Entité (PK unique & non-null), Référentielle (FK → PK existante), Domaine (types & valeurs), Utilisateur (règles métier)."},
+        {type:"qa",q:"Comment convertit-on une relation M:N en schéma relationnel ?",answer:"On crée une table de jonction dont la PK composée = les PK des deux entités. Les attributs de la relation E-R deviennent des colonnes de cette table."}
+    ],
+    dragdrop:[
+        {instruction:"Associez la cardinalité à la transformation :",pairs:[["1:1","FK UNIQUE dans une table"],["1:N","FK côté N"],["M:N","Table de jonction"]]},
+        {instruction:"Associez l'étape au livrable :",pairs:[["Analyse","Cahier des charges"],["MCD","Schéma E-R"],["MLD","Tables + PK + FK"],["MPD","CREATE TABLE SQL"],["Normaliser","Schéma 3NF"]]},
+        {instruction:"Associez la contrainte au SQL :",pairs:[["Entité","PRIMARY KEY"],["Référentielle","FOREIGN KEY REFERENCES"],["Domaine","CHECK, NOT NULL"],["Utilisateur","TRIGGER"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

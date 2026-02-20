@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 — Corrélation & régression | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-chart-line"></i> Chapitre 6</div>
+    <h1>📊 Corrélation & <span class="highlight">régression</span></h1>
+    <p>Nuage de points, coefficient de corrélation et droite de régression.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cloud"></i> Nuage de points</h2>
+    <div class="concept-card">
+        <h4>📍 Analogie de la carte des étoiles</h4>
+        <p>On a 2 variables (X et Y) mesurées sur les mêmes individus. On place chaque individu comme un <strong>point</strong> sur un graphique (X en abscisse, Y en ordonnée). L'ensemble forme un <strong>nuage de points</strong> qui montre la relation entre X et Y.</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ Exemples :</strong> Taille vs poids, heures d'étude vs note, température vs ventes de glaces.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-link"></i> Corrélation</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique — Corrélation en 3 mots</h4>
+        <p><strong>Positive</strong> = X ↑ Y ↑ (les deux montent ensemble)<br>
+        <strong>Négative</strong> = X ↑ Y ↓ (l'une monte, l'autre descend)<br>
+        <strong>Nulle</strong> = aucun lien visible (nuage circulaire)</p>
+    </div>
+
+    <h3>Coefficient de corrélation linéaire (r)</h3>
+    <div class="code-block"><pre><code>r = Cov(X,Y) / (σₓ × σᵧ)
+
+Où :
+Cov(X,Y) = Σ(xᵢ − x̄)(yᵢ − ȳ) / N = [Σ(xᵢ×yᵢ)/N] − x̄×ȳ
+σₓ = écart-type de X
+σᵧ = écart-type de Y
+
+Propriétés de r :
+• -1 ≤ r ≤ +1  (toujours entre -1 et 1)
+• |r| proche de 1 → forte corrélation
+• |r| proche de 0 → faible ou pas de corrélation
+• r > 0 → positive, r < 0 → négative</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>|r|</th><th>Interprétation</th></tr></thead>
+        <tbody>
+            <tr><td>0.8 – 1.0</td><td>Corrélation <strong>forte</strong></td></tr>
+            <tr><td>0.5 – 0.8</td><td>Corrélation <strong>modérée</strong></td></tr>
+            <tr><td>0.2 – 0.5</td><td>Corrélation <strong>faible</strong></td></tr>
+            <tr><td>0.0 – 0.2</td><td>Corrélation <strong>très faible</strong> ou nulle</td></tr>
+        </tbody>
+    </table></div>
+
+    <div class="warning-box"><strong>⚠️ Corrélation ≠ Causalité !</strong> Le nombre de noyades et les ventes de glaces sont corrélés (les deux augmentent en été), mais les glaces ne causent pas les noyades. La <strong>cause commune</strong> est la chaleur.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-ruler"></i> Droite de régression (moindres carrés)</h2>
+    <div class="concept-card">
+        <h4>📏 Analogie de la tendance</h4>
+        <p>La droite de régression est la « meilleure ligne droite » qui traverse le nuage de points. Elle minimise la somme des distances verticales au carré entre les points et la droite.</p>
+    </div>
+    <div class="code-block"><pre><code>Droite Y = aX + b
+
+Pente :     a = Cov(X,Y) / Var(X) = [Σ(xᵢyᵢ)/N − x̄ȳ] / σₓ²
+Ordonnée :  b = ȳ − a × x̄
+
+La droite passe TOUJOURS par le point moyen (x̄, ȳ).</code></pre></div>
+    <div class="tip-box"><strong>💡 Utilité :</strong> La droite de régression permet de <strong>prédire</strong> Y pour une nouvelle valeur de X. Mais attention : ne prédisez pas en dehors de la plage des données (extrapolation risquée) !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 6</h4>
+        <ul>
+            <li>Nuage de points = visualiser la relation entre 2 variables</li>
+            <li>r = Cov(X,Y) / (σₓ × σᵧ), toujours entre -1 et +1</li>
+            <li>|r| proche de 1 = forte corrélation, proche de 0 = faible</li>
+            <li>⚠️ Corrélation ≠ Causalité</li>
+            <li>Droite Y = aX + b, a = Cov/Var(X), b = ȳ − ax̄</li>
+            <li>La droite passe par (x̄, ȳ)</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre5.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Graphiques</a>
+    <a href="formules.html" class="next-chapter">Formules <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"r = 0.92. Interprétez.",hints:["Positif","Proche de 1"],answer:"Corrélation positive forte. Quand X augmente, Y augmente fortement. Les points sont proches d'une droite montante."},
+        {q:"r = -0.15. Interprétez.",hints:["Négatif","Proche de 0"],answer:"Corrélation négatif très faible — pratiquement pas de relation linéaire entre X et Y."},
+        {q:"Calculez Cov(X,Y) sachant x̄=5, ȳ=10, Σ(xᵢyᵢ)/N=58.",hints:["Cov = Σ(xᵢyᵢ)/N − x̄ȳ"],answer:"Cov(X,Y) = 58 − 5×10 = 58 − 50 = 8."},
+        {q:"Trouvez la pente a de la droite de régression si Cov(X,Y)=8 et σₓ²=4.",hints:["a = Cov/Var(X)"],answer:"a = 8/4 = 2. La pente vaut 2 (Y augmente de 2 quand X augmente de 1)."},
+        {q:"Trouvez b sachant a=2, x̄=5, ȳ=10.",hints:["b = ȳ − a×x̄"],answer:"b = 10 − 2×5 = 0. La droite est Y = 2X + 0 = 2X."}
+    ],
+    quiz:[
+        {type:"mcq",q:"Le coefficient r est toujours entre :",options:["0 et 1","-1 et 0","-1 et 1","0 et 100"],correct:2},
+        {type:"mcq",q:"r = -0.85 signifie :",options:["Pas de corrélation","Corrélation positive forte","Corrélation négative forte","Corrélation faible"],correct:2},
+        {type:"mcq",q:"La droite de régression passe toujours par :",options:["L'origine (0,0)","Le point (x̄, ȳ)","Le point (1, 1)","Le mode"],correct:1},
+        {type:"mcq",q:"Corrélation ≠ Causalité signifie :",options:["La corrélation ne marche pas","Deux variables corrélées n'impliquent pas un lien de cause à effet","r est toujours faux","La régression est inutile"],correct:1},
+        {type:"mcq",q:"La pente a = Cov(X,Y) / :",options:["σᵧ","σₓ","Var(X)","Var(Y)"],correct:2},
+        {type:"mcq",q:"Cov(X,Y) = 0 signifie :",options:["X et Y sont identiques","X et Y n'ont pas de relation linéaire","X cause Y","La moyenne est nulle"],correct:1},
+        {type:"mcq",q:"L'extrapolation est risquée car :",options:["Le calcul est faux","On prédit en dehors des données observées","La moyenne change","Le mode disparaît"],correct:1},
+        {type:"qa",q:"Qu'est-ce que la covariance ?",answer:"La covariance mesure le degré de variation conjointe de deux variables. Cov(X,Y) = Σ(xᵢ−x̄)(yᵢ−ȳ)/N. Positive si X et Y varient dans le même sens."},
+        {type:"qa",q:"Pourquoi normalise-t-on la covariance pour obtenir r ?",answer:"La covariance dépend des unités (km², kg×cm…). En divisant par σₓ×σᵧ, r devient sans dimension et toujours entre -1 et 1, facile à interpréter."},
+        {type:"qa",q:"Donnez un exemple de corrélation sans causalité.",answer:"Le nombre de films de Nicolas Cage et le nombre de noyades dans les piscines sont corrélés (corrélation fallacieuse). Les glaces et les noyades augmentent en été (cause commune : chaleur)."}
+    ],
+    dragdrop:[
+        {instruction:"Interprétez la valeur de r :",pairs:[["r = 0.95","Forte positive"],["r = -0.80","Forte négative"],["r = 0.10","Quasi nulle"],["r = -0.50","Modérée négative"]]},
+        {instruction:"Formules de la droite Y = aX + b :",pairs:[["Pente a","Cov(X,Y) / Var(X)"],["Ordonnée b","ȳ − a×x̄"],["Point moyen","(x̄, ȳ)"]]},
+        {instruction:"Associez :",pairs:[["Nuage de points","2 variables sur un graphique"],["Corrélation","Force et sens de la relation"],["Régression","Droite qui prédit Y à partir de X"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

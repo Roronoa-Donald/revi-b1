@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 — Extensions du MCD & Normalisation | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html" class="active">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html" class="active"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions & Normalisation</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-puzzle-piece"></i> Module 4</div>
+            <h1>Extensions du MCD & <span class="highlight">Normalisation</span></h1>
+            <p>Identification relative, associations réflexives, pseudo-entités et les 3 formes normales pour des modèles robustes.</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- PARTIE A : Extensions du MCD -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-puzzle-piece"></i> PARTIE A — Extensions du MCD</h2>
+            </section>
+
+            <!-- SECTION 1 : Identification relative -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-fingerprint"></i> I. L'Identification Relative</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Il y a <strong>identification relative</strong> lorsqu'une entité ne peut pas être identifiée par ses propres propriétés seules. Son identifiant doit inclure l'identifiant d'une autre entité « parente ». L'entité « faible » est représentée par un <strong>rectangle à double trait</strong> et l'association par un <strong>ovale à double trait</strong>.</p>
+                </div>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple :</strong> Un immeuble contient des appartements. Le numéro d'appartement (1, 2, 3…) n'est unique que <strong>dans</strong> un immeuble donné. L'appartement 2 de l'immeuble A ≠ l'appartement 2 de l'immeuble B.
+                    </div>
+                </div>
+
+                <div class="diagram-container">
+                    <div class="entity-box" style="border:3px double var(--accent)">
+                        <div class="entity-name">APPARTEMENT</div>
+                        <div class="entity-attrs"><span class="pk">Num_appart</span><br>Surface<br>Nb_pièces</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">1,1</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="assoc-box" style="border:3px double var(--accent)">ÊTRE_DANS</div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">1,n</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="entity-box">
+                        <div class="entity-name">IMMEUBLE</div>
+                        <div class="entity-attrs"><span class="pk">Code_imm</span><br>Adresse</div>
+                    </div>
+                </div>
+
+                <h4>Passage au MLD</h4>
+<pre class="schema-block">
+IMMEUBLE (<u>Code_imm</u>, Adresse)
+APPARTEMENT (<u><strong>#Code_imm</strong>, Num_appart</u>, Surface, Nb_pièces)
+</pre>
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div>La clé primaire d'APPARTEMENT est <strong>composée</strong> : Code_imm (FK héritée) + Num_appart. C'est l'identification relative.</div>
+                </div>
+            </section>
+
+            <!-- SECTION 2 : Associations réflexives -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-rotate"></i> II. Les Associations Réflexives</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Une <strong>association réflexive</strong> lie une entité <strong>à elle-même</strong>. On distingue les <strong>rôles</strong> de chaque « patte » de l'association.</p>
+                </div>
+
+                <h3>Cas 1 : Réflexive [n,n]</h3>
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple — Réseau social :</strong> Une PERSONNE peut « être amie » avec plusieurs personnes. L'amitié est symétrique.<br>
+                        Cardinalités : PERSONNE <span class="card-badge">0,n</span> — ÊTRE_AMI — PERSONNE <span class="card-badge">0,n</span>
+                    </div>
+                </div>
+<pre class="schema-block">
+PERSONNE (<u>Id_pers</u>, Nom, Prénom)
+ÊTRE_AMI (<u><strong>#Id_pers_1</strong>, <strong>#Id_pers_2</strong></u>, Date_amitié)
+</pre>
+                <p>→ Règle 2 classique (n,n) : table d'association avec 2 FK vers la même table.</p>
+
+                <h3>Cas 2 : Réflexive [1,n]</h3>
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple — Hiérarchie :</strong> Un EMPLOYÉ est dirigé par un seul manager (lui-même employé). Un manager dirige plusieurs employés.<br>
+                        EMPLOYÉ <span class="card-badge">1,1</span> (subordonné) — DIRIGER — EMPLOYÉ <span class="card-badge">0,n</span> (manager)
+                    </div>
+                </div>
+<pre class="schema-block">
+EMPLOYÉ (<u>Matricule</u>, Nom, Prénom, <strong>#Matricule_manager</strong>)
+</pre>
+                <p>→ Règle 1 : FK dans la même table, pointant vers la PK de la même table.</p>
+
+                <h3>Cas 3 : Réflexive [1,1]</h3>
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple — Mariage :</strong> Une PERSONNE est mariée à exactement une personne. <span class="card-badge">0,1</span> — <span class="card-badge">0,1</span>. FK dans la table, valeur NULL si non marié.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3 : Pseudo-entité / Agrégation -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-object-group"></i> III. La Pseudo-entité (Agrégation)</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Une <strong>pseudo-entité</strong> (ou agrégation) est l'encapsulation d'une association + ses entités en un bloc unique, qui peut ensuite participer à d'autres associations. On l'utilise quand une association doit être liée à une autre entité.</p>
+                </div>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple :</strong> Un ÉTUDIANT s'inscrit à une MATIÈRE (association INSCRIRE). Un PROFESSEUR note cette inscription (besoin de lier INSCRIRE à PROFESSEUR).<br><br>
+                        On englobe (ÉTUDIANT — INSCRIRE — MATIÈRE) dans une pseudo-entité <strong>[INSCRIPTION]</strong> qui est ensuite liée à PROFESSEUR par l'association NOTER.
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Quand utiliser l'agrégation ?</strong> Quand une association doit participer à une <strong>autre</strong> association. C'est le signe qu'une simple association ternaire ne suffit pas.</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- PARTIE B : Normalisation -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-shield-halved"></i> PARTIE B — La Normalisation</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Pourquoi normaliser ?</h4>
+                    <p>La <strong>normalisation</strong> est un processus qui permet d'organiser les données d'une base pour <strong>éliminer les redondances</strong>, <strong>éviter les anomalies</strong> (insertion, modification, suppression) et garantir la <strong>cohérence</strong> des données. On applique successivement les formes normales.</p>
+                </div>
+            </section>
+
+            <!-- 1FN -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-1"></i> IV. Première Forme Normale (1FN)</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-check-circle"></i> Règle</h4>
+                    <p>Une table est en <strong>1FN</strong> si <strong>tous ses attributs sont atomiques</strong> (chaque cellule contient une seule valeur) et si elle possède une <strong>clé primaire</strong>.</p>
+                </div>
+
+                <h3>Exemple NON conforme (pas en 1FN)</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Id_client</th><th>Nom</th><th>Téléphones</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>Dupont</td><td style="color:crimson"><strong>0612345678, 0698765432</strong></td></tr>
+                        <tr><td>2</td><td>Martin</td><td style="color:crimson"><strong>0155667788</strong></td></tr>
+                    </tbody>
+                </table>
+                <p>❌ Le champ « Téléphones » contient <strong>plusieurs valeurs</strong> → pas atomique.</p>
+
+                <h3>Correction en 1FN</h3>
+                <p>Séparer en deux tables :</p>
+<pre class="schema-block">
+CLIENT (<u>Id_client</u>, Nom)
+TÉLÉPHONE (<u><strong>#Id_client</strong>, Numéro</u>)
+</pre>
+            </section>
+
+            <!-- 2FN -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-2"></i> V. Deuxième Forme Normale (2FN)</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-check-circle"></i> Règle</h4>
+                    <p>Une table est en <strong>2FN</strong> si elle est en 1FN ET si <strong>tous les attributs non-clé dépendent de la totalité de la clé primaire</strong> (pas d'une partie seulement). Cela ne concerne que les tables avec <strong>clé composée</strong>.</p>
+                </div>
+
+                <h3>Exemple NON conforme (pas en 2FN)</h3>
+                <table class="merise-table">
+                    <thead><tr><th><u>Num_cmd</u></th><th><u>Code_prod</u></th><th>Quantité</th><th style="color:crimson">Désignation</th></tr></thead>
+                    <tbody>
+                        <tr><td>C001</td><td>P01</td><td>5</td><td style="color:crimson">Clavier</td></tr>
+                        <tr><td>C001</td><td>P02</td><td>2</td><td style="color:crimson">Souris</td></tr>
+                        <tr><td>C002</td><td>P01</td><td>1</td><td style="color:crimson">Clavier</td></tr>
+                    </tbody>
+                </table>
+                <p>❌ « Désignation » dépend UNIQUEMENT de Code_prod, pas de (Num_cmd, Code_prod) → dépendance partielle.</p>
+
+                <h3>Correction en 2FN</h3>
+<pre class="schema-block">
+LIGNE_COMMANDE (<u><strong>#Num_cmd</strong>, <strong>#Code_prod</strong></u>, Quantité)
+PRODUIT (<u>Code_prod</u>, Désignation)
+</pre>
+
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Astuce :</strong> Si la clé primaire est <strong>simple</strong> (un seul attribut), la table est automatiquement en 2FN (pas de dépendance partielle possible).</div>
+                </div>
+            </section>
+
+            <!-- 3FN -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-3"></i> VI. Troisième Forme Normale (3FN)</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-check-circle"></i> Règle</h4>
+                    <p>Une table est en <strong>3FN</strong> si elle est en 2FN ET si <strong>aucun attribut non-clé ne dépend d'un autre attribut non-clé</strong> (pas de dépendance transitive).</p>
+                </div>
+
+                <h3>Exemple NON conforme (pas en 3FN)</h3>
+                <table class="merise-table">
+                    <thead><tr><th><u>Matricule</u></th><th>Nom</th><th>Num_service</th><th style="color:crimson">Nom_service</th></tr></thead>
+                    <tbody>
+                        <tr><td>E001</td><td>Dupont</td><td>S01</td><td style="color:crimson">Comptabilité</td></tr>
+                        <tr><td>E002</td><td>Martin</td><td>S01</td><td style="color:crimson">Comptabilité</td></tr>
+                        <tr><td>E003</td><td>Durand</td><td>S02</td><td style="color:crimson">RH</td></tr>
+                    </tbody>
+                </table>
+                <p>❌ Matricule → Num_service → Nom_service. « Nom_service » dépend transitivement de Matricule via Num_service.</p>
+
+                <h3>Correction en 3FN</h3>
+<pre class="schema-block">
+EMPLOYÉ (<u>Matricule</u>, Nom, <strong>#Num_service</strong>)
+SERVICE (<u>Num_service</u>, Nom_service)
+</pre>
+            </section>
+
+            <!-- Récap normalisation -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-list-check"></i> VII. Récapitulatif de la Normalisation</h2>
+
+                <table class="merise-table">
+                    <thead><tr><th>Forme</th><th>Condition</th><th>Élimine</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>1FN</strong></td><td>Attributs atomiques + Clé primaire</td><td>Groupes répétitifs, attributs multivalués</td></tr>
+                        <tr><td><strong>2FN</strong></td><td>1FN + Pas de dépendance partielle</td><td>Redondances liées à une partie de la clé</td></tr>
+                        <tr><td><strong>3FN</strong></td><td>2FN + Pas de dépendance transitive</td><td>Redondances entre attributs non-clé</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div><strong>En pratique :</strong> Un MCD bien conçu (en appliquant correctement les DF) produit généralement un MLD déjà en 3FN. La normalisation sert surtout à <strong>vérifier</strong> et corriger un schéma existant.</div>
+                </div>
+
+                <div class="tip-box" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));border-left:4px solid var(--success);">
+                    <i class="fa-solid fa-brain" style="color:var(--success);"></i>
+                    <div>
+                        <strong>🧠 Mnémotechnique — Les 3 formes normales</strong><br>
+                        <strong>« 1.2.3 — Atomique, Dépendant, Direct »</strong>
+                        <ul style="margin:0.5rem 0 0 1rem;">
+                            <li><strong>1FN</strong> → Chaque case est <strong>atomique</strong> (1 seule valeur, pas de liste)</li>
+                            <li><strong>2FN</strong> → Tout attribut dépend de TOUTE la clé (pas d'une partie seulement)</li>
+                            <li><strong>3FN</strong> → Pas de dépendance <strong>transitive</strong> (A→B→C interdit, couper en 2 tables)</li>
+                        </ul>
+                        <p style="font-size:0.88rem;opacity:0.8;margin-top:0.5rem;">« <strong>La clé, toute la clé, rien que la clé</strong> » — devise des 3 formes normales.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONE EXERCICES -->
+            <article class="glass-card" id="interactive-exercise">
+                <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
+                <p style="color:var(--text-muted);">Chargement des exercices...</p>
+            </article>
+
+            <!-- Nav -->
+            <div class="chapter-nav">
+                <a href="chapitre3.html"><i class="fa-solid fa-arrow-left"></i> Module 3 — MLD</a>
+                <a href="chapitre5.html">Module 5 — Flux <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/chapter-exercises.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+</body>
+</html>

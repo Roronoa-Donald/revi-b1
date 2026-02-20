@@ -1,0 +1,26 @@
+# Dépendances
+node_modules/
+
+# Build output
+dist/
+
+# Environnement
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# PDFs source (cours du prof)
+*.pdf
+*.docx

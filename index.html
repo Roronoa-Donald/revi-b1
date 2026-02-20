@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail Bachelor 1 — Cours Interactifs</title>
+    <meta name="description" content="7 cours interactifs Bachelor 1 : Algorithmique, C/C++, Python, Réseaux, Statistiques, Bases de données, MERISE. Exercices, QCM, simulateurs et gamification.">
+    <meta property="og:title" content="Portail Bachelor 1 — Cours Interactifs">
+    <meta property="og:description" content="7 cours interactifs B1 avec exercices, QCM, simulateurs et gamification.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0e1a;
+            --bg-card: #111827;
+            --text: #e2e8f0;
+            --text-muted: #64748b;
+            --border: rgba(255,255,255,0.06);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        /* ---- Header ---- */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- Grid ---- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* ---- Cards ---- */
+        .card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: 20px 20px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.4);
+        }
+        .card:hover::before { opacity: 1; }
+
+        /* Per-card colors */
+        .card--algo { --accent: #10b981; }
+        .card--algo::before { background: linear-gradient(90deg, #10b981, #34d399); }
+        .card--algo:hover { border-color: rgba(16, 185, 129, 0.3); }
+
+        .card--c_cpp { --accent: #f59e0b; }
+        .card--c_cpp::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .card--c_cpp:hover { border-color: rgba(245, 158, 11, 0.3); }
+
+        .card--python { --accent: #06b6d4; }
+        .card--python::before { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+        .card--python:hover { border-color: rgba(6, 182, 212, 0.3); }
+
+        .card--reseaux { --accent: #0ea5e9; }
+        .card--reseaux::before { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+        .card--reseaux:hover { border-color: rgba(14, 165, 233, 0.3); }
+
+        .card--stats { --accent: #8b5cf6; }
+        .card--stats::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .card--stats:hover { border-color: rgba(139, 92, 246, 0.3); }
+
+        .card--fbd { --accent: #ea580c; }
+        .card--fbd::before { background: linear-gradient(90deg, #ea580c, #f97316); }
+        .card--fbd:hover { border-color: rgba(234, 88, 12, 0.3); }
+
+        .card--merise { --accent: #14b8a6; }
+        .card--merise::before { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+        .card--merise:hover { border-color: rgba(20, 184, 166, 0.3); }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, white));
+            box-shadow: 0 4px 15px color-mix(in srgb, var(--accent) 30%, transparent);
+        }
+
+        .card h2 {
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+        .card .desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .card .meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .card .meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .card .enter {
+            margin-left: auto;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+        .card:hover .enter { gap: 0.6rem; }
+
+        /* Mascot badge */
+        .mascot-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-size: 1.8rem;
+            opacity: 0.15;
+            transition: opacity 0.3s;
+        }
+        .card:hover .mascot-badge { opacity: 0.35; }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .grid { grid-template-columns: 1fr; }
+            .wrapper { padding: 2rem 1rem; }
+        }
+
+        .card:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .card { transition: none; }
+            .card:hover { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="hero">
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap"></i>
+                Bachelor 1 — Cours Interactifs
+            </div>
+            <h1>Choisissez votre matière</h1>
+            <p>7 cours complets pour le Bachelor 1, avec exercices interactifs, QCM, simulateurs et gamification. Tout ce qu'il faut pour réussir votre première année !</p>
+        </div>
+
+        <div class="grid">
+
+            <!-- Algorithmique -->
+            <a href="algo/index.html" class="card card--algo">
+                <span class="mascot-badge">🤖</span>
+                <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                <h2>Algorithmique</h2>
+                <p class="desc">Variables, types, conditions, boucles, tableaux, fonctions, récursivité. Sections Pascal pour la pratique. De zéro à l'algorithme complet.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 10 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- C / C++ -->
+            <a href="c_cpp/index.html" class="card card--c_cpp">
+                <span class="mascot-badge">⚡</span>
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h2>C / C++</h2>
+                <p class="desc">Programmation système : syntaxe C, pointeurs, structures, allocation mémoire, fichiers. Introduction au C++ et à la POO.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 8 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Python -->
+            <a href="python/index.html" class="card card--python">
+                <span class="mascot-badge">🐍</span>
+                <div class="card-icon"><i class="fab fa-python"></i></div>
+                <h2>Python</h2>
+                <p class="desc">Les fondamentaux de Python : variables, listes, dictionnaires, fonctions, fichiers, modules et introduction à la POO.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 8 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Réseaux Informatiques -->
+            <a href="reseaux/index.html" class="card card--reseaux">
+                <span class="mascot-badge">🌐</span>
+                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                <h2>Réseaux Informatiques</h2>
+                <p class="desc">Modèle OSI/TCP-IP, adressage IPv4, sous-réseaux, protocoles (HTTP, DNS, DHCP), câblage et équipements réseau.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 8 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Statistiques Descriptives -->
+            <a href="stats/index.html" class="card card--stats">
+                <span class="mascot-badge">📊</span>
+                <div class="card-icon"><i class="fas fa-chart-pie"></i></div>
+                <h2>Statistiques Descriptives</h2>
+                <p class="desc">Séries statistiques, tableaux de fréquence, mesures de tendance centrale, dispersion, représentations graphiques et corrélation.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 6 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- Fondamentaux des Bases de Données -->
+            <a href="fbd/index.html" class="card card--fbd">
+                <span class="mascot-badge">🔧</span>
+                <div class="card-icon"><i class="fas fa-database"></i></div>
+                <h2>Fondamentaux des BDD</h2>
+                <p class="desc">Modèle relationnel, algèbre relationnelle, SQL de base, normalisation, contraintes d'intégrité et conception de schémas.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 6 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <!-- MERISE -->
+            <a href="merise/index.html" class="card card--merise">
+                <span class="mascot-badge">🏗️</span>
+                <div class="card-icon"><i class="fas fa-sitemap"></i></div>
+                <h2>MERISE</h2>
+                <p class="desc">Modélisation des systèmes d'information : MCD, MLD, MPD, dictionnaire de données, cardinalités et passage conceptuel → logique.</p>
+                <div class="meta">
+                    <span><i class="fas fa-book-open"></i> 6 chapitres</span>
+                    <span><i class="fas fa-gamepad"></i> Gamifié</span>
+                    <span class="enter">Entrer <i class="fas fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025-2026 — Portail Bachelor 1 — Cours Interactifs</p>
+    </footer>
+
+</body>
+</html>

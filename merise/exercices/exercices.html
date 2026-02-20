@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices MERISE | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .ex-controls{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem}
+        .ex-controls select{padding:.5rem 1rem;border-radius:.5rem;border:1px solid var(--glass-border);background:var(--card-bg);color:var(--text-primary);font-size:.85rem}
+        .ex-count{margin-left:auto;font-size:.85rem;color:var(--text-muted);font-weight:600}
+        .ex-card{border:1px solid var(--glass-border);border-radius:1rem;overflow:hidden;margin-bottom:1.2rem;background:var(--card-bg)}
+        .ex-header{padding:.7rem 1rem;background:var(--accent-glow);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+        .ex-num{font-weight:700;color:var(--accent);font-size:.85rem}
+        .ex-body{padding:1rem 1.2rem}
+        .ex-question{font-size:.95rem;line-height:1.6;margin-bottom:.8rem;white-space:pre-line}
+        .ex-hint{font-size:.8rem;color:var(--text-muted);margin-bottom:.8rem;padding:.4rem .8rem;background:rgba(234,179,8,.08);border-radius:.4rem;border-left:3px solid #eab308}
+        .ex-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 .8rem}
+        .ex-answer.visible{max-height:2000px;padding:.8rem;background:var(--accent-glow);border-radius:.5rem;margin-bottom:.8rem}
+        .ex-answer-content{font-size:.9rem;line-height:1.7;white-space:pre-line}
+        .ex-answer-content code{background:var(--glass-border);padding:1px 5px;border-radius:3px;font-size:.85rem}
+        .ex-toggle{padding:.4rem 1rem;border:2px solid var(--accent);border-radius:.4rem;background:transparent;color:var(--accent);cursor:pointer;font-size:.8rem;font-weight:600;transition:.2s}
+        .ex-toggle:hover{background:var(--accent);color:#fff}
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="../chapitres/chapitre1.html">SI & MERISE</a></li>
+            <li><a href="../chapitres/chapitre2.html">MCD</a></li>
+            <li><a href="../chapitres/chapitre3.html">MLD</a></li>
+            <li><a href="../chapitres/chapitre4.html">Extensions</a></li>
+            <li><a href="../chapitres/chapitre5.html">Flux</a></li>
+            <li><a href="../chapitres/chapitre6.html">MCT</a></li>
+            <li><a href="../chapitres/formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="../chapitres/chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="../chapitres/chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="../chapitres/chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="../chapitres/chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions</a>
+        <a href="../chapitres/chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="../chapitres/chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="../chapitres/formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="../chapitres/cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="../chapitres/simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="exercices.html" class="active"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-dumbbell"></i> Entraînement</div>
+            <h1>Exercices <span class="highlight">MERISE</span></h1>
+            <p>Exercices de base et de niveau examen avec corrections détaillées.</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="ex-controls">
+                <select id="ex-filter-cat">
+                    <option value="all">Tous les modules</option>
+                    <option value="si">1. SI & MERISE</option>
+                    <option value="mcd">2. MCD</option>
+                    <option value="mld">3. MLD</option>
+                    <option value="ext">4. Extensions & Normalisation</option>
+                    <option value="flux">5. Flux</option>
+                    <option value="mct">6. MCT</option>
+                </select>
+                <select id="ex-filter-level">
+                    <option value="all">Tous niveaux</option>
+                    <option value="base">Base</option>
+                    <option value="exam">Examen</option>
+                </select>
+                <span class="ex-count" id="ex-count"></span>
+            </div>
+
+            <div id="exercises-container"></div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/exercises.js"></script>
+    <script>
+    RD_Exercises.init([
+        // ════════════════════════════════════════════════
+        // SI & MERISE — BASE
+        // ════════════════════════════════════════════════
+        {cat:'si',level:'base',q:"Donnez la définition d'un Système d'Information.",a:"Un SI est un ensemble organisé de ressources (humaines, matérielles, logicielles, données) permettant de collecter, stocker, traiter et distribuer l'information au sein d'une organisation."},
+        {cat:'si',level:'base',q:"Citez les 3 sous-systèmes d'une entreprise et leur rôle.",a:"① Système de pilotage : prend les décisions stratégiques et tactiques.\n② Système d'information : mémorise, traite et communique l'information entre les deux autres.\n③ Système opérant : réalise la production (biens/services)."},
+        {cat:'si',level:'base',q:"Quels sont les 3 principes fondamentaux de MERISE ?",a:"① Séparation données / traitements : on modélise les données indépendamment des traitements.\n② Démarche par niveaux : conceptuel (QUOI), logique/organisationnel (QUI/OÙ), physique (COMMENT).\n③ Démarche par étapes : schéma directeur → étude préalable → étude détaillée → réalisation → mise en œuvre → maintenance."},
+        {cat:'si',level:'base',q:"Placez les modèles suivants au bon niveau : MCD, MLD, MCT, MOT, MPD, MPT.",a:"Niveau conceptuel : MCD (données) + MCT (traitements)\nNiveau logique/organisationnel : MLD (données) + MOT (traitements)\nNiveau physique : MPD (données) + MPT (traitements)"},
+        {cat:'si',level:'exam',q:"Une organisation utilise un fichier Excel partagé pour gérer ses stocks. Est-ce un SI ? Justifiez.",a:"Oui, c'est un SI (même rudimentaire). Un SI n'est pas forcément informatisé. Le fichier Excel remplit les fonctions de collecte (saisie des entrées/sorties), stockage (fichier sauvegardé), traitement (calculs) et distribution (partage entre collaborateurs). Cependant, ce n'est pas un système informatique complet — il manque l'automatisation, la sécurité, la gestion multi-utilisateurs, etc."},
+
+        // ════════════════════════════════════════════════
+        // MCD — BASE
+        // ════════════════════════════════════════════════
+        {cat:'mcd',level:'base',q:"Pour chacune des propriétés suivantes, indiquez si elle est atomique ou non :\na) Nom_client\nb) Adresse_complète (rue + CP + ville)\nc) Prix_HT\nd) Téléphones (liste de numéros)",a:"a) Atomique ✅ — un seul nom\nb) NON atomique ❌ — décomposable en Rue, Code_postal, Ville\nc) Atomique ✅ — une seule valeur numérique\nd) NON atomique ❌ — peut contenir plusieurs numéros (multivalué)"},
+        {cat:'mcd',level:'base',q:"Identifiez les entités à partir de ces règles de gestion :\nRG1 : Un étudiant a un matricule, un nom, un prénom et une date de naissance.\nRG2 : Une matière a un code et un libellé.\nRG3 : Un étudiant compose dans plusieurs matières et obtient une note.",a:"Entités : ÉTUDIANT (Matricule, Nom, Prénom, Date_naissance) et MATIÈRE (Code_mat, Libellé).\nAssociation : COMPOSER entre ÉTUDIANT et MATIÈRE, portant la propriété Note.\nCardinalités : ÉTUDIANT (1,n) — MATIÈRE (1,n) car un étudiant compose dans au moins 1 matière et une matière est composée par au moins 1 étudiant."},
+        {cat:'mcd',level:'base',q:"Donnez les cardinalités pour le cas suivant :\n« Un salarié travaille dans un seul service. Un service emploie au moins un salarié. »",a:"SALARIÉ (1,1) ——— TRAVAILLER ——— (1,n) SERVICE\n\n• Côté SALARIÉ : min=1 (obligatoire), max=1 (un seul service) → (1,1)\n• Côté SERVICE : min=1 (au moins un salarié), max=n (plusieurs) → (1,n)"},
+        {cat:'mcd',level:'base',q:"Construisez le dictionnaire des données pour une gestion de bibliothèque avec les propriétés suivantes : ISBN, titre, auteur, date_emprunt, code_adhérent, nom_adhérent.",a:"Code       | Libellé           | Type | Taille | Entité\nISBN       | Code ISBN livre    | AN   | 13     | LIVRE (identifiant)\ntitre      | Titre du livre     | A    | 100    | LIVRE\nauteur     | Auteur du livre    | A    | 50     | LIVRE\ncode_adh   | Code adhérent      | AN   | 6      | ADHÉRENT (identifiant)\nnom_adh    | Nom adhérent       | A    | 30     | ADHÉRENT\ndate_emp   | Date d'emprunt     | D    | -      | EMPRUNTER (association)"},
+        {cat:'mcd',level:'base',q:"Les DF suivantes sont-elles correctes ? Justifiez.\na) Matricule → Nom\nb) Nom → Matricule\nc) (Code_client, Code_produit) → Quantité",a:"a) ✅ Correcte : un matricule identifie de manière unique un employé, donc son nom.\nb) ❌ Incorrecte : deux personnes peuvent avoir le même nom mais des matricules différents.\nc) ✅ Correcte : pour un client donné et un produit donné, il y a une seule quantité commandée (DF composée)."},
+        {cat:'mcd',level:'exam',q:"Une agence de voyages gère des voyages organisés :\nRG1 : Un client est identifié par un numéro, a un nom et un téléphone.\nRG2 : Un voyage est identifié par un code, a une destination, une date de départ et un prix.\nRG3 : Un client peut réserver plusieurs voyages.\nRG4 : Un voyage peut être réservé par plusieurs clients.\nRG5 : Chaque réservation a une date et un nombre de places.\n\nConstruisez le MCD complet.",a:"Entités :\n• CLIENT (Num_client, Nom_client, Tel_client)\n• VOYAGE (Code_voyage, Destination, Date_départ, Prix)\n\nAssociation :\n• RÉSERVER — entre CLIENT et VOYAGE\n  Propriétés portées : Date_réserv, Nb_places\n\nCardinalités :\n• CLIENT (0,n) car un client peut ne pas encore réserver\n• VOYAGE (0,n) car un voyage peut ne pas encore avoir de réservation\n\nMCD :\nCLIENT (0,n) ——— RÉSERVER (Date_réserv, Nb_places) ——— (0,n) VOYAGE"},
+        {cat:'mcd',level:'exam',q:"Modélisez par un MCD le cas suivant :\nUne université gère les inscriptions. Un étudiant (matricule, nom) s'inscrit dans une filière (code, nom) pour une année universitaire (année). L'inscription a une date. Un étudiant s'inscrit dans une seule filière par an mais peut changer d'année en année.",a:"Entités :\n• ÉTUDIANT (Matricule, Nom)\n• FILIÈRE (Code_fil, Nom_fil)\n• ANNÉE (Année)\n\nAssociation ternaire :\n• INSCRIRE — entre ÉTUDIANT, FILIÈRE et ANNÉE\n  Propriété : Date_inscription\n\nCardinalités :\n• ÉTUDIANT (1,n) : s'inscrit au moins 1 fois, peut-être plusieurs années\n• FILIÈRE (0,n) : peut avoir plusieurs inscrits\n• ANNÉE (1,n) : chaque année a des inscriptions\n\nContrainte : pour un couple (Étudiant, Année), il n'y a qu'une seule filière → DF : (Matricule, Année) → Code_fil"},
+
+        // ════════════════════════════════════════════════
+        // MLD — BASE
+        // ════════════════════════════════════════════════
+        {cat:'mld',level:'base',q:"Traduisez ce MCD en MLD :\nCLIENT (1,n) ——— PASSER ——— (1,1) COMMANDE\nCOMMANDE (1,n) ——— CONTENIR (Qté) ——— (0,n) PRODUIT",a:"Application des règles :\n• PASSER (1,n — 1,1) → Règle 1 : FK côté 1 → #Code_client dans COMMANDE\n• CONTENIR (1,n — 0,n) → Règle 2 : table d'association\n\nMLD :\nCLIENT (Code_client, Nom, Tel)\nCOMMANDE (Num_cmd, Date_cmd, #Code_client)\nPRODUIT (Code_prod, Désignation, Prix)\nCONTENIR (#Num_cmd, #Code_prod, Qté)"},
+        {cat:'mld',level:'base',q:"Appliquez la Règle 1 au cas suivant :\nÉTUDIANT (1,1) ——— APPARTENIR ——— (1,n) CLASSE",a:"Règle 1 (1 — n) : la PK du côté n (CLASSE) migre comme FK côté 1 (ÉTUDIANT).\n\nMLD :\nCLASSE (Code_classe, Libellé_classe)\nÉTUDIANT (Matricule, Nom, Prénom, #Code_classe)"},
+        {cat:'mld',level:'base',q:"Pourquoi la règle 2 crée-t-elle une table supplémentaire ?",a:"Parce qu'avec des cardinalités (n,n), une occurrence de l'entité A peut être liée à PLUSIEURS occurrences de B, et inversement. On ne peut pas stocker cette liaison multiple dans une seule colonne FK. La table d'association résout ce problème : chaque ligne représente un lien spécifique entre une occurrence de A et une de B."},
+        {cat:'mld',level:'exam',q:"Traduisez en MLD :\nFORMATEUR (1,n) ——— ANIMER ——— (1,1) SESSION\nSESSION (1,1) ——— PORTER_SUR ——— (1,n) FORMATION\nEMPLOYÉ (1,n) ——— PARTICIPER (Note) ——— (1,n) SESSION",hint:"3 associations à transformer.",a:"• ANIMER (1,n — 1,1) → R1 : #Id_form dans SESSION\n• PORTER_SUR (1,1 — 1,n) → R1 : #Code_form dans SESSION\n• PARTICIPER (1,n — 1,n) → R2 : table d'association\n\nMLD :\nFORMATEUR (Id_form, Nom_form)\nFORMATION (Code_form, Libellé)\nSESSION (Num_session, Date_session, #Id_form, #Code_form)\nEMPLOYÉ (Matricule, Nom_emp)\nPARTICIPER (#Matricule, #Num_session, Note)"},
+        {cat:'mld',level:'exam',q:"Un MCD contient 4 entités (A, B, C, D) et 3 associations :\n• R1 : A (1,n) — B (1,1)\n• R2 : B (0,n) — C (0,n) avec propriété P1\n• R3 : C (1,1) — D (1,n)\nDonnez le nombre total de tables dans le MLD et listez-les.",a:"Tables :\n• A → 1 table\n• B → 1 table (reçoit #PK_A par R1)\n• C → 1 table (reçoit #PK_D par R3)\n• D → 1 table\n• R2 → 1 table d'association (#PK_B, #PK_C, P1) par règle 2\n\nTotal : 5 tables\n\nA (PK_A, ...)\nB (PK_B, ..., #PK_A)\nD (PK_D, ...)\nC (PK_C, ..., #PK_D)\nR2 (#PK_B, #PK_C, P1)"},
+
+        // ════════════════════════════════════════════════
+        // Extensions & Normalisation — BASE
+        // ════════════════════════════════════════════════
+        {cat:'ext',level:'base',q:"Donnez un exemple d'identification relative et traduisez-le en MLD.",a:"Exemple : IMMEUBLE contient des APPARTEMENTS. Le N° d'appartement n'est unique que dans un immeuble.\n\nMCD : APPARTEMENT (1,1) ══ÊTRE_DANS══ (1,n) IMMEUBLE\n(Rectangle double + ovale double)\n\nMLD :\nIMMEUBLE (Code_imm, Adresse)\nAPPARTEMENT (#Code_imm, Num_appart, Surface, Nb_pièces)\n→ PK d'APPARTEMENT = (Code_imm, Num_appart)"},
+        {cat:'ext',level:'base',q:"Modélisez une hiérarchie d'employés (chaque employé a un manager, sauf le PDG) et donnez le MLD.",a:"Association réflexive sur EMPLOYÉ :\nEMPLOYÉ (0,1) ——manager—— DIRIGER ——subordonné—— (0,n) EMPLOYÉ\n\nCardinalité (0,1) côté subordonné car le PDG n'a pas de manager.\nCardinalité (0,n) côté manager car un manager peut diriger 0 ou n employés.\n\nMLD (Règle 1, FK auto-référentielle) :\nEMPLOYÉ (Matricule, Nom, Prénom, #Matricule_manager)\nMatricule_manager est NULL pour le PDG."},
+        {cat:'ext',level:'base',q:"Cette table est-elle en 1FN ? Justifiez.\n| Id | Nom    | Cours              |\n| 1  | Dupont | Maths, Physique    |\n| 2  | Martin | Informatique       |",a:"NON, cette table n'est pas en 1FN.\nLe champ « Cours » contient PLUSIEURS valeurs (« Maths, Physique ») → attribut non atomique.\n\nCorrection : créer une table séparée :\nÉTUDIANT (Id, Nom)\nINSCRIPTION (#Id, #Code_cours)\nCOURS (Code_cours, Libellé)"},
+        {cat:'ext',level:'base',q:"La table VENTE(#Num_cmd, #Code_prod, Qté, Désignation) est-elle en 2FN ?",a:"Non ! La PK est composée (Num_cmd, Code_prod).\nDésignation dépend UNIQUEMENT de Code_prod → dépendance partielle → viole la 2FN.\n\nCorrection :\nVENTE (#Num_cmd, #Code_prod, Qté)\nPRODUIT (Code_prod, Désignation)"},
+        {cat:'ext',level:'exam',q:"Normalisez jusqu'en 3FN la table suivante :\nEMPLOYÉ (Matricule, Nom, Num_dept, Nom_dept, Nom_chef_dept)",a:"Analyse des DF :\n• Matricule → Nom, Num_dept (DF directe)\n• Num_dept → Nom_dept, Nom_chef_dept (DF transitive)\n\n1FN : ✅ (attributs atomiques, PK simple)\n2FN : ✅ (PK simple → automatiquement en 2FN)\n3FN : ❌ Nom_dept et Nom_chef_dept dépendent de Num_dept (non-clé) → dépendance transitive\n\nCorrection :\nEMPLOYÉ (Matricule, Nom, #Num_dept)\nDÉPARTEMENT (Num_dept, Nom_dept, Nom_chef_dept)"},
+
+        // ════════════════════════════════════════════════
+        // Flux — BASE
+        // ════════════════════════════════════════════════
+        {cat:'flux',level:'base',q:"Identifiez les acteurs internes et externes pour une clinique médicale.",a:"Acteurs internes : Secrétariat médical, Médecin, Laboratoire, Service facturation, Pharmacie interne.\n\nActeurs externes : Patient, Caisse d'assurance maladie, Fournisseur médical, Laboratoire externe."},
+        {cat:'flux',level:'base',q:"Listez 5 flux d'information dans un processus d'achat de matériel.",a:"① Service demandeur → Service achat : Demande d'achat\n② Service achat → Fournisseur : Bon de commande\n③ Fournisseur → Magasin : Livraison + Bon de livraison\n④ Magasin → Service achat : Bon de réception\n⑤ Service achat → Comptabilité : Facture validée"},
+        {cat:'flux',level:'exam',q:"Construisez le schéma de flux d'un restaurant (de la réservation à la facturation).",a:"Acteurs : CLIENT (externe), ACCUEIL, SALLE, CUISINE, CAISSE\n\nFlux :\n① Client → Accueil : Demande de réservation\n② Accueil → Client : Confirmation réservation\n③ Client → Salle : Arrivée + installation\n④ Salle → Cuisine : Bon de commande plats\n⑤ Cuisine → Salle : Plats prêts\n⑥ Salle → Client : Service des plats\n⑦ Client → Caisse : Demande de l'addition\n⑧ Caisse → Client : Facture\n⑨ Client → Caisse : Paiement"},
+
+        // ════════════════════════════════════════════════
+        // MCT — BASE
+        // ════════════════════════════════════════════════
+        {cat:'mct',level:'base',q:"Qu'est-ce qui distingue un événement d'une opération dans le MCT ?",a:"Événement : fait INSTANTANÉ qui se produit à un moment donné. Il déclenche ou résulte d'un traitement. Symbole : ovale.\n\nOpération : ensemble d'ACTIONS exécutées de manière ININTERRUPTIBLE. Elle transforme l'état du système. Symbole : rectangle à 3 zones (nom, actions, conditions d'émission).\n\nBref : l'événement est le QUAND/QUOI, l'opération est le FAIRE."},
+        {cat:'mct',level:'base',q:"Construisez un MCT simple pour une inscription en ligne à une formation.\nÉvénement : le candidat soumet sa candidature.",a:"1. Événement déclencheur : « Candidature reçue »\n\n2. Opération « Vérifier candidature » :\n   Actions : vérifier les prérequis, vérifier les places disponibles\n   Émissions : ✅ Candidature acceptée | ❌ Candidature refusée\n\n3. Si acceptée → Opération « Inscrire candidat » :\n   Actions : créer le dossier, envoyer confirmation\n   Émission : (toujours) → « Inscription confirmée »\n\n4. Si refusée → Résultat : « Notification de refus »"},
+        {cat:'mct',level:'exam',q:"Modélisez le MCT d'un processus de remboursement de frais.\nRG1 : L'employé soumet une note de frais.\nRG2 : Le manager vérifie et approuve ou refuse.\nRG3 : Si approuvée, la comptabilité effectue le virement.\nRG4 : Si refusée, l'employé est notifié.",a:"Événement 1 : « Note de frais soumise »\n↓\nOpération 1 : « Vérification par le manager »\n  Actions : contrôler justificatifs, vérifier montants, vérifier budget\n  Émissions : ✅ Approuvée | ❌ Refusée\n\nBranche ✅ :\n↓\nÉvénement 2 : « Note approuvée »\n↓\nOpération 2 : « Effectuer remboursement »\n  Actions : enregistrer la dépense, émettre le virement\n  Émission : (toujours) → « Virement effectué »\n\nBranche ❌ :\n↓\nÉvénement 3 : « Note refusée »\n↓\nOpération 3 : « Notifier le refus »\n  Actions : envoyer motif de refus à l'employé\n  Émission : (toujours) → « Employé notifié »"},
+
+        // ════════════════════════════════════════════════
+        // Exercices EXAM transversaux
+        // ════════════════════════════════════════════════
+        {cat:'mcd',level:'exam',q:"Exercice complet — Gestion d'un hôpital :\nRG1 : Un médecin (matricule, nom, spécialité) exerce dans un seul service.\nRG2 : Un service (code, nom) emploie plusieurs médecins.\nRG3 : Un patient (num_dossier, nom, date_naissance) est hospitalisé dans un seul service à la fois.\nRG4 : Un patient peut consulter plusieurs médecins.\nRG5 : Chaque consultation a une date et un diagnostic.\n\n1) Construisez le MCD.\n2) Traduisez en MLD.",a:"1) MCD :\nEntités : MÉDECIN (Matricule, Nom, Spécialité) | SERVICE (Code_serv, Nom_serv) | PATIENT (Num_dossier, Nom, Date_naissance)\n\nAssociations :\n• EXERCER : MÉDECIN (1,1) — SERVICE (1,n)\n• HOSPITALISER : PATIENT (1,1) — SERVICE (0,n)\n• CONSULTER (Date_consult, Diagnostic) : PATIENT (0,n) — MÉDECIN (0,n)\n\n2) MLD :\nSERVICE (Code_serv, Nom_serv)\nMÉDECIN (Matricule, Nom, Spécialité, #Code_serv)  ← R1\nPATIENT (Num_dossier, Nom, Date_naissance, #Code_serv)  ← R1\nCONSULTER (#Num_dossier, #Matricule, Date_consult, Diagnostic)  ← R2"},
+        {cat:'mld',level:'exam',q:"Soit le MLD suivant. Retrouvez le MCD d'origine.\nARTICLE (Code_art, Libellé, Prix)\nFOURNISSEUR (Id_four, Nom_four, Ville)\nPROPOSER (#Code_art, #Id_four, Délai_livraison)",hint:"La table PROPOSER est issue de quelle règle ?",a:"La table PROPOSER a une PK composée de 2 FK → elle vient de la Règle 2 (n,n).\n\nMCD reconstruit :\nARTICLE (Code_art, Libellé, Prix)\n    (0,n)\n      |\nPROPOSER (Délai_livraison)\n      |\n    (0,n)\nFOURNISSEUR (Id_four, Nom_four, Ville)\n\nLecture : Un article peut être proposé par plusieurs fournisseurs. Un fournisseur peut proposer plusieurs articles. La relation porte le délai de livraison."},
+        {cat:'ext',level:'exam',q:"Normalisez la table suivante jusqu'en 3FN :\nCOMMANDE (Num_cmd, Date_cmd, Code_client, Nom_client, Ville_client, Code_prod, Désignation, Qté, Prix_unit)\n\nUniquement à partir des DF du domaine.",a:"DF identifiées :\n• Num_cmd → Date_cmd, Code_client\n• Code_client → Nom_client, Ville_client\n• Code_prod → Désignation, Prix_unit\n• (Num_cmd, Code_prod) → Qté\n\n1FN : ✅ (tout est atomique)\n2FN : ❌ Désignation, Prix_unit dépendent de Code_prod seul (dépendance partielle si on considère la clé (Num_cmd, Code_prod)).\nDate_cmd, Code_client dépendent de Num_cmd seul.\n\n3FN : ❌ Nom_client, Ville_client dépendent de Code_client (transitive depuis Num_cmd).\n\nRésultat en 3FN :\nCLIENT (Code_client, Nom_client, Ville_client)\nPRODUIT (Code_prod, Désignation, Prix_unit)\nCOMMANDE (Num_cmd, Date_cmd, #Code_client)\nLIGNE_CMD (#Num_cmd, #Code_prod, Qté)"}
+    ]);
+    </script>
+</body>
+</html>

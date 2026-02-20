@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'examen | Réseaux B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#0ea5e9;--accent-light:#38bdf8;--accent-dark:#0284c7;--accent-glow:rgba(14,165,233,0.25)}.dark{--accent:#38bdf8;--accent-light:#7dd3fc;--accent-dark:#0ea5e9;--accent-glow:rgba(56,189,248,0.25)}
+.sim-config{max-width:500px;margin:2rem auto;background:var(--card-bg);border-radius:18px;padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.08)}.sim-config label{display:block;margin:.8rem 0 .3rem;font-weight:600;font-size:.95rem}.sim-config select,.sim-config input{width:100%;padding:.6rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:1rem}.sim-start{display:block;width:100%;margin-top:1.2rem;padding:.8rem;border:none;border-radius:12px;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer;transition:.2s}.sim-start:hover{transform:translateY(-2px);box-shadow:0 4px 15px var(--accent-glow)}
+.sim-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}.sim-timer{font-size:1.3rem;font-weight:700;color:var(--accent)}.sim-progress{font-weight:600}.sim-question-card{background:var(--card-bg);border-radius:18px;padding:2rem;margin-bottom:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}.sim-question-card h3{margin:0 0 1rem;font-size:1.1rem;line-height:1.5}.sim-options{display:flex;flex-direction:column;gap:.6rem}.sim-option{padding:.8rem 1rem;border-radius:12px;border:2px solid var(--border);background:var(--bg);cursor:pointer;transition:.2s;font-size:.95rem}.sim-option:hover{border-color:var(--accent);background:var(--accent-glow)}.sim-option.selected{border-color:var(--accent);background:var(--accent-glow);font-weight:600}.sim-option.correct{border-color:#22c55e!important;background:rgba(34,197,94,.15)!important}.sim-option.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.15)!important}.sim-nav{display:flex;justify-content:space-between;margin-top:1.5rem}.sim-nav button{padding:.6rem 1.5rem;border-radius:10px;border:none;font-weight:600;cursor:pointer;transition:.2s}.sim-prev{background:var(--card-bg);color:var(--text);border:2px solid var(--border)!important}.sim-next{background:var(--accent);color:#fff}.sim-results{text-align:center;background:var(--card-bg);border-radius:18px;padding:2.5rem;box-shadow:0 4px 20px rgba(0,0,0,.1)}.sim-score{font-size:3rem;font-weight:900;color:var(--accent)}.sim-grade{font-size:1.3rem;margin:.5rem 0}.sim-corrections{text-align:left;margin-top:2rem}.sim-correction-item{padding:1rem;margin:.8rem 0;border-radius:12px;border-left:4px solid var(--accent);background:var(--bg)}.sim-correction-item.wrong-answer{border-left-color:#ef4444}.sim-correction-item p{margin:.3rem 0;font-size:.95rem}
+    </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-network-wired"></i> NetBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html" class="active">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🌐 NetBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Simulateur</div>
+    <h1>🌐 Simulateur <span class="highlight">d'examen</span></h1>
+    <p>35 questions couvrant les 8 chapitres — testez-vous en conditions réelles !</p>
+</section>
+
+<main class="content-wrapper">
+    <div id="sim-root"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const BANK=[
+// Ch.1 — OSI
+{ch:1,q:"Combien de couches a le modèle OSI ?",o:["4","5","7","3"],c:2},
+{ch:1,q:"PLRTSPA est le mnémonique pour :",o:["Les 7 couches OSI","Les protocoles TCP","Les ports","Les classes IP"],c:0},
+{ch:1,q:"L'encapsulation consiste à :",o:["Supprimer les en-têtes","Ajouter un en-tête à chaque couche","Chiffrer les données","Compresser les données"],c:1},
+{ch:1,q:"Un LAN est un réseau :",o:["Étendu (ville)","Local (bureau/maison)","Métropolitain","International"],c:1},
+// Ch.2 — TCP/IP
+{ch:2,q:"Combien de couches TCP/IP ?",o:["4","7","5","3"],c:0},
+{ch:2,q:"TCP est plus fiable que UDP car :",o:["Il est plus rapide","Il utilise un 3-way handshake","Il n'utilise pas de ports","Il est chiffré"],c:1},
+{ch:2,q:"Le 3-way handshake est :",o:["SYN → ACK → FIN","SYN → SYN-ACK → ACK","ACK → SYN → FIN","FIN → ACK → RST"],c:1},
+{ch:2,q:"Le port 443 est utilisé par :",o:["HTTP","FTP","HTTPS","SSH"],c:2},
+{ch:2,q:"UDP est préféré pour :",o:["Les emails","Le streaming vidéo","Le transfert de fichiers","La navigation web"],c:1},
+// Ch.3 — IPv4
+{ch:3,q:"Une adresse IPv4 a combien de bits ?",o:["64","8","16","32"],c:3},
+{ch:3,q:"192.168.1.1 est une adresse :",o:["Publique","Privée","Broadcast","Loopback"],c:1},
+{ch:3,q:"L'adresse 127.0.0.1 est :",o:["La machine locale (loopback)","Le routeur","Le broadcast","Le DNS"],c:0},
+{ch:3,q:"La classe C a un masque par défaut :",o:["/8","/16","/24","/32"],c:2},
+// Ch.4 — Subnetting
+{ch:4,q:"Formule du nombre d'hôtes par sous-réseau ?",o:["2^n","2^n − 1","2^n − 2","2^n + 2"],c:2},
+{ch:4,q:"Un masque /26 permet combien d'hôtes ?",o:["64","62","30","126"],c:1},
+{ch:4,q:"CIDR /24 équivaut à :",o:["255.255.0.0","255.255.255.0","255.255.255.128","255.0.0.0"],c:1},
+{ch:4,q:"L'adresse broadcast de 192.168.1.0/26 est :",o:["192.168.1.64","192.168.1.63","192.168.1.255","192.168.1.127"],c:1},
+// Ch.5 — Protocoles
+{ch:5,q:"DORA signifie :",o:["DNS Offer Request Ack","Discover Offer Request Acknowledge","Data Output Read Accept","Direct Open Receive Ack"],c:1},
+{ch:5,q:"ARP traduit :",o:["IP → nom de domaine","Nom → IP","IP → adresse MAC","MAC → IP"],c:2},
+{ch:5,q:"Un enregistrement DNS de type A associe :",o:["Nom → IPv6","Nom → IPv4","Nom → serveur mail","Alias → nom"],c:1},
+{ch:5,q:"Le code HTTP 404 signifie :",o:["Succès","Redirection","Ressource non trouvée","Erreur serveur"],c:2},
+// Ch.6 — Équipements
+{ch:6,q:"HSR = 1-2-3 signifie :",o:["Hub=3, Switch=2, Routeur=1","Hub=1, Switch=2, Routeur=3","Hub=2, Switch=1, Routeur=3","Aucune de ces réponses"],c:1},
+{ch:6,q:"Un switch utilise quelle type de table ?",o:["Table de routage","Table MAC","Table DNS","Table ARP"],c:1},
+{ch:6,q:"Un hub fonctionne en :",o:["Unicast","Multicast","Broadcast","Anycast"],c:2},
+{ch:6,q:"Un VLAN permet de :",o:["Chiffrer le réseau","Segmenter logiquement un réseau","Accélérer Internet","Ajouter des ports"],c:1},
+// Ch.7 — Sécurité
+{ch:7,q:"C.I.D. signifie :",o:["Codage, Internet, Données","Confidentialité, Intégrité, Disponibilité","Chiffrement, Initialisation, Déchiffrement","Connexion, IP, DNS"],c:1},
+{ch:7,q:"AES est un chiffrement :",o:["Asymétrique","Symétrique","Hachage","Aucun"],c:1},
+{ch:7,q:"Un VPN crée :",o:["Un firewall","Un tunnel chiffré","Un nouveau réseau","Un DNS privé"],c:1},
+{ch:7,q:"HTTPS utilise quel type de chiffrement ?",o:["Symétrique seul","Asymétrique seul","Hybride (les deux)","Aucun"],c:2},
+// Ch.8 — Wi-Fi & Outils
+{ch:8,q:"Wi-Fi 6 est la norme :",o:["802.11n","802.11ac","802.11ax","802.11g"],c:2},
+{ch:8,q:"WEP est :",o:["Le standard actuel","Cassé et obsolète","Plus sûr que WPA3","Utilisé en entreprise"],c:1},
+{ch:8,q:"La commande pour vider le cache DNS :",o:["ping /flushdns","ipconfig /flushdns","netstat /flushdns","arp /flushdns"],c:1},
+{ch:8,q:"Si ping 8.8.8.8 OK mais ping google.com échoue :",o:["Câble débranché","Problème de routeur","Problème DNS","Carte réseau HS"],c:2},
+{ch:8,q:"PINTA est le mnémonique pour :",o:["Les couches OSI","Les 5 commandes réseau","Les protocoles de sécurité","Les normes Wi-Fi"],c:1}
+];
+let state={phase:'config',questions:[],current:0,answers:[],timer:null,timeLeft:0};
+const root=document.getElementById('sim-root');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showConfig(){
+    root.innerHTML=`<div class="sim-config"><h2 style="text-align:center;margin-bottom:1rem">⚙️ Configuration</h2>
+    <label>Nombre de questions</label><select id="qCount"><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option><option value="35">35 (toutes)</option></select>
+    <label>Chapitre</label><select id="qCh"><option value="0">Tous les chapitres</option>${[1,2,3,4,5,6,7,8].map(i=>`<option value="${i}">Chapitre ${i}</option>`).join('')}</select>
+    <label>Durée (minutes)</label><input type="number" id="qTime" value="20" min="5" max="60">
+    <button class="sim-start" onclick="startExam()">🚀 Lancer l'examen</button></div>`;
+}
+function startExam(){
+    const count=parseInt(document.getElementById('qCount').value);
+    const ch=parseInt(document.getElementById('qCh').value);
+    const mins=parseInt(document.getElementById('qTime').value);
+    let pool=ch?BANK.filter(q=>q.ch===ch):[...BANK];
+    shuffle(pool);state.questions=pool.slice(0,Math.min(count,pool.length));
+    state.answers=new Array(state.questions.length).fill(-1);state.current=0;
+    state.timeLeft=mins*60;state.phase='exam';
+    state.timer=setInterval(()=>{state.timeLeft--;if(state.timeLeft<=0){clearInterval(state.timer);showResults();}renderQ();},1000);
+    renderQ();
+}
+function renderQ(){
+    if(state.phase!=='exam')return;
+    const q=state.questions[state.current],sel=state.answers[state.current];
+    const mm=String(Math.floor(state.timeLeft/60)).padStart(2,'0'),ss=String(state.timeLeft%60).padStart(2,'0');
+    root.innerHTML=`<div class="sim-header"><span class="sim-progress">Question ${state.current+1}/${state.questions.length}</span><span class="sim-timer">⏱ ${mm}:${ss}</span></div>
+    <div class="sim-question-card"><h3>${q.q}</h3><div class="sim-options">${q.o.map((o,i)=>`<div class="sim-option${sel===i?' selected':''}" onclick="pick(${i})">${o}</div>`).join('')}</div></div>
+    <div class="sim-nav">${state.current>0?`<button class="sim-prev" onclick="nav(-1)">← Précédente</button>`:'<span></span>'}${state.current<state.questions.length-1?`<button class="sim-next" onclick="nav(1)">Suivante →</button>`:`<button class="sim-next" onclick="showResults()">Terminer ✓</button>`}</div>`;
+}
+function pick(i){state.answers[state.current]=i;renderQ();}
+function nav(d){state.current+=d;renderQ();}
+function showResults(){
+    clearInterval(state.timer);state.phase='results';
+    let score=0;state.questions.forEach((q,i)=>{if(state.answers[i]===q.c)score++;});
+    const pct=Math.round(score/state.questions.length*100);
+    const grade=pct>=90?'🏆 Excellent':pct>=70?'✅ Bien':pct>=50?'⚠️ Peut mieux faire':'❌ À retravailler';
+    let corrections=state.questions.map((q,i)=>{const ok=state.answers[i]===q.c;return`<div class="sim-correction-item${ok?'':' wrong-answer'}"><p><strong>Q${i+1}.</strong> ${q.q}</p><p>Votre réponse : <strong>${state.answers[i]>=0?q.o[state.answers[i]]:'(aucune)'}</strong> ${ok?'✅':'❌'}</p>${ok?'':`<p>Bonne réponse : <strong>${q.o[q.c]}</strong></p>`}</div>`;}).join('');
+    root.innerHTML=`<div class="sim-results"><div class="sim-score">${score}/${state.questions.length}</div><div class="sim-grade">${grade} — ${pct}%</div><button class="sim-start" onclick="showConfig()" style="max-width:300px;margin:1.5rem auto">🔄 Recommencer</button><div class="sim-corrections"><h3>Corrections détaillées</h3>${corrections}</div></div>`;
+}
+showConfig();
+</script>
+</body>
+</html>

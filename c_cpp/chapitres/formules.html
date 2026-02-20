@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules C/C++ — Cheat Sheet | B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Cheat Sheet</div>
+    <h1>⚡ Formulaire <span class="highlight">C/C++</span></h1>
+    <p>Toutes les syntaxes essentielles du cours sur une seule page. Imprimez-la ou gardez-la ouverte pendant vos révisions !</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-terminal"></i> Bases du C</h2>
+    <div class="code-block"><div class="code-header"><span>Structure minimale</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#include &lt;stdio.h&gt;      // I.M.P.R.
+int main() {             // Point d'entrée
+    printf("Hello\n");   // Afficher
+    return 0;            // Fin OK
+}</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-box"></i> Types — I.F.D.C.</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type</th><th>Taille</th><th>Format printf</th></tr></thead>
+        <tbody>
+            <tr><td><code>int</code></td><td>4 oct</td><td><code>%d</code></td></tr>
+            <tr><td><code>float</code></td><td>4 oct</td><td><code>%f</code> (%.2f)</td></tr>
+            <tr><td><code>double</code></td><td>8 oct</td><td><code>%lf</code></td></tr>
+            <tr><td><code>char</code></td><td>1 oct</td><td><code>%c</code></td></tr>
+            <tr><td>chaîne</td><td>variable</td><td><code>%s</code></td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><code>const float PI = 3.14f;</code> ou <code>#define PI 3.14159</code></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-code-branch"></i> Contrôle de flux</h2>
+    <div class="code-block"><div class="code-header"><span>Conditionnelles & Boucles</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// if / else if / else
+if (n >= 10) { ... } else if (n >= 5) { ... } else { ... }
+
+// Ternaire : condition ? vrai : faux
+int max = (a > b) ? a : b;
+
+// switch — C.C.B.D.
+switch(x) { case 1: ...; break; default: ...; }
+
+// for — I.C.I. (Init, Condition, Incrément)
+for (int i = 0; i &lt; n; i++) { ... }
+
+// while (0+ tours)           do-while (1+ tours)
+while (cond) { ... }         do { ... } while (cond);
+
+// break = sortir, continue = tour suivant</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-puzzle-piece"></i> Fonctions — T.N.P.C.R.</h2>
+    <div class="code-block"><div class="code-header"><span>Fonctions</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Prototype
+int carre(int n);
+
+// Définition
+int carre(int n) { return n * n; }
+
+// void = pas de retour
+void dire(char msg[]) { printf("%s\n", msg); }
+
+// Par valeur (copie)      Par adresse (pointeur)
+void f(int x) { x++; }   void f(int *p) { (*p)++; }
+f(a);                      f(&amp;a);
+
+// static : persiste entre appels
+static int count = 0;</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-th-list"></i> Tableaux & Chaînes</h2>
+    <div class="code-block"><div class="code-header"><span>Arrays & Strings</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int t[5] = {1,2,3,4,5};   // Indice 0 à 4 !
+int m[3][4];               // Matrice 3×4
+char s[20] = "Hello";     // +1 pour '\0'
+
+// string.h — L.C.C.C.
+strlen(s)                  // Longueur (sans '\0')
+strcpy(dst, src)           // Copier (PAS de = !)
+strcat(dst, src)           // Concaténer
+strcmp(a, b) == 0          // Comparer (0 = égaux)
+
+// Tableau en paramètre : toujours avec taille
+void f(int t[], int n) { ... }</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-map-marker-alt"></i> Pointeurs</h2>
+    <div class="code-block"><div class="code-header"><span>Pointeurs</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int *p = &amp;x;    // &amp; = Adresse, * = Accéder
+*p = 42;          // Modifie x via p
+int *p = NULL;    // Pointeur sûr
+
+// tab ≡ &amp;tab[0]        tab[i] ≡ *(tab + i)
+
+// Allocation — M.C.R.F.
+int *t = (int*)malloc(n * sizeof(int));   // Non init
+int *t = (int*)calloc(n, sizeof(int));    // Init à 0
+t = (int*)realloc(t, m * sizeof(int));    // Redim
+free(t); t = NULL;                         // Libérer !</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cubes"></i> Structures & Enum</h2>
+    <div class="code-block"><div class="code-header"><span>struct, typedef, enum</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>typedef struct {
+    char nom[30]; int age; float note;
+} Etudiant;
+
+Etudiant e = {"Alice", 20, 15.5};
+e.nom        // accès direct (point)
+p->nom       // accès via pointeur (flèche) = (*p).nom
+
+typedef enum { ROUGE, VERT, BLEU } Couleur;</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-file-alt"></i> Fichiers — R.W.A.</h2>
+    <div class="code-block"><div class="code-header"><span>Fichiers</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>FILE *f = fopen("f.txt", "r");  // r=lire, w=écrire, a=ajouter
+if (f == NULL) return 1;        // Toujours vérifier !
+
+fprintf(f, "%d", x);            // Écrire formaté
+fgets(buf, sizeof(buf), f);     // Lire une ligne
+fscanf(f, "%d", &amp;x);           // Lire formaté
+fclose(f);                       // OBLIGATOIRE
+
+// Binaire : fwrite(data, size, count, f) / fread(...)</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-rocket"></i> C++ — L'essentiel</h2>
+    <div class="code-block"><div class="code-header"><span>C++ vs C</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+cout &lt;&lt; "Sortie" &lt;&lt; endl;    // Remplace printf
+cin &gt;&gt; x;                     // Remplace scanf
+string s = "Hello" + " World"; // Remplace char[] + strcat
+void f(int &amp;n) { n++; }       // Référence (pas de *)
+int *p = new int(42);          // Remplace malloc
+delete p;                       // Remplace free
+
+class Nom {
+private: int attr;
+public:
+    Nom(int a) : attr(a) {}    // Constructeur
+    int get() { return attr; } // Getter — P.A.M.C.
+};
+class Fille : public Mere { }; // Héritage</code></pre></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-brain"></i> Mnémoniques à retenir</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Mnémonique</th><th>Signification</th></tr></thead>
+        <tbody>
+            <tr><td><strong>I.M.P.R.</strong></td><td>Include, Main, Printf, Return</td></tr>
+            <tr><td><strong>I.F.D.C.</strong></td><td>Int, Float, Double, Char</td></tr>
+            <tr><td><strong>%D.F.C.S.</strong></td><td>%d=Décimal, %f=Float, %c=Char, %s=String</td></tr>
+            <tr><td><strong>I.C.I.</strong></td><td>Init, Condition, Incrément (for)</td></tr>
+            <tr><td><strong>C.C.B.D.</strong></td><td>Case, Code, Break, Default (switch)</td></tr>
+            <tr><td><strong>T.N.P.C.R.</strong></td><td>Type, Nom, Paramètres, Corps, Return (fonction)</td></tr>
+            <tr><td><strong>R.L.M.</strong></td><td>Réutiliser, Lire, Maintenir (raisons des fonctions)</td></tr>
+            <tr><td><strong>L.C.C.C.</strong></td><td>strLen, strCpy, strCat, strCmp</td></tr>
+            <tr><td><strong>M.C.R.F.</strong></td><td>Malloc, Calloc, Realloc, Free</td></tr>
+            <tr><td><strong>R.W.A.</strong></td><td>Read, Write, Append (modes fichier)</td></tr>
+            <tr><td><strong>P.A.M.C.</strong></td><td>Private, Attributs, Méthodes, Constructeur (classe)</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

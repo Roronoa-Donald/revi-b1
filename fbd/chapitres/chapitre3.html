@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — SQL Fondamentaux | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-code"></i> Chapitre 3</div>
+    <h1>💻 SQL — <span class="highlight">Fondamentaux</span></h1>
+    <p>CREATE, SELECT, INSERT, UPDATE, DELETE — les commandes de base pour manipuler une base de données.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── 1. Qu'est-ce que SQL ? ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-question-circle"></i> Qu'est-ce que SQL ?</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie AutoBot :</strong> SQL est le <strong>langage universel</strong> pour parler aux bases de données. Comme l'anglais est la langue internationale des affaires, SQL est la langue internationale des données.
+        </div>
+
+        <p><strong>SQL = Structured Query Language</strong> (Langage de Requête Structuré). Inventé dans les années 1970, il est compris par TOUS les SGBD relationnels.</p>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique D.M.C.</div>
+            <p><strong>D</strong>DL — <strong>M</strong>L — <strong>C</strong>L</p>
+            <p><strong>DDL</strong> = Data Definition Language (CREATE, ALTER, DROP) — structure<br>
+            <strong>DML</strong> = Data Manipulation Language (SELECT, INSERT, UPDATE, DELETE) — données<br>
+            <strong>DCL</strong> = Data Control Language (GRANT, REVOKE) — droits</p>
+        </div>
+    </section>
+
+    <!-- ─── 2. DDL — Créer des tables ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-hammer"></i> DDL — Créer et modifier</h2>
+
+        <h3>CREATE TABLE</h3>
+        <div class="code-block">
+            <div class="code-header"><span>SQL — CREATE TABLE</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>CREATE TABLE etudiants (
+    id        SERIAL PRIMARY KEY,
+    nom       VARCHAR(50) NOT NULL,
+    prenom    VARCHAR(50) NOT NULL,
+    email     VARCHAR(100) UNIQUE,
+    age       INTEGER CHECK (age >= 16),
+    date_insc DATE DEFAULT CURRENT_DATE
+);</pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>📋 Contraintes de colonne</h3>
+            <table class="styled-table">
+                <thead><tr><th>Contrainte</th><th>Rôle</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><code>PRIMARY KEY</code></td><td>Clé primaire (unique + NOT NULL)</td><td><code>id SERIAL PRIMARY KEY</code></td></tr>
+                    <tr><td><code>NOT NULL</code></td><td>Interdit les valeurs NULL</td><td><code>nom VARCHAR(50) NOT NULL</code></td></tr>
+                    <tr><td><code>UNIQUE</code></td><td>Pas de doublon</td><td><code>email VARCHAR(100) UNIQUE</code></td></tr>
+                    <tr><td><code>CHECK</code></td><td>Vérifie une condition</td><td><code>age INTEGER CHECK(age>=16)</code></td></tr>
+                    <tr><td><code>DEFAULT</code></td><td>Valeur par défaut</td><td><code>date DATE DEFAULT CURRENT_DATE</code></td></tr>
+                    <tr><td><code>REFERENCES</code></td><td>Clé étrangère</td><td><code>id_cours INT REFERENCES cours(id)</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>ALTER TABLE & DROP TABLE</h3>
+        <div class="code-block">
+            <div class="code-header"><span>SQL — ALTER & DROP</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Ajouter une colonne
+ALTER TABLE etudiants ADD COLUMN telephone VARCHAR(15);
+
+-- Supprimer une colonne
+ALTER TABLE etudiants DROP COLUMN telephone;
+
+-- Renommer
+ALTER TABLE etudiants RENAME COLUMN nom TO last_name;
+
+-- Supprimer une table (⚠️ irréversible !)
+DROP TABLE etudiants;</pre>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ DROP TABLE</strong> supprime la table ET toutes ses données. Pas de Ctrl+Z ! En production, on ajoute <code>IF EXISTS</code> pour éviter les erreurs.
+        </div>
+    </section>
+
+    <!-- ─── 3. INSERT ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-plus-circle"></i> INSERT — Insérer des données</h2>
+
+        <div class="code-block">
+            <div class="code-header"><span>SQL — INSERT</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Insertion complète (tous les attributs sauf SERIAL)
+INSERT INTO etudiants (nom, prenom, email, age)
+VALUES ('Dupont', 'Marie', 'marie@univ.fr', 19);
+
+-- Insertion multiple
+INSERT INTO etudiants (nom, prenom, email, age) VALUES
+    ('Ali', 'Ben', 'ali@univ.fr', 20),
+    ('Chen', 'Wei', 'wei@univ.fr', 21),
+    ('Diallo', 'Ami', 'ami@univ.fr', 18);</pre>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Bonne pratique :</strong> Toujours lister les colonnes dans INSERT — ça protège contre les changements de structure et rend le code plus lisible.
+        </div>
+    </section>
+
+    <!-- ─── 4. SELECT ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-search"></i> SELECT — Interroger</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique S.F.W.O.L.</div>
+            <p><strong>S</strong>ELECT — <strong>F</strong>ROM — <strong>W</strong>HERE — <strong>O</strong>RDER BY — <strong>L</strong>IMIT</p>
+            <p>L'ordre des clauses dans une requête SELECT simple.</p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>SQL — SELECT</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Tout sélectionner
+SELECT * FROM etudiants;
+
+-- Colonnes spécifiques
+SELECT nom, prenom, age FROM etudiants;
+
+-- Avec filtre
+SELECT nom, prenom FROM etudiants WHERE age >= 20;
+
+-- Tri
+SELECT nom, age FROM etudiants ORDER BY age DESC;
+
+-- Limiter les résultats
+SELECT * FROM etudiants ORDER BY nom LIMIT 10;
+
+-- Alias
+SELECT nom AS "Nom de famille", age AS "Âge" FROM etudiants;
+
+-- Valeurs distinctes
+SELECT DISTINCT ville FROM etudiants;</pre>
+        </div>
+
+        <h3>Opérateurs WHERE</h3>
+        <div class="concept-card">
+            <table class="styled-table">
+                <thead><tr><th>Opérateur</th><th>Signification</th><th>Exemple</th></tr></thead>
+                <tbody>
+                    <tr><td><code>=</code>, <code>!=</code></td><td>Égal, différent</td><td><code>WHERE age = 20</code></td></tr>
+                    <tr><td><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td><td>Comparaison</td><td><code>WHERE age >= 18</code></td></tr>
+                    <tr><td><code>AND</code>, <code>OR</code>, <code>NOT</code></td><td>Logique</td><td><code>WHERE age > 18 AND ville = 'Paris'</code></td></tr>
+                    <tr><td><code>BETWEEN</code></td><td>Intervalle inclus</td><td><code>WHERE age BETWEEN 18 AND 25</code></td></tr>
+                    <tr><td><code>IN</code></td><td>Liste de valeurs</td><td><code>WHERE ville IN ('Paris','Lyon')</code></td></tr>
+                    <tr><td><code>LIKE</code></td><td>Motif (% = n car., _ = 1 car.)</td><td><code>WHERE nom LIKE 'D%'</code></td></tr>
+                    <tr><td><code>IS NULL</code></td><td>Teste NULL (≠ de = NULL !)</td><td><code>WHERE email IS NULL</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Piège classique :</strong> <code>WHERE email = NULL</code> ne fonctionne PAS. Il faut <code>WHERE email IS NULL</code>. Rien n'est égal à NULL, même pas NULL !
+        </div>
+    </section>
+
+    <!-- ─── 5. UPDATE ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-edit"></i> UPDATE — Modifier</h2>
+
+        <div class="code-block">
+            <div class="code-header"><span>SQL — UPDATE</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Modifier un enregistrement
+UPDATE etudiants SET age = 21 WHERE id = 1;
+
+-- Modifier plusieurs colonnes
+UPDATE etudiants SET email = 'new@univ.fr', age = 22 WHERE id = 1;
+
+-- Modifier plusieurs lignes
+UPDATE etudiants SET age = age + 1;  -- ⚠️ TOUTES les lignes !</pre>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ DANGER :</strong> Un UPDATE sans WHERE modifie TOUTES les lignes ! Toujours vérifier la clause WHERE avant d'exécuter.
+        </div>
+    </section>
+
+    <!-- ─── 6. DELETE ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-trash-alt"></i> DELETE — Supprimer</h2>
+
+        <div class="code-block">
+            <div class="code-header"><span>SQL — DELETE</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Supprimer un enregistrement
+DELETE FROM etudiants WHERE id = 3;
+
+-- Supprimer avec condition
+DELETE FROM etudiants WHERE age < 16;
+
+-- Vider toute la table (⚠️)
+DELETE FROM etudiants;
+
+-- Alternative plus rapide pour vider
+TRUNCATE TABLE etudiants;  -- remet aussi l'auto-increment</pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>DELETE vs TRUNCATE vs DROP</h3>
+            <table class="styled-table">
+                <thead><tr><th>Commande</th><th>Effet</th><th>WHERE ?</th><th>Annulable ?</th></tr></thead>
+                <tbody>
+                    <tr><td><code>DELETE</code></td><td>Supprime des lignes</td><td>Oui</td><td>Oui (ROLLBACK)</td></tr>
+                    <tr><td><code>TRUNCATE</code></td><td>Vide la table entière</td><td>Non</td><td>Non</td></tr>
+                    <tr><td><code>DROP TABLE</code></td><td>Supprime table + données</td><td>Non</td><td>Non</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── 7. Résumé ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif CRUD</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique C.R.U.D.</div>
+            <p><strong>C</strong>reate → INSERT | <strong>R</strong>ead → SELECT | <strong>U</strong>pdate → UPDATE | <strong>D</strong>elete → DELETE</p>
+            <p>Les 4 opérations fondamentales sur les données.</p>
+        </div>
+
+        <div class="concept-card">
+            <table class="styled-table">
+                <thead><tr><th>CRUD</th><th>SQL</th><th>Syntaxe de base</th></tr></thead>
+                <tbody>
+                    <tr><td>Create</td><td>INSERT</td><td><code>INSERT INTO t (cols) VALUES (vals)</code></td></tr>
+                    <tr><td>Read</td><td>SELECT</td><td><code>SELECT cols FROM t WHERE cond</code></td></tr>
+                    <tr><td>Update</td><td>UPDATE</td><td><code>UPDATE t SET col=val WHERE cond</code></td></tr>
+                    <tr><td>Delete</td><td>DELETE</td><td><code>DELETE FROM t WHERE cond</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Exercices ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-dumbbell"></i> Exercices du chapitre</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre2.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Chapitre 2</a>
+        <a href="chapitre4.html" class="btn-nav">Chapitre 4 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar" id="xp-bar"></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["CRUD = Create Read Update Delete","UPDATE sans WHERE = catastrophe !"]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Écrivez la requête pour créer une table LIVRES (id auto, titre, auteur, prix, en_stock booléen).",hints:["Utilisez SERIAL pour l'id","BOOLEAN pour en_stock"],answer:"CREATE TABLE livres (id SERIAL PRIMARY KEY, titre VARCHAR(100) NOT NULL, auteur VARCHAR(80), prix DECIMAL(6,2), en_stock BOOLEAN DEFAULT TRUE);"},
+        {q:"Insérez 2 livres dans la table LIVRES.",hints:["INSERT INTO … VALUES","Pas besoin de préciser id (SERIAL)"],answer:"INSERT INTO livres (titre, auteur, prix, en_stock) VALUES ('Le Petit Prince', 'Saint-Exupéry', 8.50, TRUE), ('1984', 'Orwell', 9.90, TRUE);"},
+        {q:"Sélectionnez les livres dont le prix est entre 5 et 15€, triés par prix décroissant.",hints:["BETWEEN pour l'intervalle","ORDER BY … DESC"],answer:"SELECT * FROM livres WHERE prix BETWEEN 5 AND 15 ORDER BY prix DESC;"},
+        {q:"Augmentez de 10% le prix de tous les livres en stock.",hints:["UPDATE … SET prix = prix * …","WHERE en_stock = TRUE"],answer:"UPDATE livres SET prix = prix * 1.10 WHERE en_stock = TRUE;"},
+        {q:"Supprimez tous les livres dont le prix dépasse 50€.",hints:["DELETE FROM … WHERE"],answer:"DELETE FROM livres WHERE prix > 50;"}
+    ],
+    quiz:[
+        {type:"mcq",q:"D.M.C. en SQL signifie :",options:["DDL, DML, DCL","Data, Model, Control","Delete, Modify, Create","Drop, Merge, Cast"],correct:0},
+        {type:"mcq",q:"Pour tester si une valeur est NULL :",options:["= NULL","== NULL","IS NULL","EQUALS NULL"],correct:2},
+        {type:"mcq",q:"LIKE 'D%' sélectionne :",options:["Les valeurs égales à 'D'","Celles commençant par D","Celles finissant par D","Celles contenant D uniquement"],correct:1},
+        {type:"mcq",q:"TRUNCATE vs DELETE :",options:["Pareil","TRUNCATE ne supporte pas WHERE","DELETE est plus rapide","TRUNCATE est annulable"],correct:1},
+        {type:"mcq",q:"S.F.W.O.L. rappelle :",options:["SELECT FROM WHERE ORDER LIMIT","SORT FILTER WRITE ORDER LOAD","SET FIND WHERE ORDER LOOP","SCAN FETCH WHERE OUTPUT LIST"],correct:0},
+        {type:"mcq",q:"C.R.U.D. = :",options:["Create Read Update Delete","Copy Rename Undo Delete","Connect Read Upload Download","Create Replace Update Drop"],correct:0},
+        {type:"mcq",q:"DEFAULT CURRENT_DATE signifie :",options:["La date est obligatoire","Si non précisé, la date du jour est utilisée","La colonne est de type DATE","La date ne change jamais"],correct:1},
+        {type:"qa",q:"Quel est le danger d'un UPDATE sans WHERE ?",answer:"Il modifie TOUTES les lignes de la table — potentiellement des milliers de données corrompues."},
+        {type:"qa",q:"Quelle est la différence entre DROP TABLE et DELETE FROM ?",answer:"DROP supprime la table entière (structure + données). DELETE supprime des lignes mais la table reste."},
+        {type:"qa",q:"Citez 3 contraintes de colonnes SQL.",answer:"PRIMARY KEY, NOT NULL, UNIQUE, CHECK, DEFAULT, REFERENCES (3 parmi celles-ci)."}
+    ],
+    dragdrop:[
+        {instruction:"Associez CRUD à la commande SQL :",pairs:[["Create","INSERT"],["Read","SELECT"],["Update","UPDATE"],["Delete","DELETE"]]},
+        {instruction:"Associez l'opérateur WHERE à son usage :",pairs:[["BETWEEN","Intervalle"],["IN","Liste de valeurs"],["LIKE","Motif textuel"],["IS NULL","Tester l'absence"],["AND","Combiner conditions"]]},
+        {instruction:"DDL ou DML ?",pairs:[["CREATE TABLE","DDL"],["INSERT","DML"],["DROP TABLE","DDL"],["SELECT","DML"],["ALTER TABLE","DDL"],["UPDATE","DML"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

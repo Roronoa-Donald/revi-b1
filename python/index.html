@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python — Cours B1 | Interactif</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="chapitres/formules.html">Formules</a></li>
+        <li><a href="chapitres/cartes.html">Cartes</a></li>
+        <li><a href="chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Fonctions</a>
+    <a href="chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Listes & Tuples</a>
+    <a href="chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Dictionnaires</a>
+    <a href="chapitres/chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers & Exceptions</a>
+    <a href="chapitres/chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Modules & Intro POO</a>
+    <a href="chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fab fa-python"></i> B1 — Semestre 1</div>
+    <h1>🐍 Cours <span class="highlight">Python</span></h1>
+    <p>8 chapitres pour maîtriser Python de zéro. Le langage le plus populaire au monde, avec PyBot comme guide !</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="modules-grid">
+
+        <a href="chapitres/chapitre1.html" class="module-card reveal-on-scroll" style="animation-delay:0.05s">
+            <div class="module-icon"><i class="fas fa-inbox"></i></div>
+            <h3>Variables & Types</h3>
+            <p>print, input, int/float/str/bool, typage dynamique, opérateurs</p>
+            <span class="module-badge">Chapitre 1</span>
+        </a>
+
+        <a href="chapitres/chapitre2.html" class="module-card reveal-on-scroll" style="animation-delay:0.1s">
+            <div class="module-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>Conditions</h3>
+            <p>if/elif/else, opérateurs logiques, imbrication, match-case</p>
+            <span class="module-badge">Chapitre 2</span>
+        </a>
+
+        <a href="chapitres/chapitre3.html" class="module-card reveal-on-scroll" style="animation-delay:0.15s">
+            <div class="module-icon"><i class="fas fa-redo"></i></div>
+            <h3>Boucles</h3>
+            <p>for, range, while, break/continue, compréhensions de listes</p>
+            <span class="module-badge">Chapitre 3</span>
+        </a>
+
+        <a href="chapitres/chapitre4.html" class="module-card reveal-on-scroll" style="animation-delay:0.2s">
+            <div class="module-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <h3>Fonctions</h3>
+            <p>def, return, paramètres, valeurs par défaut, *args, **kwargs, lambda</p>
+            <span class="module-badge">Chapitre 4</span>
+        </a>
+
+        <a href="chapitres/chapitre5.html" class="module-card reveal-on-scroll" style="animation-delay:0.25s">
+            <div class="module-icon"><i class="fas fa-list-ol"></i></div>
+            <h3>Listes & Tuples</h3>
+            <p>Création, slicing, méthodes, boucles, tuples, unpacking</p>
+            <span class="module-badge">Chapitre 5</span>
+        </a>
+
+        <a href="chapitres/chapitre6.html" class="module-card reveal-on-scroll" style="animation-delay:0.3s">
+            <div class="module-icon"><i class="fas fa-book"></i></div>
+            <h3>Dictionnaires & Sets</h3>
+            <p>Clé:valeur, méthodes, parcours, sets, opérations ensemblistes</p>
+            <span class="module-badge">Chapitre 6</span>
+        </a>
+
+        <a href="chapitres/chapitre7.html" class="module-card reveal-on-scroll" style="animation-delay:0.35s">
+            <div class="module-icon"><i class="fas fa-file-alt"></i></div>
+            <h3>Fichiers & Exceptions</h3>
+            <p>open/read/write, with, try/except, finally, raise, JSON</p>
+            <span class="module-badge">Chapitre 7</span>
+        </a>
+
+        <a href="chapitres/chapitre8.html" class="module-card reveal-on-scroll" style="animation-delay:0.4s">
+            <div class="module-icon"><i class="fas fa-cubes"></i></div>
+            <h3>Modules & Intro POO</h3>
+            <p>import, modules courants, classes, __init__, héritage, méthodes</p>
+            <span class="module-badge">Chapitre 8</span>
+        </a>
+
+    </div>
+
+    <div class="features-grid" style="margin-top:3rem">
+        <a href="chapitres/formules.html" class="feature-card reveal-on-scroll">
+            <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+            <h4>Cheat Sheet</h4>
+            <p>Toutes les syntaxes Python sur une page</p>
+        </a>
+        <a href="chapitres/cartes.html" class="feature-card reveal-on-scroll">
+            <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+            <h4>Cartes Flash</h4>
+            <p>30 cartes interactives pour réviser</p>
+        </a>
+        <a href="chapitres/simulateur-examen.html" class="feature-card reveal-on-scroll">
+            <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h4>Simulateur</h4>
+            <p>Examen blanc chronométré avec correction</p>
+        </a>
+        <a href="exercices/exercices.html" class="feature-card reveal-on-scroll">
+            <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+            <h4>Exercices</h4>
+            <p>24 exercices classés par difficulté</p>
+        </a>
+    </div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({
+    storageKey: 'b1_python_progress',
+    badges: [
+        {id:'first_step',icon:'🐍',label:'Premier pas',desc:'Premier chapitre terminé'},
+        {id:'print_master',icon:'🖨️',label:'Print master',desc:'Ch.1 Variables maîtrisé'},
+        {id:'loop_hero',icon:'🔄',label:'Loop Hero',desc:'Ch.3 Boucles terminé'},
+        {id:'func_guru',icon:'⚡',label:'Func Guru',desc:'Ch.4 Fonctions terminé'},
+        {id:'list_ninja',icon:'📋',label:'List Ninja',desc:'Ch.5 Listes terminé'},
+        {id:'quiz_king',icon:'👑',label:'Quiz King',desc:'10 quiz réussis'},
+        {id:'half_way',icon:'🏔️',label:'Mi-parcours',desc:'4 chapitres terminés'},
+        {id:'legend',icon:'🏆',label:'Légende Python',desc:'Tous les chapitres terminés'}
+    ],
+    levels: [
+        {name:'Débutant',minXP:0},{name:'Apprenti Python',minXP:100},
+        {name:'Développeur Jr.',minXP:300},{name:'Codeur Confirmé',minXP:550},
+        {name:'Maître Python',minXP:850},{name:'🐍 Guru Python',minXP:1200}
+    ],
+    tips: [
+        "Python utilise l'indentation au lieu des { } !",
+        "type(x) vous dit le type de n'importe quelle variable.",
+        "Les listes commencent à l'indice 0, comme en C.",
+        "f-strings : f\"Bonjour {nom}\" — la façon moderne de formater.",
+        "with open() as f: ferme le fichier automatiquement.",
+        "try/except attrape les erreurs sans crash.",
+        "Un dictionnaire est comme un vrai dictionnaire : mot → définition.",
+        "range(5) donne [0, 1, 2, 3, 4] — jamais 5 !",
+        "Les tuples sont comme des listes qu'on ne peut pas modifier.",
+        "import math → math.sqrt(16) = 4.0"
+    ]
+});
+GameEngine.init();
+</script>
+</body>
+</html>

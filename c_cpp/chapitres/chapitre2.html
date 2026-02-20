@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 2 — Contrôle de flux | C/C++ B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre1.html">Ch.1</a></li><li><a href="chapitre2.html" class="active">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li><li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li><li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitre2.html" class="active"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-code-branch"></i> Chapitre 2</div>
+    <h1>⚡ Contrôle de <span class="highlight">Flux</span></h1>
+    <p>Conditions, aiguillages et boucles : apprenez à donner de l'intelligence et de la répétition à vos programmes C.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ 2.1 if / else ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="if-else">
+    <h2><i class="fas fa-code-branch"></i> 2.1 — Conditions : if / else</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le feu tricolore</div>
+        <p>Un <code>if</code> est comme un feu de signalisation : <strong>vert</strong> → on passe (condition vraie), <strong>rouge</strong> → on s'arrête (condition fausse) et on prend le <code>else</code>.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Structure if / else if / else</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int note = 15;
+
+if (note >= 16) {
+    printf("Très bien !\n");
+} else if (note >= 12) {
+    printf("Bien\n");        // ← Exécuté car 15 >= 12
+} else if (note >= 10) {
+    printf("Passable\n");
+} else {
+    printf("Insuffisant\n");
+}</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Piège classique :</strong> Ne confondez pas <code>=</code> (affectation) et <code>==</code> (comparaison) !<br>
+        <code>if (x = 5)</code> est <strong>toujours vrai</strong> car il affecte 5 à x.<br>
+        <code>if (x == 5)</code> teste si x vaut 5. Un seul <code>=</code> suffit à créer un bug invisible.
+    </div>
+
+    <div class="concept-card">
+        <h4>🎯 Opérateur ternaire : le if en raccourci</h4>
+        <p>Syntaxe : <code>condition ? valeur_si_vrai : valeur_si_faux</code></p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Opérateur ternaire</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int age = 20;
+// Long
+if (age >= 18) printf("Majeur");
+else printf("Mineur");
+
+// Court (ternaire)
+printf("%s\n", (age >= 18) ? "Majeur" : "Mineur");
+
+// Stocker dans une variable
+int prix = (age < 12) ? 5 : 10;</code></pre></div>
+</section>
+
+<!-- ═══════════════ 2.2 switch ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="switch">
+    <h2><i class="fas fa-list-ol"></i> 2.2 — L'aiguillage : switch</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le distributeur automatique</div>
+        <p>Le <code>switch</code> est comme un distributeur de boissons : vous appuyez sur un bouton (valeur) et il vous donne la boisson correspondante (case). Pas de bouton = pas de boisson (default).</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Syntaxe switch</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int jour = 3;
+
+switch (jour) {
+    case 1: printf("Lundi\n");    break;
+    case 2: printf("Mardi\n");    break;
+    case 3: printf("Mercredi\n"); break;  // ← Exécuté
+    case 4: printf("Jeudi\n");    break;
+    case 5: printf("Vendredi\n"); break;
+    case 6: printf("Samedi\n");   break;
+    case 7: printf("Dimanche\n"); break;
+    default: printf("Invalide\n");
+}</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Oublier le break :</strong> Sans <code>break</code>, l'exécution « tombe » dans les cases suivants (fall-through). C'est l'erreur la plus fréquente avec switch !
+    </div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>C.C.B.D.</strong> (Chaque Case a son Break par Défaut)</div>
+        <ul>
+            <li><strong>C</strong>ase — la valeur à tester</li>
+            <li><strong>C</strong>ode — les instructions</li>
+            <li><strong>B</strong>reak — sortir du switch !</li>
+            <li><strong>D</strong>efault — le cas « sinon » à la fin</li>
+        </ul>
+    </div>
+
+    <div class="info-box">
+        <strong>switch vs if/else :</strong> Utilisez <code>switch</code> quand vous comparez une variable à des valeurs <strong>exactes</strong> (entiers, caractères). Utilisez <code>if/else</code> pour des <strong>plages</strong> (note >= 10) ou des conditions complexes.
+    </div>
+</section>
+
+<!-- ═══════════════ 2.3 while ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="while">
+    <h2><i class="fas fa-redo"></i> 2.3 — Boucle while</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le réveil matin</div>
+        <p>La boucle <code>while</code> est comme un réveil qui sonne : <strong>tant que</strong> vous n'avez pas appuyé sur le bouton « arrêt » (condition devenue fausse), il continue de sonner.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Syntaxe while</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Compter de 1 à 5
+int i = 1;
+while (i <= 5) {
+    printf("%d ", i);   // Affiche : 1 2 3 4 5
+    i++;                // ← INDISPENSABLE sinon boucle infinie !
+}
+
+// Somme des entiers de 1 à 100
+int somme = 0, n = 1;
+while (n <= 100) {
+    somme += n;
+    n++;
+}
+printf("Somme = %d\n", somme);  // 5050 (formule de Gauss !)</code></pre></div>
+
+    <div class="warning-box">
+        <strong>⚠️ Boucle infinie :</strong> Si la condition ne devient jamais fausse, le programme tourne indéfiniment ! Vérifiez toujours que la variable de contrôle <strong>évolue</strong> dans la boucle. Ctrl+C pour arrêter un programme bloqué.
+    </div>
+</section>
+
+<!-- ═══════════════ 2.4 do-while ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="do-while">
+    <h2><i class="fas fa-sync-alt"></i> 2.4 — Boucle do-while</h2>
+
+    <div class="concept-card">
+        <h4>⚡ La différence clé</h4>
+        <p><code>while</code> teste <strong>avant</strong> d'exécuter → peut ne jamais s'exécuter.<br>
+        <code>do-while</code> exécute <strong>puis</strong> teste → s'exécute <strong>au moins une fois</strong>.</p>
+    </div>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Goûter avant de juger</div>
+        <p><code>while</code> = vous regardez le plat et décidez si vous mangez. <code>do-while</code> = vous goûtez d'abord, puis décidez si vous continuez à manger.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Saisie validée avec do-while</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>int choix;
+do {
+    printf("Menu : 1=Jouer, 2=Scores, 3=Quitter\n");
+    printf("Votre choix : ");
+    scanf("%d", &amp;choix);
+    
+    if (choix < 1 || choix > 3)
+        printf("Choix invalide !\n");
+        
+} while (choix != 3);  // ← Point-virgule obligatoire !
+
+printf("Au revoir !\n");</code></pre></div>
+
+    <div class="tip-box">
+        <strong>Quand utiliser do-while ?</strong> Pour la <strong>validation de saisie</strong> : vous devez demander au moins une fois avant de vérifier. C'est son cas d'usage principal.
+    </div>
+</section>
+
+<!-- ═══════════════ 2.5 for ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="for">
+    <h2><i class="fas fa-list-ol"></i> 2.5 — Boucle for</h2>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>I.C.I.</strong> (les 3 parties du for)</div>
+        <p><code>for (</code><strong>I</strong>nitialisation<code>; </code><strong>C</strong>ondition<code>; </code><strong>I</strong>ncrémentation<code>)</code></p>
+        <ul>
+            <li><strong>I</strong>nitialisation — point de départ (<code>int i = 0</code>)</li>
+            <li><strong>C</strong>ondition — continuer tant que (<code>i < 10</code>)</li>
+            <li><strong>I</strong>ncrémentation — pas d'avancement (<code>i++</code>)</li>
+        </ul>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Exemples de boucle for</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Compter de 0 à 9
+for (int i = 0; i < 10; i++) {
+    printf("%d ", i);
+}
+// → 0 1 2 3 4 5 6 7 8 9
+
+// Compter de 10 à 0 (décompte)
+for (int i = 10; i >= 0; i--) {
+    printf("%d ", i);
+}
+
+// Table de multiplication
+int n = 7;
+for (int i = 1; i <= 10; i++) {
+    printf("%d x %d = %d\n", n, i, n * i);
+}
+
+// Boucles imbriquées (rectangle d'étoiles)
+for (int ligne = 0; ligne < 3; ligne++) {
+    for (int col = 0; col < 5; col++) {
+        printf("* ");
+    }
+    printf("\n");
+}
+// * * * * *
+// * * * * *
+// * * * * *</code></pre></div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Boucle</th><th>Quand ?</th><th>Test</th><th>Nb exécutions min</th></tr></thead>
+            <tbody>
+                <tr><td><code>for</code></td><td>Nombre d'itérations <strong>connu</strong></td><td>Avant</td><td>0</td></tr>
+                <tr><td><code>while</code></td><td>Nombre <strong>inconnu</strong>, test avant</td><td>Avant</td><td>0</td></tr>
+                <tr><td><code>do-while</code></td><td>Au moins <strong>1 fois</strong></td><td>Après</td><td>1</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ 2.6 break / continue ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="break-continue">
+    <h2><i class="fas fa-stop-circle"></i> 2.6 — break et continue</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — La file d'attente</div>
+        <p><code>break</code> = vous quittez la file d'attente entièrement. <code>continue</code> = vous laissez passer la personne devant vous et passez directement au suivant dans la file.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>break et continue</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// break : chercher le premier multiple de 7
+for (int i = 1; i <= 100; i++) {
+    if (i % 7 == 0) {
+        printf("Premier multiple de 7 : %d\n", i);  // 7
+        break;  // Sort de la boucle !
+    }
+}
+
+// continue : afficher seulement les nombres impairs
+for (int i = 1; i <= 10; i++) {
+    if (i % 2 == 0) continue;  // Sauter les pairs
+    printf("%d ", i);  // 1 3 5 7 9
+}</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique</div>
+        <ul>
+            <li><strong>break</strong> → <strong>B</strong>ye bye la boucle ! (sortie totale)</li>
+            <li><strong>continue</strong> → <strong>C</strong>ontinue au prochain tour ! (saute le reste du tour)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════ 2.7 Récap ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="recap">
+    <h2><i class="fas fa-clipboard-check"></i> 2.7 — Récapitulatif</h2>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Structure</th><th>Syntaxe</th><th>Usage typique</th></tr></thead>
+            <tbody>
+                <tr><td>if / else</td><td><code>if (cond) { } else { }</code></td><td>Choix binaire ou plages</td></tr>
+                <tr><td>Ternaire</td><td><code>cond ? a : b</code></td><td>Raccourci if en une ligne</td></tr>
+                <tr><td>switch</td><td><code>switch(x){case 1:…break;}</code></td><td>Valeurs exactes (menus)</td></tr>
+                <tr><td>while</td><td><code>while (cond) { }</code></td><td>Nb itérations inconnu</td></tr>
+                <tr><td>do-while</td><td><code>do { } while(cond);</code></td><td>Au moins 1 exécution</td></tr>
+                <tr><td>for</td><td><code>for (i; c; inc) { }</code></td><td>Nb itérations connu</td></tr>
+                <tr><td>break</td><td><code>break;</code></td><td>Sortir de boucle/switch</td></tr>
+                <tr><td>continue</td><td><code>continue;</code></td><td>Sauter une itération</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ EXERCICES ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exercices">
+    <h2><i class="fas fa-dumbbell"></i> Exercices du Chapitre 2</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre1.html" class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i> Chapitre 1</a>
+    <a href="chapitre3.html" class="nav-btn next-btn">Chapitre 3 <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_c_cpp_progress',badges:[
+    {id:'first_step',name:'Premier Pas',icon:'🏁',desc:'Premier exercice',xp:10}
+],levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti C'},{min:80,title:'Développeur Jr.'},{min:150,title:'Codeur Confirmé'},{min:250,title:'Maître du C'},{min:400,title:'Guru C/C++'}]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        { q: "Écrivez un programme qui lit un entier et affiche s'il est pair ou impair.", hints: ["Utilisez % 2","if (n % 2 == 0)"], answer: 'int n;\nscanf("%d", &n);\nif (n % 2 == 0)\n    printf("Pair\\n");\nelse\n    printf("Impair\\n");' },
+        { q: "Écrivez un switch qui affiche le jour de la semaine selon un numéro (1=Lundi…7=Dimanche).", hints: ["N'oubliez pas break","Ajoutez un default"], answer: 'switch(jour){\n  case 1:printf("Lundi");break;\n  case 2:printf("Mardi");break;\n  ...\n  default:printf("Invalide");\n}' },
+        { q: "Avec une boucle for, affichez les nombres de 1 à 20.", hints: ["for (int i = 1; i <= 20; i++)"], answer: 'for (int i = 1; i <= 20; i++)\n    printf("%d ", i);' },
+        { q: "Écrivez une boucle while qui demande un mot de passe jusqu'à ce que l'utilisateur entre 1234.", hints: ["do-while serait idéal ici","while (mdp != 1234)"], answer: 'int mdp;\ndo {\n    printf("Mot de passe : ");\n    scanf("%d", &mdp);\n} while (mdp != 1234);\nprintf("Accès accordé !\\n");' },
+        { q: "Affichez tous les multiples de 3 entre 1 et 30 avec une boucle for et continue.", hints: ["if (i % 3 != 0) continue;"], answer: 'for (int i = 1; i <= 30; i++) {\n    if (i % 3 != 0) continue;\n    printf("%d ", i);\n}' }
+    ],
+    quiz: [
+        { type:'mcq', q:"Que fait ce code : if (x = 5) ?", options:["Teste si x vaut 5","Affecte 5 à x (toujours vrai)","Erreur de compilation","Rien"], correct:1 },
+        { type:'mcq', q:"Combien de fois s'exécute un do-while au minimum ?", options:["0","1","2","Ça dépend"], correct:1 },
+        { type:'mcq', q:"Quel est le rôle de break dans un switch ?", options:["Relancer le switch","Sortir du switch","Passer au case suivant","Rien"], correct:1 },
+        { type:'mcq', q:"Dans for(int i=0; i<5; i++), combien de tours ?", options:["4","5","6","Infini"], correct:1 },
+        { type:'mcq', q:"Quelle boucle utiliser pour valider une saisie utilisateur ?", options:["for","while","do-while","switch"], correct:2 },
+        { type:'qa', q:"Quelle est la différence entre break et continue ?", answer:"break sort complètement de la boucle, continue saute au tour suivant" },
+        { type:'mcq', q:"Que vaut i après : int i=0; while(i<3) i++; ?", options:["2","3","4","Boucle infinie"], correct:1 },
+        { type:'qa', q:"Citez les 3 parties du for.", answer:"Initialisation, Condition, Incrémentation (I.C.I.)" },
+        { type:'mcq', q:"switch peut tester :", options:["Des plages (>10)","Des valeurs exactes (1,2,3)","Des chaînes","Des flottants"], correct:1 },
+        { type:'mcq', q:"L'opérateur ternaire remplace :", options:["for","while","if/else court","switch"], correct:2 }
+    ],
+    dragdrop: [
+        { instruction:"Associez chaque boucle à sa caractéristique :", pairs:[
+            ["for","Nombre d'itérations connu"],["while","Test avant, 0 minimum"],["do-while","Au moins 1 exécution"]
+        ]},
+        { instruction:"Associez le mot-clé à son effet :", pairs:[
+            ["break","Sort de la boucle"],["continue","Saute au prochain tour"],["default","Cas par défaut du switch"],["return","Sort de la fonction"]
+        ]},
+        { instruction:"Associez la structure au bon usage :", pairs:[
+            ["if/else","Conditions avec plages"],["switch","Valeurs exactes"],["ternaire","Raccourci en 1 ligne"],["do-while","Validation de saisie"]
+        ]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

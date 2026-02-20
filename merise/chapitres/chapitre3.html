@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 — Modèle Logique de Données (MLD) | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html" class="active">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html" class="active"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions & Normalisation</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-table"></i> Module 3</div>
+            <h1>Modèle Logique de <span class="highlight">Données (MLD)</span></h1>
+            <p>Du MCD au MLD : traduire le modèle conceptuel en tables relationnelles avec clés primaires et clés étrangères.</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 1 : Introduction MLD -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-table-cells"></i> I. Qu'est-ce que le MLD ?</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Le <strong>Modèle Logique de Données (MLD)</strong> est la traduction du MCD en un ensemble de <strong>tables relationnelles</strong>. Il se situe au <strong>niveau logique</strong> de MERISE, entre le MCD (niveau conceptuel) et le MPD (niveau physique). Le MLD prépare l'implémentation concrète dans un SGBD relationnel (MySQL, PostgreSQL, Oracle…).</p>
+                </div>
+
+                <h3>Vocabulaire MCD ↔ MLD</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Niveau Conceptuel (MCD)</th><th>Niveau Logique (MLD)</th></tr></thead>
+                    <tbody>
+                        <tr><td>Entité</td><td><strong>Table</strong> (ou Relation)</td></tr>
+                        <tr><td>Propriété</td><td><strong>Attribut</strong> (ou Colonne)</td></tr>
+                        <tr><td>Identifiant</td><td><strong>Clé primaire</strong> (PK)</td></tr>
+                        <tr><td>Occurrence</td><td><strong>n-uplet</strong> (ligne / enregistrement)</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 2 : Clés -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-key"></i> II. Clé Primaire et Clé Étrangère</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-unlock-keyhole"></i> Clé primaire (PK — Primary Key)</h4>
+                    <p>La <strong>clé primaire</strong> est l'attribut (ou combinaison d'attributs) qui identifie de manière <strong>unique</strong> chaque enregistrement d'une table. Elle correspond à l'identifiant de l'entité dans le MCD. Elle est <strong>obligatoire</strong> (non nulle) et <strong>unique</strong>.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-link"></i> Clé étrangère (FK — Foreign Key)</h4>
+                    <p>La <strong>clé étrangère</strong> est un attribut d'une table qui fait référence à la <strong>clé primaire d'une autre table</strong>. Elle matérialise le lien entre deux tables et garantit l'<strong>intégrité référentielle</strong> (toute valeur de FK doit exister dans la table référencée).</p>
+                </div>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Notation du MLD :</strong>
+<pre class="schema-block">
+COMMANDE (<u>Num_cmd</u>, Date_cmd, <strong>#Code_client</strong>)
+</pre>
+                        <code><u>Num_cmd</u></code> est la clé primaire (soulignée).<br>
+                        <code>#Code_client</code> est la clé étrangère (précédée de #), référençant CLIENT.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 3 : Les 3 règles de passage -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-wand-magic-sparkles"></i> III. Les 3 Règles de Passage MCD → MLD</h2>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div>La transformation du MCD en MLD obéit à <strong>3 règles</strong> qui dépendent des cardinalités des associations.</div>
+                </div>
+
+                <!-- RÈGLE 1 -->
+                <h3 class="rule-title" style="margin-top:2rem;padding:.7rem 1rem;background:var(--accent-glow);border-radius:.5rem;display:inline-block">
+                    <i class="fa-solid fa-1"></i> Règle 1 — Association (x,1) – (x,n)
+                </h3>
+                <p><strong>Cas :</strong> L'une des entités a une cardinalité maximale de <strong>1</strong> (soit 0,1 soit 1,1).</p>
+
+                <div class="norm-step">
+                    <span class="step-num">→</span>
+                    Chaque entité devient une table. La <strong>clé primaire de l'entité côté n</strong> migre comme <strong>clé étrangère</strong> dans la table côté 1.
+                </div>
+
+                <h4>Exemple — MCD</h4>
+                <div class="diagram-container">
+                    <div class="entity-box">
+                        <div class="entity-name">EMPLOYÉ</div>
+                        <div class="entity-attrs"><span class="pk">Matricule</span><br>Nom<br>Prénom</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">1,1</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="assoc-box">TRAVAILLER</div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">1,n</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="entity-box">
+                        <div class="entity-name">SERVICE</div>
+                        <div class="entity-attrs"><span class="pk">Num_serv</span><br>Nom_serv</div>
+                    </div>
+                </div>
+
+                <h4>MLD résultant</h4>
+<pre class="schema-block">
+SERVICE (<u>Num_serv</u>, Nom_serv)
+EMPLOYÉ (<u>Matricule</u>, Nom, Prénom, <strong>#Num_serv</strong>)
+</pre>
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Astuce :</strong> La FK va toujours <strong>du côté 1 vers le côté n</strong>. Pensez : « Employé a cardinalité (1,1) → c'est lui qui reçoit la FK du Service. »</div>
+                </div>
+
+                <!-- RÈGLE 2 -->
+                <h3 class="rule-title" style="margin-top:2rem;padding:.7rem 1rem;background:var(--accent-glow);border-radius:.5rem;display:inline-block">
+                    <i class="fa-solid fa-2"></i> Règle 2 — Association (x,n) – (x,n)
+                </h3>
+                <p><strong>Cas :</strong> Les deux entités ont une cardinalité maximale de <strong>n</strong>.</p>
+
+                <div class="norm-step">
+                    <span class="step-num">→</span>
+                    Chaque entité devient une table. L'association devient <strong>une table supplémentaire</strong> dont la clé primaire est la <strong>concaténation des clés primaires</strong> des entités participantes. Les propriétés portées par l'association deviennent des attributs de cette table.
+                </div>
+
+                <h4>Exemple — MCD</h4>
+                <div class="diagram-container" style="flex-wrap:wrap">
+                    <div class="entity-box">
+                        <div class="entity-name">COMMANDE</div>
+                        <div class="entity-attrs"><span class="pk">Num_cmd</span><br>Date_cmd</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">1,n</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="assoc-box">CONCERNER<br><small style="color:var(--text-muted)">Quantité</small></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+                        <span class="card-badge">0,n</span><span class="diagram-arrow">───</span>
+                    </div>
+                    <div class="entity-box">
+                        <div class="entity-name">PRODUIT</div>
+                        <div class="entity-attrs"><span class="pk">Code_produit</span><br>Désignation<br>Prix_HT</div>
+                    </div>
+                </div>
+
+                <h4>MLD résultant</h4>
+<pre class="schema-block">
+COMMANDE (<u>Num_cmd</u>, Date_cmd)
+PRODUIT (<u>Code_produit</u>, Désignation, Prix_HT)
+CONCERNER (<u><strong>#Num_cmd</strong>, <strong>#Code_produit</strong></u>, Quantité)
+</pre>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div>La table CONCERNER a une <strong>clé primaire composée</strong> formée des deux clés étrangères. « Quantité » est un attribut normal de cette table d'association.</div>
+                </div>
+
+                <!-- RÈGLE 3 -->
+                <h3 class="rule-title" style="margin-top:2rem;padding:.7rem 1rem;background:var(--accent-glow);border-radius:.5rem;display:inline-block">
+                    <i class="fa-solid fa-3"></i> Règle 3 — Association (1,1) – (1,1)
+                </h3>
+                <p><strong>Cas :</strong> Les deux entités ont une cardinalité exactement <strong>(1,1)</strong>.</p>
+
+                <div class="norm-step">
+                    <span class="step-num">→</span>
+                    On <strong>fusionne</strong> les deux entités en une seule table, ou on envoie la FK dans la table la plus logique (souvent la table « dépendante »). Ce cas est <strong>rare</strong> en pratique.
+                </div>
+
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Attention :</strong> Une association (1,1)–(1,1) signifie souvent que les deux entités pourraient en être une seule. Revoir les règles de gestion avant de conclure !</div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 4 : Récapitulatif visuel -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-table-list"></i> IV. Récapitulatif des Règles</h2>
+
+                <table class="merise-table">
+                    <thead><tr><th>Cardinalité max</th><th>Transformation</th><th>Clé étrangère ?</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="card-badge">x,1</span> — <span class="card-badge">x,n</span></td>
+                            <td>FK côté 1</td>
+                            <td>Oui, la PK du côté n va dans la table côté 1</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge">x,n</span> — <span class="card-badge">x,n</span></td>
+                            <td>Table d'association</td>
+                            <td>Oui, la PK = concaténation des deux FK</td>
+                        </tr>
+                        <tr>
+                            <td><span class="card-badge">1,1</span> — <span class="card-badge">1,1</span></td>
+                            <td>Fusion ou FK</td>
+                            <td>Selon le contexte métier</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SECTION 5 : Exemple complet -->
+            <!-- ═══════════════════════════════════════ -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-diagram-project"></i> V. Exemple Complet — MCD vers MLD</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-clipboard-list"></i> Énoncé</h4>
+                    <p>
+                        Une entreprise gère ses formations internes.<br>
+                        RG1 : Un formateur anime plusieurs sessions. Chaque session est animée par un seul formateur.<br>
+                        RG2 : Une session concerne exactement une formation. Une formation peut avoir plusieurs sessions.<br>
+                        RG3 : Un employé participe à plusieurs sessions. Une session accueille plusieurs employés (avec une note d'évaluation).
+                    </p>
+                </div>
+
+                <h3>MCD</h3>
+                <div class="diagram-container" style="flex-wrap:wrap;gap:1rem">
+                    <div class="entity-box">
+                        <div class="entity-name">FORMATEUR</div>
+                        <div class="entity-attrs"><span class="pk">Id_form</span><br>Nom_form</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,n</span><span>───</span></div>
+                    <div class="assoc-box">ANIMER</div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,1</span><span>───</span></div>
+                    <div class="entity-box">
+                        <div class="entity-name">SESSION</div>
+                        <div class="entity-attrs"><span class="pk">Num_session</span><br>Date_session</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,1</span><span>───</span></div>
+                    <div class="assoc-box">PORTER_SUR</div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,n</span><span>───</span></div>
+                    <div class="entity-box">
+                        <div class="entity-name">FORMATION</div>
+                        <div class="entity-attrs"><span class="pk">Code_form</span><br>Libellé</div>
+                    </div>
+                </div>
+                <div class="diagram-container" style="margin-top:1rem">
+                    <div class="entity-box" style="visibility:hidden;width:0;min-width:0;padding:0;border:0"></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,n</span><span>│</span></div>
+                </div>
+                <div class="diagram-container">
+                    <div class="entity-box">
+                        <div class="entity-name">EMPLOYÉ</div>
+                        <div class="entity-attrs"><span class="pk">Matricule</span><br>Nom_emp</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,n</span><span>───</span></div>
+                    <div class="assoc-box">PARTICIPER<br><small style="color:var(--text-muted)">Note_eval</small></div>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem"><span class="card-badge">1,n</span><span>───</span></div>
+                    <span style="color:var(--text-muted)">SESSION</span>
+                </div>
+
+                <h3>Application des règles</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Association</th><th>Cardinalités max</th><th>Règle</th><th>Action</th></tr></thead>
+                    <tbody>
+                        <tr><td>ANIMER</td><td>n — 1</td><td>Règle 1</td><td>#Id_form → dans SESSION</td></tr>
+                        <tr><td>PORTER_SUR</td><td>1 — n</td><td>Règle 1</td><td>#Code_form → dans SESSION</td></tr>
+                        <tr><td>PARTICIPER</td><td>n — n</td><td>Règle 2</td><td>Nouvelle table PARTICIPER</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>MLD final</h3>
+<pre class="schema-block">
+FORMATEUR (<u>Id_form</u>, Nom_form)
+
+FORMATION (<u>Code_form</u>, Libellé)
+
+SESSION (<u>Num_session</u>, Date_session, <strong>#Id_form</strong>, <strong>#Code_form</strong>)
+
+EMPLOYÉ (<u>Matricule</u>, Nom_emp)
+
+PARTICIPER (<u><strong>#Matricule</strong>, <strong>#Num_session</strong></u>, Note_eval)
+</pre>
+
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Vérification :</strong> SESSION reçoit 2 clés étrangères (ANIMER et PORTER_SUR = deux fois règle 1). PARTICIPER est une table d'association avec clé composée + attribut Note_eval (règle 2).</div>
+                </div>
+
+                <div class="tip-box" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));border-left:4px solid var(--success);">
+                    <i class="fa-solid fa-brain" style="color:var(--success);"></i>
+                    <div>
+                        <strong>🧠 Mnémotechnique — MCD → MLD : les 3 règles d'or</strong><br>
+                        <strong>« Règle 1-2-3 : Chaque cardinalité max dit ce qu'il faut faire »</strong>
+                        <ul style="margin:0.5rem 0 0 1rem;">
+                            <li><strong>Règle 1</strong> (x,1 — x,n) → La clé du côté « n » migre comme <strong>clé étrangère</strong> vers le côté « 1 »</li>
+                            <li><strong>Règle 2</strong> (x,n — x,n) → L'association devient une <strong>table d'association</strong> avec clé composée</li>
+                            <li><strong>Règle 3</strong> (0,1 — 1,1) → On peut <strong>fusionner</strong> les deux entités en une seule table</li>
+                        </ul>
+                        <p style="font-size:0.88rem;opacity:0.8;margin-top:0.5rem;">« Le <strong>n</strong> envoie sa clé vers le <strong>1</strong>. Si c'est n-n, on crée une table pont. »</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONE EXERCICES -->
+            <article class="glass-card" id="interactive-exercise">
+                <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
+                <p style="color:var(--text-muted);">Chargement des exercices...</p>
+            </article>
+
+            <!-- Nav -->
+            <div class="chapter-nav">
+                <a href="chapitre2.html"><i class="fa-solid fa-arrow-left"></i> Module 2 — MCD</a>
+                <a href="chapitre4.html">Module 4 — Extensions & Normalisation <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/chapter-exercises.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+</body>
+</html>

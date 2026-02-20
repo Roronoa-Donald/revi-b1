@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 7 — Fichiers & Exceptions | Python B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#06b6d4;--accent-light:#22d3ee;--accent-dark:#0891b2;--accent-glow:rgba(6,182,212,0.25)}.dark{--accent:#22d3ee;--accent-light:#67e8f9;--accent-dark:#06b6d4;--accent-glow:rgba(34,211,238,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fab fa-python"></i> PyBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🐍 PyBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="chapitre7.html" class="active"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-file-alt"></i> Chapitre 7</div>
+    <h1>🐍 Fichiers & <span class="highlight">Exceptions</span></h1>
+    <p>Lire et écrire dans des fichiers, gérer les erreurs proprement avec try/except.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- Section 1 : Ouvrir un fichier -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-folder-open"></i> Ouvrir un fichier — with open()</h2>
+    <div class="concept-card">
+        <h4>📓 Analogie du cahier</h4>
+        <p>Un fichier c'est comme un <strong>cahier</strong> : vous devez l'<em>ouvrir</em>, le <em>lire ou écrire</em>, puis le <em>refermer</em>. En Python, <code>with</code> le referme automatiquement (pas de <code>fclose()</code> à oublier !).</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>La syntaxe magique : with</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># ⭐ LA bonne façon (fermeture automatique)
+with open("fichier.txt", "r") as f:
+    contenu = f.read()
+# Le fichier est automatiquement fermé ici !
+
+# Modes d'ouverture
+# "r"  → Read (lire, défaut)
+# "w"  → Write (écrire, ÉCRASE !)
+# "a"  → Append (ajouter à la fin)
+# "r+" → Read + Write</code></pre></div>
+
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique R.W.A. (comme en C !)</h4>
+        <p><strong>R</strong>ead · <strong>W</strong>rite (écrase !) · <strong>A</strong>ppend — les mêmes modes qu'en C mais avec <code>with</code> en bonus pour la fermeture auto.</p>
+    </div>
+</section>
+
+<!-- Section 2 : Lire -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-book-reader"></i> Lire un fichier</h2>
+    <div class="code-block"><div class="code-header"><span>3 façons de lire</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># 1. Tout lire d'un coup
+with open("notes.txt", "r") as f:
+    contenu = f.read()          # Tout en une string
+    print(contenu)
+
+# 2. Lire ligne par ligne (mémoire OK)
+with open("notes.txt", "r") as f:
+    for ligne in f:             # ⭐ Meilleure méthode !
+        print(ligne.strip())    # .strip() enlève le \n
+
+# 3. Toutes les lignes en liste
+with open("notes.txt", "r") as f:
+    lignes = f.readlines()      # Liste de strings
+    print(lignes[0])            # Première ligne</code></pre></div>
+
+    <div class="tip-box"><strong>💡 Bonnes pratiques :</strong> Utilisez <code>for ligne in f:</code> pour les gros fichiers (lit une ligne à la fois, économise la mémoire). <code>.strip()</code> supprime les espaces et <code>\n</code> en début/fin.</div>
+</section>
+
+<!-- Section 3 : Écrire -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pen"></i> Écrire dans un fichier</h2>
+    <div class="code-block"><div class="code-header"><span>Écrire et ajouter</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Écrire (écrase le fichier !)
+with open("resultats.txt", "w") as f:
+    f.write("Alice : 15/20\n")
+    f.write("Bob : 17/20\n")
+
+# Ajouter à la fin
+with open("resultats.txt", "a") as f:
+    f.write("Clara : 12/20\n")
+
+# Écrire plusieurs lignes
+lignes = ["Ligne 1\n", "Ligne 2\n", "Ligne 3\n"]
+with open("multi.txt", "w") as f:
+    f.writelines(lignes)
+
+# ⚠️ f.write() n'ajoute PAS de \n automatiquement !
+# Contrairement à print(), il faut les mettre soi-même</code></pre></div>
+
+    <div class="warning-box"><strong>⚠️ Piège :</strong> Le mode <code>"w"</code> <strong>écrase tout le contenu existant</strong> ! Pour ajouter sans écraser, utilisez <code>"a"</code> (append).</div>
+</section>
+
+<!-- Section 4 : CSV et JSON -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table"></i> Fichiers CSV et JSON</h2>
+    <div class="code-block"><div class="code-header"><span>CSV (valeurs séparées par des virgules)</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>import csv
+
+# Écrire du CSV
+with open("etudiants.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Nom", "Note"])  # En-tête
+    writer.writerow(["Alice", 15])
+    writer.writerow(["Bob", 17])
+
+# Lire du CSV
+with open("etudiants.csv", "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)  # ["Nom", "Note"], ["Alice", "15"]...</code></pre></div>
+
+    <div class="code-block"><div class="code-header"><span>JSON (format universel)</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>import json
+
+# Sauvegarder un dict en JSON
+data = {"nom": "Alice", "notes": [15, 17, 12]}
+with open("data.json", "w") as f:
+    json.dump(data, f, indent=2)  # indent = joli format
+
+# Charger depuis JSON
+with open("data.json", "r") as f:
+    data = json.load(f)
+    print(data["nom"])  # "Alice"
+
+# 🐍 json.dump() = sauvegarder, json.load() = charger
+# dump = écrire, load = lire</code></pre></div>
+</section>
+
+<!-- Section 5 : Exceptions -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-shield-alt"></i> Exceptions — try/except</h2>
+    <div class="concept-card">
+        <h4>🛡️ Analogie du filet de sécurité</h4>
+        <p><code>try/except</code> est un <strong>filet de sécurité</strong> sous un trapéziste : si une erreur se produit (chute), le programme ne crash pas — le filet la rattrape et vous décidez quoi faire.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Gérer les erreurs</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code># Sans try/except → crash !
+# n = int(input("Nombre : "))  # Si on tape "abc" → ValueError
+
+# Avec try/except → sécurisé
+try:
+    n = int(input("Nombre : "))
+    print(f"Vous avez saisi : {n}")
+except ValueError:
+    print("❌ Ce n'est pas un nombre !")
+
+# Plusieurs types d'erreurs
+try:
+    f = open("inexistant.txt", "r")
+    contenu = f.read()
+except FileNotFoundError:
+    print("Fichier introuvable !")
+except PermissionError:
+    print("Accès refusé !")
+except Exception as e:
+    print(f"Erreur inattendue : {e}")
+finally:
+    print("Ce bloc s'exécute TOUJOURS")
+    # Idéal pour fermer des ressources</code></pre></div>
+
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Exception</th><th>Cause</th></tr></thead>
+        <tbody>
+            <tr><td><code>ValueError</code></td><td>Valeur invalide (<code>int("abc")</code>)</td></tr>
+            <tr><td><code>TypeError</code></td><td>Type incompatible (<code>"a" + 1</code>)</td></tr>
+            <tr><td><code>ZeroDivisionError</code></td><td>Division par zéro</td></tr>
+            <tr><td><code>FileNotFoundError</code></td><td>Fichier introuvable</td></tr>
+            <tr><td><code>KeyError</code></td><td>Clé absente dans un dict</td></tr>
+            <tr><td><code>IndexError</code></td><td>Indice hors limites</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Section 6 : raise -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Lever ses propres exceptions — raise</h2>
+    <div class="code-block"><div class="code-header"><span>raise</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>def diviser(a, b):
+    if b == 0:
+        raise ValueError("Division par zéro interdite !")
+    return a / b
+
+try:
+    print(diviser(10, 0))
+except ValueError as e:
+    print(f"Erreur : {e}")
+# Erreur : Division par zéro interdite !</code></pre></div>
+</section>
+
+<!-- Section 7 : Récap -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 7</h4>
+        <ul>
+            <li><code>with open("f", "r") as f:</code> — ouvre et ferme auto</li>
+            <li>Modes <strong>R.W.A.</strong> : Read, Write (écrase !), Append</li>
+            <li>Lire : <code>f.read()</code>, <code>for ligne in f</code>, <code>f.readlines()</code></li>
+            <li>Écrire : <code>f.write("...")</code> (pas de \n auto)</li>
+            <li><code>csv</code> : csv.reader/writer pour les tableaux</li>
+            <li><code>json</code> : json.dump/load pour les dicts</li>
+            <li><code>try/except</code> : attrape les erreurs sans crash</li>
+            <li><code>finally</code> : s'exécute toujours</li>
+            <li><code>raise</code> : lever ses propres erreurs</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Exercices -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre6.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Dictionnaires & Sets</a>
+    <a href="chapitre8.html" class="next-chapter">Modules & POO <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        {q:"Écrivez 3 lignes dans un fichier 'test.txt' avec write.",hints:['open("test.txt","w")','f.write("...\\n")'],answer:'with open("test.txt", "w") as f:\n    f.write("Ligne 1\\n")\n    f.write("Ligne 2\\n")\n    f.write("Ligne 3\\n")'},
+        {q:"Lisez et affichez chaque ligne de 'test.txt'.",hints:["for ligne in f","strip() pour enlever \\n"],answer:'with open("test.txt", "r") as f:\n    for ligne in f:\n        print(ligne.strip())'},
+        {q:"Demandez un nombre en boucle jusqu'à obtenir un entier valide.",hints:["while True","try/except ValueError"],answer:'while True:\n    try:\n        n = int(input("Nombre : "))\n        break\n    except ValueError:\n        print("Invalide, réessayez")'},
+        {q:"Sauvegardez un dictionnaire en JSON.",hints:["import json","json.dump(data, f)"],answer:'import json\ndata = {"nom": "Alice", "age": 20}\nwith open("data.json", "w") as f:\n    json.dump(data, f, indent=2)'},
+        {q:"Chargez le JSON et affichez le nom.",hints:["json.load(f)","data[\"nom\"]"],answer:'import json\nwith open("data.json", "r") as f:\n    data = json.load(f)\nprint(data["nom"])'}
+    ],
+    quiz: [
+        {type:"mcq",q:"Quel mot-clé ferme automatiquement un fichier ?",options:["close","finally","with","auto"],correct:2},
+        {type:"mcq",q:"Quel mode écrase le fichier existant ?",options:["r","w","a","r+"],correct:1},
+        {type:"mcq",q:"Que fait .strip() sur une chaîne ?",options:["Supprime les espaces/\\n aux extrémités","Coupe la chaîne","Inverse","Convertit en liste"],correct:0},
+        {type:"mcq",q:"Que fait json.dump() ?",options:["Charge du JSON","Sauvegarde en JSON","Affiche du JSON","Supprime du JSON"],correct:1},
+        {type:"mcq",q:"Quel bloc s'exécute toujours, erreur ou pas ?",options:["try","except","finally","else"],correct:2},
+        {type:"mcq",q:"int('abc') lève quelle exception ?",options:["TypeError","ValueError","SyntaxError","NameError"],correct:1},
+        {type:"mcq",q:"Comment lever sa propre exception ?",options:["throw Error()","raise ValueError()","except ValueError","error(\"msg\")"],correct:1},
+        {type:"mcq",q:"Quelle est la meilleure façon de lire un gros fichier ?",options:["f.read()","f.readlines()","for ligne in f","csv.reader(f)"],correct:2},
+        {type:"qa",q:"Quelle différence entre 'w' et 'a' ?",answer:"'w' écrase le contenu existant, 'a' ajoute à la fin sans écraser."},
+        {type:"qa",q:"Comment charger un fichier JSON en dictionnaire Python ?",answer:"import json; with open('f.json') as f: data = json.load(f)"}
+    ],
+    dragdrop: [
+        {instruction:"Associez chaque mode d'ouverture à son action :",pairs:[["\"r\"","Lire (par défaut)"],["\"w\"","Écrire (écrase !)"],["\"a\"","Ajouter à la fin"],["\"r+\"","Lire + Écrire"]]},
+        {instruction:"Associez chaque exception à sa cause :",pairs:[["ValueError","Valeur invalide"],["FileNotFoundError","Fichier introuvable"],["ZeroDivisionError","Division par 0"],["KeyError","Clé absente du dict"]]},
+        {instruction:"Associez chaque fonction JSON à son rôle :",pairs:[["json.dump()","Dict → fichier JSON"],["json.load()","Fichier JSON → dict"],["json.dumps()","Dict → string JSON"],["json.loads()","String JSON → dict"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 1 — Variables & Types | Algorithmique B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root { --accent: #10b981; --accent-light: #34d399; --accent-dark: #059669; --accent-glow: rgba(16,185,129,0.25); }
+        .dark { --accent: #34d399; --accent-light: #6ee7b7; --accent-dark: #10b981; --accent-glow: rgba(52,211,153,0.25); }
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<!-- NAV -->
+<nav class="glass-nav">
+    <div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> AlgoBot</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="chapitre1.html" class="active">Ch.1</a></li>
+            <li><a href="chapitre2.html">Ch.2</a></li>
+            <li><a href="chapitre3.html">Ch.3</a></li>
+            <li><a href="chapitre4.html">Ch.4</a></li>
+            <li><a href="chapitre5.html">Ch.5</a></li>
+            <li><a href="formules.html">Formules</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header">
+        <span>🤖 AlgoBot</span>
+        <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+    </div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html" class="active"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<!-- HERO -->
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-box"></i> Chapitre 1 — Algorithmique</div>
+    <h1>Variables & <span class="highlight">Types de Données</span></h1>
+    <p>Les fondations de tout programme : comprendre les variables, les types de données, l'affectation et les entrées/sorties.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 1 : Qu'est-ce qu'un algorithme ?   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-lightbulb"></i> 1.1 — Qu'est-ce qu'un algorithme ?</h2>
+
+        <div class="concept-card">
+            <h4>📋 Définition</h4>
+            <p>Un <strong>algorithme</strong> est une suite finie d'instructions précises qui, à partir de <strong>données d'entrée</strong>, produit un <strong>résultat de sortie</strong> après un nombre fini d'étapes.</p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">🍳</span>
+            <div>
+                <strong>Analogie — La recette de cuisine :</strong> Un algorithme, c'est comme une recette. Les <em>ingrédients</em> sont les entrées, les <em>instructions</em> sont les étapes, et le <em>plat fini</em> est la sortie. Si tu suis les étapes dans l'ordre, tu obtiens toujours le même résultat !
+            </div>
+        </div>
+
+        <h3>Les 3 parties d'un algorithme</h3>
+        <div class="steps-container">
+            <div class="step-item">
+                <span class="step-num">1</span>
+                <strong>Entrées</strong> — Les données que l'algorithme reçoit (ex : deux nombres à additionner).
+            </div>
+            <div class="step-item">
+                <span class="step-num">2</span>
+                <strong>Traitement</strong> — Les opérations effectuées sur les données (ex : addition).
+            </div>
+            <div class="step-item">
+                <span class="step-num">3</span>
+                <strong>Sorties</strong> — Le résultat produit (ex : la somme).
+            </div>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo — ETS :</strong> <strong>E</strong>ntrée → <strong>T</strong>raitement → <strong>S</strong>ortie. Comme « Entrée en scène, Travail, Sortie de scène » — tout algorithme suit ce schéma !
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 2 : Les variables                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-box"></i> 1.2 — Les variables</h2>
+
+        <div class="concept-card">
+            <h4>📦 Définition</h4>
+            <p>Une <strong>variable</strong> est un espace de stockage en mémoire identifié par un <strong>nom</strong> (identifiant) et qui contient une <strong>valeur</strong> d'un certain <strong>type</strong>.</p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">🗄️</span>
+            <div>
+                <strong>Analogie — Le casier :</strong> Imagine un casier dans un vestiaire. Le <em>numéro du casier</em> c'est le nom de la variable, le <em>contenu</em> c'est la valeur, et le <em>type de casier</em> (petit/grand/avec crochet) c'est le type de données.
+            </div>
+        </div>
+
+        <h3>Règles de nommage</h3>
+        <ul>
+            <li>Commence par une <strong>lettre</strong> (pas un chiffre)</li>
+            <li>Contient uniquement lettres, chiffres et <code>_</code> (underscore)</li>
+            <li>Pas d'espaces ni de caractères spéciaux</li>
+            <li>Pas de mots réservés du langage (si, alors, pour…)</li>
+            <li>Choisir des noms <strong>explicites</strong> : <code>age</code> plutôt que <code>a</code></li>
+        </ul>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Bonne pratique :</strong> Utilise le <em>camelCase</em> (<code>nombreEleves</code>) ou le <em>snake_case</em> (<code>nombre_eleves</code>) pour les noms composés. Sois cohérent dans tout ton programme !</div>
+        </div>
+
+        <h3>Déclaration en pseudocode</h3>
+        <div class="code-block" data-lang="Pseudocode">
+<span class="keyword">Variable</span> age : <span class="type">Entier</span>
+<span class="keyword">Variable</span> nom : <span class="type">Chaîne</span>
+<span class="keyword">Variable</span> moyenne : <span class="type">Réel</span>
+<span class="keyword">Variable</span> estInscrit : <span class="type">Booléen</span>
+        </div>
+
+        <h3>Traduction en Pascal</h3>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">var</span>
+    age : <span class="type">integer</span>;
+    nom : <span class="type">string</span>;
+    moyenne : <span class="type">real</span>;
+    estInscrit : <span class="type">boolean</span>;
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 3 : Les types de données            -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-shapes"></i> 1.3 — Les types de données</h2>
+
+        <p>Chaque variable a un <strong>type</strong> qui détermine les valeurs possibles et les opérations autorisées.</p>
+
+        <table class="styled-table">
+            <thead>
+                <tr><th>Type</th><th>Description</th><th>Exemples</th><th>Pascal</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Entier</strong></td>
+                    <td>Nombre sans virgule</td>
+                    <td><code>0</code>, <code>42</code>, <code>-7</code></td>
+                    <td><code>integer</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Réel</strong></td>
+                    <td>Nombre avec virgule</td>
+                    <td><code>3.14</code>, <code>-0.5</code></td>
+                    <td><code>real</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Caractère</strong></td>
+                    <td>Un seul symbole</td>
+                    <td><code>'A'</code>, <code>'3'</code>, <code>'@'</code></td>
+                    <td><code>char</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Chaîne</strong></td>
+                    <td>Suite de caractères</td>
+                    <td><code>"Bonjour"</code>, <code>"B1"</code></td>
+                    <td><code>string</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Booléen</strong></td>
+                    <td>Vrai ou Faux</td>
+                    <td><code>VRAI</code>, <code>FAUX</code></td>
+                    <td><code>boolean</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo — ERCBC :</strong> <strong>E</strong>ntier, <strong>R</strong>éel, <strong>C</strong>aractère, <strong>B</strong>ooléen, <strong>C</strong>haîne — retiens « <em>Elle Rit Car Bob Chante</em> » pour les 5 types fondamentaux.
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Attention :</strong> <code>'3'</code> (caractère) ≠ <code>3</code> (entier). Le caractère <code>'3'</code> est un symbole, le nombre <code>3</code> peut être utilisé pour calculer. On ne peut pas additionner <code>'3' + '2'</code> pour obtenir <code>5</code> !</div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 4 : L'affectation                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-arrow-right"></i> 1.4 — L'affectation</h2>
+
+        <div class="concept-card">
+            <h4>⬅️ Définition</h4>
+            <p>L'<strong>affectation</strong> consiste à <strong>stocker une valeur</strong> dans une variable. En pseudocode, on utilise la flèche <code>←</code>. En Pascal, on utilise <code>:=</code>.</p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">📬</span>
+            <div>
+                <strong>Analogie — La boîte aux lettres :</strong> L'affectation, c'est comme mettre une lettre dans une boîte aux lettres. La boîte (variable) reçoit le courrier (valeur). Si tu mets un nouveau courrier, l'ancien est <em>remplacé</em>.
+            </div>
+        </div>
+
+        <h3>Syntaxe</h3>
+        <div class="code-block" data-lang="Pseudocode">
+<span class="comment">// Affectation d'une constante</span>
+age <span class="keyword">←</span> <span class="number">20</span>
+nom <span class="keyword">←</span> <span class="string">"Alice"</span>
+pi <span class="keyword">←</span> <span class="number">3.14159</span>
+
+<span class="comment">// Affectation avec expression</span>
+somme <span class="keyword">←</span> a + b
+double <span class="keyword">←</span> nombre * <span class="number">2</span>
+        </div>
+
+        <div class="code-block" data-lang="Pascal">
+age := <span class="number">20</span>;
+nom := <span class="string">'Alice'</span>;
+pi := <span class="number">3.14159</span>;
+somme := a + b;
+double := nombre * <span class="number">2</span>;
+        </div>
+
+        <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Piège classique :</strong> <code>a ← b</code> copie la valeur de <code>b</code> dans <code>a</code>. La variable <code>b</code> garde sa valeur ! Ce n'est <strong>pas</strong> un échange.</div>
+        </div>
+
+        <h3>Exemple trace — Échange de deux variables</h3>
+        <p>Pour échanger les valeurs de <code>a</code> et <code>b</code>, on a besoin d'une variable <strong>temporaire</strong> :</p>
+
+        <div class="code-block" data-lang="Pseudocode">
+<span class="comment">// Échange de a et b</span>
+temp <span class="keyword">←</span> a       <span class="comment">// Sauvegarder a</span>
+a <span class="keyword">←</span> b          <span class="comment">// Écraser a avec b</span>
+b <span class="keyword">←</span> temp       <span class="comment">// Restaurer l'ancien a dans b</span>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo — Le verre d'eau :</strong> Pour échanger le contenu de deux verres (🥤↔️🧃), il faut un <strong>troisième verre vide</strong> (la variable temp). Verse le premier dans le vide, puis remplis le premier avec le second, et le second avec le troisième.
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 5 : Entrées / Sorties               -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-keyboard"></i> 1.5 — Entrées et Sorties</h2>
+
+        <div class="concept-card">
+            <h4>📥📤 Communication avec l'utilisateur</h4>
+            <p>Les <strong>entrées</strong> permettent à l'utilisateur de fournir des données au programme. Les <strong>sorties</strong> affichent des résultats à l'écran.</p>
+        </div>
+
+        <h3>En pseudocode</h3>
+        <div class="code-block" data-lang="Pseudocode">
+<span class="keyword">Écrire</span>(<span class="string">"Quel est votre âge ?"</span>)    <span class="comment">// Sortie : afficher un message</span>
+<span class="keyword">Lire</span>(age)                           <span class="comment">// Entrée : l'utilisateur tape sa réponse</span>
+<span class="keyword">Écrire</span>(<span class="string">"Vous avez "</span>, age, <span class="string">" ans."</span>) <span class="comment">// Sortie : afficher le résultat</span>
+        </div>
+
+        <h3>En Pascal</h3>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">writeln</span>(<span class="string">'Quel est votre age ?'</span>);
+<span class="keyword">readln</span>(age);
+<span class="keyword">writeln</span>(<span class="string">'Vous avez '</span>, age, <span class="string">' ans.'</span>);
+        </div>
+
+        <div class="info-box">
+            <span>ℹ️</span>
+            <div><strong>Différence writeln / write :</strong> <code>writeln</code> ajoute un retour à la ligne après l'affichage. <code>write</code> reste sur la même ligne. Pareil pour <code>readln</code> (lire avec saut de ligne) et <code>read</code>.</div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 6 : Opérations et expressions       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-calculator"></i> 1.6 — Opérations et Expressions</h2>
+
+        <h3>Opérateurs arithmétiques</h3>
+        <table class="styled-table">
+            <thead>
+                <tr><th>Opérateur</th><th>Signification</th><th>Exemple</th><th>Résultat</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>+</code></td><td>Addition</td><td><code>7 + 3</code></td><td><code>10</code></td></tr>
+                <tr><td><code>-</code></td><td>Soustraction</td><td><code>7 - 3</code></td><td><code>4</code></td></tr>
+                <tr><td><code>*</code></td><td>Multiplication</td><td><code>7 * 3</code></td><td><code>21</code></td></tr>
+                <tr><td><code>/</code></td><td>Division réelle</td><td><code>7 / 2</code></td><td><code>3.5</code></td></tr>
+                <tr><td><code>DIV</code></td><td>Division entière</td><td><code>7 DIV 2</code></td><td><code>3</code></td></tr>
+                <tr><td><code>MOD</code></td><td>Reste (modulo)</td><td><code>7 MOD 2</code></td><td><code>1</code></td></tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo — DIV et MOD :</strong> Pense à la division posée de l'école primaire : <code>7 ÷ 2 = 3 reste 1</code>.<br>
+                <strong>DIV</strong> donne le <strong>quotient</strong> (3), <strong>MOD</strong> donne le <strong>reste</strong> (1).<br>
+                Astuce : si <code>nombre MOD 2 = 0</code>, le nombre est <strong>pair</strong> ! 🎯
+            </div>
+        </div>
+
+        <h3>Priorité des opérations</h3>
+        <p>Comme en maths : <strong>parenthèses</strong> d'abord, puis <strong>*/DIV/MOD</strong>, puis <strong>+-</strong>.</p>
+
+        <div class="example-box">
+            <span>📝</span>
+            <div>
+                <strong>Exemple :</strong> <code>3 + 4 * 2</code> = <code>3 + 8</code> = <code>11</code> (pas 14 !)<br>
+                Pour forcer l'addition en premier : <code>(3 + 4) * 2</code> = <code>7 * 2</code> = <code>14</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 7 : Les constantes                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-lock"></i> 1.7 — Les constantes</h2>
+
+        <div class="concept-card">
+            <h4>🔒 Définition</h4>
+            <p>Une <strong>constante</strong> est une variable dont la valeur est <strong>fixée une fois pour toutes</strong> et ne peut pas être modifiée pendant l'exécution du programme.</p>
+        </div>
+
+        <div class="code-block" data-lang="Pseudocode">
+<span class="keyword">Constante</span> PI <span class="keyword">←</span> <span class="number">3.14159</span>
+<span class="keyword">Constante</span> TVA <span class="keyword">←</span> <span class="number">0.20</span>
+<span class="keyword">Constante</span> MAX_ELEVES <span class="keyword">←</span> <span class="number">35</span>
+        </div>
+
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">const</span>
+    PI = <span class="number">3.14159</span>;
+    TVA = <span class="number">0.20</span>;
+    MAX_ELEVES = <span class="number">35</span>;
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Convention :</strong> Les constantes s'écrivent souvent en <strong>MAJUSCULES</strong> pour les distinguer des variables. Utilise-les dès qu'une valeur ne doit jamais changer (π, taux de TVA…).</div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 8 : Premier programme complet       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-code"></i> 1.8 — Premier programme complet</h2>
+
+        <p>Créons un programme qui calcule l'aire d'un cercle à partir de son rayon :</p>
+
+        <h3>En pseudocode</h3>
+        <div class="algo-block">
+<span class="keyword">Algorithme</span> AireCercle
+<span class="keyword">Constante</span> PI ← <span class="number">3.14159</span>
+<span class="keyword">Variable</span> rayon : <span class="type">Réel</span>
+<span class="keyword">Variable</span> aire : <span class="type">Réel</span>
+
+<span class="keyword">Début</span>
+    <span class="keyword">Écrire</span>(<span class="string">"Entrez le rayon du cercle :"</span>)
+    <span class="keyword">Lire</span>(rayon)
+    aire ← PI * rayon * rayon
+    <span class="keyword">Écrire</span>(<span class="string">"L'aire du cercle est : "</span>, aire)
+<span class="keyword">Fin</span>
+        </div>
+
+        <h3>En Pascal</h3>
+        <div class="code-block" data-lang="Pascal">
+<span class="keyword">program</span> AireCercle;
+<span class="keyword">const</span>
+    PI = <span class="number">3.14159</span>;
+<span class="keyword">var</span>
+    rayon, aire : <span class="type">real</span>;
+<span class="keyword">begin</span>
+    <span class="keyword">writeln</span>(<span class="string">'Entrez le rayon du cercle :'</span>);
+    <span class="keyword">readln</span>(rayon);
+    aire := PI * rayon * rayon;
+    <span class="keyword">writeln</span>(<span class="string">'L''aire du cercle est : '</span>, aire:<span class="number">0</span>:<span class="number">2</span>);
+<span class="keyword">end.</span>
+        </div>
+
+        <div class="info-box">
+            <span>ℹ️</span>
+            <div><strong>Notation Pascal <code>:0:2</code> :</strong> Le premier chiffre est la largeur totale (0 = automatique), le second est le nombre de <strong>décimales</strong> affichées. <code>aire:0:2</code> affiche l'aire avec 2 chiffres après la virgule.</div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- SECTION 9 : Résumé visuel                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-map"></i> 1.9 — Résumé du chapitre</h2>
+
+        <div class="concept-card">
+            <h4>🎯 Ce qu'il faut retenir</h4>
+            <ul>
+                <li><strong>Algorithme</strong> = Entrée → Traitement → Sortie</li>
+                <li><strong>Variable</strong> = espace mémoire nommé contenant une valeur typée</li>
+                <li><strong>5 types fondamentaux</strong> : Entier, Réel, Caractère, Booléen, Chaîne</li>
+                <li><strong>Affectation</strong> (<code>←</code>) remplace l'ancienne valeur</li>
+                <li><strong>Écrire</strong> = afficher, <strong>Lire</strong> = saisir</li>
+                <li><strong>DIV</strong> = quotient, <strong>MOD</strong> = reste</li>
+                <li><strong>Constante</strong> = variable non modifiable</li>
+            </ul>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Résumé mnémo complet :</strong><br>
+                🍳 Algorithme = recette (ETS : Entrée → Traitement → Sortie)<br>
+                🗄️ Variable = casier avec étiquette et contenu<br>
+                😇 ERCBC = Elle Rit Car Bob Chante (5 types)<br>
+                📬 Affectation = mettre du courrier dans une boîte<br>
+                🥤 Échange = 3 verres (variable temporaire)
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- EXERCICES INTERACTIFS                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <!-- Navigation -->
+    <div class="chapter-nav">
+        <a href="../index.html"><i class="fas fa-arrow-left"></i> Accueil</a>
+        <a href="chapitre2.html">Chapitre 2 — Conditions <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<!-- XP Bar -->
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({
+    storageKey: 'b1_algo_progress',
+    badges: [
+        { id: 'first_step', name: 'Premier Pas', icon: '🏁', desc: 'Complete ton premier exercice', xp: 10 },
+        { id: 'explorer', name: 'Explorateur', icon: '🔍', desc: 'Termine 10 exercices', xp: 50 },
+        { id: 'ch1', name: 'Variables OK', icon: '📦', desc: 'Termine Variables & Types', xp: 20 },
+        { id: 'quiz_king', name: 'Roi du Quiz', icon: '👑', desc: '50 QCM corrects', xp: 60 },
+        { id: 'streak_3', name: 'Série de 3', icon: '🔥', desc: '3 jours consécutifs', xp: 25 },
+        { id: 'streak_7', name: 'Semaine Active', icon: '⭐', desc: '7 jours consécutifs', xp: 50 },
+        { id: 'perfectionist', name: 'Perfectionniste', icon: '💎', desc: '10 exercices parfaits', xp: 40 },
+        { id: 'half_way', name: 'Mi-Parcours', icon: '🎯', desc: '50% du cours terminé', xp: 35 },
+        { id: 'legend', name: 'Légende Algo', icon: '🏆', desc: '100% du cours terminé', xp: 100 }
+    ],
+    levels: [
+        { min: 0, title: 'Débutant' },
+        { min: 30, title: 'Apprenti Codeur' },
+        { min: 80, title: 'Algorithmicien Jr.' },
+        { min: 150, title: 'Développeur Logique' },
+        { min: 250, title: 'Maître des Boucles' },
+        { min: 400, title: 'Architecte Algo' },
+        { min: 600, title: 'Légende Algorithmique' }
+    ],
+    tips: [
+        "Variable = boîte avec étiquette. Le type dit ce qu'on peut mettre dedans. 📦",
+        "Affectation ← remplace l'ancienne valeur. C'est comme un nouveau courrier dans la boîte. 📬",
+        "MOD donne le reste de la division. Si MOD 2 = 0, c'est pair ! 🎯"
+    ]
+});
+GameEngine.init();
+
+// Exercise data for Chapter 1
+ChapterExercises.init({
+    guided: [
+        { q: "Quel symbole utilise-t-on pour l'affectation en pseudocode ?", hints: ["C'est une flèche", "Elle pointe vers la gauche", "←"], answer: "←" },
+        { q: "Quel type de variable contient un nombre avec virgule ?", hints: ["Pas entier", "Avec des décimales", "Commence par R"], answer: "réel" },
+        { q: "Que donne 17 MOD 5 ?", hints: ["17 ÷ 5 = 3 reste ?", "Le reste de la division", "17 - 3×5 = ?"], answer: "2" },
+        { q: "Que donne 17 DIV 5 ?", hints: ["Division entière", "Le quotient sans virgule", "17 ÷ 5 = ?..."], answer: "3" },
+        { q: "En Pascal, quel symbole utilise-t-on pour l'affectation ?", hints: ["Deux symboles collés", "Deux-points et égal", ":="], answer: ":=" }
+    ],
+    quiz: [
+        { type: "mcq", q: "Lequel de ces noms de variable est INVALIDE ?", options: ["nombre_eleves", "2emeNote", "totalGeneral", "x"], correct: 1 },
+        { type: "mcq", q: "Quel est le type de la valeur VRAI ?", options: ["Entier", "Chaîne", "Booléen", "Caractère"], correct: 2 },
+        { type: "qa", q: "Quelle instruction affiche du texte à l'écran en pseudocode ?", answer: ["Écrire", "Ecrire", "écrire", "ecrire"] },
+        { type: "mcq", q: "Après : a ← 5, b ← 3, a ← a + b — que vaut a ?", options: ["5", "3", "8", "15"], correct: 2 },
+        { type: "qa", q: "Quelle instruction permet à l'utilisateur de saisir une donnée ?", answer: ["Lire", "lire"] },
+        { type: "mcq", q: "Quelle est la priorité entre + et * ?", options: ["+ est prioritaire", "* est prioritaire", "Même priorité", "Dépend du contexte"], correct: 1 },
+        { type: "mcq", q: "Combien de variables faut-il pour échanger deux valeurs ?", options: ["1", "2", "3", "4"], correct: 2 },
+        { type: "qa", q: "Quel mot-clé Pascal déclare une constante ?", answer: ["const"] },
+        { type: "mcq", q: "Que vaut 15 DIV 4 ?", options: ["3", "3.75", "4", "1"], correct: 0 },
+        { type: "qa", q: "Quel est le type de '3' (avec guillemets) ?", answer: ["caractère", "caractere", "char", "Caractère"] }
+    ],
+    dragdrop: [
+        { instruction: "Associe chaque type à son exemple :", pairs: [["Entier", "42"], ["Réel", "3.14"], ["Booléen", "VRAI"], ["Chaîne", "\"Bonjour\""], ["Caractère", "'A'"]] },
+        { instruction: "Associe chaque opérateur à son résultat pour 13 et 4 :", pairs: [["13 + 4", "17"], ["13 DIV 4", "3"], ["13 MOD 4", "1"], ["13 * 4", "52"]] },
+        { instruction: "Remets dans l'ordre les étapes d'un échange de variables :", pairs: [["Étape 1", "temp ← a"], ["Étape 2", "a ← b"], ["Étape 3", "b ← temp"]] }
+    ]
+});
+</script>
+</body>
+</html>

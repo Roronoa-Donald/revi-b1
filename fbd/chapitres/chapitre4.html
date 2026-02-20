@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — SQL Avancé | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Chapitre 4</div>
+    <h1>🔗 SQL — <span class="highlight">Avancé</span></h1>
+    <p>Jointures, GROUP BY, HAVING, sous-requêtes et fonctions d'agrégation.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- ─── 1. Jointures SQL ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-link"></i> Les Jointures en SQL</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie AutoBot :</strong> Imagine deux feuilles de calcul : ETUDIANTS et NOTES. La jointure, c'est le <strong>ruban adhésif</strong> qui colle les deux feuilles côte à côte en faisant correspondre l'identifiant étudiant.
+        </div>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique I.L.R.F.C.</div>
+            <p><strong>I</strong>NNER — <strong>L</strong>EFT — <strong>R</strong>IGHT — <strong>F</strong>ULL — <strong>C</strong>ROSS</p>
+            <p>Les 5 types de JOIN en SQL.</p>
+        </div>
+
+        <h3>INNER JOIN (jointure interne)</h3>
+        <p>Retourne uniquement les lignes qui ont une correspondance dans les DEUX tables.</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>INNER JOIN</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>SELECT e.nom, e.prenom, n.matiere, n.note
+FROM etudiants e
+INNER JOIN notes n ON e.id = n.id_etudiant;
+
+-- Résultat : seuls les étudiants ayant des notes apparaissent</pre>
+        </div>
+
+        <h3>LEFT JOIN (jointure gauche)</h3>
+        <p>Toutes les lignes de la table <strong>gauche</strong> + les correspondances à droite (NULL si pas de match).</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>LEFT JOIN</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>SELECT e.nom, n.note
+FROM etudiants e
+LEFT JOIN notes n ON e.id = n.id_etudiant;
+
+-- Les étudiants SANS notes apparaissent aussi (note = NULL)</pre>
+        </div>
+
+        <h3>RIGHT JOIN, FULL JOIN, CROSS JOIN</h3>
+        <div class="concept-card">
+            <table class="styled-table">
+                <thead><tr><th>Type</th><th>Garde</th><th>Usage</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>INNER JOIN</strong></td><td>Correspondances uniquement</td><td>Le plus courant (90%)</td></tr>
+                    <tr><td><strong>LEFT JOIN</strong></td><td>Tout à gauche + correspondances</td><td>Voir les lignes « orphelines »</td></tr>
+                    <tr><td><strong>RIGHT JOIN</strong></td><td>Tout à droite + correspondances</td><td>Rare (inverser l'ordre suffit)</td></tr>
+                    <tr><td><strong>FULL JOIN</strong></td><td>Tout des deux côtés</td><td>Voir toutes les données</td></tr>
+                    <tr><td><strong>CROSS JOIN</strong></td><td>Produit cartésien</td><td>Rarement utile tel quel</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Astuce :</strong> En cas de doute, commence toujours par un <code>INNER JOIN</code>. Si tu veux voir les lignes sans correspondance, passe au <code>LEFT JOIN</code>.
+        </div>
+    </section>
+
+    <!-- ─── 2. Fonctions d'agrégation ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-calculator"></i> Fonctions d'agrégation</h2>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 Mnémonique C.S.A.M.M.</div>
+            <p><strong>C</strong>OUNT — <strong>S</strong>UM — <strong>A</strong>VG — <strong>M</strong>AX — <strong>M</strong>IN</p>
+            <p>Les 5 fonctions d'agrégation principales.</p>
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>Fonctions d'agrégation</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>SELECT COUNT(*) FROM etudiants;              -- nombre total de lignes
+SELECT COUNT(email) FROM etudiants;           -- nb de emails non-NULL
+SELECT SUM(prix) FROM commandes;              -- somme des prix
+SELECT AVG(note) FROM notes;                  -- moyenne des notes
+SELECT MAX(age), MIN(age) FROM etudiants;     -- plus vieux et plus jeune</pre>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ COUNT(*) vs COUNT(col) :</strong> <code>COUNT(*)</code> compte toutes les lignes y compris NULL. <code>COUNT(col)</code> ne compte que les lignes où col n'est PAS NULL.
+        </div>
+    </section>
+
+    <!-- ─── 3. GROUP BY + HAVING ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-object-group"></i> GROUP BY & HAVING</h2>
+
+        <div class="info-box">
+            <strong>🔧 Analogie :</strong> GROUP BY = trier des billes par couleur puis compter chaque tas. HAVING = ne garder que les tas de plus de 5 billes.
+        </div>
+
+        <div class="code-block">
+            <div class="code-header"><span>GROUP BY + HAVING</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Nombre d'étudiants par ville
+SELECT ville, COUNT(*) AS nb
+FROM etudiants
+GROUP BY ville;
+
+-- Moyenne des notes par matière, seulement si moyenne > 12
+SELECT matiere, AVG(note) AS moy
+FROM notes
+GROUP BY matiere
+HAVING AVG(note) > 12;
+
+-- Combiné : combien de commandes par client, ceux avec plus de 3
+SELECT id_client, COUNT(*) AS nb_cmd, SUM(montant) AS total
+FROM commandes
+GROUP BY id_client
+HAVING COUNT(*) > 3
+ORDER BY total DESC;</pre>
+        </div>
+
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">🧠 WHERE vs HAVING</div>
+            <p><strong>WHERE</strong> filtre les <strong>lignes individuelles</strong> AVANT le regroupement.<br>
+            <strong>HAVING</strong> filtre les <strong>groupes</strong> APRÈS le regroupement.</p>
+            <p>Retiens : <strong>W</strong>here → a<strong>V</strong>ant | <strong>H</strong>aving → a<strong>P</strong>rès</p>
+        </div>
+
+        <div class="concept-card">
+            <h3>Ordre d'exécution SQL</h3>
+            <table class="styled-table">
+                <thead><tr><th>Étape</th><th>Clause</th><th>Action</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>FROM / JOIN</td><td>Cherche les tables</td></tr>
+                    <tr><td>2</td><td>WHERE</td><td>Filtre les lignes</td></tr>
+                    <tr><td>3</td><td>GROUP BY</td><td>Regroupe</td></tr>
+                    <tr><td>4</td><td>HAVING</td><td>Filtre les groupes</td></tr>
+                    <tr><td>5</td><td>SELECT</td><td>Choisit les colonnes</td></tr>
+                    <tr><td>6</td><td>ORDER BY</td><td>Trie</td></tr>
+                    <tr><td>7</td><td>LIMIT</td><td>Coupe le résultat</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── 4. Sous-requêtes ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-code-branch"></i> Sous-requêtes</h2>
+
+        <p>Une sous-requête (ou requête imbriquée) est un <code>SELECT</code> <strong>à l'intérieur</strong> d'un autre SELECT.</p>
+
+        <div class="code-block">
+            <div class="code-header"><span>Sous-requêtes</span><button class="copy-btn" onclick="navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').textContent)"><i class="fas fa-copy"></i></button></div>
+            <pre>-- Dans WHERE : étudiants plus vieux que la moyenne
+SELECT nom, age FROM etudiants
+WHERE age > (SELECT AVG(age) FROM etudiants);
+
+-- Avec IN : étudiants ayant au moins une note
+SELECT nom FROM etudiants
+WHERE id IN (SELECT DISTINCT id_etudiant FROM notes);
+
+-- Avec EXISTS : étudiants qui ont des commandes
+SELECT nom FROM etudiants e
+WHERE EXISTS (SELECT 1 FROM commandes c WHERE c.id_client = e.id);
+
+-- Dans FROM (table dérivée)
+SELECT ville, moy FROM (
+    SELECT ville, AVG(age) AS moy FROM etudiants GROUP BY ville
+) AS stats
+WHERE moy > 20;</pre>
+        </div>
+
+        <div class="concept-card">
+            <h3>IN vs EXISTS</h3>
+            <table class="styled-table">
+                <thead><tr><th>Opérateur</th><th>Usage</th><th>Performance</th></tr></thead>
+                <tbody>
+                    <tr><td><code>IN</code></td><td>Petite liste de valeurs</td><td>Bon pour sous-requêtes courtes</td></tr>
+                    <tr><td><code>EXISTS</code></td><td>Vérifier l'existence</td><td>Meilleur pour grandes tables</td></tr>
+                    <tr><td><code>NOT IN</code></td><td>⚠️ Piège avec NULL !</td><td>Préférer NOT EXISTS</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Piège NOT IN :</strong> Si la sous-requête retourne un NULL parmi les résultats, <code>NOT IN</code> ne retourne RIEN. Utiliser <code>NOT EXISTS</code> à la place.
+        </div>
+    </section>
+
+    <!-- ─── 5. Fonctions utiles ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-tools"></i> Fonctions utiles</h2>
+
+        <div class="concept-card">
+            <h3>Fonctions texte</h3>
+            <table class="styled-table">
+                <thead><tr><th>Fonction</th><th>Résultat</th></tr></thead>
+                <tbody>
+                    <tr><td><code>UPPER('hello')</code></td><td>'HELLO'</td></tr>
+                    <tr><td><code>LOWER('HELLO')</code></td><td>'hello'</td></tr>
+                    <tr><td><code>LENGTH('Bonjour')</code></td><td>7</td></tr>
+                    <tr><td><code>CONCAT('A', 'B')</code></td><td>'AB'</td></tr>
+                    <tr><td><code>SUBSTRING('Bonjour',1,3)</code></td><td>'Bon'</td></tr>
+                    <tr><td><code>TRIM('  hi  ')</code></td><td>'hi'</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="concept-card">
+            <h3>Fonctions numériques & date</h3>
+            <table class="styled-table">
+                <thead><tr><th>Fonction</th><th>Résultat</th></tr></thead>
+                <tbody>
+                    <tr><td><code>ROUND(3.567, 2)</code></td><td>3.57</td></tr>
+                    <tr><td><code>ABS(-5)</code></td><td>5</td></tr>
+                    <tr><td><code>CEIL(3.2)</code></td><td>4</td></tr>
+                    <tr><td><code>FLOOR(3.9)</code></td><td>3</td></tr>
+                    <tr><td><code>CURRENT_DATE</code></td><td>2025-01-15</td></tr>
+                    <tr><td><code>NOW()</code></td><td>2025-01-15 14:30:00</td></tr>
+                    <tr><td><code>COALESCE(NULL, 'défaut')</code></td><td>'défaut'</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 COALESCE :</strong> Retourne la première valeur non-NULL de la liste. Très utile pour gérer les NULL :<br>
+            <code>SELECT COALESCE(surnom, prenom, 'Inconnu') FROM utilisateurs;</code>
+        </div>
+    </section>
+
+    <!-- ─── 6. Résumé ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+        <div class="concept-card">
+            <h3>🧠 Résumé des mnémoniques</h3>
+            <table class="styled-table">
+                <thead><tr><th>Concept</th><th>Mnémonique</th></tr></thead>
+                <tbody>
+                    <tr><td>Types de JOIN</td><td>I.L.R.F.C. (Inner, Left, Right, Full, Cross)</td></tr>
+                    <tr><td>Agrégations</td><td>C.S.A.M.M. (Count, Sum, Avg, Max, Min)</td></tr>
+                    <tr><td>WHERE vs HAVING</td><td>WHERE = avant groupement, HAVING = après</td></tr>
+                    <tr><td>Ordre exécution</td><td>FROM → WHERE → GROUP → HAVING → SELECT → ORDER → LIMIT</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ─── Exercices ─── -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-dumbbell"></i> Exercices du chapitre</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre3.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Chapitre 3</a>
+        <a href="chapitre5.html" class="btn-nav">Chapitre 5 <i class="fas fa-arrow-right"></i></a>
+    </div>
+</main>
+
+<div class="xp-bar" id="xp-bar"></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["INNER JOIN = le plus courant","HAVING filtre APRÈS GROUP BY"]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Écrivez une requête qui affiche le nom et la note de chaque étudiant (INNER JOIN).",hints:["JOIN etudiants et notes","ON e.id = n.id_etudiant"],answer:"SELECT e.nom, n.note FROM etudiants e INNER JOIN notes n ON e.id = n.id_etudiant;"},
+        {q:"Affichez tous les étudiants y compris ceux sans notes.",hints:["Quel type de JOIN garde tout à gauche ?","LEFT JOIN"],answer:"SELECT e.nom, n.note FROM etudiants e LEFT JOIN notes n ON e.id = n.id_etudiant;"},
+        {q:"Calculez la note moyenne par matière, triée par moyenne décroissante.",hints:["GROUP BY matiere","AVG(note)","ORDER BY … DESC"],answer:"SELECT matiere, AVG(note) AS moy FROM notes GROUP BY matiere ORDER BY moy DESC;"},
+        {q:"Affichez les matières ayant une moyenne supérieure à 14.",hints:["Il faut filtrer APRÈS le GROUP BY","Donc utiliser HAVING"],answer:"SELECT matiere, AVG(note) AS moy FROM notes GROUP BY matiere HAVING AVG(note) > 14;"},
+        {q:"Trouvez les étudiants dont l'âge est supérieur à la moyenne de la classe.",hints:["Sous-requête dans WHERE","(SELECT AVG(age) FROM etudiants)"],answer:"SELECT nom, age FROM etudiants WHERE age > (SELECT AVG(age) FROM etudiants);"}
+    ],
+    quiz:[
+        {type:"mcq",q:"INNER JOIN retourne :",options:["Toutes les lignes des deux tables","Seulement les correspondances","Tout à gauche + matches à droite","Rien si pas de match"],correct:1},
+        {type:"mcq",q:"LEFT JOIN retourne :",options:["Seulement les correspondances","Tout à gauche + matches à droite (NULL sinon)","Tout à droite","Le produit cartésien"],correct:1},
+        {type:"mcq",q:"COUNT(*) vs COUNT(col) :",options:["Pareil","COUNT(*) inclut NULL, COUNT(col) non","COUNT(col) inclut NULL","COUNT(*) est plus lent"],correct:1},
+        {type:"mcq",q:"HAVING filtre :",options:["Avant GROUP BY","Après GROUP BY","Les colonnes","Les tables"],correct:1},
+        {type:"mcq",q:"NOT IN avec NULL dans la sous-requête :",options:["Fonctionne normalement","Retourne un résultat vide","Génère une erreur","Ignore les NULL"],correct:1},
+        {type:"mcq",q:"COALESCE(NULL, NULL, 'X') retourne :",options:["NULL","'X'","Erreur","0"],correct:1},
+        {type:"mcq",q:"L'ordre d'exécution réel commence par :",options:["SELECT","FROM","WHERE","ORDER BY"],correct:1},
+        {type:"qa",q:"Citez les 5 types de JOIN (I.L.R.F.C.).",answer:"INNER, LEFT, RIGHT, FULL, CROSS."},
+        {type:"qa",q:"Citez les 5 fonctions d'agrégation (C.S.A.M.M.).",answer:"COUNT, SUM, AVG, MAX, MIN."},
+        {type:"qa",q:"Quelle est la différence entre WHERE et HAVING ?",answer:"WHERE filtre les lignes individuelles AVANT le GROUP BY. HAVING filtre les groupes APRÈS le GROUP BY."}
+    ],
+    dragdrop:[
+        {instruction:"Associez le type de JOIN à son comportement :",pairs:[["INNER JOIN","Correspondances uniquement"],["LEFT JOIN","Tout gauche + matches droite"],["RIGHT JOIN","Tout droite + matches gauche"],["FULL JOIN","Tout des deux côtés"],["CROSS JOIN","Produit cartésien"]]},
+        {instruction:"Associez la fonction à son rôle :",pairs:[["COUNT","Nombre de lignes"],["SUM","Somme"],["AVG","Moyenne"],["MAX","Valeur maximale"],["MIN","Valeur minimale"],["COALESCE","Premier non-NULL"]]},
+        {instruction:"Classez dans l'ordre d'exécution SQL (1→7) :",pairs:[["1","FROM/JOIN"],["2","WHERE"],["3","GROUP BY"],["4","HAVING"],["5","SELECT"],["6","ORDER BY"],["7","LIMIT"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

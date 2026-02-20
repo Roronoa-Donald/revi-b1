@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'examen | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}.sim-config{max-width:600px;margin:1.5rem auto;padding:1.5rem;background:var(--card-bg);border-radius:16px;border:2px solid var(--accent);display:flex;flex-wrap:wrap;gap:1rem;align-items:end}.sim-config label{display:flex;flex-direction:column;gap:.3rem;font-weight:600;font-size:.85rem;flex:1 1 140px}.sim-config select,.sim-config input{padding:.5rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.95rem}.sim-config button{padding:.6rem 1.6rem;border-radius:99px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;flex:1 1 100%}.sim-timer{text-align:center;font-size:1.5rem;font-weight:800;margin:1rem 0;font-family:'JetBrains Mono',monospace}.sim-timer.warning{color:#ef4444;animation:pulse 1s infinite}.sim-progress{height:6px;background:var(--border);border-radius:99px;margin:.5rem 0 1.5rem;overflow:hidden}.sim-progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s}.sim-question{background:var(--card-bg);border-radius:16px;padding:1.5rem;margin:1rem 0;border-left:4px solid var(--accent)}.sim-question h3{margin-top:0;font-size:1.05rem}.sim-options label{display:block;padding:.6rem 1rem;margin:.4rem 0;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:.2s}.sim-options label:hover{border-color:var(--accent)}.sim-options input{margin-right:.5rem}.sim-nav{display:flex;justify-content:space-between;margin-top:1rem}.sim-nav button{padding:.5rem 1.2rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer}.sim-nav button.primary{background:var(--accent);color:#fff}.sim-result{text-align:center;padding:2rem;background:var(--card-bg);border-radius:16px;margin:1rem 0}.sim-result h2{font-size:2rem;margin-bottom:.3rem}.sim-score{font-size:3.5rem;font-weight:900;color:var(--accent)}.sim-review{margin-top:1.5rem}.rev-q{padding:1rem;margin:.5rem 0;border-radius:12px;border-left:4px solid #22c55e}.rev-q.wrong{border-left-color:#ef4444}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html" class="active">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Examen blanc</div>
+    <h1>🔧 Simulateur <span class="highlight">d'examen</span></h1>
+    <p>35 questions — configurez durée, nombre et chapitre.</p>
+</section>
+
+<main class="content-wrapper" id="app"></main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const BANK=[
+// ──── Ch.1 Modèle relationnel ────
+{q:"Quel est l'autre nom d'une ligne dans une relation ?",o:["Attribut","Domaine","Tuple","Schéma"],c:2,ch:1},
+{q:"R.A.T.D. : que signifie le T ?",o:["Table","Tuple","Transaction","Type"],c:1,ch:1},
+{q:"Quelle propriété d'une PK correspond au I de U.N.I. ?",o:["Indexable","Immuable","Inversible","Incrémentale"],c:1,ch:1},
+{q:"Une FK référence :",o:["Un index unique","La PK d'une autre table","Un attribut quelconque","Le domaine"],c:1,ch:1},
+{q:"Comment implémenter une relation M:N ?",o:["FK simple","Attribut multi-valué","Table de jonction","Vue SQL"],c:2,ch:1},
+{q:"ON DELETE CASCADE fait quoi ?",o:["Interdit la suppression","Supprime les lignes référençantes","Met la FK à NULL","Rien"],c:1,ch:1},
+// ──── Ch.2 Algèbre relationnelle ────
+{q:"σ (sigma) effectue :",o:["Projection","Sélection","Jointure","Union"],c:1,ch:2},
+{q:"π (pi) opère sur :",o:["Les lignes","Les colonnes","Les tables","Les clés"],c:1,ch:2},
+{q:"Jointure naturelle = ?",o:["σ(R1 × R2) sur attributs communs","π(R1 ∪ R2)","R1 − R2","R1 ÷ R2"],c:0,ch:2},
+{q:"La division R1 ÷ R2 répond à :",o:["Il existe","Pour tout","Au moins un","Exactement"],c:1,ch:2},
+{q:"U.I.D.P. : que signifie le P ?",o:["Projection","Partition","Produit cartésien","Permutation"],c:2,ch:2},
+{q:"Optimisation d'arbre algébrique : on descend :",o:["Les projections","Les sélections σ","Les jointures","Les unions"],c:1,ch:2},
+// ──── Ch.3 SQL Fondamentaux ────
+{q:"D.M.C. : DDL inclut :",o:["SELECT","INSERT","CREATE","GRANT"],c:2,ch:3},
+{q:"Quel mot-clé ajoute une colonne ?",o:["ADD COLUMN via ALTER TABLE","INSERT COLUMN","UPDATE TABLE","MODIFY COLUMN"],c:0,ch:3},
+{q:"WHERE email = NULL est :",o:["Correct","Incorrect — utiliser IS NULL","Renvoie TRUE","Crée une erreur de syntaxe"],c:1,ch:3},
+{q:"LIKE 'D%' sélectionne :",o:["Contient D","Commence par D","Finit par D","Exactement D"],c:1,ch:3},
+{q:"DELETE sans WHERE :",o:["Erreur SQL","Supprime toutes les lignes","Vide le schéma","Ne fait rien"],c:1,ch:3},
+{q:"TRUNCATE vs DELETE ?",o:["TRUNCATE admet WHERE","TRUNCATE est plus rapide, pas de WHERE","Ce sont des synonymes","TRUNCATE supprime la table"],c:1,ch:3},
+// ──── Ch.4 SQL Avancé ────
+{q:"LEFT JOIN conserve :",o:["Toutes les lignes de droite","Seulement les correspondances","Toutes les lignes de gauche","Le produit cartésien"],c:2,ch:4},
+{q:"C.S.A.M.M. — le premier A ?",o:["ALTER","AVG","ADD","ALL"],c:1,ch:4},
+{q:"HAVING filtre :",o:["Des lignes avant GROUP BY","Des groupes après GROUP BY","Des colonnes","Des sous-requêtes"],c:1,ch:4},
+{q:"Ordre d'exécution : que vient juste après FROM ?",o:["SELECT","WHERE","GROUP BY","ORDER BY"],c:1,ch:4},
+{q:"COALESCE(NULL, 5, 3) retourne :",o:["NULL","5","3","Erreur"],c:1,ch:4},
+{q:"COUNT(*) vs COUNT(col) :",o:["Identiques","COUNT(col) ignore les NULL","COUNT(*) ignore les NULL","COUNT(col) compte les doublons en plus"],c:1,ch:4},
+// ──── Ch.5 Normalisation ────
+{q:"I.M.S. = anomalies de :",o:["Index, Mémoire, Stockage","Insertion, Mise à jour, Suppression","Import, Merge, Sort","Intégrité, Modèle, Schéma"],c:1,ch:5},
+{q:"1NF exige :",o:["Pas de DF transitive","Valeurs atomiques + PK","Pas de DF partielle","Tout déterminant = clé candidate"],c:1,ch:5},
+{q:"2NF élimine les DF :",o:["Transitives","Partielles","Élémentaires","Totales"],c:1,ch:5},
+{q:"3NF = « la clé, toute la clé, rien que la clé ». Elle élimine :",o:["DF partielles","DF élémentaires","DF transitives","Toutes les DF"],c:2,ch:5},
+{q:"BCNF diffère de 3NF car :",o:["Elle autorise les DF transitives","Tout déterminant doit être clé candidate","Elle exige des index","Elle interdit les clés composées"],c:1,ch:5},
+// ──── Ch.6 Conception ────
+{q:"E.A.R. : le R signifie :",o:["Requête","Relation","Résultat","Restriction"],c:1,ch:6},
+{q:"Cardinalité 0..N signifie :",o:["Au moins 1","Exactement N","Zéro ou plusieurs","Zéro ou un"],c:2,ch:6},
+{q:"Conversion 1:N → FK dans :",o:["La table côté 1","La table côté N","Une table de jonction","Les deux tables"],c:1,ch:6},
+{q:"A.C.L.P.N. : étape C = ?",o:["Codage","Conceptuel (MCD)","Contrôle","Compilation"],c:1,ch:6},
+{q:"MLD correspond à quel niveau ?",o:["Analyse","Conceptuel","Logique","Physique"],c:2,ch:6}
+];
+const CHAPTERS=["Tous les chapitres","Ch.1 Modèle relationnel","Ch.2 Algèbre relationnelle","Ch.3 SQL Fondamentaux","Ch.4 SQL Avancé","Ch.5 Normalisation","Ch.6 Conception"];
+const app=document.getElementById('app');
+let qs=[],cur=0,answers=[],timer=null,secs=0;
+
+function showConfig(){
+    app.innerHTML=`<div class="sim-config"><label>Chapitre<select id="sCh">${CHAPTERS.map((c,i)=>`<option value="${i}">${c}</option>`).join('')}</select></label><label>Nb questions<input type="number" id="sNb" min="5" max="35" value="20"></label><label>Durée (min)<input type="number" id="sTm" min="5" max="60" value="25"></label><button onclick="startExam()"><i class="fas fa-play"></i> Lancer l'examen</button></div>`;
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){
+    const ch=+document.getElementById('sCh').value,nb=+document.getElementById('sNb').value,tm=+document.getElementById('sTm').value;
+    let pool=ch===0?[...BANK]:BANK.filter(q=>q.ch===ch);
+    qs=shuffle(pool).slice(0,Math.min(nb,pool.length));
+    answers=new Array(qs.length).fill(-1);cur=0;secs=tm*60;
+    renderQ();tick();
+}
+function tick(){
+    timer=setInterval(()=>{
+        secs--;if(secs<=0){clearInterval(timer);finish();return}
+        const m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+        const el=document.getElementById('timer');if(el){el.textContent=m+':'+s;if(secs<60)el.classList.add('warning')}
+    },1000);
+}
+function renderQ(){
+    const q=qs[cur],m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+    app.innerHTML=`<div class="sim-timer" id="timer">${m}:${s}</div><div class="sim-progress"><div class="sim-progress-fill" style="width:${(cur+1)/qs.length*100}%"></div></div><div class="sim-question"><h3>Q${cur+1}/${qs.length} — ${q.q}</h3><div class="sim-options">${q.o.map((o,i)=>`<label><input type="radio" name="opt" value="${i}" ${answers[cur]===i?'checked':''} onchange="answers[cur]=${i}"> ${o}</label>`).join('')}</div></div><div class="sim-nav">${cur>0?'<button onclick="cur--;renderQ()"><i class="fas fa-arrow-left"></i> Précédente</button>':'<span></span>'}${cur<qs.length-1?'<button class="primary" onclick="cur++;renderQ()">Suivante <i class="fas fa-arrow-right"></i></button>':'<button class="primary" onclick="finish()"><i class="fas fa-flag-checkered"></i> Terminer</button>'}</div>`;
+}
+function finish(){
+    clearInterval(timer);
+    const score=qs.reduce((s,q,i)=>s+(answers[i]===q.c?1:0),0);
+    const pct=Math.round(score/qs.length*100);
+    const emoji=pct>=80?'🏆':pct>=60?'👍':pct>=40?'📖':'💪';
+    app.innerHTML=`<div class="sim-result"><p>${emoji}</p><div class="sim-score">${pct}%</div><h2>${score}/${qs.length}</h2><p>${pct>=80?'Excellent ! Prêt pour l\'examen.':pct>=60?'Bon travail, encore un petit effort !':pct>=40?'Révisez les chapitres faibles.':'Reprenez les bases avec les cartes mémoire.'}</p><button class="sim-nav primary" style="margin:1rem auto;display:inline-block;padding:.6rem 1.5rem;border-radius:99px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer" onclick="showConfig()"><i class="fas fa-redo"></i> Recommencer</button></div><div class="sim-review">${qs.map((q,i)=>`<div class="rev-q ${answers[i]===q.c?'':'wrong'}"><strong>Q${i+1}.</strong> ${q.q}<br><span style="color:#22c55e">✓ ${q.o[q.c]}</span>${answers[i]!==q.c&&answers[i]>=0?'<br><span style="color:#ef4444">✗ Vous : '+q.o[answers[i]]+'</span>':answers[i]<0?'<br><span style="color:#ef4444">✗ Pas de réponse</span>':''}</div>`).join('')}</div>`;
+}
+showConfig();
+</script>
+</body>
+</html>

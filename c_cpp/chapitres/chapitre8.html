@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 8 — Introduction au C++ | C/C++ B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#f59e0b;--accent-light:#fbbf24;--accent-dark:#d97706;--accent-glow:rgba(245,158,11,0.25)}.dark{--accent:#fbbf24;--accent-light:#fcd34d;--accent-dark:#f59e0b;--accent-glow:rgba(251,191,36,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-bolt"></i> CeeBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre6.html">Ch.6</a></li><li><a href="chapitre7.html">Ch.7</a></li>
+        <li><a href="chapitre8.html" class="active">Ch.8</a></li>
+        <li><a href="formules.html">Formules</a></li><li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>⚡ CeeBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Bases du C</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Contrôle de flux</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Fonctions</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux & Chaînes</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Pointeurs</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Structures</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Fichiers</a>
+    <a href="chapitre8.html" class="active"><i class="fas fa-book-open"></i> Ch.8 — Intro C++</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes Flash</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-rocket"></i> Chapitre 8</div>
+    <h1>⚡ Introduction au <span class="highlight">C++</span></h1>
+    <p>Du C au C++ : cout/cin, les références, les classes, les constructeurs, l'encapsulation et un aperçu de l'héritage.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══════════════ 8.1 C vs C++ ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="c-vs-cpp">
+    <h2><i class="fas fa-exchange-alt"></i> 8.1 — Du C au C++ : quoi de neuf ?</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — La maison rénovée</div>
+        <p>Le C est une maison solide mais basique. Le C++ est cette même maison <strong>rénovée et agrandie</strong> : mêmes fondations, mais avec une cuisine équipée (classes), un système domotique (héritage), et un ascenseur (polymorphisme). Tout le C valide fonctionne en C++ !</p>
+    </div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>C</th><th>C++</th></tr></thead>
+            <tbody>
+                <tr><td><code>printf / scanf</code></td><td><code>cout / cin</code></td></tr>
+                <tr><td><code>#include &lt;stdio.h&gt;</code></td><td><code>#include &lt;iostream&gt;</code></td></tr>
+                <tr><td><code>struct</code> (données)</td><td><code>class</code> (données + méthodes)</td></tr>
+                <tr><td>Passage par pointeur</td><td>Passage par <strong>référence</strong> (&amp;)</td></tr>
+                <tr><td><code>malloc / free</code></td><td><code>new / delete</code></td></tr>
+                <tr><td>Fichier <code>.c</code></td><td>Fichier <code>.cpp</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Premier programme C++</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#include &lt;iostream&gt;   // Remplace stdio.h
+using namespace std;   // Pour éviter std:: partout
+
+int main() {
+    cout &lt;&lt; "Hello, C++ !" &lt;&lt; endl;
+    return 0;
+}
+
+// Compilation : g++ hello.cpp -o hello</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>cout = C Output, cin = C Input</strong></div>
+        <ul>
+            <li><code>cout &lt;&lt;</code> → les flèches « poussent » les données vers la <strong>sortie</strong> (écran)</li>
+            <li><code>cin &gt;&gt;</code> → les flèches « aspirent » les données depuis l'<strong>entrée</strong> (clavier)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════ 8.2 cout et cin ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="cout-cin">
+    <h2><i class="fas fa-terminal"></i> 8.2 — cout et cin : entrées/sorties modernes</h2>
+
+    <div class="code-block"><div class="code-header"><span>cout et cin</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;     // Pour std::string
+using namespace std;
+
+int main() {
+    // Affichage avec cout
+    int age = 20;
+    double note = 15.5;
+    cout &lt;&lt; "Age: " &lt;&lt; age &lt;&lt; ", Note: " &lt;&lt; note &lt;&lt; endl;
+    
+    // Pas besoin de %d, %f, %s ! cout détecte le type automatiquement
+
+    // Lecture avec cin
+    string nom;    // string au lieu de char[] !
+    cout &lt;&lt; "Votre nom : ";
+    cin &gt;&gt; nom;
+    
+    int annee;
+    cout &lt;&lt; "Année de naissance : ";
+    cin &gt;&gt; annee;
+    
+    cout &lt;&lt; "Bonjour " &lt;&lt; nom &lt;&lt; " (" &lt;&lt; (2024-annee) &lt;&lt; " ans)" &lt;&lt; endl;
+    
+    // Lire une ligne complète (avec espaces)
+    string ville;
+    cout &lt;&lt; "Ville : ";
+    getline(cin, ville);  // Remplace fgets
+    
+    return 0;
+}</code></pre></div>
+
+    <div class="concept-card">
+        <h4>🎉 L'avantage de string en C++</h4>
+        <p>En C++, <code>string</code> remplace les <code>char[]</code>. Plus besoin de <code>strlen</code>, <code>strcpy</code>, <code>strcmp</code> !</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>string vs char[]</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>string a = "Hello";
+string b = " World";
+
+string c = a + b;        // Concaténation avec + !
+int len = c.length();    // Longueur (remplace strlen)
+if (a == "Hello") { }    // Comparaison avec == (remplace strcmp)
+
+// Plus besoin de se soucier de la taille !
+// string gère la mémoire automatiquement</code></pre></div>
+</section>
+
+<!-- ═══════════════ 8.3 Références ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="references">
+    <h2><i class="fas fa-link"></i> 8.3 — Les références (&amp;)</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le surnom</div>
+        <p>En C, pour modifier une variable dans une fonction, on passe un pointeur (<code>*p</code>). En C++, la <strong>référence</strong> est un <strong>alias</strong> (surnom) : un deuxième nom pour la même variable. Plus simple, plus propre, pas besoin de <code>*</code> et <code>&amp;</code> partout.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Référence vs Pointeur</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// EN C : pointeur (lourd)
+void doublerC(int *p) {
+    *p = *p * 2;
+}
+int x = 5;
+doublerC(&amp;x);  // x = 10
+
+// EN C++ : référence (élégant)
+void doublerCpp(int &amp;n) {   // & dans la déclaration = référence
+    n = n * 2;              // Pas de * nécessaire !
+}
+int y = 5;
+doublerCpp(y);  // y = 10  — pas de & à l'appel !
+
+// Swap en C++ avec références
+void swap(int &amp;a, int &amp;b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — Pointeur vs Référence</div>
+        <ul>
+            <li><strong>Pointeur (C)</strong> : déclaration <code>*p</code>, passer <code>&amp;x</code>, utiliser <code>*p</code> → 3 symboles !</li>
+            <li><strong>Référence (C++)</strong> : déclaration <code>&amp;n</code>, passer <code>x</code>, utiliser <code>n</code> → 1 seul symbole</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════ 8.4 Classes et objets ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="classes">
+    <h2><i class="fas fa-box-open"></i> 8.4 — Classes et objets</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le moule à gâteau</div>
+        <p>Une <strong>classe</strong> est un <strong>moule</strong> (plan, modèle). Un <strong>objet</strong> est un <strong>gâteau</strong> fait avec ce moule. Un moule peut produire autant de gâteaux que vous voulez, chacun avec ses propres garnitures (valeurs).</p>
+    </div>
+
+    <div class="concept-card">
+        <h4>📦 Classe = struct + fonctions + protection</h4>
+        <p>En C, un <code>struct</code> ne contient que des données. En C++, une <code>class</code> contient des <strong>données</strong> (attributs) ET des <strong>fonctions</strong> (méthodes), avec un contrôle d'accès (<code>public</code>/<code>private</code>).</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Première classe C++</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>class Etudiant {
+private:           // Attributs cachés (encapsulation)
+    string nom;
+    float note;
+
+public:            // Accessible de l'extérieur
+    // Constructeur (appelé à la création)
+    Etudiant(string n, float no) {
+        nom = n;
+        note = no;
+    }
+
+    // Méthodes (fonctions de la classe)
+    void afficher() {
+        cout &lt;&lt; nom &lt;&lt; " : " &lt;&lt; note &lt;&lt; "/20" &lt;&lt; endl;
+    }
+
+    float getNote() { return note; }        // Getter
+    void setNote(float n) { note = n; }     // Setter
+
+    bool estAdmis() { return note >= 10; }
+};
+
+int main() {
+    // Créer des objets (instances)
+    Etudiant alice("Alice", 15.5);
+    Etudiant bob("Bob", 8.0);
+
+    alice.afficher();  // Alice : 15.5/20
+    bob.afficher();    // Bob : 8/20
+
+    cout &lt;&lt; "Alice admise ? " &lt;&lt; (alice.estAdmis() ? "Oui" : "Non") &lt;&lt; endl;
+
+    bob.setNote(12.0);
+    bob.afficher();    // Bob : 12/20
+    return 0;
+}</code></pre></div>
+
+    <div class="mnemonic-box">
+        <div class="mnemonic-title"><i class="fas fa-brain"></i> Mnémonique — <strong>P.A.M.C.</strong> (les 4 éléments d'une classe)</div>
+        <ul>
+            <li><strong>P</strong>rivate — attributs cachés (protection)</li>
+            <li><strong>A</strong>ttributs — les données (variables)</li>
+            <li><strong>M</strong>éthodes — les fonctions</li>
+            <li><strong>C</strong>onstructeur — initialise l'objet à la création</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══════════════ 8.5 Encapsulation ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="encapsulation">
+    <h2><i class="fas fa-shield-alt"></i> 8.5 — Encapsulation (public/private)</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — Le distributeur de billets</div>
+        <p>Un <strong>distributeur</strong> (GAB) : vous accédez au <strong>public</strong> (écran, clavier, fente). Le mécanisme interne (compteur de billets, coffre) est <strong>private</strong> — vous n'y touchez pas directement ! C'est la <strong>protection des données</strong>.</p>
+    </div>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Accès</th><th>Depuis la classe</th><th>Depuis l'extérieur</th></tr></thead>
+            <tbody>
+                <tr><td><code>public</code></td><td>✅ Oui</td><td>✅ Oui</td></tr>
+                <tr><td><code>private</code></td><td>✅ Oui</td><td>❌ Non</td></tr>
+                <tr><td><code>protected</code></td><td>✅ Oui</td><td>❌ Non (mais oui pour les classes filles)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Getters et Setters</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>class CompteBancaire {
+private:
+    float solde;   // Personne ne peut modifier directement !
+
+public:
+    CompteBancaire(float s) : solde(s) {}  // Constructeur avec liste d'init.
+
+    float getSolde() { return solde; }     // Lecture autorisée
+    
+    void deposer(float montant) {
+        if (montant > 0) solde += montant; // Validation !
+    }
+    
+    bool retirer(float montant) {
+        if (montant > 0 &amp;&amp; montant &lt;= solde) {
+            solde -= montant;
+            return true;
+        }
+        return false;  // Refusé !
+    }
+};
+
+int main() {
+    CompteBancaire c(1000);
+    // c.solde = -999;  // ❌ ERREUR : private !
+    c.deposer(500);     // ✅ Via la méthode publique
+    cout &lt;&lt; c.getSolde() &lt;&lt; endl;  // 1500
+    return 0;
+}</code></pre></div>
+</section>
+
+<!-- ═══════════════ 8.6 Héritage ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="heritage">
+    <h2><i class="fas fa-sitemap"></i> 8.6 — Aperçu de l'héritage</h2>
+
+    <div class="analogy-box">
+        <div class="analogy-title"><i class="fas fa-lightbulb"></i> Analogie — L'arbre généalogique</div>
+        <p>L'héritage est comme la génétique : un <strong>enfant</strong> hérite des caractéristiques de son <strong>parent</strong> (yeux, taille) mais peut avoir ses propres traits. La classe fille récupère tout de la classe mère et ajoute ses spécificités.</p>
+    </div>
+
+    <div class="code-block"><div class="code-header"><span>Héritage simple</span><button class="copy-btn" title="Copier"><i class="fas fa-copy"></i></button></div><pre><code>// Classe mère (base)
+class Animal {
+protected:
+    string nom;
+public:
+    Animal(string n) : nom(n) {}
+    void manger() { cout &lt;&lt; nom &lt;&lt; " mange." &lt;&lt; endl; }
+};
+
+// Classe fille (dérivée) — hérite de Animal
+class Chien : public Animal {
+public:
+    Chien(string n) : Animal(n) {}   // Appelle le constructeur parent
+    void aboyer() { cout &lt;&lt; nom &lt;&lt; " : Wouf !" &lt;&lt; endl; }
+};
+
+class Chat : public Animal {
+public:
+    Chat(string n) : Animal(n) {}
+    void miauler() { cout &lt;&lt; nom &lt;&lt; " : Miaou !" &lt;&lt; endl; }
+};
+
+int main() {
+    Chien rex("Rex");
+    rex.manger();   // Hérité de Animal !
+    rex.aboyer();   // Propre à Chien
+
+    Chat mimi("Mimi");
+    mimi.manger();  // Hérité
+    mimi.miauler(); // Propre à Chat
+    return 0;
+}</code></pre></div>
+
+    <div class="info-box">
+        <strong>L'héritage en un mot :</strong> <code>class Fille : public Mere</code> signifie « Fille possède tout ce que Mere a, plus ses propres ajouts ». C'est le pilier de la <strong>Programmation Orientée Objet</strong> (POO).
+    </div>
+</section>
+
+<!-- ═══════════════ 8.7 Récap ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="recap">
+    <h2><i class="fas fa-clipboard-check"></i> 8.7 — Récapitulatif C vs C++</h2>
+
+    <div class="styled-table-container">
+        <table class="styled-table">
+            <thead><tr><th>Concept</th><th>C</th><th>C++</th></tr></thead>
+            <tbody>
+                <tr><td>Entrées/sorties</td><td><code>printf/scanf</code></td><td><code>cout/cin</code></td></tr>
+                <tr><td>Chaînes</td><td><code>char[]</code> + string.h</td><td><code>string</code> (+ avec ==)</td></tr>
+                <tr><td>Passage par réf.</td><td>Pointeur <code>*p</code></td><td>Référence <code>&amp;n</code></td></tr>
+                <tr><td>Allocation</td><td><code>malloc/free</code></td><td><code>new/delete</code></td></tr>
+                <tr><td>Données + fonctions</td><td><code>struct</code> séparés</td><td><code>class</code> intégrée</td></tr>
+                <tr><td>Protection</td><td>Aucune</td><td><code>private/public</code></td></tr>
+                <tr><td>Réutilisation</td><td>Fonctions</td><td>Héritage + polymorphisme</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ═══════════════ EXERCICES ═══════════════ -->
+<section class="chapter-section reveal-on-scroll" id="exercices">
+    <h2><i class="fas fa-dumbbell"></i> Exercices du Chapitre 8</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre7.html" class="nav-btn prev-btn"><i class="fas fa-arrow-left"></i> Chapitre 7</a>
+    <a href="formules.html" class="nav-btn next-btn">Formules <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container"><span class="xp-level">Débutant</span><div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div><span class="xp-text">0 XP</span></div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>
+GameEngine.configure({storageKey:'b1_c_cpp_progress',badges:[{id:'first_step',name:'Premier Pas',icon:'🏁',desc:'Premier exercice',xp:10},{id:'cpp_intro',name:'C++ Initié',icon:'🚀',desc:'Termine l\'intro C++',xp:25}],levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti C'},{min:80,title:'Développeur Jr.'},{min:150,title:'Codeur Confirmé'},{min:250,title:'Maître du C'},{min:400,title:'Guru C/C++'}]});
+GameEngine.init();
+</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided: [
+        { q: "Réécrivez le Hello World en C++ avec cout.", hints: ["#include <iostream>","using namespace std;","cout << ... << endl;"], answer: '#include <iostream>\nusing namespace std;\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}' },
+        { q: "Écrivez une fonction swap utilisant des références C++ (sans pointeurs).", hints: ["void swap(int &a, int &b)","Variable temp","Pas de * nécessaire"], answer: 'void swap(int &a, int &b) {\n    int temp = a;\n    a = b;\n    b = temp;\n}' },
+        { q: "Créez une classe Rectangle avec largeur, hauteur, un constructeur et une méthode aire().", hints: ["class Rectangle { private: ...","Constructeur avec paramètres","double aire() { return l*h; }"], answer: 'class Rectangle {\nprivate: double l, h;\npublic:\n    Rectangle(double la, double ha):l(la),h(ha){}\n    double aire(){return l*h;}\n    void afficher(){cout<<l<<"x"<<h<<" aire="<<aire()<<endl;}\n};' },
+        { q: "Créez une classe CompteBancaire avec solde privé, deposer(), retirer() et getSolde().", hints: ["private: float solde;","Vérifier montant > 0","retirer: vérifier montant <= solde"], answer: 'class Compte {\nprivate: float solde;\npublic:\n    Compte(float s):solde(s){}\n    void deposer(float m){if(m>0)solde+=m;}\n    bool retirer(float m){if(m>0&&m<=solde){solde-=m;return true;}return false;}\n    float getSolde(){return solde;}\n};' },
+        { q: "Créez une classe Animal avec une méthode parler(), et une classe Chien qui hérite et ajoute aboyer().", hints: ["class Chien : public Animal","Appeler constructeur parent","Méthode propre à Chien"], answer: 'class Animal {\nprotected: string nom;\npublic:\n    Animal(string n):nom(n){}\n    void parler(){cout<<nom<<" fait du bruit"<<endl;}\n};\nclass Chien:public Animal{\npublic:\n    Chien(string n):Animal(n){}\n    void aboyer(){cout<<nom<<": Wouf!"<<endl;}\n};' }
+    ],
+    quiz: [
+        { type:'mcq', q:"cout << est l'équivalent C++ de :", options:["scanf","printf","puts","gets"], correct:1 },
+        { type:'mcq', q:"En C++, cin >> détecte automatiquement le type.", options:["Vrai","Faux"], correct:0 },
+        { type:'mcq', q:"Une référence en C++ est :", options:["Un pointeur déguisé","Un alias (surnom) pour une variable","Une copie de variable","Un type de données"], correct:1 },
+        { type:'mcq', q:"Quel mot-clé cache les attributs dans une classe ?", options:["public","protected","private","static"], correct:2 },
+        { type:'qa', q:"Qu'est-ce qu'un constructeur ?", answer:"Une méthode spéciale appelée automatiquement à la création d'un objet, pour l'initialiser" },
+        { type:'mcq', q:"Pour hériter en C++ :", options:["class F extends M","class F : public M","class F inherits M","class F(M)"], correct:1 },
+        { type:'mcq', q:"string en C++ remplace :", options:["int","printf","char[] + string.h","malloc"], correct:2 },
+        { type:'qa', q:"Que signifie P.A.M.C. pour une classe ?", answer:"Private, Attributs, Méthodes, Constructeur" },
+        { type:'mcq', q:"getline(cin, s) lit :", options:["Un mot","Une ligne entière","Un caractère","Un nombre"], correct:1 },
+        { type:'mcq', q:"a + b avec des string en C++ fait :", options:["Addition","Erreur","Concaténation","Comparaison"], correct:2 }
+    ],
+    dragdrop: [
+        { instruction:"Associez C et C++ :", pairs:[
+            ["printf","cout"],["scanf","cin"],["char[]","string"],["malloc","new"]
+        ]},
+        { instruction:"Associez le concept POO à sa description :", pairs:[
+            ["Classe","Moule / modèle"],["Objet","Instance créée"],["Encapsulation","Protection private/public"],["Héritage","Classe fille hérite de mère"]
+        ]},
+        { instruction:"Associez l'accès à sa visibilité :", pairs:[
+            ["public","Accessible partout"],["private","Classe uniquement"],["protected","Classe + filles"]
+        ]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>

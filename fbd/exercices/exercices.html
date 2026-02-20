@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | FBD B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#ea580c;--accent-light:#f97316;--accent-dark:#c2410c;--accent-glow:rgba(234,88,12,0.18)}.dark{--accent:#f97316;--accent-light:#fb923c;--accent-dark:#ea580c;--accent-glow:rgba(249,115,22,0.18)}.exo-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.exo-toolbar button{padding:.4rem .9rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;font-size:.82rem;transition:.2s}.exo-toolbar button.active,.exo-toolbar button:hover{background:var(--accent);color:#fff}.exo-search{display:block;max-width:420px;margin:1rem auto;padding:.55rem 1rem;border-radius:99px;border:2px solid var(--border);background:var(--bg);color:var(--text);width:100%;font-size:.95rem}.exo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin:1.5rem 0}.exo-card{background:var(--card-bg);border-radius:16px;padding:1.3rem;border-left:4px solid var(--accent);transition:transform .2s}.exo-card:hover{transform:translateY(-3px)}.exo-card h3{font-size:.95rem;margin:0 0 .5rem}.exo-card p{font-size:.88rem;margin:0 0 .7rem;opacity:.8;line-height:1.5}.exo-meta{display:flex;gap:.5rem;flex-wrap:wrap}.exo-meta span{font-size:.72rem;padding:.2rem .6rem;border-radius:99px;font-weight:600}.exo-level-facile{background:#dcfce7;color:#15803d}.exo-level-moyen{background:#fef3c7;color:#b45309}.exo-level-difficile{background:#fee2e2;color:#dc2626}.dark .exo-level-facile{background:rgba(34,197,94,.15);color:#4ade80}.dark .exo-level-moyen{background:rgba(234,179,8,.15);color:#facc15}.dark .exo-level-difficile{background:rgba(239,68,68,.15);color:#f87171}.exo-cat{background:var(--accent-glow);color:var(--accent)}.exo-toggle{margin-top:.7rem;background:none;border:none;color:var(--accent);cursor:pointer;font-weight:600;font-size:.82rem;padding:0}.exo-answer{display:none;margin-top:.7rem;padding:.7rem;background:var(--bg);border-radius:10px;font-size:.85rem;line-height:1.6;font-family:'JetBrains Mono',monospace}.exo-answer.show{display:block}.exo-count{text-align:center;font-size:.9rem;opacity:.6;margin:.5rem 0}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-database"></i> AutoBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🔧 AutoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="../chapitres/chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="../chapitres/chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>🔧 Exercices <span class="highlight">FBD</span></h1>
+    <p>24 exercices classés par catégorie et difficulté.</p>
+</section>
+
+<main class="content-wrapper">
+    <input type="text" class="exo-search" id="search" placeholder="🔍 Rechercher un exercice…">
+    <div class="exo-toolbar" id="catBar"></div>
+    <div class="exo-toolbar" id="lvlBar"></div>
+    <div class="exo-count" id="count"></div>
+    <div class="exo-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXOS=[
+// ─── Modèle relationnel ───
+{t:"Identifier les composantes",d:"Soit la relation Étudiant(id, nom, prénom, date_naiss, email). Identifiez : la relation, les attributs, un tuple exemple, et les domaines.",cat:"Modèle",lvl:"Facile",ans:"Relation = Étudiant. Attributs = {id, nom, prénom, date_naiss, email}. Tuple = (1, 'Dupont', 'Marie', '2004-03-15', 'marie@mail.fr'). Domaines = INT, VARCHAR, VARCHAR, DATE, VARCHAR."},
+{t:"Choisir une clé primaire",d:"Table Commande(num_cmd, date_cmd, num_client, montant). Quelle PK choisir et pourquoi ? Vérifiez les 3 règles U.N.I.",cat:"Modèle",lvl:"Facile",ans:"PK = num_cmd. U : chaque n° est unique. N : jamais vide (identifiant obligatoire). I : un n° de commande ne change pas après création."},
+{t:"Relations M:N → table de jonction",d:"Modélisez la relation « Un étudiant suit plusieurs cours et un cours a plusieurs étudiants ». Donnez les tables SQL nécessaires.",cat:"Modèle",lvl:"Moyen",ans:"CREATE TABLE Etudiant(id_etu INT PK, nom VARCHAR);\nCREATE TABLE Cours(id_cours INT PK, titre VARCHAR);\nCREATE TABLE Inscription(id_etu INT, id_cours INT, PRIMARY KEY(id_etu, id_cours), FOREIGN KEY(id_etu) REFERENCES Etudiant, FOREIGN KEY(id_cours) REFERENCES Cours);"},
+{t:"ON DELETE CASCADE vs SET NULL",d:"Table Commande avec FK vers Client. Comparez le comportement si on supprime un client avec ON DELETE CASCADE et ON DELETE SET NULL.",cat:"Modèle",lvl:"Moyen",ans:"CASCADE : toutes les commandes du client supprimé sont aussi supprimées. SET NULL : les commandes restent mais leur colonne client_id devient NULL (client inconnu)."},
+// ─── Algèbre relationnelle ───
+{t:"Sélection et projection",d:"R = Employé(id, nom, age, dept). Écrivez en algèbre : « noms des employés du département RH âgés de plus de 30 ans ».",cat:"Algèbre",lvl:"Facile",ans:"π_nom( σ_{dept='RH' ∧ age>30}(Employé) )\nD'abord σ filtre lignes, puis π ne garde que nom."},
+{t:"Jointure naturelle",d:"R1 = Étudiant(id, nom), R2 = Note(id, matière, note). Écrivez la jointure naturelle et le résultat si R1 = {(1,'Ali'),(2,'Bea')} et R2 = {(1,'Math',15),(1,'Info',12),(3,'Math',8)}.",cat:"Algèbre",lvl:"Moyen",ans:"R1 ⋈ R2 = σ_{R1.id=R2.id}(R1 × R2).\nRésultat : {(1,'Ali','Math',15), (1,'Ali','Info',12)}. Bea n'a pas de note, id=3 n'existe pas dans R1, donc absents."},
+{t:"Union et Différence",d:"A = {1,2,3,4}, B = {3,4,5,6}. Calculez A ∪ B et A − B.",cat:"Algèbre",lvl:"Facile",ans:"A ∪ B = {1,2,3,4,5,6}. A − B = {1,2} (éléments de A non présents dans B)."},
+{t:"Division — « pour tout »",d:"R(étudiant, matière) et S(matière) = {Math, Info}. R contient {(Ali,Math),(Ali,Info),(Bea,Math),(Cyril,Math),(Cyril,Info)}. Calculez R ÷ S.",cat:"Algèbre",lvl:"Difficile",ans:"R ÷ S = étudiants associés à TOUTES les matières de S. Ali a Math+Info ✓, Bea a seulement Math ✗, Cyril a Math+Info ✓. Résultat = {Ali, Cyril}."},
+// ─── SQL base ───
+{t:"CREATE TABLE avec contraintes",d:"Créez la table Produit avec : id (PK auto), nom (non null, unique), prix (décimal > 0), catégorie (défaut 'Divers').",cat:"SQL Base",lvl:"Facile",ans:"CREATE TABLE Produit (\n  id INT PRIMARY KEY AUTO_INCREMENT,\n  nom VARCHAR(100) NOT NULL UNIQUE,\n  prix DECIMAL(10,2) CHECK(prix > 0),\n  categorie VARCHAR(50) DEFAULT 'Divers'\n);"},
+{t:"INSERT + SELECT basique",d:"Insérez 3 produits dans la table Produit puis écrivez une requête pour lister les produits dont le prix est entre 10 et 50 €, triés par prix décroissant.",cat:"SQL Base",lvl:"Facile",ans:"INSERT INTO Produit(nom, prix) VALUES ('Cahier', 3.50), ('Clé USB', 15.00), ('Sac', 45.00);\nSELECT * FROM Produit WHERE prix BETWEEN 10 AND 50 ORDER BY prix DESC;\n→ Résultat : Sac(45), Clé USB(15)."},
+{t:"Piège du NULL",d:"Table Client(id, nom, email). Certains clients n'ont pas d'email. Écrivez la requête pour trouver ces clients. Expliquez pourquoi WHERE email = NULL est faux.",cat:"SQL Base",lvl:"Moyen",ans:"SELECT * FROM Client WHERE email IS NULL;\nemail = NULL est faux car NULL n'est pas une valeur — aucune comparaison avec NULL ne retourne TRUE. Il faut IS NULL / IS NOT NULL."},
+{t:"UPDATE + DELETE sécurisé",d:"Augmentez le prix de 10% pour tous les produits de catégorie 'Électronique', puis supprimez les produits dont le prix est 0. Ajoutez la condition de sécurité.",cat:"SQL Base",lvl:"Moyen",ans:"UPDATE Produit SET prix = prix * 1.10 WHERE categorie = 'Électronique';\nDELETE FROM Produit WHERE prix = 0;\n⚠️ TOUJOURS mettre WHERE, sinon UPDATE modifie TOUT et DELETE supprime TOUT."},
+// ─── SQL avancé ───
+{t:"JOINs multiples",d:"Tables : Étudiant(id, nom), Inscription(id_etu, id_cours), Cours(id_cours, titre). Affichez nom et titre pour chaque inscription.",cat:"SQL Avancé",lvl:"Moyen",ans:"SELECT e.nom, c.titre\nFROM Etudiant e\nINNER JOIN Inscription i ON e.id = i.id_etu\nINNER JOIN Cours c ON i.id_cours = c.id_cours;"},
+{t:"LEFT JOIN — étudiants sans cours",d:"Trouvez les étudiants qui ne sont inscrits à aucun cours.",cat:"SQL Avancé",lvl:"Moyen",ans:"SELECT e.nom\nFROM Etudiant e\nLEFT JOIN Inscription i ON e.id = i.id_etu\nWHERE i.id_etu IS NULL;\nLe LEFT JOIN garde tous les étudiants ; ceux sans correspondance ont NULL dans i.id_etu."},
+{t:"GROUP BY + HAVING",d:"Affichez les catégories ayant plus de 5 produits, avec le prix moyen de chaque catégorie.",cat:"SQL Avancé",lvl:"Moyen",ans:"SELECT categorie, COUNT(*) AS nb, AVG(prix) AS prix_moy\nFROM Produit\nGROUP BY categorie\nHAVING COUNT(*) > 5;\nWHERE filtre avant groupement, HAVING après."},
+{t:"Sous-requête corrélée",d:"Trouvez les employés dont le salaire est supérieur à la moyenne de leur département.",cat:"SQL Avancé",lvl:"Difficile",ans:"SELECT e.nom, e.salaire, e.dept\nFROM Employe e\nWHERE e.salaire > (\n  SELECT AVG(e2.salaire)\n  FROM Employe e2\n  WHERE e2.dept = e.dept\n);\nSous-requête corrélée : elle est ré-évaluée pour chaque ligne de la requête externe."},
+// ─── Normalisation ───
+{t:"Détecter les anomalies I.M.S.",d:"Table EtudiantCours(id_etu, nom_etu, email_etu, id_cours, titre_cours, note). Identifiez les 3 types d'anomalies.",cat:"Normalisation",lvl:"Facile",ans:"I : impossible d'ajouter un cours sans étudiant inscrit. M : si email change, il faut modifier TOUTES les lignes de cet étudiant. S : si on supprime sa seule inscription, on perd ses infos personnelles."},
+{t:"Passer en 1NF",d:"Table Commande(id_cmd, produits, quantités) avec produits='Cahier,Stylo' et quantités='3,5'. Mettez en 1NF.",cat:"Normalisation",lvl:"Facile",ans:"1NF = valeurs atomiques. Solution :\nCommande(id_cmd, produit, quantite)\n(1, 'Cahier', 3)\n(1, 'Stylo', 5)\nUne ligne par produit, pas de listes."},
+{t:"2NF — éliminer DF partielles",d:"R(A, B, C, D) avec PK = (A, B). DF : A → C et AB → D. Mettez en 2NF.",cat:"Normalisation",lvl:"Moyen",ans:"A → C est une DF partielle (dépend d'une partie de la PK).\nDécomposition : R1(A, C) avec PK = A, R2(A, B, D) avec PK = (A,B).\nToutes les DF dépendent maintenant de la totalité de leur clé."},
+{t:"3NF — éliminer DF transitives",d:"R(id_emp, nom, id_dept, nom_dept). PK = id_emp. DF : id_emp → id_dept et id_dept → nom_dept. Normalisez en 3NF.",cat:"Normalisation",lvl:"Moyen",ans:"id_emp → id_dept → nom_dept = DF transitive.\nR1(id_emp, nom, id_dept) PK = id_emp, FK = id_dept.\nR2(id_dept, nom_dept) PK = id_dept.\n« La clé, toute la clé, rien que la clé. »"},
+// ─── Conception ───
+{t:"Schéma E-R → tables",d:"Entités : Auteur(id, nom), Livre(isbn, titre). Relation : Écrit (M:N). Convertissez en schéma relationnel SQL.",cat:"Conception",lvl:"Moyen",ans:"CREATE TABLE Auteur(id INT PK, nom VARCHAR);\nCREATE TABLE Livre(isbn VARCHAR PK, titre VARCHAR);\nCREATE TABLE Ecrit(id_auteur INT, isbn VARCHAR, PK(id_auteur, isbn), FK id_auteur→Auteur, FK isbn→Livre);"},
+{t:"Contraintes E.R.D.U.",d:"Pour la table Employé(id, nom, email, salaire, dept_id), écrivez les 4 types de contraintes d'intégrité.",cat:"Conception",lvl:"Moyen",ans:"Entité : PRIMARY KEY(id).\nRéférentielle : FOREIGN KEY(dept_id) REFERENCES Departement(id).\nDomaine : CHECK(salaire > 0).\nUtilisateur : UNIQUE(email), NOT NULL sur nom."},
+{t:"Processus A.C.L.P.N. complet",d:"Cas : système de bibliothèque avec Livres, Emprunts, Membres. Décrivez chaque étape A.C.L.P.N.",cat:"Conception",lvl:"Difficile",ans:"A (Analyse) : identifier entités (Livre, Membre, Emprunt), attributs, règles métier.\nC (Conceptuel) : MCD avec cardinalités — Membre 0..N—Emprunter—0..N Livre.\nL (Logique) : MLD — tables Membre, Livre, Emprunt(id, id_membre FK, isbn FK, date_emprunt, date_retour).\nP (Physique) : CREATE TABLE SQL, index, types de données.\nN (Normaliser) : vérifier 1NF→3NF sur chaque table."},
+{t:"Conception mini-projet BD",d:"Concevez une BD pour un site e-commerce : clients, produits, commandes, lignes de commande. Donnez le MLD et le SQL de création.",cat:"Conception",lvl:"Difficile",ans:"MLD :\n- Client(id_client PK, nom, email UNIQUE)\n- Produit(id_produit PK, nom, prix CHECK>0, stock)\n- Commande(id_cmd PK, id_client FK, date_cmd, statut DEFAULT 'En attente')\n- LigneCommande(id_cmd FK, id_produit FK, qte CHECK>0, PK(id_cmd, id_produit))\n\nRelationnellement : Client 1:N Commande, Commande M:N Produit via LigneCommande."}
+];
+const CATS=["Tous",...new Set(EXOS.map(e=>e.cat))];
+const LVLS=["Tous","Facile","Moyen","Difficile"];
+let fCat="Tous",fLvl="Tous",fSearch="";
+const catBar=document.getElementById('catBar'),lvlBar=document.getElementById('lvlBar'),grid=document.getElementById('grid'),counter=document.getElementById('count'),search=document.getElementById('search');
+
+function render(){
+    let f=EXOS.filter(e=>(fCat==="Tous"||e.cat===fCat)&&(fLvl==="Tous"||e.lvl===fLvl)&&(!fSearch||e.t.toLowerCase().includes(fSearch)||e.d.toLowerCase().includes(fSearch)));
+    counter.textContent=f.length+' exercice'+(f.length>1?'s':'');
+    grid.innerHTML=f.map((e,i)=>{
+        const id='exo_'+i;
+        return `<div class="exo-card"><h3>${e.t}</h3><p>${e.d}</p><div class="exo-meta"><span class="exo-cat">${e.cat}</span><span class="exo-level-${e.lvl.toLowerCase()}">${e.lvl}</span></div><button class="exo-toggle" onclick="document.getElementById('${id}').classList.toggle('show');this.textContent=this.textContent.includes('Voir')?'Masquer la solution':'Voir la solution'">Voir la solution</button><div class="exo-answer" id="${id}">${e.ans.replace(/\n/g,'<br>')}</div></div>`;
+    }).join('');
+}
+function mkBar(el,items,setter){
+    el.innerHTML=items.map(t=>`<button class="${t===(setter==='cat'?fCat:fLvl)?'active':''}" onclick="f${setter==='cat'?'Cat':'Lvl'}='${t}';this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');render();">${t}</button>`).join('');
+}
+mkBar(catBar,CATS,'cat');mkBar(lvlBar,LVLS,'lvl');
+search.addEventListener('input',e=>{fSearch=e.target.value.toLowerCase();render()});
+render();
+</script>
+</body>
+</html>

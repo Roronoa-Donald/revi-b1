@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6 — Modèle Conceptuel des Traitements (MCT) | RD MERISE</title>
+    <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div class="reading-progress" id="reading-progress"></div>
+
+    <nav class="glass-nav"><div class="nav-inner">
+        <a href="../index.html" class="nav-logo"><i class="fa-solid fa-database"></i> RD MERISE</a>
+        <ul class="nav-links">
+            <li><a href="chapitre1.html">SI & MERISE</a></li>
+            <li><a href="chapitre2.html">MCD</a></li>
+            <li><a href="chapitre3.html">MLD</a></li>
+            <li><a href="chapitre4.html">Extensions</a></li>
+            <li><a href="chapitre5.html">Flux</a></li>
+            <li><a href="chapitre6.html" class="active">MCT</a></li>
+            <li><a href="formules.html">CheatSheet</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+            <button id="hamburger-btn" class="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </div></nav>
+
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <div class="mobile-nav-panel" id="mobile-nav">
+        <div class="mobile-nav-header"><span><i class="fa-solid fa-database"></i> Menu</span><button id="mobile-nav-close" class="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button></div>
+        <a href="../index.html"><i class="fa-solid fa-house"></i> Accueil</a>
+        <a href="chapitre1.html"><i class="fa-solid fa-building"></i> 1. SI & MERISE</a>
+        <a href="chapitre2.html"><i class="fa-solid fa-diagram-project"></i> 2. MCD</a>
+        <a href="chapitre3.html"><i class="fa-solid fa-table"></i> 3. MLD</a>
+        <a href="chapitre4.html"><i class="fa-solid fa-puzzle-piece"></i> 4. Extensions & Normalisation</a>
+        <a href="chapitre5.html"><i class="fa-solid fa-arrows-spin"></i> 5. Flux</a>
+        <a href="chapitre6.html" class="active"><i class="fa-solid fa-gears"></i> 6. MCT</a>
+        <hr style="border-color:var(--glass-border);margin:.8rem 0">
+        <a href="formules.html"><i class="fa-solid fa-scroll"></i> CheatSheet</a>
+        <a href="cartes.html"><i class="fa-solid fa-clone"></i> Flashcards</a>
+        <a href="simulateur-examen.html"><i class="fa-solid fa-award"></i> Simulateur</a>
+        <a href="../exercices/exercices.html"><i class="fa-solid fa-dumbbell"></i> Exercices</a>
+    </div>
+
+    <main id="main-content">
+        <div class="hero-section">
+            <div class="hero-badge"><i class="fa-solid fa-gears"></i> Module 6</div>
+            <h1>Modèle Conceptuel des <span class="highlight">Traitements (MCT)</span></h1>
+            <p>Événements, opérations, synchronisation et résultats — modéliser les traitements du système d'information.</p>
+        </div>
+
+        <div class="content-wrapper">
+
+            <!-- SECTION 1 : Introduction MCT -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-circle-question"></i> I. Qu'est-ce que le MCT ?</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Le <strong>Modèle Conceptuel des Traitements (MCT)</strong> décrit <strong>ce que fait</strong> le système d'information en réponse aux événements, <strong>indépendamment de qui le fait</strong> et <strong>comment</strong>. Il se situe au <strong>niveau conceptuel</strong> de MERISE, côté <strong>traitements</strong> (le MCD étant côté données).</p>
+                </div>
+
+                <div class="info-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div><strong>Rappel MERISE :</strong> MCD = « quelles données ? » | MCT = « quels traitements ? ». Les deux sont au niveau conceptuel (indépendant de l'organisation et de la technique).</div>
+                </div>
+            </section>
+
+            <!-- SECTION 2 : Formalisme -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-shapes"></i> II. Formalisme du MCT</h2>
+
+                <h3>Les éléments graphiques</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Élément</th><th>Symbole</th><th>Description</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Événement</strong></td>
+                            <td>Ovale / Ellipse</td>
+                            <td>Fait déclencheur venant de l'extérieur ou d'une opération précédente</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opération</strong></td>
+                            <td>Rectangle avec 3 zones</td>
+                            <td>Traitement exécuté. Zone haute = nom, zone centrale = actions, zone basse = conditions d'émission</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Synchronisation</strong></td>
+                            <td>ET / OU entre événements</td>
+                            <td>Condition logique reliant les événements déclencheurs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Résultat</strong></td>
+                            <td>Ovale / Ellipse</td>
+                            <td>Événement produit par une opération (peut déclencher une autre opération)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- SECTION 3 : Événement -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-bolt"></i> III. L'Événement</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Un <strong>événement</strong> est un fait qui se produit à un moment donné et qui <strong>déclenche</strong> ou <strong>résulte</strong> d'une opération. Il peut être :</p>
+                    <ul>
+                        <li><strong>Externe</strong> : provient de l'environnement (ex : arrivée d'une commande client)</li>
+                        <li><strong>Interne</strong> : produit par une opération du système (ex : commande validée)</li>
+                        <li><strong>Temporel</strong> : déclenché par une date/heure (ex : fin de mois)</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Propriétés d'un événement :</strong><br>
+                    1. Il est <strong>instantané</strong> (il se produit à un moment précis)<br>
+                    2. Il est <strong>consommé</strong> par une opération (une fois traité, il disparaît)<br>
+                    3. Il est <strong>contributif</strong> (il déclenche un traitement)
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4 : Opération -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-gears"></i> IV. L'Opération</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>Une <strong>opération</strong> est un ensemble d'actions exécutées de manière <strong>ininterruptible</strong> (atomique). Elle est déclenchée par un ou plusieurs événements et produit un ou plusieurs résultats selon des <strong>règles d'émission</strong>.</p>
+                </div>
+
+                <h3>Structure d'une opération</h3>
+                <div class="diagram-container" style="flex-direction:column;gap:0;max-width:400px;margin:1rem auto">
+                    <div style="background:var(--accent);color:white;padding:.5rem 1rem;border-radius:.5rem .5rem 0 0;text-align:center;font-weight:700">
+                        Nom de l'opération
+                    </div>
+                    <div style="border:2px solid var(--accent);padding:1rem;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center">
+                        <em>Description des actions réalisées<br>(vérification, enregistrement, calcul…)</em>
+                    </div>
+                    <div style="border:2px solid var(--accent);border-top:1px dashed var(--accent);padding:.5rem 1rem;border-radius:0 0 .5rem .5rem;text-align:center;font-size:.85rem;background:var(--accent-glow)">
+                        <strong>Conditions d'émission</strong><br>
+                        (toujours) &nbsp;|&nbsp; (si OK) &nbsp;|&nbsp; (si refus)
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <i class="fa-solid fa-brain"></i>
+                    <div><strong>Règle fondamentale :</strong> Une opération est <strong>non interruptible</strong>. Si un traitement nécessite une attente (réponse humaine, validation externe), il faut le découper en <strong>plusieurs opérations</strong> séparées par des événements.</div>
+                </div>
+            </section>
+
+            <!-- SECTION 5 : Synchronisation -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-code-branch"></i> V. La Synchronisation</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Définition</h4>
+                    <p>La <strong>synchronisation</strong> est une expression logique (<strong>ET</strong>, <strong>OU</strong>) qui exprime la condition de déclenchement d'une opération lorsque celle-ci dépend de <strong>plusieurs événements</strong>.</p>
+                </div>
+
+                <h3>Types de synchronisation</h3>
+                <table class="merise-table">
+                    <thead><tr><th>Type</th><th>Symbole</th><th>Signification</th><th>Exemple</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ET</strong></td>
+                            <td><code>∧</code> ou <code>ET</code></td>
+                            <td><strong>Tous</strong> les événements doivent être présents</td>
+                            <td>Commande reçue ET Stock vérifié → Traitement</td>
+                        </tr>
+                        <tr>
+                            <td><strong>OU</strong></td>
+                            <td><code>∨</code> ou <code>OU</code></td>
+                            <td><strong>Au moins un</strong> événement suffit</td>
+                            <td>Paiement reçu OU Garantie acceptée → Livraison</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Illustration :</strong><br>
+                        Événement A : « Commande client reçue »<br>
+                        Événement B : « Stock disponible vérifié »<br>
+                        Synchronisation : <strong>A ET B</strong><br>
+                        → L'opération « Préparer la livraison » ne se déclenche que lorsque les DEUX événements sont réalisés.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6 : Construction du MCT -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-hammer"></i> VI. Construire un MCT — Méthode</h2>
+
+                <div class="norm-step"><span class="step-num">1</span><strong>Identifier les événements déclencheurs</strong> — À partir du schéma de flux (module 5), lister les événements externes et temporels.</div>
+                <div class="norm-step"><span class="step-num">2</span><strong>Identifier les opérations</strong> — Pour chaque événement, déterminer quel traitement est effectué.</div>
+                <div class="norm-step"><span class="step-num">3</span><strong>Définir les synchronisations</strong> — Si une opération nécessite plusieurs événements, noter la condition (ET/OU).</div>
+                <div class="norm-step"><span class="step-num">4</span><strong>Définir les règles d'émission</strong> — Pour chaque opération, lister les résultats possibles (OK, refus, etc.).</div>
+                <div class="norm-step"><span class="step-num">5</span><strong>Chaîner les opérations</strong> — Les résultats d'une opération deviennent les événements de la suivante.</div>
+                <div class="norm-step"><span class="step-num">6</span><strong>Dessiner le MCT</strong> — Utiliser le formalisme graphique défini.</div>
+            </section>
+
+            <!-- SECTION 7 : Exemple complet -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-diagram-project"></i> VII. Exemple Complet — Commande Client</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-clipboard-list"></i> Scénario</h4>
+                    <p>
+                        (a) Le client passe une commande.<br>
+                        (b) Le système vérifie le stock.<br>
+                        (c) Si stock OK → préparer la livraison et émettre la facture.<br>
+                        (d) Si stock insuffisant → informer le client et passer commande fournisseur.
+                    </p>
+                </div>
+
+                <h3>MCT graphique</h3>
+                <div class="diagram-container" style="flex-direction:column;gap:0;max-width:500px;margin:1rem auto">
+                    <!-- Événement 1 -->
+                    <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:.5rem">
+                        <div style="padding:.5rem 1.2rem;border:2px solid var(--accent);border-radius:2rem;background:var(--card-bg);text-align:center;font-size:.85rem">
+                            <strong>Commande reçue</strong>
+                        </div>
+                    </div>
+                    <div style="text-align:center;color:var(--accent)">↓</div>
+
+                    <!-- Opération 1 -->
+                    <div style="margin:.5rem auto;max-width:350px;width:100%">
+                        <div style="background:var(--accent);color:white;padding:.4rem .8rem;border-radius:.4rem .4rem 0 0;text-align:center;font-weight:700;font-size:.85rem">
+                            Vérification du stock
+                        </div>
+                        <div style="border:2px solid var(--accent);padding:.6rem .8rem;text-align:center;font-size:.8rem">
+                            Vérifier la disponibilité de chaque<br>produit de la commande en stock
+                        </div>
+                        <div style="border:2px solid var(--accent);border-top:1px dashed var(--accent);padding:.3rem .8rem;border-radius:0 0 .4rem .4rem;display:flex;justify-content:space-around;font-size:.8rem;background:var(--accent-glow)">
+                            <span>✅ Stock OK</span>
+                            <span>❌ Stock insuffisant</span>
+                        </div>
+                    </div>
+
+                    <!-- Résultats divergents -->
+                    <div style="display:flex;justify-content:space-around;margin:.5rem 0">
+                        <div style="text-align:center;color:var(--accent)">↓ ✅</div>
+                        <div style="text-align:center;color:var(--accent)">↓ ❌</div>
+                    </div>
+                    <div style="display:flex;justify-content:space-around;gap:1rem;flex-wrap:wrap">
+                        <div style="padding:.5rem 1rem;border:2px solid var(--accent);border-radius:2rem;background:var(--card-bg);text-align:center;font-size:.8rem">
+                            <strong>Stock disponible</strong>
+                        </div>
+                        <div style="padding:.5rem 1rem;border:2px solid var(--accent);border-radius:2rem;background:var(--card-bg);text-align:center;font-size:.8rem">
+                            <strong>Stock insuffisant</strong>
+                        </div>
+                    </div>
+
+                    <!-- Opérations suite -->
+                    <div style="display:flex;justify-content:space-around;margin:.5rem 0">
+                        <div style="text-align:center;color:var(--accent)">↓</div>
+                        <div style="text-align:center;color:var(--accent)">↓</div>
+                    </div>
+                    <div style="display:flex;gap:1rem;justify-content:space-around;flex-wrap:wrap">
+                        <div style="flex:1;min-width:180px;max-width:200px">
+                            <div style="background:var(--accent);color:white;padding:.3rem .6rem;border-radius:.4rem .4rem 0 0;text-align:center;font-weight:700;font-size:.75rem">Préparer livraison</div>
+                            <div style="border:2px solid var(--accent);padding:.4rem .5rem;text-align:center;font-size:.75rem">Préparer colis<br>Émettre facture</div>
+                            <div style="border:2px solid var(--accent);border-top:1px dashed var(--accent);padding:.2rem .5rem;border-radius:0 0 .4rem .4rem;text-align:center;font-size:.7rem;background:var(--accent-glow)">(toujours)</div>
+                        </div>
+                        <div style="flex:1;min-width:180px;max-width:200px">
+                            <div style="background:var(--accent);color:white;padding:.3rem .6rem;border-radius:.4rem .4rem 0 0;text-align:center;font-weight:700;font-size:.75rem">Gérer rupture</div>
+                            <div style="border:2px solid var(--accent);padding:.4rem .5rem;text-align:center;font-size:.75rem">Notifier client<br>Commander fournisseur</div>
+                            <div style="border:2px solid var(--accent);border-top:1px dashed var(--accent);padding:.2rem .5rem;border-radius:0 0 .4rem .4rem;text-align:center;font-size:.7rem;background:var(--accent-glow)">(toujours)</div>
+                        </div>
+                    </div>
+
+                    <!-- Résultats finaux -->
+                    <div style="display:flex;justify-content:space-around;margin:.5rem 0">
+                        <div style="text-align:center;color:var(--accent)">↓</div>
+                        <div style="text-align:center;color:var(--accent)">↓</div>
+                    </div>
+                    <div style="display:flex;justify-content:space-around;gap:1rem;flex-wrap:wrap">
+                        <div style="padding:.4rem .8rem;border:2px solid var(--accent);border-radius:2rem;background:var(--card-bg);text-align:center;font-size:.8rem">
+                            <strong>Livraison prête</strong>
+                        </div>
+                        <div style="padding:.4rem .8rem;border:2px solid var(--accent);border-radius:2rem;background:var(--card-bg);text-align:center;font-size:.8rem">
+                            <strong>Cmd fournisseur</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8 : Événements consommables -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-fire"></i> VIII. Événements Consommables et Cycles</h2>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-circle-info"></i> Événement consommable</h4>
+                    <p>Un événement est <strong>consommable</strong> s'il ne peut déclencher une opération qu'<strong>une seule fois</strong>. Après avoir été utilisé, il est « consommé » et ne peut plus redéclencher la même opération.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h4><i class="fa-solid fa-rotate"></i> Cycle dans le MCT</h4>
+                    <p>Un <strong>cycle</strong> se produit quand le résultat d'une opération redéclenche une opération antérieure (boucle). C'est fréquent dans les processus avec des <strong>itérations</strong> (relances, vérifications multiples).</p>
+                </div>
+
+                <div class="example-box">
+                    <i class="fa-solid fa-flask"></i>
+                    <div>
+                        <strong>Exemple de cycle :</strong><br>
+                        Événement « Devis envoyé » → Opération « Attente réponse client » → Résultat « Pas de réponse sous 7 jours » → Opération « Relance client » → Résultat « Devis envoyé à nouveau » → retour au début.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9 : MCT vs MCD -->
+            <section class="chapter-section reveal-on-scroll">
+                <h2><i class="fa-solid fa-scale-balanced"></i> IX. MCD vs MCT — Vision globale</h2>
+
+                <table class="merise-table">
+                    <thead><tr><th></th><th>MCD</th><th>MCT</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Objet</strong></td><td>Les données</td><td>Les traitements</td></tr>
+                        <tr><td><strong>Question</strong></td><td>Quelles informations ?</td><td>Quelles actions ?</td></tr>
+                        <tr><td><strong>Éléments</strong></td><td>Entités, Associations, Propriétés</td><td>Événements, Opérations, Synchronisation</td></tr>
+                        <tr><td><strong>Niveau</strong></td><td>Conceptuel</td><td>Conceptuel</td></tr>
+                        <tr><td><strong>Indépendant de</strong></td><td>L'organisation et la technique</td><td>L'organisation et la technique</td></tr>
+                        <tr><td><strong>Se transforme en</strong></td><td>MLD puis MPD</td><td>MOT puis MPT</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="tip-box" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.05));border-left:4px solid var(--success);">
+                    <i class="fa-solid fa-brain" style="color:var(--success);"></i>
+                    <div>
+                        <strong>🧠 Mnémotechnique — MCT en 3 étapes</strong><br>
+                        <strong>« É.O.R — Événement, Opération, Résultat »</strong>
+                        <ul style="margin:0.5rem 0 0 1rem;">
+                            <li><strong>É</strong>vénement → ce qui déclenche l'action (réception commande, fin de saisie)</li>
+                            <li><strong>O</strong>pération → le traitement exécuté (vérifier stock, calculer total) + règles d'émission</li>
+                            <li><strong>R</strong>ésultat → l'événement produit (commande validée / commande refusée)</li>
+                        </ul>
+                        <p style="font-size:0.88rem;opacity:0.8;margin-top:0.5rem;"><strong>Synchronisation :</strong> ET = tous les événements nécessaires. OU = un seul suffit. C'est le « feu vert » de l'opération.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ZONE EXERCICES -->
+            <article class="glass-card" id="interactive-exercise">
+                <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
+                <p style="color:var(--text-muted);">Chargement des exercices...</p>
+            </article>
+
+            <!-- Nav -->
+            <div class="chapter-nav">
+                <a href="chapitre5.html"><i class="fa-solid fa-arrow-left"></i> Module 5 — Flux</a>
+                <a href="formules.html">CheatSheet <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <div class="xp-bar-container">
+        <span class="xp-level">Débutant</span>
+        <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+        <span class="xp-text">0 XP</span>
+    </div>
+
+    <script src="../assets/js/chapter-exercises.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/gamification.js"></script>
+    <script src="../assets/js/download.js"></script>
+</body>
+</html>

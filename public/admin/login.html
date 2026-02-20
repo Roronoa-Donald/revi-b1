@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration B1 - Connexion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+  <link rel="stylesheet" href="/_auth/css/auth-global.css">
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon">⚙️</div>
+      </div>
+
+      <h1 class="auth-title">Administration B1</h1>
+      <p class="auth-subtitle">Connectez-vous pour gérer les clés Bachelor 1</p>
+
+      <form id="loginForm">
+        <div class="auth-form-group">
+          <label class="auth-label" for="username">Nom d'utilisateur</label>
+          <input class="auth-input" type="text" id="username" name="username" required autofocus autocomplete="username">
+        </div>
+        <div class="auth-form-group">
+          <label class="auth-label" for="password">Mot de passe</label>
+          <input class="auth-input" type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+        <div id="errorMsg" class="auth-message auth-message-error"></div>
+        <button type="submit" id="btnLogin" class="auth-btn auth-btn-primary">
+          <span class="auth-btn-text">Se connecter</span>
+        </button>
+      </form>
+
+      <a href="/" class="auth-back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Retour au site B1
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const btn = document.getElementById('btnLogin');
+    const errorMsg = document.getElementById('errorMsg');
+
+    fetch('/api/admin/verify', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => { if (data.authenticated) window.location.href = '/_auth/admin/dashboard.html'; })
+      .catch(() => {});
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.classList.remove('visible');
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      if (!username || !password) { errorMsg.textContent = 'Veuillez remplir tous les champs'; errorMsg.classList.add('visible'); return; }
+      btn.disabled = true;
+      btn.innerHTML = '<span class="auth-spinner"></span> Connexion...';
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }), credentials: 'include'
+        });
+        const data = await res.json();
+        if (data.success) {
+          btn.innerHTML = '✅ Connecté !';
+          btn.classList.add('auth-btn-success-state');
+          setTimeout(() => { window.location.href = '/_auth/admin/dashboard.html'; }, 600);
+        } else {
+          errorMsg.textContent = data.message || 'Identifiants incorrects';
+          errorMsg.classList.add('visible');
+          btn.disabled = false; btn.innerHTML = '<span class="auth-btn-text">Se connecter</span>';
+        }
+      } catch (err) {
+        errorMsg.textContent = 'Erreur de connexion au serveur';
+        errorMsg.classList.add('visible');
+        btn.disabled = false; btn.innerHTML = '<span class="auth-btn-text">Se connecter</span>';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activation - Bachelor 1 | Cours Interactifs RD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
+  <style>
+    :root {
+      --ar: 16; --ag: 185; --ab: 129;
+      --accent: rgb(var(--ar), var(--ag), var(--ab));
+      --accent-light: #34d399;
+      --accent-dark: #059669;
+      --bg-deep: #0a0e1a;
+      --bg-surface: rgba(15, 23, 42, 0.7);
+      --bg-input: rgba(15, 23, 42, 0.6);
+      --bg-input-focus: rgba(15, 23, 42, 0.85);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --tr: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html.light-mode {
+      --bg-deep: #f8fafc; --bg-surface: rgba(255, 255, 255, 0.85);
+      --bg-input: rgba(241, 245, 249, 0.8); --bg-input-focus: rgba(255, 255, 255, 0.95);
+      --text-primary: #1e293b; --text-secondary: #475569; --text-muted: #64748b;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 15px; }
+    body {
+      font-family: var(--font-sans); background: var(--bg-deep); color: var(--text-primary);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 20px; overflow-x: hidden; transition: background 0.5s; padding-top: 60px;
+    }
+    .bg-glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: all 0.5s;
+      background: radial-gradient(ellipse 550px 400px at 25% 20%, rgba(var(--ar), var(--ag), var(--ab), 0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 450px 350px at 75% 80%, rgba(var(--ar), var(--ag), var(--ab), 0.07) 0%, transparent 70%); }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+      background-image: linear-gradient(rgba(var(--ar), var(--ag), var(--ab), 0.6) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(var(--ar), var(--ag), var(--ab), 0.6) 1px, transparent 1px);
+      background-size: 60px 60px; }
+    .card { position: relative; z-index: 1; background: var(--bg-surface); backdrop-filter: blur(24px);
+      border: 1px solid rgba(var(--ar), var(--ag), var(--ab), 0.15); border-radius: var(--radius);
+      padding: 44px 40px 36px; max-width: 520px; width: 100%;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(var(--ar), var(--ag), var(--ab), 0.08); }
+    .logo-icon { width: 68px; height: 68px; margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgb(var(--ar), var(--ag), var(--ab)), var(--accent-dark));
+      border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 1.9rem;
+      box-shadow: 0 10px 35px rgba(var(--ar), var(--ag), var(--ab), 0.35); }
+    .b1-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; margin: 0 auto 14px;
+      background: rgba(var(--ar), var(--ag), var(--ab), 0.12); border: 1px solid rgba(var(--ar), var(--ag), var(--ab), 0.25);
+      border-radius: 20px; font-size: 0.75rem; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; }
+    .course-badge { display: none; align-items: center; gap: 8px; padding: 8px 18px; margin: 0 auto 18px;
+      background: rgba(var(--ar), var(--ag), var(--ab), 0.1); border: 1px solid rgba(var(--ar), var(--ag), var(--ab), 0.2);
+      border-radius: 30px; width: fit-content; }
+    .course-badge.visible { display: inline-flex; }
+    .course-badge .c-icon { font-size: 1.15rem; }
+    .course-badge .c-name { font-weight: 700; font-size: 0.84rem; color: var(--accent-light); }
+    .title { font-size: 1.55rem; font-weight: 800; text-align: center; margin-bottom: 8px; }
+    .subtitle { text-align: center; color: var(--text-muted); font-size: 0.88rem; line-height: 1.65; margin-bottom: 28px; }
+    .key-group { display: flex; gap: 12px; justify-content: center; align-items: center; margin-bottom: 10px; }
+    .key-part { width: 135px; padding: 16px; font-size: 1.6rem; font-family: var(--font-mono);
+      font-weight: 700; text-align: center; text-transform: uppercase; background: var(--bg-input);
+      border: 2px solid rgba(var(--ar), var(--ag), var(--ab), 0.18); border-radius: var(--radius-sm);
+      color: var(--text-primary); outline: none; transition: all var(--tr); letter-spacing: 4px; }
+    .key-part::placeholder { color: var(--text-muted); opacity: 0.4; letter-spacing: 4px; }
+    .key-part:focus { border-color: rgb(var(--ar), var(--ag), var(--ab));
+      box-shadow: 0 0 0 3px rgba(var(--ar), var(--ag), var(--ab), 0.18), 0 0 30px rgba(var(--ar), var(--ag), var(--ab), 0.08);
+      background: var(--bg-input-focus); }
+    .key-sep { font-size: 1.8rem; color: rgba(var(--ar), var(--ag), var(--ab), 0.45); font-weight: 700; font-family: var(--font-mono); }
+    .msg { display: none; padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.84rem; font-weight: 600; text-align: center; margin-bottom: 16px; line-height: 1.4; }
+    .msg.visible { display: block; animation: msgFadeIn 0.3s ease-out; }
+    @keyframes msgFadeIn { from { opacity: 0; transform: translateY(-6px); } }
+    .msg-error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.25); color: #fca5a5; }
+    .msg-success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); color: #6ee7b7; }
+    .btn { width: 100%; padding: 15px; font-size: 0.95rem; font-weight: 700; font-family: var(--font-sans);
+      border: none; border-radius: var(--radius-sm); cursor: pointer; color: white;
+      background: linear-gradient(135deg, rgb(var(--ar), var(--ag), var(--ab)), var(--accent-dark));
+      box-shadow: 0 6px 20px rgba(var(--ar), var(--ag), var(--ab), 0.35); transition: all var(--tr); }
+    .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(var(--ar), var(--ag), var(--ab), 0.45); }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
+    .btn.success-state { background: linear-gradient(135deg, #10b981, #059669) !important; }
+    .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 8px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .info-box { background: rgba(var(--ar), var(--ag), var(--ab), 0.05); border: 1px solid rgba(var(--ar), var(--ag), var(--ab), 0.1);
+      border-radius: var(--radius-sm); padding: 18px 20px; margin-top: 24px; text-align: left; }
+    .info-box h3 { color: var(--accent-light); font-size: 0.84rem; font-weight: 700; margin-bottom: 8px; }
+    .info-box p { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
+    .info-box strong { color: var(--accent-light); }
+    .back-link { display: flex; align-items: center; gap: 6px; justify-content: center; margin-top: 22px;
+      color: var(--text-muted); font-size: 0.84rem; font-weight: 500; text-decoration: none; transition: color var(--tr); }
+    .back-link:hover { color: rgb(var(--ar), var(--ag), var(--ab)); }
+    .promo-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: linear-gradient(135deg, #10b981, #059669, #047857); padding: 12px 20px;
+      text-align: center; font-size: 0.92rem; font-weight: 600; color: white;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); }
+    .promo-banner a { color: #fde68a; text-decoration: none; font-weight: 800; border-bottom: 2px solid rgba(253, 230, 138, 0.5); }
+    .promo-price { display: inline-block; background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 20px; margin: 0 4px; font-weight: 900; font-size: 1.05rem; }
+    .promo-card { background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm); padding: 18px 20px; margin-top: 16px; text-align: center; }
+    .promo-card .promo-cta { font-size: 0.92rem; font-weight: 700; color: var(--accent-light); margin-bottom: 6px; }
+    .promo-card .promo-detail { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+    .promo-card .promo-detail a { color: var(--accent-light); font-weight: 700; text-decoration: none; }
+    @media (max-width: 480px) {
+      .card { padding: 30px 22px 26px; }
+      .key-part { width: 110px; padding: 14px; font-size: 1.3rem; letter-spacing: 2px; }
+      .key-sep { font-size: 1.4rem; }
+      .title { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="promo-banner">
+    🎓 Bachelor 1 — Accès illimité à tous les cours pour seulement <span class="promo-price">1 000 F</span> !
+    Contactez <strong>Donald</strong> pour obtenir votre clé.
+  </div>
+
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+
+  <div class="card">
+    <div class="logo-icon" id="pageIcon">🔑</div>
+    <div class="b1-badge">🎒 Bachelor 1</div>
+
+    <div class="course-badge" id="courseBadge">
+      <span class="c-icon" id="courseIcon"></span>
+      <span class="c-name" id="courseName"></span>
+    </div>
+
+    <h1 class="title" id="pageTitle">Activer votre accès</h1>
+    <p class="subtitle" id="pageSubtitle">
+      Entrez votre clé d'activation pour débloquer l'accès complet aux cours Bachelor 1.
+    </p>
+
+    <form id="activationForm">
+      <div class="key-group">
+        <input type="text" id="keyPart1" class="key-part" maxlength="4" placeholder="XXXX" autocomplete="off" autofocus>
+        <span class="key-sep">—</span>
+        <input type="text" id="keyPart2" class="key-part" maxlength="4" placeholder="XXXX" autocomplete="off">
+      </div>
+      <div id="errorMsg" class="msg msg-error"></div>
+      <div id="successMsg" class="msg msg-success"></div>
+      <button type="submit" id="btnActivate" class="btn">Activer ma clé</button>
+    </form>
+
+    <div class="info-box">
+      <h3>ℹ️ Comment ça marche ?</h3>
+      <p>
+        Votre clé d'activation est au format <strong>XXXX-XXXX</strong> (lettres et chiffres).
+        Elle est à usage unique et liée à votre appareil. Une fois activée, vous aurez accès
+        à l'ensemble des cours Bachelor 1. Les clés Bachelor 2 fonctionnent aussi ici !
+      </p>
+    </div>
+
+    <div class="promo-card">
+      <div class="promo-cta">💰 Pas encore de clé ? Obtenez la vôtre à seulement 1 000 F !</div>
+      <div class="promo-detail">
+        Accès complet à tous les chapitres, exercices, simulateurs d'examen et fiches formules.<br>
+        Contactez <strong>Donald</strong> pour recevoir votre clé instantanément.
+      </div>
+    </div>
+
+    <a href="/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour à l'accueil Bachelor 1
+    </a>
+  </div>
+
+  <script src="/_auth/js/fingerprint.js"></script>
+  <script>
+    const part1 = document.getElementById('keyPart1');
+    const part2 = document.getElementById('keyPart2');
+    const form = document.getElementById('activationForm');
+    const btn = document.getElementById('btnActivate');
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    function hexToRgb(hex) {
+      const h = hex.replace('#', '');
+      return { r: parseInt(h.substring(0, 2), 16), g: parseInt(h.substring(2, 4), 16), b: parseInt(h.substring(4, 6), 16) };
+    }
+
+    const courseId = urlParams.get('course');
+    if (courseId) {
+      fetch('/api/course-info?course=' + encodeURIComponent(courseId), { credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          if (data.name) {
+            document.getElementById('courseBadge').classList.add('visible');
+            document.getElementById('courseIcon').textContent = data.icon;
+            document.getElementById('courseName').textContent = data.name;
+            document.getElementById('pageIcon').textContent = data.icon;
+            document.getElementById('pageSubtitle').textContent = 'Activez votre clé pour accéder au cours « ' + data.name + ' » et à tous les contenus.';
+            document.title = 'Activation — ' + data.name;
+          }
+          if (data.theme) {
+            const t = data.theme;
+            const root = document.documentElement.style;
+            const rgb = hexToRgb(t.accent);
+            root.setProperty('--ar', rgb.r);
+            root.setProperty('--ag', rgb.g);
+            root.setProperty('--ab', rgb.b);
+            root.setProperty('--accent-light', t.accentLight);
+            root.setProperty('--accent-dark', t.accentDark);
+            if (t.mode === 'light') document.documentElement.classList.add('light-mode');
+          }
+        }).catch(() => {});
+    }
+
+    if (urlParams.get('error') === 'scope') showError("Votre clé ne donne pas accès à ce cours.");
+
+    part1.addEventListener('input', (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); if (e.target.value.length === 4) part2.focus(); });
+    part2.addEventListener('input', (e) => { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); });
+    part1.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text').toUpperCase().trim();
+      const match = pasted.match(/^([A-Z0-9]{4})[- ]?([A-Z0-9]{4})$/);
+      if (match) { part1.value = match[1]; part2.value = match[2]; part2.focus(); }
+      else { part1.value = pasted.replace(/[^A-Z0-9]/g, '').substring(0, 4); if (part1.value.length === 4) part2.focus(); }
+    });
+    part2.addEventListener('keydown', (e) => { if (e.key === 'Backspace' && part2.value === '') part1.focus(); });
+
+    function showError(msg) { errorMsg.textContent = msg; errorMsg.classList.add('visible'); successMsg.classList.remove('visible'); }
+    function showSuccess(msg) { successMsg.textContent = msg; successMsg.classList.add('visible'); errorMsg.classList.remove('visible'); }
+    function hideMessages() { errorMsg.classList.remove('visible'); successMsg.classList.remove('visible'); }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); hideMessages();
+      const key = part1.value + '-' + part2.value;
+      if (part1.value.length !== 4 || part2.value.length !== 4) { showError('Veuillez entrer une clé complète au format XXXX-XXXX'); return; }
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Activation en cours...';
+      try {
+        const fingerprint = generateFingerprint();
+        const response = await fetch('/api/activate', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key, fingerprint }), credentials: 'include'
+        });
+        const data = await response.json();
+        if (data.success) {
+          showSuccess(data.message);
+          btn.innerHTML = '✅ Activé !';
+          btn.classList.add('success-state');
+          setTimeout(() => { window.location.href = urlParams.get('redirect') || '/'; }, 1200);
+        } else {
+          showError(data.message || "Erreur lors de l'activation");
+          btn.disabled = false; btn.innerHTML = 'Activer ma clé';
+        }
+      } catch (err) {
+        showError('Erreur de connexion au serveur. Réessayez.');
+        btn.disabled = false; btn.innerHTML = 'Activer ma clé';
+      }
+    });
+  </script>
+</body>
+</html>

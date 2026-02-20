@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 2 — Tableaux de fréquences | Stats B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-chart-bar"></i> StatBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📊 StatBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html" class="active"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a><a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-table"></i> Chapitre 2</div>
+    <h1>📊 Tableaux de <span class="highlight">fréquences</span></h1>
+    <p>Effectifs, fréquences, fréquences cumulées et regroupement en classes.</p>
+</section>
+
+<main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table"></i> Tableau de distribution</h2>
+    <div class="concept-card">
+        <h4>📦 Analogie du tri de bonbons</h4>
+        <p>Vous avez un sac de 20 bonbons de 4 couleurs. Trier et compter chaque couleur = construire un tableau de distribution. Le tableau répond à « combien de chaque ? » et « quelle proportion ? ».</p>
+    </div>
+    <p>Exemple : Notes obtenues à un test (sur 5) par 20 élèves :</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Note (xᵢ)</th><th>Effectif (nᵢ)</th><th>Fréquence (fᵢ)</th><th>Fréq. cumulée (Fᵢ)</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>2</td><td>2/20 = 0.10</td><td>0.10</td></tr>
+            <tr><td>2</td><td>3</td><td>3/20 = 0.15</td><td>0.25</td></tr>
+            <tr><td>3</td><td>7</td><td>7/20 = 0.35</td><td>0.60</td></tr>
+            <tr><td>4</td><td>5</td><td>5/20 = 0.25</td><td>0.85</td></tr>
+            <tr><td>5</td><td>3</td><td>3/20 = 0.15</td><td>1.00</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>20</strong></td><td><strong>1.00</strong></td><td>—</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-calculator"></i> Les formules clés</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique E.F.C. — Effectif, Fréquence, Cumulée</h4>
+        <p><strong>E</strong>ffectif : nᵢ = combien d'individus ont la valeur xᵢ<br>
+        <strong>F</strong>réquence : fᵢ = nᵢ / N (proportion)<br>
+        <strong>C</strong>umulée : Fᵢ = f₁ + f₂ + … + fᵢ (cumul progressif)</p>
+    </div>
+    <div class="info-box"><strong>ℹ️ Vérifications :</strong> Σnᵢ = N (somme des effectifs = total). Σfᵢ = 1 (somme des fréquences = 1). La dernière fréquence cumulée = 1.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Données groupées en classes</h2>
+    <p>Quand les données sont continues (taille, poids), on les regroupe en <strong>classes</strong> (intervalles) :</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Classe (taille cm)</th><th>Centre (cᵢ)</th><th>Effectif (nᵢ)</th><th>Fréquence</th></tr></thead>
+        <tbody>
+            <tr><td>[150 ; 160[</td><td>155</td><td>4</td><td>0.20</td></tr>
+            <tr><td>[160 ; 170[</td><td>165</td><td>8</td><td>0.40</td></tr>
+            <tr><td>[170 ; 180[</td><td>175</td><td>6</td><td>0.30</td></tr>
+            <tr><td>[180 ; 190[</td><td>185</td><td>2</td><td>0.10</td></tr>
+            <tr><td><strong>Total</strong></td><td>—</td><td><strong>20</strong></td><td><strong>1.00</strong></td></tr>
+        </tbody>
+    </table></div>
+    <div class="tip-box"><strong>💡 Centre de classe :</strong> cᵢ = (borne inf + borne sup) / 2. Exemple : (150 + 160) / 2 = 155. On utilise le centre pour les calculs de moyenne.</div>
+    <div class="warning-box"><strong>⚠️ Notation [a ; b[ :</strong> Le crochet [ inclut la valeur, le crochet [ l'exclut. Donc [160 ; 170[ inclut 160 mais pas 170.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 2</h4>
+        <ul>
+            <li><strong>E.F.C.</strong> : Effectif (nᵢ), Fréquence (nᵢ/N), Cumulée (somme progressive)</li>
+            <li>Σnᵢ = N, Σfᵢ = 1, dernière Fᵢ = 1</li>
+            <li>Classes pour données continues : [a ; b[</li>
+            <li>Centre de classe = (a + b) / 2</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre1.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Séries</a>
+    <a href="chapitre3.html" class="next-chapter">Tendance centrale <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script>
+ChapterExercises.init({
+    guided:[
+        {q:"Construisez un tableau de fréquences pour : 2, 3, 3, 4, 4, 4, 5, 5, 5, 5 (N=10).",hints:["Comptez chaque valeur","Divisez par N"],answer:"x=2: n=1, f=0.10 | x=3: n=2, f=0.20 | x=4: n=3, f=0.30 | x=5: n=4, f=0.40. Total: N=10, Σf=1."},
+        {q:"Calculez les fréquences cumulées pour le tableau précédent.",hints:["Cumuler = ajouter progressivement"],answer:"F(2)=0.10. F(3)=0.10+0.20=0.30. F(4)=0.30+0.30=0.60. F(5)=0.60+0.40=1.00."},
+        {q:"Quel est le centre de la classe [20 ; 30[ ?",hints:["Somme des deux bornes","Diviser par 2"],answer:"Centre = (20 + 30) / 2 = 25."},
+        {q:"Si N=50 et n₃=15, quelle est la fréquence f₃ ?",hints:["f = n/N"],answer:"f₃ = 15/50 = 0.30 (soit 30%)."},
+        {q:"La fréquence cumulée F₃ = 0.75. Que signifie ce chiffre ?",hints:["75% des individus…"],answer:"75% des individus ont une valeur inférieure ou égale à la 3e modalité."}
+    ],
+    quiz:[
+        {type:"mcq",q:"La fréquence se calcule par :",options:["nᵢ × N","nᵢ + N","nᵢ / N","N / nᵢ"],correct:2},
+        {type:"mcq",q:"La somme de toutes les fréquences vaut :",options:["0","N","1","∞"],correct:2},
+        {type:"mcq",q:"La fréquence cumulée est :",options:["nᵢ / N","La somme progressive des fréquences","L'effectif total","La médiane"],correct:1},
+        {type:"mcq",q:"Le centre de la classe [10 ; 20[ est :",options:["10","20","15","30"],correct:2},
+        {type:"mcq",q:"[a ; b[ signifie :",options:["a inclus, b inclus","a exclus, b inclus","a inclus, b exclus","a exclus, b exclus"],correct:2},
+        {type:"mcq",q:"Si Σnᵢ = 40, alors N =",options:["20","40","80","Impossible à dire"],correct:1},
+        {type:"mcq",q:"10 élèves sur 25 ont une note de 15. La fréquence de 15 est :",options:["0.25","0.40","0.50","2.5"],correct:1},
+        {type:"qa",q:"Comment vérifie-t-on un tableau de fréquences ?",answer:"Σnᵢ = N (somme des effectifs = total), Σfᵢ = 1 (somme des fréquences = 1), et la dernière fréquence cumulée doit valoir 1."},
+        {type:"qa",q:"Pourquoi regroupe-t-on en classes ?",answer:"Quand les données sont continues, il y a trop de valeurs différentes. Le regroupement en classes simplifie le tableau et permet de visualiser la distribution."},
+        {type:"qa",q:"Que représente la fréquence cumulée F₄ = 0.85 ?",answer:"85% des individus ont une valeur inférieure ou égale à la 4e modalité (ou classe)."}
+    ],
+    dragdrop:[
+        {instruction:"Associez chaque terme à sa formule :",pairs:[["Effectif total","N = Σnᵢ"],["Fréquence","fᵢ = nᵢ / N"],["Centre de classe","cᵢ = (a+b)/2"],["Fréq. cumulée","Fᵢ = Σfⱼ (j≤i)"]]},
+        {instruction:"Vrai ou Faux :",pairs:[["Σfᵢ = 1","Vrai"],["Σfᵢ = N","Faux"],["Centre de [0;10[ = 5","Vrai"],["[a;b[ inclut b","Faux"]]},
+        {instruction:"Associez :",pairs:[["Données discrètes","Tableau simple"],["Données continues","Regroupement en classes"],["Fréquence","Proportion (0 à 1)"]]}
+    ]
+});
+</script>
+<script src="../../assets/js/download.js"></script>
+</body>
+</html>
