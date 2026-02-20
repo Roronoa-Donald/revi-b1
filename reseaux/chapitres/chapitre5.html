@@ -134,6 +134,52 @@ traceroute www.google.com # (Linux/Mac)
     </table></div>
 </section>
 
+<!-- Protocoles de messagerie -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-envelope"></i> Protocoles de messagerie en détail</h2>
+    <p>L'email utilise <strong>3 protocoles</strong> qu'il ne faut pas confondre :</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Protocole</th><th>Port</th><th>Direction</th><th>Rôle</th></tr></thead>
+        <tbody>
+            <tr><td><strong>SMTP</strong></td><td>25 / 587</td><td>Envoi →</td><td>Envoyer un email (client → serveur, serveur → serveur)</td></tr>
+            <tr><td><strong>POP3</strong></td><td>110 / 995</td><td>← Réception</td><td>Télécharge les mails <strong>puis les supprime</strong> du serveur</td></tr>
+            <tr><td><strong>IMAP</strong></td><td>143 / 993</td><td>← Réception</td><td>Synchronise les mails, <strong>les garde</strong> sur le serveur</td></tr>
+        </tbody>
+    </table></div>
+    <div class="concept-card">
+        <h4>📮 Analogie postale</h4>
+        <p><strong>SMTP</strong> = le facteur qui <strong>dépose</strong> la lettre au bureau de poste.<br>
+        <strong>POP3</strong> = vous allez chercher la lettre et la <strong>ramenez chez vous</strong> (le bureau ne la garde plus).<br>
+        <strong>IMAP</strong> = vous <strong>lisez la lettre au bureau</strong> de poste, elle reste là pour être relue depuis d'autres endroits.</p>
+    </div>
+    <div class="tip-box"><strong>💡 IMAP vs POP3 :</strong> Aujourd'hui, IMAP est le standard (Gmail, Outlook…) car on consulte ses mails sur <strong>plusieurs appareils</strong>. POP3 est utile si on veut une copie locale unique.</div>
+</section>
+
+<!-- Hiérarchie DNS -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sitemap"></i> La hiérarchie DNS</h2>
+    <p>Le DNS fonctionne comme un <strong>annuaire distribué</strong> organisé en arbre hiérarchique :</p>
+    <div class="code-block"><div class="code-header"><span>Résolution DNS pas à pas : www.google.com</span></div><pre><code>1. Votre PC vérifie son cache DNS local
+2. Si pas en cache → demande au serveur DNS récursif (FAI)
+3. Récursif interroge un serveur racine (".")  → "Allez voir .com"
+4. Récursif interroge le serveur TLD .com       → "Allez voir ns.google.com"
+5. Récursif interroge le serveur autoritaire de google.com
+   → "www.google.com = 142.250.179.68"
+6. Réponse renvoyée au PC + mise en cache (TTL)
+
+Hiérarchie :
+  . (racine)  →  .com / .fr / .org (TLD)  →  google.com (domaine)  →  www (sous-domaine)</code></pre></div>
+    <div class="info-box"><strong>ℹ️ Il existe 13 serveurs racine</strong> (de A à M), répartis mondialement via Anycast. Ils sont le point de départ de toute résolution DNS non mise en cache.</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – SMTP ≠ réception :</strong> SMTP sert à <strong>envoyer</strong>. Pour <strong>recevoir</strong>, c'est POP3 ou IMAP. Un QCM avec « quel protocole pour relever ses mails ? » → jamais SMTP !</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – FTP utilise 2 ports :</strong> Le port <strong>21</strong> (commandes) ET le port <strong>20</strong> (données en mode actif). Ne pas oublier le port 20 en examen !</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – DHCP utilise UDP, pas TCP :</strong> DHCP fonctionne en broadcast (le client n'a pas encore d'IP !). Il utilise UDP sur les ports <strong>67</strong> (serveur) et <strong>68</strong> (client).</div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

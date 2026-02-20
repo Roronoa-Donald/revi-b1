@@ -56,7 +56,13 @@
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-link"></i> Corrélation</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">
-        <h4>🧠 Mnémonique — Corrélation en 3 mots</h4>
+        <h4>🧠 Mnémonique C.D.P. — Covariance, Droite, Prédiction</h4>
+        <p><strong>C</strong>ovariance = mesure la liaison entre X et Y<br>
+        <strong>D</strong>roite de régression = modèle Y = aX + b<br>
+        <strong>P</strong>rédiction = utiliser la droite pour estimer Y à partir de X</p>
+    </div>
+    <div class="concept-card">
+        <h4>🧠 Mnémonique secondaire — Corrélation en 3 mots</h4>
         <p><strong>Positive</strong> = X ↑ Y ↑ (les deux montent ensemble)<br>
         <strong>Négative</strong> = X ↑ Y ↓ (l'une monte, l'autre descend)<br>
         <strong>Nulle</strong> = aucun lien visible (nuage circulaire)</p>
@@ -102,6 +108,58 @@ Ordonnée :  b = ȳ − a × x̄
 
 La droite passe TOUJOURS par le point moyen (x̄, ȳ).</code></pre></div>
     <div class="tip-box"><strong>💡 Utilité :</strong> La droite de régression permet de <strong>prédire</strong> Y pour une nouvelle valeur de X. Mais attention : ne prédisez pas en dehors de la plage des données (extrapolation risquée) !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Coefficient de détermination R²</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-percentage"></i> Qualité de l'ajustement</div>
+<pre><code>R² = r² = (coefficient de corrélation)²
+
+Interprétation :
+R² représente la proportion de la variance de Y
+expliquée par la relation linéaire avec X.
+
+Exemple : r = 0.90 → R² = 0.81 = 81%
+→ 81% de la variation de Y est expliquée par X.
+→ 19% reste inexpliqué (autres facteurs).
+
+R² = 1   → ajustement parfait (tous les points sur la droite)
+R² = 0   → aucun pouvoir explicatif
+R² > 0.7 → bon modèle en général</code></pre>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exemple complet travaillé</h2>
+    <div class="concept-card">
+        <h4>📋 Données : Heures d'étude (X) et note obtenue (Y)</h4>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Étudiant</th><th>X (heures)</th><th>Y (note)</th><th>xᵢyᵢ</th><th>xᵢ²</th></tr></thead>
+        <tbody>
+            <tr><td>A</td><td>2</td><td>8</td><td>16</td><td>4</td></tr>
+            <tr><td>B</td><td>3</td><td>10</td><td>30</td><td>9</td></tr>
+            <tr><td>C</td><td>5</td><td>14</td><td>70</td><td>25</td></tr>
+            <tr><td>D</td><td>7</td><td>16</td><td>112</td><td>49</td></tr>
+            <tr><td>E</td><td>8</td><td>18</td><td>144</td><td>64</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>25</strong></td><td><strong>66</strong></td><td><strong>372</strong></td><td><strong>151</strong></td></tr>
+        </tbody>
+    </table></div>
+    <p><strong>Étape 1 :</strong> Moyennes → x̄ = 25/5 = 5, ȳ = 66/5 = 13.2</p>
+    <p><strong>Étape 2 :</strong> Cov(X,Y) = Σ(xᵢyᵢ)/N − x̄ȳ = 372/5 − 5×13.2 = 74.4 − 66 = <strong>8.4</strong></p>
+    <p><strong>Étape 3 :</strong> Var(X) = Σxᵢ²/N − x̄² = 151/5 − 25 = 30.2 − 25 = <strong>5.2</strong></p>
+    <p><strong>Étape 4 :</strong> Pente a = 8.4 / 5.2 ≈ <strong>1.615</strong></p>
+    <p><strong>Étape 5 :</strong> b = 13.2 − 1.615×5 = 13.2 − 8.077 ≈ <strong>5.12</strong></p>
+    <p><strong>Résultat :</strong> Droite Y = 1.615X + 5.12</p>
+    <p><strong>Prédiction :</strong> Pour X = 6 heures → Y = 1.615×6 + 5.12 = 9.69 + 5.12 ≈ <strong>14.8</strong></p>
+    <div class="info-box"><strong>✅ Vérification :</strong> La droite passe par (x̄, ȳ) = (5, 13.2). Test : 1.615×5 + 5.12 = 8.077 + 5.12 = 13.2 ✓</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 — Corrélation ≠ Causalité :</strong> Même si r = 0.99, on ne peut pas conclure que X <em>cause</em> Y. Il peut y avoir une variable cachée (confondante). Exemples célèbres : glaces et noyades, cignognes et natalité.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 — Extrapolation :</strong> La droite est fiable <strong>entre les valeurs observées</strong>. Prédire Y pour X = 100 si vos données vont de 2 à 8 est très risqué (la relation peut changer).</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 — Relation non linéaire :</strong> r mesure la corrélation <strong>linéaire</strong>. Si la relation est courbe (parabolique, exponentielle), r peut être faible même si la relation est forte. Toujours regarder le nuage de points d'abord !</div>
 </section>
 
 <section class="chapter-section reveal-on-scroll">

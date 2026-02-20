@@ -113,6 +113,57 @@ Valeur > Q3 + 1.5×IQR  → outlier haut</code></pre></div>
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-percentage"></i> Coefficient de variation (CV)</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-balance-scale"></i> Comparer des dispersions</div>
+<pre><code>Coefficient de variation :
+CV = (σ / x̄) × 100%
+
+Interprétation :
+CV < 15%  → faible dispersion (données homogènes)
+CV 15-30% → dispersion modérée
+CV > 30%  → forte dispersion (données hétérogènes)</code></pre>
+    </div>
+    <div class="concept-card">
+        <h4>🎯 Pourquoi le CV ?</h4>
+        <p>On ne peut pas comparer directement les écarts-types de données avec des unités ou des ordres de grandeur différents. Le CV est <strong>sans unité</strong> et permet de comparer :</p>
+        <p><strong>Exemple :</strong> Tailles (x̄=170 cm, σ=10) → CV = 5.9%. Poids (x̄=70 kg, σ=12) → CV = 17.1%. → Les poids sont relativement <strong>plus dispersés</strong> que les tailles.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-users-cog"></i> Population vs Échantillon : σ² vs s²</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-exclamation-circle"></i> Distinction importante</div>
+<pre><code>Variance de population :  σ² = Σ(xᵢ − x̄)² / N
+Variance d'échantillon :  s² = Σ(xᵢ − x̄)² / (N − 1)
+
+↑ On divise par (N−1), pas par N !
+→ C'est la "correction de Bessel"
+→ Rend l'estimation non biaisée</code></pre>
+    </div>
+    <div class="tip-box"><strong>💡 En pratique :</strong> Si on étudie la population entière → σ² (diviser par N). Si c'est un échantillon (cas le plus fréquent) → s² (diviser par N−1). Les calculatrices offrent souvent les deux : σₙ et σₙ₋₁.</div>
+    <div class="warning-box"><strong>⚠️ Piège d'examen :</strong> Vérifiez si l'énoncé dit « population » ou « échantillon ». Cela change le dénominateur (N vs N−1) ! Pour N grand, la différence est négligeable.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Déciles et centiles</h2>
+    <div class="concept-card">
+        <h4>📏 Découpage plus fin que les quartiles</h4>
+        <p>Les <strong>quartiles</strong> découpent en 4. Les <strong>déciles</strong> découpent en 10 parts. Les <strong>centiles</strong> (ou percentiles) découpent en 100.</p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Mesure</th><th>Notation</th><th>Signification</th></tr></thead>
+        <tbody>
+            <tr><td>1er décile</td><td>D1</td><td>10% des données sont en dessous</td></tr>
+            <tr><td>5e décile</td><td>D5 = Me</td><td>50% en dessous (= médiane)</td></tr>
+            <tr><td>9e décile</td><td>D9</td><td>90% en dessous</td></tr>
+            <tr><td>25e centile</td><td>P25 = Q1</td><td>25% en dessous (= 1er quartile)</td></tr>
+            <tr><td>Interdécile</td><td>D9 − D1</td><td>Étendue des 80% centraux</td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>ℹ️ Usage :</strong> Les déciles sont très utilisés pour les revenus (« les 10% les plus riches gagnent plus que D9 ») et en médecine (courbes de croissance : « votre enfant est au 75e centile »).</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-box"></i> Boîte à moustaches (Box Plot)</h2>
     <div class="concept-card">
         <h4>📦 Les 5 valeurs clés</h4>

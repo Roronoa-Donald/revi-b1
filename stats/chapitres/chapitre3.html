@@ -112,6 +112,74 @@ Exemple (N=6, pair) :
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Moyenne et médiane pour données groupées en classes</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-calculator"></i> Formules pour données groupées</div>
+<pre><code>Moyenne (données groupées) :
+x̄ = Σ(cᵢ × nᵢ) / N     où cᵢ = centre de la classe i
+
+Médiane (interpolation linéaire) :
+Me = Lᵢ + ((N/2 − Nᵢ₋₁) / nᵢ) × hᵢ
+
+Lᵢ     = borne inférieure de la classe médiane
+N/2    = moitié de l'effectif total
+Nᵢ₋₁  = effectif cumulé AVANT la classe médiane
+nᵢ     = effectif DE la classe médiane
+hᵢ     = amplitude de la classe médiane</code></pre>
+    </div>
+    <h3>Exemple : tailles de 20 étudiants</h3>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Classe (cm)</th><th>cᵢ</th><th>nᵢ</th><th>Nᵢ (cumulé)</th></tr></thead>
+        <tbody>
+            <tr><td>[150 ; 160[</td><td>155</td><td>3</td><td>3</td></tr>
+            <tr><td>[160 ; 170[</td><td>165</td><td>7</td><td>10</td></tr>
+            <tr><td>[170 ; 180[</td><td>175</td><td>8</td><td>18</td></tr>
+            <tr><td>[180 ; 190[</td><td>185</td><td>2</td><td>20</td></tr>
+        </tbody>
+    </table></div>
+    <p><strong>Moyenne :</strong> x̄ = (155×3 + 165×7 + 175×8 + 185×2) / 20 = (465+1155+1400+370) / 20 = 3390/20 = <strong>169.5 cm</strong></p>
+    <p><strong>Médiane :</strong> N/2 = 10. Nᵢ₋₁ = 3 (cumulé avant [160;170[), nᵢ = 7, Lᵢ = 160, hᵢ = 10.</p>
+    <p>Me = 160 + ((10−3) / 7) × 10 = 160 + 10 = <strong>170 cm</strong></p>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-balance-scale"></i> Quand utiliser quelle mesure ?</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Situation</th><th>Mesure recommandée</th><th>Pourquoi ?</th></tr></thead>
+        <tbody>
+            <tr><td>Salaires d'une entreprise</td><td><strong>Médiane</strong></td><td>Quelques très hauts salaires faussent la moyenne</td></tr>
+            <tr><td>Notes d'un examen</td><td><strong>Moyenne</strong></td><td>Pas d'extrêmes aberrants, utilise toutes les notes</td></tr>
+            <tr><td>Taille de vêtement la plus vendue</td><td><strong>Mode</strong></td><td>On cherche la valeur la plus demandée</td></tr>
+            <tr><td>Prix de l'immobilier</td><td><strong>Médiane</strong></td><td>Quelques biens très chers déforment la moyenne</td></tr>
+            <tr><td>Couleur préférée</td><td><strong>Mode</strong></td><td>Donnée qualitative → seul le mode est applicable</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-chart-line"></i> Asymétrie (skewness)</h2>
+    <div class="concept-card">
+        <h4>📊 Position relative des 3 M et forme de la distribution</h4>
+        <p>La position de la moyenne par rapport à la médiane indique la forme de la distribution :</p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Relation</th><th>Forme</th><th>Explication</th></tr></thead>
+        <tbody>
+            <tr><td>Moyenne ≈ Médiane ≈ Mode</td><td><strong>Symétrique</strong></td><td>Distribution équilibrée (ex : tailles d'adultes)</td></tr>
+            <tr><td>Moyenne &gt; Médiane</td><td><strong>Asymétrie droite</strong> (queue à droite)</td><td>Quelques valeurs très élevées tirent la moyenne (ex : salaires)</td></tr>
+            <tr><td>Moyenne &lt; Médiane</td><td><strong>Asymétrie gauche</strong> (queue à gauche)</td><td>Quelques valeurs très basses (ex : notes à un examen facile)</td></tr>
+        </tbody>
+    </table></div>
+    <div class="tip-box"><strong>💡 Astuce :</strong> La moyenne est « tirée » vers la queue de la distribution. Si Moyenne &gt; Médiane → les extrêmes hauts dominent → asymétrie positive (droite).</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 :</strong> Oublier de <strong>ranger les données</strong> avant de calculer la médiane. La médiane n'a de sens que sur une série ordonnée !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 :</strong> Confondre « rang de la médiane » et « valeur de la médiane ». Si N=9, le rang est 5, mais la médiane est la <strong>valeur</strong> au 5e rang, pas 5 !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 :</strong> La moyenne pondérée ≠ la moyenne simple. Si les coefficients sont différents, on ne peut pas juste faire la somme / nombre de matières.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">
         <h4>📝 L'essentiel du Chapitre 3</h4>

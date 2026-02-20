@@ -125,6 +125,56 @@ Sous-réseau 3 : 192.168.1.128/26 (hôtes .129 – .190)
 Sous-réseau 4 : 192.168.1.192/26 (hôtes .193 – .254)</code></pre></div>
 </section>
 
+<!-- VLSM -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-cut"></i> VLSM – Masques de longueur variable</h2>
+    <p>Le VLSM (<strong>Variable Length Subnet Mask</strong>) permet de créer des sous-réseaux de <strong>tailles différentes</strong> pour optimiser l'utilisation des adresses IP.</p>
+    <div class="concept-card">
+        <h4>🍕 Analogie : découper une pizza</h4>
+        <p>Sans VLSM = couper une pizza en parts <strong>égales</strong> (même si certains convives mangent peu).<br>
+        Avec VLSM = couper des parts <strong>adaptées</strong> à l'appétit de chacun → moins de gaspillage !</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Exemple VLSM : 192.168.10.0/24 pour 3 départements</span></div><pre><code>Besoins : Marketing = 100 hôtes · IT = 50 hôtes · Direction = 10 hôtes
+
+Étape 1 : Trier du PLUS GRAND au plus petit
+  Marketing (100) → IT (50) → Direction (10)
+
+Étape 2 : Allouer en commençant par le plus grand
+  Marketing : 100 hôtes → besoin 2⁷ = 128 → /25
+    → 192.168.10.0/25    (126 hôtes utilisables)
+
+  IT : 50 hôtes → besoin 2⁶ = 64 → /26
+    → 192.168.10.128/26  (62 hôtes utilisables)
+
+  Direction : 10 hôtes → besoin 2⁴ = 16 → /28
+    → 192.168.10.192/28  (14 hôtes utilisables)
+
+Résultat : 3 sous-réseaux optimisés au lieu de 4 sous-réseaux /26 !</code></pre></div>
+    <div class="tip-box"><strong>💡 Règle d'or VLSM :</strong> Toujours commencer par le sous-réseau le <strong>plus grand</strong>. C'est comme remplir une valise : on met les gros objets d'abord !</div>
+</section>
+
+<!-- Masques spéciaux /31 et /32 -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-link"></i> Masques spéciaux : /31 et /32</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Masque</th><th>Hôtes</th><th>Usage</th><th>Explication</th></tr></thead>
+        <tbody>
+            <tr><td><strong>/32</strong></td><td>1 seul</td><td>Loopback, route vers un hôte</td><td>Identifie une machine <strong>unique</strong> (255.255.255.255)</td></tr>
+            <tr><td><strong>/31</strong></td><td>2</td><td>Liaison point-à-point</td><td>Pas de broadcast, 2 IPs pour connecter 2 routeurs (RFC 3021)</td></tr>
+            <tr><td><strong>/30</strong></td><td>2</td><td>Liaison point-à-point (classique)</td><td>4 adresses − réseau − broadcast = 2 hôtes</td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>ℹ️ En examen :</strong> Pour une liaison entre 2 routeurs, la réponse attendue est souvent <strong>/30</strong>. Le /31 est correct aussi (RFC 3021) mais moins courant dans les QCM.</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – Oublier de trier en VLSM :</strong> Si on alloue les petits réseaux d'abord, on risque de ne plus avoir assez d'espace contigu pour les grands. <strong>Toujours du plus grand au plus petit !</strong></div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – Le /24 n'est PAS le seul masque :</strong> Par réflexe, on pense « masque = 255.255.255.0 ». En réalité le masque dépend du nombre d'hôtes nécessaires. Pour 200 hôtes → /24. Pour 30 → /27. Pour 10 → /28.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – Confondre nombre de bits réseau et bits hôte :</strong> Dans /26, il y a 26 bits <strong>réseau</strong> et 32 − 26 = 6 bits <strong>hôte</strong>. C'est 2<sup>6</sup> − 2 = 62 hôtes, pas 2<sup>26</sup>.</div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

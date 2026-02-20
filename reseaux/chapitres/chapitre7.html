@@ -73,6 +73,92 @@
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-fingerprint"></i> Hachage (Hashing)</h2>
+    <div class="concept-card">
+        <h4>🔒 Empreinte digitale des données</h4>
+        <p>Le hachage transforme des données de n'importe quelle taille en une <strong>empreinte fixe</strong> (hash). C'est <strong>irréversible</strong> : on ne peut pas retrouver les données depuis le hash.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><i class="fas fa-hashtag"></i> Algorithmes de hachage</div>
+<pre><code>MD5     → 128 bits (32 hex) — obsolète, vulnérable aux collisions
+SHA-1   → 160 bits (40 hex) — obsolète depuis 2017
+SHA-256 → 256 bits (64 hex) — standard actuel ✓
+SHA-512 → 512 bits (128 hex)
+
+Exemple SHA-256 :
+"bonjour" → 2c89d40cb16b6c0db5c35bc35cf75b98...
+"Bonjour" → 6e340b9cffb37a989ca544e6bb780a2c...
+↑ Un seul caractère change → hash complètement différent !</code></pre>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Usage</th><th>Explication</th></tr></thead>
+        <tbody>
+            <tr><td>Stockage de mots de passe</td><td>On stocke le hash, jamais le mot de passe en clair</td></tr>
+            <tr><td>Intégrité des fichiers</td><td>Vérifier qu'un fichier n'a pas été modifié (checksum)</td></tr>
+            <tr><td>Signatures numériques</td><td>Prouver l'authenticité d'un message</td></tr>
+            <tr><td>Certificats SSL/TLS</td><td>Vérifier l'identité d'un site web</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-certificate"></i> SSL/TLS et certificats</h2>
+    <div class="concept-card">
+        <h4>🤝 Le handshake HTTPS simplifié</h4>
+        <p>Quand vous visitez un site HTTPS, voici ce qui se passe :</p>
+        <ol>
+            <li>Le navigateur demande le <strong>certificat</strong> du serveur</li>
+            <li>Le certificat contient la <strong>clé publique</strong> du serveur (signée par une autorité de confiance CA)</li>
+            <li>Le navigateur vérifie le certificat auprès du CA</li>
+            <li>Échange de clé symétrique via chiffrement asymétrique</li>
+            <li>Communication chiffrée en AES (symétrique, rapide)</li>
+        </ol>
+    </div>
+    <div class="info-box"><strong>ℹ️ CA (Certificate Authority) :</strong> Autorité de confiance qui signe les certificats (Let's Encrypt, DigiCert, Verisign). Le cadenas dans le navigateur = certificat valide.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-shield-alt"></i> Pare-feu et ACL</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-fire"></i> Règles de pare-feu (exemples)</div>
+<pre><code>ACL = Access Control List (liste de règles ordonnées)
+
+Règle    Action    Protocole    Source          Dest Port    Description
+1        ALLOW     TCP          192.168.1.0/24  80,443       Web (HTTP/HTTPS)
+2        ALLOW     TCP          192.168.1.0/24  22           SSH admin
+3        ALLOW     UDP          Any             53           DNS
+4        DENY      TCP          Any             23           Bloquer Telnet
+5        DENY      ALL          Any             Any          Tout le reste bloqué
+
+→ Les règles sont évaluées dans l'ordre : première correspondance gagne.
+→ Toujours terminer par un DENY ALL implicite.</code></pre>
+    </div>
+    <div class="tip-box"><strong>💡 Principe du moindre privilège :</strong> Bloquer tout par défaut, puis ouvrir uniquement ce qui est nécessaire. C'est la philosophie « deny by default, allow by exception ».</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-network-wired"></i> DMZ (Zone démilitarisée)</h2>
+    <div class="concept-card">
+        <h4>🏰 Architecture de sécurité</h4>
+        <p>La <strong>DMZ</strong> est une zone réseau entre Internet et le réseau interne, protégée par <strong>deux pare-feu</strong> :</p>
+        <ul>
+            <li><strong>Internet</strong> → [Pare-feu 1] → <strong>DMZ</strong> (serveurs web, mail) → [Pare-feu 2] → <strong>Réseau interne</strong></li>
+        </ul>
+        <p>Si un serveur DMZ est compromis, l'attaquant ne peut pas atteindre le réseau interne grâce au 2e pare-feu.</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-eye"></i> IDS vs IPS</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Système</th><th>Rôle</th><th>Action</th></tr></thead>
+        <tbody>
+            <tr><td><strong>IDS</strong> (Intrusion Detection)</td><td>Détecte les activités suspectes</td><td><strong>Alerte</strong> l'administrateur (passif)</td></tr>
+            <tr><td><strong>IPS</strong> (Intrusion Prevention)</td><td>Détecte ET bloque les attaques</td><td><strong>Bloque</strong> automatiquement (actif)</td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>ℹ️ Analogie :</strong> IDS = caméra de surveillance (observe et alerte). IPS = gardien (observe et intervient).</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-tunnel"></i> VPN — Le tunnel sécurisé</h2>
     <div class="concept-card">
         <h4>🚇 Analogie du tunnel</h4>

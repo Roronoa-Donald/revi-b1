@@ -130,6 +130,49 @@ Partie hôte :   .100       (les 8 derniers bits)
     </table></div>
 </section>
 
+<!-- Conversion binaire ↔ décimale -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-binary"></i> Conversion binaire ↔ décimale</h2>
+    <p>Comprendre le binaire est <strong>essentiel</strong> pour maîtriser les masques et le subnetting. Chaque octet = 8 bits, chaque bit a une valeur positionnelle :</p>
+    <div class="code-block"><div class="code-header"><span>Table des puissances de 2 (à connaître par cœur !)</span></div><pre><code>Position :   7     6     5     4     3    2    1    0
+Valeur :   128    64    32    16     8    4    2    1
+
+Exemple : convertir 192 en binaire
+  192 = 128 + 64 = 11000000
+
+Exemple : convertir 10101100 en décimal
+  10101100 = 128 + 32 + 8 + 4 = 172</code></pre></div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Les sous-réseaux « magiques »</h4>
+        <p>Les valeurs de masque possibles pour un octet sont <strong>toujours</strong> :<br>
+        <strong>0 · 128 · 192 · 224 · 240 · 248 · 252 · 254 · 255</strong><br>
+        Ce sont 256 − 2ⁿ pour n = 0 à 8. Retenez cette série !</p>
+    </div>
+</section>
+
+<!-- Opération AND logique -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-microchip"></i> L'opération AND (ET logique)</h2>
+    <p>Pour trouver l'<strong>adresse réseau</strong> à partir d'une IP et son masque, on applique un <strong>ET logique</strong> bit à bit :</p>
+    <div class="code-block"><div class="code-header"><span>AND logique – Exemple : 192.168.1.130 / 255.255.255.192</span></div><pre><code>Règle AND :  1 AND 1 = 1  |  1 AND 0 = 0  |  0 AND 1 = 0  |  0 AND 0 = 0
+
+IP :     192.168.1.  10000010   (130 en binaire)
+Masque : 255.255.255.11000000   (192 = /26)
+                    ──────────
+AND :    192.168.1.  10000000   = 192.168.1.128  ← adresse réseau !
+
+→ L'hôte 192.168.1.130/26 appartient au réseau 192.168.1.128/26</code></pre></div>
+    <div class="tip-box"><strong>💡 Raccourci sans binaire :</strong> 256 − masque = taille du bloc. 256 − 192 = 64. Quel multiple de 64 ≤ 130 ? → 128. Donc réseau = 192.168.1.128.</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – Classe ≠ masque par défaut en CIDR :</strong> En adressage classique, une adresse 10.x.x.x a un masque /8. Mais en CIDR (sans classe), on peut avoir 10.0.0.0<strong>/24</strong> ! Ne pas supposer le masque à partir de l'adresse.</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – Broadcast ≠ dernière adresse du masque :</strong> Le broadcast est la dernière adresse <strong>de chaque sous-réseau</strong>, pas forcément x.x.x.255. Ex: dans /26, le broadcast de 192.168.1.0/26 est 192.168.1.<strong>63</strong>.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – Nombre d'hôtes = 2ⁿ − 2, pas 2ⁿ :</strong> On retire toujours <strong>2 adresses</strong> : l'adresse réseau (tous les bits hôte à 0) et le broadcast (tous les bits hôte à 1). Un /24 → 2⁸ − 2 = 254 hôtes, pas 256.</div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

@@ -125,6 +125,47 @@ Physique        → Bits sur le câble (010110...)</code></pre></div>
     </div>
 </section>
 
+<!-- Noms des PDU par couche -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tag"></i> Noms des PDU par couche</h2>
+    <p>Chaque couche manipule une <strong>unité de données</strong> (PDU – Protocol Data Unit) portant un nom spécifique. Connaître ces noms est <strong>incontournable en examen</strong>.</p>
+    <div class="code-block"><div class="code-header"><span>PDU à chaque couche OSI</span></div><pre><code>Couche 7 – Application   → Données  (Data)
+Couche 6 – Présentation  → Données  (Data)
+Couche 5 – Session        → Données  (Data)
+Couche 4 – Transport      → Segment  (TCP) / Datagramme (UDP)
+Couche 3 – Réseau         → Paquet   (Packet)
+Couche 2 – Liaison        → Trame    (Frame)
+Couche 1 – Physique       → Bits     (0 et 1)</code></pre></div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique « Des Singes Tapent Pas Très Bien »</h4>
+        <p><strong>D</strong>onnées → <strong>S</strong>egment → <strong>T</strong>rame… Non ! Attention à l'ordre :<br>
+        <strong>D</strong>onnées (L7-L5) → <strong>S</strong>egment (L4) → <strong>P</strong>aquet (L3) → <strong>T</strong>rame (L2) → <strong>B</strong>its (L1)<br>
+        Retenir : <strong>D – S – P – T – B</strong> = « <strong>D</strong>es <strong>S</strong>inges <strong>P</strong>as <strong>T</strong>rès <strong>B</strong>eaux »</p>
+    </div>
+</section>
+
+<!-- Couches hautes en détail -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-layer-group"></i> Couches 5, 6 et 7 en détail</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Couche</th><th>Rôle</th><th>Exemples concrets</th></tr></thead>
+        <tbody>
+            <tr><td><strong>7 – Application</strong></td><td>Interface entre l'utilisateur et le réseau</td><td>HTTP, FTP, SMTP, DNS, DHCP</td></tr>
+            <tr><td><strong>6 – Présentation</strong></td><td>Traduction, chiffrement, compression</td><td>SSL/TLS, JPEG, ASCII ↔ Unicode</td></tr>
+            <tr><td><strong>5 – Session</strong></td><td>Ouverture/fermeture/synchronisation des sessions</td><td>NetBIOS, RPC, sessions web (cookies)</td></tr>
+        </tbody>
+    </table></div>
+    <div class="tip-box"><strong>💡 Astuce examen :</strong> En pratique, le modèle TCP/IP fusionne L5+L6+L7 en une seule couche « Application ». Mais en QCM sur l'OSI, chaque couche compte !</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – Confondre Trame et Paquet :</strong> Une <strong>trame</strong> (L2) contient des adresses MAC. Un <strong>paquet</strong> (L3) contient des adresses IP. En examen, si on vous dit « Ethernet », c'est de la couche 2 (trame). Si on dit « routage », c'est couche 3 (paquet).</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – L'ordre des couches :</strong> La couche 1 est en <strong>bas</strong> (physique, câbles). La couche 7 est en <strong>haut</strong> (l'application). L'envoi descend de 7→1, la réception remonte de 1→7.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – « 7 couches OSI » ≠ « 4 couches TCP/IP » :</strong> Ne pas mélanger les deux modèles ! OSI = théorique (7 couches). TCP/IP = pratique (4 couches). Un QCM peut tester les deux.</div>
+</section>
+
 <!-- Récap -->
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>

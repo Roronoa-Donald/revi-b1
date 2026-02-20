@@ -161,6 +161,76 @@ arp -a</code></pre></div>
     <div class="tip-box"><strong>💡 Le réflexe universel :</strong> Quand rien ne marche, testez <code>ping 8.8.8.8</code> — c'est le serveur DNS de Google, toujours accessible. S'il répond, Internet fonctionne mais c'est peut-être un problème DNS.</div>
 </section>
 
+<!-- Standards Wi-Fi modernes -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-wifi"></i> Standards Wi-Fi : de 802.11n à Wi-Fi 7</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Standard</th><th>Nom commercial</th><th>Fréquences</th><th>Débit max théorique</th><th>Année</th></tr></thead>
+        <tbody>
+            <tr><td>802.11n</td><td><strong>Wi-Fi 4</strong></td><td>2.4 + 5 GHz</td><td>600 Mbps</td><td>2009</td></tr>
+            <tr><td>802.11ac</td><td><strong>Wi-Fi 5</strong></td><td>5 GHz</td><td>3.5 Gbps</td><td>2013</td></tr>
+            <tr><td>802.11ax</td><td><strong>Wi-Fi 6</strong></td><td>2.4 + 5 GHz</td><td>9.6 Gbps</td><td>2020</td></tr>
+            <tr><td>802.11ax</td><td><strong>Wi-Fi 6E</strong></td><td>2.4 + 5 + <strong>6 GHz</strong></td><td>9.6 Gbps</td><td>2021</td></tr>
+            <tr><td>802.11be</td><td><strong>Wi-Fi 7</strong></td><td>2.4 + 5 + 6 GHz</td><td>46 Gbps</td><td>2024</td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>ℹ️ Wi-Fi 6E</strong> ajoute la bande <strong>6 GHz</strong> = plus de canaux, moins d'interférences, idéal pour les environnements denses (bureaux, stades).</div>
+</section>
+
+<!-- Scénario diagnostic -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-stethoscope"></i> Scénario de diagnostic complet</h2>
+    <p>Un utilisateur se plaint : <em>« Je n'arrive pas à accéder à un site web »</em>. Voici la démarche systématique :</p>
+    <div class="code-block"><div class="code-header"><span>Diagnostic en 5 étapes</span></div><pre><code>Étape 1 : Vérifier la couche physique
+  → Le câble est branché ? Le Wi-Fi est activé ?
+  → ipconfig (Windows) / ip addr (Linux) → IP obtenue ?
+
+Étape 2 : Tester la connectivité locale
+  → ping 127.0.0.1      (loopback = pile TCP/IP OK ?)
+  → ping [ma passerelle] (ex: 192.168.1.1 = routeur joignable ?)
+
+Étape 3 : Tester la connectivité Internet
+  → ping 8.8.8.8         (serveur Google = Internet OK ?)
+
+Étape 4 : Tester la résolution DNS
+  → ping google.com      (si échec mais 8.8.8.8 OK = problème DNS)
+  → nslookup google.com  (vérifier quel serveur DNS répond)
+
+Étape 5 : Tester le service
+  → tracert google.com   (où le paquet se bloque-t-il ?)
+  → Vérifier pare-feu, proxy, port bloqué</code></pre></div>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique « De Bas en Haut »</h4>
+        <p>Toujours diagnostiquer <strong>de la couche 1 vers la couche 7</strong> :<br>
+        <strong>Câble</strong> → <strong>IP</strong> → <strong>Passerelle</strong> → <strong>Internet</strong> → <strong>DNS</strong> → <strong>Application</strong><br>
+        Comme un médecin : on vérifie d'abord le pouls avant de faire une radio !</p>
+    </div>
+</section>
+
+<!-- Outils réseau essentiels -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tools"></i> Outils réseau essentiels</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Outil</th><th>Windows</th><th>Linux</th><th>Usage</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Config IP</strong></td><td>ipconfig /all</td><td>ip addr</td><td>Voir IP, masque, passerelle, DNS</td></tr>
+            <tr><td><strong>Ping</strong></td><td>ping</td><td>ping</td><td>Tester la connectivité (ICMP Echo)</td></tr>
+            <tr><td><strong>Trace</strong></td><td>tracert</td><td>traceroute</td><td>Voir le chemin emprunté par les paquets</td></tr>
+            <tr><td><strong>DNS</strong></td><td>nslookup</td><td>dig / nslookup</td><td>Résolution de noms</td></tr>
+            <tr><td><strong>Ports</strong></td><td>netstat -an</td><td>ss -tuln</td><td>Voir les connexions et ports ouverts</td></tr>
+            <tr><td><strong>ARP</strong></td><td>arp -a</td><td>arp -a</td><td>Table de correspondance IP ↔ MAC</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – « Pas d'Internet » ≠ « Pas de réseau » :</strong> Si ping vers la passerelle fonctionne mais pas vers 8.8.8.8, le réseau local est OK. Le problème est en amont (routeur, FAI).</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – SSID caché ≠ sécurisé :</strong> Masquer le nom du Wi-Fi n'empêche <strong>personne</strong> de le détecter (des outils le voient quand même). La vraie sécurité = <strong>WPA3</strong> + mot de passe fort.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – 2.4 GHz vs 5 GHz :</strong> Si un QCM demande « quelle fréquence pour traverser les murs ? » → <strong>2.4 GHz</strong> (meilleure portée). Pour le débit max → <strong>5 GHz</strong>. Wi-Fi 6E ajoute le <strong>6 GHz</strong> (débit++, portée--).</div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

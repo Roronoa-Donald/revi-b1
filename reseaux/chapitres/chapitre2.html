@@ -119,6 +119,56 @@ Client → Serveur :  ACK        (« C'est parti ! »)
     <div class="warning-box"><strong>⚠️ Plages de ports :</strong> 0-1023 = ports « bien connus » (réservés) · 1024-49151 = enregistrés · 49152-65535 = dynamiques/privés</div>
 </section>
 
+<!-- Flags TCP et fermeture -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-flag"></i> Les flags TCP en détail</h2>
+    <p>L'en-tête TCP contient <strong>6 flags</strong> (drapeaux) qui contrôlent l'état de la connexion :</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Flag</th><th>Nom complet</th><th>Rôle</th></tr></thead>
+        <tbody>
+            <tr><td><strong>SYN</strong></td><td>Synchronize</td><td>Initier une connexion</td></tr>
+            <tr><td><strong>ACK</strong></td><td>Acknowledge</td><td>Confirmer la réception</td></tr>
+            <tr><td><strong>FIN</strong></td><td>Finish</td><td>Terminer proprement la connexion</td></tr>
+            <tr><td><strong>RST</strong></td><td>Reset</td><td>Forcer la fermeture (erreur ou refus)</td></tr>
+            <tr><td><strong>PSH</strong></td><td>Push</td><td>Envoyer immédiatement sans attendre le buffer</td></tr>
+            <tr><td><strong>URG</strong></td><td>Urgent</td><td>Données prioritaires à traiter en premier</td></tr>
+        </tbody>
+    </table></div>
+    <div class="code-block"><div class="code-header"><span>Fermeture de connexion TCP (4-Way Teardown)</span></div><pre><code>Client → Serveur :  FIN        (« J'ai fini d'envoyer »)
+Serveur → Client :  ACK        (« Bien reçu »)
+Serveur → Client :  FIN        (« Moi aussi j'ai fini »)
+Client → Serveur :  ACK        (« OK, connexion fermée »)
+
+🔚 La connexion est proprement fermée des deux côtés !</code></pre></div>
+    <div class="tip-box"><strong>💡 Ouverture = 3 étapes (SYN, SYN-ACK, ACK). Fermeture = 4 étapes (FIN, ACK, FIN, ACK).</strong> C'est asymétrique car chaque côté ferme indépendamment.</div>
+</section>
+
+<!-- Le concept de socket -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-plug"></i> Le concept de Socket</h2>
+    <div class="concept-card">
+        <h4>🔌 Qu'est-ce qu'un socket ?</h4>
+        <p>Un <strong>socket</strong> = une combinaison unique <strong>Adresse IP + Port</strong>. C'est le « point de rencontre » entre deux machines pour communiquer.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Exemple de connexion par sockets</span></div><pre><code>Votre navigateur :  192.168.1.50:54321  (IP locale + port dynamique)
+        ↕
+Serveur web :       93.184.216.34:443   (IP serveur + port HTTPS)
+
+Socket client = 192.168.1.50:54321
+Socket serveur = 93.184.216.34:443
+
+→ La paire de sockets identifie UNIQUEMENT cette connexion !</code></pre></div>
+    <div class="info-box"><strong>ℹ️</strong> Un serveur peut avoir des <strong>milliers de sockets</strong> ouverts simultanément, tous sur le même port (ex: 443) mais avec des clients différents.</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – TCP vs UDP :</strong> TCP = fiable, connexion, accusés de réception (web, email, fichiers). UDP = rapide, sans connexion, pas de garantie (streaming, DNS, jeux en ligne). Un QCM peut demander « quel protocole pour le streaming ? » → UDP !</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – « TCP/IP a 4 couches, pas 5 » :</strong> Certains manuels montrent 5 couches (en séparant Liaison et Physique). Le modèle TCP/IP officiel en a <strong>4</strong> : Accès réseau, Internet, Transport, Application.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – Port ≠ Protocole :</strong> Le port 80 est <strong>associé</strong> à HTTP mais n'est <strong>pas</strong> HTTP. On peut faire tourner un serveur web sur le port 8080 ou n'importe quel port.</div>
+</section>
+
 <!-- Récap -->
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>

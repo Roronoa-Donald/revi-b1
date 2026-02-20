@@ -26,7 +26,9 @@ const ROOT_FILES = ['index.html', 'robots.txt', 'sitemap.xml', '404.html', 'rd-a
 const SKIP_DIRS = ['node_modules', '.git', 'server', 'api', 'scripts', 'dist', 'public', 'cours', 'ref'];
 
 // Injection HTML
-const AUTH_INJECT_HEAD = '<link rel="stylesheet" href="/_auth/css/auth-styles.css">';
+const ANTI_FLASH_SCRIPT = `<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.documentElement.classList.add('dark');document.body&&document.body.classList.add('dark-mode');}})();</script>`;
+const MATHJAX_SCRIPT = `<script>MathJax={tex:{inlineMath:[['$','$'],['\\\\(','\\\\)']],displayMath:[['$$','$$'],['\\\\[','\\\\]']]}}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>`;
+const AUTH_INJECT_HEAD = ANTI_FLASH_SCRIPT + '\n<link rel="stylesheet" href="/_auth/css/auth-styles.css">';
 const AUTH_INJECT_BODY = '<script src="/_auth/js/fingerprint.js"></script>\n<script src="/_auth/js/auth-check.js"></script>\n<script src="/rd-ai-chat.js"></script>';
 
 function copyDirRecursive(src, dest) {
@@ -48,7 +50,7 @@ function copyDirRecursive(src, dest) {
 
       if (ext === '.html') {
         let content = fs.readFileSync(srcPath, 'utf-8');
-        content = injectAuth(content);
+        content = injectAuth(content, srcPath);
         fs.writeFileSync(destPath, content, 'utf-8');
       } else {
         fs.copyFileSync(srcPath, destPath);
@@ -57,8 +59,10 @@ function copyDirRecursive(src, dest) {
   }
 }
 
-function injectAuth(html) {
-  if (html.includes('</head>')) html = html.replace('</head>', AUTH_INJECT_HEAD + '\n</head>');
+function injectAuth(html, filePath) {
+  const needsMathJax = filePath && filePath.replace(/\\/g, '/').includes('/stats/');
+  const headInject = needsMathJax ? AUTH_INJECT_HEAD + '\n' + MATHJAX_SCRIPT : AUTH_INJECT_HEAD;
+  if (html.includes('</head>')) html = html.replace('</head>', headInject + '\n</head>');
   if (html.includes('</body>')) html = html.replace('</body>', AUTH_INJECT_BODY + '\n</body>');
   return html;
 }
@@ -69,7 +73,7 @@ function copyFileIfExists(src, dest) {
     const ext = path.extname(src).toLowerCase();
     if (ext === '.html') {
       let content = fs.readFileSync(src, 'utf-8');
-      content = injectAuth(content);
+      content = injectAuth(content, src);
       fs.writeFileSync(dest, content, 'utf-8');
     } else {
       fs.copyFileSync(src, dest);

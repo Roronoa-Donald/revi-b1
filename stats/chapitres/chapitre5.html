@@ -97,6 +97,38 @@ Exemple : fréquence = 0.25
         <p><strong>Important :</strong> La surface de chaque barre est proportionnelle à l'effectif (ou la fréquence), pas seulement la hauteur.</p>
     </div>
     <div class="info-box"><strong>ℹ️ Classes d'amplitudes inégales :</strong> Si les classes n'ont pas la même largeur, on utilise la <strong>densité de fréquence</strong> = fréquence / amplitude de la classe. C'est la hauteur de la barre.</div>
+    <div class="code-block"><div class="code-header"><i class="fas fa-calculator"></i> Densité de fréquence (classes inégales)</div>
+<pre><code>Densité = fréquence / amplitude = fᵢ / hᵢ
+
+Exemple :
+  Classe [0 ; 10[ :  f = 0.20, amplitude = 10 → densité = 0.020
+  Classe [10 ; 30[ : f = 0.40, amplitude = 20 → densité = 0.020
+  Classe [30 ; 40[ : f = 0.40, amplitude = 10 → densité = 0.040
+
+Sans densité, la classe [10;30[ paraît dominante (f=0.40)
+Avec densité, c'est [30;40[ qui est la plus dense !</code></pre>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tools"></i> Construction pas à pas d'un histogramme</h2>
+    <div class="concept-card">
+        <h4>📝 Méthode en 5 étapes</h4>
+        <ol>
+            <li><strong>Étape 1 :</strong> Déterminer les classes et leurs amplitudes</li>
+            <li><strong>Étape 2 :</strong> Calculer les effectifs (ou fréquences) par classe</li>
+            <li><strong>Étape 3 :</strong> Si amplitudes inégales → calculer les densités</li>
+            <li><strong>Étape 4 :</strong> Tracer les axes (X = valeurs, Y = effectif ou densité)</li>
+            <li><strong>Étape 5 :</strong> Dessiner les rectangles <strong>collés</strong> (largeur = amplitude, hauteur = effectif ou densité)</li>
+        </ol>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 :</strong> Confondre <strong>diagramme en bâtons</strong> (discret, barres séparées) et <strong>histogramme</strong> (continu, barres collées). Le type de données détermine le graphique.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 — Camembert 3D :</strong> Les graphiques 3D déforment les proportions visuelles. Une part en avant paraît plus grande qu'elle ne l'est. Toujours utiliser des graphiques <strong>2D</strong> pour être précis.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 — Axes tronqués :</strong> Un axe Y qui ne commence pas à 0 peut exagérer les différences entre les barres. Vérifiez toujours l'échelle des axes !</div>
 </section>
 
 <section class="chapter-section reveal-on-scroll">

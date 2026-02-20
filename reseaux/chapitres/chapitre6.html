@@ -114,6 +114,58 @@
     </div>
 </section>
 
+<!-- VLAN et 802.1Q -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-object-group"></i> VLAN et 802.1Q</h2>
+    <p>Un <strong>VLAN</strong> (Virtual LAN) permet de segmenter un réseau physique en <strong>plusieurs réseaux logiques</strong> sur un même switch.</p>
+    <div class="concept-card">
+        <h4>🏢 Analogie : l'immeuble de bureaux</h4>
+        <p>Un switch = un immeuble. Sans VLAN, tout le monde partage le même couloir (broadcast).<br>
+        Avec VLANs = chaque étage (département) a son propre réseau isolé, même si les câbles passent par le même switch.</p>
+    </div>
+    <div class="code-block"><div class="code-header"><span>Configuration VLAN typique</span></div><pre><code>VLAN 10 = Comptabilité   (ports 1-8)
+VLAN 20 = Marketing      (ports 9-16)
+VLAN 30 = Direction      (ports 17-20)
+
+Port TRUNK (port 24) = transporte TOUS les VLANs
+                        entre 2 switches via le tag 802.1Q
+
+802.1Q ajoute un tag de 4 octets dans la trame Ethernet :
+  [MAC dst][MAC src][802.1Q tag: VLAN ID][Type][Données][FCS]
+                         ↑
+              Identifie à quel VLAN appartient la trame</code></pre></div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Type de port</th><th>Rôle</th><th>VLANs transportés</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Access</strong></td><td>Connecte un terminal (PC, imprimante)</td><td>1 seul VLAN</td></tr>
+            <tr><td><strong>Trunk</strong></td><td>Relie deux switches entre eux</td><td>Plusieurs VLANs (tagués 802.1Q)</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- Topologies réseau -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-project-diagram"></i> Topologies réseau</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Topologie</th><th>Schéma</th><th>Avantages</th><th>Inconvénients</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Étoile ⭐</strong></td><td>Tous reliés à un switch central</td><td>Panne d'un câble = 1 poste affecté</td><td>Switch central = SPOF</td></tr>
+            <tr><td><strong>Bus —</strong></td><td>Un seul câble partagé</td><td>Simple, économique</td><td>Obsolète, collisions, panne = tout tombe</td></tr>
+            <tr><td><strong>Anneau ○</strong></td><td>Boucle fermée (Token Ring)</td><td>Pas de collision</td><td>Panne d'un nœud = rupture</td></tr>
+            <tr><td><strong>Maillée ◇</strong></td><td>Chaque nœud relié aux autres</td><td>Très résilient (redondance)</td><td>Coûteux, complexe</td></tr>
+        </tbody>
+    </table></div>
+    <div class="tip-box"><strong>💡 En examen :</strong> La topologie <strong>étoile</strong> est quasi universelle aujourd'hui. Le <strong>SPOF</strong> (Single Point Of Failure) = le switch central. Pour éliminer le SPOF → switch redondant + spanning tree.</div>
+</section>
+
+<!-- Pièges classiques -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques</h2>
+    <div class="warning-box"><strong>⚠️ Piège 1 – Hub ≠ Switch :</strong> Un <strong>hub</strong> envoie les données à TOUS les ports (broadcast). Un <strong>switch</strong> envoie uniquement au port du destinataire (table MAC). Le hub est obsolète !</div>
+    <div class="warning-box"><strong>⚠️ Piège 2 – Switch L3 ≠ Routeur :</strong> Un switch L3 peut faire du routage inter-VLAN, mais un routeur gère en plus le NAT, le WAN, les ACL avancées et le pare-feu. Ne pas les confondre en QCM.</div>
+    <div class="warning-box"><strong>⚠️ Piège 3 – « Quel câble ? » :</strong> <strong>Droit</strong> = PC↔Switch, Switch↔Routeur. <strong>Croisé</strong> = PC↔PC, Switch↔Switch. Mais aujourd'hui la plupart des équipements ont l'<strong>Auto-MDI/X</strong> (détection automatique).</div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

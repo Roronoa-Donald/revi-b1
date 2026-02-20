@@ -98,6 +98,82 @@
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-calculator"></i> Formules clés</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-square-root-alt"></i> Formules fondamentales</div>
+<pre><code>Fréquence :       fᵢ = nᵢ / N
+
+Fréquence en % :  fᵢ% = (nᵢ / N) × 100
+
+Propriété :       Σ nᵢ = N     (somme des effectifs = effectif total)
+                  Σ fᵢ = 1     (somme des fréquences = 1)
+                  Σ fᵢ% = 100% (somme des fréquences en % = 100%)</code></pre>
+    </div>
+    <div class="tip-box"><strong>💡 Vérification rapide :</strong> Si la somme de vos fréquences ne fait pas 1 (ou 100%), il y a une erreur dans vos calculs !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exemple complet travaillé</h2>
+    <div class="concept-card">
+        <h4>📋 Enquête : notes de 20 étudiants à un contrôle (/20)</h4>
+        <p>Notes récoltées : 12, 8, 15, 12, 10, 14, 12, 9, 11, 16, 10, 12, 13, 8, 15, 12, 11, 10, 14, 13</p>
+    </div>
+    <p><strong>Étape 1 :</strong> Identifier la population, l'échantillon, le caractère</p>
+    <ul>
+        <li><strong>Population</strong> : tous les étudiants de la promotion</li>
+        <li><strong>Échantillon</strong> : les 20 étudiants interrogés (N = 20)</li>
+        <li><strong>Caractère</strong> : note obtenue → <strong>quantitatif discret</strong></li>
+    </ul>
+    <p><strong>Étape 2 :</strong> Construire le tableau de distribution</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Note (xᵢ)</th><th>Effectif (nᵢ)</th><th>Fréquence (fᵢ)</th><th>Fréquence %</th></tr></thead>
+        <tbody>
+            <tr><td>8</td><td>2</td><td>2/20 = 0.10</td><td>10%</td></tr>
+            <tr><td>9</td><td>1</td><td>1/20 = 0.05</td><td>5%</td></tr>
+            <tr><td>10</td><td>3</td><td>3/20 = 0.15</td><td>15%</td></tr>
+            <tr><td>11</td><td>2</td><td>2/20 = 0.10</td><td>10%</td></tr>
+            <tr><td>12</td><td>5</td><td>5/20 = 0.25</td><td>25%</td></tr>
+            <tr><td>13</td><td>2</td><td>2/20 = 0.10</td><td>10%</td></tr>
+            <tr><td>14</td><td>2</td><td>2/20 = 0.10</td><td>10%</td></tr>
+            <tr><td>15</td><td>2</td><td>2/20 = 0.10</td><td>10%</td></tr>
+            <tr><td>16</td><td>1</td><td>1/20 = 0.05</td><td>5%</td></tr>
+            <tr><td colspan="1"><strong>Total</strong></td><td><strong>20</strong></td><td><strong>1.00</strong></td><td><strong>100%</strong></td></tr>
+        </tbody>
+    </table></div>
+    <div class="info-box"><strong>✅ Vérification :</strong> Σnᵢ = 2+1+3+2+5+2+2+2+1 = 20 = N ✓ et Σfᵢ = 1.00 ✓</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sitemap"></i> Arbre de décision : classifier une variable</h2>
+    <div class="concept-card">
+        <h4>🌳 Comment classer une variable en 3 questions ?</h4>
+        <p><strong>Q1.</strong> Les valeurs sont-elles des <strong>nombres</strong> ou des <strong>catégories/mots</strong> ?</p>
+        <ul>
+            <li>→ Catégories/mots → <strong>QUALITATIF</strong>
+                <ul>
+                    <li><strong>Q2.</strong> Y a-t-il un <strong>ordre naturel</strong> entre les catégories ?</li>
+                    <li>→ Oui (Faible &lt; Moyen &lt; Bien) → <strong>Ordinal</strong></li>
+                    <li>→ Non (Rouge, Bleu, Vert) → <strong>Nominal</strong></li>
+                </ul>
+            </li>
+            <li>→ Nombres → <strong>QUANTITATIF</strong>
+                <ul>
+                    <li><strong>Q3.</strong> Les valeurs sont-elles <strong>isolées/entières</strong> ou <strong>peuvent prendre toute valeur</strong> dans un intervalle ?</li>
+                    <li>→ Entiers isolés (0, 1, 2, 3…) → <strong>Discret</strong></li>
+                    <li>→ Toute valeur possible (1.72, 65.3…) → <strong>Continu</strong></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 — L'âge :</strong> L'âge est-il discret ou continu ? <strong>Réponse : ça dépend !</strong> Si on note l'âge en années entières (18, 19, 20) → discret. Si on mesure l'âge exact (19.5 ans) → continu. En pratique, on le traite souvent comme discret.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 — Le code postal :</strong> C'est un nombre (75000, 13001…) mais c'est une variable <strong>qualitative nominale</strong> ! On ne peut pas calculer « la moyenne des codes postaux ». Un nombre ≠ automatiquement quantitatif.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 — Nominale vs Ordinale :</strong> « Satisfaction : 1=Pas du tout, 2=Peu, 3=Moyennement, 4=Très ». Les numéros sont un codage, mais la variable est <strong>qualitative ordinale</strong>, pas quantitative !</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">
         <h4>📝 L'essentiel du Chapitre 1</h4>

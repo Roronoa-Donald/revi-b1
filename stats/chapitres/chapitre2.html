@@ -72,7 +72,46 @@
         <strong>F</strong>réquence : fᵢ = nᵢ / N (proportion)<br>
         <strong>C</strong>umulée : Fᵢ = f₁ + f₂ + … + fᵢ (cumul progressif)</p>
     </div>
+    <div class="code-block"><div class="code-header"><i class="fas fa-square-root-alt"></i> Formules de base</div>
+<pre><code>Effectif total :      N = Σ nᵢ = n₁ + n₂ + ... + nₖ
+
+Fréquence :           fᵢ = nᵢ / N
+
+Fréquence en % :      fᵢ% = (nᵢ / N) × 100
+
+Fréquence cumulée :   Fᵢ = f₁ + f₂ + ... + fᵢ
+
+Effectif cumulé :     Nᵢ = n₁ + n₂ + ... + nᵢ
+
+Vérifications :       Σ nᵢ = N
+                      Σ fᵢ = 1
+                      Fₖ = 1 (dernière cumulée)</code></pre>
+    </div>
     <div class="info-box"><strong>ℹ️ Vérifications :</strong> Σnᵢ = N (somme des effectifs = total). Σfᵢ = 1 (somme des fréquences = 1). La dernière fréquence cumulée = 1.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exemple complet pas à pas</h2>
+    <div class="concept-card">
+        <h4>📋 Données brutes : durées de trajet (en min) de 15 employés</h4>
+        <p>10, 25, 15, 30, 20, 15, 35, 10, 25, 20, 15, 40, 20, 25, 30</p>
+    </div>
+    <p><strong>Étape 1 :</strong> Trier et dénombrer chaque valeur</p>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Durée (xᵢ)</th><th>Effectif (nᵢ)</th><th>Fréquence (fᵢ)</th><th>Fréq. cumulée (Fᵢ)</th><th>Eff. cumulé (Nᵢ)</th></tr></thead>
+        <tbody>
+            <tr><td>10</td><td>2</td><td>2/15 ≈ 0.133</td><td>0.133</td><td>2</td></tr>
+            <tr><td>15</td><td>3</td><td>3/15 = 0.200</td><td>0.333</td><td>5</td></tr>
+            <tr><td>20</td><td>3</td><td>3/15 = 0.200</td><td>0.533</td><td>8</td></tr>
+            <tr><td>25</td><td>3</td><td>3/15 = 0.200</td><td>0.733</td><td>11</td></tr>
+            <tr><td>30</td><td>2</td><td>2/15 ≈ 0.133</td><td>0.867</td><td>13</td></tr>
+            <tr><td>35</td><td>1</td><td>1/15 ≈ 0.067</td><td>0.933</td><td>14</td></tr>
+            <tr><td>40</td><td>1</td><td>1/15 ≈ 0.067</td><td>1.000</td><td>15</td></tr>
+            <tr><td><strong>Total</strong></td><td><strong>15</strong></td><td><strong>1.000</strong></td><td>—</td><td>—</td></tr>
+        </tbody>
+    </table></div>
+    <p><strong>Étape 2 :</strong> Lecture de la fréquence cumulée</p>
+    <div class="info-box"><strong>✅ Interprétation :</strong> F₃ = 0.533 signifie que <strong>53.3%</strong> des employés mettent <strong>20 min ou moins</strong> pour venir au travail. Autrement dit, plus de la moitié a un trajet ≤ 20 min.</div>
 </section>
 
 <section class="chapter-section reveal-on-scroll">
@@ -90,6 +129,29 @@
     </table></div>
     <div class="tip-box"><strong>💡 Centre de classe :</strong> cᵢ = (borne inf + borne sup) / 2. Exemple : (150 + 160) / 2 = 155. On utilise le centre pour les calculs de moyenne.</div>
     <div class="warning-box"><strong>⚠️ Notation [a ; b[ :</strong> Le crochet [ inclut la valeur, le crochet [ l'exclut. Donc [160 ; 170[ inclut 160 mais pas 170.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-ruler-combined"></i> Choisir le nombre et la largeur des classes</h2>
+    <div class="code-block"><div class="code-header"><i class="fas fa-lightbulb"></i> Règle de Sturges</div>
+<pre><code>Nombre de classes k :   k ≈ 1 + 3.322 × log₁₀(N)
+
+Amplitude de classe h : h = (max − min) / k
+
+Exemples :
+  N = 20  → k ≈ 1 + 3.322 × 1.30 ≈ 5.3 → ~5 classes
+  N = 50  → k ≈ 1 + 3.322 × 1.70 ≈ 6.6 → ~7 classes
+  N = 100 → k ≈ 1 + 3.322 × 2.00 ≈ 7.6 → ~8 classes</code></pre>
+    </div>
+    <div class="tip-box"><strong>💡 Astuce pratique :</strong> Si les données vont de 150 à 190 cm et qu'on veut ~4 classes : h = (190 − 150) / 4 = 10 cm. Classes : [150;160[, [160;170[, [170;180[, [180;190].</div>
+    <div class="info-box"><strong>ℹ️ Règle de bon sens :</strong> Pas trop de classes (sinon tableau illisible), pas trop peu (sinon perte d'information). En général, entre 5 et 15 classes convient.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 — Oublier que Σfᵢ = 1 :</strong> Si la somme de vos fréquences ne fait pas 1 (arrondi près), c'est qu'il y a une erreur de calcul. Vérifiez TOUJOURS !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 — Confondre fréquence et effectif :</strong> fᵢ = 0.30 ≠ 30 individus. C'est 30% du total. Si N = 50, alors nᵢ = 0.30 × 50 = 15 individus.</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 — Classes d'amplitudes inégales :</strong> Si les classes ont des largeurs différentes, on ne peut pas comparer les effectifs directement. Il faut utiliser la <strong>densité</strong> = fᵢ / amplitude. C'est essentiel pour les histogrammes !</div>
 </section>
 
 <section class="chapter-section reveal-on-scroll">
