@@ -77,8 +77,8 @@ module.exports = async function authRoutes(fastify) {
           });
         }
         const oldSessions = await db.query(
-          'SELECT jti FROM sessions WHERE key_id = $1 AND is_valid = TRUE',
-          [keyRecord.id]
+          'SELECT jti FROM sessions WHERE key_id = $1 AND is_valid = TRUE AND platform = $2',
+          [keyRecord.id, 'b1']
         );
         for (const s of oldSessions.rows) {
           await db.revokeSessionByJti(s.jti);
@@ -88,7 +88,7 @@ module.exports = async function authRoutes(fastify) {
       }
 
       const jti = generateJti();
-      await db.createSession(keyRecord.id, jti, fpHash);
+      await db.createSession(keyRecord.id, jti, fpHash, 'b1');
 
       const token = jwt.sign(
         {
