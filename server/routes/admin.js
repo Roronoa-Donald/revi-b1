@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const db = require('../../../server/db');
-const { generateActivationKey } = require('../../../server/utils/keygen');
+const db = require('../db');
+const { generateActivationKey } = require('../utils/keygen');
 const { COURSES } = require('../middleware/access-control');
 
 const JWT_SECRET = process.env.JWT_SECRET;

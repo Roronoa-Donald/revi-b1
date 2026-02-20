@@ -1,4 +1,4 @@
-require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
+require('dotenv').config();
 process.env.KEY_CLASS = 'b1';
 
 const path = require('path');
@@ -6,7 +6,7 @@ const fs = require('fs');
 const fsPromises = require('fs').promises;
 const jwt = require('jsonwebtoken');
 const { buildApp } = require('./server/app');
-const { initDB, getSessionByJti, getKeyById, updateSessionVerified } = require('../server/db');
+const { initDB, getSessionByJti, getKeyById, updateSessionVerified } = require('./server/db');
 const { isProtected, getCourseFromUrl, COURSES } = require('./server/middleware/access-control');
 
 const fastify = buildApp({ logger: true });

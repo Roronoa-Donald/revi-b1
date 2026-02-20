@@ -1,11 +1,11 @@
 /**
  * Vercel Serverless Function — Bachelor 1 API
  */
-require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 process.env.KEY_CLASS = 'b1';
 
 const { buildApp } = require('../server/app');
-const { initDB } = require('../../server/db');
+const { initDB } = require('../server/db');
 
 let app;
 let dbInitialized = false;

@@ -4,7 +4,7 @@
  *   - b1/server.js (Render / local) → ajoute le serveur de fichiers statiques + listen()
  *   - b1/api/index.js (Vercel) → expose en serverless function
  */
-require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 
 // Forcer KEY_CLASS=b1 pour le backend B1
 process.env.KEY_CLASS = 'b1';
@@ -34,12 +34,8 @@ function buildApp(opts = {}) {
   fastify.register(require('./routes/auth'), { prefix: '/api' });
   fastify.register(require('./routes/admin'), { prefix: '/api/admin' });
 
-  // AI Chat route — shared with B2
-  try {
-    fastify.register(require('../../server/routes/ai-chat'), { prefix: '/api' });
-  } catch (e) {
-    console.warn('⚠️ AI chat route non disponible:', e.message);
-  }
+  // AI Chat route
+  fastify.register(require('./routes/ai-chat'), { prefix: '/api' });
 
   return fastify;
 }
