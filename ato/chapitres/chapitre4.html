@@ -63,11 +63,33 @@
 
     <!-- 4.1 Von Neumann -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Comprendre le modèle de Von Neumann (5 composants)</li>
+                <li>Connaître le fonctionnement du CPU et ses registres</li>
+                <li>Expliquer le cycle Fetch-Decode-Execute</li>
+                <li>Décrire la hiérarchie mémoire (registres → cache → RAM → disque)</li>
+                <li>Comprendre le rôle des 3 bus système</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-landmark"></i> 4.1 — Le modèle de Von Neumann</h2>
 
         <div class="concept-card">
-            <h4>📋 Principe fondamental</h4>
-            <p>En 1945, John Von Neumann propose un modèle d'architecture où les <strong>données et le programme partagent la même mémoire</strong>. C'est le modèle que suivent encore tous les ordinateurs modernes.</p>
+            <h4>📋 L'idée révolutionnaire</h4>
+            <p>Avant 1945, chaque « ordinateur » était câblé pour une seule tâche. Pour changer le programme, il fallait <strong>physiquement recâbler la machine</strong> !</p>
+            <p>En 1945, <strong>John Von Neumann</strong> propose une idée géniale : stocker le programme <strong>dans la même mémoire que les données</strong>. Ainsi, pour changer de programme, il suffit de charger un nouveau fichier en mémoire — plus besoin de toucher au câblage.</p>
+            <p><strong>C'est le modèle que suivent TOUS les ordinateurs modernes.</strong></p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">📋</span>
+            <div>
+                <strong>Analogie — Le bureau :</strong> Imagine un employé à son bureau. Sur le bureau (= <strong>mémoire</strong>), il y a à la fois les <strong>données</strong> (dossiers, chiffres) et les <strong>instructions</strong> (procédures à suivre). L'employé (= <strong>CPU</strong>) lit les instructions une par une et traite les dossiers. Les dossiers arrivent par la porte d'entrée (= <strong>entrées</strong>) et les résultats sont envoyés par la porte de sortie (= <strong>sorties</strong>).
+            </div>
         </div>
 
         <h3>Les 5 composants du modèle</h3>

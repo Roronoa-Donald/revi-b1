@@ -15,6 +15,17 @@
         .kmap td,.kmap th{padding:.5rem .7rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.9rem;border:1px solid var(--border,rgba(255,255,255,.1))}
         .kmap th{background:var(--accent-glow);font-weight:700;color:var(--accent)}
         .kmap .grouped{background:var(--accent);color:#fff;font-weight:700;border-radius:4px}
+        .gate-svg{display:inline-block;vertical-align:middle}
+        .gate-svg svg{width:80px;height:50px}
+        .gate-card{background:var(--card-bg,#111827);border:1px solid var(--border,rgba(255,255,255,.06));border-radius:14px;padding:1.2rem;margin:.8rem 0;display:flex;align-items:flex-start;gap:1.2rem;flex-wrap:wrap}
+        .gate-card .gate-visual{flex:0 0 100px;display:flex;align-items:center;justify-content:center}
+        .gate-card .gate-visual svg{width:100px;height:64px}
+        .gate-card .gate-info{flex:1;min-width:200px}
+        .gate-card .gate-info h4{color:var(--accent);font-size:1.05rem;margin-bottom:.3rem}
+        .gate-card .gate-truth{margin-top:.5rem}
+        .gate-card .gate-truth table{font-size:.85rem;width:auto}
+        .gate-card .gate-truth td,.gate-card .gate-truth th{padding:.25rem .6rem;text-align:center;border:1px solid var(--border,rgba(255,255,255,.1))}
+        .gate-card .gate-truth th{background:var(--accent-glow);color:var(--accent);font-weight:700}
     </style>
 </head>
 <body>
@@ -77,27 +88,215 @@
         <div class="concept-card">
             <h4>📋 Le monde binaire</h4>
             <p>En électronique numérique, tout signal est soit <strong>0</strong> (faux, bas, ~0V) soit <strong>1</strong> (vrai, haut, ~5V ou 3.3V). Les <strong>portes logiques</strong> sont les briques élémentaires qui combinent ces signaux.</p>
+            <p>Un processeur moderne contient <strong>des milliards</strong> de portes logiques minuscules gravées dans le silicium !</p>
         </div>
 
         <div class="analogy-box">
             <span class="icon">💡</span>
             <div>
-                <strong>Analogie — Les interrupteurs :</strong> Deux interrupteurs en <strong>série</strong> = porte AND (les deux doivent être ON). Deux interrupteurs en <strong>parallèle</strong> = porte OR (un seul suffit). Un interrupteur <strong>inversé</strong> = porte NOT.
+                <strong>Analogie — Les interrupteurs :</strong> Deux interrupteurs en <strong>série</strong> = porte AND (les deux doivent être ON pour que la lampe s'allume). Deux interrupteurs en <strong>parallèle</strong> = porte OR (un seul suffit). Un interrupteur <strong>inversé</strong> = porte NOT (la lampe est allumée quand l'interrupteur est OFF).
             </div>
         </div>
 
         <h3>Les 7 portes essentielles</h3>
+
+        <!-- ── NOT ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="35" x2="25" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <polygon points="25,15 85,35 25,55" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <circle cx="91" cy="35" r="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+                    <line x1="97" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="28" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="104" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>NOT (NON) — Inverseur</h4>
+                <p><strong>Expression :</strong> S = <span style="text-decoration:overline">A</span> (ou ¬A)</p>
+                <p><strong>En français :</strong> La sortie est l'<strong>inverse</strong> de l'entrée. Si A=1, S=0. Si A=0, S=1.</p>
+                <p><strong>Reconnaissance :</strong> Le petit <strong>cercle ○</strong> à la sortie signifie « inversion ». Tu le retrouveras sur NAND, NOR, XNOR.</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td><strong>1</strong></td></tr><tr><td>1</td><td><strong>0</strong></td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── AND ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="30" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M30,10 L30,10 L55,10 A25,25 0 0,1 55,60 L30,60 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <line x1="80" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>AND (ET) — Multiplication logique</h4>
+                <p><strong>Expression :</strong> S = A · B (ou A ∧ B)</p>
+                <p><strong>En français :</strong> La sortie vaut 1 <strong>seulement si les deux entrées sont à 1</strong>. Une seule entrée à 0 suffit pour que la sortie soit 0.</p>
+                <p><strong>Astuce :</strong> AND = multiplication. 1×1=1, tout le reste=0.</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── OR ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="32" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20,10 Q45,10 80,35 Q45,60 20,60 Q35,35 20,10 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <line x1="80" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>OR (OU) — Addition logique</h4>
+                <p><strong>Expression :</strong> S = A + B (ou A ∨ B)</p>
+                <p><strong>En français :</strong> La sortie vaut 1 <strong>dès qu'au moins une entrée est à 1</strong>. La sortie est 0 seulement quand les deux entrées sont à 0.</p>
+                <p><strong>Astuce :</strong> OR = addition « plafonnée » à 1. Il suffit d'UN seul 1.</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── NAND ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="30" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="30" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M30,10 L30,10 L55,10 A25,25 0 0,1 55,60 L30,60 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <circle cx="86" cy="35" r="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+                    <line x1="92" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>NAND (NON-ET) — AND inversé</h4>
+                <p><strong>Expression :</strong> S = <span style="text-decoration:overline">A · B</span></p>
+                <p><strong>En français :</strong> C'est un AND suivi d'un NOT. La sortie vaut 0 <strong>seulement si les deux entrées sont à 1</strong>. Sinon elle vaut 1.</p>
+                <p><strong>Importance :</strong> Porte <strong>universelle</strong> — on peut construire TOUTES les autres portes avec uniquement des NAND !</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>0</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>1</td><td>0</td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── NOR ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="32" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20,10 Q45,10 75,35 Q45,60 20,60 Q35,35 20,10 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <circle cx="81" cy="35" r="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+                    <line x1="87" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>NOR (NON-OU) — OR inversé</h4>
+                <p><strong>Expression :</strong> S = <span style="text-decoration:overline">A + B</span></p>
+                <p><strong>En français :</strong> C'est un OR suivi d'un NOT. La sortie vaut 1 <strong>seulement si les deux entrées sont à 0</strong>. Dès qu'une entrée est à 1, la sortie tombe à 0.</p>
+                <p><strong>Importance :</strong> Aussi une porte <strong>universelle</strong> (comme NAND).</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── XOR ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="32" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M25,10 Q45,10 80,35 Q45,60 25,60 Q40,35 25,10 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M17,10 Q32,35 17,60" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <line x1="80" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>XOR (OU exclusif)</h4>
+                <p><strong>Expression :</strong> S = A ⊕ B</p>
+                <p><strong>En français :</strong> La sortie vaut 1 <strong>quand les entrées sont différentes</strong>. Si A et B sont identiques (tous deux 0 ou tous deux 1), la sortie est 0.</p>
+                <p><strong>Reconnaissance :</strong> Le symbole est un OR avec une <strong>double courbe</strong> à l'entrée.</p>
+                <p><strong>Usage clé :</strong> C'est la porte de l'<strong>addition binaire</strong> (demi-additionneur : Somme = A ⊕ B).</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>1</td><td>1</td><td>0</td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── XNOR ── -->
+        <div class="gate-card">
+            <div class="gate-visual">
+                <svg viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="0" y1="20" x2="32" y2="20" stroke="currentColor" stroke-width="2"/>
+                    <line x1="0" y1="50" x2="32" y2="50" stroke="currentColor" stroke-width="2"/>
+                    <path d="M25,10 Q45,10 74,35 Q45,60 25,60 Q40,35 25,10 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M17,10 Q32,35 17,60" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <circle cx="80" cy="35" r="6" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+                    <line x1="86" y1="35" x2="120" y2="35" stroke="currentColor" stroke-width="2"/>
+                    <text x="6" y="16" font-size="10" fill="var(--text-muted)">A</text>
+                    <text x="6" y="46" font-size="10" fill="var(--text-muted)">B</text>
+                    <text x="100" y="28" font-size="10" fill="var(--text-muted)">S</text>
+                </svg>
+            </div>
+            <div class="gate-info">
+                <h4>XNOR (OU exclusif inversé) — Comparateur</h4>
+                <p><strong>Expression :</strong> S = <span style="text-decoration:overline">A ⊕ B</span></p>
+                <p><strong>En français :</strong> La sortie vaut 1 <strong>quand les entrées sont identiques</strong>. C'est l'inverse du XOR.</p>
+                <p><strong>Usage :</strong> Comparateur d'égalité — si A = B, alors S = 1.</p>
+                <div class="gate-truth">
+                    <table><thead><tr><th>A</th><th>B</th><th>S</th></tr></thead>
+                    <tbody><tr><td>0</td><td>0</td><td><strong style="color:var(--accent)">1</strong></td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td><strong style="color:var(--accent)">1</strong></td></tr></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Comment reconnaître les portes :</strong> AND = forme en D plate. OR = forme en D incurvée. Le <strong>cercle ○</strong> à la sortie = inversion (NOT). Le XOR a la <strong>double courbe</strong> à l'entrée.</div>
+        </div>
+
+        <h3>Tableau récapitulatif</h3>
         <table class="styled-table gate-table">
-            <thead><tr><th>Porte</th><th>Symbole</th><th>Expression</th><th>A=0,B=0</th><th>A=0,B=1</th><th>A=1,B=0</th><th>A=1,B=1</th></tr></thead>
+            <thead><tr><th>Porte</th><th>Expression</th><th>0,0</th><th>0,1</th><th>1,0</th><th>1,1</th><th>Règle</th></tr></thead>
             <tbody>
-                <tr><td><strong>NOT</strong></td><td>▷○</td><td>S = Ā</td><td colspan="2">S=1 si A=0</td><td colspan="2">S=0 si A=1</td></tr>
-                <tr><td><strong>AND</strong></td><td>D</td><td>S = A·B</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td></tr>
-                <tr><td><strong>OR</strong></td><td>≥1</td><td>S = A+B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td></tr>
-                <tr><td><strong>NAND</strong></td><td>D○</td><td>S = <span style="text-decoration:overline">A·B</span></td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td></tr>
-                <tr><td><strong>NOR</strong></td><td>≥1○</td><td>S = <span style="text-decoration:overline">A+B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td></tr>
-                <tr><td><strong>XOR</strong></td><td>=1</td><td>S = A⊕B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td></tr>
-                <tr><td><strong>XNOR</strong></td><td>=1○</td><td>S = <span style="text-decoration:overline">A⊕B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td><strong>1</strong></td></tr>
+                <tr><td><strong>AND</strong></td><td>A · B</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td><td>Les DEUX à 1</td></tr>
+                <tr><td><strong>OR</strong></td><td>A + B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td><td>Au moins UN à 1</td></tr>
+                <tr><td><strong>NAND</strong></td><td><span style="text-decoration:overline">A·B</span></td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td><td>Inverse de AND</td></tr>
+                <tr><td><strong>NOR</strong></td><td><span style="text-decoration:overline">A+B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td><td>Inverse de OR</td></tr>
+                <tr><td><strong>XOR</strong></td><td>A ⊕ B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td><td>Différent = 1</td></tr>
+                <tr><td><strong>XNOR</strong></td><td><span style="text-decoration:overline">A⊕B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td><strong>1</strong></td><td>Identique = 1</td></tr>
             </tbody>
+        </table>
         </table>
 
         <div class="mnemonic-box">
@@ -159,24 +358,60 @@
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-compress"></i> 3.3 — Simplification algébrique</h2>
 
+        <div class="concept-card">
+            <h4>📋 Pourquoi simplifier ?</h4>
+            <p>Une expression booléenne simplifiée = <strong>moins de portes logiques</strong> = circuit plus petit, plus rapide, moins cher et qui consomme moins d'énergie. C'est fondamental en conception de circuits !</p>
+        </div>
+
         <div class="example-box">
-            <h4>📝 Exemple : simplifier F = A·B + A·B̄ + Ā·B</h4>
-            <div style="padding:.5rem 0">
-                <p>F = A·(B + B̄) + Ā·B <em>(factorisation de A)</em></p>
-                <p>F = A·1 + Ā·B <em>(complémentarité : B + B̄ = 1)</em></p>
-                <p>F = A + Ā·B <em>(neutre : A·1 = A)</em></p>
-                <p>F = A + B <em>(absorption : A + Ā·B = A + B)</em></p>
-                <p><strong>Résultat : F = A + B</strong></p>
+            <h4>📝 Exemple 1 : simplifier F = A·B + A·B̄ + Ā·B</h4>
+            <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;">
+                <p><strong>Étape 1 :</strong> On remarque que A apparaît dans les deux premiers termes → <strong>factorisation</strong></p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0">F = <span style="color:var(--accent);font-weight:700">A</span>·(B + B̄) + Ā·B</p>
+                <p><strong>Étape 2 :</strong> B + B̄ = 1 (complémentarité — un bit vaut toujours 0 ou 1 !)</p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0">F = A·<span style="color:var(--accent);font-weight:700">1</span> + Ā·B</p>
+                <p><strong>Étape 3 :</strong> A·1 = A (élément neutre)</p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0">F = <span style="color:var(--accent);font-weight:700">A</span> + Ā·B</p>
+                <p><strong>Étape 4 :</strong> Absorption → A + Ā·B = A + B</p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0;font-size:1.1rem"><strong>F = A + B</strong> ✓</p>
+                <p style="margin-top:.5rem;color:var(--text-muted);font-size:.85rem">On est passé de 3 termes (7 variables) à 1 terme (2 variables) = circuit beaucoup plus simple !</p>
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>📝 Exemple 2 : simplifier F = Ā·B·C + A·B·C + A·B·C̄</h4>
+            <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;">
+                <p><strong>Étape 1 :</strong> Les termes 2 et 3 ont A·B en commun → <strong>factorisation</strong></p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0">F = Ā·B·C + <span style="color:var(--accent);font-weight:700">A·B</span>·(C + C̄)</p>
+                <p><strong>Étape 2 :</strong> C + C̄ = 1</p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0">F = Ā·B·C + A·B</p>
+                <p><strong>Étape 3 :</strong> Factoriser B → F = B·(Ā·C + A)</p>
+                <p><strong>Étape 4 :</strong> Absorption : Ā·C + A = A + C</p>
+                <p style="font-family:'JetBrains Mono',monospace;margin:.3rem 0;font-size:1.1rem"><strong>F = B·(A + C)</strong> ✓</p>
             </div>
         </div>
 
         <h3>Règles d'absorption utiles</h3>
-        <ul>
-            <li>A + A·B = A (absorption)</li>
-            <li>A + Ā·B = A + B</li>
-            <li>A·(A+B) = A</li>
-            <li>(A+B)·(A+B̄) = A</li>
-        </ul>
+        <table class="styled-table" style="max-width:500px">
+            <thead><tr><th>Règle</th><th>Explication</th></tr></thead>
+            <tbody>
+                <tr><td>A + A·B = <strong>A</strong></td><td>Si A=1, pas besoin de B</td></tr>
+                <tr><td>A + Ā·B = <strong>A + B</strong></td><td>Ā·B « complète » A</td></tr>
+                <tr><td>A·(A+B) = <strong>A</strong></td><td>Dual de la 1ère règle</td></tr>
+                <tr><td>(A+B)·(A+B̄) = <strong>A</strong></td><td>B et B̄ s'annulent</td></tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Méthode de simplification en 4 étapes :</strong><br>
+                1. Chercher des <strong>termes communs</strong> → factoriser<br>
+                2. Appliquer <strong>X + X̄ = 1</strong> pour éliminer des variables<br>
+                3. Appliquer <strong>X·1 = X</strong> pour simplifier<br>
+                4. Utiliser l'<strong>absorption</strong> pour réduire encore
+            </div>
+        </div>
     </section>
 
     <!-- 3.4 Karnaugh -->

@@ -58,80 +58,66 @@
 <main class="content-wrapper">
 
     <!-- ─── Modules ─── -->
-    <section class="chapter-section reveal-on-scroll">
-        <h2 class="section-title"><i class="fas fa-book-open"></i> Les 4 modules</h2>
-        <div class="module-grid">
-
-            <a href="chapitres/chapitre1.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-computer"></i></span>
-                <h3>1 — Généralités</h3>
-                <p>Histoire, composants matériels, logiciels, unités de mesure, périphériques.</p>
-                <span class="module-tag">7 sections</span>
-            </a>
-
-            <a href="chapitres/chapitre2.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-binary"></i></span>
-                <h3>2 — Systèmes de numération</h3>
-                <p>Binaire, octal, hexadécimal, conversions, nombres signés, codes (BCD, ASCII, Gray).</p>
-                <span class="module-tag">8 sections</span>
-            </a>
-
-            <a href="chapitres/chapitre3.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-microchip"></i></span>
-                <h3>3 — Circuits logiques</h3>
-                <p>Portes logiques, algèbre de Boole, simplification Karnaugh, circuits combinatoires et séquentiels.</p>
-                <span class="module-tag">7 sections</span>
-            </a>
-
-            <a href="chapitres/chapitre4.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-memory"></i></span>
-                <h3>4 — Architecture d'un PC</h3>
-                <p>Modèle Von Neumann, CPU, mémoire hiérarchique, bus, entrées/sorties.</p>
-                <span class="module-tag">7 sections</span>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- ─── Outils ─── -->
-    <section class="chapter-section reveal-on-scroll">
-        <h2 class="section-title"><i class="fas fa-toolbox"></i> Outils de révision</h2>
-        <div class="module-grid">
-            <a href="chapitres/formules.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-scroll"></i></span>
-                <h3>Formules & Mnémoniques</h3>
-                <p>Toutes les formules clés et mnémoniques en un seul endroit.</p>
-            </a>
-            <a href="chapitres/cartes.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-clone"></i></span>
-                <h3>Flashcards</h3>
-                <p>30 cartes interactives pour mémoriser les concepts essentiels.</p>
-            </a>
-            <a href="chapitres/simulateur-examen.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-graduation-cap"></i></span>
-                <h3>Simulateur d'examen</h3>
-                <p>Examen blanc chronométré avec correction automatique.</p>
-            </a>
-            <a href="exercices/exercices.html" class="module-card">
-                <span class="module-icon"><i class="fas fa-dumbbell"></i></span>
-                <h3>Exercices</h3>
-                <p>28 exercices classés par catégorie et difficulté.</p>
-            </a>
-        </div>
-    </section>
+    <div class="modules-grid">
+        <a href="chapitres/chapitre1.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-computer"></i></div>
+            <h3>1. Généralités & Histoire</h3>
+            <p>Histoire de l'informatique, composants matériels et logiciels, unités de mesure, périphériques.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~40 min</span><span><i class="fas fa-gamepad"></i> 15 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre2.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-hashtag"></i></div>
+            <h3>2. Systèmes de Numération</h3>
+            <p>Binaire, octal, hexadécimal, conversions, arithmétique binaire, nombres signés, codes (BCD, ASCII, Gray).</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~55 min</span><span><i class="fas fa-gamepad"></i> 15 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre3.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-microchip"></i></div>
+            <h3>3. Circuits Logiques</h3>
+            <p>Portes logiques (AND, OR, NOT…), algèbre de Boole, tableaux de Karnaugh, circuits combinatoires et séquentiels.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~60 min</span><span><i class="fas fa-gamepad"></i> 15 exercices</span></div>
+        </a>
+        <a href="chapitres/chapitre4.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-memory"></i></div>
+            <h3>4. Architecture d'un PC</h3>
+            <p>Modèle Von Neumann, CPU (cycle Fetch-Decode-Execute), mémoire hiérarchique, bus système, E/S.</p>
+            <div class="module-meta"><span><i class="fas fa-clock"></i> ~50 min</span><span><i class="fas fa-gamepad"></i> 15 exercices</span></div>
+        </a>
+        <a href="chapitres/formules.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-scroll"></i></div>
+            <h3>Formules & Mnémoniques</h3>
+            <p>Toutes les formules clés et mnémoniques en un seul endroit.</p>
+            <div class="module-meta"><span><i class="fas fa-calculator"></i> Référence</span></div>
+        </a>
+        <a href="chapitres/cartes.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-clone"></i></div>
+            <h3>Flashcards</h3>
+            <p>30 cartes interactives pour mémoriser les concepts essentiels.</p>
+            <div class="module-meta"><span><i class="fas fa-brain"></i> Mémorisation</span></div>
+        </a>
+        <a href="chapitres/simulateur-examen.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Simulateur d'Examen</h3>
+            <p>Examen blanc chronométré avec correction automatique détaillée.</p>
+            <div class="module-meta"><span><i class="fas fa-stopwatch"></i> Chronométré</span></div>
+        </a>
+        <a href="exercices/exercices.html" class="module-card reveal-on-scroll">
+            <div class="module-icon"><i class="fas fa-dumbbell"></i></div>
+            <h3>Exercices</h3>
+            <p>28 exercices classés par catégorie et difficulté progressive.</p>
+            <div class="module-meta"><span><i class="fas fa-gamepad"></i> 28 exercices</span></div>
+        </a>
+    </div>
 
     <!-- ─── Features ─── -->
-    <section class="chapter-section reveal-on-scroll">
-        <h2 class="section-title"><i class="fas fa-star"></i> Pédagogie interactive</h2>
-        <div class="feature-grid">
-            <div class="feature-card"><i class="fas fa-brain feature-icon"></i><h4>Analogies concrètes</h4><p>Des métaphores pour relier chaque concept à la vie quotidienne.</p></div>
-            <div class="feature-card"><i class="fas fa-lightbulb feature-icon"></i><h4>Mnémoniques</h4><p>Des phrases et acronymes pour retenir facilement.</p></div>
-            <div class="feature-card"><i class="fas fa-gamepad feature-icon"></i><h4>Gamification XP</h4><p>Gagne des points, débloque des badges et monte de niveau.</p></div>
-            <div class="feature-card"><i class="fas fa-dumbbell feature-icon"></i><h4>Exercices guidés</h4><p>Exercices progressifs avec indices et correction détaillée.</p></div>
-            <div class="feature-card"><i class="fas fa-download feature-icon"></i><h4>PDF hors-ligne</h4><p>Télécharge tes chapitres pour réviser sans connexion.</p></div>
-            <div class="feature-card"><i class="fas fa-moon feature-icon"></i><h4>Mode sombre</h4><p>Confortable pour les sessions de nuit.</p></div>
-        </div>
-    </section>
+    <div class="features-grid reveal-on-scroll">
+        <div class="feature-item"><i class="fas fa-brain"></i><h4>Analogies concrètes</h4><p>Des métaphores pour relier chaque concept à la vie quotidienne.</p></div>
+        <div class="feature-item"><i class="fas fa-lightbulb"></i><h4>Mnémoniques</h4><p>Des phrases et acronymes pour retenir facilement.</p></div>
+        <div class="feature-item"><i class="fas fa-gamepad"></i><h4>Gamification XP</h4><p>Gagne des points, débloque des badges et monte de niveau.</p></div>
+        <div class="feature-item"><i class="fas fa-dumbbell"></i><h4>Exercices guidés</h4><p>Exercices progressifs avec indices et correction détaillée.</p></div>
+        <div class="feature-item"><i class="fas fa-download"></i><h4>PDF hors-ligne</h4><p>Télécharge tes chapitres pour réviser sans connexion.</p></div>
+        <div class="feature-item"><i class="fas fa-moon"></i><h4>Mode sombre</h4><p>Confortable pour les sessions de nuit.</p></div>
+    </div>
 
 </main>
 
