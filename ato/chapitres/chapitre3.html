@@ -11,10 +11,15 @@
         :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
         .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
         .gate-table{text-align:center}.gate-table td,.gate-table th{padding:.4rem .8rem;min-width:50px}
-        .kmap{display:inline-grid;gap:0;border:2px solid var(--accent);border-radius:8px;overflow:hidden;margin:1rem 0}
-        .kmap td,.kmap th{padding:.5rem .7rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.9rem;border:1px solid var(--border,rgba(255,255,255,.1))}
+        .kmap{border-collapse:collapse;border:2px solid var(--accent);border-radius:8px;overflow:hidden;margin:1rem auto}
+        .kmap td,.kmap th{padding:.6rem .9rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.95rem;border:1px solid var(--border,rgba(255,255,255,.15));min-width:44px}
         .kmap th{background:var(--accent-glow);font-weight:700;color:var(--accent)}
-        .kmap .grouped{background:var(--accent);color:#fff;font-weight:700;border-radius:4px}
+        .kmap .grouped{background:var(--accent);color:#fff;font-weight:700}
+        .kmap .grp-blue{background:#6366f1;color:#fff;font-weight:700}
+        .kmap .grp-green{background:#10b981;color:#fff;font-weight:700}
+        .kmap-legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin:.8rem 0;font-size:.85rem;align-items:center}
+        .kmap-legend span{display:inline-flex;align-items:center;gap:.4rem}
+        .kmap-legend .swatch{width:16px;height:16px;border-radius:4px;display:inline-block}
         .gate-svg{display:inline-block;vertical-align:middle}
         .gate-svg svg{width:80px;height:50px}
         .gate-card{background:var(--card-bg,#111827);border:1px solid var(--border,rgba(255,255,255,.06));border-radius:14px;padding:1.2rem;margin:.8rem 0;display:flex;align-items:flex-start;gap:1.2rem;flex-wrap:wrap}
@@ -419,34 +424,113 @@
         <h2><i class="fas fa-table-cells"></i> 3.4 — Tableaux de Karnaugh</h2>
 
         <div class="concept-card">
-            <h4>📋 Principe</h4>
-            <p>Le tableau de Karnaugh est une méthode <strong>graphique</strong> pour simplifier les expressions booléennes. Les cases adjacentes ne diffèrent que d'<strong>une seule variable</strong> (code de Gray).</p>
-            <p><strong>Règles :</strong> Regrouper les 1 en rectangles de taille 1, 2, 4, 8… (puissances de 2). Plus le groupe est grand, plus l'expression est simplifiée.</p>
+            <h4>📋 C'est quoi un tableau de Karnaugh ?</h4>
+            <p>C'est une méthode <strong>graphique</strong> (visuelle) pour simplifier des expressions booléennes sans faire d'algèbre compliquée. On remplit un tableau, on repère des <strong>groupes de 1</strong>, et on lit directement le résultat simplifié !</p>
         </div>
 
-        <div class="example-box">
-            <h4>📝 Exemple : F(A,B,C) — 3 variables</h4>
-            <p>Table de vérité : F = Σm(0,2,4,5,6)</p>
+        <div class="concept-card" style="border-left:4px solid var(--accent)">
+            <h4>⚡ Les 5 règles du Karnaugh</h4>
+            <ol>
+                <li><strong>Ordre Gray</strong> — Les en-têtes suivent le code de Gray (00, 01, 11, 10) pour qu'entre deux cases voisines, <strong>un seul bit change</strong>.</li>
+                <li><strong>Remplir</strong> — On place des 1 dans les cases correspondant aux mintermes de la fonction.</li>
+                <li><strong>Grouper les 1</strong> — Former des rectangles de <strong>1, 2, 4, 8 ou 16 cases</strong> (puissances de 2 uniquement).</li>
+                <li><strong>Plus gros = mieux</strong> — Un groupe de 4 élimine 2 variables, un groupe de 2 en élimine 1. Toujours chercher le plus grand groupe possible.</li>
+                <li><strong>Les bords s'enroulent</strong> — La 1ère colonne est adjacente à la dernière, la 1ère ligne à la dernière (comme un tore).</li>
+            </ol>
+        </div>
 
-            <table class="kmap" style="margin:1rem auto">
-                <tr><th>AB \ C</th><th>0</th><th>1</th></tr>
-                <tr><th>00</th><td class="grouped">1</td><td>0</td></tr>
-                <tr><th>01</th><td class="grouped">1</td><td>0</td></tr>
-                <tr><th>11</th><td class="grouped">1</td><td class="grouped">1</td></tr>
-                <tr><th>10</th><td class="grouped">1</td><td class="grouped">1</td></tr>
+        <h3>Exemple 1 : Karnaugh à 3 variables</h3>
+
+        <div class="example-box">
+            <h4>📝 F(A,B,C) = Σm(3,4,5,6,7)</h4>
+
+            <p><strong>Étape 1 — Placer les 1 dans le tableau</strong></p>
+            <p style="font-size:.85rem;color:var(--text-muted)">m3=011, m4=100, m5=101, m6=110, m7=111 — Colonnes en ordre <strong>Gray</strong> : 00, 01, 11, 10</p>
+
+            <table class="kmap">
+                <tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+                <tr><th>0</th><td>0</td><td>0</td><td class="grouped">1</td><td>0</td></tr>
+                <tr><th>1</th><td class="grp-blue">1</td><td class="grp-blue">1</td><td class="grp-green">1</td><td class="grp-blue">1</td></tr>
             </table>
 
-            <p>Groupements :</p>
-            <ul>
-                <li>Colonne C=0 (4 cases) → C̄</li>
-                <li>Lignes AB=11 et AB=10 (4 cases) → A</li>
-            </ul>
-            <p><strong>F = C̄ + A</strong> (ou F = A + C̄)</p>
+            <div class="kmap-legend">
+                <span><span class="swatch" style="background:var(--accent)"></span> Groupe 1 (2 cases)</span>
+                <span><span class="swatch" style="background:#6366f1"></span> Groupe 2 (4 cases)</span>
+                <span><span class="swatch" style="background:#10b981"></span> Dans les 2 groupes</span>
+            </div>
+
+            <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem">
+                <p style="font-weight:700">Étape 2 — Former les groupes</p>
+                <p><strong>Groupe bleu (4 cases) :</strong> toute la ligne A=1 (m4, m5, m7, m6). 4 cases → on élimine 2 variables (B et C). Seule variable constante : A=1. Résultat : <strong>A</strong></p>
+                <p><strong>Groupe rose (2 cases) :</strong> colonne BC=11 (m3 et m7). 2 cases → on élimine 1 variable (A change). Variables constantes : B=1 et C=1. Résultat : <strong>B·C</strong></p>
+
+                <p style="font-weight:700;margin-top:.8rem">Étape 3 — Écrire le résultat (OR de tous les groupes)</p>
+                <p style="font-size:1.15rem;text-align:center;margin:.5rem 0"><strong>F = A + B·C</strong></p>
+
+                <p style="font-size:.85rem;color:var(--text-muted);margin-top:.5rem">Vérification : m3 (A=0,B=1,C=1) → 0 + 1·1 = 1 ✓ | m4 (A=1,B=0,C=0) → 1 + 0 = 1 ✓ | m0 (A=0,B=0,C=0) → 0 + 0 = 0 ✓ | m1 (A=0,B=0,C=1) → 0 + 0 = 0 ✓</p>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <h4>📋 Méthode Karnaugh — Résumé en 4 étapes</h4>
+            <ol>
+                <li><strong>Construire le tableau</strong> avec les en-têtes en <strong>code de Gray</strong> (00, 01, 11, 10)</li>
+                <li><strong>Remplir</strong> les 1 à partir des mintermes de la table de vérité</li>
+                <li><strong>Former les plus grands rectangles possibles</strong> de 1 (taille = puissance de 2). Une case peut appartenir à plusieurs groupes. Les bords s'enroulent.</li>
+                <li><strong>Pour chaque groupe</strong>, écrire le produit des variables qui <strong>ne changent pas</strong> à l'intérieur du groupe. Faire le OR (somme) de tous les groupes.</li>
+            </ol>
+        </div>
+
+        <h3>Exemple 2 : Karnaugh à 4 variables (avec enroulement !)</h3>
+
+        <div class="example-box">
+            <h4>📝 F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15)</h4>
+
+            <p><strong>Étape 1 —</strong> Remplir le tableau :</p>
+            <p style="font-size:.85rem;color:var(--text-muted)">m0=0000, m2=0010, m5=0101, m7=0111, m8=1000, m10=1010, m13=1101, m15=1111</p>
+
+            <table class="kmap">
+                <tr><th>AB \ CD</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
+                <tr><th>00</th><td class="grouped">1</td><td>0</td><td>0</td><td class="grouped">1</td></tr>
+                <tr><th>01</th><td>0</td><td class="grp-blue">1</td><td class="grp-blue">1</td><td>0</td></tr>
+                <tr><th>11</th><td>0</td><td class="grp-blue">1</td><td class="grp-blue">1</td><td>0</td></tr>
+                <tr><th>10</th><td class="grouped">1</td><td>0</td><td>0</td><td class="grouped">1</td></tr>
+            </table>
+
+            <div class="kmap-legend">
+                <span><span class="swatch" style="background:var(--accent)"></span> Groupe 1 : B̄·D̄ (4 cases)</span>
+                <span><span class="swatch" style="background:#6366f1"></span> Groupe 2 : B·D (4 cases)</span>
+            </div>
+
+            <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem">
+                <p style="font-weight:700">Étape 2 — Former les groupes :</p>
+
+                <p><strong>Groupe rose (4 cases) :</strong> AB=00/CD=00, AB=00/CD=10, AB=10/CD=00, AB=10/CD=10</p>
+                <p style="padding-left:1rem">→ AB=00 et AB=10 sont adjacentes (enroulement haut-bas, seul A change)</p>
+                <p style="padding-left:1rem">→ CD=00 et CD=10 sont adjacentes (enroulement gauche-droite, seul D change)</p>
+                <p style="padding-left:1rem">→ Variables constantes : <strong>B=0</strong> et <strong>D=0</strong>. Donc ce groupe = <strong>B̄·D̄</strong></p>
+
+                <p style="margin-top:.5rem"><strong>Groupe bleu (4 cases) :</strong> AB=01/CD=01, AB=01/CD=11, AB=11/CD=01, AB=11/CD=11</p>
+                <p style="padding-left:1rem">→ AB=01 et AB=11 adjacentes (seul A change)</p>
+                <p style="padding-left:1rem">→ CD=01 et CD=11 adjacentes (seul C change)</p>
+                <p style="padding-left:1rem">→ Variables constantes : <strong>B=1</strong> et <strong>D=1</strong>. Donc ce groupe = <strong>B·D</strong></p>
+
+                <p style="font-weight:700;margin-top:.8rem">Étape 3 — Résultat :</p>
+                <p style="font-size:1.2rem;text-align:center;margin:.5rem 0"><strong>F = B̄·D̄ + B·D</strong></p>
+                <p style="text-align:center;font-size:.9rem;color:var(--text-muted)">Ou encore : F = B ⊙ D (XNOR de B et D !)</p>
+
+                <p style="font-size:.85rem;color:var(--text-muted);margin-top:.5rem">Vérif : m0 (0000) → B̄·D̄=1·1=1 ✓ | m5 (0101) → B·D=1·1=1 ✓ | m3 (0011) → 0+0=0 ✓</p>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Erreur fréquente :</strong> Oublier que les bords s'enroulent ! Dans un tableau 4×4, la 1ère ligne est adjacente à la dernière, et la 1ère colonne est adjacente à la dernière. Les 4 coins forment aussi un groupe valide !</div>
         </div>
 
         <div class="tip-box">
             <span>💡</span>
-            <div><strong>Astuces Karnaugh :</strong> 1) Les bords « s'enroulent » (la 1ère colonne est adjacente à la dernière). 2) Un même 1 peut appartenir à plusieurs groupes. 3) Les don't care (X) peuvent être 0 ou 1 selon ce qui arrange.</div>
+            <div><strong>Astuces Karnaugh :</strong> 1) Un même 1 peut appartenir à <strong>plusieurs groupes</strong>. 2) Les <strong>don't care (X)</strong> peuvent être traités comme 0 ou 1 selon ce qui arrange le groupement. 3) Pour n variables : n=2 → 2×2, n=3 → 2×4, n=4 → 4×4.</div>
         </div>
 
         <div class="mnemonic-box">
