@@ -7,7 +7,7 @@
 
   if (window.location.pathname.startsWith('/_auth/')) return;
 
-  var COURSE_DIRS = ['algo', 'c_cpp', 'python', 'reseaux', 'stats', 'fbd', 'merise'];
+  var COURSE_DIRS = ['algo', 'c_cpp', 'python', 'reseaux', 'stats', 'fbd', 'merise', 'algebre', 'ato'];
   var path = window.location.pathname;
 
   function isProtectedPage() {

@@ -10,7 +10,9 @@ const COURSES = {
   'reseaux': 'Réseaux Informatiques',
   'stats': 'Statistiques Descriptives',
   'fbd': 'Fondamentaux des Bases de Données',
-  'merise': 'MERISE'
+  'merise': 'MERISE',
+  'algebre': 'Algèbre Linéaire',
+  'ato': 'Architecture & Technologie des Ordinateurs'
 };
 
 const COURSE_ICONS = {
@@ -20,7 +22,9 @@ const COURSE_ICONS = {
   'reseaux': '🌐',
   'stats': '📊',
   'fbd': '🔧',
-  'merise': '🏗️'
+  'merise': '🏗️',
+  'algebre': '📐',
+  'ato': '🖥️'
 };
 
 const COURSE_THEMES = {
@@ -30,7 +34,9 @@ const COURSE_THEMES = {
   'reseaux': { mode: 'dark',  accent: '#0ea5e9', accentLight: '#38bdf8', accentDark: '#0284c7', gradient: 'linear-gradient(135deg, #0ea5e9, #0284c7)' },
   'stats':   { mode: 'dark',  accent: '#8b5cf6', accentLight: '#a78bfa', accentDark: '#7c3aed', gradient: 'linear-gradient(135deg, #8b5cf6, #7c3aed)' },
   'fbd':     { mode: 'dark',  accent: '#ea580c', accentLight: '#f97316', accentDark: '#c2410c', gradient: 'linear-gradient(135deg, #ea580c, #c2410c)' },
-  'merise':  { mode: 'dark',  accent: '#14b8a6', accentLight: '#2dd4bf', accentDark: '#0d9488', gradient: 'linear-gradient(135deg, #14b8a6, #0d9488)' }
+  'merise':  { mode: 'dark',  accent: '#14b8a6', accentLight: '#2dd4bf', accentDark: '#0d9488', gradient: 'linear-gradient(135deg, #14b8a6, #0d9488)' },
+  'algebre': { mode: 'dark',  accent: '#a855f7', accentLight: '#c084fc', accentDark: '#9333ea', gradient: 'linear-gradient(135deg, #a855f7, #9333ea)' },
+  'ato':     { mode: 'dark',  accent: '#f43f5e', accentLight: '#fb7185', accentDark: '#e11d48', gradient: 'linear-gradient(135deg, #f43f5e, #e11d48)' }
 };
 
 const COURSE_DIRS = Object.keys(COURSES);
