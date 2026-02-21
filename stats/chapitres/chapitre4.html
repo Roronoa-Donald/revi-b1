@@ -190,6 +190,60 @@ Variance d'échantillon :  s² = Σ(xᵢ − x̄)² / (N − 1)
     </div>
 </section>
 
+
+    <!-- Exercice guidé : Dispersion -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Calculer variance et écart-type pas à pas</h4>
+            <p><strong>Données :</strong> Temps de trajet (min) sur 5 jours : 25, 30, 22, 28, 35</p>
+            <h5>Étape 1 — Calculer la moyenne</h5>
+            <pre><code>x&#x0304; = (25 + 30 + 22 + 28 + 35) / 5 = 140/5 = 28</code></pre>
+            <h5>Étape 2 — Calculer les écarts à la moyenne</h5>
+            <table class="styled-table">
+                <thead><tr><th>x<sub>i</sub></th><th>x<sub>i</sub> - x&#x0304;</th><th>(x<sub>i</sub> - x&#x0304;)²</th></tr></thead>
+                <tbody>
+                    <tr><td>25</td><td>25 - 28 = -3</td><td>(-3)² = 9</td></tr>
+                    <tr><td>30</td><td>30 - 28 = +2</td><td>(+2)² = 4</td></tr>
+                    <tr><td>22</td><td>22 - 28 = -6</td><td>(-6)² = 36</td></tr>
+                    <tr><td>28</td><td>28 - 28 = 0</td><td>(0)² = 0</td></tr>
+                    <tr><td>35</td><td>35 - 28 = +7</td><td>(+7)² = 49</td></tr>
+                </tbody>
+            </table>
+            <h5>Étape 3 — Variance</h5>
+            <pre><code>V = (9 + 4 + 36 + 0 + 49) / 5 = 98/5 = 19.6</code></pre>
+            <h5>Étape 4 — Écart-type</h5>
+            <pre><code>σ = √V = √19.6 ≈ 4.43 minutes
+
+Interprétation : En moyenne, le temps de trajet
+s'écarte de ±4.43 min par rapport à la moyenne (28 min).
+Le trajet varie entre ~23.6 et ~32.4 minutes.</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Calculer les quartiles et l'IQR</h4>
+            <p><strong>Données triées :</strong> 3, 5, 7, 8, 12, 14, 15, 18, 20, 22, 25, 30 (n=12)</p>
+            <h5>Étape 1 — Médiane (Q2)</h5>
+            <pre><code>n = 12 (pair) → Médiane = (6ème + 7ème valeur) / 2
+Médiane = (14 + 15) / 2 = 14.5</code></pre>
+            <h5>Étape 2 — Q1 (médiane de la moitié inférieure)</h5>
+            <pre><code>Moitié inférieure : 3, 5, 7, 8, 12, 14 (6 valeurs)
+Q1 = (3ème + 4ème) / 2 = (7 + 8) / 2 = 7.5</code></pre>
+            <h5>Étape 3 — Q3 (médiane de la moitié supérieure)</h5>
+            <pre><code>Moitié supérieure : 15, 18, 20, 22, 25, 30 (6 valeurs)
+Q3 = (3ème + 4ème) / 2 = (20 + 22) / 2 = 21</code></pre>
+            <h5>Étape 4 — Écart interquartile (IQR)</h5>
+            <pre><code>IQR = Q3 - Q1 = 21 - 7.5 = 13.5
+
+→ 50% des données se situent entre 7.5 et 21
+→ Un point aberrant serait au-delà de :
+  Q1 - 1.5×IQR = 7.5 - 20.25 = -12.75 (pas de valeur &lt; 0)
+  Q3 + 1.5×IQR = 21 + 20.25 = 41.25 (pas de valeur &gt; 41.25)
+→ Aucune valeur aberrante ✓</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

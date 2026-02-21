@@ -200,6 +200,45 @@ Règle    Action    Protocole    Source          Dest Port    Description
     <div class="warning-box"><strong>⚠️ Piège n°3 — Ordre des ACL :</strong> Les règles d'un pare-feu sont évaluées <strong>dans l'ordre, première correspondance gagne</strong>. Si un « deny all » est en première position, tout est bloqué même si des « permit » suivent.</div>
 </section>
 
+
+    <!-- Exercice guidé : Sécurité -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Classifier les attaques réseau</h4>
+            <table class="styled-table">
+                <thead><tr><th>Attaque</th><th>Type</th><th>Couche ciblée</th><th>Contre-mesure</th></tr></thead>
+                <tbody>
+                    <tr><td>DDoS</td><td>Déni de service</td><td>3-4</td><td>Pare-feu, rate limiting, CDN</td></tr>
+                    <tr><td>Man-in-the-Middle</td><td>Interception</td><td>2-7</td><td>Chiffrement TLS/SSL, HTTPS</td></tr>
+                    <tr><td>ARP Spoofing</td><td>Usurpation</td><td>2</td><td>Entrées ARP statiques, DHCP snooping</td></tr>
+                    <tr><td>Phishing</td><td>Ingénierie sociale</td><td>7</td><td>Formation utilisateurs, filtres email</td></tr>
+                    <tr><td>Brute Force</td><td>Cassage de mot de passe</td><td>7</td><td>Limitation de tentatives, 2FA</td></tr>
+                    <tr><td>DNS Poisoning</td><td>Empoisonnement</td><td>7</td><td>DNSSEC, DNS over HTTPS</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="example-box">
+            <h4>Configurer les règles d'un pare-feu</h4>
+            <p><strong>Scénario :</strong> Protéger un serveur web (192.168.1.10) en autorisant seulement HTTP/HTTPS et SSH.</p>
+            <pre><code>Règle 1 : AUTORISER TCP entrant vers port 80  (HTTP)
+Règle 2 : AUTORISER TCP entrant vers port 443 (HTTPS)
+Règle 3 : AUTORISER TCP entrant vers port 22  (SSH)
+           source : 10.0.0.0/24 uniquement (admin)
+Règle 4 : BLOQUER tout le reste (deny all)
+
+Ordre important ! Les règles sont évaluées de haut en bas.
+La règle "deny all" doit être en DERNIER.</code></pre>
+            <pre><code>En notation iptables (Linux) :
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+iptables -A INPUT -p tcp -s 10.0.0.0/24 --dport 22 -j ACCEPT
+iptables -A INPUT -j DROP</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

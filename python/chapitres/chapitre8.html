@@ -259,6 +259,81 @@ print(rex.nom)           # "Rex" — hérité de Animal</code></pre></div>
 </section>
 
 <!-- Section 8 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Système de personnages (POO)</h4>
+        <p><strong>Objectif :</strong> Créer une hiérarchie de classes avec héritage.</p>
+
+        <p><strong>Étape 1 — Classe de base :</strong></p>
+        <div class="code-block"><pre>class Personnage:
+    def __init__(self, nom, pv=100, attaque=10):
+        self.nom = nom
+        self.pv = pv
+        self.attaque = attaque
+
+    def attaquer(self, cible):
+        cible.pv -= self.attaque
+        print(f"{self.nom} attaque {cible.nom} ! (-{self.attaque} PV)")</pre></div>
+
+        <p><strong>Étape 2 — Classe Mage (héritage) :</strong></p>
+        <div class="code-block"><pre>class Mage(Personnage):
+    def __init__(self, nom, pv=80, attaque=8, mana=50):
+        super().__init__(nom, pv, attaque)
+        self.mana = mana
+
+    def lancer_sort(self, cible, degats=25):
+        if self.mana >= 10:
+            self.mana -= 10
+            cible.pv -= degats
+            print(f"🔮 {self.nom} lance un sort ! (-{degats} PV)")
+        else:
+            print(f"{self.nom} n'a plus de mana !")</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>super().__init__(...)</code> appelle le constructeur parent pour initialiser les attributs communs.</div>
+
+        <p><strong>Étape 3 — Simuler un combat :</strong></p>
+        <div class="code-block"><pre>guerrier = Personnage("Aragorn", pv=120, attaque=15)
+mage = Mage("Gandalf")
+
+mage.lancer_sort(guerrier)  # 🔮 Gandalf lance un sort ! (-25 PV)
+guerrier.attaquer(mage)     # Aragorn attaque Gandalf ! (-15 PV)
+# Aragorn: 95 PV | Gandalf: 65 PV, 40 mana</pre></div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Créer et importer un module</h4>
+        <p><strong>Objectif :</strong> Créer un module et l'importer de 3 façons.</p>
+
+        <p><strong>Étape 1 — Créer outils.py :</strong></p>
+        <div class="code-block"><pre># outils.py
+def moyenne(*notes):
+    return sum(notes) / len(notes) if notes else 0
+
+def est_premier(n):
+    if n &lt; 2: return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0: return False
+    return True</pre></div>
+
+        <p><strong>Étape 2 — 3 styles d'import :</strong></p>
+        <div class="code-block"><pre># Style 1 : import module
+import outils
+print(outils.moyenne(12, 15, 18))  # 15.0
+
+# Style 2 : from ... import ...
+from outils import est_premier
+print(est_premier(17))  # True
+
+# Style 3 : alias
+import outils as o
+print(o.moyenne(10, 20))  # 15.0</pre></div>
+        <div class="warning-box"><strong>⚠️</strong> Évitez <code>from outils import *</code> — ça importe tout et peut créer des conflits de noms !</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

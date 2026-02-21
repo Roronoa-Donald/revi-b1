@@ -286,6 +286,53 @@ int main() {
 </section>
 
 <!-- ═══════════════ 3.7 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Fonction puissance récursive</h4>
+        <p><strong>Objectif :</strong> Calculer x^n avec une fonction récursive.</p>
+
+        <p><strong>Étape 1 — Prototype et cas de base :</strong></p>
+        <div class="code-block"><pre>double puissance(double x, int n);  // Prototype
+
+double puissance(double x, int n) {
+    if (n == 0) return 1;        // Cas de base : x^0 = 1
+    return x * puissance(x, n-1); // Appel récursif
+}</pre></div>
+
+        <p><strong>Étape 2 — Utiliser la fonction :</strong></p>
+        <div class="code-block"><pre>printf("2^10 = %.0f\n", puissance(2, 10));  // 1024
+printf("3^4  = %.0f\n", puissance(3, 4));   // 81</pre></div>
+        <div class="tip-box"><strong>💡</strong> La récursion s'arrête grâce au <strong>cas de base</strong> (n == 0). Sans lui → boucle infinie !</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Échanger deux variables (passage par adresse)</h4>
+        <p><strong>Objectif :</strong> Comprendre la différence entre passage par valeur et par adresse.</p>
+
+        <p><strong>Étape 1 — Version qui NE MARCHE PAS (par valeur) :</strong></p>
+        <div class="code-block"><pre>void echanger_valeur(int a, int b) {
+    int temp = a; a = b; b = temp;
+    // Échange uniquement les copies locales !
+}</pre></div>
+
+        <p><strong>Étape 2 — Version correcte (par adresse) :</strong></p>
+        <div class="code-block"><pre>void echanger(int *a, int *b) {
+    int temp = *a;
+    *a = *b;       // Modifie la valeur pointée
+    *b = temp;
+}
+
+int x = 5, y = 10;
+echanger(&amp;x, &amp;y);  // Passer les adresses avec &amp;
+printf("x=%d, y=%d\n", x, y);  // x=10, y=5 ✓</pre></div>
+        <div class="warning-box"><strong>⚠️</strong> Le <code>*</code> devant le paramètre = pointeur (adresse). Le <code>&amp;</code> à l'appel = "donne-moi l'adresse de".</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 3.7 — Récapitulatif</h2>
 

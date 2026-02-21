@@ -181,6 +181,54 @@ Socket serveur = 93.184.216.34:443
 </section>
 
 <!-- Récap -->
+
+    <!-- Exercice guidé : TCP vs UDP -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>TCP vs UDP — Choisir le bon protocole</h4>
+            <p><strong>Énoncé :</strong> Pour chaque application, quel protocole de transport utiliser ?</p>
+            <table class="styled-table">
+                <thead><tr><th>Application</th><th>Protocole</th><th>Justification</th></tr></thead>
+                <tbody>
+                    <tr><td>Navigation web (HTTP)</td><td>TCP</td><td>Les pages doivent arriver complètes et dans l'ordre</td></tr>
+                    <tr><td>Streaming vidéo en direct</td><td>UDP</td><td>Vitesse prioritaire, perte d'une image acceptable</td></tr>
+                    <tr><td>Envoi d'email (SMTP)</td><td>TCP</td><td>Le message doit arriver intégralement</td></tr>
+                    <tr><td>Jeu en ligne (FPS)</td><td>UDP</td><td>Latence minimale, un paquet perdu = 1 frame</td></tr>
+                    <tr><td>DNS (résolution de nom)</td><td>UDP</td><td>Requête courte, réponse courte, pas besoin de connexion</td></tr>
+                    <tr><td>Transfert de fichiers (FTP)</td><td>TCP</td><td>Intégrité du fichier essentielle</td></tr>
+                </tbody>
+            </table>
+            <div class="tip-box">
+                <strong>Règle simple :</strong> Si perdre un paquet = problème grave → TCP. Si la vitesse prime et qu'une perte est tolérable → UDP.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Le handshake TCP en 3 étapes</h4>
+            <p><strong>Scénario :</strong> Un client (192.168.1.10) se connecte au serveur web (10.0.0.1:80).</p>
+            <pre><code>Étape 1 — SYN (Client → Serveur)
+  Client envoie : SYN, Seq=100
+  "Je veux me connecter, mon numéro de séquence est 100"
+
+Étape 2 — SYN-ACK (Serveur → Client)
+  Serveur répond : SYN-ACK, Seq=300, Ack=101
+  "D'accord, mon numéro est 300, j'attends ton paquet 101"
+
+Étape 3 — ACK (Client → Serveur)
+  Client confirme : ACK, Seq=101, Ack=301
+  "Reçu ! J'envoie 101, j'attends ton 301"
+
+→ Connexion établie ! Échange de données possible ✓</code></pre>
+            <pre><code>Déconnexion (4 étapes) :
+  Client → FIN → Serveur
+  Serveur → ACK → Client
+  Serveur → FIN → Client
+  Client → ACK → Serveur → Connexion fermée</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

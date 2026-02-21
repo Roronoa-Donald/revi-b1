@@ -258,7 +258,58 @@ Lecture bottom-up :
         </div>
     </section>
 
-    <!-- ─── 7. Résumé ─── -->
+    
+    <!-- Exercice guidé : Algèbre relationnelle -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Enchaîner sélection, projection et jointure</h4>
+            <p><strong>Tables :</strong></p>
+            <pre><code>EMPLOYE(NumEmp, Nom, Salaire, NumDept)
+| 1   | Dupont  | 2800 | 10 |
+| 2   | Martin  | 3200 | 20 |
+| 3   | Durand  | 2500 | 10 |
+| 4   | Petit   | 3500 | 30 |
+
+DEPARTEMENT(NumDept, NomDept, Ville)
+| 10 | Compta  | Paris |
+| 20 | Info    | Lyon  |
+| 30 | RH      | Paris |</code></pre>
+            <p><strong>Question :</strong> Trouver les noms des employés parisiens gagnant plus de 2700 €.</p>
+            <h5>Étape 1 — Jointure</h5>
+            <pre><code>R1 = EMPLOYE ⋈ DEPARTEMENT (sur NumDept)
+→ Combine chaque employé avec son département</code></pre>
+            <h5>Étape 2 — Sélection (σ)</h5>
+            <pre><code>R2 = σ(Ville='Paris' ET Salaire &gt; 2700)(R1)
+→ Garde : Dupont (2800, Compta/Paris) et Petit (3500, RH/Paris)
+→ Élimine : Martin (Lyon), Durand (2500 &lt; 2700)</code></pre>
+            <h5>Étape 3 — Projection (π)</h5>
+            <pre><code>R3 = π(Nom)(R2)
+→ Résultat : { Dupont, Petit } ✓</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Différence et division relationnelles</h4>
+            <p><strong>Question :</strong> Quels étudiants ont validé TOUS les modules ?</p>
+            <pre><code>VALIDATION(NumEtu, CodeModule)
+| E1 | M1 |    MODULE(CodeModule)
+| E1 | M2 |    | M1 |
+| E1 | M3 |    | M2 |
+| E2 | M1 |    | M3 |
+| E2 | M3 |
+| E3 | M1 |</code></pre>
+            <h5>Division : VALIDATION ÷ MODULE</h5>
+            <pre><code>Pour chaque étudiant, vérifier s'il a TOUS les modules :
+  E1 : {M1, M2, M3} ⊇ {M1, M2, M3} ? OUI ✓
+  E2 : {M1, M3}     ⊇ {M1, M2, M3} ? NON (M2 manque)
+  E3 : {M1}         ⊇ {M1, M2, M3} ? NON (M2, M3 manquent)
+
+→ Résultat : { E1 } ✓</code></pre>
+        </div>
+    </section>
+
+<!-- ─── 7. Résumé ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
         <div class="concept-card">

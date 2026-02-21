@@ -356,6 +356,72 @@ int main() {
 </section>
 
 <!-- ═══════════════ 8.7 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Classe Rectangleavec encapsulation</h4>
+        <p><strong>Objectif :</strong> Créer une classe C++ avec attributs privés et méthodes.</p>
+
+        <p><strong>Étape 1 — Déclarer la classe :</strong></p>
+        <div class="code-block"><pre>class Rectangle {
+private:
+    double largeur, hauteur;  // Attributs privés
+
+public:
+    // Constructeur
+    Rectangle(double l, double h) : largeur(l), hauteur(h) {}
+
+    // Méthodes
+    double aire() const { return largeur * hauteur; }
+    double perimetre() const { return 2 * (largeur + hauteur); }
+
+    void afficher() const {
+        cout &lt;&lt; largeur &lt;&lt; "x" &lt;&lt; hauteur
+             &lt;&lt; " → Aire=" &lt;&lt; aire()
+             &lt;&lt; ", Périmètre=" &lt;&lt; perimetre() &lt;&lt; endl;
+    }
+};</pre></div>
+
+        <p><strong>Étape 2 — Utiliser :</strong></p>
+        <div class="code-block"><pre>Rectangle r1(5, 3);
+r1.afficher();  // 5x3 → Aire=15, Périmètre=16
+
+Rectangle r2(10, 2);
+r2.afficher();  // 10x2 → Aire=20, Périmètre=24</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>const</code> après une méthode signifie qu'elle ne modifie pas l'objet — bonne pratique C++ !</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Héritage : Forme → Cercle</h4>
+        <p><strong>Objectif :</strong> Comprendre l'héritage en C++.</p>
+
+        <div class="code-block"><pre>class Forme {
+protected:
+    string nom;
+public:
+    Forme(string n) : nom(n) {}
+    virtual double aire() const = 0;  // Méthode abstraite
+    void afficher() const {
+        cout &lt;&lt; nom &lt;&lt; " → Aire = " &lt;&lt; aire() &lt;&lt; endl;
+    }
+};
+
+class Cercle : public Forme {
+    double rayon;
+public:
+    Cercle(double r) : Forme("Cercle"), rayon(r) {}
+    double aire() const override { return 3.14159 * rayon * rayon; }
+};
+
+Cercle c(5);
+c.afficher();  // Cercle → Aire = 78.5398</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>virtual</code> + <code>= 0</code> rend la méthode <strong>abstraite</strong>. <code>override</code> vérifie à la compilation que l'on redéfinit bien une méthode du parent.</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 8.7 — Récapitulatif C vs C++</h2>
 

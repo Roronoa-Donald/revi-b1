@@ -259,7 +259,57 @@ CHECK (date_insc >= '2020-01-01');</pre>
         <div class="warning-box"><strong>⚠️ Piège n°3 — Clé naturelle vs surrogate :</strong> Utiliser un numéro de sécurité sociale ou un email comme clé primaire est risqué (ils peuvent changer !). Préférez une clé <strong>artificielle auto-incrémentée</strong> (surrogate key).</div>
     </section>
 
-    <!-- ─── 7. Résumé global ─── -->
+    
+    <!-- Exercice guidé : Conception -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Concevoir un schéma avec contraintes d'intégrité</h4>
+            <p><strong>Énoncé :</strong> Concevoir le schéma SQL pour une bibliothèque : LIVRE, ADHERENT, EMPRUNT.</p>
+            <h5>Étape 1 — Créer les tables avec contraintes</h5>
+            <pre><code>CREATE TABLE ADHERENT (
+    id_adh   INT PRIMARY KEY,
+    nom      VARCHAR(50) NOT NULL,
+    email    VARCHAR(100) UNIQUE,          -- Contrainte d'unicité
+    date_ins DATE DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE LIVRE (
+    isbn     VARCHAR(13) PRIMARY KEY,
+    titre    VARCHAR(100) NOT NULL,
+    auteur   VARCHAR(50),
+    dispo    BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE EMPRUNT (
+    id_emp   INT PRIMARY KEY AUTO_INCREMENT,
+    id_adh   INT NOT NULL,
+    isbn     VARCHAR(13) NOT NULL,
+    date_emp DATE NOT NULL,
+    date_ret DATE,
+    FOREIGN KEY (id_adh) REFERENCES ADHERENT(id_adh)
+        ON DELETE RESTRICT,                -- Empêche suppression si emprunts
+    FOREIGN KEY (isbn) REFERENCES LIVRE(isbn)
+        ON UPDATE CASCADE,                 -- Met à jour si ISBN change
+    CHECK (date_ret IS NULL OR date_ret &gt;= date_emp)
+        -- La date de retour ne peut précéder l'emprunt
+);</code></pre>
+            <h5>Étape 2 — Tester les contraintes</h5>
+            <pre><code>-- ✓ Insertion valide :
+INSERT INTO EMPRUNT VALUES (1, 101, '978-2-01-000001', '2024-01-15', NULL);
+
+-- ✗ Violation d'intégrité référentielle :
+INSERT INTO EMPRUNT VALUES (2, 999, '978-2-01-000001', '2024-01-20', NULL);
+-- ERREUR : id_adh 999 n'existe pas dans ADHERENT
+
+-- ✗ Violation du CHECK :
+INSERT INTO EMPRUNT VALUES (3, 101, '978-2-01-000001', '2024-01-15', '2024-01-10');
+-- ERREUR : date_ret (10 jan) &lt; date_emp (15 jan)</code></pre>
+        </div>
+    </section>
+
+<!-- ─── 7. Résumé global ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif du cours FBD</h2>
 

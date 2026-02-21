@@ -439,7 +439,36 @@ b <span class="keyword">←</span> temp       <span class="comment">// Restaurer
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- SECTION 9 : Résumé visuel                   -->
+    
+    <!-- Exercice guidé : Conversion de types -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercice guidé — Conversion de types</h2>
+
+        <div class="example-box">
+            <h4>🎯 Convertir une durée en secondes → heures, minutes, secondes</h4>
+            <p><strong>Énoncé :</strong> On dispose d'une variable <code>duree_sec ← 7384</code>. Calculer les heures, minutes et secondes correspondantes.</p>
+            <h5>Étape 1 — Déclarer les variables</h5>
+            <pre><code>Variables :
+    duree_sec : ENTIER ← 7384
+    heures    : ENTIER
+    minutes   : ENTIER
+    secondes  : ENTIER</code></pre>
+            <h5>Étape 2 — Calculer les heures</h5>
+            <pre><code>heures ← duree_sec DIV 3600
+// 7384 DIV 3600 = 2</code></pre>
+            <h5>Étape 3 — Calculer le reste après les heures</h5>
+            <pre><code>reste ← duree_sec MOD 3600
+// 7384 MOD 3600 = 184</code></pre>
+            <h5>Étape 4 — Calculer minutes et secondes</h5>
+            <pre><code>minutes ← reste DIV 60       // 184 DIV 60 = 3
+secondes ← reste MOD 60      // 184 MOD 60 = 4</code></pre>
+            <h5>Résultat</h5>
+            <pre><code>Afficher heures, "h", minutes, "min", secondes, "s"
+→ 2h 3min 4s ✓</code></pre>
+        </div>
+    </section>
+
+<!-- SECTION 9 : Résumé visuel                   -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 1.9 — Résumé du chapitre</h2>

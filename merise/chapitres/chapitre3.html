@@ -367,7 +367,44 @@ PARTICIPER (<u><strong>#Matricule</strong>, <strong>#Num_session</strong></u>, N
             </section>
 
             <!-- ZONE EXERCICES -->
-            <article class="glass-card" id="interactive-exercise">
+            
+    <!-- Exercice guidé : MLD -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fa-solid fa-pencil-alt"></i> Exercice guidé</h2>
+
+        <div class="example-box">
+            <h4>Transformer un MCD en MLD — Règles de passage</h4>
+            <p><strong>MCD donné :</strong></p>
+            <pre><code>ÉTUDIANT ——(1,n)—— INSCRIPTION ——(0,n)—— MODULE
+   |                  |Date, Note|
+   NumEtu             CodeModule
+   Nom                Libelle
+   Prenom             Coeff</code></pre>
+            <h5>Règle 1 — Entités → Tables</h5>
+            <pre><code>ÉTUDIANT(NumEtu, Nom, Prenom)    → clé primaire : NumEtu
+MODULE(CodeModule, Libelle, Coeff) → clé primaire : CodeModule</code></pre>
+            <h5>Règle 2 — Association N:M → Table de jonction</h5>
+            <pre><code>Cardinalités : (1,n) côté ÉTUDIANT, (0,n) côté MODULE
+→ C'est du N:M → créer une table de jonction
+
+INSCRIPTION(NumEtu#, CodeModule#, Date, Note)
+  Clé primaire : (NumEtu, CodeModule)
+  NumEtu# → réf. ÉTUDIANT
+  CodeModule# → réf. MODULE</code></pre>
+            <h5>Règle 3 — Association 1:N → Migration de clé</h5>
+            <pre><code>Si on avait eu une cardinalité (1,1):
+  ÉTUDIANT ——(1,1)—— INSCRIRE ——(1,n)—— CLASSE
+  → La clé migre côté (1,1) :
+  ÉTUDIANT(NumEtu, Nom, Prenom, NumClasse#)
+
+Résumé des règles :
+  1:1 → fusionner ou migrer au choix
+  1:N → clé étrangère côté "1" (ou "1,1")
+  N:M → table de jonction avec clé composite</code></pre>
+        </div>
+    </section>
+
+<article class="glass-card" id="interactive-exercise">
                 <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
                 <p style="color:var(--text-muted);">Chargement des exercices...</p>
             </article>

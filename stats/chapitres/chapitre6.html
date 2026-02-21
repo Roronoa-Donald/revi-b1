@@ -165,6 +165,72 @@ R² > 0.7 → bon modèle en général</code></pre>
     <div class="warning-box"><strong>⚠️ Piège n°3 — Relation non linéaire :</strong> r mesure la corrélation <strong>linéaire</strong>. Si la relation est courbe (parabolique, exponentielle), r peut être faible même si la relation est forte. Toujours regarder le nuage de points d'abord !</div>
 </section>
 
+
+    <!-- Exercice guidé : Corrélation -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Calculer le coefficient de corrélation r</h4>
+            <p><strong>Énoncé :</strong> Heures de révision (x) et note obtenue (y) :</p>
+            <table class="styled-table">
+                <thead><tr><th>x (heures)</th><th>y (note)</th></tr></thead>
+                <tbody>
+                    <tr><td>2</td><td>8</td></tr>
+                    <tr><td>4</td><td>11</td></tr>
+                    <tr><td>6</td><td>13</td></tr>
+                    <tr><td>8</td><td>15</td></tr>
+                    <tr><td>10</td><td>17</td></tr>
+                </tbody>
+            </table>
+            <h5>Étape 1 — Calculer les moyennes</h5>
+            <pre><code>x&#x0304; = (2+4+6+8+10)/5 = 30/5 = 6
+y&#x0304; = (8+11+13+15+17)/5 = 64/5 = 12.8</code></pre>
+            <h5>Étape 2 — Tableau des écarts</h5>
+            <table class="styled-table">
+                <thead><tr><th>x<sub>i</sub></th><th>y<sub>i</sub></th><th>x<sub>i</sub>-x&#x0304;</th><th>y<sub>i</sub>-y&#x0304;</th><th>(x-x&#x0304;)(y-y&#x0304;)</th><th>(x-x&#x0304;)²</th><th>(y-y&#x0304;)²</th></tr></thead>
+                <tbody>
+                    <tr><td>2</td><td>8</td><td>-4</td><td>-4.8</td><td>19.2</td><td>16</td><td>23.04</td></tr>
+                    <tr><td>4</td><td>11</td><td>-2</td><td>-1.8</td><td>3.6</td><td>4</td><td>3.24</td></tr>
+                    <tr><td>6</td><td>13</td><td>0</td><td>0.2</td><td>0</td><td>0</td><td>0.04</td></tr>
+                    <tr><td>8</td><td>15</td><td>2</td><td>2.2</td><td>4.4</td><td>4</td><td>4.84</td></tr>
+                    <tr><td>10</td><td>17</td><td>4</td><td>4.2</td><td>16.8</td><td>16</td><td>17.64</td></tr>
+                    <tr><td colspan="4"><strong>Sommes</strong></td><td><strong>44</strong></td><td><strong>40</strong></td><td><strong>48.8</strong></td></tr>
+                </tbody>
+            </table>
+            <h5>Étape 3 — Coefficient de corrélation</h5>
+            <pre><code>r = Somme[(xi-x&#x0304;)(yi-y&#x0304;)] / sqrt(Somme[(xi-x&#x0304;)²] × Somme[(yi-y&#x0304;)²])
+r = 44 / sqrt(40 × 48.8)
+r = 44 / sqrt(1952)
+r = 44 / 44.18
+r ≈ 0.996
+
+→ r très proche de 1 → Forte corrélation positive ✓
+Plus on révise, meilleure est la note.</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Droite de régression y = ax + b</h4>
+            <p><strong>Avec les données précédentes, trouver l'équation.</strong></p>
+            <h5>Étape 1 — Coefficient directeur a</h5>
+            <pre><code>a = Somme[(xi-x&#x0304;)(yi-y&#x0304;)] / Somme[(xi-x&#x0304;)²]
+a = 44 / 40 = 1.1</code></pre>
+            <h5>Étape 2 — Ordonnée à l'origine b</h5>
+            <pre><code>b = y&#x0304; - a×x&#x0304;
+b = 12.8 - 1.1 × 6
+b = 12.8 - 6.6
+b = 6.2</code></pre>
+            <h5>Équation finale</h5>
+            <pre><code>y = 1.1x + 6.2
+
+Vérification avec x=6 :
+y = 1.1 × 6 + 6.2 = 6.6 + 6.2 = 12.8 ✓ (= y&#x0304;)
+
+Prédiction : pour x=12h de révision :
+y = 1.1 × 12 + 6.2 = 19.4 → Note prédite ≈ 19/20</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

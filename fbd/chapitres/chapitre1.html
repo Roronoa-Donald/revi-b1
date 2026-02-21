@@ -269,7 +269,57 @@ INSCRIPTIONS(<u>#id_etu, #id_cours</u>, date_inscription, note)
         </div>
     </section>
 
-    <!-- ─── 8. Résumé ─── -->
+    
+    <!-- Exercice guidé : Modèle relationnel -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Identifier clé primaire et étrangère</h4>
+            <p><strong>Énoncé :</strong> On a les tables suivantes :</p>
+            <pre><code>ETUDIANT(NumEtu, Nom, Prenom, DateNaissance)
+INSCRIPTION(NumEtu, CodeModule, Annee, Note)</code></pre>
+            <p><strong>Question :</strong> Identifier les clés primaires et étrangères.</p>
+            <h5>Étape 1 — Clés primaires</h5>
+            <pre><code>ETUDIANT : NumEtu est la clé primaire
+  → Identifie de manière unique chaque étudiant
+
+INSCRIPTION : (NumEtu, CodeModule, Annee) est la clé primaire
+  → Un étudiant peut s'inscrire à plusieurs modules sur différentes années
+  → Il faut les 3 attributs pour identifier une inscription unique</code></pre>
+            <h5>Étape 2 — Clés étrangères</h5>
+            <pre><code>INSCRIPTION.NumEtu → ETUDIANT.NumEtu
+  → C'est une clé étrangère : elle référence la clé primaire d'ETUDIANT
+  → Garantit qu'on ne peut pas inscrire un étudiant inexistant</code></pre>
+            <h5>Vérification des propriétés</h5>
+            <pre><code>✓ Unicité de la clé primaire d'ETUDIANT
+✓ Intégrité référentielle entre INSCRIPTION et ETUDIANT
+✓ Pas de redondance dans ETUDIANT</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Passage du schéma conceptuel au schéma relationnel</h4>
+            <p><strong>Énoncé :</strong> Traduire en relationnel : Un CLIENT passe des COMMANDES contenant des PRODUITS.</p>
+            <h5>Étape 1 — Identifier les entités</h5>
+            <pre><code>CLIENT(IdClient, Nom, Ville)
+PRODUIT(IdProd, Libelle, Prix)</code></pre>
+            <h5>Étape 2 — Traduire l'association 1:N (Client → Commande)</h5>
+            <pre><code>COMMANDE(NumCmd, DateCmd, IdClient#)
+  → La clé étrangère IdClient# migre côté "N"
+  → Un client peut avoir plusieurs commandes</code></pre>
+            <h5>Étape 3 — Traduire l'association N:M (Commande ↔ Produit)</h5>
+            <pre><code>LIGNE_COMMANDE(NumCmd#, IdProd#, Quantite)
+  → Table de jonction avec clé primaire composite
+  → Deux clés étrangères : NumCmd# et IdProd#</code></pre>
+            <h5>Schéma final</h5>
+            <pre><code>CLIENT(IdClient, Nom, Ville)
+COMMANDE(NumCmd, DateCmd, IdClient#)
+PRODUIT(IdProd, Libelle, Prix)
+LIGNE_COMMANDE(NumCmd#, IdProd#, Quantite)</code></pre>
+        </div>
+    </section>
+
+<!-- ─── 8. Résumé ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
 

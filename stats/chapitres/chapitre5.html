@@ -152,6 +152,54 @@ Avec densité, c'est [30;40[ qui est la plus dense !</code></pre>
     <div class="tip-box"><strong>💡 Lire la médiane sur l'ogive :</strong> Tracez une droite horizontale à F = 0.5. Là où elle coupe la courbe, descendez verticalement pour lire la médiane sur l'axe des x.</div>
 </section>
 
+
+    <!-- Exercice guidé : Représentations graphiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Choisir le bon graphique</h4>
+            <p><strong>Énoncé :</strong> Pour chaque situation, quel graphique utiliser ?</p>
+            <table class="styled-table">
+                <thead><tr><th>Situation</th><th>Type de variable</th><th>Graphique adapté</th></tr></thead>
+                <tbody>
+                    <tr><td>Répartition par filière (Info, Gestion, Droit)</td><td>Qualitative nominale</td><td>Diagramme circulaire (camembert) ou barres</td></tr>
+                    <tr><td>Nombre d'absences (0, 1, 2, 3...)</td><td>Quantitative discrète</td><td>Diagramme en bâtons</td></tr>
+                    <tr><td>Distribution des tailles [150-160[, [160-170[...</td><td>Quantitative continue (classes)</td><td>Histogramme (barres collées)</td></tr>
+                    <tr><td>Évolution du CA sur 12 mois</td><td>Série temporelle</td><td>Courbe (polygone des fréquences)</td></tr>
+                    <tr><td>Comparaison des notes entre 3 classes</td><td>Comparaison de distributions</td><td>Boîte à moustaches (boxplot)</td></tr>
+                </tbody>
+            </table>
+            <div class="warning-box">
+                <strong>⚠️ Erreur fréquente :</strong> Utiliser un histogramme pour une variable discrète. 
+                L'histogramme = barres COLLÉES (continu). Les bâtons = barres SÉPARÉES (discret).
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Construire et lire un boxplot</h4>
+            <p><strong>Données :</strong> Min=3, Q1=7.5, Médiane=14.5, Q3=21, Max=30</p>
+            <pre><code>    |----[=========|=========]-----|
+    3   7.5       14.5       21    30
+    ↑    ↑          ↑         ↑     ↑
+   Min  Q1      Médiane     Q3    Max
+
+Boîte : de Q1 (7.5) à Q3 (21)
+Trait central : Médiane (14.5)
+Moustaches : de Min (3) à Q1 et de Q3 à Max (30)</code></pre>
+            <h5>Lecture</h5>
+            <pre><code>1. La médiane (14.5) est centrée dans la boîte
+   → Distribution assez symétrique
+
+2. IQR = Q3 - Q1 = 21 - 7.5 = 13.5
+   → 50% des données dans cet intervalle
+
+3. Moustache gauche (3 à 7.5) = 4.5
+   Moustache droite (21 à 30) = 9
+   → Légère asymétrie à droite (queue plus longue)</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

@@ -257,7 +257,66 @@ TRUNCATE TABLE etudiants;  -- remet aussi l'auto-increment</pre>
         </div>
     </section>
 
-    <!-- ─── 7. Résumé ─── -->
+    
+    <!-- Exercice guidé : SQL CRUD -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>CRUD complet sur une table</h4>
+            <p><strong>Contexte :</strong> Gérer une table PRODUIT(id, nom, prix, stock).</p>
+            <h5>CREATE — Créer la table</h5>
+            <pre><code>CREATE TABLE PRODUIT (
+    id    INT PRIMARY KEY AUTO_INCREMENT,
+    nom   VARCHAR(50) NOT NULL,
+    prix  DECIMAL(8,2),
+    stock INT DEFAULT 0
+);</code></pre>
+            <h5>INSERT — Ajouter des données</h5>
+            <pre><code>INSERT INTO PRODUIT (nom, prix, stock) VALUES
+    ('Clavier', 29.99, 150),
+    ('Souris', 19.99, 200),
+    ('Écran', 249.99, 45);
+-- 3 lignes insérées ✓</code></pre>
+            <h5>SELECT — Lire les données</h5>
+            <pre><code>SELECT nom, prix FROM PRODUIT WHERE stock &gt; 100;
+-- Résultat :
+-- | Clavier | 29.99 |
+-- | Souris  | 19.99 |</code></pre>
+            <h5>UPDATE — Modifier</h5>
+            <pre><code>UPDATE PRODUIT SET prix = prix * 0.9 WHERE stock &gt; 100;
+-- Clavier : 29.99 → 26.99
+-- Souris  : 19.99 → 17.99
+-- 2 lignes modifiées ✓</code></pre>
+            <h5>DELETE — Supprimer</h5>
+            <pre><code>DELETE FROM PRODUIT WHERE stock = 0;
+-- 0 lignes supprimées (aucun stock à 0)</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Requêtes avec WHERE, ORDER BY et LIKE</h4>
+            <pre><code>-- Table EMPLOYE(id, nom, poste, salaire, ville)
+-- Trouver les développeurs triés par salaire décroissant
+SELECT nom, salaire
+FROM EMPLOYE
+WHERE poste = 'Développeur'
+ORDER BY salaire DESC;
+
+-- Résultat :
+-- | Martin  | 3800 |
+-- | Dupont  | 3200 |
+-- | Leroy   | 2900 |</code></pre>
+            <pre><code>-- Chercher les noms commençant par 'D'
+SELECT nom FROM EMPLOYE WHERE nom LIKE 'D%';
+-- Résultat : Dupont, Durand
+
+-- Chercher les noms contenant 'ar'
+SELECT nom FROM EMPLOYE WHERE nom LIKE '%ar%';
+-- Résultat : Martin, Durand</code></pre>
+        </div>
+    </section>
+
+<!-- ─── 7. Résumé ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif CRUD</h2>
 

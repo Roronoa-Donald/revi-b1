@@ -182,6 +182,61 @@ hᵢ     = amplitude de la classe médiane</code></pre>
     <div class="warning-box"><strong>⚠️ Piège n°3 :</strong> La moyenne pondérée ≠ la moyenne simple. Si les coefficients sont différents, on ne peut pas juste faire la somme / nombre de matières.</div>
 </section>
 
+
+    <!-- Exercice guidé : Tendance centrale -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Calculer moyenne, médiane et mode</h4>
+            <p><strong>Données :</strong> Notes de 10 étudiants : 8, 12, 14, 9, 12, 15, 11, 12, 7, 10</p>
+            <h5>Étape 1 — La Moyenne</h5>
+            <pre><code>x&#x0304; = (8+12+14+9+12+15+11+12+7+10) / 10
+x&#x0304; = 110 / 10 = 11.0</code></pre>
+            <h5>Étape 2 — La Médiane (valeur du milieu)</h5>
+            <pre><code>1. Trier les données :
+   7, 8, 9, 10, 11, 12, 12, 12, 14, 15
+
+2. n = 10 (pair) → Médiane = moyenne des 2 valeurs centrales
+   Positions n/2 = 5 et n/2 + 1 = 6
+   Valeurs : 11 et 12
+
+3. Médiane = (11 + 12)/2 = 11.5</code></pre>
+            <h5>Étape 3 — Le Mode (valeur la plus fréquente)</h5>
+            <pre><code>Effectifs : 7(×1) 8(×1) 9(×1) 10(×1) 11(×1) 12(×3) 14(×1) 15(×1)
+Mode = 12 (apparaît 3 fois) ✓</code></pre>
+            <h5>Interprétation</h5>
+            <pre><code>Moyenne = 11.0 | Médiane = 11.5 | Mode = 12
+→ Les trois sont proches → distribution assez symétrique</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Moyenne pondérée (avec coefficients)</h4>
+            <p><strong>Énoncé :</strong> Un étudiant a obtenu :</p>
+            <table class="styled-table">
+                <thead><tr><th>Matière</th><th>Note</th><th>Coefficient</th></tr></thead>
+                <tbody>
+                    <tr><td>Maths</td><td>14</td><td>4</td></tr>
+                    <tr><td>Français</td><td>11</td><td>3</td></tr>
+                    <tr><td>Anglais</td><td>16</td><td>2</td></tr>
+                    <tr><td>Sport</td><td>13</td><td>1</td></tr>
+                </tbody>
+            </table>
+            <h5>Calcul</h5>
+            <pre><code>Moyenne pondérée = (14×4 + 11×3 + 16×2 + 13×1) / (4+3+2+1)
+                = (56 + 33 + 32 + 13) / 10
+                = 134 / 10
+                = 13.4 ✓
+
+Moyenne simple (sans coefficients) :
+(14 + 11 + 16 + 13) / 4 = 54/4 = 13.5
+
+→ La moyenne pondérée (13.4) est légèrement plus basse
+  car les maths (coeff 4) tirent vers 14, mais le
+  français (coeff 3) tire vers le bas.</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

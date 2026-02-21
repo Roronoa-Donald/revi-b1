@@ -274,7 +274,62 @@ WHERE moy > 20;</pre>
         </div>
     </section>
 
-    <!-- ─── 6. Résumé ─── -->
+    
+    <!-- Exercice guidé : SQL Avancé -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>JOIN + GROUP BY + HAVING</h4>
+            <p><strong>Tables :</strong> COMMANDE(id, date, id_client) et LIGNE_CMD(id_cmd, id_prod, qte, prix_unit)</p>
+            <p><strong>Question :</strong> Quels clients ont dépensé plus de 500 € au total ?</p>
+            <h5>Étape 1 — Jointure</h5>
+            <pre><code>SELECT c.id_client, SUM(l.qte * l.prix_unit) AS total
+FROM COMMANDE c
+JOIN LIGNE_CMD l ON c.id = l.id_cmd</code></pre>
+            <h5>Étape 2 — Grouper par client</h5>
+            <pre><code>GROUP BY c.id_client</code></pre>
+            <h5>Étape 3 — Filtrer les groupes</h5>
+            <pre><code>HAVING SUM(l.qte * l.prix_unit) &gt; 500;</code></pre>
+            <h5>Requête complète et résultat</h5>
+            <pre><code>SELECT c.id_client, SUM(l.qte * l.prix_unit) AS total
+FROM COMMANDE c
+JOIN LIGNE_CMD l ON c.id = l.id_cmd
+GROUP BY c.id_client
+HAVING total &gt; 500
+ORDER BY total DESC;
+
+-- | id_client | total  |
+-- | C003      | 1250.00|
+-- | C001      |  780.50|</code></pre>
+            <div class="tip-box">
+                <strong>WHERE vs HAVING :</strong> WHERE filtre les lignes AVANT le GROUP BY, HAVING filtre les groupes APRÈS.
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Sous-requêtes imbriquées</h4>
+            <p><strong>Question :</strong> Trouver les employés qui gagnent plus que la moyenne de leur département.</p>
+            <pre><code>SELECT e.nom, e.salaire, e.num_dept
+FROM EMPLOYE e
+WHERE e.salaire &gt; (
+    SELECT AVG(e2.salaire)
+    FROM EMPLOYE e2
+    WHERE e2.num_dept = e.num_dept
+);
+
+-- Explication pas à pas :
+-- 1. Pour chaque employé, la sous-requête calcule
+--    la moyenne du département correspondant
+-- 2. Dept 10 : moyenne = (2800+2500)/2 = 2650
+--    → Dupont (2800) &gt; 2650 ✓
+--    → Durand (2500) &lt; 2650 ✗
+-- 3. Dept 20 : moyenne = 3200/1 = 3200
+--    → Martin (3200) = 3200 ✗ (pas strictement &gt;)</code></pre>
+        </div>
+    </section>
+
+<!-- ─── 6. Résumé ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif</h2>
         <div class="concept-card">

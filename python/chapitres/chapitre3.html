@@ -211,6 +211,60 @@ for i in range(1, 4):
 </section>
 
 <!-- Section 7 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Jeu "Deviner le nombre"</h4>
+        <p><strong>Objectif :</strong> L'ordinateur choisit un nombre entre 1 et 100, le joueur doit le deviner.</p>
+
+        <p><strong>Étape 1 — Générer le nombre secret :</strong></p>
+        <div class="code-block"><pre>import random
+secret = random.randint(1, 100)
+tentatives = 0</pre></div>
+
+        <p><strong>Étape 2 — Boucle while avec break :</strong></p>
+        <div class="code-block"><pre>while True:
+    proposition = int(input("Votre nombre : "))
+    tentatives += 1
+
+    if proposition &lt; secret:
+        print("⬆️ Plus grand !")
+    elif proposition &gt; secret:
+        print("⬇️ Plus petit !")
+    else:
+        print(f"🎉 Bravo ! Trouvé en {tentatives} tentatives !")
+        break  # Sort de la boucle</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>while True</code> + <code>break</code> est un patron courant pour les boucles dont on ne connaît pas le nombre d'itérations.</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Table de multiplication avec for</h4>
+        <p><strong>Objectif :</strong> Afficher la table de multiplication d'un nombre choisi.</p>
+
+        <p><strong>Étape 1 — Lire le nombre :</strong></p>
+        <div class="code-block"><pre>n = int(input("Table de : "))</pre></div>
+
+        <p><strong>Étape 2 — Boucle for avec range :</strong></p>
+        <div class="code-block"><pre>for i in range(1, 11):
+    resultat = n * i
+    print(f"{n} × {i} = {resultat}")</pre></div>
+
+        <p><strong>Exécution pour n = 7 :</strong></p>
+        <div class="code-block"><pre>7 × 1 = 7
+7 × 2 = 14
+...
+7 × 10 = 70</pre></div>
+
+        <p><strong>Bonus — Avec compréhension de liste :</strong></p>
+        <div class="code-block"><pre>resultats = [n * i for i in range(1, 11)]
+for i, val in enumerate(resultats, start=1):
+    print(f"{n} × {i} = {val}")</pre></div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

@@ -350,7 +350,40 @@
     </section>
 
     <!-- EXERCICES -->
+    
+    <!-- Exercice guidé : Architecture -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercice guidé</h2>
+
+        <div class="example-box">
+            <h4>Le cycle d'exécution d'une instruction</h4>
+            <p><strong>Instruction :</strong> ADD R1, R2 (additionner R1 et R2, résultat dans R1)</p>
+            <h5>Phase 1 — FETCH (Recherche)</h5>
+            <pre><code>1. Le PC (Program Counter) contient l'adresse : 0x0040
+2. L'adresse est envoyée sur le bus d'adresses
+3. La mémoire envoie l'instruction via le bus de données
+4. L'instruction est stockée dans le registre RI
+5. PC est incrémenté : PC = 0x0044 (instruction suivante)</code></pre>
+            <h5>Phase 2 — DECODE (Décodage)</h5>
+            <pre><code>L'unité de contrôle décode l'instruction :
+  - Opération : ADD (addition)
+  - Opérande 1 : R1 (contient 15)
+  - Opérande 2 : R2 (contient 27)</code></pre>
+            <h5>Phase 3 — EXECUTE (Exécution)</h5>
+            <pre><code>L'UAL (Unité Arithmétique et Logique) effectue :
+  R1 + R2 = 15 + 27 = 42
+  Résultat stocké dans R1
+
+→ R1 = 42 ✓
+
+Registre d'état mis à jour :
+  Z (Zero) = 0 (résultat ≠ 0)
+  N (Negative) = 0 (résultat positif)
+  C (Carry) = 0 (pas de retenue)</code></pre>
+        </div>
+    </section>
+
+<section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
         <div id="chapter-exercises"></div>
     </section>

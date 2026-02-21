@@ -163,7 +163,47 @@
         <div class="info-box"><span>ℹ️</span><div><strong>Tri stable :</strong> Un tri est stable s'il conserve l'ordre relatif des éléments égaux. Bulles et Insertion sont stables, Sélection ne l'est pas.</div></div>
     </section>
 
-    <!-- Résumé -->
+    
+    <!-- Exercice guidé : Tri -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés — Algorithmes de Tri</h2>
+
+        <div class="example-box">
+            <h4>🎯 Tri par sélection — Pas à pas</h4>
+            <p><strong>Énoncé :</strong> Trier T = [29, 10, 14, 37, 13] par sélection croissante.</p>
+            <h5>Principe : À chaque tour, trouver le minimum et le placer en bonne position</h5>
+            <table class="styled-table">
+                <thead><tr><th>Passe</th><th>Min trouvé</th><th>Échange</th><th>Tableau</th></tr></thead>
+                <tbody>
+                    <tr><td>Init</td><td>—</td><td>—</td><td>[29, 10, 14, 37, 13]</td></tr>
+                    <tr><td>1 (i=0)</td><td>10 (pos 1)</td><td>T[0] ↔ T[1]</td><td>[<strong>10</strong>, 29, 14, 37, 13]</td></tr>
+                    <tr><td>2 (i=1)</td><td>13 (pos 4)</td><td>T[1] ↔ T[4]</td><td>[10, <strong>13</strong>, 14, 37, 29]</td></tr>
+                    <tr><td>3 (i=2)</td><td>14 (pos 2)</td><td>Déjà en place</td><td>[10, 13, <strong>14</strong>, 37, 29]</td></tr>
+                    <tr><td>4 (i=3)</td><td>29 (pos 4)</td><td>T[3] ↔ T[4]</td><td>[10, 13, 14, <strong>29</strong>, <strong>37</strong>]</td></tr>
+                </tbody>
+            </table>
+            <pre><code>→ Résultat : [10, 13, 14, 29, 37] ✓
+Nombre de comparaisons : 4+3+2+1 = 10 = n(n-1)/2</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>🎯 Tri à bulles — Pas à pas</h4>
+            <p><strong>Énoncé :</strong> Trier T = [5, 1, 4, 2] avec le tri à bulles.</p>
+            <h5>Principe : Comparer les éléments adjacents et échanger si mal ordonnés</h5>
+            <p><strong>Passe 1 :</strong></p>
+            <pre><code>[5, 1, 4, 2]  → 5&gt;1 ? Oui → échange → [1, 5, 4, 2]
+[1, 5, 4, 2]  → 5&gt;4 ? Oui → échange → [1, 4, 5, 2]
+[1, 4, 5, 2]  → 5&gt;2 ? Oui → échange → [1, 4, 2, 5]  ← 5 est en place</code></pre>
+            <p><strong>Passe 2 :</strong></p>
+            <pre><code>[1, 4, 2, 5]  → 1&gt;4 ? Non
+[1, 4, 2, 5]  → 4&gt;2 ? Oui → échange → [1, 2, 4, 5]  ← 4 est en place</code></pre>
+            <p><strong>Passe 3 :</strong></p>
+            <pre><code>[1, 2, 4, 5]  → 1&gt;2 ? Non  → Aucun échange → STOP</code></pre>
+            <pre><code>→ Résultat : [1, 2, 4, 5] ✓ (trié en 3 passes)</code></pre>
+        </div>
+    </section>
+
+<!-- Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 6.6 — Résumé</h2>
         <div class="concept-card"><h4>🎯 Aide-mémoire</h4>

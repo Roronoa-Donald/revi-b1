@@ -191,6 +191,53 @@ Hiérarchie :
     <div class="warning-box"><strong>⚠️ Piège 3 – DHCP utilise UDP, pas TCP :</strong> DHCP fonctionne en broadcast (le client n'a pas encore d'IP !). Il utilise UDP sur les ports <strong>67</strong> (serveur) et <strong>68</strong> (client).</div>
 </section>
 
+
+    <!-- Exercice guidé : Protocoles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Associer protocole, port et couche</h4>
+            <table class="styled-table">
+                <thead><tr><th>Protocole</th><th>Port</th><th>Transport</th><th>Rôle</th></tr></thead>
+                <tbody>
+                    <tr><td>HTTP</td><td>80</td><td>TCP</td><td>Pages web non chiffrées</td></tr>
+                    <tr><td>HTTPS</td><td>443</td><td>TCP</td><td>Pages web chiffrées (TLS)</td></tr>
+                    <tr><td>FTP</td><td>20/21</td><td>TCP</td><td>Transfert de fichiers</td></tr>
+                    <tr><td>SSH</td><td>22</td><td>TCP</td><td>Accès distant sécurisé</td></tr>
+                    <tr><td>DNS</td><td>53</td><td>UDP/TCP</td><td>Résolution nom → IP</td></tr>
+                    <tr><td>DHCP</td><td>67/68</td><td>UDP</td><td>Attribution auto d'IP</td></tr>
+                    <tr><td>SMTP</td><td>25/587</td><td>TCP</td><td>Envoi d'emails</td></tr>
+                    <tr><td>RDP</td><td>3389</td><td>TCP</td><td>Bureau à distance Windows</td></tr>
+                </tbody>
+            </table>
+            <div class="tip-box">
+                <strong>Mnémonique ports :</strong> HTTP=80 (quatre-vingts = H comme HTTP), HTTPS=443, SSH=22, DNS=53
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Résolution DNS pas à pas</h4>
+            <p><strong>Scénario :</strong> L'utilisateur tape www.example.com dans son navigateur.</p>
+            <pre><code>1. Cache local → "www.example.com" trouvé ? NON
+
+2. Fichier hosts (/etc/hosts ou C:\Windows\...\hosts)
+   → Entrée trouvée ? NON
+
+3. Requête au serveur DNS configuré (ex: 8.8.8.8)
+
+4. DNS récursif : le serveur interroge la hiérarchie
+   a) Serveur racine (.) → "Demandez à .com"
+   b) Serveur TLD (.com) → "Demandez au NS de example.com"
+   c) Serveur autoritaire (example.com) → "IP = 93.184.216.34"
+
+5. Réponse : www.example.com = 93.184.216.34
+   → Mise en cache (TTL = 3600s = 1h)
+
+6. Le navigateur contacte 93.184.216.34 sur le port 443 (HTTPS)</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

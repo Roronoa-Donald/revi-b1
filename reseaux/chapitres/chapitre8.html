@@ -242,6 +242,55 @@ arp -a</code></pre></div>
     <div class="warning-box"><strong>⚠️ Piège 3 – 2.4 GHz vs 5 GHz :</strong> Si un QCM demande « quelle fréquence pour traverser les murs ? » → <strong>2.4 GHz</strong> (meilleure portée). Pour le débit max → <strong>5 GHz</strong>. Wi-Fi 6E ajoute le <strong>6 GHz</strong> (débit++, portée--).</div>
 </section>
 
+
+    <!-- Exercice guidé : Wi-Fi et outils -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Diagnostiquer un problème réseau</h4>
+            <p><strong>Scénario :</strong> Un PC ne peut pas accéder à www.google.com. Diagnostic méthodique.</p>
+            <h5>Étape 1 — Vérifier la configuration IP</h5>
+            <pre><code>&gt; ipconfig (Windows) / ip addr (Linux)
+→ IP : 192.168.1.50  ✓ (pas d'APIPA 169.254.x.x)
+→ Masque : 255.255.255.0  ✓
+→ Passerelle : 192.168.1.1  ✓
+→ DNS : 8.8.8.8  ✓</code></pre>
+            <h5>Étape 2 — Tester la connectivité locale</h5>
+            <pre><code>&gt; ping 192.168.1.1   (passerelle)
+→ Réponse OK ✓ → Le réseau local fonctionne</code></pre>
+            <h5>Étape 3 — Tester la connectivité Internet</h5>
+            <pre><code>&gt; ping 8.8.8.8   (serveur Google DNS)
+→ Réponse OK ✓ → Internet fonctionne !</code></pre>
+            <h5>Étape 4 — Tester la résolution DNS</h5>
+            <pre><code>&gt; ping www.google.com
+→ "Impossible de résoudre le nom" ❌
+→ Problème = DNS !</code></pre>
+            <h5>Solution</h5>
+            <pre><code>&gt; nslookup www.google.com 8.8.8.8
+→ Fonctionne avec 8.8.8.8 mais pas avec le DNS local
+
+Solution : changer le serveur DNS
+ou vider le cache : ipconfig /flushdns</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Normes Wi-Fi — Comparaison</h4>
+            <table class="styled-table">
+                <thead><tr><th>Norme</th><th>Nom commercial</th><th>Fréquence</th><th>Débit max</th><th>Année</th></tr></thead>
+                <tbody>
+                    <tr><td>802.11a</td><td>—</td><td>5 GHz</td><td>54 Mbps</td><td>1999</td></tr>
+                    <tr><td>802.11n</td><td>Wi-Fi 4</td><td>2.4/5 GHz</td><td>600 Mbps</td><td>2009</td></tr>
+                    <tr><td>802.11ac</td><td>Wi-Fi 5</td><td>5 GHz</td><td>6.9 Gbps</td><td>2014</td></tr>
+                    <tr><td>802.11ax</td><td>Wi-Fi 6</td><td>2.4/5/6 GHz</td><td>9.6 Gbps</td><td>2020</td></tr>
+                </tbody>
+            </table>
+            <div class="tip-box">
+                <strong>2.4 GHz vs 5 GHz :</strong> 2.4 GHz = meilleure portée mais plus lent et plus d'interférences. 5 GHz = plus rapide mais portée réduite.
+            </div>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

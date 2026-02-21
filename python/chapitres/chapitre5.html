@@ -188,6 +188,52 @@ nom, age, note = ("Alice", 20, 15.5)  # Pratique !</code></pre></div>
 </section>
 
 <!-- Section 6 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Gestion d'un panier de courses</h4>
+        <p><strong>Objectif :</strong> Manipuler une liste avec les méthodes principales.</p>
+
+        <p><strong>Étape 1 — Créer et remplir :</strong></p>
+        <div class="code-block"><pre>panier = ["pommes", "pain", "lait"]
+panier.append("beurre")       # Ajout en fin
+panier.insert(1, "fromage")   # Ajout en position 1
+print(panier)  # ['pommes', 'fromage', 'pain', 'lait', 'beurre']</pre></div>
+
+        <p><strong>Étape 2 — Supprimer et trier :</strong></p>
+        <div class="code-block"><pre>panier.remove("pain")    # Supprime par valeur
+panier.sort()            # Tri alphabétique
+print(panier)  # ['beurre', 'fromage', 'lait', 'pommes']</pre></div>
+
+        <p><strong>Étape 3 — Slicing :</strong></p>
+        <div class="code-block"><pre>deux_premiers = panier[:2]    # ['beurre', 'fromage']
+a_l_envers = panier[::-1]     # ['pommes', 'lait', 'fromage', 'beurre']
+print(f"{len(panier)} articles dans le panier")</pre></div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Classement d'étudiants par notes</h4>
+        <p><strong>Objectif :</strong> Trier des étudiants par note décroissante.</p>
+
+        <p><strong>Étape 1 — Liste de tuples :</strong></p>
+        <div class="code-block"><pre>etudiants = [("Alice", 15), ("Bob", 12), ("Clara", 18), ("David", 9)]</pre></div>
+
+        <p><strong>Étape 2 — Trier par note décroissante :</strong></p>
+        <div class="code-block"><pre>classement = sorted(etudiants, key=lambda x: x[1], reverse=True)</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>key=lambda x: x[1]</code> signifie "trier selon le 2ème élément du tuple" (la note).</div>
+
+        <p><strong>Étape 3 — Afficher le podium avec unpacking :</strong></p>
+        <div class="code-block"><pre>print("🏆 Podium :")
+for rang, (nom, note) in enumerate(classement[:3], start=1):
+    print(f"  {rang}. {nom} — {note}/20")</pre></div>
+
+        <p><strong>Résultat :</strong> 1. Clara — 18/20, 2. Alice — 15/20, 3. Bob — 12/20</p>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

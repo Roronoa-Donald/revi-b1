@@ -281,6 +281,63 @@ fclose(f);
 </section>
 
 <!-- ═══════════════ 7.7 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Sauvegarder des notes dans un fichier</h4>
+        <p><strong>Objectif :</strong> Écrire et relire des données dans un fichier texte.</p>
+
+        <p><strong>Étape 1 — Écrire dans le fichier :</strong></p>
+        <div class="code-block"><pre>FILE *f = fopen("notes.txt", "w");
+if (f == NULL) {
+    printf("Erreur d'ouverture !\n");
+    return 1;
+}
+
+fprintf(f, "Alice,15\n");
+fprintf(f, "Bob,18\n");
+fprintf(f, "Clara,12\n");
+fclose(f);  // Toujours fermer !</pre></div>
+
+        <p><strong>Étape 2 — Relire le fichier :</strong></p>
+        <div class="code-block"><pre>FILE *f = fopen("notes.txt", "r");
+char nom[50];
+int note;
+
+while (fscanf(f, "%[^,],%d\n", nom, &amp;note) == 2) {
+    printf("%-10s : %d/20\n", nom, note);
+}
+fclose(f);</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>%[^,]</code> lit tous les caractères <strong>sauf</strong> la virgule — très utile pour parser du CSV !</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Copier un fichier</h4>
+        <p><strong>Objectif :</strong> Copier le contenu d'un fichier dans un autre, caractère par caractère.</p>
+
+        <div class="code-block"><pre>FILE *src = fopen("source.txt", "r");
+FILE *dst = fopen("copie.txt", "w");
+
+if (src == NULL || dst == NULL) {
+    printf("Erreur d'ouverture !\n");
+    return 1;
+}
+
+int c;
+while ((c = fgetc(src)) != EOF) {
+    fputc(c, dst);
+}
+
+fclose(src);
+fclose(dst);
+printf("Copie terminée !\n");</pre></div>
+        <div class="warning-box"><strong>⚠️</strong> Le type de <code>c</code> doit être <code>int</code> (pas <code>char</code>) car <code>EOF</code> est un entier (-1) !</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 7.7 — Récapitulatif</h2>
 

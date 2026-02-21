@@ -119,6 +119,41 @@
     </div>
     <div class="tip-box"><strong>💡 Test 2-en-1 :</strong> On peut regrouper A + M : \(\forall \lambda, \mu \in \mathbb{R},\ \forall u, v \in F : \lambda u + \mu v \in F\)</div>
     <div class="warning-box"><strong>⚠️ Piège :</strong> \(F = \{(x, y) \in \mathbb{R}^2 \mid x + y = 1\}\) n'est <strong>pas</strong> un SEV car \((0,0) \notin F\).</div>
+
+    <!-- ─── Exercice guidé : Vérifier un SEV ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Vérifier si un ensemble est un SEV</h4>
+        <p><strong>Énoncé :</strong> L'ensemble \(F = \{(x, y, z) \in \mathbb{R}^3 \mid x - 2y + z = 0\}\) est-il un SEV de \(\mathbb{R}^3\) ?</p>
+
+        <p><strong>Étape 1 — Test N (non-vide) :</strong></p>
+        <p>\((0,0,0) \in F\) ? → \(0 - 2(0) + 0 = 0\) ✓ Le vecteur nul est dans \(F\).</p>
+
+        <p><strong>Étape 2 — Test A (stabilité par addition) :</strong></p>
+        <p>Soient \(u = (x_1, y_1, z_1)\) et \(v = (x_2, y_2, z_2)\) dans \(F\), donc \(x_1 - 2y_1 + z_1 = 0\) et \(x_2 - 2y_2 + z_2 = 0\).</p>
+        <div class="math-block">
+            \[(x_1+x_2) - 2(y_1+y_2) + (z_1+z_2) = \underbrace{(x_1-2y_1+z_1)}_{=0} + \underbrace{(x_2-2y_2+z_2)}_{=0} = 0 \quad ✓\]
+        </div>
+
+        <p><strong>Étape 3 — Test M (stabilité par multiplication scalaire) :</strong></p>
+        <div class="math-block">
+            \[\lambda x_1 - 2(\lambda y_1) + \lambda z_1 = \lambda\underbrace{(x_1 - 2y_1 + z_1)}_{=0} = 0 \quad ✓\]
+        </div>
+
+        <p><strong>Conclusion :</strong> \(F\) est un SEV de \(\mathbb{R}^3\). C'est le plan d'équation \(x - 2y + z = 0\) passant par l'origine.</p>
+        <div class="tip-box"><strong>💡 Règle générale :</strong> Tout ensemble défini par une <strong>équation linéaire homogène</strong> (= 0) est un SEV !</div>
+    </div>
+
+    <!-- ─── Exercice guidé : Contre-exemple ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Contre-exemple : ce n'est PAS un SEV</h4>
+        <p><strong>Énoncé :</strong> \(G = \{(x, y) \in \mathbb{R}^2 \mid xy \geq 0\}\) est-il un SEV ?</p>
+
+        <p><strong>Test N :</strong> \((0,0) \in G\) car \(0 \times 0 = 0 \geq 0\) ✓</p>
+        <p><strong>Test A :</strong> Prenons \(u = (1,1)\) et \(v = (-1,2)\). On a \(1 \times 1 = 1 \geq 0\) ✓ et \((-1)(2) = -2 \not\geq 0\) ✗</p>
+        <p>En fait, \(v \notin G\). Prenons \(u=(1, -1)\) (xy = -1 < 0) → \(u \notin G\) non plus. Essayons \(u = (1, 0)\) et \(v = (0, -1)\) :</p>
+        <p>\(u + v = (1, -1)\) et \(1 \times (-1) = -1 < 0\), donc \(u+v \notin G\). Le test A <strong>échoue</strong> !</p>
+        <p><strong>Conclusion :</strong> \(G\) n'est <strong>pas</strong> un SEV (il suffit d'UN contre-exemple !).</p>
+    </div>
     <p><strong>Exemple :</strong> \(F = \{(x, y) \in \mathbb{R}^2 \mid 2x - y = 0\}\) est un SEV de \(\mathbb{R}^2\) :</p>
     <ul>
         <li>\((0,0)\) vérifie \(2(0)-0=0\) ✓ (non-vide)</li>
@@ -160,6 +195,34 @@
     <p>\(\lambda_1(1,0) + \lambda_2(0,1) = (0,0) \Rightarrow \lambda_1 = \lambda_2 = 0\) → <strong>libre ✓</strong></p>
     <p><strong>Exemple 2 :</strong> \(\{(1,0), (0,1), (1,1)\}\) dans \(\mathbb{R}^2\) : 3 vecteurs pour \(\dim = 2\) → <strong>liée ✓</strong></p>
     <p>En effet : \(1 \cdot (1,0) + 1 \cdot (0,1) - 1 \cdot (1,1) = (0,0)\) avec des coefficients non tous nuls.</p>
+
+    <!-- ─── Exercice guidé : Famille libre ou liée ? ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Déterminer si une famille est libre ou liée</h4>
+        <p><strong>Énoncé :</strong> La famille \(\{v_1 = (1,2,1),\ v_2 = (0,1,-1),\ v_3 = (2,5,1)\}\) est-elle libre dans \(\mathbb{R}^3\) ?</p>
+
+        <p><strong>Étape 1 — Poser l'équation :</strong></p>
+        <div class="math-block">
+            \[\lambda_1(1,2,1) + \lambda_2(0,1,-1) + \lambda_3(2,5,1) = (0,0,0)\]
+        </div>
+
+        <p><strong>Étape 2 — Former le système :</strong></p>
+        <div class="math-block">
+            \[\begin{cases} \lambda_1 + 0 + 2\lambda_3 = 0 \\ 2\lambda_1 + \lambda_2 + 5\lambda_3 = 0 \\ \lambda_1 - \lambda_2 + \lambda_3 = 0 \end{cases}\]
+        </div>
+
+        <p><strong>Étape 3 — Résoudre par échelonnement :</strong></p>
+        <p>De \(L_1\) : \(\lambda_1 = -2\lambda_3\)</p>
+        <p>\(L_2 : 2(-2\lambda_3) + \lambda_2 + 5\lambda_3 = 0 \Rightarrow \lambda_2 + \lambda_3 = 0 \Rightarrow \lambda_2 = -\lambda_3\)</p>
+        <p>\(L_3 : (-2\lambda_3) - (-\lambda_3) + \lambda_3 = -2\lambda_3 + \lambda_3 + \lambda_3 = 0\) ✓ (automatiquement satisfaite)</p>
+
+        <p><strong>Étape 4 — Conclure :</strong></p>
+        <p>Pour \(\lambda_3 = 1\) : \(\lambda_1 = -2\), \(\lambda_2 = -1\), \(\lambda_3 = 1\). Tous non nuls → CL non triviale !</p>
+        <div class="math-block">
+            \[-2(1,2,1) - 1(0,1,-1) + 1(2,5,1) = (-2+0+2,\ -4-1+5,\ -2+1+1) = (0,0,0) ✓\]
+        </div>
+        <p><strong>Conclusion :</strong> La famille est <strong>liée</strong>. On a \(v_3 = 2v_1 + v_2\).</p>
+    </div>
 </section>
 
 <!-- ═══ 6. Base et dimension ═══ -->
@@ -201,6 +264,30 @@
         <li>\(F_1 \cap F_2 = \text{Vect}((0,1,0))\) → \(\dim(F_1 \cap F_2) = 1\)</li>
         <li>\(\dim(F_1 + F_2) = 2 + 2 - 1 = 3\), donc \(F_1 + F_2 = \mathbb{R}^3\).</li>
     </ul>
+
+    <!-- ─── Exercice guidé : Grassmann ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Formule de Grassmann pas à pas</h4>
+        <p><strong>Énoncé :</strong> Dans \(\mathbb{R}^4\), on donne :</p>
+        \[F = \text{Vect}((1,0,1,0),\ (0,1,0,1)) \qquad G = \text{Vect}((1,1,1,1),\ (0,1,1,0))\]
+        <p>Calculer \(\dim(F+G)\) et déterminer si \(F + G\) est une somme directe.</p>
+
+        <p><strong>Étape 1 — Dimensions de \(F\) et \(G\) :</strong></p>
+        <p>\(\dim(F) = 2\) (les deux vecteurs ne sont pas proportionnels → libre).</p>
+        <p>\(\dim(G) = 2\) (idem).</p>
+
+        <p><strong>Étape 2 — Trouver \(F \cap G\) :</strong></p>
+        <p>Un vecteur \(w \in F \cap G\) s'écrit \(w = \alpha(1,0,1,0) + \beta(0,1,0,1) = \gamma(1,1,1,1) + \delta(0,1,1,0)\).</p>
+        <div class="math-block">
+            \[\begin{cases} \alpha = \gamma \\ \beta = \gamma + \delta \\ \alpha = \gamma + \delta \\ \beta = \gamma \end{cases} \Rightarrow \begin{cases} \alpha = \gamma \\ \delta = \beta - \gamma \\ \delta = \alpha - \gamma = 0 \\ \beta = \gamma = \alpha \end{cases}\]
+        </div>
+        <p>Donc \(\delta = 0\) et \(\alpha = \beta = \gamma\) → \(w = \alpha(1,1,1,1)\), donc \(F \cap G = \text{Vect}((1,1,1,1))\) et \(\dim(F \cap G) = 1\).</p>
+
+        <p><strong>Étape 3 — Appliquer Grassmann :</strong></p>
+        \[\dim(F+G) = 2 + 2 - 1 = \boxed{3}\]
+
+        <p><strong>Conclusion :</strong> \(F \cap G \neq \{0\}\), donc la somme n'est <strong>pas directe</strong>. \(F + G\) est un sous-espace de dimension 3 de \(\mathbb{R}^4\).</p>
+    </div>
 </section>
 
 <!-- ═══ 8. Pièges ═══ -->

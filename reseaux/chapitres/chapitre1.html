@@ -178,6 +178,56 @@ Couche 1 – Physique       → Bits     (0 et 1)</code></pre></div>
 </section>
 
 <!-- Récap -->
+
+    <!-- Exercice guidé : Modèle OSI -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Identifier la couche OSI d'un protocole</h4>
+            <p><strong>Énoncé :</strong> Pour chaque élément, indiquer la couche OSI correspondante.</p>
+            <table class="styled-table">
+                <thead><tr><th>Élément</th><th>Couche</th><th>N°</th><th>Justification</th></tr></thead>
+                <tbody>
+                    <tr><td>Câble Ethernet</td><td>Physique</td><td>1</td><td>Transport du signal électrique</td></tr>
+                    <tr><td>Adresse MAC</td><td>Liaison</td><td>2</td><td>Identifie une carte réseau</td></tr>
+                    <tr><td>Adresse IP</td><td>Réseau</td><td>3</td><td>Routage entre réseaux</td></tr>
+                    <tr><td>TCP</td><td>Transport</td><td>4</td><td>Fiabilité de la transmission</td></tr>
+                    <tr><td>HTTP</td><td>Application</td><td>7</td><td>Protocole utilisateur (web)</td></tr>
+                    <tr><td>Trame</td><td>Liaison</td><td>2</td><td>Unité de données de couche 2</td></tr>
+                    <tr><td>Paquet</td><td>Réseau</td><td>3</td><td>Unité de données de couche 3</td></tr>
+                    <tr><td>Segment</td><td>Transport</td><td>4</td><td>Unité de données de couche 4</td></tr>
+                </tbody>
+            </table>
+            <div class="tip-box">
+                <strong>Mnémonique (de bas en haut) :</strong> <strong>P</strong>our <strong>L</strong>es <strong>R</strong>éseaux, <strong>T</strong>out <strong>S</strong>e <strong>P</strong>asse <strong>A</strong>utrement → Physique, Liaison, Réseau, Transport, Session, Présentation, Application
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>Encapsulation : suivre une requête web</h4>
+            <p><strong>Scénario :</strong> Un navigateur envoie une requête HTTP à google.com. Décrire l'encapsulation.</p>
+            <pre><code>Couche 7 (Application) : Données HTTP
+  → Le navigateur crée la requête "GET / HTTP/1.1"
+
+Couche 4 (Transport) : Segment TCP
+  → Ajout : port source (49152) + port dest (80)
+  → En-tête TCP + Données HTTP
+
+Couche 3 (Réseau) : Paquet IP
+  → Ajout : IP source (192.168.1.10) + IP dest (142.250.74.46)
+  → En-tête IP + Segment TCP
+
+Couche 2 (Liaison) : Trame Ethernet
+  → Ajout : MAC source + MAC dest (gateway) + FCS
+  → En-tête Ethernet + Paquet IP + Trailer
+
+Couche 1 (Physique) : Bits
+  → La trame est convertie en signaux électriques/optiques
+  → Transmission sur le câble !</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

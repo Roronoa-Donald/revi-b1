@@ -252,6 +252,55 @@ int main() {
 </section>
 
 <!-- ═══════════════ 5.6 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Tableau dynamique avec malloc</h4>
+        <p><strong>Objectif :</strong> Allouer un tableau dont la taille est choisie à l'exécution.</p>
+
+        <p><strong>Étape 1 — Allouer :</strong></p>
+        <div class="code-block"><pre>int n;
+printf("Combien de notes ? ");
+scanf("%d", &amp;n);
+
+int *notes = (int *)malloc(n * sizeof(int));
+if (notes == NULL) {
+    printf("Erreur d'allocation !\n");
+    return 1;
+}</pre></div>
+        <div class="warning-box"><strong>⚠️</strong> Toujours vérifier que <code>malloc</code> ne retourne pas <code>NULL</code> !</div>
+
+        <p><strong>Étape 2 — Utiliser comme un tableau normal :</strong></p>
+        <div class="code-block"><pre>for (int i = 0; i &lt; n; i++) {
+    printf("Note %d : ", i + 1);
+    scanf("%d", &amp;notes[i]);  // notes[i] = *(notes + i)
+}</pre></div>
+
+        <p><strong>Étape 3 — Libérer la mémoire :</strong></p>
+        <div class="code-block"><pre>free(notes);    // Toujours libérer !
+notes = NULL;   // Bonne pratique : évite les pointeurs pendants</pre></div>
+        <div class="tip-box"><strong>💡</strong> Règle d'or : chaque <code>malloc</code> doit avoir son <code>free</code>.</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Pointeurs et arithmétique</h4>
+        <p><strong>Objectif :</strong> Comprendre l'arithmétique des pointeurs.</p>
+
+        <div class="code-block"><pre>int tab[] = {10, 20, 30, 40, 50};
+int *p = tab;  // p pointe sur tab[0]
+
+printf("*p     = %d\n", *p);       // 10 (valeur pointée)
+printf("*(p+2) = %d\n", *(p+2));   // 30 (avance de 2 cases)
+printf("p[3]   = %d\n", p[3]);     // 40 (notation tableau)
+p++;                                // p pointe maintenant sur tab[1]
+printf("*p     = %d\n", *p);       // 20</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>p+1</code> avance de <code>sizeof(int)</code> octets (4 octets), pas de 1 octet ! C ajuste automatiquement.</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 5.6 — Récapitulatif</h2>
 

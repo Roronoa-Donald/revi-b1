@@ -168,6 +168,53 @@ Exemples :
     <div class="warning-box"><strong>⚠️ Piège n°3 — Classes d'amplitudes inégales :</strong> Si les classes ont des largeurs différentes, on ne peut pas comparer les effectifs directement. Il faut utiliser la <strong>densité</strong> = fᵢ / amplitude. C'est essentiel pour les histogrammes !</div>
 </section>
 
+
+    <!-- Exercice guidé : Fréquences -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Construire un tableau avec fréquences cumulées</h4>
+            <p><strong>Énoncé :</strong> Notes d'un contrôle (sur 5) pour 30 étudiants.</p>
+            <table class="styled-table">
+                <thead><tr><th>Note x<sub>i</sub></th><th>n<sub>i</sub></th><th>f<sub>i</sub></th><th>N<sub>i</sub> (eff. cum.)</th><th>F<sub>i</sub> (fréq. cum.)</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>3</td><td>3/30 = 0.10</td><td>3</td><td>0.10</td></tr>
+                    <tr><td>2</td><td>5</td><td>5/30 = 0.17</td><td>3+5 = 8</td><td>0.27</td></tr>
+                    <tr><td>3</td><td>10</td><td>10/30 = 0.33</td><td>8+10 = 18</td><td>0.60</td></tr>
+                    <tr><td>4</td><td>8</td><td>8/30 = 0.27</td><td>18+8 = 26</td><td>0.87</td></tr>
+                    <tr><td>5</td><td>4</td><td>4/30 = 0.13</td><td>26+4 = 30</td><td>1.00</td></tr>
+                </tbody>
+            </table>
+            <h5>Lecture du tableau</h5>
+            <pre><code>F(3) = 0.60 → 60% des étudiants ont eu 3 ou moins
+→ Donc 40% ont eu plus de 3 (soit 4 ou 5)
+
+F(4) = 0.87 → 87% ont eu 4 ou moins
+→ Seulement 13% ont eu 5/5</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Tableau en classes (variable continue)</h4>
+            <p><strong>Énoncé :</strong> Tailles (cm) de 25 personnes. Construire un tableau en classes.</p>
+            <table class="styled-table">
+                <thead><tr><th>Classe</th><th>n<sub>i</sub></th><th>Amplitude</th><th>Centre c<sub>i</sub></th><th>f<sub>i</sub></th></tr></thead>
+                <tbody>
+                    <tr><td>[150 ; 160[</td><td>3</td><td>10</td><td>155</td><td>0.12</td></tr>
+                    <tr><td>[160 ; 170[</td><td>8</td><td>10</td><td>165</td><td>0.32</td></tr>
+                    <tr><td>[170 ; 180[</td><td>10</td><td>10</td><td>175</td><td>0.40</td></tr>
+                    <tr><td>[180 ; 190[</td><td>4</td><td>10</td><td>185</td><td>0.16</td></tr>
+                    <tr><td><strong>Total</strong></td><td><strong>25</strong></td><td></td><td></td><td><strong>1.00</strong></td></tr>
+                </tbody>
+            </table>
+            <pre><code>Centre de classe = (borne inf + borne sup) / 2
+Exemple : (160 + 170) / 2 = 165
+
+⚠️ Convention : [a ; b[ → a est inclus, b est exclu
+Une personne de 170 cm va dans [170 ; 180[, pas [160 ; 170[</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

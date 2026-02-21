@@ -177,6 +177,30 @@ Port TRUNK (port 24) = transporte TOUS les VLANs
     <div class="warning-box"><strong>⚠️ Piège 3 – « Quel câble ? » :</strong> <strong>Droit</strong> = PC↔Switch, Switch↔Routeur. <strong>Croisé</strong> = PC↔PC, Switch↔Switch. Mais aujourd'hui la plupart des équipements ont l'<strong>Auto-MDI/X</strong> (détection automatique).</div>
 </section>
 
+
+    <!-- Exercice guidé : Équipements -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Choisir le bon équipement</h4>
+            <p><strong>Énoncé :</strong> Pour chaque besoin, quel équipement utiliser ?</p>
+            <table class="styled-table">
+                <thead><tr><th>Besoin</th><th>Équipement</th><th>Couche OSI</th><th>Justification</th></tr></thead>
+                <tbody>
+                    <tr><td>Connecter 24 PC dans un bureau</td><td>Switch (commutateur)</td><td>Couche 2</td><td>Envoie les trames uniquement au port destination (adresse MAC)</td></tr>
+                    <tr><td>Relier le LAN à Internet</td><td>Routeur</td><td>Couche 3</td><td>Route les paquets entre réseaux différents (adresses IP)</td></tr>
+                    <tr><td>Filtrer le trafic entrant</td><td>Pare-feu (Firewall)</td><td>Couche 3-7</td><td>Examine et filtre selon des règles de sécurité</td></tr>
+                    <tr><td>Étendre la couverture Wi-Fi</td><td>Point d'accès (AP)</td><td>Couche 1-2</td><td>Point de connexion sans fil, pont entre filaire et Wi-Fi</td></tr>
+                    <tr><td>Amplifier un signal sur longue distance</td><td>Répéteur</td><td>Couche 1</td><td>Régénère le signal physique affaibli</td></tr>
+                </tbody>
+            </table>
+            <div class="warning-box">
+                <strong>⚠️ Hub vs Switch :</strong> Le hub envoie à TOUS les ports (broadcast) → collisions. Le switch envoie uniquement au bon port (table MAC) → efficace. Les hubs sont obsolètes !
+            </div>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

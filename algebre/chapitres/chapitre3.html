@@ -84,6 +84,32 @@
         <li>\(f(x,y) = x^2 + y\) → <strong>pas linéaire ✗</strong> (le \(x^2\) casse la linéarité)</li>
         <li>\(f(x,y) = (x+1, y)\) → <strong>pas linéaire ✗</strong> (car \(f(0,0) = (1,0) \neq 0\))</li>
     </ul>
+
+    <!-- ─── Exercice guidé : Vérifier la linéarité ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Prouver qu'une application est linéaire</h4>
+        <p><strong>Énoncé :</strong> Montrer que \(f : \mathbb{R}^3 \to \mathbb{R}^2\) définie par \(f(x,y,z) = (2x - y + z,\ x + 3z)\) est linéaire.</p>
+
+        <p><strong>Méthode :</strong> Montrons que \(f(\lambda u + \mu v) = \lambda f(u) + \mu f(v)\) pour tout \(u, v \in \mathbb{R}^3\) et \(\lambda, \mu \in \mathbb{R}\).</p>
+
+        <p><strong>Étape 1 :</strong> Soient \(u = (x_1,y_1,z_1)\) et \(v = (x_2,y_2,z_2)\).</p>
+        <div class="math-block">
+            \[f(\lambda u + \mu v) = f(\lambda x_1 + \mu x_2,\ \lambda y_1 + \mu y_2,\ \lambda z_1 + \mu z_2)\]
+        </div>
+
+        <p><strong>Étape 2 :</strong> Appliquer la définition de \(f\) :</p>
+        <div class="math-block">
+            \[= \big(2(\lambda x_1+\mu x_2) - (\lambda y_1+\mu y_2) + (\lambda z_1+\mu z_2),\ (\lambda x_1+\mu x_2) + 3(\lambda z_1+\mu z_2)\big)\]
+        </div>
+
+        <p><strong>Étape 3 :</strong> Factoriser par \(\lambda\) et \(\mu\) :</p>
+        <div class="math-block">
+            \[= \lambda(2x_1-y_1+z_1,\ x_1+3z_1) + \mu(2x_2-y_2+z_2,\ x_2+3z_2) = \lambda f(u) + \mu f(v) \quad ✓\]
+        </div>
+
+        <p><strong>Conclusion :</strong> \(f\) est bien linéaire.</p>
+        <div class="tip-box"><strong>💡 Raccourci :</strong> Si \(f\) est définie par des combinaisons <strong>linéaires</strong> des coordonnées (pas de \(x^2\), pas de constante ajoutée), elle est automatiquement linéaire !</div>
+    </div>
 </section>
 
 <!-- ═══ 2. Vocabulaire EIAF ═══ -->
@@ -134,6 +160,29 @@
         <li>\(\text{Ker}(f)\) : \(x+y=0\) et \(x-y=0\) → \(x=y=0\), donc \(\text{Ker}(f) = \{(0,0)\}\) → \(f\) est <strong>injective</strong>.</li>
         <li>Comme \(\dim(E) = \dim(F) = 2\) et \(f\) injective → \(f\) est aussi <strong>surjective</strong>, donc <strong>bijective</strong> (isomorphisme).</li>
     </ul>
+
+    <!-- ─── Exercice guidé : Noyau et Image ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Trouver le noyau et l'image, pas à pas</h4>
+        <p><strong>Énoncé :</strong> Soit \(f : \mathbb{R}^3 \to \mathbb{R}^2\) définie par \(f(x,y,z) = (x+y-z,\ 2x+y)\). Déterminer \(\text{Ker}(f)\) et \(\text{Im}(f)\).</p>
+
+        <p><strong>Étape 1 — Trouver le noyau :</strong> On résout \(f(x,y,z) = (0,0)\) :</p>
+        <div class="math-block">
+            \[\begin{cases} x + y - z = 0 \\ 2x + y = 0 \end{cases}\]
+        </div>
+        <p>De \(L_2\) : \(y = -2x\). Dans \(L_1\) : \(x + (-2x) - z = 0 \Rightarrow z = -x\).</p>
+        <p>Solution : \((x, y, z) = (x, -2x, -x) = x(1, -2, -1)\) pour \(x \in \mathbb{R}\).</p>
+        \[\boxed{\text{Ker}(f) = \text{Vect}((1, -2, -1))} \qquad \dim(\text{Ker}\,f) = 1\]
+
+        <p><strong>Étape 2 — Appliquer le théorème du rang :</strong></p>
+        <div class="math-block">
+            \[\dim(\text{Ker}\,f) + \text{rg}(f) = \dim(\mathbb{R}^3) \Rightarrow 1 + \text{rg}(f) = 3 \Rightarrow \text{rg}(f) = 2\]
+        </div>
+
+        <p><strong>Étape 3 — Conclure sur l'image :</strong></p>
+        <p>\(\text{rg}(f) = 2 = \dim(\mathbb{R}^2)\), donc \(\text{Im}(f) = \mathbb{R}^2\) et \(f\) est <strong>surjective</strong>.</p>
+        <p>Mais \(\text{Ker}(f) \neq \{0\}\), donc \(f\) n'est <strong>pas injective</strong>.</p>
+    </div>
 </section>
 
 <!-- ═══ 4. Théorème du rang ═══ -->
@@ -167,6 +216,26 @@
         \[M(f) = \begin{pmatrix}2&1\\1&-3\end{pmatrix}\]
     </div>
     <div class="info-box"><strong>ℹ️ Composition :</strong> \(M(g \circ f) = M(g) \cdot M(f)\) — attention, l'ordre est inversé par rapport à \(\circ\) !</div>
+
+    <!-- ─── Exercice guidé : Construire la matrice ─── -->
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Construire la matrice d'une application linéaire, pas à pas</h4>
+        <p><strong>Énoncé :</strong> Soit \(f : \mathbb{R}^3 \to \mathbb{R}^2\) définie par \(f(x,y,z) = (x+y-z,\ 2x+y)\). Écrire \(M(f)\) dans les bases canoniques.</p>
+
+        <p><strong>Étape 1 — Calculer les images des vecteurs de base :</strong></p>
+        <div class="math-block">
+            \[f(e_1) = f(1,0,0) = (1+0-0,\ 2+0) = (1, 2)\]
+            \[f(e_2) = f(0,1,0) = (0+1-0,\ 0+1) = (1, 1)\]
+            \[f(e_3) = f(0,0,1) = (0+0-1,\ 0+0) = (-1, 0)\]
+        </div>
+
+        <p><strong>Étape 2 — Écrire les images en colonnes :</strong></p>
+        \[M(f) = \begin{pmatrix} 1 & 1 & -1 \\ 2 & 1 & 0 \end{pmatrix}\]
+
+        <p><strong>Vérification :</strong> \(M(f) \cdot \begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}x+y-z\\2x+y\end{pmatrix} = f(x,y,z)\) ✓</p>
+
+        <p><strong>Bonus — Rang :</strong> Les colonnes 1 et 2 ne sont pas proportionnelles → \(\text{rg}(M) = 2 = \text{rg}(f)\). ✓</p>
+    </div>
 </section>
 
 <!-- ═══ 6. Transformations géométriques ═══ -->

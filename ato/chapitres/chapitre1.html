@@ -305,7 +305,65 @@
     </section>
 
     <!-- EXERCICES -->
+    
+    <!-- Exercice guidé : Généralités -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Conversion d'unités de stockage</h4>
+            <p><strong>Énoncé :</strong> Convertir les tailles suivantes.</p>
+            <table class="styled-table">
+                <thead><tr><th>Valeur</th><th>En octets</th><th>Calcul</th></tr></thead>
+                <tbody>
+                    <tr><td>3 Ko</td><td>3 072 octets</td><td>3 × 1024 = 3 072</td></tr>
+                    <tr><td>2 Mo</td><td>2 097 152 octets</td><td>2 × 1024² = 2 × 1 048 576</td></tr>
+                    <tr><td>1,5 Go</td><td>1 610 612 736 octets</td><td>1.5 × 1024³</td></tr>
+                </tbody>
+            </table>
+            <h5>Sens inverse : octets → unité adaptée</h5>
+            <pre><code>5 242 880 octets = ?
+  ÷ 1024 = 5 120 Ko
+  ÷ 1024 = 5 Mo ✓
+
+Attention : 1 Ko = 1024 octets (pas 1000 !)
+En notation SI : 1 kB = 1000 octets
+En notation binaire : 1 KiB = 1024 octets
+
+En informatique, on utilise généralement 1024.</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Identifier les composants et leur rôle</h4>
+            <p><strong>Schéma fonctionnel d'un ordinateur :</strong></p>
+            <pre><code>        ┌──────────────┐
+        │     CPU      │
+        │  ┌────┐ ┌───┐│
+        │  │ UC │ │UAL││ ← Unité de Contrôle + Unité Arithmétique
+        │  └────┘ └───┘│
+        └──────┬───────┘
+               │ Bus système
+    ┌──────────┼──────────┐
+    │          │          │
+┌───┴───┐  ┌──┴──┐  ┌───┴───┐
+│  RAM  │  │ ROM │  │  E/S  │
+│(temp.)│  │BIOS │  │clavier│
+└───────┘  └─────┘  │écran  │
+                     └───────┘</code></pre>
+            <table class="styled-table">
+                <thead><tr><th>Composant</th><th>Rôle</th><th>Volatile ?</th></tr></thead>
+                <tbody>
+                    <tr><td>CPU</td><td>Exécute les instructions (cerveau)</td><td>—</td></tr>
+                    <tr><td>RAM</td><td>Stockage temporaire rapide</td><td>Oui (perdu à l'extinction)</td></tr>
+                    <tr><td>ROM/BIOS</td><td>Démarrage du PC</td><td>Non (permanent)</td></tr>
+                    <tr><td>SSD/HDD</td><td>Stockage permanent</td><td>Non</td></tr>
+                    <tr><td>Carte mère</td><td>Interconnecte tous les composants</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+<section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
         <div id="chapter-exercises"></div>
     </section>

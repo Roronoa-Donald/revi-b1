@@ -186,6 +186,52 @@ Résultat : 3 sous-réseaux optimisés au lieu de 4 sous-réseaux /26 !</code></
     <div class="warning-box"><strong>⚠️ Piège 3 – Confondre nombre de bits réseau et bits hôte :</strong> Dans /26, il y a 26 bits <strong>réseau</strong> et 32 − 26 = 6 bits <strong>hôte</strong>. C'est 2<sup>6</sup> − 2 = 62 hôtes, pas 2<sup>26</sup>.</div>
 </section>
 
+
+    <!-- Exercice guidé : Subnetting -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Découper un réseau en sous-réseaux</h4>
+            <p><strong>Énoncé :</strong> Découper 192.168.10.0/24 en 4 sous-réseaux.</p>
+            <h5>Étape 1 — Combien de bits emprunter ?</h5>
+            <pre><code>4 sous-réseaux → 2^n ≥ 4 → n = 2 bits
+Nouveau masque : /24 + 2 = /26
+Masque : 255.255.255.192</code></pre>
+            <h5>Étape 2 — Taille de chaque sous-réseau</h5>
+            <pre><code>Bits hôte restants : 32 - 26 = 6
+Adresses par sous-réseau : 2^6 = 64
+Hôtes utilisables : 64 - 2 = 62 par sous-réseau</code></pre>
+            <h5>Étape 3 — Calculer les plages</h5>
+            <table class="styled-table">
+                <thead><tr><th>Sous-réseau</th><th>Adresse réseau</th><th>Plage d'hôtes</th><th>Broadcast</th></tr></thead>
+                <tbody>
+                    <tr><td>SR1</td><td>192.168.10.0/26</td><td>.1 à .62</td><td>.63</td></tr>
+                    <tr><td>SR2</td><td>192.168.10.64/26</td><td>.65 à .126</td><td>.127</td></tr>
+                    <tr><td>SR3</td><td>192.168.10.128/26</td><td>.129 à .190</td><td>.191</td></tr>
+                    <tr><td>SR4</td><td>192.168.10.192/26</td><td>.193 à .254</td><td>.255</td></tr>
+                </tbody>
+            </table>
+            <pre><code>Vérification :
+4 sous-réseaux × 64 adresses = 256 = 2^8 ✓
+Total hôtes : 4 × 62 = 248 (vs 254 avant découpage)</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Trouver le sous-réseau d'une adresse</h4>
+            <p><strong>Énoncé :</strong> À quel sous-réseau appartient 192.168.10.200/26 ?</p>
+            <h5>Méthode rapide</h5>
+            <pre><code>Pas du masque = 256 - 192 = 64
+Diviser le dernier octet : 200 ÷ 64 = 3.125
+Partie entière = 3 → Sous-réseau n°3 (en partant de 0)
+Début = 3 × 64 = 192
+
+→ 192.168.10.200 appartient à 192.168.10.192/26
+  Plage : .193 à .254
+  Broadcast : .255 ✓</code></pre>
+        </div>
+    </section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

@@ -265,6 +265,58 @@ VILLES(<u>ville</u>, region)</pre>
         <a href="chapitre4.html" class="btn-nav"><i class="fas fa-arrow-left"></i> Chapitre 4</a>
         <a href="chapitre6.html" class="btn-nav">Chapitre 6 <i class="fas fa-arrow-right"></i></a>
     </div>
+
+    <!-- Exercice guidé : Normalisation -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-pencil-alt"></i> Exercices guidés</h2>
+
+        <div class="example-box">
+            <h4>Normaliser une table pas à pas (1NF → 2NF → 3NF)</h4>
+            <p><strong>Table de départ (non normalisée) :</strong></p>
+            <pre><code>COMMANDE(NumCmd, DateCmd, NomClient, VilleClient,
+         Produit1, Qte1, Produit2, Qte2)</code></pre>
+            <h5>Étape 1 — Passage en 1NF (atomicité)</h5>
+            <p>Problème : attributs répétitifs (Produit1/Qte1, Produit2/Qte2).</p>
+            <pre><code>COMMANDE_1NF(NumCmd, DateCmd, NomClient, VilleClient,
+             IdProd, Qte)
+-- Chaque produit = une ligne distincte
+-- Clé primaire : (NumCmd, IdProd)</code></pre>
+            <h5>Étape 2 — Passage en 2NF (dépendances totales)</h5>
+            <p>Problème : NomClient et VilleClient dépendent de NumCmd seulement (pas de IdProd).</p>
+            <pre><code>COMMANDE_2NF(NumCmd, DateCmd, NomClient, VilleClient)
+DETAIL_CMD(NumCmd#, IdProd, Qte)
+-- NomClient ne dépend que de NumCmd → déplacé</code></pre>
+            <h5>Étape 3 — Passage en 3NF (pas de dépendance transitive)</h5>
+            <p>Problème : VilleClient dépend de NomClient (transitif via NumCmd).</p>
+            <pre><code>COMMANDE_3NF(NumCmd, DateCmd, NomClient#)
+CLIENT(NomClient, VilleClient)
+DETAIL_CMD(NumCmd#, IdProd, Qte)
+
+✓ 3NF atteinte : chaque attribut non-clé dépend
+  directement et uniquement de la clé primaire.</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>Identifier les dépendances fonctionnelles</h4>
+            <p><strong>Table :</strong> EMPLOYE(NumEmp, Nom, NumDept, NomDept, NomChef)</p>
+            <h5>Lister les dépendances fonctionnelles (DF)</h5>
+            <pre><code>NumEmp → Nom          (chaque n° identifie un nom)
+NumEmp → NumDept      (chaque employé a un département)
+NumDept → NomDept     (chaque n° de dept a un nom)
+NumDept → NomChef     (chaque dept a un chef)
+
+Dépendance transitive détectée :
+  NumEmp → NumDept → NomDept
+  NumEmp → NumDept → NomChef</code></pre>
+            <h5>Décomposition en 3NF</h5>
+            <pre><code>EMPLOYE_3NF(NumEmp, Nom, NumDept#)
+DEPARTEMENT(NumDept, NomDept, NomChef)
+
+✓ Plus de dépendance transitive
+✓ Mise à jour du chef = 1 seule ligne à modifier</code></pre>
+        </div>
+    </section>
+
 </main>
 
 <div class="xp-bar-container">

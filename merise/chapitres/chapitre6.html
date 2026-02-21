@@ -376,7 +376,47 @@
             </section>
 
             <!-- ZONE EXERCICES -->
-            <article class="glass-card" id="interactive-exercise">
+            
+    <!-- Exercice guidé : MCT -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fa-solid fa-pencil-alt"></i> Exercice guidé</h2>
+
+        <div class="example-box">
+            <h4>Construire un MCT — Processus de commande</h4>
+            <h5>Étape 1 — Événements déclencheurs</h5>
+            <pre><code>E1 : Réception de la commande client
+E2 : Vérification du stock</code></pre>
+            <h5>Étape 2 — Opération</h5>
+            <pre><code>OPÉRATION : "Traiter la commande"
+  Déclenchée par : E1 ET E2
+  Synchronisation : E1 ∧ E2 (les deux sont nécessaires)</code></pre>
+            <h5>Étape 3 — Règles d'émission</h5>
+            <pre><code>SI stock suffisant ALORS
+    → Résultat R1 : "Commande acceptée"
+    → Émettre : bon de livraison + facture
+SINON
+    → Résultat R2 : "Commande refusée"
+    → Émettre : notification de rupture</code></pre>
+            <h5>Schéma MCT</h5>
+            <pre><code>  [E1: Commande reçue]   [E2: Stock vérifié]
+          \                  /
+           \                /
+        Synchronisation : E1 ∧ E2
+               |
+    ┌─────────────────────┐
+    │  TRAITER COMMANDE   │
+    │                     │
+    │  - Vérifier stock   │
+    │  - Calculer total   │
+    │  - Générer facture  │
+    └─────────────────────┘
+         /                stock OK      stock KO
+       |               |
+   [R1: Acceptée]  [R2: Refusée]</code></pre>
+        </div>
+    </section>
+
+<article class="glass-card" id="interactive-exercise">
                 <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
                 <p style="color:var(--text-muted);">Chargement des exercices...</p>
             </article>

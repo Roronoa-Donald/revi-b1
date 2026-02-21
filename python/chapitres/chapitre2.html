@@ -205,6 +205,68 @@ match commande:
 </section>
 
 <!-- Section 8 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Calculatrice de tarif cinéma</h4>
+        <p><strong>Objectif :</strong> Afficher le tarif selon l'âge : enfant (&lt;12), adulte (12-64), senior (65+).</p>
+
+        <p><strong>Étape 1 — Lire l'âge :</strong></p>
+        <div class="code-block"><pre>age = int(input("Votre âge : "))</pre></div>
+
+        <p><strong>Étape 2 — Enchaîner les conditions avec elif :</strong></p>
+        <div class="code-block"><pre>if age &lt; 12:
+    tarif = 5
+    categorie = "Enfant"
+elif age &lt; 65:
+    tarif = 10
+    categorie = "Adulte"
+else:
+    tarif = 7
+    categorie = "Senior"</pre></div>
+        <div class="tip-box"><strong>💡</strong> L'ordre des <code>elif</code> est important ! Python s'arrête à la <strong>première condition vraie</strong>.</div>
+
+        <p><strong>Étape 3 — Afficher :</strong></p>
+        <div class="code-block"><pre>print(f"Catégorie : {categorie} → Tarif : {tarif}€")</pre></div>
+
+        <p><strong>Exécutions :</strong></p>
+        <ul>
+            <li><code>8 ans</code> → <code>Enfant → 5€</code></li>
+            <li><code>30 ans</code> → <code>Adulte → 10€</code></li>
+            <li><code>70 ans</code> → <code>Senior → 7€</code></li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Vérificateur de mot de passe</h4>
+        <p><strong>Objectif :</strong> Vérifier qu'un mot de passe respecte 3 critères.</p>
+
+        <p><strong>Étape 1 — Définir les critères :</strong></p>
+        <div class="code-block"><pre>mdp = input("Mot de passe : ")
+
+assez_long = len(mdp) >= 8
+a_chiffre = any(c.isdigit() for c in mdp)
+a_majuscule = any(c.isupper() for c in mdp)</pre></div>
+
+        <p><strong>Étape 2 — Vérifier avec des opérateurs logiques :</strong></p>
+        <div class="code-block"><pre>if assez_long and a_chiffre and a_majuscule:
+    print("✅ Mot de passe valide !")
+else:
+    print("❌ Mot de passe invalide :")
+    if not assez_long:
+        print("  - Au moins 8 caractères requis")
+    if not a_chiffre:
+        print("  - Au moins un chiffre requis")
+    if not a_majuscule:
+        print("  - Au moins une majuscule requise")</pre></div>
+
+        <p><strong>Exécution :</strong> <code>abc</code> → ❌ (3 erreurs). <code>MonPass1</code> → ✅</p>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

@@ -382,7 +382,42 @@
             </section>
 
             <!-- ZONE EXERCICES -->
-            <article class="glass-card" id="interactive-exercise">
+            
+    <!-- Exercice guidé : Merise ch1 -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fa-solid fa-pencil-alt"></i> Exercice guidé</h2>
+
+        <div class="example-box">
+            <h4>Analyser un système d'information</h4>
+            <p><strong>Énoncé :</strong> Une auto-école gère des élèves, moniteurs, véhicules et leçons. Identifier les niveaux MERISE.</p>
+            <h5>Niveau Conceptuel (QUOI ?)</h5>
+            <pre><code>Entités identifiées :
+  - ÉLÈVE (Num, Nom, Prénom, DateInscription)
+  - MONITEUR (Num, Nom, Spécialité)
+  - VÉHICULE (Immatriculation, Type, DateContrôle)
+
+Associations :
+  - PLANIFIER : un moniteur donne une leçon à un élève
+    avec un véhicule, à une date/heure donnée</code></pre>
+            <h5>Niveau Logique (COMMENT ?)</h5>
+            <pre><code>Tables relationnelles :
+  ELEVE(NumEleve, Nom, Prenom, DateInscription)
+  MONITEUR(NumMoniteur, Nom, Specialite)
+  VEHICULE(Immat, Type, DateControle)
+  LECON(NumLecon, Date, Heure, NumEleve#, NumMoniteur#, Immat#)</code></pre>
+            <h5>Niveau Physique (OÙ ?)</h5>
+            <pre><code>CREATE TABLE LECON (
+    num_lecon INT PRIMARY KEY AUTO_INCREMENT,
+    date_lecon DATE NOT NULL,
+    heure TIME NOT NULL,
+    num_eleve INT REFERENCES ELEVE(num_eleve),
+    num_moniteur INT REFERENCES MONITEUR(num_moniteur),
+    immat VARCHAR(10) REFERENCES VEHICULE(immat)
+);</code></pre>
+        </div>
+    </section>
+
+<article class="glass-card" id="interactive-exercise">
                 <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
                 <p style="color:var(--text-muted);">Chargement des exercices...</p>
             </article>

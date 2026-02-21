@@ -258,6 +258,59 @@ else
 </section>
 
 <!-- ═══════════════ 6.7 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Gestion d'étudiants avec structures</h4>
+        <p><strong>Objectif :</strong> Créer un tableau de structures et trouver le meilleur étudiant.</p>
+
+        <p><strong>Étape 1 — Définir la structure :</strong></p>
+        <div class="code-block"><pre>typedef struct {
+    char nom[50];
+    int note;
+} Etudiant;</pre></div>
+
+        <p><strong>Étape 2 — Créer et remplir le tableau :</strong></p>
+        <div class="code-block"><pre>Etudiant classe[3] = {
+    {"Alice", 15},
+    {"Bob", 18},
+    {"Clara", 12}
+};</pre></div>
+
+        <p><strong>Étape 3 — Trouver le meilleur :</strong></p>
+        <div class="code-block"><pre>int meilleur_idx = 0;
+for (int i = 1; i &lt; 3; i++) {
+    if (classe[i].note &gt; classe[meilleur_idx].note)
+        meilleur_idx = i;
+}
+printf("Meilleur : %s (%d/20)\n", classe[meilleur_idx].nom,
+       classe[meilleur_idx].note);
+// Meilleur : Bob (18/20)</pre></div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Structure avec typedef et fonction</h4>
+        <p><strong>Objectif :</strong> Passer une structure à une fonction.</p>
+
+        <div class="code-block"><pre>typedef struct {
+    float x, y;
+} Point;
+
+float distance(Point a, Point b) {
+    float dx = b.x - a.x;
+    float dy = b.y - a.y;
+    return sqrt(dx*dx + dy*dy);  // #include &lt;math.h&gt;
+}
+
+Point p1 = {0, 0}, p2 = {3, 4};
+printf("Distance = %.1f\n", distance(p1, p2));  // 5.0</pre></div>
+        <div class="tip-box"><strong>💡</strong> Pour modifier la structure originale dans la fonction, passez un <strong>pointeur</strong> : <code>void deplacer(Point *p)</code> et utilisez <code>p-&gt;x</code>.</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 6.7 — Récapitulatif</h2>
 

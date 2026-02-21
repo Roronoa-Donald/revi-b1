@@ -296,6 +296,57 @@ for (int i = 1; i <= 10; i++) {
 </section>
 
 <!-- ═══════════════ 2.7 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Menu interactif avec switch</h4>
+        <p><strong>Objectif :</strong> Créer un menu avec validation de l'entrée.</p>
+
+        <div class="code-block"><pre>int choix;
+printf("=== MENU ===\n");
+printf("1. Nouveau\n2. Ouvrir\n3. Quitter\n");
+printf("Choix : ");
+scanf("%d", &amp;choix);
+
+switch (choix) {
+    case 1:
+        printf("Création d'un fichier...\n");
+        break;      // Sans break → exécute le case suivant !
+    case 2:
+        printf("Ouverture...\n");
+        break;
+    case 3:
+        printf("Au revoir !\n");
+        break;
+    default:
+        printf("Choix invalide !\n");
+}</pre></div>
+        <div class="warning-box"><strong>⚠️ Piège classique :</strong> Oublier <code>break</code> provoque un <strong>fall-through</strong> — le code continue dans le case suivant !</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Somme des nombres jusqu'à 0</h4>
+        <p><strong>Objectif :</strong> Lire des nombres en boucle et calculer la somme (arrêt quand 0).</p>
+
+        <div class="code-block"><pre>int nombre, somme = 0, compteur = 0;
+
+do {
+    printf("Entrez un nombre (0 pour arrêter) : ");
+    scanf("%d", &amp;nombre);
+    if (nombre != 0) {
+        somme += nombre;
+        compteur++;
+    }
+} while (nombre != 0);
+
+printf("Somme = %d, Moyenne = %.1f\n", somme, (float)somme / compteur);</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>do...while</code> exécute le bloc <strong>au moins une fois</strong>, contrairement à <code>while</code> qui teste d'abord.</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 2.7 — Récapitulatif</h2>
 

@@ -168,7 +168,29 @@
         <div class="tip-box"><span>💡</span><div><strong>3 étapes</strong> au lieu de 6 en recherche séquentielle. Plus le tableau est grand, plus la dichotomie est avantageuse.</div></div>
     </section>
 
-    <!-- Résumé -->
+    
+    <!-- Exercice guidé : Recherche dichotomique -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercice guidé — Recherche dichotomique</h2>
+
+        <div class="example-box">
+            <h4>🎯 Recherche dichotomique dans un tableau trié</h4>
+            <p><strong>Énoncé :</strong> Chercher la valeur 23 dans T = [3, 7, 12, 18, 23, 31, 45].</p>
+            <h5>Principe : Diviser l'intervalle par 2 à chaque étape</h5>
+            <table class="styled-table">
+                <thead><tr><th>Étape</th><th>gauche</th><th>droite</th><th>milieu</th><th>T[milieu]</th><th>Comparaison</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>0</td><td>6</td><td>3</td><td>18</td><td>23 &gt; 18 → chercher à droite</td></tr>
+                    <tr><td>2</td><td>4</td><td>6</td><td>5</td><td>31</td><td>23 &lt; 31 → chercher à gauche</td></tr>
+                    <tr><td>3</td><td>4</td><td>4</td><td>4</td><td>23</td><td>23 = 23 → TROUVÉ !</td></tr>
+                </tbody>
+            </table>
+            <pre><code>→ Valeur 23 trouvée à l'indice 4 en 3 comparaisons ✓
+   (Recherche séquentielle aurait pris 5 comparaisons)</code></pre>
+        </div>
+    </section>
+
+<!-- Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 7.5 — Résumé</h2>
         <div class="concept-card"><h4>🎯 Aide-mémoire</h4>

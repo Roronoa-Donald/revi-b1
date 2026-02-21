@@ -242,6 +242,62 @@ print(moyenne.__doc__)</code></pre></div>
 </section>
 
 <!-- Section 8 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Mini-calculatrice avec fonctions</h4>
+        <p><strong>Objectif :</strong> Créer 4 fonctions arithmétiques et les appeler.</p>
+
+        <p><strong>Étape 1 — Définir les fonctions :</strong></p>
+        <div class="code-block"><pre>def additionner(a, b):
+    # Retourne la somme de a et b
+    return a + b
+
+def diviser(a, b):
+    # Retourne a/b avec protection
+    if b == 0:
+        return "Erreur : division par zéro !"
+    return a / b</pre></div>
+
+        <p><strong>Étape 2 — Menu interactif :</strong></p>
+        <div class="code-block"><pre>a = float(input("Premier nombre : "))
+b = float(input("Deuxième nombre : "))
+op = input("Opération (+, -, *, /) : ")
+
+if op == "+":
+    print(f"Résultat : {additionner(a, b)}")
+elif op == "/":
+    print(f"Résultat : {diviser(a, b)}")</pre></div>
+
+        <p><strong>Exécution :</strong> <code>10 / 0</code> → <code>Erreur : division par zéro !</code></p>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Fonction statistiques avec *args</h4>
+        <p><strong>Objectif :</strong> Une fonction qui accepte un nombre variable de notes.</p>
+
+        <p><strong>Étape 1 — Définir avec *args :</strong></p>
+        <div class="code-block"><pre>def stats(*notes):
+    # Retourne (min, max, moyenne) des notes
+    if len(notes) == 0:
+        return None
+    return min(notes), max(notes), sum(notes) / len(notes)</pre></div>
+
+        <p><strong>Étape 2 — Appeler et unpacker :</strong></p>
+        <div class="code-block"><pre>minimum, maximum, moyenne = stats(12, 15, 8, 19, 14)
+print(f"Min: {minimum}, Max: {maximum}, Moyenne: {moyenne}")
+# Min: 8, Max: 19, Moyenne: 13.6</pre></div>
+
+        <p><strong>Bonus — Avec une liste existante :</strong></p>
+        <div class="code-block"><pre>mes_notes = [12, 15, 8, 19, 14]
+resultat = stats(*mes_notes)  # * "déballe" la liste</pre></div>
+        <div class="tip-box"><strong>💡</strong> L'opérateur <code>*</code> devant une liste la "déballe" en arguments individuels.</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

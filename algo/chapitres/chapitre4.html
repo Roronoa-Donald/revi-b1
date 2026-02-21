@@ -174,7 +174,62 @@ i ← <span class="number">1</span>
         <div class="mnemonic-box"><span class="icon">🧠</span><div><strong>Mnémo — FLAG :</strong> On utilise un <strong>drapeau</strong> (booléen <code>trouvé</code>) pour savoir si on a trouvé et on <strong>s'arrête dès</strong> que c'est trouvé — on ne continue pas inutilement.</div></div>
     </section>
 
-    <!-- Résumé -->
+    
+    <!-- Exercice guidé : Tableaux -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés — Les Tableaux</h2>
+
+        <div class="example-box">
+            <h4>🎯 Trouver le maximum et sa position dans un tableau</h4>
+            <p><strong>Énoncé :</strong> T = [14, 7, 23, 9, 18]. Trouver la valeur maximale et son indice.</p>
+            <h5>Étape 1 — Initialiser avec le premier élément</h5>
+            <pre><code>max_val ← T[0]    // max_val = 14
+max_pos ← 0</code></pre>
+            <h5>Étape 2 — Parcourir le tableau</h5>
+            <pre><code>POUR i DE 1 À 4 FAIRE
+    SI T[i] &gt; max_val ALORS
+        max_val ← T[i]
+        max_pos ← i
+    FIN SI
+FIN POUR</code></pre>
+            <h5>Étape 3 — Trace</h5>
+            <table class="styled-table">
+                <thead><tr><th>i</th><th>T[i]</th><th>T[i] &gt; max ?</th><th>max_val</th><th>max_pos</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>7</td><td>7 &gt; 14 ? Non</td><td>14</td><td>0</td></tr>
+                    <tr><td>2</td><td>23</td><td>23 &gt; 14 ? Oui</td><td>23</td><td>2</td></tr>
+                    <tr><td>3</td><td>9</td><td>9 &gt; 23 ? Non</td><td>23</td><td>2</td></tr>
+                    <tr><td>4</td><td>18</td><td>18 &gt; 23 ? Non</td><td>23</td><td>2</td></tr>
+                </tbody>
+            </table>
+            <h5>Résultat</h5>
+            <pre><code>→ Maximum = 23 à l'indice 2 ✓</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>🎯 Inverser un tableau en place</h4>
+            <p><strong>Énoncé :</strong> Inverser T = [3, 8, 1, 6, 2] sans tableau auxiliaire.</p>
+            <h5>Principe — Échanger les éléments symétriques</h5>
+            <pre><code>POUR i DE 0 À (n DIV 2 - 1) FAIRE
+    temp ← T[i]
+    T[i] ← T[n - 1 - i]
+    T[n - 1 - i] ← temp
+FIN POUR</code></pre>
+            <h5>Trace (n=5, boucle de 0 à 1)</h5>
+            <table class="styled-table">
+                <thead><tr><th>i</th><th>Échange</th><th>Tableau</th></tr></thead>
+                <tbody>
+                    <tr><td>Init</td><td>—</td><td>[3, 8, 1, 6, 2]</td></tr>
+                    <tr><td>0</td><td>T[0] ↔ T[4]</td><td>[2, 8, 1, 6, 3]</td></tr>
+                    <tr><td>1</td><td>T[1] ↔ T[3]</td><td>[2, 6, 1, 8, 3]</td></tr>
+                </tbody>
+            </table>
+            <pre><code>→ Résultat : [2, 6, 1, 8, 3] ✓
+L'élément central (indice 2) ne bouge pas.</code></pre>
+        </div>
+    </section>
+
+<!-- Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 4.5 — Résumé</h2>
         <div class="concept-card"><h4>🎯 Aide-mémoire</h4>

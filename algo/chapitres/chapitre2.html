@@ -270,7 +270,33 @@ FAUX  OU FAUX  = <span class="keyword">FAUX</span>
         </div>
     </section>
 
-    <!-- 2.6 Résumé -->
+    
+    <!-- Exercice guidé : Conditions imbriquées -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercice guidé — Classification d'un triangle</h2>
+
+        <div class="example-box">
+            <h4>🎯 Déterminer le type d'un triangle à partir de ses 3 côtés</h4>
+            <p><strong>Énoncé :</strong> Étant donnés 3 côtés a=5, b=5, c=8, déterminer si le triangle est équilatéral, isocèle ou scalène.</p>
+            <h5>Étape 1 — Vérifier si c'est un triangle valide</h5>
+            <pre><code>SI (a + b > c) ET (a + c > b) ET (b + c > a) ALORS
+    // 5+5=10 > 8 ✓  |  5+8=13 > 5 ✓  |  5+8=13 > 5 ✓
+    // C'est bien un triangle</code></pre>
+            <h5>Étape 2 — Classifier avec conditions imbriquées</h5>
+            <pre><code>    SI (a = b) ET (b = c) ALORS
+        Afficher "Équilatéral"       // 5≠8, donc NON
+    SINON SI (a = b) OU (a = c) OU (b = c) ALORS
+        Afficher "Isocèle"           // a=b=5, donc OUI ✓
+    SINON
+        Afficher "Scalène"
+    FIN SI</code></pre>
+            <h5>Résultat</h5>
+            <pre><code>→ "Isocèle" ✓
+Le triangle (5, 5, 8) a deux côtés égaux.</code></pre>
+        </div>
+    </section>
+
+<!-- 2.6 Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 2.6 — Résumé du chapitre</h2>
         <div class="concept-card">

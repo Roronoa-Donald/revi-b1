@@ -210,6 +210,49 @@ a ^ b    # Symétrique : {1,2,5,6}
 </section>
 
 <!-- Section 6 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Compteur de mots dans une phrase</h4>
+        <p><strong>Objectif :</strong> Compter l'occurrence de chaque mot avec un dictionnaire.</p>
+
+        <p><strong>Étape 1 — Découper la phrase :</strong></p>
+        <div class="code-block"><pre>phrase = "le chat mange le poisson et le chat dort"
+mots = phrase.split()</pre></div>
+
+        <p><strong>Étape 2 — Construire le compteur :</strong></p>
+        <div class="code-block"><pre>compteur = {}
+for mot in mots:
+    compteur[mot] = compteur.get(mot, 0) + 1</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>.get(mot, 0)</code> retourne 0 si la clé n'existe pas (évite le <code>KeyError</code> !).</div>
+
+        <p><strong>Étape 3 — Afficher trié par fréquence :</strong></p>
+        <div class="code-block"><pre>for mot, count in sorted(compteur.items(), key=lambda x: x[1], reverse=True):
+    print(f"  '{mot}' → {count} fois")</pre></div>
+        <p><strong>Résultat :</strong> 'le' → 3 fois, 'chat' → 2 fois, 'mange' → 1 fois...</p>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Amis communs avec les sets</h4>
+        <p><strong>Objectif :</strong> Utiliser les opérations ensemblistes.</p>
+
+        <p><strong>Étape 1 — Définir les ensembles :</strong></p>
+        <div class="code-block"><pre>amis_alice = {"Bob", "Clara", "David", "Emma"}
+amis_bob   = {"Alice", "Clara", "Frank", "Emma"}</pre></div>
+
+        <p><strong>Étape 2 — Opérations ensemblistes :</strong></p>
+        <div class="code-block"><pre>communs   = amis_alice &amp; amis_bob    # Intersection → {'Clara', 'Emma'}
+tous      = amis_alice | amis_bob    # Union
+exclusifs = amis_alice - amis_bob    # Différence → {'Bob', 'David'}
+symetrique = amis_alice ^ amis_bob   # Différence symétrique</pre></div>
+
+        <p><strong>Résultat :</strong> Amis communs : {'Clara', 'Emma'}</p>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

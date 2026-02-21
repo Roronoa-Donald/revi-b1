@@ -231,6 +231,52 @@ isinstance(age, int)      # True</code></pre></div>
 </section>
 
 <!-- Section 7 : Récap -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Calculer l'âge dans 10 ans</h4>
+        <p><strong>Objectif :</strong> Demander l'âge à l'utilisateur et afficher son âge dans 10 ans.</p>
+
+        <p><strong>Étape 1 — Lire l'entrée :</strong></p>
+        <div class="code-block"><pre>age_texte = input("Quel est votre âge ? ")
+print(type(age_texte))  # &lt;class 'str'&gt; ← ATTENTION !</pre></div>
+        <div class="warning-box"><strong>⚠️ Piège :</strong> <code>input()</code> retourne TOUJOURS un <code>str</code>, même si on tape un nombre !</div>
+
+        <p><strong>Étape 2 — Convertir en entier :</strong></p>
+        <div class="code-block"><pre>age = int(age_texte)  # Conversion str → int</pre></div>
+
+        <p><strong>Étape 3 — Calculer et afficher :</strong></p>
+        <div class="code-block"><pre>futur = age + 10
+print(f"Dans 10 ans, vous aurez {futur} ans.")</pre></div>
+
+        <p><strong>Code complet :</strong></p>
+        <div class="code-block"><pre>age = int(input("Quel est votre âge ? "))
+futur = age + 10
+print(f"Dans 10 ans, vous aurez {futur} ans.")</pre></div>
+        <p><strong>Exécution :</strong> <code>Quel est votre âge ? 20</code> → <code>Dans 10 ans, vous aurez 30 ans.</code></p>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Convertisseur °C → °F</h4>
+        <p><strong>Objectif :</strong> Convertir des degrés Celsius en Fahrenheit.</p>
+
+        <p><strong>Étape 1 — Lire un nombre décimal :</strong></p>
+        <div class="code-block"><pre>celsius = float(input("Température en °C : "))</pre></div>
+        <div class="tip-box"><strong>💡</strong> On utilise <code>float()</code> car la température peut être décimale (ex: 36.5).</div>
+
+        <p><strong>Étape 2 — Appliquer la formule F = C × 9/5 + 32 :</strong></p>
+        <div class="code-block"><pre>fahrenheit = celsius * 9 / 5 + 32</pre></div>
+
+        <p><strong>Étape 3 — Afficher avec arrondi :</strong></p>
+        <div class="code-block"><pre>print(f"{celsius}°C = {round(fahrenheit, 1)}°F")</pre></div>
+
+        <p><strong>Exécution :</strong> <code>100</code> → <code>100.0°C = 212.0°F</code> ✓</p>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">

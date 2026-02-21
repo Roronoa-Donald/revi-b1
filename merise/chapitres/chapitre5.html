@@ -314,7 +314,42 @@
             </section>
 
             <!-- ZONE EXERCICES -->
-            <article class="glass-card" id="interactive-exercise">
+            
+    <!-- Exercice guidé : Flux -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fa-solid fa-pencil-alt"></i> Exercice guidé</h2>
+
+        <div class="example-box">
+            <h4>Construire un diagramme de flux</h4>
+            <p><strong>Scénario :</strong> Processus de commande en ligne.</p>
+            <h5>Étape 1 — Identifier les acteurs</h5>
+            <pre><code>Acteurs externes :
+  → CLIENT (passe commande)
+  → BANQUE (valide le paiement)
+  → TRANSPORTEUR (livre le colis)
+
+Acteur interne :
+  → SERVICE COMMANDE (traite les commandes)</code></pre>
+            <h5>Étape 2 — Identifier les flux</h5>
+            <pre><code>F1 : CLIENT → SERVICE COMMANDE : "Bon de commande"
+F2 : SERVICE COMMANDE → CLIENT : "Confirmation"
+F3 : SERVICE COMMANDE → BANQUE : "Demande paiement"
+F4 : BANQUE → SERVICE COMMANDE : "Accord/Refus"
+F5 : SERVICE COMMANDE → TRANSPORTEUR : "Ordre d'expédition"
+F6 : TRANSPORTEUR → CLIENT : "Livraison"</code></pre>
+            <h5>Étape 3 — Dessiner le diagramme</h5>
+            <pre><code>  [CLIENT] ——F1→ (SERVICE COMMANDE) ——F3→ [BANQUE]
+     ↑              |     ↑                |
+     F2             F5    F4               |
+     |              ↓                       |
+     ←—F6— [TRANSPORTEUR]</code></pre>
+            <div class="tip-box">
+                <strong>Convention :</strong> Les acteurs externes sont en rectangles [], l'acteur interne en cercle (). Les flux sont numérotés et fléchés.
+            </div>
+        </div>
+    </section>
+
+<article class="glass-card" id="interactive-exercise">
                 <h2><i class="fa-solid fa-dumbbell" style="color:var(--accent);margin-right:0.5rem;"></i>Exercices Interactifs</h2>
                 <p style="color:var(--text-muted);">Chargement des exercices...</p>
             </article>

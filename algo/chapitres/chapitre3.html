@@ -183,7 +183,66 @@ somme ← <span class="number">0</span>
         <div class="info-box"><span>ℹ️</span><div><strong>Nombre total d'itérations :</strong> boucle externe × boucle interne. Si la boucle externe fait 5 tours et l'interne 5 tours → 5 × 5 = <strong>25 itérations</strong> au total.</div></div>
     </section>
 
-    <!-- Résumé -->
+    
+    <!-- Exercice guidé : Boucles -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés — Les Boucles</h2>
+
+        <div class="example-box">
+            <h4>🎯 Calculer la factorielle d'un nombre avec POUR</h4>
+            <p><strong>Énoncé :</strong> Calculer 5! (factorielle de 5).</p>
+            <h5>Étape 1 — Initialiser</h5>
+            <pre><code>resultat ← 1
+n ← 5</code></pre>
+            <h5>Étape 2 — Boucle POUR</h5>
+            <pre><code>POUR i DE 1 À n FAIRE
+    resultat ← resultat × i
+FIN POUR</code></pre>
+            <h5>Étape 3 — Trace d'exécution</h5>
+            <table class="styled-table">
+                <thead><tr><th>Itération</th><th>i</th><th>resultat</th></tr></thead>
+                <tbody>
+                    <tr><td>Init</td><td>—</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>1 × 1 = 1</td></tr>
+                    <tr><td>2</td><td>2</td><td>1 × 2 = 2</td></tr>
+                    <tr><td>3</td><td>3</td><td>2 × 3 = 6</td></tr>
+                    <tr><td>4</td><td>4</td><td>6 × 4 = 24</td></tr>
+                    <tr><td>5</td><td>5</td><td>24 × 5 = 120</td></tr>
+                </tbody>
+            </table>
+            <h5>Résultat</h5>
+            <pre><code>→ 5! = 120 ✓</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>🎯 Deviner un nombre avec TANT QUE</h4>
+            <p><strong>Énoncé :</strong> L'utilisateur doit deviner le nombre secret (42). Simuler 3 tentatives.</p>
+            <h5>Algorithme</h5>
+            <pre><code>secret ← 42
+tentative ← 0
+TANT QUE tentative ≠ secret FAIRE
+    Afficher "Devinez le nombre :"
+    Lire tentative
+    SI tentative &lt; secret ALORS
+        Afficher "Plus grand !"
+    SINON SI tentative &gt; secret ALORS
+        Afficher "Plus petit !"
+    FIN SI
+FIN TANT QUE
+Afficher "Bravo !"</code></pre>
+            <h5>Trace d'exécution</h5>
+            <table class="styled-table">
+                <thead><tr><th>Tour</th><th>Saisie</th><th>Comparaison</th><th>Message</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>20</td><td>20 &lt; 42</td><td>"Plus grand !"</td></tr>
+                    <tr><td>2</td><td>50</td><td>50 &gt; 42</td><td>"Plus petit !"</td></tr>
+                    <tr><td>3</td><td>42</td><td>42 = 42</td><td>"Bravo !"</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+<!-- Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 3.6 — Résumé</h2>
         <div class="concept-card"><h4>🎯 Ce qu'il faut retenir</h4>

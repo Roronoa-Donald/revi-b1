@@ -177,7 +177,70 @@ Doubler(x)
         <div class="warning-box"><span>⚠️</span><div><strong>Bonne pratique :</strong> Évite les variables globales ! Passe les données en <strong>paramètres</strong>. Les globales rendent le code difficile à déboguer.</div></div>
     </section>
 
-    <!-- Résumé -->
+    
+    <!-- Exercice guidé : Fonctions -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-pencil-alt"></i> Exercices guidés — Fonctions & Procédures</h2>
+
+        <div class="example-box">
+            <h4>🎯 Fonction : Vérifier si un nombre est premier</h4>
+            <p><strong>Énoncé :</strong> Écrire une fonction estPremier(n) et tester avec n=17 et n=15.</p>
+            <h5>Étape 1 — Écrire la fonction</h5>
+            <pre><code>FONCTION estPremier(n : ENTIER) : BOOLÉEN
+    SI n &lt; 2 ALORS
+        RETOURNER FAUX
+    FIN SI
+    POUR i DE 2 À √n FAIRE
+        SI n MOD i = 0 ALORS
+            RETOURNER FAUX    // Divisible → pas premier
+        FIN SI
+    FIN POUR
+    RETOURNER VRAI            // Aucun diviseur trouvé
+FIN FONCTION</code></pre>
+            <h5>Étape 2 — Trace pour n = 17 (√17 ≈ 4.12, boucle de 2 à 4)</h5>
+            <table class="styled-table">
+                <thead><tr><th>i</th><th>17 MOD i</th><th>= 0 ?</th></tr></thead>
+                <tbody>
+                    <tr><td>2</td><td>17 MOD 2 = 1</td><td>Non</td></tr>
+                    <tr><td>3</td><td>17 MOD 3 = 2</td><td>Non</td></tr>
+                    <tr><td>4</td><td>17 MOD 4 = 1</td><td>Non</td></tr>
+                </tbody>
+            </table>
+            <pre><code>→ estPremier(17) = VRAI ✓</code></pre>
+            <h5>Trace pour n = 15 (√15 ≈ 3.87, boucle de 2 à 3)</h5>
+            <pre><code>i=2 : 15 MOD 2 = 1 → Non
+i=3 : 15 MOD 3 = 0 → RETOURNER FAUX
+→ estPremier(15) = FAUX ✓ (divisible par 3)</code></pre>
+        </div>
+
+        <div class="example-box">
+            <h4>🎯 Procédure vs Fonction : Afficher vs Retourner</h4>
+            <p><strong>Énoncé :</strong> Comparer une procédure et une fonction pour calculer la moyenne de 3 notes.</p>
+            <h5>Version Procédure (ne retourne rien)</h5>
+            <pre><code>PROCÉDURE afficherMoyenne(a, b, c : RÉEL)
+    m ← (a + b + c) / 3
+    Afficher "Moyenne =", m
+FIN PROCÉDURE
+
+// Appel :
+afficherMoyenne(12, 15, 9)
+→ Affiche "Moyenne = 12.0"
+// On ne peut PAS stocker le résultat</code></pre>
+            <h5>Version Fonction (retourne une valeur)</h5>
+            <pre><code>FONCTION calculerMoyenne(a, b, c : RÉEL) : RÉEL
+    RETOURNER (a + b + c) / 3
+FIN FONCTION
+
+// Appel :
+resultat ← calculerMoyenne(12, 15, 9)
+// resultat = 12.0, on peut le réutiliser
+SI resultat &gt;= 10 ALORS
+    Afficher "Admis"    → "Admis" ✓
+FIN SI</code></pre>
+        </div>
+    </section>
+
+<!-- Résumé -->
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-map"></i> 5.6 — Résumé</h2>
         <div class="concept-card"><h4>🎯 Aide-mémoire</h4>

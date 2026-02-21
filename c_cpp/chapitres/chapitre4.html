@@ -289,6 +289,48 @@ int main() {
 </section>
 
 <!-- ═══════════════ 4.6 Récap ═══════════════ -->
+
+<!-- EXERCICES GUIDES -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-pencil-alt"></i> Exercices guidés pas à pas</h2>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Trouver le max dans un tableau</h4>
+        <p><strong>Objectif :</strong> Parcourir un tableau pour trouver le maximum.</p>
+
+        <div class="code-block"><pre>int notes[] = {12, 18, 7, 15, 20, 9};
+int taille = sizeof(notes) / sizeof(notes[0]);  // 6
+int max = notes[0];  // Hypothèse : le premier est le max
+
+for (int i = 1; i &lt; taille; i++) {
+    if (notes[i] &gt; max) {
+        max = notes[i];
+    }
+}
+printf("Note max = %d\n", max);  // 20</pre></div>
+        <div class="tip-box"><strong>💡</strong> <code>sizeof(tab)/sizeof(tab[0])</code> donne le nombre d'éléments — fonctionne seulement si le tableau n'est pas passé en paramètre !</div>
+    </div>
+
+    <div class="example-box">
+        <h4>✏️ Exercice guidé — Inverser une chaîne de caractères</h4>
+        <p><strong>Objectif :</strong> Inverser un mot en utilisant string.h.</p>
+
+        <div class="code-block"><pre>#include &lt;string.h&gt;
+
+char mot[] = "Bonjour";
+int len = strlen(mot);  // 7
+char inverse[50];
+
+for (int i = 0; i &lt; len; i++) {
+    inverse[i] = mot[len - 1 - i];
+}
+inverse[len] = '\0';  // Ne pas oublier le terminateur !
+
+printf("'%s' → '%s'\n", mot, inverse);  // 'Bonjour' → 'ruojnoB'</pre></div>
+        <div class="warning-box"><strong>⚠️</strong> Ne JAMAIS oublier le <code>'\0'</code> à la fin d'une chaîne C — sinon <code>printf</code> lira de la mémoire aléatoire !</div>
+    </div>
+</section>
+
 <section class="chapter-section reveal-on-scroll" id="recap">
     <h2><i class="fas fa-clipboard-check"></i> 4.6 — Récapitulatif</h2>
 
