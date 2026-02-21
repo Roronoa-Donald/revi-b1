@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu</a>
@@ -43,6 +46,17 @@
 </section>
 
 <main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Calculer la variance et l'écart-type</li>
+            <li>Comprendre le coefficient de variation</li>
+            <li>Interpréter la dispersion d'une série</li>
+        </ul>
+    </div>
+</section>
 
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-question-circle"></i> Pourquoi la dispersion ?</h2>
@@ -202,10 +216,14 @@ Variance d'échantillon :  s² = Σ(xᵢ − x̄)² / (N − 1)
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
-<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Calculateur',min:300},{title:'Analyste',min:550},{title:'Statisticien',min:850},{title:'Guru',min:1200}]});GameEngine.init();</script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>
 ChapterExercises.init({
@@ -236,5 +254,6 @@ ChapterExercises.init({
 });
 </script>
 <script src="../../assets/js/download.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
 </body>
 </html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes mémoire | Algèbre Linéaire B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <style>:root{--accent:#a855f7;--accent-light:#c084fc;--accent-dark:#9333ea;--accent-glow:rgba(168,85,247,0.18)}.dark{--accent:#c084fc;--accent-light:#d8b4fe;--accent-dark:#a855f7;--accent-glow:rgba(192,132,252,0.18)}.cards-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.cards-toolbar button{padding:.45rem 1rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;transition:.2s}.cards-toolbar button.active,.cards-toolbar button:hover{background:var(--accent);color:#fff}.flashcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin:2rem 0}.flashcard{perspective:900px;height:220px;cursor:pointer}.flashcard-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}.flashcard-front,.flashcard-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.1)}.flashcard-front{background:var(--card-bg);border:2px solid var(--accent)}.flashcard-back{background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;transform:rotateY(180deg)}.flashcard-front h3{font-size:1rem;margin:0;line-height:1.5}.flashcard-back p{font-size:.93rem;margin:0;line-height:1.5}.flashcard-tag{position:absolute;top:.7rem;right:.7rem;font-size:.7rem;padding:.2rem .6rem;border-radius:99px;background:var(--accent-glow);color:var(--accent);font-weight:700}.cards-counter{text-align:center;margin:1rem 0;font-size:.95rem;opacity:.7}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-superscript"></i> MatriBot</a>
+    <ul class="nav-links">
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html" class="active">Cartes</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📐 MatriBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Matrices</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Espaces vectoriels</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Applications linéaires</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html" class="active"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Révision active</div>
+    <h1>📐 Cartes <span class="highlight">mémoire</span></h1>
+    <p>30 flashcards interactives — clique pour retourner.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="cards-toolbar" id="toolbar"></div>
+    <div class="cards-counter" id="counter"></div>
+    <div class="flashcard-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const CARDS=[
+// ─── Matrices ───
+{q:"Quand peut-on additionner deux matrices ?",a:"Quand elles ont les MÊMES dimensions (m×n). On additionne terme à terme.",tag:"Matrices"},
+{q:"Condition pour multiplier A×B ?",a:"Nb de colonnes de A = nb de lignes de B. Si A(m×n) et B(n×p), résultat = m×p.",tag:"Matrices"},
+{q:"AB = BA ?",a:"NON ! Le produit matriciel n'est PAS commutatif en général. Contre-exemple facile avec des 2×2.",tag:"Matrices"},
+{q:"(AB)ᵀ = ?",a:"BᵀAᵀ — on inverse l'ordre ! Même règle pour l'inverse : (AB)⁻¹ = B⁻¹A⁻¹.",tag:"Matrices"},
+{q:"Matrice identité : propriété clé ?",a:"AI = IA = A. C'est l'élément neutre du produit matriciel. C'est la matrice avec des 1 sur la diagonale.",tag:"Matrices"},
+{q:"Sarrus : valable pour quelle taille ?",a:"UNIQUEMENT 3×3 ! Pour 2×2 : ad−bc. Pour 4×4+ : développement par cofacteurs ou Gauss.",tag:"Matrices"},
+{q:"det(AB) = ?",a:"det(A) × det(B). Le déterminant d'un produit = produit des déterminants.",tag:"Matrices"},
+{q:"A inversible ⟺ ?",a:"det(A) ≠ 0. Aussi : Ker(A) = {0}, rg(A) = n, colonnes linéairement indépendantes.",tag:"Matrices"},
+{q:"Gauss-Jordan pour inverser A ?",a:"Augmenter [A|I], appliquer opérations élémentaires sur les lignes, obtenir [I|A⁻¹].",tag:"Matrices"},
+{q:"Méthode des cofacteurs pour A⁻¹ ?",a:"A⁻¹ = (1/det A) × Com(A)ᵀ. Calculer tous les cofacteurs, transposer, diviser par det.",tag:"Matrices"},
+// ─── Espaces vectoriels ───
+{q:"Combien d'axiomes pour un EV ?",a:"8 axiomes : 4 pour le groupe commutatif (E,+) et 4 pour la loi externe (scalaire × vecteur).",tag:"Espaces V."},
+{q:"3 conditions pour un SEV ?",a:"1) Contient le vecteur nul. 2) Stable par addition. 3) Stable par multiplication scalaire.",tag:"Espaces V."},
+{q:"Famille libre = ?",a:"λ₁v₁+…+λₚvₚ = 0 implique TOUS les λᵢ = 0. Aucun vecteur n'est combinaison linéaire des autres.",tag:"Espaces V."},
+{q:"Famille liée = ?",a:"∃ λᵢ ≠ 0 tel que λ₁v₁+…+λₚvₚ = 0. Au moins un vecteur est CL des autres.",tag:"Espaces V."},
+{q:"Base d'un EV ?",a:"Famille à la fois LIBRE et GÉNÉRATRICE. Tout vecteur a une décomposition UNIQUE en base.",tag:"Espaces V."},
+{q:"dim(ℝⁿ) = ?",a:"n. Base canonique : e₁=(1,0,…,0), e₂=(0,1,…,0), etc.",tag:"Espaces V."},
+{q:"Formule de Grassmann ?",a:"dim(E+F) = dim(E) + dim(F) − dim(E∩F). Pour une somme directe : E∩F={0}.",tag:"Espaces V."},
+{q:"Vect{v₁,…,vₚ} = ?",a:"L'ensemble de toutes les combinaisons linéaires de v₁,…,vₚ. C'est toujours un sous-espace vectoriel.",tag:"Espaces V."},
+{q:"Théorème de la base incomplète ?",a:"Toute famille libre d'un EV de dim. finie peut être complétée en une base.",tag:"Espaces V."},
+{q:"dim(Mₘₙ(ℝ)) = ?",a:"m×n. Espace des matrices m×n a pour dimension le produit m×n.",tag:"Espaces V."},
+// ─── Applications linéaires ───
+{q:"f linéaire ⟺ ?",a:"f(λu + μv) = λf(u) + μf(v) pour tout u,v∈E et λ,μ∈K.",tag:"App. Lin."},
+{q:"EIAF : que signifie chaque lettre ?",a:"Endomorphisme (E→E), Isomorphisme (bijectif), Automorphisme (endo+iso), Forme linéaire (→K).",tag:"App. Lin."},
+{q:"Ker(f) = ?",a:"Noyau = {u∈E | f(u) = 0}. C'est un SEV de E. f injective ⟺ Ker(f) = {0}.",tag:"App. Lin."},
+{q:"Im(f) = ?",a:"Image = {f(u) | u∈E}. C'est un SEV de F. f surjective ⟺ Im(f) = F.",tag:"App. Lin."},
+{q:"Théorème du rang ?",a:"dim(Ker f) + dim(Im f) = dim(E). Le « perdu » + le « transmis » = le total de départ.",tag:"App. Lin."},
+{q:"Comment construire la matrice de f ?",a:"Colonnes = coordonnées de f(eⱼ) dans la base d'arrivée. La j-ème colonne = f(j-ème vecteur de base).",tag:"App. Lin."},
+{q:"M(g∘f) = ?",a:"M(g) × M(f). Attention à l'ordre ! La composition devient un produit matriciel (dans le bon sens).",tag:"App. Lin."},
+{q:"rg(f) = ?",a:"dim(Im f) = rang de la matrice M(f). C'est aussi le nombre de colonnes indépendantes de M(f).",tag:"App. Lin."},
+{q:"Matrice de rotation θ dans ℝ² ?",a:"[[cos θ, −sin θ], [sin θ, cos θ]]. Son déterminant vaut 1.",tag:"App. Lin."},
+{q:"f bijective ⟺ ? (en termes de rang)",a:"rg(f) = dim(E) = dim(F). Ker = {0} ET Im = F.",tag:"App. Lin."}
+];
+const TAGS=["Tous",...[...new Set(CARDS.map(c=>c.tag))]];
+let activeTag="Tous";
+const toolbar=document.getElementById('toolbar'),grid=document.getElementById('grid'),counter=document.getElementById('counter');
+function render(){
+    const f=activeTag==="Tous"?CARDS:CARDS.filter(c=>c.tag===activeTag);
+    counter.textContent=f.length+' carte'+(f.length>1?'s':'');
+    grid.innerHTML=f.map(c=>`<div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0"><div class="flashcard-inner"><div class="flashcard-front"><span class="flashcard-tag">${c.tag}</span><h3>${c.q}</h3></div><div class="flashcard-back"><p>${c.a}</p></div></div></div>`).join('');
+}
+toolbar.innerHTML=TAGS.map(t=>`<button class="${t===activeTag?'active':''}" onclick="activeTag='${t}';document.querySelectorAll('.cards-toolbar button').forEach(b=>b.classList.remove('active'));this.classList.add('active');render();">${t}</button>`).join('');
+render();
+</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_algebre_progress'});GameEngine.init();</script>
+<script src="../../assets/js/spaced-repetition.js"></script>
+<script>SpacedRepetition.configure('b1_algebre_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof SpacedRepetition!=="undefined"&&typeof cards!=="undefined"){SpacedRepetition.enhance()}});</script>
+</body>
+</html>

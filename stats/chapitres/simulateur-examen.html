@@ -97,12 +97,14 @@ const BANK=[
 {ch:5,q:"Un histogramme est adapté pour des données :",o:["Qualitatives nominales","Quantitatives continues regroupées en classes","Quantitatives discrètes","Toutes les données"],c:1,e:"Histogramme = barres collées pour des classes continues [a;b[."},
 {ch:5,q:"L'angle dans un diagramme circulaire se calcule par :",o:["fréquence × 360°","effectif × 100","fréquence × 180°","effectif × 360°"],c:0,e:"Angle = fᵢ × 360°. Ex: 25% = 0.25 × 360 = 90°."},
 {ch:5,q:"L'ogive (courbe cumulée) sert à lire :",o:["La moyenne","La médiane et les quartiles","Le mode","L'écart-type"],c:1,e:"On lit la médiane à F = 0.5 et les quartiles à F = 0.25 / 0.75 sur l'ogive."},
+{ch:5,q:"Un diagramme en barres est adapté pour des données :",o:["Quantitatives continues","Qualitatives ou quantitatives discrètes","Uniquement qualitatives ordinales","Uniquement quantitatives"],c:1,e:"Barres séparées conviennent aux données discrètes ou qualitatives, chaque barre = une modalité."},
 // ─── Ch.6 Corrélation ───
 {ch:6,q:"Le coefficient r varie entre :",o:["-∞ et +∞","0 et 1","-1 et +1","0 et +∞"],c:2,e:"r ∈ [−1 ; +1]. Plus |r| est proche de 1, plus la corrélation est forte."},
 {ch:6,q:"|r| < 0.3 indique :",o:["Forte corrélation","Corrélation modérée","Corrélation faible ou nulle","Corrélation parfaite"],c:2,e:"Faible corrélation. Les points du nuage sont très dispersés."},
 {ch:6,q:"La droite de régression passe toujours par :",o:["L'origine (0,0)","Le point (x̄, ȳ)","Le point (Q1, Q3)","Aucun point fixe"],c:1,e:"Y = aX + b avec b = ȳ − ax̄, donc le point moyen (x̄,ȳ) est toujours sur la droite."},
 {ch:6,q:"Corrélation élevée implique causalité ?",o:["Toujours","Jamais","Pas forcément","Seulement si r > 0.9"],c:2,e:"Corrélation ≠ causalité ! Il peut y avoir un facteur confondant ou une coïncidence."},
-{ch:6,q:"a = Cov(X,Y) / Var(X) est :",o:["L'ordonnée à l'origine","Le coefficient directeur de la droite","Le coefficient de corrélation","La variance de Y"],c:1,e:"a = pente de la droite de régression linéaire Y = aX + b."}
+{ch:6,q:"a = Cov(X,Y) / Var(X) est :",o:["L'ordonnée à l'origine","Le coefficient directeur de la droite","Le coefficient de corrélation","La variance de Y"],c:1,e:"a = pente de la droite de régression linéaire Y = aX + b."},
+{ch:6,q:"Cov(X,Y) = E(XY) − E(X)E(Y). Si Cov = 0 :",o:["X et Y sont indépendantes","X et Y ne sont pas linéairement corrélées","X et Y sont opposées","r = 1"],c:1,e:"Cov = 0 signifie absence de corrélation linéaire, pas forcément indépendance."}
 ];
 let quiz=[],current=0,answers=[],timerID,timeLeft;
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
@@ -131,5 +133,16 @@ function finishQuiz(){
     document.getElementById('results-area').style.display='block';
 }
 </script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress'});GameEngine.init();</script>
+<script src="../../assets/js/error-tracking.js"></script>
+<script>ErrorTracker.configure('b1_stats_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof ErrorTracker!=="undefined"&&typeof bank!=="undefined"){ErrorTracker.enhance()}});</script>
 </body>
 </html>

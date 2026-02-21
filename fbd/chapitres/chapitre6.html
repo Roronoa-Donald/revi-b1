@@ -46,6 +46,17 @@
 
     <!-- ─── 1. Le modèle E-R ─── -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Connaître les 4 contraintes d'intégrité (E.R.D.U.)</li>
+                <li>Maîtriser le processus de conception A.C.L.P.N.</li>
+                <li>Appliquer les bonnes pratiques de modélisation</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-project-diagram"></i> Le modèle Entité-Relation (E-R)</h2>
 
         <div class="info-box">
@@ -240,6 +251,14 @@ CHECK (date_insc >= '2020-01-01');</pre>
         </div>
     </section>
 
+    <!-- Pièges classiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+        <div class="warning-box"><strong>⚠️ Piège n°1 — Les 4 contraintes (E.R.D.U.) :</strong> Ne confondez pas : <strong>Entité</strong> (clé primaire unique), <strong>Référentielle</strong> (clé étrangère valide), <strong>Domaine</strong> (valeurs autorisées), <strong>Utilisateur</strong> (règles métier). Chacune a un rôle différent !</div>
+        <div class="warning-box"><strong>⚠️ Piège n°2 — ON DELETE CASCADE :</strong> Si vous supprimez un enregistrement parent avec <strong>CASCADE</strong>, tous les enfants référencés sont supprimés aussi ! Utilisez <strong>RESTRICT</strong> ou <strong>SET NULL</strong> si vous voulez empêcher la suppression en cascade.</div>
+        <div class="warning-box"><strong>⚠️ Piège n°3 — Clé naturelle vs surrogate :</strong> Utiliser un numéro de sécurité sociale ou un email comme clé primaire est risqué (ils peuvent changer !). Préférez une clé <strong>artificielle auto-incrémentée</strong> (surrogate key).</div>
+    </section>
+
     <!-- ─── 7. Résumé global ─── -->
     <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-check-circle"></i> Récapitulatif du cours FBD</h2>
@@ -279,11 +298,15 @@ CHECK (date_insc >= '2020-01-01');</pre>
     </div>
 </main>
 
-<div class="xp-bar" id="xp-bar"></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
 <script>
-GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["E-R = plan d'architecte de la BD","Toujours convertir M:N en table de jonction"]});
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{title:'Débutant',min:0},{title:'Apprenti SQL',min:100},{title:'Requêteur Jr.',min:250},{title:'Analyste BD',min:500},{title:'DBA Confirmé',min:800},{title:'Guru des Données',min:1200}],tips:["E-R = plan d'architecte de la BD","Toujours convertir M:N en table de jonction"]});
 GameEngine.init();
 </script>
 <script src="../../assets/js/chapter-exercises.js"></script>

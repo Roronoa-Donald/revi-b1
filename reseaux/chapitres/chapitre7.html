@@ -46,6 +46,17 @@
 <main class="content-wrapper">
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Comprendre la triade C.I.D. (Confidentialité, Intégrité, Disponibilité)</li>
+            <li>Différencier chiffrement symétrique et asymétrique</li>
+            <li>Connaître pare-feu, VPN, IDS/IPS et les attaques courantes</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-lock"></i> La triade C.I.D.</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">
         <h4>🧠 Mnémonique C.I.D. — les 3 piliers de la sécurité</h4>
@@ -183,6 +194,13 @@ Règle    Action    Protocole    Source          Dest Port    Description
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 — IDS vs IPS :</strong> L'<strong>IDS</strong> (Intrusion Detection System) <strong>détecte et alerte</strong> seulement — il est passif. L'<strong>IPS</strong> (Intrusion Prevention System) <strong>bloque activement</strong> le trafic malveillant. Ne les confondez pas !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 — Symétrique vs Asymétrique :</strong> <strong>Symétrique</strong> = 1 seule clé (rapide, pour chiffrer les données). <strong>Asymétrique</strong> = 2 clés publique/privée (lent, pour l'échange de clés et les signatures). TLS utilise les <strong>deux</strong> !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 — Ordre des ACL :</strong> Les règles d'un pare-feu sont évaluées <strong>dans l'ordre, première correspondance gagne</strong>. Si un « deny all » est en première position, tout est bloqué même si des « permit » suivent.</div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
     <div class="concept-card" style="border-left-color:var(--accent)">
         <h4>📝 L'essentiel du Chapitre 7</h4>
@@ -207,10 +225,14 @@ Règle    Action    Protocole    Source          Dest Port    Description
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
-<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Technicien',minXP:300},{name:'Admin',minXP:550},{name:'Architecte',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress',badges:[],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Technicien',min:300},{title:'Admin',min:550},{title:'Architecte',min:850},{title:'Guru',min:1200}]});GameEngine.init();</script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>
 ChapterExercises.init({

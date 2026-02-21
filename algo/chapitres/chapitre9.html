@@ -28,12 +28,18 @@
 <div class="mobile-nav-panel" id="mobile-nav">
     <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
     <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
-    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
-    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
-    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
-    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
     <a href="chapitre9.html" class="active"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
-    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
 </div>
 
 <section class="hero-section" id="main-content">
@@ -44,6 +50,17 @@
 
 <main class="content-wrapper">
     <!-- 9.1 Enregistrements -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Maîtriser les piles (LIFO) et files (FIFO)</li>
+                <li>Comprendre les listes chaînées et leurs opérations</li>
+                <li>Savoir choisir la bonne structure de données</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-id-card"></i> 9.1 — Les enregistrements (records)</h2>
         <div class="concept-card"><h4>📋 Définition</h4>
@@ -145,6 +162,14 @@ e1.age ← <span class="number">20</span>
                 <tr><td>Taille dynamique</td><td>Plus de mémoire (pointeurs)</td></tr>
             </tbody>
         </table>
+    </section>
+
+    <!-- Pièges classiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+        <div class="warning-box"><strong>⚠️ Piège n°1 — LIFO vs FIFO :</strong> <strong>Pile = LIFO</strong> (Last In, First Out) : on dépile le dernier empilé. <strong>File = FIFO</strong> (First In, First Out) : on défile le premier enfilé. Ne les confondez pas !</div>
+        <div class="warning-box"><strong>⚠️ Piège n°2 — Terminologie :</strong> Pile → <strong>Empiler/Dépiler</strong>. File → <strong>Enfiler/Défiler</strong>. Penser aussi à <strong>push/pop</strong> pour la pile et <strong>enqueue/dequeue</strong> pour la file.</div>
+        <div class="warning-box"><strong>⚠️ Piège n°3 — Accès par indice :</strong> Une liste chaînée ne permet <strong>pas</strong> l'accès direct par indice (pas de tab[i]). Il faut parcourir la liste depuis la tête — c'est O(n), pas O(1) comme un tableau !</div>
     </section>
 
     <!-- 9.5 Comparaison -->

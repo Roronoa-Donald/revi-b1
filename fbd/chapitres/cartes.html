@@ -98,5 +98,16 @@ function render(){
 toolbar.innerHTML=TAGS.map(t=>`<button class="${t===activeTag?'active':''}" onclick="activeTag='${t}';document.querySelectorAll('.cards-toolbar button').forEach(b=>b.classList.remove('active'));this.classList.add('active');render();">${t}</button>`).join('');
 render();
 </script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_fbd_progress'});GameEngine.init();</script>
+<script src="../../assets/js/spaced-repetition.js"></script>
+<script>SpacedRepetition.configure('b1_fbd_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof SpacedRepetition!=="undefined"&&typeof cards!=="undefined"){SpacedRepetition.enhance()}});</script>
 </body>
 </html>

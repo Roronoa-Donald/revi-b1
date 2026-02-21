@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord — Bachelor 1</title>
+    <meta name="description" content="Suivez votre progression globale à travers les 9 cours interactifs Bachelor 1.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0a0e1a;
+            --bg-card: #111827;
+            --bg-card-alt: #1a2235;
+            --text: #e2e8f0;
+            --text-muted: #64748b;
+            --border: rgba(255,255,255,0.06);
+            --accent: #10b981;
+            --accent-glow: rgba(16,185,129,0.15);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(16,185,129,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6,182,212,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(139,92,246,0.05) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* ---- Back link ---- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: gap 0.2s;
+        }
+        .back-link:hover { gap: 0.8rem; }
+
+        /* ---- Hero ---- */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            background: rgba(16,185,129,0.1);
+            border: 1px solid rgba(16,185,129,0.2);
+            color: #34d399;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ---- Summary Cards Row ---- */
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .summary-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(16,185,129,0.2);
+        }
+        .summary-card .icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.6rem;
+        }
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+        .summary-card .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        /* ---- Global Level Bar ---- */
+        .global-level {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .global-level h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .global-level h2 .tag {
+            background: rgba(16,185,129,0.15);
+            color: #34d399;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            font-weight: 800;
+        }
+        .gl-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .gl-bar {
+            flex: 1;
+            height: 18px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .gl-bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #10b981, #06b6d4, #8b5cf6);
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 0%;
+        }
+        .gl-xp-text {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        /* ---- Streak ---- */
+        .streak-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .streak-fire {
+            font-size: 3rem;
+        }
+        .streak-info h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .streak-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+        .streak-days {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        .streak-day {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        .streak-day.active {
+            background: rgba(16,185,129,0.15);
+            border-color: rgba(16,185,129,0.3);
+            color: #34d399;
+        }
+        .streak-day.today {
+            background: rgba(16,185,129,0.25);
+            border-color: #10b981;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(16,185,129,0.3);
+        }
+
+        /* ---- Course Grid ---- */
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .course-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .course-card:hover {
+            transform: translateY(-3px);
+            border-color: color-mix(in srgb, var(--c-accent) 40%, transparent);
+        }
+        .course-card-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .course-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .course-card-head h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            flex: 1;
+        }
+        .course-card-head .course-level {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+        .course-card-stats {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+        .course-card-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .course-card-stats span i { font-size: 0.7rem; }
+        .course-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        .course-bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            width: 0%;
+        }
+        .course-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ---- Badges Gallery ---- */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        .badge-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem 0.6rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .badge-card:hover {
+            transform: translateY(-2px);
+        }
+        .badge-card.locked {
+            opacity: 0.35;
+            filter: grayscale(0.6);
+        }
+        .badge-card .badge-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .badge-card .badge-name {
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .badge-card .badge-desc {
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+            line-height: 1.3;
+        }
+
+        /* ---- Reset Button ---- */
+        .reset-zone {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .reset-btn {
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.2);
+            color: #f87171;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .reset-btn:hover { background: rgba(239,68,68,0.2); }
+
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .wrapper { padding: 1.5rem 1rem 3rem; }
+            .courses-grid { grid-template-columns: 1fr; }
+            .streak-days { margin-left: 0; width: 100%; justify-content: center; }
+            .summary-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeUp 0.5s ease both; }
+        .fade-in-d1 { animation-delay: 0.1s; }
+        .fade-in-d2 { animation-delay: 0.2s; }
+        .fade-in-d3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Retour au Portail</a>
+
+    <div class="hero fade-in">
+        <div class="hero-badge"><i class="fas fa-chart-line"></i> Tableau de Bord</div>
+        <h1>Votre Progression Globale</h1>
+        <p>Vue d'ensemble de votre parcours à travers les 9 cours du Bachelor 1. Continuez à pratiquer pour débloquer tous les badges !</p>
+    </div>
+
+    <!-- Summary Row -->
+    <div class="summary-row fade-in fade-in-d1" id="summary-row">
+        <div class="summary-card">
+            <div class="icon">⚡</div>
+            <div class="value" id="total-xp">0</div>
+            <div class="label">XP Total</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">🏆</div>
+            <div class="value" id="total-badges">0</div>
+            <div class="label">Badges</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">📝</div>
+            <div class="value" id="total-exercises">0</div>
+            <div class="label">Exercices</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">🎯</div>
+            <div class="value" id="total-chapters">0</div>
+            <div class="label">Chapitres</div>
+        </div>
+        <div class="summary-card">
+            <div class="icon">🔥</div>
+            <div class="value" id="best-streak">0</div>
+            <div class="label">Meilleur Streak</div>
+        </div>
+    </div>
+
+    <!-- Global Level -->
+    <div class="global-level fade-in fade-in-d2">
+        <h2><i class="fas fa-trophy" style="color:#fbbf24"></i> Niveau Global <span class="tag" id="global-level-tag">Débutant</span></h2>
+        <div class="gl-bar-container">
+            <div class="gl-bar"><div class="gl-bar-fill" id="global-bar-fill"></div></div>
+            <span class="gl-xp-text" id="global-xp-text">0 / 30 XP</span>
+        </div>
+    </div>
+
+    <!-- Streak -->
+    <div class="streak-section fade-in fade-in-d2" id="streak-section">
+        <div class="streak-fire">🔥</div>
+        <div class="streak-info">
+            <h3 id="streak-count">0 jour</h3>
+            <p id="streak-msg">Pratiquez aujourd'hui pour démarrer votre série !</p>
+        </div>
+        <div class="streak-days" id="streak-days"></div>
+    </div>
+
+    <!-- Courses -->
+    <h2 class="section-title fade-in fade-in-d3"><i class="fas fa-graduation-cap"></i> Progression par Cours</h2>
+    <div class="courses-grid fade-in fade-in-d3" id="courses-grid"></div>
+
+    <!-- Badges -->
+    <h2 class="section-title fade-in fade-in-d3"><i class="fas fa-medal"></i> Badges Débloqués</h2>
+    <div class="badges-grid fade-in fade-in-d3" id="badges-grid"></div>
+
+    <!-- Reset -->
+    <div class="reset-zone">
+        <button class="reset-btn" id="reset-btn"><i class="fas fa-trash-alt"></i> Réinitialiser toute la progression</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025-2026 — Portail Bachelor 1 — Cours Interactifs</p>
+</footer>
+
+<script>
+/* ============================================
+   Dashboard — Aggregates all 9 course storageKeys
+   ============================================ */
+(function() {
+    'use strict';
+
+    const COURSES = [
+        { key: 'b1_algo_progress',    name: 'Algorithmique',               icon: 'fas fa-microchip',            color: '#10b981', chapters: 10, url: 'algo/index.html' },
+        { key: 'b1_c_cpp_progress',   name: 'C / C++',                     icon: 'fas fa-bolt',                 color: '#f59e0b', chapters: 8,  url: 'c_cpp/index.html' },
+        { key: 'b1_python_progress',  name: 'Python',                      icon: 'fab fa-python',               color: '#06b6d4', chapters: 8,  url: 'python/index.html' },
+        { key: 'b1_reseaux_progress', name: 'Réseaux Informatiques',       icon: 'fas fa-network-wired',        color: '#0ea5e9', chapters: 8,  url: 'reseaux/index.html' },
+        { key: 'b1_stats_progress',   name: 'Statistiques Descriptives',   icon: 'fas fa-chart-pie',            color: '#8b5cf6', chapters: 6,  url: 'stats/index.html' },
+        { key: 'b1_fbd_progress',     name: 'Fondamentaux des BDD',        icon: 'fas fa-database',             color: '#ea580c', chapters: 6,  url: 'fbd/index.html' },
+        { key: 'b1_merise_progress',  name: 'MERISE',                      icon: 'fas fa-sitemap',              color: '#14b8a6', chapters: 6,  url: 'merise/index.html' },
+        { key: 'b1_algebre_progress', name: 'Algèbre Linéaire',            icon: 'fas fa-square-root-variable', color: '#a855f7', chapters: 3,  url: 'algebre/index.html' },
+        { key: 'b1_ato_progress',     name: 'Architecture des Ordinateurs', icon: 'fas fa-microchip',           color: '#f43f5e', chapters: 4,  url: 'ato/index.html' }
+    ];
+
+    const GLOBAL_LEVELS = [
+        { min: 0,    title: 'Débutant' },
+        { min: 100,  title: 'Apprenti' },
+        { min: 300,  title: 'Initié' },
+        { min: 600,  title: 'Confirmé' },
+        { min: 1200, title: 'Avancé' },
+        { min: 2000, title: 'Expert' },
+        { min: 3500, title: 'Maître' },
+        { min: 5400, title: 'Grand Maître' }
+    ];
+
+    const COURSE_LEVELS = [
+        { min: 0,   title: 'Débutant' },
+        { min: 30,  title: 'Apprenti' },
+        { min: 80,  title: 'Initié' },
+        { min: 150, title: 'Confirmé' },
+        { min: 250, title: 'Avancé' },
+        { min: 400, title: 'Expert' },
+        { min: 600, title: 'Maître' }
+    ];
+
+    // Load data from localStorage
+    function loadCourse(key) {
+        try {
+            return JSON.parse(localStorage.getItem(key)) || {};
+        } catch(e) { return {}; }
+    }
+
+    function getLevel(xp, levels) {
+        let lvl = levels[0];
+        for (const l of levels) {
+            if (xp >= l.min) lvl = l;
+        }
+        return lvl;
+    }
+
+    function getNextLevel(xp, levels) {
+        for (const l of levels) {
+            if (xp < l.min) return l;
+        }
+        return null;
+    }
+
+    // ---- Aggregate data ----
+    let totalXP = 0, totalBadges = 0, totalExercises = 0, totalChapters = 0, bestStreak = 0;
+    const allBadges = [];
+    const courseData = [];
+
+    COURSES.forEach(c => {
+        const d = loadCourse(c.key);
+        const xp = d.xp || 0;
+        const badges = d.badges || [];
+        const stats = d.stats || {};
+        const streak = d.streak || { last: null, count: 0 };
+        const chapters = (stats.chaptersCompleted || []).length;
+
+        totalXP += xp;
+        totalBadges += badges.length;
+        totalExercises += stats.exercises || 0;
+        totalChapters += chapters;
+        if (streak.count > bestStreak) bestStreak = streak.count;
+
+        badges.forEach(bId => {
+            allBadges.push({ courseKey: c.key, courseName: c.name, id: bId, color: c.color });
+        });
+
+        courseData.push({
+            ...c,
+            xp, badges, chapters, chapters_total: c.chapters,
+            exercises: stats.exercises || 0,
+            quizCorrect: stats.quizCorrect || 0,
+            streakCount: streak.count,
+            streakLast: streak.last
+        });
+    });
+
+    // ---- Populate Summary ----
+    document.getElementById('total-xp').textContent = totalXP.toLocaleString('fr-FR');
+    document.getElementById('total-badges').textContent = totalBadges;
+    document.getElementById('total-exercises').textContent = totalExercises;
+    document.getElementById('total-chapters').textContent = totalChapters;
+    document.getElementById('best-streak').textContent = bestStreak;
+
+    // ---- Global Level Bar ----
+    const gLevel = getLevel(totalXP, GLOBAL_LEVELS);
+    const gNext  = getNextLevel(totalXP, GLOBAL_LEVELS);
+    document.getElementById('global-level-tag').textContent = gLevel.title;
+    if (gNext) {
+        const pct = ((totalXP - gLevel.min) / (gNext.min - gLevel.min)) * 100;
+        document.getElementById('global-bar-fill').style.width = Math.min(pct, 100) + '%';
+        document.getElementById('global-xp-text').textContent = totalXP + ' / ' + gNext.min + ' XP';
+    } else {
+        document.getElementById('global-bar-fill').style.width = '100%';
+        document.getElementById('global-xp-text').textContent = totalXP + ' XP — MAX';
+    }
+
+    // ---- Streak Visual ----
+    const streakEl = document.getElementById('streak-count');
+    const streakMsg = document.getElementById('streak-msg');
+    // Find the best current streak across courses
+    let currentStreak = 0;
+    const today = new Date().toDateString();
+    courseData.forEach(c => {
+        if (c.streakLast === today && c.streakCount > currentStreak) {
+            currentStreak = c.streakCount;
+        }
+    });
+    if (currentStreak === 0) {
+        // Check if any streak was yesterday (still recoverable)
+        const yesterday = new Date(Date.now() - 86400000).toDateString();
+        courseData.forEach(c => {
+            if (c.streakLast === yesterday && c.streakCount > currentStreak) {
+                currentStreak = c.streakCount;
+            }
+        });
+    }
+    streakEl.textContent = currentStreak + (currentStreak > 1 ? ' jours' : ' jour');
+    if (currentStreak >= 7) {
+        streakMsg.textContent = 'Impressionnant ! Vous êtes en feu !';
+    } else if (currentStreak >= 3) {
+        streakMsg.textContent = 'Belle série ! Continuez comme ça !';
+    } else if (currentStreak >= 1) {
+        streakMsg.textContent = 'Bon début ! Revenez demain pour augmenter votre série.';
+    }
+
+    // Weekly streak days
+    const streakDaysEl = document.getElementById('streak-days');
+    const dayNames = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+    const todayDate = new Date();
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date(todayDate);
+        d.setDate(d.getDate() - i);
+        const dStr = d.toDateString();
+        const isToday = (i === 0);
+        // Check if any course had activity on that day
+        let active = false;
+        courseData.forEach(c => {
+            if (c.streakLast === dStr) active = true;
+        });
+        const div = document.createElement('div');
+        div.className = 'streak-day' + (isToday ? ' today' : (active ? ' active' : ''));
+        div.textContent = dayNames[d.getDay()];
+        div.title = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'short' });
+        streakDaysEl.appendChild(div);
+    }
+
+    // ---- Course Cards ----
+    const coursesGrid = document.getElementById('courses-grid');
+    const totalAllChapters = COURSES.reduce((s, c) => s + c.chapters, 0);
+
+    courseData.forEach(c => {
+        const level = getLevel(c.xp, COURSE_LEVELS);
+        const next  = getNextLevel(c.xp, COURSE_LEVELS);
+        let pct = 0;
+        if (next) {
+            pct = ((c.xp - level.min) / (next.min - level.min)) * 100;
+        } else {
+            pct = 100;
+        }
+        const chPct = c.chapters > 0 ? Math.round((c.chapters / c.chapters_total) * 100) : 0;
+
+        const a = document.createElement('a');
+        a.href = c.url;
+        a.className = 'course-card';
+        a.style.setProperty('--c-accent', c.color);
+
+        a.innerHTML = [
+            '<div class="course-card-head">',
+            '  <div class="course-card-icon" style="background:linear-gradient(135deg,' + c.color + ',color-mix(in srgb,' + c.color + ' 70%,white))">',
+            '    <i class="' + c.icon + '"></i>',
+            '  </div>',
+            '  <h3>' + c.name + '</h3>',
+            '  <span class="course-level" style="background:' + c.color + '22;color:' + c.color + '">' + level.title + '</span>',
+            '</div>',
+            '<div class="course-card-stats">',
+            '  <span><i class="fas fa-bolt"></i> ' + c.xp + ' XP</span>',
+            '  <span><i class="fas fa-medal"></i> ' + c.badges.length + ' badges</span>',
+            '  <span><i class="fas fa-book-open"></i> ' + c.chapters + '/' + c.chapters_total + ' ch.</span>',
+            '  <span><i class="fas fa-pen"></i> ' + c.exercises + ' ex.</span>',
+            '</div>',
+            '<div class="course-bar">',
+            '  <div class="course-bar-fill" style="width:' + Math.min(pct, 100) + '%;background:' + c.color + '"></div>',
+            '</div>',
+            '<div class="course-card-footer">',
+            '  <span>' + (next ? c.xp + '/' + next.min + ' XP vers ' + next.title : 'Niveau Max !') + '</span>',
+            '  <span style="color:' + c.color + ';font-weight:700">Voir le cours <i class="fas fa-arrow-right"></i></span>',
+            '</div>'
+        ].join('\n');
+
+        coursesGrid.appendChild(a);
+    });
+
+    // ---- Badges Gallery ----
+    const badgesGrid = document.getElementById('badges-grid');
+
+    // Common badge templates per course (fallback display)
+    const BADGE_ICONS = {
+        'first_step': '🚀', 'explorer': '🧭', 'quiz_king': '👑',
+        'half_way': '🏔️', 'legend': '🏆', 'streak_3': '🔥', 'streak_7': '💫',
+        'perfectionist': '💎'
+    };
+    const BADGE_NAMES = {
+        'first_step': 'Premier Pas', 'explorer': 'Explorateur', 'quiz_king': 'Roi du QCM',
+        'half_way': 'Mi-Parcours', 'legend': 'Légende', 'streak_3': 'Série x3', 'streak_7': 'Série x7',
+        'perfectionist': 'Perfectionniste'
+    };
+
+    if (allBadges.length === 0) {
+        badgesGrid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:2rem;font-size:0.9rem"><i class="fas fa-lock" style="margin-right:0.5rem"></i>Aucun badge débloqué. Faites des exercices pour gagner des badges !</p>';
+    } else {
+        // Group badges
+        const seen = new Set();
+        allBadges.forEach(b => {
+            const uid = b.courseKey + ':' + b.id;
+            if (seen.has(uid)) return;
+            seen.add(uid);
+
+            const card = document.createElement('div');
+            card.className = 'badge-card';
+            card.style.borderColor = b.color + '33';
+
+            const icon = BADGE_ICONS[b.id] || (b.id.startsWith('ch') ? '📖' : '🎖️');
+            const name = BADGE_NAMES[b.id] || b.id.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+            card.innerHTML = '<div class="badge-icon">' + icon + '</div>'
+                + '<div class="badge-name">' + name + '</div>'
+                + '<div class="badge-desc" style="color:' + b.color + '">' + b.courseName + '</div>';
+
+            badgesGrid.appendChild(card);
+        });
+    }
+
+    // ---- Reset ----
+    document.getElementById('reset-btn').addEventListener('click', function() {
+        if (!confirm('⚠️ Êtes-vous sûr ? Cela supprimera toute votre progression dans les 9 cours. Cette action est irréversible.')) return;
+        if (!confirm('Dernière chance ! Confirmer la réinitialisation ?')) return;
+        COURSES.forEach(c => localStorage.removeItem(c.key));
+        location.reload();
+    });
+
+})();
+</script>
+
+</body>
+</html>

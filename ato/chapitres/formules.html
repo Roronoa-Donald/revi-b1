@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules & Cheatsheet — ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1.5rem 0}
+        .formula-card{background:var(--card,#1e293b);border:1px solid var(--border,rgba(255,255,255,.1));border-radius:12px;padding:1.2rem;transition:transform .2s,box-shadow .2s}
+        .formula-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px var(--accent-glow)}
+        .formula-card h4{color:var(--accent);margin-bottom:.5rem;font-size:.95rem}
+        .formula-card code{font-family:'JetBrains Mono',monospace;font-size:.9rem}
+        .mnemonic-table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+        .mnemonic-table th{background:var(--accent);color:#fff;padding:.6rem 1rem;text-align:left}
+        .mnemonic-table td{padding:.6rem 1rem;border-bottom:1px solid var(--border,rgba(255,255,255,.1))}
+        .mnemonic-table tr:hover{background:var(--accent-glow)}
+    </style>
+    <link rel="stylesheet" href="../../assets/css/print.css" media="print">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="formules.html" class="active">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Cheatsheet</div>
+    <h1>Formules & <span class="highlight">Mémos</span></h1>
+    <p>Toutes les formules et mnémoniques ATO sur une seule page.</p>
+</section>
+
+<div class="pdf-export-bar" style="text-align:center;margin:0 auto 1rem;max-width:680px"><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.4rem;border-radius:0.5rem;border:1px solid var(--accent);background:rgba(var(--accent-rgb,16,185,129),0.1);color:var(--accent);font-size:0.85rem;font-weight:700;cursor:pointer;transition:0.2s" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='rgba(var(--accent-rgb,16,185,129),0.1)';this.style.color='var(--accent)'"><i class="fas fa-file-pdf"></i> Exporter en PDF</button></div>
+<main class="content-wrapper" data-print-title="Aide-Mémoire — Architecture des Ordinateurs">
+
+    <!-- MNÉMONIQUES -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-brain"></i> Mnémoniques</h2>
+        <table class="mnemonic-table">
+            <thead><tr><th>Chapitre</th><th>Mnémonique</th><th>Ce qu'il retient</th></tr></thead>
+            <tbody>
+                <tr><td>Ch.1</td><td><strong>P.T.E.T.C.M.</strong></td><td>Pascaline → Turing → ENIAC → Transistor → CI → Micropro (6 jalons)</td></tr>
+                <tr><td>Ch.1</td><td><strong>5 fonctions</strong> : E-T-S-M-C</td><td>Entrée, Traitement, Sortie, Mémorisation, Communication</td></tr>
+                <tr><td>Ch.2</td><td><strong>BCD = 4 bits/chiffre</strong></td><td>0→0000, 9→1001 (pas au-delà !)</td></tr>
+                <tr><td>Ch.2</td><td><strong>CA2 : inverser + 1</strong></td><td>Complément à 2 = NOT bits + additionner 1</td></tr>
+                <tr><td>Ch.3</td><td><strong>G.R.A.P.</strong></td><td>Karnaugh : Grille Gray, Rectangles puiss. 2, Adjacences enroulées, Plus grand = simple</td></tr>
+                <tr><td>Ch.3</td><td><strong>Casser la barre, changer le signe</strong></td><td>De Morgan : NOT(A·B) = Ā+B̄, NOT(A+B) = Ā·B̄</td></tr>
+                <tr><td>Ch.4</td><td><strong>MUCES</strong></td><td>Von Neumann : Mémoire, UC, Calculateur, Entrées, Sorties</td></tr>
+                <tr><td>Ch.4</td><td><strong>FDE</strong></td><td>Cycle CPU : Fetch → Decode → Execute</td></tr>
+                <tr><td>Ch.4</td><td><strong>Pyramide mémoire bureau</strong></td><td>Main → Post-it → Bureau → Tiroirs → Archives</td></tr>
+                <tr><td>Ch.4</td><td><strong>PID</strong></td><td>E/S : Polling, Interruption, DMA (du pire au meilleur)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Ch.1 Généralités -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-computer"></i> Ch.1 — Généralités</h2>
+        <div class="formula-grid">
+            <div class="formula-card"><h4>5 générations</h4><p>1. Tubes à vide (1945)<br>2. Transistors (1955)<br>3. Circuits intégrés (1965)<br>4. Microprocesseurs (1971)<br>5. IA/Quantique (auj.)</p></div>
+            <div class="formula-card"><h4>Unités de mesure</h4><p>1 octet = 8 bits<br>1 Ko = 1024 octets (2¹⁰)<br>1 Mo = 1024 Ko (2²⁰)<br>1 Go = 1024 Mo (2³⁰)<br>1 To = 1024 Go (2⁴⁰)</p></div>
+            <div class="formula-card"><h4>Loi de Moore</h4><p>Le nombre de transistors double tous les <strong>~2 ans</strong>.</p></div>
+            <div class="formula-card"><h4>5 composants matériels</h4><p>UC (traitement), Mémoire, Périph. entrée, Périph. sortie, Bus (interconnexion)</p></div>
+        </div>
+    </section>
+
+    <!-- Ch.2 Numération -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-hashtag"></i> Ch.2 — Numération</h2>
+        <div class="formula-grid">
+            <div class="formula-card"><h4>Décimal → Base b</h4><p>Divisions successives par b.<br>Lire les restes de <strong>bas en haut</strong>.</p></div>
+            <div class="formula-card"><h4>Base b → Décimal</h4><p>Somme pondérée :<br><code>dₙ·bⁿ + … + d₁·b¹ + d₀·b⁰</code></p></div>
+            <div class="formula-card"><h4>Bin ↔ Hex</h4><p>Grouper par <strong>4 bits</strong>.<br>Ex : 1010 1111₂ = AF₁₆</p></div>
+            <div class="formula-card"><h4>Bin ↔ Oct</h4><p>Grouper par <strong>3 bits</strong>.<br>Ex : 101 111₂ = 57₈</p></div>
+            <div class="formula-card"><h4>Complément à 2 (CA2)</h4><p>−N = NOT(N) + 1<br>Sur n bits : plage [−2ⁿ⁻¹, 2ⁿ⁻¹−1]<br>8 bits : [−128, +127]</p></div>
+            <div class="formula-card"><h4>IEEE 754 (32 bits)</h4><p>1 bit signe + 8 bits exposant + 23 bits mantisse<br>Exposant biaisé = E + 127</p></div>
+        </div>
+    </section>
+
+    <!-- Ch.3 Circuits logiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-toggle-on"></i> Ch.3 — Circuits logiques</h2>
+        <div class="formula-grid">
+            <div class="formula-card"><h4>Portes de base</h4><p>AND : A·B<br>OR : A+B<br>NOT : Ā<br>XOR : A⊕B = A·B̄+Ā·B</p></div>
+            <div class="formula-card"><h4>De Morgan</h4><p><span style="text-decoration:overline">A·B</span> = Ā + B̄<br><span style="text-decoration:overline">A+B</span> = Ā · B̄</p></div>
+            <div class="formula-card"><h4>Absorption</h4><p>A + A·B = A<br>A + Ā·B = A + B<br>A·(A+B) = A</p></div>
+            <div class="formula-card"><h4>Karnaugh</h4><p>Code de Gray aux bords<br>Groupes = puissances de 2<br>Bords enroulés (tore)</p></div>
+            <div class="formula-card"><h4>Demi-additionneur</h4><p>S = A ⊕ B<br>C = A · B</p></div>
+            <div class="formula-card"><h4>Additionneur complet</h4><p>S = A⊕B⊕Cᵢₙ<br>Cₒᵤₜ = A·B + Cᵢₙ·(A⊕B)</p></div>
+            <div class="formula-card"><h4>Bascules</h4><p>RS : S=1→Q=1, R=1→Q=0<br>D : Q=D au front CLK<br>JK : J=K=1→Toggle<br>T : T=1→Toggle</p></div>
+        </div>
+    </section>
+
+    <!-- Ch.4 Architecture PC -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-microchip"></i> Ch.4 — Architecture PC</h2>
+        <div class="formula-grid">
+            <div class="formula-card"><h4>Von Neumann</h4><p>UC + UAL + Mémoire + Entrées + Sorties<br>Programme ET données dans la même mémoire.</p></div>
+            <div class="formula-card"><h4>Registres CPU</h4><p>PC (adresse suivante)<br>IR (instruction courante)<br>MAR/MBR (adresse/donnée mémoire)<br>ACC (résultat UAL)<br>SP (pile), FLAGS</p></div>
+            <div class="formula-card"><h4>Cycle FDE</h4><p>1. Fetch : PC→MAR, Mém→IR, PC++<br>2. Decode : opcode + opérandes<br>3. Execute : UAL calcule</p></div>
+            <div class="formula-card"><h4>Hiérarchie mémoire</h4><p>Registres (~1ns, Ko)<br>Cache L1-L3 (~2-20ns, Mo)<br>RAM (~50-100ns, Go)<br>SSD/HDD (~μs-ms, To)</p></div>
+            <div class="formula-card"><h4>3 Bus</h4><p>Données (bidirectionnel)<br>Adresses (unidirectionnel)<br>Contrôle (bidirectionnel)</p></div>
+            <div class="formula-card"><h4>Mémoire adressable</h4><p>n bits d'adresses → 2ⁿ octets<br>32 bits → 4 Go<br>64 bits → 16 Eio</p></div>
+            <div class="formula-card"><h4>E/S</h4><p>Polling : CPU interroge<br>Interruption : périph. signale<br>DMA : transfert direct RAM</p></div>
+            <div class="formula-card"><h4>CISC vs RISC</h4><p>CISC : x86, instructions complexes<br>RISC : ARM, instructions simples<br>Pipeline : FDE chevauchés</p></div>
+        </div>
+    </section>
+
+    <!-- Comparatif -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-code-compare"></i> Tableaux comparatifs</h2>
+
+        <h3>Combinatoire vs Séquentiel</h3>
+        <table class="styled-table">
+            <thead><tr><th>Critère</th><th>Combinatoire</th><th>Séquentiel</th></tr></thead>
+            <tbody>
+                <tr><td>Mémoire</td><td>Non</td><td>Oui (bascules)</td></tr>
+                <tr><td>Sorties dépendent de</td><td>Entrées actuelles</td><td>Entrées + état précédent</td></tr>
+                <tr><td>Horloge</td><td>Non requise</td><td>Requise</td></tr>
+                <tr><td>Exemples</td><td>MUX, additionneur, décodeur</td><td>Bascules, compteurs, registres</td></tr>
+            </tbody>
+        </table>
+
+        <h3>SRAM vs DRAM</h3>
+        <table class="styled-table">
+            <thead><tr><th>Critère</th><th>SRAM</th><th>DRAM</th></tr></thead>
+            <tbody>
+                <tr><td>Vitesse</td><td>Très rapide</td><td>Rapide</td></tr>
+                <tr><td>Coût</td><td>Élevé</td><td>Modéré</td></tr>
+                <tr><td>Rafraîchissement</td><td>Non</td><td>Oui (besoin de refresh)</td></tr>
+                <tr><td>Usage</td><td>Cache L1/L2/L3</td><td>RAM principale</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_ato_progress'});GameEngine.init();</script>
+</body>
+</html>

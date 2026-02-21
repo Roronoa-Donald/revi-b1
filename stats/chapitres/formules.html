@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin:2rem 0}.formula-card{background:var(--card-bg);border-radius:18px;padding:1.5rem;border-left:4px solid var(--accent);box-shadow:0 2px 12px rgba(0,0,0,.08);transition:transform .2s}.formula-card:hover{transform:translateY(-3px)}.formula-card h3{margin:0 0 .5rem;font-size:1.05rem;color:var(--accent)}.formula-card .mnemonic{font-size:1.3rem;font-weight:800;letter-spacing:1px;color:var(--accent);margin:.5rem 0}.formula-card p,.formula-card li{font-size:.92rem;line-height:1.5}.formula-card ul{padding-left:1.2rem;margin:.5rem 0}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/print.css" media="print">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu</a>
@@ -41,7 +45,8 @@
     <p>Tout le cours Stats sur une page — à imprimer avant l'examen.</p>
 </section>
 
-<main class="content-wrapper">
+<div class="pdf-export-bar" style="text-align:center;margin:0 auto 1rem;max-width:680px"><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.4rem;border-radius:0.5rem;border:1px solid var(--accent);background:rgba(var(--accent-rgb,16,185,129),0.1);color:var(--accent);font-size:0.85rem;font-weight:700;cursor:pointer;transition:0.2s" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='rgba(var(--accent-rgb,16,185,129),0.1)';this.style.color='var(--accent)'"><i class="fas fa-file-pdf"></i> Exporter en PDF</button></div>
+<main class="content-wrapper" data-print-title="Aide-Mémoire — Statistiques">
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-brain"></i> Mnémoniques</h2>
     <div class="styled-table-container"><table class="styled-table">
@@ -134,5 +139,14 @@
 </main>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/download.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress'});GameEngine.init();</script>
 </body>
 </html>

@@ -46,6 +46,17 @@
 
     <!-- ─── 1. Pourquoi les bases de données ? ─── -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Comprendre le rôle d'un SGBD et le modèle relationnel</li>
+                <li>Maîtriser le vocabulaire R.A.T.D. (Relation, Attribut, Tuple, Domaine)</li>
+                <li>Identifier clés primaires et clés étrangères</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-question-circle"></i> Pourquoi les bases de données ?</h2>
 
         <div class="info-box">
@@ -292,7 +303,11 @@ INSCRIPTIONS(<u>#id_etu, #id_cours</u>, date_inscription, note)
     </div>
 </main>
 
-<div class="xp-bar" id="xp-bar"></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
 <script>
@@ -309,8 +324,8 @@ GameEngine.configure({
         {id:'db_legend',name:'Légende BD',icon:'🏆',desc:'Tous les chapitres terminés'}
     ],
     levels:[
-        {name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},
-        {name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}
+        {title:'Débutant',min:0},{title:'Apprenti SQL',min:100},{title:'Requêteur Jr.',min:250},
+        {title:'Analyste BD',min:500},{title:'DBA Confirmé',min:800},{title:'Guru des Données',min:1200}
     ],
     tips:["Une clé primaire identifie UNIQUEMENT chaque ligne !","NULL ≠ 0 ≠ '' — NULL signifie 'inconnu'."]
 });

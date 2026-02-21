@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu</a>
@@ -178,6 +181,27 @@ R² > 0.7 → bon modèle en général</code></pre>
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tools"></i> Méthode : Calculer r et la Droite de Régression</h2>
+    <div class="card" style="border-left:4px solid var(--accent);padding:1.5rem">
+        <p><strong>Données :</strong> n couples (xᵢ, yᵢ)</p>
+        <p style="margin-top:1rem"><strong>Étape 1 :</strong> Calculer les moyennes</p>
+        <ul><li>x̄ = Σxᵢ / n et ȳ = Σyᵢ / n</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 2 :</strong> Remplir le tableau</p>
+        <ul><li>Colonnes : xᵢ, yᵢ, xᵢ², yᵢ², xᵢ·yᵢ</li><li>Calculer toutes les sommes Σ</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 3 :</strong> Covariance</p>
+        <ul><li>Cov(X,Y) = (Σxᵢyᵢ / n) − x̄·ȳ</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 4 :</strong> Écarts-types</p>
+        <ul><li>σₓ = √(Σxᵢ²/n − x̄²) et σᵧ = √(Σyᵢ²/n − ȳ²)</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 5 :</strong> Coefficient de corrélation</p>
+        <ul><li>r = Cov(X,Y) / (σₓ · σᵧ)</li><li>|r| proche de 1 → forte corrélation ; proche de 0 → faible</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 6 :</strong> Droite de régression y = ax + b</p>
+        <ul><li>a = Cov(X,Y) / σₓ² = Cov(X,Y) / Var(X)</li><li>b = ȳ − a·x̄</li><li>Vérification : la droite passe par (x̄, ȳ)</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 7 :</strong> Interpréter</p>
+        <ul><li>R² = r² → % de variance expliquée (ex: R²=0.81 → 81%)</li><li>a > 0 → relation croissante ; a < 0 → décroissante</li></ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
     <div id="chapter-exercises"></div>
 </section>
@@ -188,10 +212,14 @@ R² > 0.7 → bon modèle en général</code></pre>
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
-<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Calculateur',min:300},{title:'Analyste',min:550},{title:'Statisticien',min:850},{title:'Guru',min:1200}]});GameEngine.init();</script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>
 ChapterExercises.init({
@@ -222,5 +250,6 @@ ChapterExercises.init({
 });
 </script>
 <script src="../../assets/js/download.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
 </body>
 </html>

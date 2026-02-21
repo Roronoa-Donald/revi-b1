@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices | Algèbre Linéaire B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#a855f7;--accent-light:#c084fc;--accent-dark:#9333ea;--accent-glow:rgba(168,85,247,0.18)}.dark{--accent:#c084fc;--accent-light:#d8b4fe;--accent-dark:#a855f7;--accent-glow:rgba(192,132,252,0.18)}.exo-toolbar{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:1.5rem 0}.exo-toolbar button{padding:.4rem .9rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer;font-size:.82rem;transition:.2s}.exo-toolbar button.active,.exo-toolbar button:hover{background:var(--accent);color:#fff}.exo-search{display:block;max-width:420px;margin:1rem auto;padding:.55rem 1rem;border-radius:99px;border:2px solid var(--border);background:var(--bg);color:var(--text);width:100%;font-size:.95rem}.exo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin:1.5rem 0}.exo-card{background:var(--card-bg);border-radius:16px;padding:1.3rem;border-left:4px solid var(--accent);transition:transform .2s}.exo-card:hover{transform:translateY(-3px)}.exo-card h3{font-size:.95rem;margin:0 0 .5rem}.exo-card p{font-size:.88rem;margin:0 0 .7rem;opacity:.8;line-height:1.5}.exo-meta{display:flex;gap:.5rem;flex-wrap:wrap}.exo-meta span{font-size:.72rem;padding:.2rem .6rem;border-radius:99px;font-weight:600}.exo-level-facile{background:#dcfce7;color:#15803d}.exo-level-moyen{background:#fef3c7;color:#b45309}.exo-level-difficile{background:#fee2e2;color:#dc2626}.dark .exo-level-facile{background:rgba(34,197,94,.15);color:#4ade80}.dark .exo-level-moyen{background:rgba(234,179,8,.15);color:#facc15}.dark .exo-level-difficile{background:rgba(239,68,68,.15);color:#f87171}.exo-cat{background:var(--accent-glow);color:var(--accent)}.exo-toggle{margin-top:.7rem;background:none;border:none;color:var(--accent);cursor:pointer;font-weight:600;font-size:.82rem;padding:0}.exo-answer{display:none;margin-top:.7rem;padding:.7rem;background:var(--bg);border-radius:10px;font-size:.85rem;line-height:1.6;font-family:'JetBrains Mono',monospace}.exo-answer.show{display:block}.exo-count{text-align:center;font-size:.9rem;opacity:.6;margin:.5rem 0}</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-square-root-variable"></i> MatriBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="../chapitres/formules.html">Formules</a></li>
+        <li><a href="../chapitres/cartes.html">Cartes</a></li><li><a href="../chapitres/simulateur-examen.html">Simulateur</a></li>
+        <li><a href="exercices.html" class="active">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📐 MatriBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Matrices</a>
+    <a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Espaces vectoriels</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Applications linéaires</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>📐 Exercices <span class="highlight">Algèbre Linéaire</span></h1>
+    <p>27 exercices classés par catégorie et difficulté.</p>
+</section>
+
+<main class="content-wrapper">
+    <input type="text" class="exo-search" id="search" placeholder="🔍 Rechercher un exercice…">
+    <div class="exo-toolbar" id="catBar"></div>
+    <div class="exo-toolbar" id="lvlBar"></div>
+    <div class="exo-count" id="count"></div>
+    <div class="exo-grid" id="grid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXOS=[
+// ─── Matrices ───
+{t:"Addition de matrices",d:"Calculer A + B avec A = [[1,2],[3,4]] et B = [[5,−1],[0,2]].",cat:"Matrices",lvl:"Facile",ans:"A+B = [[1+5, 2+(−1)],[3+0, 4+2]] = [[6, 1],[3, 6]]."},
+{t:"Produit matriciel AB",d:"A = [[1,2],[3,4]], B = [[5,6],[7,8]]. Calculer AB.",cat:"Matrices",lvl:"Facile",ans:"AB = [[1×5+2×7, 1×6+2×8],[3×5+4×7, 3×6+4×8]] = [[19, 22],[43, 50]]."},
+{t:"Transposée et symétrie",d:"A = [[1,2,3],[2,5,6],[3,6,9]]. Vérifier que A est symétrique.",cat:"Matrices",lvl:"Facile",ans:"Aᵀ = [[1,2,3],[2,5,6],[3,6,9]] = A. Comme A = Aᵀ, A est bien symétrique."},
+{t:"Déterminant 2×2",d:"Calculer det(A) pour A = [[3,7],[1,−4]].",cat:"Matrices",lvl:"Facile",ans:"det(A) = 3×(−4) − 7×1 = −12 − 7 = −19."},
+{t:"Déterminant 3×3 (Sarrus)",d:"Calculer le déterminant de M = [[2,−3,1],[0,1,−2],[3,0,4]] par Sarrus.",cat:"Matrices",lvl:"Moyen",ans:"↘ : 2×1×4 + (−3)×(−2)×3 + 1×0×0 = 8+18+0 = 26\n↗ : 1×1×3 + (−3)×0×4 + 2×(−2)×0 = 3+0+0 = 3\ndet = 26 − 3 = 23."},
+{t:"Inverse 2×2",d:"Calculer l'inverse de A = [[2,1],[5,3]].",cat:"Matrices",lvl:"Facile",ans:"det(A) = 6−5 = 1.\nA⁻¹ = (1/1)×[[3,−1],[−5,2]] = [[3,−1],[−5,2]].\nVérif : AA⁻¹ = I ✓"},
+{t:"Inverse Gauss-Jordan 3×3",d:"Calculer l'inverse de A = [[1,0,2],[2,−1,3],[4,1,8]] par Gauss-Jordan.",cat:"Matrices",lvl:"Difficile",ans:"[A|I] → L2←L2−2L1 → L3←L3−4L1 → L3←L3−L2 → L2←−L2 → L1←L1−2L3 → L1←L1+0L2\nA⁻¹ = [[11/2, −1, −1],[2, 0, −1/2],[−3, 1/2, 1/2]] (après calculs complets avec det=−2)."},
+{t:"Inverse par cofacteurs 3×3",d:"Même matrice A = [[1,0,2],[2,−1,3],[4,1,8]]. Calculer A⁻¹ par la méthode des cofacteurs.",cat:"Matrices",lvl:"Difficile",ans:"det(A) = −2.\nCofacteurs :\nC₁₁=−11, C₁₂=−4, C₁₃=6\nC₂₁=2, C₂₂=0, C₂₃=−1\nC₃₁=2, C₃₂=1, C₃₃=−1\nCom(A)ᵀ = [[−11,2,2],[−4,0,1],[6,−1,−1]]\nA⁻¹ = (1/(−2))×Com(A)ᵀ = [[11/2,−1,−1],[2,0,−1/2],[−3,1/2,1/2]]."},
+{t:"Propriétés du déterminant",d:"Si det(A) = 3 et det(B) = −2, calculer : det(AB), det(A²), det(2A) si A est 3×3.",cat:"Matrices",lvl:"Moyen",ans:"det(AB) = det(A)×det(B) = 3×(−2) = −6.\ndet(A²) = (det A)² = 9.\ndet(2A) = 2³×det(A) = 8×3 = 24 (car n=3)."},
+// ─── Espaces vectoriels ───
+{t:"Vérifier un SEV",d:"F = {(x,y,z) ∈ ℝ³ | x + y − z = 0}. Montrer que F est un SEV de ℝ³.",cat:"Espaces V.",lvl:"Facile",ans:"1) 0∈F : 0+0−0=0 ✓\n2) u=(x₁,y₁,z₁), v=(x₂,y₂,z₂) ∈ F : (x₁+x₂)+(y₁+y₂)−(z₁+z₂) = 0+0 = 0 ✓\n3) λu : λx₁+λy₁−λz₁ = λ(x₁+y₁−z₁) = 0 ✓\nF est un SEV."},
+{t:"Non-SEV (contre-exemple)",d:"G = {(x,y) ∈ ℝ² | x² + y² = 1}. Montrer que G n'est PAS un SEV.",cat:"Espaces V.",lvl:"Facile",ans:"(0,0) ∉ G car 0²+0² = 0 ≠ 1. Donc G ne contient pas le vecteur nul → G n'est PAS un SEV."},
+{t:"Famille libre ou liée ?",d:"v₁ = (1,0,1), v₂ = (0,1,1), v₃ = (1,1,2). Cette famille est-elle libre ?",cat:"Espaces V.",lvl:"Moyen",ans:"λ₁v₁+λ₂v₂+λ₃v₃ = 0 → système :\nλ₁+λ₃=0, λ₂+λ₃=0, λ₁+λ₂+2λ₃=0.\nDe L1: λ₁=−λ₃, de L2: λ₂=−λ₃. L3: −λ₃−λ₃+2λ₃=0 ✓ pour tout λ₃.\nDonc liée : v₃ = v₁ + v₂."},
+{t:"Base de ℝ³",d:"v₁ = (1,0,0), v₂ = (1,1,0), v₃ = (1,1,1). Est-ce une base de ℝ³ ?",cat:"Espaces V.",lvl:"Moyen",ans:"det[[1,1,1],[0,1,1],[0,0,1]] = 1 ≠ 0.\nLa famille est libre (3 vecteurs indépendants dans dim 3) → c'est une base de ℝ³."},
+{t:"Coordonnées dans une base",d:"B = {(1,1), (1,−1)} base de ℝ². Trouver les coordonnées de v = (3,1) dans B.",cat:"Espaces V.",lvl:"Moyen",ans:"v = α(1,1) + β(1,−1)\nα+β=3 et α−β=1\nα=2, β=1.\n[v]_B = (2, 1)."},
+{t:"Dimension d'un SEV",d:"F = {(x,y,z,t) ∈ ℝ⁴ | x+y=0 et z−t=0}. Trouver dim(F) et une base.",cat:"Espaces V.",lvl:"Moyen",ans:"x=−y, z=t. Vecteurs de F : (−y,y,t,t) = y(−1,1,0,0)+t(0,0,1,1).\nBase : {(−1,1,0,0),(0,0,1,1)}. dim(F) = 2."},
+{t:"Grassmann",d:"E et F deux SEV de ℝ⁴ avec dim(E)=3, dim(F)=2, dim(E∩F)=1. Calculer dim(E+F).",cat:"Espaces V.",lvl:"Facile",ans:"Grassmann : dim(E+F) = 3+2−1 = 4. Donc E+F = ℝ⁴."},
+{t:"Somme directe",d:"E = Vect{(1,0,0)}, F = Vect{(0,1,0),(0,0,1)} dans ℝ³. Montrer que E⊕F = ℝ³.",cat:"Espaces V.",lvl:"Moyen",ans:"E∩F = {0} (e₁ n'est pas CL de e₂,e₃). dim(E)+dim(F) = 1+2 = 3 = dim(ℝ³).\nDonc E⊕F = ℝ³."},
+// ─── Applications linéaires ───
+{t:"Vérifier la linéarité",d:"f(x,y) = (2x+y, x−3y). Montrer que f est linéaire.",cat:"App. Lin.",lvl:"Facile",ans:"f(λ(x₁,y₁)+μ(x₂,y₂)) = f(λx₁+μx₂, λy₁+μy₂)\n= (2(λx₁+μx₂)+(λy₁+μy₂), (λx₁+μx₂)−3(λy₁+μy₂))\n= λ(2x₁+y₁, x₁−3y₁) + μ(2x₂+y₂, x₂−3y₂)\n= λf(x₁,y₁) + μf(x₂,y₂). ✓"},
+{t:"Non-linéarité",d:"g(x,y) = (x+1, y). Montrer que g n'est PAS linéaire.",cat:"App. Lin.",lvl:"Facile",ans:"g(0,0) = (1,0) ≠ (0,0). Comme g(0) ≠ 0, g n'est pas linéaire. (Pas besoin d'aller plus loin !)"},
+{t:"Noyau et Image",d:"f : ℝ³→ℝ² définie par f(x,y,z) = (x+y, y−z). Trouver Ker(f) et Im(f).",cat:"App. Lin.",lvl:"Moyen",ans:"Ker : x+y=0, y−z=0 → y=z, x=−y → Ker(f) = Vect{(−1,1,1)}, dim=1.\nIm : f(e₁)=(1,0), f(e₂)=(1,1), f(e₃)=(0,−1). Libre ⇒ Im(f)=ℝ², dim=2.\nVérif : 1+2=3=dim(ℝ³) ✓"},
+{t:"Théorème du rang",d:"f : ℝ⁴→ℝ³ linéaire avec dim(Im f) = 2. Calculer dim(Ker f) et dire si f est injective/surjective.",cat:"App. Lin.",lvl:"Facile",ans:"dim(Ker f) = 4−2 = 2.\nKer ≠ {0} → f non injective.\nIm(f) ≠ ℝ³ (dim 2 ≠ 3) → f non surjective."},
+{t:"Matrice d'une application",d:"f : ℝ²→ℝ³, f(x,y) = (x−y, 2x, x+3y). Écrire la matrice de f dans les bases canoniques.",cat:"App. Lin.",lvl:"Facile",ans:"f(e₁) = f(1,0) = (1,2,1) → col 1\nf(e₂) = f(0,1) = (−1,0,3) → col 2\nM(f) = [[1,−1],[2,0],[1,3]]."},
+{t:"Composition et produit",d:"f(x,y) = (x+y, x−y), g(x,y) = (2x, y). Calculer M(g∘f) de deux façons.",cat:"App. Lin.",lvl:"Moyen",ans:"Façon 1 : (g∘f)(x,y) = g(x+y, x−y) = (2(x+y), x−y) = (2x+2y, x−y) → M = [[2,2],[1,−1]].\nFaçon 2 : M(g)×M(f) = [[2,0],[0,1]]×[[1,1],[1,−1]] = [[2,2],[1,−1]] ✓"},
+{t:"Rotation de 45°",d:"Écrire la matrice de rotation de 45° dans ℝ². Calculer l'image du vecteur (1,0).",cat:"App. Lin.",lvl:"Moyen",ans:"cos45°=sin45°=√2/2 ≈ 0.707.\nR₄₅ = [[√2/2, −√2/2],[√2/2, √2/2]].\nR₄₅×(1,0)ᵀ = (√2/2, √2/2) ≈ (0.707, 0.707)."},
+{t:"Isomorphisme ?",d:"f : ℝ²→ℝ², f(x,y) = (x+y, x−y). f est-elle un isomorphisme ?",cat:"App. Lin.",lvl:"Moyen",ans:"M(f) = [[1,1],[1,−1]]. det = −1−1 = −2 ≠ 0.\nDonc f est bijective → c'est un isomorphisme (et même un automorphisme car E=F=ℝ²)."},
+{t:"Exercice de synthèse",d:"f : ℝ³→ℝ³, f(x,y,z) = (x+y+z, x+y, x). Trouver Ker(f), Im(f), rg(f). f est-elle bijective ?",cat:"App. Lin.",lvl:"Difficile",ans:"Ker : x+y+z=0, x+y=0, x=0 → x=0, y=0, z=0. Ker={0}.\nrg(f)=3−0=3. Im(f)=ℝ³.\nf est bijective (injective car Ker={0}, surjective car Im=ℝ³).\nM(f)=[[1,1,1],[1,1,0],[1,0,0]], det=1 ≠ 0 ✓"}
+];
+const CATS=["Tous",...new Set(EXOS.map(e=>e.cat))];
+const LVLS=["Tous","Facile","Moyen","Difficile"];
+let fCat="Tous",fLvl="Tous",fSearch="";
+const catBar=document.getElementById('catBar'),lvlBar=document.getElementById('lvlBar'),grid=document.getElementById('grid'),counter=document.getElementById('count'),search=document.getElementById('search');
+
+function render(){
+    let f=EXOS.filter(e=>(fCat==="Tous"||e.cat===fCat)&&(fLvl==="Tous"||e.lvl===fLvl)&&(!fSearch||e.t.toLowerCase().includes(fSearch)||e.d.toLowerCase().includes(fSearch)));
+    counter.textContent=f.length+' exercice'+(f.length>1?'s':'');
+    grid.innerHTML=f.map((e,i)=>{
+        const id='exo_'+i;
+        return `<div class="exo-card"><h3>${e.t}</h3><p>${e.d}</p><div class="exo-meta"><span class="exo-cat">${e.cat}</span><span class="exo-level-${e.lvl.toLowerCase()}">${e.lvl}</span></div><button class="exo-toggle" onclick="document.getElementById('${id}').classList.toggle('show');this.textContent=this.textContent.includes('Voir')?'Masquer la solution':'Voir la solution'">Voir la solution</button><div class="exo-answer" id="${id}">${e.ans.replace(/\n/g,'<br>')}</div></div>`;
+    }).join('');
+}
+function mkBar(el,items,setter){
+    el.innerHTML=items.map(t=>`<button class="${t===(setter==='cat'?fCat:fLvl)?'active':''}" onclick="f${setter==='cat'?'Cat':'Lvl'}='${t}';this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));this.classList.add('active');render();">${t}</button>`).join('');
+}
+mkBar(catBar,CATS,'cat');mkBar(lvlBar,LVLS,'lvl');
+search.addEventListener('input',e=>{fSearch=e.target.value.toLowerCase();render()});
+render();
+</script>
+</body>
+</html>

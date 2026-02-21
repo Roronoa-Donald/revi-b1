@@ -130,5 +130,16 @@ document.getElementById('btn-shuffle').addEventListener('click',()=>{for(let i=f
 document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){idx=(idx-1+filtered.length)%filtered.length;render()}else if(e.key==='ArrowRight'){idx=(idx+1)%filtered.length;render()}else if(e.key===' '){e.preventDefault();document.getElementById('flash-card').classList.toggle('flipped')}});
 buildToolbar();render();
 </script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_python_progress'});GameEngine.init();</script>
+<script src="../../assets/js/spaced-repetition.js"></script>
+<script>SpacedRepetition.configure('b1_python_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof SpacedRepetition!=="undefined"&&typeof cards!=="undefined"){SpacedRepetition.enhance()}});</script>
 </body>
 </html>

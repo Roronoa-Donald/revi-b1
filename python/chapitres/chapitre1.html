@@ -53,6 +53,17 @@
 
 <!-- Section 1 : Pourquoi Python -->
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Installer Python et configurer l'environnement</li>
+            <li>Comprendre la syntaxe de base : print, input, commentaires</li>
+            <li>Manipuler les types de base : int, float, str, bool</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-question-circle"></i> Pourquoi Python ?</h2>
     <div class="concept-card">
         <h4>🐍 Le langage couteau-suisse</h4>
@@ -248,12 +259,16 @@ isinstance(age, int)      # True</code></pre></div>
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
 <script>
-GameEngine.configure({storageKey:'b1_python_progress',badges:[{id:'first_step',icon:'🐍',label:'Premier pas',desc:'Premier chapitre terminé'},{id:'print_master',icon:'🖨️',label:'Print master',desc:'Ch.1 maîtrisé'},{id:'quiz_king',icon:'👑',label:'Quiz King',desc:'10 quiz réussis'},{id:'half_way',icon:'🏔️',label:'Mi-parcours',desc:'4 chapitres terminés'},{id:'legend',icon:'🏆',label:'Légende',desc:'Tous les chapitres terminés'}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru 🐍',minXP:1200}]});GameEngine.init();
+GameEngine.configure({storageKey:'b1_python_progress',badges:[{id:'first_step',icon:'🐍',label:'Premier pas',desc:'Premier chapitre terminé'},{id:'print_master',icon:'🖨️',label:'Print master',desc:'Ch.1 maîtrisé'},{id:'quiz_king',icon:'👑',label:'Quiz King',desc:'10 quiz réussis'},{id:'half_way',icon:'🏔️',label:'Mi-parcours',desc:'4 chapitres terminés'},{id:'legend',icon:'🏆',label:'Légende',desc:'Tous les chapitres terminés'}],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Dev Jr.',min:300},{title:'Confirmé',min:550},{title:'Maître',min:850},{title:'Guru 🐍',min:1200}]});GameEngine.init();
 </script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>

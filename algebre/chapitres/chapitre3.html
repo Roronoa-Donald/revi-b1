@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — Applications Linéaires | Algèbre Linéaire B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root { --accent: #a855f7; --accent-light: #c084fc; --accent-dark: #9333ea; --accent-glow: rgba(168,85,247,0.25); }
+        .dark { --accent: #c084fc; --accent-light: #d8b4fe; --accent-dark: #a855f7; --accent-glow: rgba(192,132,252,0.25); }
+        .math-block{background:var(--bg-card,#111827);border:1px solid var(--border,rgba(255,255,255,.06));border-radius:12px;padding:1.2rem 1.5rem;margin:1rem 0;text-align:center;font-size:1.05rem;overflow-x:auto}
+        .matrix{display:inline-flex;flex-direction:column;border-left:2.5px solid var(--accent);border-right:2.5px solid var(--accent);padding:4px 10px;margin:6px 4px;vertical-align:middle;border-radius:4px}
+        .matrix-row{display:flex;gap:16px;justify-content:center;padding:2px 0;font-family:'JetBrains Mono',monospace;font-size:.95rem}
+        .matrix-label{font-weight:700;color:var(--accent);margin-right:6px;vertical-align:middle}
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-square-root-variable"></i> MatriBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📐 MatriBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Matrices</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Espaces vectoriels</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3 — Applications linéaires</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-exchange-alt"></i> Chapitre 3</div>
+    <h1>📐 Applications <span class="highlight">Linéaires</span></h1>
+    <p>Définition, noyau, image, théorème du rang et transformations géométriques.</p>
+</section>
+
+<main class="content-wrapper">
+
+<!-- ═══ Objectifs ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Vérifier si une application est linéaire</li>
+            <li>Connaître le vocabulaire E.I.A.F. (endomorphisme, isomorphisme…)</li>
+            <li>Déterminer le noyau et l'image d'une application linéaire</li>
+            <li>Appliquer le théorème du rang et construire la matrice de \(f\)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══ 1. Définition ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-question-circle"></i> C'est quoi une application linéaire ?</h2>
+    <div class="concept-card">
+        <h4>🏫 Analogie de la machine</h4>
+        <p>Une application linéaire \(f : E \to F\), c'est une <strong>machine à transformer les vecteurs</strong> qui respecte les combinaisons linéaires :</p>
+        \[\boxed{\forall u,v \in E,\ \forall \lambda, \mu \in \mathbb{R} : \quad f(\lambda u + \mu v) = \lambda f(u) + \mu f(v)}\]
+        <p>Autrement dit, la machine « préserve » les opérations d'addition et de multiplication par un scalaire.</p>
+    </div>
+    <div class="tip-box"><strong>💡 Test rapide :</strong> Si \(f(0) \neq 0\), alors \(f\) n'est <strong>certainement pas</strong> linéaire (condition nécessaire).</div>
+    <p><strong>Exemples :</strong></p>
+    <ul>
+        <li>\(f(x,y) = (2x+y,\ x-3y)\) → <strong>linéaire ✓</strong></li>
+        <li>\(f(x,y) = x^2 + y\) → <strong>pas linéaire ✗</strong> (le \(x^2\) casse la linéarité)</li>
+        <li>\(f(x,y) = (x+1, y)\) → <strong>pas linéaire ✗</strong> (car \(f(0,0) = (1,0) \neq 0\))</li>
+    </ul>
+</section>
+
+<!-- ═══ 2. Vocabulaire EIAF ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tags"></i> Vocabulaire — E.I.A.F.</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Mnémonique E.I.A.F. — « En Italie, on Adore les Fettuccine »</h4>
+        <ul>
+            <li><strong>E</strong>ndomorphisme : \(f : E \to E\) (même espace de départ et d'arrivée)</li>
+            <li><strong>I</strong>somorphisme : application linéaire <strong>bijective</strong></li>
+            <li><strong>A</strong>utomorphisme : endomorphisme <strong>bijectif</strong> (\(f : E \to E\), bijective)</li>
+            <li><strong>F</strong>orme linéaire : \(f : E \to \mathbb{R}\) (arrive dans les scalaires)</li>
+        </ul>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Nom</th><th>Départ → Arrivée</th><th>Bijectif ?</th></tr></thead>
+        <tbody>
+            <tr><td>Application linéaire</td><td>\(E \to F\)</td><td>Pas forcément</td></tr>
+            <tr><td>Endomorphisme</td><td>\(E \to E\)</td><td>Pas forcément</td></tr>
+            <tr><td>Isomorphisme</td><td>\(E \to F\)</td><td>Oui</td></tr>
+            <tr><td>Automorphisme</td><td>\(E \to E\)</td><td>Oui</td></tr>
+            <tr><td>Forme linéaire</td><td>\(E \to \mathbb{R}\)</td><td>Pas forcément</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- ═══ 3. Noyau & Image ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Noyau et Image</h2>
+    <div class="concept-card">
+        <p>Pour \(f : E \to F\) linéaire :</p>
+        <ul>
+            <li><strong>Noyau</strong> : \(\text{Ker}(f) = \{u \in E \mid f(u) = 0_F\}\) — les vecteurs « écrasés » à zéro</li>
+            <li><strong>Image</strong> : \(\text{Im}(f) = \{f(u) \mid u \in E\}\) — tout ce que la machine peut produire</li>
+        </ul>
+        <p>\(\text{Ker}(f)\) est un SEV de \(E\) et \(\text{Im}(f)\) est un SEV de \(F\).</p>
+    </div>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Propriété de \(f\)</th><th>Condition équivalente</th></tr></thead>
+        <tbody>
+            <tr><td>\(f\) <strong>injective</strong></td><td>\(\text{Ker}(f) = \{0_E\}\)</td></tr>
+            <tr><td>\(f\) <strong>surjective</strong></td><td>\(\text{Im}(f) = F\)</td></tr>
+            <tr><td>\(f\) <strong>bijective</strong></td><td>Injective + Surjective</td></tr>
+        </tbody>
+    </table></div>
+    <p><strong>Exemple :</strong> Soit \(f : \mathbb{R}^2 \to \mathbb{R}^2\), \(f(x,y) = (x+y,\ x-y)\).</p>
+    <ul>
+        <li>\(\text{Ker}(f)\) : \(x+y=0\) et \(x-y=0\) → \(x=y=0\), donc \(\text{Ker}(f) = \{(0,0)\}\) → \(f\) est <strong>injective</strong>.</li>
+        <li>Comme \(\dim(E) = \dim(F) = 2\) et \(f\) injective → \(f\) est aussi <strong>surjective</strong>, donc <strong>bijective</strong> (isomorphisme).</li>
+    </ul>
+</section>
+
+<!-- ═══ 4. Théorème du rang ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-balance-scale"></i> Théorème du rang</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>🧠 Le résultat le plus utile du cours !</h4>
+        \[\boxed{\dim(\text{Ker}\,f) + \dim(\text{Im}\,f) = \dim(E)}\]
+        <p>Soit encore : \(\dim(\text{Ker}\,f) + \text{rg}(f) = \dim(E)\), où \(\text{rg}(f) = \dim(\text{Im}\,f)\) est le <strong>rang</strong> de \(f\).</p>
+    </div>
+    <p><strong>Exemple :</strong> \(f : \mathbb{R}^3 \to \mathbb{R}^2\) linéaire avec \(\dim(\text{Ker}\,f) = 1\).</p>
+    <p>Théorème du rang : \(1 + \text{rg}(f) = 3\), donc \(\text{rg}(f) = 2 = \dim(\mathbb{R}^2)\) → \(f\) est <strong>surjective</strong> !</p>
+    <div class="tip-box"><strong>💡 Limites du rang :</strong> \(\text{rg}(f) \leq \min(\dim E, \dim F)\). Bijective ⟺ \(\text{rg}(f) = \dim(E) = \dim(F)\).</div>
+</section>
+
+<!-- ═══ 5. Matrice d'une application linéaire ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table"></i> Matrice d'une application linéaire</h2>
+    <div class="concept-card">
+        <h4>📋 Construction de \(M(f)\) en 3 étapes</h4>
+        <p>Soit \(\mathcal{B}_E = (e_1, \ldots, e_n)\) base de \(E\) et \(\mathcal{B}_F\) base de \(F\) :</p>
+        <ol>
+            <li>Calculer \(f(e_1), f(e_2), \ldots, f(e_n)\)</li>
+            <li>Exprimer chaque \(f(e_j)\) en coordonnées dans \(\mathcal{B}_F\)</li>
+            <li>La <strong>\(j\)-ème colonne</strong> de \(M(f)\) = coordonnées de \(f(e_j)\)</li>
+        </ol>
+    </div>
+    <p><strong>Exemple :</strong> \(f(x,y) = (2x+y,\ x-3y)\) dans les bases canoniques :</p>
+    <div class="math-block">
+        \[f(e_1) = f(1,0) = (2,1), \quad f(e_2) = f(0,1) = (1,-3)\]
+        \[M(f) = \begin{pmatrix}2&1\\1&-3\end{pmatrix}\]
+    </div>
+    <div class="info-box"><strong>ℹ️ Composition :</strong> \(M(g \circ f) = M(g) \cdot M(f)\) — attention, l'ordre est inversé par rapport à \(\circ\) !</div>
+</section>
+
+<!-- ═══ 6. Transformations géométriques ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sync-alt"></i> Transformations géométriques dans \(\mathbb{R}^2\)</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Transformation</th><th>Matrice</th><th>Description</th></tr></thead>
+        <tbody>
+            <tr><td>Rotation de \(\theta\)</td><td>\(\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\)</td><td>Tourne de \(\theta\) autour de O</td></tr>
+            <tr><td>Homothétie de rapport \(k\)</td><td>\(\begin{pmatrix}k&0\\0&k\end{pmatrix}\)</td><td>Dilate/contracte de facteur \(k\)</td></tr>
+            <tr><td>Symétrie / axe Ox</td><td>\(\begin{pmatrix}1&0\\0&-1\end{pmatrix}\)</td><td>Miroir horizontal</td></tr>
+            <tr><td>Symétrie / axe Oy</td><td>\(\begin{pmatrix}-1&0\\0&1\end{pmatrix}\)</td><td>Miroir vertical</td></tr>
+            <tr><td>Projection / Ox</td><td>\(\begin{pmatrix}1&0\\0&0\end{pmatrix}\)</td><td>Projette sur l'axe des \(x\)</td></tr>
+        </tbody>
+    </table></div>
+    <p><strong>Exemple :</strong> Rotation de 90° → \(\cos 90° = 0,\ \sin 90° = 1\) → \(M = \begin{pmatrix}0&-1\\1&0\end{pmatrix}\)</p>
+</section>
+
+<!-- ═══ 7. Pièges ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+    <div class="warning-box"><strong>⚠️ Piège n°1 :</strong> \(f(x,y) = x^2 + y\) n'est <strong>pas linéaire</strong>. Le \(x^2\) casse la linéarité. Tester avec \(f(\lambda u) = \lambda f(u)\).</div>
+    <div class="warning-box"><strong>⚠️ Piège n°2 :</strong> \(M(g \circ f) = M(g) \cdot M(f)\), <strong>pas</strong> \(M(f) \cdot M(g)\). L'ordre est inversé !</div>
+    <div class="warning-box"><strong>⚠️ Piège n°3 :</strong> Pour montrer l'injectivité, il ne suffit pas d'un exemple. Il faut prouver que \(\text{Ker}(f) = \{0\}\) systématiquement.</div>
+</section>
+
+<!-- ═══ 8. Récapitulatif ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-check-circle"></i> Récapitulatif</h2>
+    <div class="concept-card" style="border-left-color:var(--accent)">
+        <h4>📝 L'essentiel du Chapitre 3</h4>
+        <ul>
+            <li><strong>Linéaire</strong> : \(f(\lambda u + \mu v) = \lambda f(u) + \mu f(v)\)</li>
+            <li><strong>E.I.A.F.</strong> : Endomorphisme, Isomorphisme, Automorphisme, Forme linéaire</li>
+            <li><strong>Noyau</strong> : \(\text{Ker}(f) = \{0\}\) ⟹ injective</li>
+            <li><strong>Image</strong> : \(\text{Im}(f) = F\) ⟹ surjective</li>
+            <li><strong>Théorème du rang</strong> : \(\dim(\text{Ker}\,f) + \text{rg}(f) = \dim(E)\)</li>
+            <li><strong>Matrice</strong> : colonnes = images des vecteurs de base</li>
+            <li><strong>Composition</strong> : \(M(g \circ f) = M(g) \cdot M(f)\)</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ═══ 9. Exercices ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
+    <div id="chapter-exercises"></div>
+</section>
+
+<div class="chapter-nav">
+    <a href="chapitre2.html" class="prev-chapter"><i class="fas fa-arrow-left"></i> Espaces vectoriels</a>
+    <a href="formules.html" class="next-chapter">Formules <i class="fas fa-arrow-right"></i></a>
+</div>
+</main>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_algebre_progress',
+    badges:[
+        {id:'linear_master',name:'Maître Linéaire',icon:'🎯',desc:'Réussir les applications linéaires',xp:25},
+        {id:'rank_theorem',name:'Théorème du Rang',icon:'⚖️',desc:'Appliquer le théorème du rang',xp:30}
+    ],
+    levels:[
+        {min:0,title:'Débutant'},{min:30,title:'Apprenti Matriciel'},{min:80,title:'Calculateur Jr.'},
+        {min:150,title:'Algébriste'},{min:250,title:'Maître des Vecteurs'},{min:400,title:'Guru Linéaire'}
+    ],
+    tips:[
+        "f(0) = 0 est une condition NÉCESSAIRE pour la linéarité.",
+        "dim(Ker f) + dim(Im f) = dim(E) — le théorème du rang !",
+        "f injective ⟺ Ker(f) = {0}.",
+        "Colonnes de la matrice = images des vecteurs de base."
+    ]
+});
+GameEngine.init();
+
+ChapterExercises.init({
+    guided:[
+        {q:"Si f est linéaire, que vaut f(0) ?",hints:["f(0) = f(0·u)","= 0·f(u)","= 0"],answer:"0"},
+        {q:"Soit f : ℝ³→ℝ² linéaire. Si dim(Ker f)=1, que vaut dim(Im f) ?",hints:["Théorème du rang","dim(Ker)+dim(Im)=dim(E)","1+?=3"],answer:"2"},
+        {q:"Comment s'appelle une application linéaire bijective ?",hints:["C'est injective ET surjective","Commence par 'iso'",""],answer:"isomorphisme"},
+        {q:"La matrice d'une rotation de 90° dans ℝ² est [[0,?],[?,0]]. Quels sont les ? ?",hints:["cos 90°=0, sin 90°=1","1ère ligne : [cos,-sin]","[0,-1,1,0]"],answer:"−1 et 1"},
+        {q:"Si f : E→F linéaire avec dim(E)=4 et rg(f)=4, f est-elle injective ?",hints:["rg(f)=dim(Im f)=4","dim(Ker f)=4-4=0","Ker={0} ⟹ ?"],answer:"oui"}
+    ],
+    quiz:[
+        {type:"mcq",q:"f(x,y) = x² + y est-elle linéaire ?",options:["Oui","Non"],correct:1},
+        {type:"mcq",q:"Le théorème du rang dit :",options:["dim(Ker)+dim(Im)=dim(E)","dim(Ker)=dim(Im)","dim(E)=dim(F)","rg(f)=dim(E)"],correct:0},
+        {type:"qa",q:"Si Ker(f) = {0}, f est :",answer:["injective"]},
+        {type:"mcq",q:"La j-ème colonne de la matrice de f contient :",options:["Les coord. de f(eⱼ)","Les coord. de eⱼ","Le noyau de f","L'image de f"],correct:0},
+        {type:"mcq",q:"M(g∘f) = ?",options:["M(f)×M(g)","M(g)×M(f)","M(f)+M(g)","M(g)−M(f)"],correct:1},
+        {type:"qa",q:"Comment appelle-t-on une application linéaire de E dans E ?",answer:["endomorphisme"]},
+        {type:"mcq",q:"rg(f) ≤ ?",options:["min(dim E, dim F)","max(dim E, dim F)","dim E + dim F","dim E − dim F"],correct:0},
+        {type:"mcq",q:"La matrice d'une homothétie de rapport 3 dans ℝ² est :",options:["[[3,0],[0,3]]","[[3,3],[3,3]]","[[1,3],[3,1]]","[[0,3],[3,0]]"],correct:0},
+        {type:"qa",q:"Quel est le rg d'une application bijective f:ℝ³→ℝ³ ?",answer:["3"]},
+        {type:"mcq",q:"f surjective ⟺ ?",options:["Im(f)=F","Ker(f)={0}","rg(f)=0","dim(E)=dim(F)"],correct:0}
+    ],
+    dragdrop:[
+        {instruction:"Associe chaque transformation à sa matrice (ℝ²) :",pairs:[["Rotation 90°","[[0,−1],[1,0]]"],["Homothétie k","[[k,0],[0,k]]"],["Symétrie/Ox","[[1,0],[0,−1]]"],["Projection/Ox","[[1,0],[0,0]]"]]},
+        {instruction:"Associe chaque propriété de f à sa condition :",pairs:[["Injective","Ker(f) = {0}"],["Surjective","Im(f) = F"],["Bijective","Injective + Surjective"],["Non inversible","dim(Ker f) > 0"]]},
+        {instruction:"Remets dans l'ordre pour trouver la matrice de f :",pairs:[["Étape 1","Choisir des bases de E et F"],["Étape 2","Calculer f(e₁), f(e₂), ..."],["Étape 3","Écrire les coordonnées en colonnes"],["Étape 4","Former la matrice M(f)"]]}
+    ]
+});
+</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
+</body>
+</html>

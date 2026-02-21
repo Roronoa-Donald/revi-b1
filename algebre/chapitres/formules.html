@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formules & Mnémoniques | Algèbre Linéaire B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#a855f7;--accent-light:#c084fc;--accent-dark:#9333ea;--accent-glow:rgba(168,85,247,0.18)}.dark{--accent:#c084fc;--accent-light:#d8b4fe;--accent-dark:#a855f7;--accent-glow:rgba(192,132,252,0.18)}.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;margin:2rem 0}.formula-card{background:var(--card-bg);border-radius:18px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.06);border-left:4px solid var(--accent);transition:.2s}.formula-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1)}.formula-card h3{margin:0 0 .75rem;font-size:1.05rem;color:var(--accent)}.formula-card p,.formula-card code{font-size:.93rem;line-height:1.5}.formula-card .formula{font-family:'JetBrains Mono',monospace;background:var(--accent-glow);padding:.5rem .8rem;border-radius:8px;display:inline-block;margin:.5rem 0;font-size:.88rem}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="../../assets/css/print.css" media="print">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-square-root-variable"></i> MatriBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li><li><a href="formules.html" class="active">Formules</a></li>
+        <li><a href="cartes.html">Cartes</a></li><li><a href="simulateur-examen.html">Simulateur</a></li>
+        <li><a href="../exercices/exercices.html">Exercices</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📐 MatriBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Matrices</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Espaces vectoriels</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Applications linéaires</a>
+    <a href="formules.html" class="active"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-scroll"></i> Cheatsheet</div>
+    <h1>📐 Formules &amp; <span class="highlight">Mnémoniques</span></h1>
+    <p>Toutes les formules essentielles et astuces de mémorisation — en un seul endroit.</p>
+</section>
+
+<div class="pdf-export-bar" style="text-align:center;margin:0 auto 1rem;max-width:680px"><button onclick="window.print()" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.4rem;border-radius:0.5rem;border:1px solid var(--accent);background:rgba(var(--accent-rgb,16,185,129),0.1);color:var(--accent);font-size:0.85rem;font-weight:700;cursor:pointer;transition:0.2s" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='rgba(var(--accent-rgb,16,185,129),0.1)';this.style.color='var(--accent)'"><i class="fas fa-file-pdf"></i> Exporter en PDF</button></div>
+<main class="content-wrapper" data-print-title="Aide-Mémoire — Algèbre Linéaire">
+
+<!-- ═══ Mnémoniques ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-brain"></i> 10 Mnémoniques à retenir</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>#</th><th>Mnémonique</th><th>Signification</th><th>Ch.</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td><strong>C.D.I.T.S.</strong></td><td>Carrée · Diagonale · Identité · Triangulaire · Symétrique</td><td>1</td></tr>
+            <tr><td>2</td><td><strong>L.C.</strong></td><td>Ligne × Colonne (produit matriciel)</td><td>1</td></tr>
+            <tr><td>3</td><td><strong>ad − bc</strong></td><td>Déterminant 2×2</td><td>1</td></tr>
+            <tr><td>4</td><td><strong>Sarrus ↘ − ↗</strong></td><td>Diagonales descendantes (+) — montantes (−)</td><td>1</td></tr>
+            <tr><td>5</td><td><strong>[A|I] → [I|A⁻¹]</strong></td><td>Gauss-Jordan pour l'inversion</td><td>1</td></tr>
+            <tr><td>6</td><td><strong>A.C.N.I. × 2</strong></td><td>8 axiomes d'un espace vectoriel (4+4)</td><td>2</td></tr>
+            <tr><td>7</td><td><strong>N.A.M.</strong></td><td>Non-vide · Addition · Multiplication (test SEV)</td><td>2</td></tr>
+            <tr><td>8</td><td><strong>Base = Libre + Gén.</strong></td><td>Le « juste nécessaire »</td><td>2</td></tr>
+            <tr><td>9</td><td><strong>E.I.A.F.</strong></td><td>Endomorphisme · Isomorphisme · Automorphisme · Forme linéaire</td><td>3</td></tr>
+            <tr><td>10</td><td><strong>Ker = {0} ⟹ Inj.</strong></td><td>Noyau trivial → application injective</td><td>3</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- ═══ Ch.1 Formules ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-table-cells"></i> Chapitre 1 — Matrices</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h3>Taille du produit</h3>
+            <p>\(A\) de \(n \times m\) et \(B\) de \(m \times p\) :</p>
+            <span class="formula">\(AB\) est \(n \times p\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Transposée du produit</h3>
+            <span class="formula">\(^{t}(AB) = {^{t}\!B} \cdot {^{t}\!A}\)</span>
+            <p>L'ordre s'inverse !</p>
+        </div>
+        <div class="formula-card">
+            <h3>Déterminant 2×2</h3>
+            <span class="formula">\(\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad - bc\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Déterminant 3×3 (Sarrus)</h3>
+            <span class="formula">\(aei + bfg + cdh - ceg - bdi - afh\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Cofacteur</h3>
+            <span class="formula">\(C_{ij} = (-1)^{i+j} M_{ij}\)</span>
+            <p>\(M_{ij}\) = mineur (det de la sous-matrice)</p>
+        </div>
+        <div class="formula-card">
+            <h3>Inverse par cofacteurs</h3>
+            <span class="formula">\(A^{-1} = \frac{1}{\det(A)} \cdot {^{t}\text{Com}(A)}\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Inverse 2×2 express</h3>
+            <span class="formula">\(\frac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Det du produit</h3>
+            <span class="formula">\(\det(AB) = \det(A) \cdot \det(B)\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Det de l'inverse</h3>
+            <span class="formula">\(\det(A^{-1}) = \frac{1}{\det(A)}\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Det scalaire × matrice</h3>
+            <span class="formula">\(\det(\lambda A) = \lambda^n \det(A)\)</span>
+            <p>Pour \(A \in \mathcal{M}_n\)</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Ch.2 Formules ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-arrows-alt"></i> Chapitre 2 — Espaces Vectoriels</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h3>SEV — 3 tests</h3>
+            <p><strong>N</strong>on-vide (\(0 \in F\))<br><strong>A</strong>ddition stable<br><strong>M</strong>ultiplication stable</p>
+        </div>
+        <div class="formula-card">
+            <h3>Famille libre</h3>
+            <span class="formula">\(\sum \lambda_i v_i = 0 \Rightarrow\) tous \(\lambda_i = 0\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Base</h3>
+            <span class="formula">Libre + Génératrice</span>
+            <p>\(\dim(E)\) = nombre de vecteurs de la base</p>
+        </div>
+        <div class="formula-card">
+            <h3>Dimensions classiques</h3>
+            <p>\(\dim(\mathbb{R}^n) = n\)<br>\(\dim(\mathbb{R}_n[X]) = n+1\)<br>\(\dim(\mathcal{M}_{n,p}) = np\)</p>
+        </div>
+        <div class="formula-card">
+            <h3>Formule de Grassmann</h3>
+            <span class="formula">\(\dim(F_1{+}F_2) = \dim F_1 + \dim F_2 - \dim(F_1 \cap F_2)\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Somme directe</h3>
+            <span class="formula">\(F_1 \oplus F_2 \iff F_1 \cap F_2 = \{0\}\)</span>
+            <p>Alors \(\dim(F_1 \oplus F_2) = \dim F_1 + \dim F_2\)</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Ch.3 Formules ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-exchange-alt"></i> Chapitre 3 — Applications Linéaires</h2>
+    <div class="formula-grid">
+        <div class="formula-card">
+            <h3>Définition</h3>
+            <span class="formula">\(f(\lambda u + \mu v) = \lambda f(u) + \mu f(v)\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Théorème du rang</h3>
+            <span class="formula">\(\dim(\text{Ker}\,f) + \text{rg}(f) = \dim(E)\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Injectivité</h3>
+            <span class="formula">\(f\) injective \(\iff \text{Ker}(f) = \{0\}\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Surjectivité</h3>
+            <span class="formula">\(f\) surjective \(\iff \text{Im}(f) = F\)</span>
+        </div>
+        <div class="formula-card">
+            <h3>Matrice de \(f\)</h3>
+            <p>Colonne \(j\) = coordonnées de \(f(e_j)\) dans \(\mathcal{B}_F\)</p>
+        </div>
+        <div class="formula-card">
+            <h3>Composition</h3>
+            <span class="formula">\(M(g \circ f) = M(g) \cdot M(f)\)</span>
+            <p>Ordre inversé !</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ Transformations géométriques ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-sync-alt"></i> Matrices des transformations (ℝ²)</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Transformation</th><th>Matrice</th></tr></thead>
+        <tbody>
+            <tr><td>Rotation \(\theta\)</td><td>\(\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}\)</td></tr>
+            <tr><td>Homothétie \(k\)</td><td>\(\begin{pmatrix}k&0\\0&k\end{pmatrix}\)</td></tr>
+            <tr><td>Symétrie / Ox</td><td>\(\begin{pmatrix}1&0\\0&-1\end{pmatrix}\)</td></tr>
+            <tr><td>Symétrie / Oy</td><td>\(\begin{pmatrix}-1&0\\0&1\end{pmatrix}\)</td></tr>
+            <tr><td>Projection / Ox</td><td>\(\begin{pmatrix}1&0\\0&0\end{pmatrix}\)</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+<!-- ═══ Comparaison Gauss vs Cofacteurs ═══ -->
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-scale-balanced"></i> Gauss-Jordan vs Cofacteurs</h2>
+    <div class="styled-table-container"><table class="styled-table">
+        <thead><tr><th>Critère</th><th>Gauss-Jordan</th><th>Cofacteurs</th></tr></thead>
+        <tbody>
+            <tr><td>Principe</td><td>\([A|I] \to [I|A^{-1}]\)</td><td>\(\frac{1}{\det} \cdot {^{t}\text{Com}(A)}\)</td></tr>
+            <tr><td>Taille idéale</td><td>Toutes, surtout \(\geq 3\)</td><td>2×2, éventuellement 3×3</td></tr>
+            <tr><td>Approche</td><td>Algorithmique</td><td>Formule directe</td></tr>
+            <tr><td>Erreurs</td><td>Faible si méthodique</td><td>Élevé pour \(n \geq 4\)</td></tr>
+            <tr><td>Examen</td><td>✅ Universel</td><td>✅ Rapide pour 2×2</td></tr>
+            <tr><td>Pré-requis</td><td>Opérations sur lignes</td><td>Calcul de \(\det\) et cofacteurs</td></tr>
+            <tr><td>Donne aussi</td><td>Le rang de \(A\)</td><td>Seulement \(A^{-1}\)</td></tr>
+        </tbody>
+    </table></div>
+</section>
+
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_algebre_progress'});GameEngine.init();</script>
+</body>
+</html>

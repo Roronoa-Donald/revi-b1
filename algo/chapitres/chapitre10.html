@@ -28,12 +28,18 @@
 <div class="mobile-nav-panel" id="mobile-nav">
     <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
     <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
-    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
-    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
-    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
-    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
-    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
     <a href="chapitre10.html" class="active"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
 </div>
 
 <section class="hero-section" id="main-content">
@@ -44,6 +50,17 @@
 
 <main class="content-wrapper">
     <!-- 10.1 Pourquoi -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Lire et écrire dans des fichiers texte</li>
+                <li>Connaître les modes d'ouverture (lecture, écriture, ajout)</li>
+                <li>Traiter un fichier ligne par ligne</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-question-circle"></i> 10.1 — Pourquoi mesurer la complexité ?</h2>
         <div class="analogy-box"><span class="icon">🏎️</span><div><strong>Analogie — Les voitures :</strong> Deux voitures vont de Paris à Lyon. L'une prend l'autoroute (rapide mais péage), l'autre les routes nationales (lent mais gratuit). La complexité mesure le « coût » d'un algorithme : combien de temps (temporel) et combien de mémoire (spatial).</div></div>
@@ -161,6 +178,27 @@ FinPour</pre>
                     <tr><td>10. Complexité</td><td>Grand O</td><td>CD + CLLQQE</td></tr>
                 </tbody>
             </table>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-tools"></i> Méthode : Analyser la Complexité d'un Algorithme</h2>
+        <div class="card" style="border-left:4px solid var(--accent);padding:1.5rem">
+            <p><strong>Étape 1 :</strong> Identifier les boucles</p>
+            <ul><li>Pas de boucle → O(1)</li><li>1 boucle de 1 à N → O(n)</li><li>2 boucles imbriquées de 1 à N → O(n²)</li><li>Boucle qui divise par 2 → O(log n)</li></ul>
+            <p style="margin-top:1rem"><strong>Étape 2 :</strong> Appliquer les règles de combinaison</p>
+            <ul><li>Séquentiel : O(f) puis O(g) → O(max(f,g))</li><li>Imbriqué : O(f) dans O(g) → O(f × g)</li><li>Ignorer les constantes : O(3n) = O(n)</li><li>Garder le terme dominant : O(n² + n) = O(n²)</li></ul>
+            <p style="margin-top:1rem"><strong>Étape 3 :</strong> Cas courants à reconnaître</p>
+            <table style="width:100%;font-size:0.85rem;border-collapse:collapse;margin-top:0.5rem">
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem">Accès direct (tableau[i])</td><td style="color:var(--accent);font-weight:700">O(1)</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem">Recherche dichotomique</td><td style="color:var(--accent);font-weight:700">O(log n)</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem">Parcours simple</td><td style="color:var(--accent);font-weight:700">O(n)</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem">Tri efficace (fusion)</td><td style="color:var(--accent);font-weight:700">O(n log n)</td></tr>
+                <tr style="border-bottom:1px solid var(--border)"><td style="padding:0.3rem">Tri basique (sélection, bulles)</td><td style="color:var(--accent);font-weight:700">O(n²)</td></tr>
+                <tr><td style="padding:0.3rem">Fibonacci naïf</td><td style="color:#ef4444;font-weight:700">O(2ⁿ) ⚠️</td></tr>
+            </table>
+            <p style="margin-top:1rem"><strong>Étape 4 :</strong> Vérifier avec un exemple concret</p>
+            <ul><li>Pour n = 1000 : O(n²) = 1 000 000 opérations</li><li>Pour n = 1000 : O(log n) = ~10 opérations seulement !</li></ul>
         </div>
     </section>
 

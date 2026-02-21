@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 4 — Architecture d'un PC | ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .mem-pyramid{display:flex;flex-direction:column;align-items:center;gap:.3rem;margin:1.5rem auto;max-width:500px}
+        .mem-pyramid .mem-level{display:flex;align-items:center;justify-content:center;text-align:center;padding:.6rem 1rem;border-radius:8px;font-weight:600;color:#fff;font-size:.85rem;transition:transform .3s}
+        .mem-pyramid .mem-level:hover{transform:scale(1.05)}
+        .bus-diagram{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin:1.5rem auto;padding:1.5rem;border-radius:12px;background:var(--accent-glow);max-width:550px}
+        .bus-row{display:flex;align-items:center;gap:1rem;width:100%}
+        .bus-label{flex:0 0 120px;font-weight:700;font-size:.9rem;text-align:right}
+        .bus-bar{flex:1;height:12px;border-radius:6px;position:relative}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="chapitre4.html" class="active">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Généralités</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Numération</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Circuits logiques</a>
+    <a href="chapitre4.html" class="active"><i class="fas fa-book-open"></i> Ch.4 — Architecture PC</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-microchip"></i> Chapitre 4 — ATO</div>
+    <h1>Architecture d'un <span class="highlight">Ordinateur</span></h1>
+    <p>Modèle de Von Neumann, CPU, mémoire hiérarchique, bus système et entrées/sorties.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- 4.1 Von Neumann -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-landmark"></i> 4.1 — Le modèle de Von Neumann</h2>
+
+        <div class="concept-card">
+            <h4>📋 Principe fondamental</h4>
+            <p>En 1945, John Von Neumann propose un modèle d'architecture où les <strong>données et le programme partagent la même mémoire</strong>. C'est le modèle que suivent encore tous les ordinateurs modernes.</p>
+        </div>
+
+        <h3>Les 5 composants du modèle</h3>
+        <table class="styled-table">
+            <thead><tr><th>Composant</th><th>Rôle</th><th>Analogie humaine</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Unité de Commande (UC)</strong></td><td>Cherche, décode et ordonne l'exécution des instructions</td><td>Le chef d'orchestre</td></tr>
+                <tr><td><strong>Unité Arithmétique et Logique (UAL)</strong></td><td>Effectue calculs (+, −, ×, ÷) et opérations logiques (AND, OR…)</td><td>Le calculateur</td></tr>
+                <tr><td><strong>Mémoire centrale</strong></td><td>Stocke programmes et données en cours d'utilisation</td><td>Le bureau de travail</td></tr>
+                <tr><td><strong>Entrées</strong></td><td>Reçoit les données de l'extérieur (clavier, souris, capteur…)</td><td>Les yeux et les oreilles</td></tr>
+                <tr><td><strong>Sorties</strong></td><td>Envoie les résultats (écran, imprimante, haut-parleur…)</td><td>La bouche et les mains</td></tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Architecture Harvard :</strong> Variante avec mémoire programme et mémoire données séparées. Utilisée dans les microcontrôleurs (Arduino, PIC). Avantage : accès simultané aux données et instructions.</div>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div><strong>Mnémo Von Neumann — « MUCES » :</strong> <strong>M</strong>émoire, <strong>U</strong>C, <strong>C</strong>alculateur (UAL), <strong>E</strong>ntrées, <strong>S</strong>orties.</div>
+        </div>
+    </section>
+
+    <!-- 4.2 Le processeur (CPU) -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-microchip"></i> 4.2 — Le processeur (CPU)</h2>
+
+        <div class="concept-card">
+            <h4>📋 Structure du CPU</h4>
+            <p>Le CPU (<em>Central Processing Unit</em>) est le « cerveau » de l'ordinateur. Il contient :</p>
+            <ul>
+                <li><strong>UAL</strong> — effectue les calculs</li>
+                <li><strong>UC (Unité de Commande)</strong> — pilote le séquencement</li>
+                <li><strong>Registres</strong> — mémoires ultra-rapides internes</li>
+                <li><strong>Horloge</strong> — cadence le CPU (en GHz)</li>
+            </ul>
+        </div>
+
+        <h3>Les registres principaux</h3>
+        <table class="styled-table">
+            <thead><tr><th>Registre</th><th>Nom complet</th><th>Rôle</th></tr></thead>
+            <tbody>
+                <tr><td><strong>PC</strong> (CO)</td><td>Program Counter / Compteur Ordinal</td><td>Adresse de la prochaine instruction</td></tr>
+                <tr><td><strong>IR</strong> (RI)</td><td>Instruction Register</td><td>Contient l'instruction en cours</td></tr>
+                <tr><td><strong>MAR</strong> (RA)</td><td>Memory Address Register</td><td>Adresse mémoire à lire/écrire</td></tr>
+                <tr><td><strong>MBR</strong> (RD)</td><td>Memory Buffer Register</td><td>Donnée lue/à écrire en mémoire</td></tr>
+                <tr><td><strong>ACC</strong></td><td>Accumulateur</td><td>Stocke les résultats intermédiaires de l'UAL</td></tr>
+                <tr><td><strong>SP</strong></td><td>Stack Pointer</td><td>Pointe vers le sommet de la pile</td></tr>
+                <tr><td><strong>SR / FLAGS</strong></td><td>Status Register</td><td>Drapeaux : Z (zéro), C (carry), N (négatif), V (overflow)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Le cycle d'instruction (Fetch-Decode-Execute)</h3>
+        <div class="concept-card" style="border-left:4px solid var(--accent)">
+            <h4>⚡ Les 3 étapes fondamentales</h4>
+            <ol>
+                <li><strong>FETCH (Recherche)</strong> — L'UC copie PC → MAR, lit la mémoire[MAR] → MBR → IR, incrémente PC</li>
+                <li><strong>DECODE (Décodage)</strong> — L'UC analyse IR : identifie l'opcode (opération) et les opérandes (données)</li>
+                <li><strong>EXECUTE (Exécution)</strong> — L'UAL effectue l'opération, le résultat va dans ACC ou en mémoire</li>
+            </ol>
+            <p>Ce cycle se répète <strong>des milliards de fois par seconde</strong> (1 GHz = 10⁹ cycles/s).</p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">🍳</span>
+            <div>
+                <strong>Analogie — Cuisiner :</strong><br>
+                <strong>FETCH</strong> = aller chercher la recette dans le livre (mémoire).<br>
+                <strong>DECODE</strong> = lire et comprendre l'étape « battre 2 œufs ».<br>
+                <strong>EXECUTE</strong> = casser les œufs et battre. Puis on passe à l'étape suivante (PC++).
+            </div>
+        </div>
+
+        <h3>CISC vs RISC</h3>
+        <table class="styled-table">
+            <thead><tr><th>Critère</th><th>CISC</th><th>RISC</th></tr></thead>
+            <tbody>
+                <tr><td>Signification</td><td>Complex Instruction Set Computer</td><td>Reduced Instruction Set Computer</td></tr>
+                <tr><td>Instructions</td><td>Nombreuses, complexes</td><td>Peu, simples</td></tr>
+                <tr><td>Cycles/instruction</td><td>Variable (1 à 20+)</td><td>1 (objectif)</td></tr>
+                <tr><td>Exemples</td><td>x86 (Intel, AMD)</td><td>ARM, RISC-V, MIPS</td></tr>
+                <tr><td>Usage</td><td>PC de bureau, serveurs</td><td>Smartphones, embarqué, Apple M1/M2</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- 4.3 Mémoire hiérarchique -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-layer-group"></i> 4.3 — La hiérarchie mémoire</h2>
+
+        <div class="concept-card">
+            <h4>📋 Principe</h4>
+            <p>Plus une mémoire est <strong>rapide</strong>, plus elle est <strong>petite</strong> et <strong>chère</strong>. On organise les mémoires en pyramide : en haut le plus rapide, en bas le plus volumineux.</p>
+        </div>
+
+        <div class="mem-pyramid">
+            <div class="mem-level" style="width:30%;background:#e11d48">Registres<br><small>~1 ns, ~Ko</small></div>
+            <div class="mem-level" style="width:42%;background:#f43f5e">Cache L1/L2/L3<br><small>~2-20 ns, ~Mo</small></div>
+            <div class="mem-level" style="width:58%;background:#fb7185">RAM (DRAM)<br><small>~50-100 ns, ~Go</small></div>
+            <div class="mem-level" style="width:74%;background:#6366f1">SSD / Disque dur<br><small>~μs-ms, ~To</small></div>
+            <div class="mem-level" style="width:90%;background:#64748b">Stockage distant (Cloud)<br><small>~ms-s, ~∞</small></div>
+        </div>
+
+        <h3>Types de mémoire</h3>
+        <table class="styled-table">
+            <thead><tr><th>Type</th><th>Volatile ?</th><th>Accès</th><th>Usage</th></tr></thead>
+            <tbody>
+                <tr><td><strong>SRAM</strong></td><td>Oui</td><td>Très rapide (~1-2 ns)</td><td>Cache CPU</td></tr>
+                <tr><td><strong>DRAM</strong></td><td>Oui</td><td>Rapide (~50-100 ns)</td><td>RAM principale (DDR4, DDR5)</td></tr>
+                <tr><td><strong>ROM</strong></td><td>Non</td><td>Lent</td><td>BIOS/UEFI, firmware</td></tr>
+                <tr><td><strong>EEPROM/Flash</strong></td><td>Non</td><td>Moyen</td><td>SSD, clés USB, cartes SD</td></tr>
+                <tr><td><strong>HDD</strong></td><td>Non</td><td>Lent (mécanique)</td><td>Stockage de masse</td></tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo :</strong> La pyramide mémoire c'est comme un bureau :
+                Les <strong>registres</strong> = ce que tu tiens en main (ultra-rapide, très peu).
+                Le <strong>cache</strong> = les post-it sur l'écran.
+                La <strong>RAM</strong> = le bureau devant toi.
+                Le <strong>disque dur</strong> = les tiroirs du bureau.
+                Le <strong>cloud</strong> = les archives au sous-sol.
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Cache :</strong> Le cache exploite le <strong>principe de localité</strong> — temporelle (si on accède à une donnée, on y accédera bientôt à nouveau) et spatiale (les données voisines seront probablement accédées aussi).</div>
+        </div>
+    </section>
+
+    <!-- 4.4 Bus système -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-road"></i> 4.4 — Les bus système</h2>
+
+        <div class="concept-card">
+            <h4>📋 Définition</h4>
+            <p>Un <strong>bus</strong> est un ensemble de lignes (fils) qui transporte des signaux entre les composants de l'ordinateur. Il y a 3 types de bus :</p>
+        </div>
+
+        <div class="bus-diagram">
+            <div class="bus-row"><span class="bus-label">Bus de données</span><div class="bus-bar" style="background:linear-gradient(90deg,#f43f5e,#fb7185)"></div><span style="font-size:.8rem;font-weight:600">32/64 bits</span></div>
+            <div class="bus-row"><span class="bus-label">Bus d'adresses</span><div class="bus-bar" style="background:linear-gradient(90deg,#6366f1,#818cf8)"></div><span style="font-size:.8rem;font-weight:600">32/64 bits</span></div>
+            <div class="bus-row"><span class="bus-label">Bus de contrôle</span><div class="bus-bar" style="background:linear-gradient(90deg,#10b981,#34d399)"></div><span style="font-size:.8rem;font-weight:600">R/W, IRQ…</span></div>
+        </div>
+
+        <table class="styled-table">
+            <thead><tr><th>Bus</th><th>Direction</th><th>Transporte</th><th>Détails</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Bus de données</strong></td><td>Bidirectionnel</td><td>Les données</td><td>Largeur = nombre de bits traités (32/64 bits)</td></tr>
+                <tr><td><strong>Bus d'adresses</strong></td><td>Unidirectionnel (CPU→mémoire)</td><td>Les adresses mémoire</td><td>n bits → 2ⁿ adresses possibles (32 bits = 4 Go max)</td></tr>
+                <tr><td><strong>Bus de contrôle</strong></td><td>Bidirectionnel</td><td>Les signaux de commande</td><td>R/W (lecture/écriture), IRQ (interruption), CLK (horloge)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="analogy-box">
+            <span class="icon">🚌</span>
+            <div>
+                <strong>Analogie — L'autoroute :</strong><br>
+                Le <strong>bus de données</strong> = les voies de circulation (plus il y en a, plus de débit).<br>
+                Le <strong>bus d'adresses</strong> = les panneaux de sortie (indique la destination).<br>
+                Le <strong>bus de contrôle</strong> = les feux et la signalisation (commande le trafic).
+            </div>
+        </div>
+
+        <div class="example-box">
+            <h4>📝 Calcul : mémoire adressable</h4>
+            <p>Bus d'adresses de <strong>32 bits</strong> : 2³² = 4 294 967 296 octets = <strong>4 Go</strong> (max RAM en 32 bits)</p>
+            <p>Bus d'adresses de <strong>64 bits</strong> : 2⁶⁴ = 16 Eio ≈ 18,4 × 10¹⁸ octets (en théorie !)</p>
+        </div>
+    </section>
+
+    <!-- 4.5 Entrées/Sorties -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-plug"></i> 4.5 — Les entrées/sorties (E/S)</h2>
+
+        <div class="concept-card">
+            <h4>📋 Modes de gestion des E/S</h4>
+            <table class="styled-table">
+                <thead><tr><th>Mode</th><th>Principe</th><th>Avantage</th><th>Inconvénient</th></tr></thead>
+                <tbody>
+                    <tr><td><strong>Polling (scrutation)</strong></td><td>Le CPU interroge régulièrement le périphérique</td><td>Simple</td><td>Gaspille du temps CPU</td></tr>
+                    <tr><td><strong>Interruption</strong></td><td>Le périphérique signale au CPU quand il est prêt</td><td>CPU libre entre-temps</td><td>Plus complexe</td></tr>
+                    <tr><td><strong>DMA (Direct Memory Access)</strong></td><td>Le périphérique transfère directement en RAM sans passer par le CPU</td><td>Très performant</td><td>Nécessite un contrôleur DMA</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">📬</span>
+            <div>
+                <strong>Analogie — Le courrier :</strong><br>
+                <strong>Polling</strong> = aller vérifier la boîte aux lettres toutes les 5 minutes.<br>
+                <strong>Interruption</strong> = la sonnette retentit quand le facteur arrive.<br>
+                <strong>DMA</strong> = le facteur dépose le courrier directement sur votre bureau.
+            </div>
+        </div>
+    </section>
+
+    <!-- 4.6 Performances -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-tachometer-alt"></i> 4.6 — Performances du processeur</h2>
+
+        <div class="concept-card">
+            <h4>📋 Facteurs de performance</h4>
+            <ul>
+                <li><strong>Fréquence d'horloge</strong> — Plus de GHz = plus de cycles/seconde</li>
+                <li><strong>Nombre de cœurs</strong> — Traitement parallèle (dual, quad, octa…)</li>
+                <li><strong>Pipeline</strong> — Découpe le cycle Fetch-Decode-Execute en étapes parallélisées</li>
+                <li><strong>Taille du cache</strong> — Plus de cache = moins d'accès lents à la RAM</li>
+                <li><strong>Largeur du bus</strong> — 64 bits transfère 2× plus que 32 bits par cycle</li>
+            </ul>
+        </div>
+
+        <div class="example-box">
+            <h4>📝 Pipeline — le principe de la chaîne de montage</h4>
+            <p>Sans pipeline : une instruction doit finir avant que la suivante commence (3 cycles par instruction).</p>
+            <p>Avec pipeline (3 étages) :</p>
+            <table class="styled-table" style="font-size:.85rem">
+                <thead><tr><th>Cycle</th><th>Étage 1 (Fetch)</th><th>Étage 2 (Decode)</th><th>Étage 3 (Execute)</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>Instr. 1</td><td>—</td><td>—</td></tr>
+                    <tr><td>2</td><td>Instr. 2</td><td>Instr. 1</td><td>—</td></tr>
+                    <tr><td>3</td><td>Instr. 3</td><td>Instr. 2</td><td>Instr. 1</td></tr>
+                    <tr><td>4</td><td>Instr. 4</td><td>Instr. 3</td><td>Instr. 2</td></tr>
+                </tbody>
+            </table>
+            <p>Résultat : après le remplissage initial, <strong>1 instruction terminée par cycle</strong> au lieu d'1 tous les 3 cycles !</p>
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Hyper-Threading (Intel) / SMT (AMD) :</strong> Chaque cœur physique simule 2 cœurs logiques pour mieux utiliser les ressources du pipeline inutilisées.</div>
+        </div>
+    </section>
+
+    <!-- RÉSUMÉ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-clipboard-list"></i> Résumé du chapitre</h2>
+        <div class="concept-card">
+            <h4>🔑 Points clés</h4>
+            <ul>
+                <li><strong>Von Neumann :</strong> 5 composants — UC, UAL, Mémoire, Entrées, Sorties</li>
+                <li><strong>CPU :</strong> UAL + UC + Registres + Horloge</li>
+                <li><strong>Cycle :</strong> Fetch → Decode → Execute (milliards/seconde)</li>
+                <li><strong>Registres clés :</strong> PC, IR, MAR, MBR, ACC, SP, FLAGS</li>
+                <li><strong>Hiérarchie mémoire :</strong> Registres > Cache > RAM > SSD/HDD > Cloud</li>
+                <li><strong>3 bus :</strong> Données (bidirectionnel), Adresses (unidirectionnel), Contrôle</li>
+                <li><strong>E/S :</strong> Polling < Interruption < DMA (en performance)</li>
+                <li><strong>Pipeline :</strong> exécution chevauche fetch de l'instruction suivante</li>
+                <li><strong>CISC vs RISC :</strong> complexe/flexible vs simple/rapide</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- EXERCICES -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre3.html"><i class="fas fa-arrow-left"></i> Chapitre 3 — Circuits logiques</a>
+        <a href="formules.html">Formules <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_ato_progress',
+    badges:[{id:'von_neumann',name:'Von Neumann Fan',icon:'🏛️',desc:'Modèle maîtrisé',xp:20},{id:'pipeline_pro',name:'Pipeline Pro',icon:'🔄',desc:'Cycle CPU compris',xp:25}],
+    levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti Hardware'},{min:80,title:'Technicien Jr.'},{min:150,title:'Architecte'},{min:250,title:'Ingénieur Système'},{min:400,title:'Guru du Silicium'}],
+    tips:["Von Neumann : données et programme dans la même mémoire.","Fetch-Decode-Execute, des milliards de fois par seconde.","Plus la mémoire est rapide, plus elle est petite et chère.","DMA libère le CPU des transferts de données."]
+});
+GameEngine.init();
+
+ChapterExercises.init({
+    guided:[
+        {q:"Quels sont les 5 composants du modèle Von Neumann ?",hints:["UC et UAL","Mémoire centrale","Entrées et Sorties"],answer:"UC, UAL, Mémoire, Entrées, Sorties"},
+        {q:"Quel registre contient l'adresse de la prochaine instruction ?",hints:["C'est le compteur…","Program Counter","Il s'incrémente à chaque fetch"],answer:"PC (Program Counter / Compteur Ordinal)"},
+        {q:"Bus d'adresses 32 bits → combien d'adresses ?",hints:["2 puissance n","2³² = ?","~4 milliards"],answer:"2³² = 4 294 967 296 = 4 Go"},
+        {q:"Quelle technique E/S libère le CPU pendant les transferts mémoire ?",hints:["Direct Memory…","Le périphérique écrit lui-même en RAM","3 lettres"],answer:"DMA (Direct Memory Access)"},
+        {q:"Qu'est-ce que le pipeline ?",hints:["Chaîne de montage","Fetch pendant que Decode et Execute","Chevauchement des étapes"],answer:"Technique qui chevauche les étapes Fetch, Decode, Execute pour exécuter ~1 instruction/cycle"}
+    ],
+    quiz:[
+        {type:"mcq",q:"Modèle Von Neumann : données et programme sont…",options:["En mémoires séparées","Dans la même mémoire","Sur le bus","Dans les registres uniquement"],correct:1},
+        {type:"mcq",q:"Le registre IR contient :",options:["L'adresse suivante","L'instruction en cours","Le résultat du calcul","Le sommet de la pile"],correct:1},
+        {type:"mcq",q:"Le cycle d'instruction :",options:["Fetch → Execute → Decode","Decode → Fetch → Execute","Fetch → Decode → Execute","Execute → Decode → Fetch"],correct:2},
+        {type:"mcq",q:"Mémoire la plus rapide :",options:["DRAM","Cache L3","Registres","SSD"],correct:2},
+        {type:"mcq",q:"Le bus d'adresses est :",options:["Bidirectionnel","Unidirectionnel (CPU→mémoire)","Unidirectionnel (mémoire→CPU)","Tri-directionnel"],correct:1},
+        {type:"qa",q:"CISC vs RISC : lequel a des instructions simples ?",answer:["RISC","risc"]},
+        {type:"mcq",q:"DMA signifie :",options:["Direct Memory Access","Data Memory Allocation","Dynamic Module Architecture","Dual Mode Authentication"],correct:0},
+        {type:"mcq",q:"32 bits d'adresses = combien de RAM max ?",options:["2 Go","4 Go","8 Go","16 Go"],correct:1},
+        {type:"mcq",q:"Le polling c'est :",options:["Le CPU attend un signal","Le CPU interroge régulièrement","Le périphérique écrit en RAM","Le DMA transfert"],correct:1},
+        {type:"mcq",q:"Le pipeline permet :",options:["D'augmenter la fréquence","De chevaucher les étapes d'instruction","De doubler la RAM","De supprimer le cache"],correct:1}
+    ],
+    dragdrop:[
+        {instruction:"Associe chaque registre à son rôle :",pairs:[["PC","Adresse prochaine instruction"],["IR","Instruction en cours"],["MAR","Adresse mémoire"],["ACC","Résultat de l'UAL"]]},
+        {instruction:"Classe les mémoires de la plus rapide à la plus lente :",pairs:[["1er","Registres"],["2ème","Cache"],["3ème","RAM"],["4ème","SSD/HDD"]]},
+        {instruction:"Associe chaque mode E/S :",pairs:[["Polling","CPU interroge en boucle"],["Interruption","Périphérique signale CPU"],["DMA","Transfert direct en RAM"]]}
+    ]
+});
+</script>
+</body>
+</html>

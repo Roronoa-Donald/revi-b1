@@ -28,12 +28,18 @@
 <div class="mobile-nav-panel" id="mobile-nav">
     <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
     <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
-    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
-    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
-    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a><a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6</a>
-    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
+    <a href="chapitre6.html"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
     <a href="chapitre8.html" class="active"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
-    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a><a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
 </div>
 
 <section class="hero-section" id="main-content">
@@ -44,6 +50,17 @@
 
 <main class="content-wrapper">
     <!-- 8.1 Principe -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Comprendre le principe de la récursivité</li>
+                <li>Identifier le cas de base et le cas récursif</li>
+                <li>Tracer l'exécution d'un appel récursif (pile d'appels)</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-sync-alt"></i> 8.1 — Le principe de la récursivité</h2>
         <div class="concept-card"><h4>🔄 Définition</h4>
@@ -153,6 +170,22 @@ Factorielle(<span class="number">4</span>) = <span class="number">4</span> × Fa
                 <li><strong>Pile d'appels</strong> : LIFO (crêpes)</li>
                 <li><strong>Stack Overflow</strong> : quand il manque le cas de base</li>
             </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-tools"></i> Méthode : Écrire une Fonction Récursive</h2>
+        <div class="card" style="border-left:4px solid var(--accent);padding:1.5rem">
+            <p><strong>Étape 1 :</strong> Identifier le cas de base (condition d'arrêt)</p>
+            <ul><li>Quel est le cas le plus simple ? Ex: n = 0, tableau vide, chaîne vide</li><li>Quelle valeur retourner ? Ex: fact(0) = 1, fib(0) = 0</li></ul>
+            <p style="margin-top:1rem"><strong>Étape 2 :</strong> Identifier la réduction du problème</p>
+            <ul><li>Comment le problème de taille n se ramène à un problème de taille n−1 ?</li><li>Ex: fact(n) = n × fact(n−1), fib(n) = fib(n−1) + fib(n−2)</li></ul>
+            <p style="margin-top:1rem"><strong>Étape 3 :</strong> Vérifier la terminaison</p>
+            <ul><li>Chaque appel récursif doit se rapprocher du cas de base</li><li>Si n diminue à chaque appel → terminaison garantie ✅</li><li>Sinon → boucle infinie (Stack Overflow) ⚠️</li></ul>
+            <p style="margin-top:1rem"><strong>Étape 4 :</strong> Tracer à la main avec n petit</p>
+            <ul><li>Dépiler les appels pour vérifier le résultat</li><li>Ex: fact(3) → 3×fact(2) → 3×2×fact(1) → 3×2×1×fact(0) → 3×2×1×1 = 6 ✅</li></ul>
+            <p style="margin-top:1rem"><strong>Checklist mnémotechnique : B.R.T.</strong></p>
+            <ul><li><strong>B</strong>ase — Le cas d'arrêt est défini</li><li><strong>R</strong>éduction — Chaque appel réduit le problème</li><li><strong>T</strong>est — Vérifier à la main avec un petit exemple</li></ul>
         </div>
     </section>
 

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards — ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0}
+        .filter-btn{padding:.5rem 1rem;border-radius:20px;border:2px solid var(--accent);background:transparent;color:var(--text,#e2e8f0);font-weight:600;cursor:pointer;transition:all .3s}
+        .filter-btn.active,.filter-btn:hover{background:var(--accent);color:#fff}
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin:2rem 0}
+        .flip-card{perspective:1000px;height:220px;cursor:pointer}
+        .flip-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+        .flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+        .flip-card-front,.flip-card-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:1.5rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+        .flip-card-front{background:var(--card,#1e293b);border:2px solid var(--accent)}
+        .flip-card-back{background:var(--accent);color:#fff;transform:rotateY(180deg)}
+        .flip-card-front h3{font-size:1.05rem;color:var(--accent);margin-bottom:.5rem}
+        .flip-card-back p{font-size:.95rem;line-height:1.5}
+        .card-tag{font-size:.7rem;padding:.2rem .6rem;border-radius:10px;background:var(--accent-glow);color:var(--accent);font-weight:700;margin-bottom:.5rem}
+        .flip-card-back .card-tag{background:rgba(255,255,255,.2);color:#fff}
+        .counter{text-align:center;margin:1rem 0;font-weight:600;color:var(--accent)}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html" class="active"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-layer-group"></i> Flashcards</div>
+    <h1>Cartes <span class="highlight">Mémoire</span></h1>
+    <p>30 flashcards — clique pour retourner. Filtre par chapitre.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-tag="all">Tout (30)</button>
+        <button class="filter-btn" data-tag="ch1">Ch.1 Généralités</button>
+        <button class="filter-btn" data-tag="ch2">Ch.2 Numération</button>
+        <button class="filter-btn" data-tag="ch3">Ch.3 Circuits</button>
+        <button class="filter-btn" data-tag="ch4">Ch.4 Architecture</button>
+    </div>
+    <div class="counter" id="counter"></div>
+    <div class="cards-grid" id="cardsGrid"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const CARDS=[
+// Ch.1 Généralités (8)
+{q:"Quelle est la première machine à calculer mécanique ?",a:"La Pascaline (1642), inventée par Blaise Pascal.",tag:"ch1"},
+{q:"Quelles sont les 5 générations d'ordinateurs ?",a:"1. Tubes à vide  2. Transistors  3. Circuits intégrés  4. Microprocesseurs  5. IA/Quantique",tag:"ch1"},
+{q:"Quel composant a remplacé le tube à vide ?",a:"Le transistor (1947, Bell Labs). Plus petit, plus fiable, moins de chaleur.",tag:"ch1"},
+{q:"Que dit la loi de Moore ?",a:"Le nombre de transistors sur un circuit intégré double environ tous les 2 ans.",tag:"ch1"},
+{q:"Quels sont les 5 composants matériels d'un ordinateur ?",a:"1. UC  2. Mémoire  3. Périph. entrée  4. Périph. sortie  5. Bus",tag:"ch1"},
+{q:"1 octet = combien de bits ?",a:"8 bits. 1 Ko = 1024 octets (2¹⁰).",tag:"ch1"},
+{q:"Logiciel système vs applicatif ?",a:"Système : gère le matériel (OS, pilotes). Applicatif : pour l'utilisateur (Word, Chrome).",tag:"ch1"},
+{q:"ENIAC, c'est quoi ?",a:"1er ordinateur électronique (1945). 30 tonnes, 18 000 tubes à vide, programmé par câblage.",tag:"ch1"},
+// Ch.2 Numération (8)
+{q:"Comment convertir décimal → binaire ?",a:"Divisions successives par 2, lire les restes de bas en haut.",tag:"ch2"},
+{q:"Comment convertir binaire → hexadécimal ?",a:"Grouper les bits par 4 (de droite à gauche) et convertir chaque groupe en hex (0-F).",tag:"ch2"},
+{q:"Que vaut 1010 1100 en hexadécimal ?",a:"AC₁₆ (1010=A, 1100=C).",tag:"ch2"},
+{q:"Comment obtenir le complément à 2 ?",a:"Inverser tous les bits (NOT) puis ajouter 1. Ex : 5=0101 → NOT=1010 → +1=1011 = −5.",tag:"ch2"},
+{q:"Plage d'un entier signé sur 8 bits ?",a:"[−128, +127] soit [−2⁷, 2⁷−1].",tag:"ch2"},
+{q:"IEEE 754 simple précision : structure ?",a:"1 bit signe + 8 bits exposant (biais 127) + 23 bits mantisse.",tag:"ch2"},
+{q:"Qu'est-ce que le code BCD ?",a:"Binary Coded Decimal : chaque chiffre décimal est codé sur 4 bits (0→0000, 9→1001).",tag:"ch2"},
+{q:"Code de Gray : quel avantage ?",a:"Seul 1 bit change entre 2 valeurs consécutives → pas d'état transitoire erroné.",tag:"ch2"},
+// Ch.3 Circuits (7)
+{q:"Porte AND : résultat si A=1, B=0 ?",a:"0. AND = multiplication : les DEUX doivent être à 1.",tag:"ch3"},
+{q:"Portes universelles ?",a:"NAND et NOR. On peut construire TOUTES les portes avec uniquement des NAND (ou des NOR).",tag:"ch3"},
+{q:"Théorème de De Morgan ?",a:"NOT(A·B) = Ā+B̄ et NOT(A+B) = Ā·B̄. « Casser la barre, changer le signe ».",tag:"ch3"},
+{q:"Karnaugh : taille des groupes ?",a:"Puissances de 2 (1, 2, 4, 8…). Plus le groupe est grand, plus c'est simplifié.",tag:"ch3"},
+{q:"Demi-additionneur : formules ?",a:"S = A ⊕ B (somme),  C = A · B (retenue).",tag:"ch3"},
+{q:"Différence combinatoire vs séquentiel ?",a:"Combinatoire : pas de mémoire (sorties = f(entrées)). Séquentiel : a de la mémoire (bascules).",tag:"ch3"},
+{q:"Bascule JK avec J=K=1 ?",a:"La sortie bascule (toggle) : Q passe à Q̄ à chaque front d'horloge.",tag:"ch3"},
+// Ch.4 Architecture (7)
+{q:"Les 5 composants Von Neumann ?",a:"UC, UAL, Mémoire centrale, Entrées, Sorties. Données et programme dans la même mémoire.",tag:"ch4"},
+{q:"Que contient le registre PC ?",a:"L'adresse de la prochaine instruction à exécuter. Il s'incrémente après chaque fetch.",tag:"ch4"},
+{q:"Les 3 étapes du cycle CPU ?",a:"1. Fetch (chercher l'instruction) 2. Decode (la décoder) 3. Execute (l'exécuter).",tag:"ch4"},
+{q:"Ordre hiérarchie mémoire (rapide→lent) ?",a:"Registres > Cache L1/L2/L3 > RAM > SSD > HDD > Cloud.",tag:"ch4"},
+{q:"3 types de bus ?",a:"Bus de données (bidirectionnel), bus d'adresses (unidirectionnel CPU→mém), bus de contrôle.",tag:"ch4"},
+{q:"DMA : c'est quoi ?",a:"Direct Memory Access. Le périphérique transfère des données directement en RAM sans passer par le CPU.",tag:"ch4"},
+{q:"CISC vs RISC ?",a:"CISC (x86) : instructions complexes, variables. RISC (ARM) : instructions simples, 1 cycle chacune.",tag:"ch4"}
+];
+
+const grid=document.getElementById('cardsGrid');
+const counter=document.getElementById('counter');
+const filterBar=document.getElementById('filterBar');
+let currentTag='all';
+
+function render(){
+    const filtered=currentTag==='all'?CARDS:CARDS.filter(c=>c.tag===currentTag);
+    counter.textContent=filtered.length+' carte'+(filtered.length>1?'s':'')+' affichée'+(filtered.length>1?'s':'');
+    grid.innerHTML=filtered.map((c,i)=>`
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+            <div class="flip-card-inner">
+                <div class="flip-card-front"><span class="card-tag">${c.tag.toUpperCase()}</span><h3>${c.q}</h3><small style="opacity:.5;margin-top:auto">Cliquer pour retourner</small></div>
+                <div class="flip-card-back"><span class="card-tag">${c.tag.toUpperCase()}</span><p>${c.a}</p></div>
+            </div>
+        </div>`).join('');
+}
+
+filterBar.addEventListener('click',e=>{
+    if(!e.target.classList.contains('filter-btn'))return;
+    filterBar.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentTag=e.target.dataset.tag;
+    render();
+});
+render();
+</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_ato_progress'});GameEngine.init();</script>
+<script src="../../assets/js/spaced-repetition.js"></script>
+<script>SpacedRepetition.configure('b1_ato_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof SpacedRepetition!=="undefined"&&typeof cards!=="undefined"){SpacedRepetition.enhance()}});</script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'examen | Algèbre Linéaire B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>:root{--accent:#a855f7;--accent-light:#c084fc;--accent-dark:#9333ea;--accent-glow:rgba(168,85,247,0.18)}.dark{--accent:#c084fc;--accent-light:#d8b4fe;--accent-dark:#a855f7;--accent-glow:rgba(192,132,252,0.18)}.sim-config{max-width:600px;margin:1.5rem auto;padding:1.5rem;background:var(--card-bg);border-radius:16px;border:2px solid var(--accent);display:flex;flex-wrap:wrap;gap:1rem;align-items:end}.sim-config label{display:flex;flex-direction:column;gap:.3rem;font-weight:600;font-size:.85rem;flex:1 1 140px}.sim-config select,.sim-config input{padding:.5rem;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:.95rem}.sim-config button{padding:.6rem 1.6rem;border-radius:99px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;flex:1 1 100%}.sim-timer{text-align:center;font-size:1.5rem;font-weight:800;margin:1rem 0;font-family:'JetBrains Mono',monospace}.sim-timer.warning{color:#ef4444;animation:pulse 1s infinite}.sim-progress{height:6px;background:var(--border);border-radius:99px;margin:.5rem 0 1.5rem;overflow:hidden}.sim-progress-fill{height:100%;background:var(--accent);border-radius:99px;transition:width .3s}.sim-question{background:var(--card-bg);border-radius:16px;padding:1.5rem;margin:1rem 0;border-left:4px solid var(--accent)}.sim-question h3{margin-top:0;font-size:1.05rem}.sim-options label{display:block;padding:.6rem 1rem;margin:.4rem 0;border-radius:10px;border:2px solid var(--border);cursor:pointer;transition:.2s}.sim-options label:hover{border-color:var(--accent)}.sim-options input{margin-right:.5rem}.sim-nav{display:flex;justify-content:space-between;margin-top:1rem}.sim-nav button{padding:.5rem 1.2rem;border-radius:99px;border:2px solid var(--accent);background:transparent;color:var(--text);font-weight:600;cursor:pointer}.sim-nav button.primary{background:var(--accent);color:#fff}.sim-result{text-align:center;padding:2rem;background:var(--card-bg);border-radius:16px;margin:1rem 0}.sim-result h2{font-size:2rem;margin-bottom:.3rem}.sim-score{font-size:3.5rem;font-weight:900;color:var(--accent)}.sim-review{margin-top:1.5rem}.rev-q{padding:1rem;margin:.5rem 0;border-radius:12px;border-left:4px solid #22c55e}.rev-q.wrong{border-left-color:#ef4444}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-superscript"></i> MatriBot</a>
+    <ul class="nav-links">
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="formules.html">Formules</a></li>
+        <li><a href="simulateur-examen.html" class="active">Simulateur</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>📐 MatriBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Matrices</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Espaces vectoriels</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Applications linéaires</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Examen blanc</div>
+    <h1>📐 Simulateur <span class="highlight">d'examen</span></h1>
+    <p>35 questions — configurez durée, nombre et chapitre.</p>
+</section>
+
+<main class="content-wrapper" id="app"></main>
+
+<script src="../../assets/js/main.js"></script>
+const BANK=[
+// ──── Ch.1 Matrices ────
+{q:"Le produit matriciel est-il commutatif ?",o:["Oui, toujours","Non, jamais","Uniquement pour les matrices carrées","Uniquement pour les matrices diagonales"],c:1,ch:1},
+{q:"(AB)ᵀ = ?",o:["AᵀBᵀ","BᵀAᵀ","(A+B)ᵀ","Aᵀ + Bᵀ"],c:1,ch:1},
+{q:"A(m×n) × B(n×p) donne une matrice de taille :",o:["m × n","n × p","m × p","n × n"],c:2,ch:1},
+{q:"Le déterminant de la matrice identité I vaut :",o:["0","1","n","−1"],c:1,ch:1},
+{q:"Règle de Sarrus : pour quelle taille ?",o:["2×2","3×3","4×4","Toute taille"],c:1,ch:1},
+{q:"det(AB) = ?",o:["det(A) + det(B)","det(A) × det(B)","det(A) − det(B)","det(A) / det(B)"],c:1,ch:1},
+{q:"A est inversible si et seulement si :",o:["det(A) = 0","det(A) ≠ 0","A est symétrique","A est diagonale"],c:1,ch:1},
+{q:"Gauss-Jordan : on part de [A|I] pour obtenir :",o:["[I|A]","[I|A⁻¹]","[A⁻¹|I]","[0|A⁻¹]"],c:1,ch:1},
+{q:"Par cofacteurs, A⁻¹ = ?",o:["det(A) × Com(A)","(1/det A) × Com(A)ᵀ","Com(A) × det(A)ᵀ","Aᵀ / det(A)"],c:1,ch:1},
+{q:"det(λA) si A est n×n = ?",o:["λ·det(A)","λⁿ·det(A)","λ²·det(A)","det(A)/λ"],c:1,ch:1},
+{q:"Cofacteur Cᵢⱼ = ?",o:["(−1)ⁱ⁺ʲ × Mᵢⱼ","(−1)ⁱ × Mᵢⱼ","Mᵢⱼ","(−1)ⁱʲ × Mᵢⱼ"],c:0,ch:1},
+{q:"Inverse d'une matrice 2×2 [[a,b],[c,d]] : le dénominateur est :",o:["a+d","ad+bc","ad−bc","ab−cd"],c:2,ch:1},
+// ──── Ch.2 Espaces vectoriels ────
+{q:"Combien d'axiomes pour un espace vectoriel ?",o:["4","6","8","10"],c:2,ch:2},
+{q:"Pour tester si F est un SEV de E, on vérifie :",o:["F non vide seulement","F contient 0, stable par +, stable par ×λ","F est de dimension finie","F est inclus dans ℝⁿ"],c:1,ch:2},
+{q:"Famille libre : λ₁v₁+…+λₚvₚ=0 implique :",o:["Au moins un λᵢ≠0","Tous les λᵢ=0","λ₁=1","Rien"],c:1,ch:2},
+{q:"dim(ℝ³) = ?",o:["1","2","3","∞"],c:2,ch:2},
+{q:"Formule de Grassmann :",o:["dim(E+F) = dim(E) × dim(F)","dim(E+F) = dim(E) + dim(F) − dim(E∩F)","dim(E+F) = dim(E∩F)","dim(E+F) = max(dim E, dim F)"],c:1,ch:2},
+{q:"Vect{v₁,…,vₚ} est toujours :",o:["Un espace vectoriel","Un SEV","Une base","Une famille libre"],c:1,ch:2},
+{q:"Base = famille :",o:["Libre uniquement","Génératrice uniquement","Libre ET génératrice","Liée et finie"],c:2,ch:2},
+{q:"Dans ℝⁿ, la base canonique a combien de vecteurs ?",o:["1","n−1","n","n²"],c:2,ch:2},
+{q:"E⊕F (somme directe) ⟺ ?",o:["E∩F = E","E∩F = {0}","E = F","dim E = dim F"],c:1,ch:2},
+{q:"Tout vecteur d'un EV de dimension n se décompose de manière :",o:["Multiple en base","Unique en base","Impossible","Approximative"],c:1,ch:2},
+// ──── Ch.3 Applications linéaires ────
+{q:"f linéaire ⟹ f(0) = ?",o:["1","f(1)","0","Indéterminé"],c:2,ch:3},
+{q:"Un endomorphisme est une application linéaire :",o:["De E dans F","De E dans E","De E dans K","Bijective"],c:1,ch:3},
+{q:"Ker(f) = {0} signifie que f est :",o:["Surjective","Injective","Bijective","Nulle"],c:1,ch:3},
+{q:"Im(f) = F signifie que f est :",o:["Injective","Surjective","Nulle","Endomorphisme"],c:1,ch:3},
+{q:"Théorème du rang : dim(Ker f) + dim(Im f) = ?",o:["dim(F)","dim(E)","dim(E) + dim(F)","rg(f)"],c:1,ch:3},
+{q:"La j-ème colonne de M(f) contient :",o:["Les coord. de eⱼ","Les coord. de f(eⱼ)","Le noyau","Le rang"],c:1,ch:3},
+{q:"M(g∘f) = ?",o:["M(f)×M(g)","M(g)×M(f)","M(f)+M(g)","M(f)−M(g)"],c:1,ch:3},
+{q:"rg(f) ≤ ?",o:["dim(E) + dim(F)","max(dim E, dim F)","min(dim E, dim F)","dim(E) − dim(F)"],c:2,ch:3},
+{q:"Matrice de rotation de 180° dans ℝ² :",o:["[[1,0],[0,1]]","[[−1,0],[0,−1]]","[[0,1],[1,0]]","[[0,−1],[1,0]]"],c:1,ch:3},
+{q:"f(x,y) = x² + y est-elle linéaire ?",o:["Oui","Non, car f(0) ≠ 0","Non, car le x² brise la linéarité","Oui, si x > 0"],c:2,ch:3},
+{q:"Si dim(E)=5 et rg(f)=3, alors dim(Ker f) = ?",o:["2","3","5","8"],c:0,ch:3},
+{q:"Un isomorphisme est :",o:["Une application linéaire bijective","Un endomorphisme","Une forme linéaire","Une projection"],c:0,ch:3},
+{q:"Si f est bijective, alors M(f) est :",o:["Singulière","Inversible","Diagonale","Nulle"],c:1,ch:3}
+];
+const CHAPTERS=["Tous les chapitres","Ch.1 Matrices","Ch.2 Espaces vectoriels","Ch.3 Applications linéaires"];
+const app=document.getElementById('app');
+let qs=[],cur=0,answers=[],timer=null,secs=0;
+
+function showConfig(){
+    app.innerHTML=`<div class="sim-config"><label>Chapitre<select id="sCh">${CHAPTERS.map((c,i)=>`<option value="${i}">${c}</option>`).join('')}</select></label><label>Nb questions<input type="number" id="sNb" min="5" max="35" value="20"></label><label>Durée (min)<input type="number" id="sTm" min="5" max="60" value="25"></label><button onclick="startExam()"><i class="fas fa-play"></i> Lancer l'examen</button></div>`;
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){
+    const ch=+document.getElementById('sCh').value,nb=+document.getElementById('sNb').value,tm=+document.getElementById('sTm').value;
+    let pool=ch===0?[...BANK]:BANK.filter(q=>q.ch===ch);
+    qs=shuffle(pool).slice(0,Math.min(nb,pool.length));
+    answers=new Array(qs.length).fill(-1);cur=0;secs=tm*60;
+    renderQ();tick();
+}
+function tick(){
+    timer=setInterval(()=>{
+        secs--;if(secs<=0){clearInterval(timer);finish();return}
+        const m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+        const el=document.getElementById('timer');if(el){el.textContent=m+':'+s;if(secs<60)el.classList.add('warning')}
+    },1000);
+}
+function renderQ(){
+    const q=qs[cur],m=Math.floor(secs/60),s=String(secs%60).padStart(2,'0');
+    app.innerHTML=`<div class="sim-timer" id="timer">${m}:${s}</div><div class="sim-progress"><div class="sim-progress-fill" style="width:${(cur+1)/qs.length*100}%"></div></div><div class="sim-question"><h3>Q${cur+1}/${qs.length} — ${q.q}</h3><div class="sim-options">${q.o.map((o,i)=>`<label><input type="radio" name="opt" value="${i}" ${answers[cur]===i?'checked':''} onchange="answers[cur]=${i}"> ${o}</label>`).join('')}</div></div><div class="sim-nav">${cur>0?'<button onclick="cur--;renderQ()"><i class="fas fa-arrow-left"></i> Précédente</button>':'<span></span>'}${cur<qs.length-1?'<button class="primary" onclick="cur++;renderQ()">Suivante <i class="fas fa-arrow-right"></i></button>':'<button class="primary" onclick="finish()"><i class="fas fa-flag-checkered"></i> Terminer</button>'}</div>`;
+}
+function finish(){
+    clearInterval(timer);
+    const score=qs.reduce((s,q,i)=>s+(answers[i]===q.c?1:0),0);
+    const pct=Math.round(score/qs.length*100);
+    const emoji=pct>=80?'🏆':pct>=60?'👍':pct>=40?'📖':'💪';
+    app.innerHTML=`<div class="sim-result"><p>${emoji}</p><div class="sim-score">${pct}%</div><h2>${score}/${qs.length}</h2><p>${pct>=80?'Excellent ! Prêt pour l\'examen.':pct>=60?'Bon travail, encore un petit effort !':pct>=40?'Révisez les chapitres faibles.':'Reprenez les bases avec les cartes mémoire.'}</p><button class="sim-nav primary" style="margin:1rem auto;display:inline-block;padding:.6rem 1.5rem;border-radius:99px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer" onclick="showConfig()"><i class="fas fa-redo"></i> Recommencer</button></div><div class="sim-review">${qs.map((q,i)=>`<div class="rev-q ${answers[i]===q.c?'':'wrong'}"><strong>Q${i+1}.</strong> ${q.q}<br><span style="color:#22c55e">✓ ${q.o[q.c]}</span>${answers[i]!==q.c&&answers[i]>=0?'<br><span style="color:#ef4444">✗ Vous : '+q.o[answers[i]]+'</span>':answers[i]<0?'<br><span style="color:#ef4444">✗ Pas de réponse</span>':''}</div>`).join('')}</div>`;
+}
+showConfig();
+</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_algebre_progress'});GameEngine.init();</script>
+<script src="../../assets/js/error-tracking.js"></script>
+<script>ErrorTracker.configure('b1_algebre_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof ErrorTracker!=="undefined"&&typeof bank!=="undefined"){ErrorTracker.enhance()}});</script>
+</body>
+</html>

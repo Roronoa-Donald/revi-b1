@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 — Circuits Logiques | ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .gate-table{text-align:center}.gate-table td,.gate-table th{padding:.4rem .8rem;min-width:50px}
+        .kmap{display:inline-grid;gap:0;border:2px solid var(--accent);border-radius:8px;overflow:hidden;margin:1rem 0}
+        .kmap td,.kmap th{padding:.5rem .7rem;text-align:center;font-family:'JetBrains Mono',monospace;font-size:.9rem;border:1px solid var(--border,rgba(255,255,255,.1))}
+        .kmap th{background:var(--accent-glow);font-weight:700;color:var(--accent)}
+        .kmap .grouped{background:var(--accent);color:#fff;font-weight:700;border-radius:4px}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<div class="reading-progress" id="reading-progress"></div>
+
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">Accueil</a></li>
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html" class="active">Ch.3</a></li>
+        <li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Généralités</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Numération</a>
+    <a href="chapitre3.html" class="active"><i class="fas fa-book-open"></i> Ch.3 — Circuits logiques</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Architecture PC</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-microchip"></i> Chapitre 3 — ATO</div>
+    <h1>Circuits <span class="highlight">Logiques</span></h1>
+    <p>Portes logiques, algèbre de Boole, tableaux de Karnaugh, circuits combinatoires et séquentiels.</p>
+</section>
+
+<main class="content-wrapper">
+
+    <!-- 3.1 Portes logiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Connaître les portes logiques de base (ET, OU, NON, XOR)</li>
+                <li>Simplifier des expressions booléennes (algèbre de Boole)</li>
+                <li>Construire et lire des tables de vérité et tableaux de Karnaugh</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-toggle-on"></i> 3.1 — Les portes logiques de base</h2>
+
+        <div class="concept-card">
+            <h4>📋 Le monde binaire</h4>
+            <p>En électronique numérique, tout signal est soit <strong>0</strong> (faux, bas, ~0V) soit <strong>1</strong> (vrai, haut, ~5V ou 3.3V). Les <strong>portes logiques</strong> sont les briques élémentaires qui combinent ces signaux.</p>
+        </div>
+
+        <div class="analogy-box">
+            <span class="icon">💡</span>
+            <div>
+                <strong>Analogie — Les interrupteurs :</strong> Deux interrupteurs en <strong>série</strong> = porte AND (les deux doivent être ON). Deux interrupteurs en <strong>parallèle</strong> = porte OR (un seul suffit). Un interrupteur <strong>inversé</strong> = porte NOT.
+            </div>
+        </div>
+
+        <h3>Les 7 portes essentielles</h3>
+        <table class="styled-table gate-table">
+            <thead><tr><th>Porte</th><th>Symbole</th><th>Expression</th><th>A=0,B=0</th><th>A=0,B=1</th><th>A=1,B=0</th><th>A=1,B=1</th></tr></thead>
+            <tbody>
+                <tr><td><strong>NOT</strong></td><td>▷○</td><td>S = Ā</td><td colspan="2">S=1 si A=0</td><td colspan="2">S=0 si A=1</td></tr>
+                <tr><td><strong>AND</strong></td><td>D</td><td>S = A·B</td><td>0</td><td>0</td><td>0</td><td><strong>1</strong></td></tr>
+                <tr><td><strong>OR</strong></td><td>≥1</td><td>S = A+B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td></tr>
+                <tr><td><strong>NAND</strong></td><td>D○</td><td>S = <span style="text-decoration:overline">A·B</span></td><td><strong>1</strong></td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td></tr>
+                <tr><td><strong>NOR</strong></td><td>≥1○</td><td>S = <span style="text-decoration:overline">A+B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td>0</td></tr>
+                <tr><td><strong>XOR</strong></td><td>=1</td><td>S = A⊕B</td><td>0</td><td><strong>1</strong></td><td><strong>1</strong></td><td>0</td></tr>
+                <tr><td><strong>XNOR</strong></td><td>=1○</td><td>S = <span style="text-decoration:overline">A⊕B</span></td><td><strong>1</strong></td><td>0</td><td>0</td><td><strong>1</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo :</strong><br>
+                <strong>AND</strong> = multiplication (0×1=0, 1×1=1). Il faut les DEUX.<br>
+                <strong>OR</strong> = addition plafonnée (0+1=1, 1+1=1). Il suffit d'UN.<br>
+                <strong>XOR</strong> = « <em>ou exclusif</em> » → différent = 1, pareil = 0.<br>
+                <strong>NAND/NOR</strong> = complémentaire (bulle ○ = NOT)
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <span>⚠️</span>
+            <div><strong>Portes universelles :</strong> NAND et NOR sont dites « universelles » car on peut reconstruire TOUTES les autres portes avec uniquement des NAND (ou uniquement des NOR) !</div>
+        </div>
+    </section>
+
+    <!-- 3.2 Algèbre de Boole -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-scale-balanced"></i> 3.2 — Algèbre de Boole</h2>
+
+        <div class="concept-card">
+            <h4>📋 Propriétés fondamentales</h4>
+            <table class="styled-table">
+                <thead><tr><th>Propriété</th><th>AND (·)</th><th>OR (+)</th></tr></thead>
+                <tbody>
+                    <tr><td>Commutativité</td><td>A·B = B·A</td><td>A+B = B+A</td></tr>
+                    <tr><td>Associativité</td><td>(A·B)·C = A·(B·C)</td><td>(A+B)+C = A+(B+C)</td></tr>
+                    <tr><td>Distributivité</td><td>A·(B+C) = A·B+A·C</td><td>A+(B·C) = (A+B)·(A+C)</td></tr>
+                    <tr><td>Élément neutre</td><td>A·1 = A</td><td>A+0 = A</td></tr>
+                    <tr><td>Élément absorbant</td><td>A·0 = 0</td><td>A+1 = 1</td></tr>
+                    <tr><td>Idempotence</td><td>A·A = A</td><td>A+A = A</td></tr>
+                    <tr><td>Complémentarité</td><td>A·Ā = 0</td><td>A+Ā = 1</td></tr>
+                    <tr><td>Involution</td><td colspan="2"><span style="text-decoration:overline;text-decoration-style:double">A</span> = A (double négation)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Théorèmes de De Morgan</h3>
+        <div class="concept-card" style="border-left:4px solid var(--accent)">
+            <h4>⚡ Théorèmes de De Morgan (fondamental !)</h4>
+            <ul>
+                <li><strong><span style="text-decoration:overline">A·B</span> = Ā + B̄</strong> — « le NOT du AND = OR des NOT »</li>
+                <li><strong><span style="text-decoration:overline">A+B</span> = Ā · B̄</strong> — « le NOT du OR = AND des NOT »</li>
+            </ul>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo De Morgan :</strong> « <em>Casser la barre, changer le signe</em> ». Quand on « casse » la barre de complémentation, le AND (·) devient OR (+) et vice versa.
+            </div>
+        </div>
+    </section>
+
+    <!-- 3.3 Simplification algébrique -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-compress"></i> 3.3 — Simplification algébrique</h2>
+
+        <div class="example-box">
+            <h4>📝 Exemple : simplifier F = A·B + A·B̄ + Ā·B</h4>
+            <div style="padding:.5rem 0">
+                <p>F = A·(B + B̄) + Ā·B <em>(factorisation de A)</em></p>
+                <p>F = A·1 + Ā·B <em>(complémentarité : B + B̄ = 1)</em></p>
+                <p>F = A + Ā·B <em>(neutre : A·1 = A)</em></p>
+                <p>F = A + B <em>(absorption : A + Ā·B = A + B)</em></p>
+                <p><strong>Résultat : F = A + B</strong></p>
+            </div>
+        </div>
+
+        <h3>Règles d'absorption utiles</h3>
+        <ul>
+            <li>A + A·B = A (absorption)</li>
+            <li>A + Ā·B = A + B</li>
+            <li>A·(A+B) = A</li>
+            <li>(A+B)·(A+B̄) = A</li>
+        </ul>
+    </section>
+
+    <!-- 3.4 Karnaugh -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-table-cells"></i> 3.4 — Tableaux de Karnaugh</h2>
+
+        <div class="concept-card">
+            <h4>📋 Principe</h4>
+            <p>Le tableau de Karnaugh est une méthode <strong>graphique</strong> pour simplifier les expressions booléennes. Les cases adjacentes ne diffèrent que d'<strong>une seule variable</strong> (code de Gray).</p>
+            <p><strong>Règles :</strong> Regrouper les 1 en rectangles de taille 1, 2, 4, 8… (puissances de 2). Plus le groupe est grand, plus l'expression est simplifiée.</p>
+        </div>
+
+        <div class="example-box">
+            <h4>📝 Exemple : F(A,B,C) — 3 variables</h4>
+            <p>Table de vérité : F = Σm(0,2,4,5,6)</p>
+
+            <table class="kmap" style="margin:1rem auto">
+                <tr><th>AB \ C</th><th>0</th><th>1</th></tr>
+                <tr><th>00</th><td class="grouped">1</td><td>0</td></tr>
+                <tr><th>01</th><td class="grouped">1</td><td>0</td></tr>
+                <tr><th>11</th><td class="grouped">1</td><td class="grouped">1</td></tr>
+                <tr><th>10</th><td class="grouped">1</td><td class="grouped">1</td></tr>
+            </table>
+
+            <p>Groupements :</p>
+            <ul>
+                <li>Colonne C=0 (4 cases) → C̄</li>
+                <li>Lignes AB=11 et AB=10 (4 cases) → A</li>
+            </ul>
+            <p><strong>F = C̄ + A</strong> (ou F = A + C̄)</p>
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Astuces Karnaugh :</strong> 1) Les bords « s'enroulent » (la 1ère colonne est adjacente à la dernière). 2) Un même 1 peut appartenir à plusieurs groupes. 3) Les don't care (X) peuvent être 0 ou 1 selon ce qui arrange.</div>
+        </div>
+
+        <div class="mnemonic-box">
+            <span class="icon">🧠</span>
+            <div>
+                <strong>Mnémo Karnaugh — G.R.A.P. :</strong><br>
+                <strong>G</strong>rille en code de Gray | <strong>R</strong>ectangles de puissances de 2 | <strong>A</strong>djacences (bords enroulés) | <strong>P</strong>lus grand = plus simple
+            </div>
+        </div>
+    </section>
+
+    <!-- 3.5 Circuits combinatoires -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-network-wired"></i> 3.5 — Circuits combinatoires</h2>
+
+        <div class="concept-card">
+            <h4>📋 Définition</h4>
+            <p>Un circuit <strong>combinatoire</strong> produit des sorties qui dépendent <strong>uniquement</strong> des entrées actuelles (pas de mémoire, pas d'état passé).</p>
+        </div>
+
+        <table class="styled-table">
+            <thead><tr><th>Circuit</th><th>Fonction</th><th>Entrées</th><th>Sorties</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Demi-additionneur</strong></td><td>Additionne 2 bits</td><td>A, B</td><td>S = A⊕B, C = A·B</td></tr>
+                <tr><td><strong>Additionneur complet</strong></td><td>Additionne 2 bits + retenue</td><td>A, B, Cᵢₙ</td><td>S = A⊕B⊕Cᵢₙ, Cₒᵤₜ = A·B + Cᵢₙ·(A⊕B)</td></tr>
+                <tr><td><strong>Multiplexeur (MUX)</strong></td><td>Sélectionne 1 entrée parmi 2ⁿ</td><td>2ⁿ données + n sélection</td><td>1 sortie</td></tr>
+                <tr><td><strong>Démultiplexeur (DEMUX)</strong></td><td>Distribue 1 entrée vers 2ⁿ</td><td>1 donnée + n sélection</td><td>2ⁿ sorties</td></tr>
+                <tr><td><strong>Décodeur</strong></td><td>n entrées → 2ⁿ sorties</td><td>n bits</td><td>1 seule sortie active</td></tr>
+                <tr><td><strong>Encodeur</strong></td><td>2ⁿ entrées → n sorties</td><td>2ⁿ lignes</td><td>Code binaire</td></tr>
+                <tr><td><strong>Comparateur</strong></td><td>Compare 2 nombres</td><td>A, B (n bits)</td><td>A>B, A=B, A<B</td></tr>
+            </tbody>
+        </table>
+
+        <div class="analogy-box">
+            <span class="icon">📺</span>
+            <div>
+                <strong>Analogie MUX :</strong> Un multiplexeur, c'est comme une télécommande TV avec un sélecteur de chaîne. Tu as 100 chaînes (entrées) mais l'écran (sortie) n'en affiche qu'une à la fois. Le sélecteur choisit laquelle.
+            </div>
+        </div>
+    </section>
+
+    <!-- 3.6 Circuits séquentiels -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-clock"></i> 3.6 — Circuits séquentiels</h2>
+
+        <div class="concept-card">
+            <h4>📋 Définition</h4>
+            <p>Un circuit <strong>séquentiel</strong> a une mémoire : ses sorties dépendent des entrées <strong>ET de l'état précédent</strong>. Il est synchronisé par un signal d'<strong>horloge</strong>.</p>
+        </div>
+
+        <h3>Les bascules (flip-flops)</h3>
+        <table class="styled-table">
+            <thead><tr><th>Bascule</th><th>Fonctionnement</th><th>Usage</th></tr></thead>
+            <tbody>
+                <tr><td><strong>RS (Set-Reset)</strong></td><td>S=1 → Q=1, R=1 → Q=0, S=R=1 → interdit</td><td>Mémoire élémentaire</td></tr>
+                <tr><td><strong>D (Data)</strong></td><td>Q = D au front d'horloge</td><td>Registres, mémorisation de bits</td></tr>
+                <tr><td><strong>JK</strong></td><td>Comme RS mais J=K=1 → bascule (toggle)</td><td>Compteurs</td></tr>
+                <tr><td><strong>T (Toggle)</strong></td><td>T=1 → Q change d'état</td><td>Diviseur de fréquence</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Registres et compteurs</h3>
+        <ul>
+            <li><strong>Registre :</strong> ensemble de bascules D stockant n bits en parallèle</li>
+            <li><strong>Registre à décalage :</strong> décale les bits d'un cran à chaque coup d'horloge</li>
+            <li><strong>Compteur :</strong> circuit séquentiel qui compte les impulsions d'horloge (0→1→2→…→2ⁿ−1→0)</li>
+        </ul>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div><strong>Application :</strong> Les registres du processeur (EAX, EBX…) sont constitués de bascules D. Un processeur 64 bits a des registres de 64 bascules D chacun !</div>
+        </div>
+    </section>
+
+    <!-- 3.7 Additionneurs -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-calculator"></i> 3.7 — L'additionneur n bits</h2>
+
+        <div class="concept-card">
+            <h4>📋 Additionneur à propagation de retenue (Ripple Carry Adder)</h4>
+            <p>On cascade n additionneurs complets. La retenue du bit i devient l'entrée retenue du bit i+1.</p>
+            <p>Inconvénient : la retenue se propage bit par bit → lent pour de grands n.</p>
+            <p>Solution : <strong>additionneur à anticipation de retenue</strong> (Carry Look-Ahead) qui calcule toutes les retenues en parallèle.</p>
+        </div>
+    </section>
+
+    <!-- RÉSUMÉ -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-clipboard-list"></i> Résumé du chapitre</h2>
+        <div class="concept-card">
+            <h4>🔑 Points clés</h4>
+            <ul>
+                <li><strong>7 portes :</strong> NOT, AND, OR, NAND, NOR, XOR, XNOR</li>
+                <li><strong>NAND et NOR</strong> sont universelles</li>
+                <li><strong>De Morgan :</strong> casser la barre → changer le signe</li>
+                <li><strong>Karnaugh :</strong> regrouper les 1 en rectangles de puissances de 2</li>
+                <li><strong>Combinatoire :</strong> sorties = f(entrées actuelles) — MUX, additionneur, décodeur</li>
+                <li><strong>Séquentiel :</strong> sorties = f(entrées + état) — bascules RS, D, JK, T</li>
+                <li><strong>Registres :</strong> ensemble de bascules D | <strong>Compteurs :</strong> circuits séquentiels</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- EXERCICES -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-dumbbell"></i> Exercices interactifs</h2>
+        <div id="chapter-exercises"></div>
+    </section>
+
+    <div class="chapter-nav">
+        <a href="chapitre2.html"><i class="fas fa-arrow-left"></i> Chapitre 2 — Numération</a>
+        <a href="chapitre4.html">Chapitre 4 — Architecture PC <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+</main>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/gamification.js"></script>
+<script src="../../assets/js/chapter-exercises.js"></script>
+<script src="../../assets/js/download.js"></script>
+<script>
+GameEngine.configure({
+    storageKey:'b1_ato_progress',
+    badges:[{id:'gate_keeper',name:'Gate Keeper',icon:'🚪',desc:'Portes logiques maîtrisées',xp:20},{id:'boole_boss',name:'Boole Boss',icon:'🧮',desc:'Algèbre de Boole simplifiée',xp:25}],
+    levels:[{min:0,title:'Débutant'},{min:30,title:'Apprenti Hardware'},{min:80,title:'Technicien Jr.'},{min:150,title:'Architecte'},{min:250,title:'Ingénieur Système'},{min:400,title:'Guru du Silicium'}],
+    tips:["AND = multiplication, OR = addition.","NAND et NOR sont universelles.","De Morgan : casser la barre, changer le signe.","Karnaugh : regrouper par puissances de 2."]
+});
+GameEngine.init();
+
+ChapterExercises.init({
+    guided:[
+        {q:"Que vaut AND(1,0) ?",hints:["AND = les deux doivent être à 1","1×0 = ?",""],answer:"0"},
+        {q:"Simplifier F = A + A·B",hints:["Factoriser A : A(1+B)","1+B = 1 (absorption)","A×1 = A"],answer:"A"},
+        {q:"Appliquer De Morgan : NOT(A·B) = ?",hints:["Casser la barre","Le · devient +","Complémentez A et B"],answer:"Ā + B̄"},
+        {q:"Table de vérité XOR : A=1, B=1 → ?",hints:["XOR = différent → 1","Pareil → 0","1⊕1 = ?"],answer:"0"},
+        {q:"Un MUX 4 vers 1 a combien de lignes de sélection ?",hints:["4 = 2ⁿ","n = ?","log₂(4)"],answer:"2"}
+    ],
+    quiz:[
+        {type:"mcq",q:"A·1 = ?",options:["0","1","A","Ā"],correct:2},
+        {type:"mcq",q:"A + Ā = ?",options:["0","1","A","2A"],correct:1},
+        {type:"mcq",q:"Portes universelles :",options:["AND et OR","NAND et NOR","XOR et XNOR","NOT et AND"],correct:1},
+        {type:"mcq",q:"De Morgan : NOT(A+B) =",options:["Ā+B̄","Ā·B̄","A·B","NOT(A)·B"],correct:1},
+        {type:"qa",q:"La bascule D copie l'entrée D sur Q à quel moment ?",answer:["front d'horloge","au front montant","front montant"]},
+        {type:"mcq",q:"Un demi-additionneur calcule :",options:["S = A+B et C = A·B","S = A⊕B et C = A·B","S = A·B et C = A⊕B","S et C avec retenue entrante"],correct:1},
+        {type:"mcq",q:"Karnaugh : les groupes doivent être de taille :",options:["Impaire","Première","Puissance de 2","Carrée"],correct:2},
+        {type:"mcq",q:"XOR(A,B) = 1 quand :",options:["A = B","A ≠ B","A = 0","B = 1"],correct:1},
+        {type:"mcq",q:"Bascule JK avec J=K=1 :",options:["Q = 0","Q = 1","Q bascule (toggle)","Interdit"],correct:2},
+        {type:"mcq",q:"Un décodeur 3 vers 8 a combien de sorties ?",options:["3","6","8","16"],correct:2}
+    ],
+    dragdrop:[
+        {instruction:"Associe chaque porte logique à son résultat pour A=1, B=0 :",pairs:[["AND","0"],["OR","1"],["XOR","1"],["NAND","1"]]},
+        {instruction:"Associe propriété booléenne :",pairs:[["A·0","0"],["A+1","1"],["A·Ā","0"],["A+Ā","1"]]},
+        {instruction:"Associe chaque circuit à son type :",pairs:[["Multiplexeur","Combinatoire"],["Bascule D","Séquentiel"],["Additionneur","Combinatoire"],["Compteur","Séquentiel"]]}
+    ]
+});
+</script>
+</body>
+</html>

@@ -136,5 +136,16 @@ function showResults(){
 }
 showConfig();
 </script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_reseaux_progress'});GameEngine.init();</script>
+<script src="../../assets/js/error-tracking.js"></script>
+<script>ErrorTracker.configure('b1_reseaux_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof ErrorTracker!=="undefined"&&typeof bank!=="undefined"){ErrorTracker.enhance()}});</script>
 </body>
 </html>

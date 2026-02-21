@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercices — ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .filters{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0;align-items:center}
+        .filters select,.filters input{padding:.5rem 1rem;border-radius:8px;border:2px solid var(--border,rgba(255,255,255,.1));background:var(--card,#1e293b);color:var(--text,#e2e8f0);font-size:.9rem}
+        .filters input{flex:1;min-width:200px}
+        .exo{background:var(--card,#1e293b);border:1px solid var(--border,rgba(255,255,255,.1));border-radius:16px;padding:1.5rem;margin:1rem 0}
+        .exo h3{color:var(--accent);margin-bottom:.5rem}
+        .exo-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+        .exo-tag{font-size:.7rem;padding:.15rem .5rem;border-radius:8px;font-weight:700}
+        .exo-tag.ch{background:var(--accent-glow);color:var(--accent)}
+        .exo-tag.easy{background:rgba(16,185,129,.15);color:#10b981}
+        .exo-tag.medium{background:rgba(245,158,11,.15);color:#f59e0b}
+        .exo-tag.hard{background:rgba(239,68,68,.15);color:#ef4444}
+        .solution{display:none;margin-top:1rem;padding:1rem;border-radius:8px;background:var(--accent-glow);border-left:4px solid var(--accent)}
+        .solution.visible{display:block}
+        .toggle-sol{padding:.4rem .8rem;border-radius:8px;border:2px solid var(--accent);background:transparent;color:var(--accent);font-weight:600;cursor:pointer;font-size:.85rem;margin-top:.5rem}
+        .toggle-sol:hover{background:var(--accent);color:#fff}
+        .counter{font-weight:600;color:var(--accent);margin:1rem 0}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="../chapitres/chapitre1.html">Ch.1</a></li>
+        <li><a href="../chapitres/chapitre2.html">Ch.2</a></li>
+        <li><a href="../chapitres/chapitre3.html">Ch.3</a></li>
+        <li><a href="../chapitres/chapitre4.html">Ch.4</a></li>
+        <li><a href="../chapitres/formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="../chapitres/chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Généralités</a>
+    <a href="../chapitres/chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Numération</a>
+    <a href="../chapitres/chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Circuits</a>
+    <a href="../chapitres/chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Architecture</a>
+    <a href="../chapitres/formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="../chapitres/cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="../chapitres/simulateur-examen.html"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="exercices.html" class="active"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-dumbbell"></i> Exercices</div>
+    <h1>Banque d'<span class="highlight">Exercices</span></h1>
+    <p>28 exercices classés par chapitre et difficulté. Solutions détaillées incluses.</p>
+</section>
+
+<main class="content-wrapper">
+    <div class="filters" id="filters">
+        <select id="fCh"><option value="all">Tous les chapitres</option><option value="ch1">Ch.1 Généralités</option><option value="ch2">Ch.2 Numération</option><option value="ch3">Ch.3 Circuits</option><option value="ch4">Ch.4 Architecture</option></select>
+        <select id="fLvl"><option value="all">Tous les niveaux</option><option value="easy">Facile</option><option value="medium">Moyen</option><option value="hard">Difficile</option></select>
+        <input type="text" id="fSearch" placeholder="🔍 Rechercher…">
+    </div>
+    <div class="counter" id="counter"></div>
+    <div id="exoList"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const EXOS=[
+// Ch.1 Généralités (7)
+{ch:"ch1",lvl:"easy",title:"Chronologie des inventions",desc:"Classer dans l'ordre chronologique : Transistor, ENIAC, Pascaline, Microprocesseur, Circuit intégré.",sol:"Pascaline (1642) → ENIAC (1945) → Transistor (1947) → Circuit intégré (1958) → Microprocesseur (1971)."},
+{ch:"ch1",lvl:"easy",title:"Générations d'ordinateurs",desc:"Associer chaque génération à sa technologie de base.",sol:"1ère : Tubes à vide | 2ème : Transistors | 3ème : Circuits intégrés | 4ème : Microprocesseurs | 5ème : IA/Quantique."},
+{ch:"ch1",lvl:"easy",title:"Conversion d'unités",desc:"Convertir : 2 Go en Mo, 4096 Ko en Mo, 3 To en Go.",sol:"2 Go = 2048 Mo | 4096 Ko = 4 Mo | 3 To = 3072 Go."},
+{ch:"ch1",lvl:"medium",title:"Hardware vs Software",desc:"Classer : RAM, Windows, CPU, Chrome, BIOS, SSD, LibreOffice, carte graphique.",sol:"Hardware : RAM, CPU, SSD, carte graphique. Software système : Windows, BIOS. Software applicatif : Chrome, LibreOffice."},
+{ch:"ch1",lvl:"medium",title:"Loi de Moore",desc:"Si un processeur a 1 milliard de transistors en 2010, combien en 2020 selon la loi de Moore ?",sol:"10 ans = 5 doublements. 1×10⁹ × 2⁵ = 32 × 10⁹ = 32 milliards de transistors."},
+{ch:"ch1",lvl:"medium",title:"Fonctions d'un ordinateur",desc:"Donner un exemple concret pour chacune des 5 fonctions : entrée, traitement, sortie, mémorisation, communication.",sol:"Entrée : clavier | Traitement : CPU calcule | Sortie : écran affiche | Mémorisation : SSD stocke | Communication : carte WiFi envoie."},
+{ch:"ch1",lvl:"hard",title:"Comparaison ENIAC vs smartphone",desc:"Comparer l'ENIAC (1945) avec un smartphone actuel sur : poids, consommation, puissance de calcul, mémoire.",sol:"ENIAC : 30 tonnes, 150kW, ~5000 add/s, pas de mémoire programme. Smartphone : ~200g, ~5W, ~milliards d'op/s, ~128 Go. Le smartphone est des millions de fois plus puissant."},
+
+// Ch.2 Numération (7)
+{ch:"ch2",lvl:"easy",title:"Décimal → Binaire",desc:"Convertir en binaire : 25, 100, 255.",sol:"25 = 11001₂ | 100 = 1100100₂ | 255 = 11111111₂."},
+{ch:"ch2",lvl:"easy",title:"Binaire → Hexadécimal",desc:"Convertir : 10110011₂, 11111010₂, 01001110₂.",sol:"10110011 = B3₁₆ | 11111010 = FA₁₆ | 01001110 = 4E₁₆."},
+{ch:"ch2",lvl:"medium",title:"Complément à 2",desc:"Représenter −42 en CA2 sur 8 bits.",sol:"+42 = 00101010. NOT = 11010101. +1 = 11010110. Vérification : 11010110₂ en CA2 donne bien −42."},
+{ch:"ch2",lvl:"medium",title:"Addition binaire signée",desc:"Effectuer +35 + (−20) en binaire 8 bits (CA2).",sol:"+35 = 00100011. −20 : +20=00010100, NOT=11101011, +1=11101100. Addition : 00100011 + 11101100 = 00001111 = +15. ✓"},
+{ch:"ch2",lvl:"medium",title:"Hexadécimal → Décimal",desc:"Convertir : 2F₁₆, A5₁₆, FF₁₆.",sol:"2F = 2×16+15 = 47 | A5 = 10×16+5 = 165 | FF = 15×16+15 = 255."},
+{ch:"ch2",lvl:"hard",title:"IEEE 754",desc:"Représenter −6.5 en IEEE 754 simple précision.",sol:"6.5 = 110.1₂ = 1.101 × 2². Signe=1 (négatif). Exposant=2+127=129=10000001₂. Mantisse=10100000…0. Résultat : 1 10000001 10100000000000000000000."},
+{ch:"ch2",lvl:"hard",title:"Toutes les bases",desc:"Convertir 156₁₀ en binaire, octal et hexadécimal. Vérifier la cohérence.",sol:"156 = 10011100₂ = 234₈ = 9C₁₆. Vérif : 9C=9×16+12=156 ✓ | 234₈=2×64+3×8+4=156 ✓"},
+
+// Ch.3 Circuits (7)
+{ch:"ch3",lvl:"easy",title:"Tables de vérité",desc:"Établir la table de vérité complète de F = A·B + Ā·C (3 variables, 8 lignes).",sol:"A=0,B=0,C=0→0 | 0,0,1→1 | 0,1,0→0 | 0,1,1→1 | 1,0,0→0 | 1,0,1→0 | 1,1,0→1 | 1,1,1→1. Mintermes : Σm(1,3,6,7)."},
+{ch:"ch3",lvl:"easy",title:"Portes logiques basiques",desc:"Calculer : AND(1,1), OR(0,1), XOR(1,1), NAND(0,0), NOR(1,0).",sol:"AND(1,1)=1 | OR(0,1)=1 | XOR(1,1)=0 | NAND(0,0)=1 | NOR(1,0)=0."},
+{ch:"ch3",lvl:"medium",title:"De Morgan",desc:"Simplifier avec De Morgan : F = NOT(A·B·C), G = NOT(NOT(A) + B).",sol:"F = Ā+B̄+C̄ (De Morgan étendu). G = NOT(Ā+B) = A·B̄ (De Morgan puis involution)."},
+{ch:"ch3",lvl:"medium",title:"Simplification algébrique",desc:"Simplifier F = A·B̄·C + A·B·C + A·B̄·C̄.",sol:"F = A·B̄·(C+C̄) + A·B·C = A·B̄ + A·B·C = A·(B̄+B·C) = A·(B̄+C). Résultat : F = A·(B̄+C)."},
+{ch:"ch3",lvl:"medium",title:"Karnaugh 3 variables",desc:"Simplifier par Karnaugh : F(A,B,C) = Σm(0,1,2,4,5).",sol:"Groupe 1 : m0+m1+m4+m5 (C̄ qd B=0) → B̄. Groupe 2 : m0+m2 → Ā·C̄. Mais ceux-ci se combinent en : F = B̄ + Ā·C̄. Vérif par Karnaugh 2×4."},
+{ch:"ch3",lvl:"hard",title:"Karnaugh 4 variables",desc:"Simplifier par Karnaugh : F(A,B,C,D) = Σm(0,1,2,5,8,9,10).",sol:"Grille 4×4 en Gray. Groupes : m0+m1+m8+m9 (4 cases)→C̄·D̄ ? Non. Détail : {0,1,8,9}→B̄·D̄, {0,2,8,10}→B̄·C̄ non…. Résultat simplifié final : F = B̄·D̄ + B̄·C̄ + Ā·B̄·D (procédure complète de groupement)."},
+{ch:"ch3",lvl:"hard",title:"Additionneur complet",desc:"Concevoir un additionneur complet : donner la table de vérité (A,B,Cᵢₙ → S,Cₒᵤₜ) et les expressions.",sol:"8 lignes. S=A⊕B⊕Cᵢₙ. Cₒᵤₜ=A·B + Cᵢₙ·(A⊕B). On peut vérifier : 1+1+1 → S=1, Cₒᵤₜ=1 (=11₂=3). Correct."},
+
+// Ch.4 Architecture (7)
+{ch:"ch4",lvl:"easy",title:"Von Neumann",desc:"Nommer les 5 composants du modèle de Von Neumann et donner le rôle de chacun.",sol:"UC (séquence), UAL (calculs), Mémoire (stocke prog+données), Entrées (clavier…), Sorties (écran…)."},
+{ch:"ch4",lvl:"easy",title:"Registres CPU",desc:"Associer chaque registre à son rôle : PC, IR, MAR, MBR, ACC.",sol:"PC→adresse prochaine instruction | IR→instruction en cours | MAR→adresse mémoire | MBR→donnée mémoire | ACC→résultat UAL."},
+{ch:"ch4",lvl:"medium",title:"Cycle Fetch-Decode-Execute",desc:"Décrire les micro-opérations de chaque étape pour l'instruction « ADD [100] ».",sol:"Fetch : PC→MAR, Mém[MAR]→MBR→IR, PC++. Decode : opcode=ADD, opérande=adresse 100. Execute : 100→MAR, Mém[100]→MBR, ACC=ACC+MBR."},
+{ch:"ch4",lvl:"medium",title:"Hiérarchie mémoire",desc:"Classer et comparer : SRAM, DRAM, HDD, registres, SSD en vitesse, coût, capacité.",sol:"Du + rapide au + lent : Registres (1ns,Ko) > SRAM/Cache (2ns,Mo) > DRAM/RAM (50ns,Go) > SSD (μs,To) > HDD (ms,To). Inverse pour capacité et coût."},
+{ch:"ch4",lvl:"medium",title:"Bus et mémoire adressable",desc:"Un système avec bus d'adresses 24 bits et bus de données 16 bits. a) Mémoire max ? b) Taille d'un mot ?",sol:"a) 2²⁴ = 16 777 216 octets = 16 Mo. b) Mot = 16 bits = 2 octets."},
+{ch:"ch4",lvl:"hard",title:"Pipeline",desc:"Montrer l'exécution de 5 instructions (I1-I5) avec un pipeline 3 étages sur 7 cycles. Calculer le gain vs sans pipeline.",sol:"Sans pipeline : 5×3=15 cycles. Avec pipeline : 3+(5-1)=7 cycles. Gain = 15/7 ≈ 2.14×. Tableau : C1:F1|C2:D1,F2|C3:E1,D2,F3|C4:E2,D3,F4|C5:E3,D4,F5|C6:E4,D5|C7:E5."},
+{ch:"ch4",lvl:"hard",title:"CISC vs RISC — Analyse",desc:"Un programme nécessite 10M d'instructions CISC (3 cycles/instr, 1 GHz) ou 15M RISC (1 cycle/instr, 1.5 GHz). Lequel est plus rapide ?",sol:"CISC : 10M×3/10⁹ = 30ms. RISC : 15M×1/1.5×10⁹ = 10ms. RISC est 3× plus rapide malgré plus d'instructions, grâce à sa fréquence et son 1 cycle/instruction."}
+];
+
+const list=document.getElementById('exoList'),ctr=document.getElementById('counter');
+const fCh=document.getElementById('fCh'),fLvl=document.getElementById('fLvl'),fSearch=document.getElementById('fSearch');
+
+function render(){
+    const ch=fCh.value,lvl=fLvl.value,q=fSearch.value.toLowerCase();
+    const filtered=EXOS.filter(e=>(ch==='all'||e.ch===ch)&&(lvl==='all'||e.lvl===lvl)&&(e.title.toLowerCase().includes(q)||e.desc.toLowerCase().includes(q)));
+    ctr.textContent=filtered.length+' exercice'+(filtered.length>1?'s':'');
+    list.innerHTML=filtered.map((e,i)=>`<div class="exo">
+        <div class="exo-tags"><span class="exo-tag ch">${e.ch.toUpperCase()}</span><span class="exo-tag ${e.lvl}">${{easy:'Facile',medium:'Moyen',hard:'Difficile'}[e.lvl]}</span></div>
+        <h3>${e.title}</h3><p>${e.desc}</p>
+        <button class="toggle-sol" onclick="this.nextElementSibling.classList.toggle('visible');this.textContent=this.nextElementSibling.classList.contains('visible')?'Masquer la solution':'Voir la solution'">Voir la solution</button>
+        <div class="solution"><strong>Solution :</strong> ${e.sol}</div>
+    </div>`).join('');
+}
+
+fCh.addEventListener('change',render);
+fLvl.addEventListener('change',render);
+fSearch.addEventListener('input',render);
+render();
+</script>
+</body>
+</html>

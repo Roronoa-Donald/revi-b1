@@ -46,6 +46,17 @@
 
     <!-- ─── 1. Jointures SQL ─── -->
     <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Comprendre les 3 formes normales (1NF, 2NF, 3NF)</li>
+                <li>Identifier les dépendances fonctionnelles</li>
+                <li>Normaliser une relation pas à pas</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="chapter-section reveal-on-scroll">
         <h2 class="section-title"><i class="fas fa-link"></i> Les Jointures en SQL</h2>
 
         <div class="info-box">
@@ -292,11 +303,15 @@ WHERE moy > 20;</pre>
     </div>
 </main>
 
-<div class="xp-bar" id="xp-bar"></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
 <script>
-GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{name:'Débutant',minXP:0},{name:'Apprenti SQL',minXP:100},{name:'Requêteur Jr.',minXP:250},{name:'Analyste BD',minXP:500},{name:'DBA Confirmé',minXP:800},{name:'Guru des Données',minXP:1200}],tips:["INNER JOIN = le plus courant","HAVING filtre APRÈS GROUP BY"]});
+GameEngine.configure({storageKey:'b1_fbd_progress',badges:[{id:'first_table',name:'Première Table',icon:'🗃️',desc:''},{id:'algebra_fan',name:'Algèbre Fan',icon:'σ',desc:''},{id:'sql_starter',name:'SQL Starter',icon:'💻',desc:''},{id:'join_master',name:'JOIN Master',icon:'🔗',desc:''},{id:'norm_ninja',name:'Normalisateur',icon:'🧹',desc:''},{id:'architect',name:'Architecte BD',icon:'🏗️',desc:''},{id:'half_way',name:'Mi-parcours',icon:'🏁',desc:''},{id:'db_legend',name:'Légende BD',icon:'🏆',desc:''}],levels:[{title:'Débutant',min:0},{title:'Apprenti SQL',min:100},{title:'Requêteur Jr.',min:250},{title:'Analyste BD',min:500},{title:'DBA Confirmé',min:800},{title:'Guru des Données',min:1200}],tips:["INNER JOIN = le plus courant","HAVING filtre APRÈS GROUP BY"]});
 GameEngine.init();
 </script>
 <script src="../../assets/js/chapter-exercises.js"></script>

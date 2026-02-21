@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>:root{--accent:#8b5cf6;--accent-light:#a78bfa;--accent-dark:#7c3aed;--accent-glow:rgba(139,92,246,0.25)}.dark{--accent:#a78bfa;--accent-light:#c4b5fd;--accent-dark:#8b5cf6;--accent-glow:rgba(167,139,250,0.25)}</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Aller au contenu</a>
@@ -43,6 +46,17 @@
 </section>
 
 <main class="content-wrapper">
+
+<section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Calculer les effectifs et fréquences cumulés</li>
+            <li>Construire et interpréter un diagramme cumulatif</li>
+            <li>Lire des quartiles et la médiane sur une courbe</li>
+        </ul>
+    </div>
+</section>
 
 <section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-table"></i> Tableau de distribution</h2>
@@ -168,6 +182,24 @@ Exemples :
 </section>
 
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-tools"></i> Méthode : Construire un Tableau de Fréquences Complet</h2>
+    <div class="card" style="border-left:4px solid var(--accent);padding:1.5rem">
+        <p><strong>Données brutes :</strong> une liste de N valeurs</p>
+        <p style="margin-top:1rem"><strong>Étape 1 :</strong> Trier et lister les modalités/classes</p>
+        <ul><li>Données discrètes → lister chaque valeur distincte (xᵢ)</li><li>Données continues → découper en classes [a ; b[</li><li>Nombre de classes recommandé ≈ √N (règle de Sturges)</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 2 :</strong> Compter les effectifs (nᵢ)</p>
+        <ul><li>Bâtonner : |||| pour compter sans se tromper</li><li>Vérification : Σnᵢ = N (total obligatoire)</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 3 :</strong> Calculer les fréquences relatives</p>
+        <ul><li>fᵢ = nᵢ / N</li><li>Vérification : Σfᵢ = 1 (arrondir si nécessaire)</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 4 :</strong> Fréquences cumulées</p>
+        <ul><li>Nᵢ = n₁ + n₂ + … + nᵢ (effectifs cumulés)</li><li>Fᵢ = f₁ + f₂ + … + fᵢ (fréquences cumulées)</li><li>Dernière valeur : Nₖ = N et Fₖ = 1</li></ul>
+        <p style="margin-top:1rem"><strong>Étape 5 :</strong> Données groupées en classes</p>
+        <ul><li>Centre de classe cᵢ = (borne inf + borne sup) / 2</li><li>Amplitude = borne sup − borne inf</li><li>Pour les calculs de moyenne/variance : utiliser les centres de classes</li></ul>
+        <p style="margin-top:1rem"><strong>Checklist finale :</strong> Σnᵢ = N ? Σfᵢ = 1 ? Dernière cumul = N ?</p>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-dumbbell"></i> Exercices</h2>
     <div id="chapter-exercises"></div>
 </section>
@@ -178,10 +210,14 @@ Exemples :
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
-<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Calculateur',minXP:300},{name:'Analyste',minXP:550},{name:'Statisticien',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script>GameEngine.configure({storageKey:'b1_stats_progress',badges:[],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Calculateur',min:300},{title:'Analyste',min:550},{title:'Statisticien',min:850},{title:'Guru',min:1200}]});GameEngine.init();</script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>
 ChapterExercises.init({
@@ -212,5 +248,6 @@ ChapterExercises.init({
 });
 </script>
 <script src="../../assets/js/download.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof renderMathInElement!=="undefined"){renderMathInElement(document.body,{delimiters:[{left:"\\(",right:"\\)",display:false},{left:"\\[",right:"\\]",display:true}],throwOnError:false})}});</script>
 </body>
 </html>

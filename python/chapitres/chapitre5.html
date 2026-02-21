@@ -47,6 +47,17 @@
 
 <!-- Section 1 : Listes -->
 <section class="chapter-section reveal-on-scroll">
+    <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+    <div class="info-box">
+        <ul>
+            <li>Définir des fonctions avec def et return</li>
+            <li>Comprendre les paramètres positionnels, nommés et par défaut</li>
+            <li>Utiliser les fonctions lambda</li>
+        </ul>
+    </div>
+</section>
+
+<section class="chapter-section reveal-on-scroll">
     <h2><i class="fas fa-list"></i> Les listes — collections modifiables</h2>
     <div class="concept-card">
         <h4>🧳 Analogie de la valise</h4>
@@ -205,10 +216,14 @@ nom, age, note = ("Alice", 20, 15.5)  # Pratique !</code></pre></div>
 </div>
 </main>
 
-<div class="xp-bar"><div class="xp-fill" id="xp-fill"></div><span class="xp-text" id="xp-text">Chargement…</span></div>
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
 <script src="../../assets/js/main.js"></script>
 <script src="../../assets/js/gamification.js"></script>
-<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{name:'Débutant',minXP:0},{name:'Apprenti',minXP:100},{name:'Dev Jr.',minXP:300},{name:'Confirmé',minXP:550},{name:'Maître',minXP:850},{name:'Guru',minXP:1200}]});GameEngine.init();</script>
+<script>GameEngine.configure({storageKey:'b1_python_progress',badges:[],levels:[{title:'Débutant',min:0},{title:'Apprenti',min:100},{title:'Dev Jr.',min:300},{title:'Confirmé',min:550},{title:'Maître',min:850},{title:'Guru',min:1200}]});GameEngine.init();</script>
 <script src="../../assets/js/chapter-exercises.js"></script>
 <script>
 ChapterExercises.init({

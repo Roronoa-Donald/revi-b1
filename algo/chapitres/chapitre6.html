@@ -28,12 +28,18 @@
 <div class="mobile-nav-panel" id="mobile-nav">
     <div class="mobile-nav-header"><span>🤖 AlgoBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
     <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
-    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1</a><a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2</a>
-    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3</a><a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4</a>
-    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Variables</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Conditions</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Boucles</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Tableaux</a>
+    <a href="chapitre5.html"><i class="fas fa-book-open"></i> Ch.5 — Fonctions</a>
     <a href="chapitre6.html" class="active"><i class="fas fa-book-open"></i> Ch.6 — Tri</a>
-    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7</a><a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8</a>
-    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9</a><a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10</a>
+    <a href="chapitre7.html"><i class="fas fa-book-open"></i> Ch.7 — Recherche</a>
+    <a href="chapitre8.html"><i class="fas fa-book-open"></i> Ch.8 — Récursivité</a>
+    <a href="chapitre9.html"><i class="fas fa-book-open"></i> Ch.9 — Structures</a>
+    <a href="chapitre10.html"><i class="fas fa-book-open"></i> Ch.10 — Complexité</a>
+    <a href="formules.html"><i class="fas fa-calculator"></i> Formules</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
 </div>
 
 <section class="hero-section" id="main-content">
@@ -44,6 +50,17 @@
 
 <main class="content-wrapper">
     <!-- 6.1 Introduction -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-bullseye"></i> Objectifs du chapitre</h2>
+        <div class="info-box">
+            <ul>
+                <li>Implémenter les tris par sélection, insertion et bulles</li>
+                <li>Comparer les complexités O(n²) et O(n) au meilleur cas</li>
+                <li>Identifier un tri stable vs instable</li>
+            </ul>
+        </div>
+    </section>
+
     <section class="chapter-section reveal-on-scroll">
         <h2><i class="fas fa-sort"></i> 6.1 — Pourquoi trier ?</h2>
         <div class="analogy-box"><span class="icon">📚</span><div><strong>Analogie — La bibliothèque :</strong> Imagine une bibliothèque où les livres sont rangés au hasard. Trouver un livre prendrait des heures ! Si tout est trié par ordre alphabétique, c'est instantané. Trier = faciliter la recherche.</div></div>
@@ -159,6 +176,14 @@
                 <li>Échange = toujours avec variable temp</li>
             </ul>
         </div>
+    </section>
+
+    <!-- Pièges classiques -->
+    <section class="chapter-section reveal-on-scroll">
+        <h2><i class="fas fa-exclamation-triangle"></i> Pièges classiques à l'examen</h2>
+        <div class="warning-box"><strong>⚠️ Piège n°1 — Complexité du tri sélection :</strong> Le tri par sélection est <strong>toujours O(n²)</strong>, même si le tableau est déjà trié. Contrairement au tri à bulles ou par insertion qui peuvent être O(n) dans le meilleur cas.</div>
+        <div class="warning-box"><strong>⚠️ Piège n°2 — Oublier la variable temporaire :</strong> Pour échanger deux valeurs, il faut <strong>obligatoirement</strong> une variable <code>temp</code>. Écrire <code>a ← b ; b ← a</code> sans temp écrase la première valeur !</div>
+        <div class="warning-box"><strong>⚠️ Piège n°3 — Stabilité des tris :</strong> Un tri est <strong>stable</strong> s'il préserve l'ordre relatif des éléments égaux. Le tri par sélection n'est <strong>pas stable</strong>, mais insertion et bulles le sont.</div>
     </section>
 
     <!-- Exercices -->

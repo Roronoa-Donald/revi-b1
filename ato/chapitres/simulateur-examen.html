@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulateur d'Examen — ATO B1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        :root{--accent:#f43f5e;--accent-light:#fb7185;--accent-dark:#e11d48;--accent-glow:rgba(244,63,94,0.25)}
+        .dark{--accent:#fb7185;--accent-light:#fda4af;--accent-dark:#f43f5e;--accent-glow:rgba(251,113,133,0.25)}
+        .exam-config{max-width:500px;margin:2rem auto;text-align:center}
+        .exam-config label{display:block;margin:.8rem 0 .3rem;font-weight:600}
+        .exam-config select,.exam-config input{padding:.5rem 1rem;border-radius:8px;border:2px solid var(--accent);background:var(--card,#1e293b);color:var(--text,#e2e8f0);font-size:1rem;width:100%;max-width:300px}
+        .exam-config button{margin-top:1.5rem;padding:.8rem 2rem;border-radius:12px;border:none;background:var(--accent);color:#fff;font-size:1.1rem;font-weight:700;cursor:pointer}
+        .exam-config button:hover{background:var(--accent-dark)}
+        .timer{font-size:1.8rem;font-weight:800;text-align:center;margin:1rem 0;color:var(--accent);font-family:'JetBrains Mono',monospace}
+        .timer.warning{animation:pulse .5s infinite alternate}
+        @keyframes pulse{from{opacity:1}to{opacity:.4}}
+        .q-card{background:var(--card,#1e293b);border:1px solid var(--border,rgba(255,255,255,.1));border-radius:16px;padding:1.5rem;margin:1rem 0}
+        .q-card h3{color:var(--accent);margin-bottom:1rem}
+        .q-option{display:block;padding:.7rem 1rem;margin:.4rem 0;border-radius:10px;border:2px solid var(--border,rgba(255,255,255,.1));cursor:pointer;transition:all .2s}
+        .q-option:hover{border-color:var(--accent);background:var(--accent-glow)}
+        .q-option.selected{border-color:var(--accent);background:var(--accent-glow);font-weight:600}
+        .q-option.correct{border-color:#10b981;background:rgba(16,185,129,.15)}
+        .q-option.wrong{border-color:#ef4444;background:rgba(239,68,68,.15)}
+        .nav-btns{display:flex;gap:1rem;justify-content:center;margin:1.5rem 0}
+        .nav-btns button{padding:.6rem 1.5rem;border-radius:10px;border:2px solid var(--accent);background:transparent;color:var(--text,#e2e8f0);font-weight:600;cursor:pointer}
+        .nav-btns button.primary{background:var(--accent);color:#fff}
+        .result-box{text-align:center;padding:2rem;margin:2rem auto;max-width:500px}
+        .result-box .score{font-size:3rem;font-weight:900;color:var(--accent)}
+        .progress-dots{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin:1rem 0}
+        .progress-dots .dot{width:12px;height:12px;border-radius:50%;background:var(--border,rgba(255,255,255,.1))}
+        .progress-dots .dot.answered{background:var(--accent)}
+        .progress-dots .dot.current{box-shadow:0 0 0 3px var(--accent-glow);border:2px solid var(--accent)}
+    </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Aller au contenu</a>
+<nav class="glass-nav"><div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><i class="fas fa-microchip"></i> ArchiBot</a>
+    <ul class="nav-links">
+        <li><a href="chapitre1.html">Ch.1</a></li>
+        <li><a href="chapitre2.html">Ch.2</a></li>
+        <li><a href="chapitre3.html">Ch.3</a></li>
+        <li><a href="chapitre4.html">Ch.4</a></li>
+        <li><a href="formules.html">Formules</a></li>
+    </ul>
+    <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Mode sombre"><i class="fa-solid fa-moon"></i></button>
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+</div></nav>
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<div class="mobile-nav-panel" id="mobile-nav">
+    <div class="mobile-nav-header"><span>🖥️ ArchiBot</span><button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button></div>
+    <a href="../index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="chapitre1.html"><i class="fas fa-book-open"></i> Ch.1 — Généralités</a>
+    <a href="chapitre2.html"><i class="fas fa-book-open"></i> Ch.2 — Numération</a>
+    <a href="chapitre3.html"><i class="fas fa-book-open"></i> Ch.3 — Circuits</a>
+    <a href="chapitre4.html"><i class="fas fa-book-open"></i> Ch.4 — Architecture</a>
+    <a href="formules.html"><i class="fas fa-scroll"></i> Formules</a>
+    <a href="cartes.html"><i class="fas fa-layer-group"></i> Cartes</a>
+    <a href="simulateur-examen.html" class="active"><i class="fas fa-graduation-cap"></i> Simulateur</a>
+    <a href="../exercices/exercices.html"><i class="fas fa-dumbbell"></i> Exercices</a>
+</div>
+
+<section class="hero-section" id="main-content">
+    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> Simulateur</div>
+    <h1>Examen <span class="highlight">ATO</span></h1>
+    <p>QCM chronométré couvrant les 4 chapitres.</p>
+</section>
+
+<main class="content-wrapper">
+    <div id="app"></div>
+</main>
+
+<script src="../../assets/js/main.js"></script>
+<script>
+const BANK=[
+// Ch.1 (9)
+{ch:1,q:"La Pascaline a été inventée par :",o:["Ada Lovelace","Blaise Pascal","Charles Babbage","Alan Turing"],c:1},
+{ch:1,q:"ENIAC utilisait des :",o:["Transistors","Circuits intégrés","Tubes à vide","Microprocesseurs"],c:2},
+{ch:1,q:"La 3ème génération est basée sur :",o:["Tubes","Transistors","Circuits intégrés","Microprocesseurs"],c:2},
+{ch:1,q:"1 Go = :",o:["1000 Mo","1024 Mo","1024 Ko","8000 Mb"],c:1},
+{ch:1,q:"La loi de Moore prévoit un doublement tous les :",o:["6 mois","1 an","~2 ans","10 ans"],c:2},
+{ch:1,q:"Le BIOS est un logiciel :",o:["Applicatif","Système","De bureautique","Réseau"],c:1},
+{ch:1,q:"Qui a formalisé le concept de machine universelle ?",o:["Von Neumann","Pascal","Turing","Babbage"],c:2},
+{ch:1,q:"Un octet comporte :",o:["4 bits","8 bits","16 bits","32 bits"],c:1},
+{ch:1,q:"Le transistor a été inventé en :",o:["1942","1945","1947","1958"],c:2},
+// Ch.2 (9)
+{ch:2,q:"13 en binaire :",o:["1011","1101","1110","1001"],c:1},
+{ch:2,q:"1111 0000 en hex :",o:["FF","F0","0F","E0"],c:1},
+{ch:2,q:"CA2 de +5 (8 bits) est :",o:["11111011","11111010","00000101","10000101"],c:0},
+{ch:2,q:"Plage sur 8 bits signé :",o:["0 à 255","-127 à 127","-128 à 127","-256 à 255"],c:2},
+{ch:2,q:"BCD de 9 :",o:["1001","1010","0110","1111"],c:0},
+{ch:2,q:"En base 16, A vaut :",o:["8","9","10","11"],c:2},
+{ch:2,q:"IEEE 754 simple : bits exposant :",o:["1","8","11","23"],c:1},
+{ch:2,q:"Code de Gray : avantage :",o:["Plus compact","1 seul bit change","Plus rapide","Plus lisible"],c:1},
+{ch:2,q:"101₂ en décimal :",o:["3","5","6","7"],c:1},
+// Ch.3 (9)
+{ch:3,q:"AND(1,1) = ?",o:["0","1","indéterminé","2"],c:1},
+{ch:3,q:"Portes universelles :",o:["AND/OR","NAND/NOR","XOR/XNOR","NOT/AND"],c:1},
+{ch:3,q:"NOT(A·B) selon De Morgan :",o:["Ā·B̄","Ā+B̄","A+B","NOT(A+B)"],c:1},
+{ch:3,q:"XOR(0,0) = ?",o:["0","1","indéterminé","X"],c:0},
+{ch:3,q:"Karnaugh : taille des groupes :",o:["Nombres premiers","Puissances de 2","Impaires","Carrés"],c:1},
+{ch:3,q:"Le demi-additionneur calcule :",o:["S=A·B, C=A+B","S=A⊕B, C=A·B","S=A+B, C=A⊕B","S et C avec retenue entrante"],c:1},
+{ch:3,q:"Bascule D : Q = ?",o:["Q précédent","D au front CLK","J·K","Toggle"],c:1},
+{ch:3,q:"Un multiplexeur sélectionne :",o:["Toutes les entrées","1 entrée parmi 2ⁿ","n entrées","Aucune"],c:1},
+{ch:3,q:"Circuit séquentiel a :",o:["Pas de mémoire","De la mémoire (bascules)","Pas d'horloge","Que des MUX"],c:1},
+// Ch.4 (9)
+{ch:4,q:"Composants Von Neumann :",o:["UC, UAL, Mémoire, E, S","CPU, GPU, RAM, SSD, USB","ALU, Cache, Bus, NIC, PSU","Registres, RAM, ROM, SSD, Cloud"],c:0},
+{ch:4,q:"PC (Program Counter) contient :",o:["Le résultat du calcul","L'adresse de la prochaine instruction","La donnée lue","Le sommet de la pile"],c:1},
+{ch:4,q:"Cycle CPU :",o:["Execute-Fetch-Decode","Decode-Execute-Fetch","Fetch-Decode-Execute","Fetch-Execute-Decode"],c:2},
+{ch:4,q:"Mémoire la plus rapide :",o:["RAM","Cache L1","Registres","SSD"],c:2},
+{ch:4,q:"Bus d'adresses 32 bits → max RAM :",o:["2 Go","4 Go","8 Go","16 Go"],c:1},
+{ch:4,q:"DMA signifie :",o:["Direct Memory Access","Dynamic Module Allocation","Data Management Array","Dual Mode Architecture"],c:0},
+{ch:4,q:"RISC est utilisé dans :",o:["PC de bureau","Smartphones (ARM)","Serveurs x86","Mainframes"],c:1},
+{ch:4,q:"Le pipeline permet de :",o:["Doubler la RAM","Chevaucher les étapes FDE","Supprimer le cache","Réduire la fréquence"],c:1},
+{ch:4,q:"SRAM est utilisée pour :",o:["RAM principale","Cache CPU","Stockage permanent","BIOS"],c:1}
+];
+
+const app=document.getElementById('app');
+let questions=[],current=0,answers=[],timer=null,timeLeft=0;
+
+function showConfig(){
+    app.innerHTML=`<div class="exam-config">
+        <label>Chapitre(s)</label>
+        <select id="cfgCh"><option value="all">Tous</option><option value="1">Ch.1 — Généralités</option><option value="2">Ch.2 — Numération</option><option value="3">Ch.3 — Circuits</option><option value="4">Ch.4 — Architecture</option></select>
+        <label>Nombre de questions</label>
+        <select id="cfgN"><option value="10">10</option><option value="15">15</option><option value="20" selected>20</option><option value="36">Toutes (36)</option></select>
+        <label>Durée (minutes)</label>
+        <input type="number" id="cfgT" value="15" min="5" max="60">
+        <br><button onclick="startExam()">Lancer l'examen <i class="fas fa-play"></i></button>
+    </div>`;
+}
+
+function startExam(){
+    const ch=document.getElementById('cfgCh').value;
+    const n=parseInt(document.getElementById('cfgN').value);
+    const t=parseInt(document.getElementById('cfgT').value);
+    let pool=ch==='all'?[...BANK]:BANK.filter(q=>q.ch==ch);
+    pool.sort(()=>Math.random()-.5);
+    questions=pool.slice(0,Math.min(n,pool.length));
+    answers=new Array(questions.length).fill(-1);
+    current=0;
+    timeLeft=t*60;
+    showQuestion();
+    timer=setInterval(()=>{timeLeft--;updateTimer();if(timeLeft<=0){clearInterval(timer);showResults();}},1000);
+}
+
+function updateTimer(){
+    const el=document.getElementById('timer');
+    if(!el)return;
+    const m=Math.floor(timeLeft/60),s=timeLeft%60;
+    el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    if(timeLeft<60)el.classList.add('warning');
+}
+
+function showQuestion(){
+    const q=questions[current];
+    const dots=questions.map((_,i)=>`<div class="dot${answers[i]>=0?' answered':''}${i===current?' current':''}"></div>`).join('');
+    app.innerHTML=`<div class="timer" id="timer"></div>
+        <div class="progress-dots">${dots}</div>
+        <div class="q-card"><h3>Q${current+1}/${questions.length} — Ch.${q.ch}</h3><p>${q.q}</p>
+        ${q.o.map((o,i)=>`<div class="q-option${answers[current]===i?' selected':''}" onclick="selectOpt(${i})">${o}</div>`).join('')}
+        </div>
+        <div class="nav-btns">
+            ${current>0?'<button onclick="nav(-1)"><i class="fas fa-arrow-left"></i> Précédent</button>':''}
+            ${current<questions.length-1?'<button class="primary" onclick="nav(1)">Suivant <i class="fas fa-arrow-right"></i></button>':'<button class="primary" onclick="clearInterval(timer);showResults()">Terminer <i class="fas fa-flag-checkered"></i></button>'}
+        </div>`;
+    updateTimer();
+}
+
+function selectOpt(i){answers[current]=i;showQuestion();}
+function nav(d){current+=d;showQuestion();}
+
+function showResults(){
+    let score=0;
+    questions.forEach((q,i)=>{if(answers[i]===q.c)score++;});
+    const pct=Math.round(score/questions.length*100);
+    const review=questions.map((q,i)=>{
+        const opts=q.o.map((o,j)=>`<div class="q-option${j===q.c?' correct':''}${answers[i]===j&&j!==q.c?' wrong':''}">${o}</div>`).join('');
+        return`<div class="q-card"><h3>Q${i+1} — Ch.${q.ch} ${answers[i]===q.c?'✅':'❌'}</h3><p>${q.q}</p>${opts}</div>`;
+    }).join('');
+    app.innerHTML=`<div class="result-box"><div class="score">${pct}%</div><p>${score}/${questions.length} bonnes réponses</p>
+        <p style="margin-top:.5rem;font-size:1.2rem">${pct>=80?'🏆 Excellent !':pct>=50?'👍 Pas mal, continue !':'📖 Révise encore !'}</p>
+        <button onclick="showConfig()" style="margin-top:1rem;padding:.6rem 1.5rem;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer">Recommencer</button></div>
+        <h2 style="margin-top:2rem;text-align:center">Correction détaillée</h2>${review}`;
+}
+
+showConfig();
+</script>
+
+<div class="xp-bar-container">
+    <span class="xp-level">Débutant</span>
+    <div class="xp-bar"><div class="xp-bar-fill" style="width:0%"></div></div>
+    <span class="xp-text">0 XP</span>
+</div>
+<script src="../../assets/js/gamification.js"></script>
+<script>GameEngine.configure({storageKey:'b1_ato_progress'});GameEngine.init();</script>
+<script src="../../assets/js/error-tracking.js"></script>
+<script>ErrorTracker.configure('b1_ato_progress');</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(typeof ErrorTracker!=="undefined"&&typeof bank!=="undefined"){ErrorTracker.enhance()}});</script>
+</body>
+</html>
