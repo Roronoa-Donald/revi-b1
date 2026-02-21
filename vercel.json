@@ -14,40 +14,52 @@
       }
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "source": "/:course(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)/chapitres/chapitre:num([2-9]|[1-9][0-9]+).html",
+      "missing": [{ "type": "cookie", "key": "auth_token" }],
+      "destination": "/_auth/activate.html?redirect=/:course/chapitres/chapitre:num.html&course=:course",
+      "permanent": false
     },
     {
-      "src": "/(.*)",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Referrer-Policy": "no-referrer"
-      },
-      "continue": true
+      "source": "/:course(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)/exercices/:path+",
+      "missing": [{ "type": "cookie", "key": "auth_token" }],
+      "destination": "/_auth/activate.html?redirect=/:course/exercices/:path&course=:course",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index.js"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "no-referrer" }
+      ]
     },
     {
-      "src": "/_auth/(.*)",
-      "headers": {
-        "Cache-Control": "no-cache, no-store, must-revalidate"
-      },
-      "continue": true
+      "source": "/_auth/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
     },
     {
-      "src": "/assets/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=604800, immutable"
-      },
-      "continue": true
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, immutable" }
+      ]
     },
     {
-      "src": "/(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)/assets/(.*)",
-      "headers": {
-        "Cache-Control": "public, max-age=86400, immutable"
-      },
-      "continue": true
+      "source": "/:course(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, immutable" }
+      ]
     }
   ]
 }

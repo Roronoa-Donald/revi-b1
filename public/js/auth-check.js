@@ -126,7 +126,7 @@
   }
 
   function showDemoBanner() {
-    var coursePattern = /^\/(algo|c_cpp|python|reseaux|stats|fbd|merise)\//;
+    var coursePattern = /^\/(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)\//;
     var courseMatch = path.match(coursePattern);
     if (!courseMatch && path !== '/' && !path.endsWith('/index.html')) return;
     var courseParam = courseMatch ? '&course=' + encodeURIComponent(courseMatch[1]) : '';

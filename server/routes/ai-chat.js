@@ -3,6 +3,8 @@
  * Proxy les requêtes vers OpenRouter sans exposer la clé API côté client
  */
 
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
@@ -17,6 +19,17 @@ async function aiChatRoutes(fastify) {
       }
     }
   }, async (request, reply) => {
+    // Vérification d'authentification
+    const token = request.cookies?.auth_token;
+    if (!token) {
+      return reply.code(401).send({ error: 'Authentification requise pour utiliser le chat IA' });
+    }
+    try {
+      jwt.verify(token, JWT_SECRET);
+    } catch (e) {
+      return reply.code(401).send({ error: 'Session invalide ou expirée' });
+    }
+
     if (!OPENROUTER_API_KEY) {
       return reply.code(503).send({ error: 'Service IA non configuré (OPENROUTER_API_KEY manquante)' });
     }
