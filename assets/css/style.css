@@ -364,6 +364,7 @@ body {
     background: rgba(139,92,246,0.08);
     border-left: 3px solid #8b5cf6;
     color: var(--text-secondary);
+    display: block;
 }
 
 /* Mnemonic box (for mnemos/astuces) */
