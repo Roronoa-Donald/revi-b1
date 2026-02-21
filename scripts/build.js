@@ -14,13 +14,13 @@ const DIST = path.join(ROOT, 'dist');
 const PUBLIC_DIR = path.join(ROOT, 'public');
 
 // Cours B1
-const COURSE_DIRS = ['algo', 'c_cpp', 'python', 'reseaux', 'stats', 'fbd', 'merise'];
+const COURSE_DIRS = ['algo', 'c_cpp', 'python', 'reseaux', 'stats', 'fbd', 'merise', 'algebre', 'ato'];
 
 // Dossiers partagés à copier en plus des cours
 const SHARED_DIRS = ['assets'];
 
 // Fichiers racine
-const ROOT_FILES = ['index.html', 'robots.txt', 'sitemap.xml', '404.html', 'rd-ai-chat.js'];
+const ROOT_FILES = ['index.html', 'dashboard.html', 'robots.txt', 'sitemap.xml', '404.html', 'rd-ai-chat.js'];
 
 // Dossiers à ignorer
 const SKIP_DIRS = ['node_modules', '.git', 'server', 'api', 'scripts', 'dist', 'public', 'cours', 'ref'];

@@ -43,7 +43,7 @@
       "continue": true
     },
     {
-      "src": "/(algo|c_cpp|python|reseaux|stats|fbd|merise)/assets/(.*)",
+      "src": "/(algo|c_cpp|python|reseaux|stats|fbd|merise|algebre|ato)/assets/(.*)",
       "headers": {
         "Cache-Control": "public, max-age=86400, immutable"
       },
