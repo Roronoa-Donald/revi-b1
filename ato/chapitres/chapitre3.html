@@ -447,22 +447,55 @@
             <p><strong>Étape 1 — Placer les 1 dans le tableau</strong></p>
             <p style="font-size:.85rem;color:var(--text-muted)">m3=011, m4=100, m5=101, m6=110, m7=111 — Colonnes en ordre <strong>Gray</strong> : 00, 01, 11, 10</p>
 
-            <table class="kmap">
-                <tr><th>A \ BC</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
-                <tr><th>0</th><td>0</td><td>0</td><td class="grouped">1</td><td>0</td></tr>
-                <tr><th>1</th><td class="grp-blue">1</td><td class="grp-blue">1</td><td class="grp-green">1</td><td class="grp-blue">1</td></tr>
-            </table>
+            <!-- SVG Karnaugh 3 variables : 2 lignes × 4 colonnes -->
+            <div style="text-align:center;margin:1rem 0">
+            <svg viewBox="0 0 420 210" style="max-width:440px;width:100%;font-family:'JetBrains Mono',monospace" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grille : header col 60px (x80-140), 4 data cols 60px each (x140-380) -->
+                <!-- header row 40px (y40-80), 2 data rows 50px each (y80-130, y130-180) -->
+                <rect x="80" y="40" width="300" height="140" rx="6" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+                <line x1="80" y1="80" x2="380" y2="80" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="80" y1="130" x2="380" y2="130" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="140" y1="40" x2="140" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="200" y1="40" x2="200" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="260" y1="40" x2="260" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="320" y1="40" x2="320" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
 
-            <div class="kmap-legend">
-                <span><span class="swatch" style="background:var(--accent)"></span> Groupe 1 (2 cases)</span>
-                <span><span class="swatch" style="background:#6366f1"></span> Groupe 2 (4 cases)</span>
-                <span><span class="swatch" style="background:#10b981"></span> Dans les 2 groupes</span>
+                <!-- En-têtes -->
+                <text x="110" y="66" fill="#fb7185" font-size="12" font-weight="700" text-anchor="middle">A\BC</text>
+                <text x="170" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">00</text>
+                <text x="230" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">01</text>
+                <text x="290" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">11</text>
+                <text x="350" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">10</text>
+                <text x="110" y="110" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">0</text>
+                <text x="110" y="160" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">1</text>
+
+                <!-- ═══ GROUPE BLEU (dessous) : toute la ligne A=1 ═══ -->
+                <rect x="142" y="132" width="236" height="46" rx="12" fill="rgba(99,102,241,0.18)" stroke="#6366f1" stroke-width="3"/>
+
+                <!-- ═══ GROUPE ROSE (dessus) : colonne BC=11 ═══ -->
+                <rect x="262" y="82" width="56" height="96" rx="12" fill="rgba(244,63,94,0.18)" stroke="#f43f5e" stroke-width="3"/>
+
+                <!-- Valeurs ligne A=0 -->
+                <text x="170" y="110" fill="#9ca3af" font-size="16" text-anchor="middle">0</text>
+                <text x="230" y="110" fill="#9ca3af" font-size="16" text-anchor="middle">0</text>
+                <text x="290" y="110" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">1</text>
+                <text x="350" y="110" fill="#9ca3af" font-size="16" text-anchor="middle">0</text>
+                <!-- Valeurs ligne A=1 -->
+                <text x="170" y="160" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">1</text>
+                <text x="230" y="160" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">1</text>
+                <text x="290" y="160" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">1</text>
+                <text x="350" y="160" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">1</text>
+
+                <!-- Labels des groupes -->
+                <text x="395" y="160" fill="#6366f1" font-size="11" font-weight="700">A</text>
+                <text x="290" y="198" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">B·C</text>
+            </svg>
             </div>
 
             <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem">
                 <p style="font-weight:700">Étape 2 — Former les groupes</p>
-                <p><strong>Groupe bleu (4 cases) :</strong> toute la ligne A=1 (m4, m5, m7, m6). 4 cases → on élimine 2 variables (B et C). Seule variable constante : A=1. Résultat : <strong>A</strong></p>
-                <p><strong>Groupe rose (2 cases) :</strong> colonne BC=11 (m3 et m7). 2 cases → on élimine 1 variable (A change). Variables constantes : B=1 et C=1. Résultat : <strong>B·C</strong></p>
+                <p><strong style="color:#6366f1">Groupe bleu (4 cases) :</strong> toute la ligne A=1 (m4, m5, m7, m6). 4 cases → on élimine 2 variables (B et C). Seule variable constante : A=1. Résultat : <strong>A</strong></p>
+                <p><strong style="color:#f43f5e">Groupe rose (2 cases) :</strong> colonne BC=11 (m3 et m7). 2 cases → on élimine 1 variable (A change). Variables constantes : B=1 et C=1. Résultat : <strong>B·C</strong></p>
 
                 <p style="font-weight:700;margin-top:.8rem">Étape 3 — Écrire le résultat (OR de tous les groupes)</p>
                 <p style="font-size:1.15rem;text-align:center;margin:.5rem 0"><strong>F = A + B·C</strong></p>
@@ -489,28 +522,86 @@
             <p><strong>Étape 1 —</strong> Remplir le tableau :</p>
             <p style="font-size:.85rem;color:var(--text-muted)">m0=0000, m2=0010, m5=0101, m7=0111, m8=1000, m10=1010, m13=1101, m15=1111</p>
 
-            <table class="kmap">
-                <tr><th>AB \ CD</th><th>00</th><th>01</th><th>11</th><th>10</th></tr>
-                <tr><th>00</th><td class="grouped">1</td><td>0</td><td>0</td><td class="grouped">1</td></tr>
-                <tr><th>01</th><td>0</td><td class="grp-blue">1</td><td class="grp-blue">1</td><td>0</td></tr>
-                <tr><th>11</th><td>0</td><td class="grp-blue">1</td><td class="grp-blue">1</td><td>0</td></tr>
-                <tr><th>10</th><td class="grouped">1</td><td>0</td><td>0</td><td class="grouped">1</td></tr>
-            </table>
+            <!-- SVG Karnaugh 4 variables : 4 lignes × 4 colonnes -->
+            <div style="text-align:center;margin:1rem 0">
+            <svg viewBox="0 0 430 330" style="max-width:460px;width:100%;font-family:'JetBrains Mono',monospace" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grille : header col 60px (x80-140), 4 data cols 60px (x140-380) -->
+                <!-- header row 40px (y40-80), 4 data rows 50px (y80-280) -->
+                <rect x="80" y="40" width="300" height="240" rx="6" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1.5"/>
+                <!-- Horizontales -->
+                <line x1="80" y1="80" x2="380" y2="80" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="80" y1="130" x2="380" y2="130" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="80" y1="180" x2="380" y2="180" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="80" y1="230" x2="380" y2="230" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <!-- Verticales -->
+                <line x1="140" y1="40" x2="140" y2="280" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="200" y1="40" x2="200" y2="280" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="260" y1="40" x2="260" y2="280" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+                <line x1="320" y1="40" x2="320" y2="280" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
 
-            <div class="kmap-legend">
-                <span><span class="swatch" style="background:var(--accent)"></span> Groupe 1 : B̄·D̄ (4 cases)</span>
-                <span><span class="swatch" style="background:#6366f1"></span> Groupe 2 : B·D (4 cases)</span>
+                <!-- En-têtes colonnes -->
+                <text x="110" y="66" fill="#fb7185" font-size="11" font-weight="700" text-anchor="middle">AB\CD</text>
+                <text x="170" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">00</text>
+                <text x="230" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">01</text>
+                <text x="290" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">11</text>
+                <text x="350" y="66" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">10</text>
+                <!-- En-têtes lignes -->
+                <text x="110" y="110" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">00</text>
+                <text x="110" y="160" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">01</text>
+                <text x="110" y="210" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">11</text>
+                <text x="110" y="260" fill="#fb7185" font-size="13" font-weight="700" text-anchor="middle">10</text>
+
+                <!-- ═══ GROUPE BLEU (dessous) : bloc central 2×2 ═══ -->
+                <rect x="202" y="132" width="116" height="96" rx="14" fill="rgba(99,102,241,0.18)" stroke="#6366f1" stroke-width="3"/>
+
+                <!-- ═══ GROUPE ROSE : 4 coins (enroulement !) ═══ -->
+                <rect x="142" y="82" width="56" height="46" rx="10" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="2.5"/>
+                <rect x="322" y="82" width="56" height="46" rx="10" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="2.5"/>
+                <rect x="142" y="232" width="56" height="46" rx="10" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="2.5"/>
+                <rect x="322" y="232" width="56" height="46" rx="10" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="2.5"/>
+                <!-- Lignes pointillées d'enroulement -->
+                <line x1="170" y1="128" x2="170" y2="232" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5,4" opacity=".5"/>
+                <line x1="350" y1="128" x2="350" y2="232" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5,4" opacity=".5"/>
+                <line x1="198" y1="105" x2="322" y2="105" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5,4" opacity=".5"/>
+                <line x1="198" y1="255" x2="322" y2="255" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5,4" opacity=".5"/>
+
+                <!-- Valeurs (au-dessus des groupes pour lisibilité) -->
+                <!-- AB=00 -->
+                <text x="170" y="110" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="230" y="110" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="290" y="110" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="350" y="110" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <!-- AB=01 -->
+                <text x="170" y="160" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="230" y="160" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="290" y="160" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="350" y="160" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <!-- AB=11 -->
+                <text x="170" y="210" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="230" y="210" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="290" y="210" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="350" y="210" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <!-- AB=10 -->
+                <text x="170" y="260" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+                <text x="230" y="260" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="290" y="260" fill="#9ca3af" font-size="15" text-anchor="middle">0</text>
+                <text x="350" y="260" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">1</text>
+
+                <!-- Labels des groupes -->
+                <text x="260" y="186" fill="#6366f1" font-size="11" font-weight="700" text-anchor="middle">B·D</text>
+                <text x="230" y="305" fill="#f43f5e" font-size="11" font-weight="700" text-anchor="middle">⤡ Enroulement des 4 coins → B̄·D̄</text>
+            </svg>
             </div>
 
             <div style="background:var(--accent-glow);border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem">
                 <p style="font-weight:700">Étape 2 — Former les groupes :</p>
 
-                <p><strong>Groupe rose (4 cases) :</strong> AB=00/CD=00, AB=00/CD=10, AB=10/CD=00, AB=10/CD=10</p>
-                <p style="padding-left:1rem">→ AB=00 et AB=10 sont adjacentes (enroulement haut-bas, seul A change)</p>
-                <p style="padding-left:1rem">→ CD=00 et CD=10 sont adjacentes (enroulement gauche-droite, seul D change)</p>
+                <p><strong style="color:#f43f5e">Groupe rose (4 cases — enroulement !) :</strong> Les 4 coins du tableau : AB=00/CD=00, AB=00/CD=10, AB=10/CD=00, AB=10/CD=10</p>
+                <p style="padding-left:1rem">→ AB=00 et AB=10 sont adjacentes (1ʳᵉ et dernière ligne = enroulement haut↔bas)</p>
+                <p style="padding-left:1rem">→ CD=00 et CD=10 sont adjacentes (1ʳᵉ et dernière colonne = enroulement gauche↔droite)</p>
                 <p style="padding-left:1rem">→ Variables constantes : <strong>B=0</strong> et <strong>D=0</strong>. Donc ce groupe = <strong>B̄·D̄</strong></p>
 
-                <p style="margin-top:.5rem"><strong>Groupe bleu (4 cases) :</strong> AB=01/CD=01, AB=01/CD=11, AB=11/CD=01, AB=11/CD=11</p>
+                <p style="margin-top:.5rem"><strong style="color:#6366f1">Groupe bleu (4 cases) :</strong> Bloc central : AB=01/CD=01, AB=01/CD=11, AB=11/CD=01, AB=11/CD=11</p>
                 <p style="padding-left:1rem">→ AB=01 et AB=11 adjacentes (seul A change)</p>
                 <p style="padding-left:1rem">→ CD=01 et CD=11 adjacentes (seul C change)</p>
                 <p style="padding-left:1rem">→ Variables constantes : <strong>B=1</strong> et <strong>D=1</strong>. Donc ce groupe = <strong>B·D</strong></p>
