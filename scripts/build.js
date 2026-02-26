@@ -20,7 +20,7 @@ const COURSE_DIRS = ['algo', 'c_cpp', 'python', 'reseaux', 'stats', 'fbd', 'meri
 const SHARED_DIRS = ['assets'];
 
 // Fichiers racine
-const ROOT_FILES = ['index.html', 'dashboard.html', 'robots.txt', 'sitemap.xml', '404.html', 'rd-ai-chat.js'];
+const ROOT_FILES = ['index.html', 'robots.txt', 'sitemap.xml', '404.html', 'rd-ai-chat.js'];
 
 // Dossiers à ignorer
 const SKIP_DIRS = ['node_modules', '.git', 'server', 'api', 'scripts', 'dist', 'public', 'cours', 'ref'];
@@ -48,12 +48,16 @@ function copyDirRecursive(src, dest) {
       if (['.pdf', '.docx', '.doc', '.py'].includes(ext)) continue;
       if (ext === '.txt' && !entry.name.includes('robots')) continue;
 
-      if (ext === '.html') {
-        let content = fs.readFileSync(srcPath, 'utf-8');
-        content = injectAuth(content, srcPath);
-        fs.writeFileSync(destPath, content, 'utf-8');
-      } else {
-        fs.copyFileSync(srcPath, destPath);
+      try {
+        if (ext === '.html') {
+          let content = fs.readFileSync(srcPath, 'utf-8');
+          content = injectAuth(content, srcPath);
+          fs.writeFileSync(destPath, content, 'utf-8');
+        } else {
+          fs.copyFileSync(srcPath, destPath);
+        }
+      } catch (err) {
+        console.error(`  ⚠️ Erreur copie ${srcPath}: ${err.message}`);
       }
     }
   }

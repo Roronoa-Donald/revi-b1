@@ -21,8 +21,9 @@ function verifyAdmin(request) {
 module.exports = async function adminRoutes(fastify) {
 
   fastify.addHook('onRequest', async (request, reply) => {
-    if (request.url === '/api/admin/login' && request.method === 'POST') return;
-    if (request.url.startsWith('/api/admin/courses')) return;
+    const urlPath = request.url.split('?')[0];
+    if (urlPath === '/api/admin/login' && request.method === 'POST') return;
+    if (urlPath.startsWith('/api/admin/courses')) return;
     if (!verifyAdmin(request)) {
       return reply.code(401).send({ success: false, message: 'Non autorisé' });
     }

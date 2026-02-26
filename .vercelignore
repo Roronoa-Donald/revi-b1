@@ -1,0 +1,10 @@
+# Fichiers à ne pas uploader sur Vercel
+node_modules
+.env
+.git
+dist
+*.md
+*.txt
+*.pdf
+*.docx
+rapport.md
